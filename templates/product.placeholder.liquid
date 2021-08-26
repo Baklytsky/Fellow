@@ -1,0 +1,42 @@
+<div class="pdp-placeholder rel">
+  {% if product.metafields.custom_fields.placeholder_badge != blank %}
+    <div class="pdp-placeholder__badge">{{ product.metafields.custom_fields.placeholder_badge }}
+    </div>
+  {% endif %}
+  {% assign portrait_image = product.metafields.custom_fields.placeholder_portrait_image %}
+  {% assign landscape_image = product.metafields.custom_fields.placeholder_landscape_image %}
+  <div class="pdp-placeholder__image abs fill z0 placeholder-image--{{ product.id }}" >
+    <img class="x y landscape" src="{{ landscape_image }}" alt="{{ product.title }}"/>
+    <img class="x portrait" src="{{ portrait_image }}" alt="{{ product.title }}"/>
+  </div>
+
+  <div class="pdp-placeholder__text rel cw z1 pdpMain__details">
+    {% if product.metafields.custom_fields.placeholder_cta %}
+      {% capture cta_html %}
+        <button class="pdp-placeholder__cta track--xNarrow btn--lg btn {% if product.metafields.custom_fields.placeholder_is_kickstarter %}btn--kickstarter-green{% else %}btn--dark{% endif %}">
+          {{ product.metafields.custom_fields.placeholder_cta }}
+        </button>
+      {% endcapture %}
+    {% endif %}
+
+    {% capture kickstarter_logo %}
+      <img src="{{ 'kickstarter-logo-white.png' | asset_img_url: '300x' }}" title="Kickstarter" alt="Kickstarter" class="kickstarter-logo kickstarter-logo--white" />
+      <img src="{{ 'kickstarter-logo-black.png' | asset_img_url: '300x' }}" title="Kickstarter" alt="Kickstarter" class="kickstarter-logo kickstarter-logo--black" />
+    {% endcapture %}
+
+    {% assign product_tagline = product.metafields.custom_fields.placeholder_tagline | replace: "{kickstarter}", kickstarter_logo %}
+
+    {% include 'large-text-with-cta',
+      tagline: product_tagline,
+      header: product.metafields.custom_fields.placeholder_heading,
+      body: product.description,
+      cta_html: cta_html
+    %}
+  </div>
+</div>
+
+{% assign cta_html = blank %}
+{% assign landscape_img = blank %}
+{% assign landscape_img_src = blank %}
+{% assign portrait_img = blank %}
+{% assign portrait_img_src = blank %}

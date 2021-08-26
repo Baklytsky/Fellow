@@ -1,0 +1,30 @@
+{% if product.metafields.custom_fields["product_specs"] != blank %}
+  <div class="custom-field custom-field__product-specs custom-field__type--field-collection">
+    <h3 class="custom-field--title">Product Specs</h3>
+    <div class="custom-field--value">
+      {% assign separator = "|###|" %}
+      {% assign specification_title_array = product.metafields.custom_fields["specification_title"] | split: separator %}
+      {% assign specification_copy_array = product.metafields.custom_fields["specification_copy"] | split: separator %}
+      {% assign product_specs_image_array = product.metafields.custom_fields["product_specs_image"] | split: separator %}
+      {% assign product_specs_image_alt_array = product.metafields.custom_fields["product_specs_image_alt"] | split: separator %}
+      {% assign fc_keys = product.metafields.custom_fields["product_specs"] | split: "," %}
+      {% for i in fc_keys %}
+        {% assign index = i | plus: 0 %}
+        <div class="fc-item fc-item--specification fc-index--{{ index }}">
+          <div class="fc-field field__specification-title">
+            {{ specification_title_array[index] }}
+          </div>
+          <div class="fc-field field__specification-copy">
+            {{ specification_copy_array[index] }}
+          </div>
+          <div class="fc-field field__product-specs-image">
+            {{ product_specs_image_array[index] }}
+          </div>
+          <div class="fc-field field__product-specs-image-alt">
+            {{ product_specs_image_alt_array[index] }}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}

@@ -1,0 +1,8 @@
+{% if product.metafields.custom_fields["placeholder_tagline"] != blank %}
+  <div class="custom-field custom-field__placeholder-tagline custom-field__type--text">
+    <h3 class="custom-field--title">Placeholder Tagline</h3>
+    <div class="custom-field--value">
+      {{ product.metafields.custom_fields["placeholder_tagline"] }}
+    </div>
+  </div>
+{% endif %}

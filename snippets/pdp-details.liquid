@@ -1,0 +1,34 @@
+{% if product.metafields.custom_fields["product_tagline"] != blank %}
+  {% assign tagline = product.metafields.custom_fields["product_tagline"] %}
+{% endif %}
+{% capture dataProductForm %}
+  { "money_format": {{ shop.money_format | json }}, "button": {{ 'products.product.add_to_cart' | t | json}} }
+{% endcapture %}
+
+<section class='pdpMain__details z2 rel'>
+  {% comment %} <form action='/cart/add' method='post' enctype='multipart/form-data' data-component='productForm'> {% endcomment %}
+  {% form 'product', product, data-product-form: dataProductForm %}
+    <div class='pdpCopy__header'>
+      {% if tagline != blank %}<div class='eyebrow'>{{ tagline }}</div>{% endif %}
+      <div class=' f jcb'>
+        <h1 class='h2'>{{ product.title }}</h1>
+        <h2 data-selected-var-price class="ml1">{{ current_variant.price | money | remove: '.00' }}</h2>
+      </div>
+      {% comment %} Shop Pay Snippet {% endcomment %}
+      <div data-shop-pay class='shop-pay mb15'>
+        {{ form | payment_terms }}
+      </div>
+      {%- assign reviews_count = product.metafields.yotpo.reviews_count | plus: 0 -%}
+      {%- if reviews_count > 0 -%}
+        {% include 'yotpo-star-rating-widget' %}
+      {%- endif -%}
+    </div>
+    {% include 'pdp-details-copy' with
+      className: 'd-none d-lg-block d-xl-block'
+    %}
+    {% include 'pdp-details-form' %}
+    {% include 'pdp-details-copy' with
+      className: 'd-lg-none d-xl-none'
+    %}
+  {% endform %}
+</section>

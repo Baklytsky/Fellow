@@ -1,0 +1,31 @@
+{% comment %}
+  DO NOT MODIFY THIS FILE DIRECTLY. THIS FILE WILL BE OVERWRITTEN.
+  YOU CAN MODIFY THE LIQUID CODE FOR THIS CUSTOM FIELD HERE:
+  https://customfields.bonify.io/dashboard/fellow-devshop.myshopify.com/pages/configure/253435/edit
+{% endcomment %}
+{% if page.metafields.custom_fields["our_products"] != blank %}
+  <div class="custom-field custom-field__our-products custom-field__type--field-collection">
+    <h3 class="custom-field--title">Customs - Our Products</h3>
+    <div class="custom-field--value">
+      {% assign separator = "|###|" %}
+      {% assign our_products_image_array = page.metafields.custom_fields["our_products_image"] | split: separator %}
+      {% assign our_products_title_array = page.metafields.custom_fields["our_products_title"] | split: separator %}
+      {% assign our_products_body_array = page.metafields.custom_fields["our_products_body"] | split: separator %}
+      {% assign fc_keys = page.metafields.custom_fields["our_products"] | split: "," %}
+      {% for i in fc_keys %}
+        {% assign index = i | plus: 0 %}
+        <div class="fc-item fc-item--product fc-index--{{ index }}">
+          <div class="fc-field field__our-products-image">
+            {{ our_products_image_array[index] }}
+          </div>
+          <div class="fc-field field__our-products-title">
+            {{ our_products_title_array[index] }}
+          </div>
+          <div class="fc-field field__our-products-body">
+            {{ our_products_body_array[index] }}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}

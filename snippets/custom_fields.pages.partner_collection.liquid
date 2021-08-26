@@ -1,0 +1,21 @@
+{% comment %}
+  DO NOT MODIFY THIS FILE DIRECTLY. THIS FILE WILL BE OVERWRITTEN.
+  YOU CAN MODIFY THE LIQUID CODE FOR THIS CUSTOM FIELD HERE:
+  https://customfields.bonify.io/dashboard/fellow-products.myshopify.com/pages/configure/94676/edit
+{% endcomment %}
+{% if page.metafields.custom_fields["partner_collection"] != blank %}
+  <div class="custom-field custom-field__partner-collection custom-field__type--collection-reference">
+    <h3 class="custom-field--title">Partner Collection</h3>
+    <div class="custom-field--value">  
+      {% assign collection_refs = page.metafields.custom_fields["partner_collection"] | split: "|" %}
+      <ul>
+        {% for collection_handle in collection_refs %}
+          <li>
+            {% assign collection_ref = collections[collection_handle] %}
+            {{ collection_ref.title | link_to: collection_ref.url }}
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+{% endif %}

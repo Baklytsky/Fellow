@@ -1,0 +1,22 @@
+<div class='giftCard--fields' data-component='giftCardFields'>
+  <div id='properties' class='f fdc jcb is-hidden'>
+    <div class='f fdr jcb'>
+      <div>
+        <label for="giftCard_recipient-name">Recipient Name</label>
+        <input id="giftCard_recipient-name" type="text" name="properties[giftCard_recipient-name]">
+      </div>
+      <div>
+        <label for="giftCard_recipient-email">Recipient Email</label>
+        <input id="giftCard_recipient-email" name="properties[giftCard_recipient-email]" type="email" title="The domain portion of the email address is invalid (the portion after the @)." pattern="^([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22))*\x40([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d))*(\.\w{2,})+$">
+      </div>
+    </div>
+    <label for="giftCard_message">Message</label>
+    <textarea id="giftCard_message" name="properties[giftCard_message]"></textarea>
+  </div>
+
+  <div class='f fdr jcb'>
+    <button class="button button--ghost button--full rel mb15">
+      Send as Gift
+    </button>
+  </div>
+<div>

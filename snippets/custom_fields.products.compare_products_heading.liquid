@@ -1,0 +1,8 @@
+{% if product.metafields.custom_fields["compare_products_heading"] != blank %}
+  <div class="custom-field custom-field__compare-products-heading custom-field__type--text">
+    <h3 class="custom-field--title">Compare Products Heading</h3>
+    <div class="custom-field--value">
+      {{ product.metafields.custom_fields["compare_products_heading"] }}
+    </div>
+  </div>
+{% endif %}

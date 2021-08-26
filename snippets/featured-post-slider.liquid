@@ -1,0 +1,39 @@
+{% assign article = articles[section.settings.featuredPost] %}
+{% if article.image %}
+  {%- assign imgSrc = article | img_url: '320x' -%}
+{% endif %}
+{% if article.metafields.custom_fields["author_name"] != blank %}
+  {%- assign author_name = article.metafields.custom_fields["author_name"] -%}
+{% else %}
+  {%- assign author_name = article.author -%}
+{% endif %}
+
+<article class='featuredPost__slider additionalPost__single f jcs ais rel'>
+  <a href="{{ article.url }}" class='abs z1 x y fill'></a>
+  {% if article.image %}
+    <div class='additionalPost__thumb rel'>
+      {%
+        include 'component-image' with
+        src: imgSrc,
+        alt: article.title,
+        className: 'image ais',
+        centered: false,
+        fill: true
+      %}
+    </div>
+  {% endif %}
+  <div class='additionalPost__copy'>
+    <div class='articleCard__header'>
+      <p class='eyebrow'>Featured</p>
+      <h3 class='b'>{{ article.title }}</h3>
+    </div>
+    <div class='rte articleCard__excerpt'>
+      {% if section.settings.show_author or section.settings.show_date %}
+        {{ article.excerpt_or_content | strip_html | truncatewords: 15, '...' }}
+      {% else %}
+        {{ article.excerpt_or_content | strip_html | truncatewords: 20, '...' }}
+      {% endif %}
+    </div>
+    <a href="{{ article.url }}" class='d-lg-none d-xl-none underline underlineArrow' aria-label='Read more about {{ article.title | escape }}'>{{ 'blogs.article.read_more' | t }}</a>
+  </div>
+</article>

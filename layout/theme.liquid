@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang='{{ shop.locale }}'>
+  <head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width,initial-scale=1,shrink-to-fit=no'>
+    <link rel='canonical' href='{{ canonical_url }}'>
+    <link rel='shortcut icon' href='{{ settings.favicon | img_url: "32x32" }}' type='image/png'>
+
+    {% capture seo_title %}
+      {{ page_title }}
+      {% if current_tags %}
+        {%- assign meta_tags = current_tags | join: ', ' %} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags -}}
+      {% endif %}
+      {% if current_page != 1 %}
+        &ndash; {{ 'general.meta.page' | t: page: current_page }}
+      {% endif %}
+      {% unless page_title contains shop.name %}
+        &ndash; {{ shop.name }}
+      {% endunless %}
+    {% endcapture %}
+    <title>{{ seo_title }}</title>
+
+    {% include 'head-meta' %}
+
+    {% if template.directory == 'customers' %}
+      <script src='{{ 'shopify_common.js' | shopify_asset_url }}' defer='defer'></script>
+    {% endif %}
+
+    <script>
+      window.theme = {
+        strings: {
+          addToCart: "{{ 'products.product.add_to_cart' | t }}",
+          soldOut: "{{ 'products.product.sold_out' | t }}",
+          unavailable: "{{ 'products.product.unavailable' | t }}"
+        },
+        moneyFormat: "{{ shop.money_format }}"
+      }
+      <script type="text/javascript">
+var _conv_page_type = "{% if template == 'index' %}homepage{% else template == "collections" %}collection{% else template == "article" %}article{% else template == "product" %}product{% else template == "cart" %}cart{% else %}other{% endif %}";
+ var _conv_category_id = "";
+ var _conv_category_name = "{{ collection.title }}";
+ var _conv_product_sku = "";
+ var _conv_product_name = "{{ product.title }}";
+ var _conv_product_price = "{{ product.compare_at_price_min | money }}";
+ var _conv_customer_id = "";
+ var _conv_custom_v1 = "{{ tag }}";
+ var _conv_custom_v2 = "{{ order.shipping_address.province }}";
+ var _conv_custom_v3 = "{{ cart.item_count }}";
+ var _conv_custom_v4 = "{{ cart.total_price | money_without_currency }}";
+</script>
+<script type="text/javascript" src="//cdn-3.convertexperiments.com/js/1002950-10025167.js"></script>
+<!-- end Convert Experiences code -->
+  
+  
+<!-- This goes in Settings > Checkout > Additional Scripts -->
+  
+  <script type="text/javascript">
+  if (typeof _conv_host == "undefined") {
+  window["_conv_prevent_bodyhide"] = true;
+  (function() {
+    var _conv_track = document.createElement("script");
+    _conv_track.src = "//cdn-3.convertexperiments.com/js/1002950-10025167.js";
+
+    document.getElementsByTagName("head")[0].appendChild(_conv_track);
+  })();
+}
+</script>
+      
+      
+      
+      
+      
+      
+      
+    </script>
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-K9G7563');</script>
+    <!-- End Google Tag Manager -->
+
+    <!-- Global site tag (gtag.js) - Google Ads: 951859275 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-951859275"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'AW-951859275');
+    </script>
+
+    <!-- Google Fonts via Preconnect -->
+    <link rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin />
+
+    <link rel="preload"
+          as="style"
+          href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&family=Oswald:wght@300;400;700&display=swap" />
+
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&family=Oswald:wght@300;400;700&display=swap"
+          media="print" onload="this.media='all'" />
+    <noscript>
+      <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&family=Oswald:wght@300;400;700&display=swap" />
+    </noscript>
+
+    {% include 'preconnect' %}
+
+    {{ 'index.css' | asset_url | stylesheet_tag }}
+
+    {{ content_for_header }}
+  </head>
+
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K9G7563"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    {% section 'header' %}
+    {% include 'cart-drawer' %}
+
+    <main role='main' id='root' tabindex='0'>
+      {{ content_for_layout }}
+      {% include 'meta-json' %}
+    </main>
+
+    {% section 'footer' %}
+    {% include 'cloak' %}
+
+    <script src="{{ 'index.js' | asset_url }}" defer='defer'></script>
+    {% comment %} <script src="https://a.klaviyo.com/media/js/onsite/onsite.js"></script> {% endcomment %}
+    {% include 'revy-bundle-script' %}
+  </body>
+</html>

@@ -1,0 +1,60 @@
+{% if settings.free_product != blank %}
+  {% assign product = all_products[settings.free_product] %}
+{% endif %}
+{% if product.metafields.custom_fields["product_nickname"] != blank %}
+  {% assign nickname = product.metafields.custom_fields["product_nickname"] %}
+{% endif %}
+{% if settings.free_product_threshold != blank %}
+  {% assign appendThresh = settings.free_product_threshold | append: "00" %}
+  {% assign threshold = appendThresh | plus: 0 %}
+{% endif %}
+
+<section class='cart-footer__promoItem mxa pb05' data-component='cartPromoItem'>
+  <div class='d-none'>
+    <span class='js-threshold'>{{ threshold }}</span>
+    <span class='js-promoProductHandle'>{{ product.handle }}</span>
+    <span class='js-promoProductId'>{{ product.id }}</span>
+    <span class='js-promoProductNickname'>{{ nickname }}</span>
+    <span class='js-promoProductUrl'>{{ product.url }}</span>
+    <span class='js-promoProductImg'>{{ product.featured_image.src | product_img_url: '200x' }}</span>
+  </div>
+
+  <div class='f fdc aic thresholdMet mb1 js-thresholdMet is-hidden'>
+    {% if settings.free_product != blank %}
+      <div class='promoItem__thresholdMetMsg'>
+        {% unless settings.free_product_met_msg != blank %}
+          <h5 class='mt0 mb15 ac caps'>Click Below to Add a free {{ nickname }} to your cart!</h5>
+        {% else %}
+          {{ settings.free_product_met_msg }}
+        {% endunless %}
+      </div>
+      <div class='promoItem__entry is-gradient f rel'>
+        <a href="{{ product.url }}" class='fill abs x y z2'></a>
+        <a href="{{ product.url }}">
+          <img src="{{ product.featured_image.src | product_img_url: '200x' }}">
+        </a>
+        <div class='cart-drawer__itemContent py05 px1 f y ais jcb'>
+          <div class='cart-drawer__itemDetails'>
+            <a href="{{ product.url }}" class='oswald caps bold mv0 p'>
+              {{ product.title }}
+            </a>
+            <p class='xsmall caps bold my025'>Click through to add</p>
+            <p class='xsmall caps my0'>Limit 1 Per Order</p>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+
+  <div class='thresholdNotMet js-thresholdNotMet is-visible jcc'>
+    {% if settings.free_product_not_met_url != blank %}<a href="{{ settings.free_product_not_met_url }}">{% endif %}
+    <h5 class='caps ac'>
+    {% unless settings.free_product_not_met_msg != blank %}
+      Add {{ threshold | money }} to your cart to get a free {{ nickname }}
+    {% else %}
+      {{ settings.free_product_not_met_msg }}
+    {% endunless %}
+    </h5>
+    {% if settings.free_product_not_met_url != blank %}</a>{% endif %}
+  </div>
+</section>

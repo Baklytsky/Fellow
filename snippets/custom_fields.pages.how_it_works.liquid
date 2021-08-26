@@ -1,0 +1,27 @@
+{% comment %}
+  DO NOT MODIFY THIS FILE DIRECTLY. THIS FILE WILL BE OVERWRITTEN.
+  YOU CAN MODIFY THE LIQUID CODE FOR THIS CUSTOM FIELD HERE:
+  https://customfields.bonify.io/dashboard/fellow-devshop.myshopify.com/pages/configure/253442/edit
+{% endcomment %}
+{% if page.metafields.custom_fields["how_it_works"] != blank %}
+  <div class="custom-field custom-field__how-it-works custom-field__type--field-collection">
+    <h3 class="custom-field--title">Customs - How It Works</h3>
+    <div class="custom-field--value">
+      {% assign separator = "|###|" %}
+      {% assign how_it_works_title_array = page.metafields.custom_fields["how_it_works_title"] | split: separator %}
+      {% assign how_it_works_body_array = page.metafields.custom_fields["how_it_works_body"] | split: separator %}
+      {% assign fc_keys = page.metafields.custom_fields["how_it_works"] | split: "," %}
+      {% for i in fc_keys %}
+        {% assign index = i | plus: 0 %}
+        <div class="fc-item fc-item--step fc-index--{{ index }}">
+          <div class="fc-field field__how-it-works-title">
+            {{ how_it_works_title_array[index] }}
+          </div>
+          <div class="fc-field field__how-it-works-body">
+            {{ how_it_works_body_array[index] }}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}

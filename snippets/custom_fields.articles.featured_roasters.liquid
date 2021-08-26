@@ -1,0 +1,43 @@
+{% comment %}
+  DO NOT MODIFY THIS FILE DIRECTLY. THIS FILE WILL BE OVERWRITTEN.
+  YOU CAN MODIFY THE LIQUID CODE FOR THIS CUSTOM FIELD HERE:
+  https://customfields.bonify.io/dashboard/fellow-products.myshopify.com/articles/configure/97177/edit
+{% endcomment %}
+{% if article.metafields.custom_fields["featured_roasters"] != blank %}
+  <div class="custom-field custom-field__featured-roasters custom-field__type--field-collection">
+    <h3 class="custom-field--title">Featured Roasters</h3>
+    <div class="custom-field--value">
+      {% assign separator = "|###|" %}
+      {% assign featured_roaster_image_array = article.metafields.custom_fields["featured_roaster_image"] | split: separator %}
+      {% assign featured_roaster_name_array = article.metafields.custom_fields["featured_roaster_name"] | split: separator %}
+      {% assign featured_roaster_url_array = article.metafields.custom_fields["featured_roaster_url"] | split: separator %}
+      {% assign featured_roaster_location_array = article.metafields.custom_fields["featured_roaster_location"] | split: separator %}
+      {% assign featured_roaster_coffee_array = article.metafields.custom_fields["featured_roaster_coffee"] | split: separator %}
+      {% assign featured_roaster_details_array = article.metafields.custom_fields["featured_roaster_details"] | split: separator %}
+      {% assign fc_keys = article.metafields.custom_fields["featured_roasters"] | split: "," %}
+      {% for i in fc_keys %}
+        {% assign index = i | plus: 0 %}
+        <div class="fc-item fc-item--featured roaster fc-index--{{ index }}">
+          <div class="fc-field field__featured-roaster-image">
+            {{ featured_roaster_image_array[index] }}
+          </div>
+          <div class="fc-field field__featured-roaster-name">
+            {{ featured_roaster_name_array[index] }}
+          </div>
+          <div class="fc-field field__featured-roaster-url">
+            {{ featured_roaster_url_array[index] }}
+          </div>
+          <div class="fc-field field__featured-roaster-location">
+            {{ featured_roaster_location_array[index] }}
+          </div>
+          <div class="fc-field field__featured-roaster-coffee">
+            {{ featured_roaster_coffee_array[index] }}
+          </div>
+          <div class="fc-field field__featured-roaster-details">
+            {{ featured_roaster_details_array[index] }}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}

@@ -1,0 +1,49 @@
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+{%- assign featured_image = current_variant.featured_image | default: product.featured_image -%}
+
+<div class='gtm-pdp' data-component='product'>
+  {% include 'product-head' %}
+  {% include 'pdp-masthead' %}
+  {% include 'pdp-main' %}
+  <div class="f fdc">
+    {% include 'pdp-hero' %}
+    {% include 'pdp-media-proof' %}
+    {% include 'pdp-jumbo-slider' %}
+    {% include 'pdp-features' %}
+    {% include 'pdp-video' %}
+    {% include 'pdp-hero-bottom' %}
+    {% include 'pdp-specs' %}
+    {% include 'pdp-related-products' %}
+    {% include 'pdp-compare-products' %}
+  </div>
+  {% include 'pdp-reviews' %}
+</div>
+
+{% comment %} Reset {% endcomment %}
+{% assign display_order = blank %}
+
+{% schema %}
+  {
+    "name": {
+      "en": "Product Details"
+    },
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_quantity_selector",
+        "label": {
+          "en": "Show quantity selector",
+          "de": "Quantitäts-Auswahl anzeigen",
+          "fr": "Afficher le sélecteur de quantité"
+        },
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "quantity_selector_inline",
+        "label": "Align quantity selector with ATC button on desktop",
+        "default": false
+      }
+    ]
+  }
+{% endschema %}

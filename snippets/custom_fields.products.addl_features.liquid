@@ -1,0 +1,26 @@
+{% if product.metafields.custom_fields["addl_features"] != blank %}
+  <div class="custom-field custom-field__addl-features custom-field__type--field-collection">
+    <h3 class="custom-field--title">Additional Features</h3>
+    <div class="custom-field--value">
+      {% assign separator = "|###|" %}
+      {% assign addl_feature_icon_array = product.metafields.custom_fields["addl_feature_icon"] | split: separator %}
+      {% assign addl_feature_title_array = product.metafields.custom_fields["addl_feature_title"] | split: separator %}
+      {% assign addl_feature_copy_array = product.metafields.custom_fields["addl_feature_copy"] | split: separator %}
+      {% assign fc_keys = product.metafields.custom_fields["addl_features"] | split: "," %}
+      {% for i in fc_keys %}
+        {% assign index = i | plus: 0 %}
+        <div class="fc-item fc-item--additional feature fc-index--{{ index }}">
+          <div class="fc-field field__addl-feature-icon">
+            {{ addl_feature_icon_array[index] }}
+          </div>
+          <div class="fc-field field__addl-feature-title">
+            {{ addl_feature_title_array[index] }}
+          </div>
+          <div class="fc-field field__addl-feature-copy">
+            {{ addl_feature_copy_array[index] }}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}

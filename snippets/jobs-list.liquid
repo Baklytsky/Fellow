@@ -1,0 +1,45 @@
+{% if page.metafields.custom_fields["current_jobs"] != blank %}
+  {% assign separator = "|###|" %}
+  {% assign job_page_array = page.metafields.custom_fields["job_page"] | split: separator %}
+  {% assign job_title_array = page.metafields.custom_fields["job_title"] | split: separator %}
+  {% assign job_short_description_array = page.metafields.custom_fields["job_short_description"] | split: separator %}
+  {% assign fc_keys = page.metafields.custom_fields["current_jobs"] | split: "," %}
+  <section class="container--l">
+    <div class='row'>
+      <div class='col-lg-6 offset-lg-3'>
+        {% for i in fc_keys %}
+          {% assign index = i | plus: 0 %}
+          {% assign pageRef = pages[job_page_array[index]] %}
+          {% assign jobTitle = job_title_array[index] %}
+          {% assign jobShortDesc = job_short_description_array[index] %}
+          <div class='jobs__listing'>
+            {% if jobTitle != blank %}
+              <h3 class='caps'>{{ jobTitle }}</h3>
+            {% else if pageRef != blank %}
+              <h3>{{ pageRef.title }}</h3>
+            {% endif %}
+
+            {% if jobShortDesc != blank %}
+              <div class='rte'>
+                {{ jobShortDesc }}
+              </div>
+            {% endif %}
+            <a href='{{ pageRef.url }}'>Learn More &rarr;</a>
+          </div>
+          {% comment %} Reset {% endcomment %}
+          {% assign jobTitle = blank %}
+          {% assign jobShortDesc = blank %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% else %}
+  {% comment %} If there aren't any jobs listed {% endcomment %}
+  <section class='container--l'>
+    <div class='row'>
+      <div class='col-lg-6 offset-lg-3'>
+        <p>We don't have any openings at the moment, but we're always growing, so check back soon!</p>
+      </div>
+    </div>
+  </section>
+{% endif %}

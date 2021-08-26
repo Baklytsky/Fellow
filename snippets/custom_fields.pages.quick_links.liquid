@@ -1,0 +1,23 @@
+{% comment %}
+  DO NOT MODIFY THIS FILE DIRECTLY. THIS FILE WILL BE OVERWRITTEN.
+  YOU CAN MODIFY THE LIQUID CODE FOR THIS CUSTOM FIELD HERE:
+  https://customfields.bonify.io/dashboard/fellow-devshop.myshopify.com/pages/configure/253418/edit
+{% endcomment %}
+{% if page.metafields.custom_fields["quick_links"] != blank %}
+  <div class="custom-field custom-field__quick-links custom-field__type--field-collection">
+    <h3 class="custom-field--title">Wholesale & Customs - Quick Links</h3>
+    <div class="custom-field--value">
+      {% assign separator = "|###|" %}
+      {% assign quicklinks_link_array = page.metafields.custom_fields["quicklinks_link"] | split: separator %}
+      {% assign fc_keys = page.metafields.custom_fields["quick_links"] | split: "," %}
+      {% for i in fc_keys %}
+        {% assign index = i | plus: 0 %}
+        <div class="fc-item fc-item--link fc-index--{{ index }}">
+          <div class="fc-field field__quicklinks-link">
+            {{ quicklinks_link_array[index] }}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}

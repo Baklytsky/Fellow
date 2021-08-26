@@ -1,0 +1,45 @@
+<div class='pdpMain__slider x rel z0' data-component='pdpMainSlider'>
+  <div class='x y block rel' data-noodle>
+    {% for image in product.images %}
+      {% if image.variants.size > 0 %}
+        {% for variant in image.variants %}
+          {%- assign variantId = variant.id -%}
+        {% endfor %}
+      {% else %}
+        {%- assign variantId = '' -%}
+      {% endif %}
+      {%- assign imageSrc = image.src | img_url: '900x' -%}
+      <div class='pdpMain__slide x y fill abs' data-variant-img='{{ variantId }}'>
+        {%
+          include 'component-image' with
+          src: imageSrc,
+          alt: alt,
+          className: 'image',
+          fill: true
+        %}
+      </div>
+      {% comment %}
+      <div class='image' data-variant-img='{{variantId}}'>
+        <img class='block x' src='{{ image.src | img_url: '900x' }}' alt='{{ image.alt | escape }}' data-image-id='{{ image.id }}' />
+      </div>
+      {% endcomment %}
+    {% endfor %}
+  </div>
+  {% if product.images.size > 1 %}
+    <div class='slider__controls abs block bottom left z2'>
+      <div class='f fdr jcb aic jcc'>
+        <div class='slider__nav'>
+          <button data-slidePrev>
+            &larr;
+          </button>
+          <button data-slideNext>
+            &rarr;
+          </button>
+        </div>
+        <div class="slider__count">
+          <span data-slideIndex>1</span>/<span data-totalSlides></span>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+</div>

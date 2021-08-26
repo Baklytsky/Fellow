@@ -1,0 +1,34 @@
+{% if product.metafields.custom_fields["hero_module"] != blank %}
+  <div class="custom-field custom-field__hero-module custom-field__type--field-collection">
+    <h3 class="custom-field--title">Hero Module</h3>
+    <div class="custom-field--value">
+      {% assign separator = "|###|" %}
+      {% assign hero_media_type_array = product.metafields.custom_fields["hero_media_type"] | split: separator %}
+      {% assign hero_image_array = product.metafields.custom_fields["hero_image"] | split: separator %}
+      {% assign hero_media_webm_array = product.metafields.custom_fields["hero_media_webm"] | split: separator %}
+      {% assign hero_media_mp4_array = product.metafields.custom_fields["hero_media_mp4"] | split: separator %}
+      {% assign hero_copy_array = product.metafields.custom_fields["hero_copy"] | split: separator %}
+      {% assign fc_keys = product.metafields.custom_fields["hero_module"] | split: "," %}
+      {% for i in fc_keys %}
+        {% assign index = i | plus: 0 %}
+        <div class="fc-item fc-item--hero module fc-index--{{ index }}">
+          <div class="fc-field field__hero-media-type">
+            {{ hero_media_type_array[index] }}
+          </div>
+          <div class="fc-field field__hero-image">
+            {{ hero_image_array[index] }}
+          </div>
+          <div class="fc-field field__hero-media-webm">
+            {{ hero_media_webm_array[index] }}
+          </div>
+          <div class="fc-field field__hero-media-mp4">
+            {{ hero_media_mp4_array[index] }}
+          </div>
+          <div class="fc-field field__hero-copy">
+            {{ hero_copy_array[index] }}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}

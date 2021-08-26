@@ -1,0 +1,124 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Slater-Fellow",
+    "theme_version": "2.0.5",
+    "theme_author": "mage",
+    "theme_documentation_url": "https:\/\/github.com\/the-couch\/slater-theme",
+    "theme_support_url": "https:\/\/wearemage.com"
+  },
+  {
+    "name": "Social media",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Social links"
+      },
+      {
+        "type": "url",
+        "id": "social_instagram_link",
+        "label": "Instagram link"
+      },
+      {
+        "type": "url",
+        "id": "social_facebook_link",
+        "label": "Facebook link"
+      },
+      {
+        "type": "url",
+        "id": "social_twitter_link",
+        "label": "Twitter link"
+      },
+      {
+        "type": "url",
+        "id": "social_youtube_link",
+        "label": "Youtube link"
+      },
+      {
+        "type": "url",
+        "id": "social_pinterest_link",
+        "label": "Pinterest link"
+      }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Free Shipping Notice"
+      },
+      {
+        "type": "text",
+        "id": "free_shipping_met_msg",
+        "label": "Free Shipping Met Text"
+      },
+      {
+        "type": "header",
+        "content": "Cart Banner"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_cart_banner",
+        "label": "Enable cart banner",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "cart_banner_text",
+        "label": "Cart banner text",
+        "default": {
+          "en": "FREE SHIPPING ON ORDERS OVER $50 & FREE RETURNS*"
+        }
+      },
+      {
+        "type": "url",
+        "id": "cart_banner_link",
+        "label": "Cart banner link",
+        "info": "Optional"
+      },
+      {
+        "type": "header",
+        "content": "Cart Upsell Messaging"
+      },
+      {
+        "type": "text",
+        "id": "cart_upsell_flavor_text",
+        "label": "Cart Upsell Flavor Text",
+        "info": "Short flavor text to be displayed above upsell item"
+      },
+      {
+        "type": "header",
+        "content": "Cart Empty State"
+      },
+      {
+        "type": "url",
+        "id": "cart_empty_cta",
+        "label": "Cart Empty Link"
+      },
+      {
+        "type": "text",
+        "id": "cart_empty_cta_text",
+        "label": "Cart Empty CTA text",
+        "default": "Shop Bestsellers"
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_notes_enable",
+        "label": "Enable cart notes",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon image",
+        "info": "Will be scaled down to 32 x 32px"
+      }
+    ]
+  }
+]

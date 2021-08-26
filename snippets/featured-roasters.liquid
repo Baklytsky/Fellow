@@ -1,0 +1,35 @@
+{% if article.metafields.custom_fields["featured_roasters"] != blank %}
+  {% assign separator = "|###|" %}
+  {% assign featured_roaster_image_array = article.metafields.custom_fields["featured_roaster_image"] | split: separator %}
+  {% assign featured_roaster_name_array = article.metafields.custom_fields["featured_roaster_name"] | split: separator %}
+  {% assign featured_roaster_location_array = article.metafields.custom_fields["featured_roaster_location"] | split: separator %}
+  {% assign featured_roaster_coffee_array = article.metafields.custom_fields["featured_roaster_coffee"] | split: separator %}
+  {% assign featured_roaster_details_array = article.metafields.custom_fields["featured_roaster_details"] | split: separator %}
+  {% assign fc_keys = article.metafields.custom_fields["featured_roasters"] | split: "," %}
+
+  {% for i in fc_keys %}
+    {% assign index = i | plus: 0 %}
+    {% assign imgSrc = featured_roaster_image_array[index] %}
+    {% assign roasterName = featured_roaster_name_array[index] %}
+    {% assign roasterLocation = featured_roaster_location_array[index] %}
+    {% assign coffeeName = featured_roaster_coffee_array[index] %}
+    <div class="col">
+      <div class='featuredRoaster__image'>
+        {%
+          include 'component-image' with
+          src: imgSrc,
+          alt: alt,
+          className: 'image'
+        %}
+      </div>
+      <section class='featuredRoaster__details my3rem'>
+        <h3 class='caps mt05 mb0'>{{ roasterName }}</h3>
+        <p class='bold my025'>{{ roasterLocation }}</p>
+        <p class='bold my025'>{{ coffeeName }}</p>
+        <div class="my15 rte">
+          {{ featured_roaster_details_array[index] }}
+        </div>
+      </section>
+    </div>
+  {% endfor %}
+{% endif %}

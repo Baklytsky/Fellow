@@ -1,0 +1,145 @@
+{% comment %}
+  When a comment is submitted, the browser is redirected to a page that includes
+  the new comment id in its URL.
+  #comments is a required ID and is used as an anchor link by Shopify.
+{% endcomment %}
+
+{%- assign number_of_comments = article.comments_count -%}
+
+{% comment %}
+  If a comment was just submitted but requires moderation, we have an extra comment to count.
+{% endcomment %}
+{% if comment and comment.status != 'published' %}
+  {% assign number_of_comments = article.comments_count | plus: 1 %}
+{% endif %}
+
+{% capture date %}{{ article.published_at | time_tag: format: 'month_day_year' }}{% endcapture %}
+
+{% if article.metafields.custom_fields["author_name"] != blank %}
+  {%- assign author_name = article.metafields.custom_fields["author_name"] -%}
+{% else %}
+  {%- assign author_name = article.author -%}
+{% endif %}
+
+{% if article.metafields.custom_fields["desktop_masthead_image"] != blank %}
+  {%- assign desktop_masthead = article.metafields.custom_fields["desktop_masthead_image"] -%}
+{% endif %}
+{% if article.metafields.custom_fields["mobile_masthead_image"] != blank %}
+  {%- assign mobile_masthead = article.metafields.custom_fields["mobile_masthead_image"] -%}
+{% endif %}
+
+{% if article.metafields.custom_fields["article_masthead_alt_text"] != blank %}
+  {% assign masthead_alt = article.metafields.custom_fields["article_masthead_alt_text"] %}
+{% else %}
+  {% assign masthead_alt = article.title | escape %}
+{% endif %}
+
+{% if desktop_masthead != blank %}
+  {%
+    include 'component-masthead' with
+    img: desktop_masthead,
+    imgMobile: mobile_masthead,
+    altText: masthead_alt,
+    dataAttr: 'componentMasthead',
+    className: ''
+  %}
+{% else %}
+  {%
+    include 'component-masthead' with
+    altText: masthead_alt,
+    dataAttr: 'componentMasthead',
+    className: ''
+  %}
+{% endif %}
+
+{% comment %} Blog and Brew Guide Template {% endcomment %}
+<section class='container--l f mxa'>
+  <div class='row article'>
+    <article class='col-lg-8 order-lg-3' role="article" itemscope itemtype="http://schema.org/Article">
+
+      <header class='article__header' role="banner">
+        <p class='eyebrow'>{{ 'blogs.article.author_on_date_html' | t: author: author_name, date: date }}</p>
+        <h1 class='caps'>{{ article.title }}</h1>
+      </header>
+
+      <div class="rte article__body" itemprop="articleBody" data-component='articleBody'>
+        {{ article.content }}
+      </div>
+
+      {% comment %} Featured Roaster Template {% endcomment %}
+      {% if blog.handle == 'featured-roasters' %}
+        {% include 'featured-roasters' %}
+      {% endif %}
+      {% comment %} {% if article.tags.size > 0 %}
+        <ul>
+          {% for tag in article.tags %}
+            <li>
+              <a href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag }}</a>{% unless forloop.last %}, {% endunless %}
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %} {% endcomment %}
+
+      {% comment %}
+        Off until I hook the setting up -ae 08.04.19
+        {% if settings.social_sharing_blog %}
+          {% include 'social-sharing', share_title: article.title, share_permalink: article.url, share_image: article.image %}
+        {% endif %}
+      {% endcomment %}
+
+      {% comment %}
+      We're likely not enabling blog comments any time soon. -ae 10.27.19
+      {% if blog.comments_enabled? %}
+        {% include 'article-comments' %}
+      {% endif %}
+      {% endcomment %}
+
+    </article>
+    <div class='col-lg-1 order-lg-2 divider mxa'></div>
+    <aside class='col-lg-3 order-lg-1 articleSidebar'>
+      {% include 'recent-posts-sidebar' %}
+      {% include 'article-related-products' %}
+    </aside>
+  </div>
+</section>
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "articleBody": "{{ article.content | strip_html }}",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ shop.url }}{{ page.url }}"
+  },
+  "headline": "{{ article.title }}",
+  {% if article.excerpt != blank %}
+    "description": "{{ article.excerpt | strip_html }}",
+  {% endif %}
+  {% if article.image %}
+    {% assign image_size = article.image.width | append: 'x' %}
+    "image": [
+      "https:{{ article | img_url: image_size }}"
+    ],
+  {% endif %}
+  "datePublished": "{{ article.published_at | date: '%Y-%m-%dT%H:%M:%SZ' }}",
+  "dateCreated": "{{ article.created_at | date: '%Y-%m-%dT%H:%M:%SZ' }}",
+  "author": {
+    "@type": "Person",
+    "name": "{{ article.author }}"
+  },
+  "publisher": {
+    "@type": "Organization",
+    {% if settings.share_image %}
+      {% assign image_size = settings.share_image.width | append: 'x' %}
+      "logo": {
+        "@type": "ImageObject",
+        "height": "{{ settings.share_image.height }}",
+        "url": "https:{{ settings.share_image | img_url: image_size }}",
+        "width": "{{ settings.share_image.width }}"
+      },
+    {% endif %}
+    "name": "{{ shop.name }}"
+  }
+}
+</script>

@@ -1,0 +1,38 @@
+{%- assign staggSrc = "kettleBud-min2.gif" | asset_img_url: '250x' -%}
+{%- assign atmosSrc = "walkinAtmos-min2.gif" | asset_img_url: '250x' -%}
+{%- assign clydeSrc = "walkinClyde-min2.gif" | asset_img_url: '250x' -%}
+
+<section class='full rel x y my0'>
+  <div class="marquee--left x y">
+    <div class="inner f jcb aie" data-component='footerMarquee'>
+      {%
+        include 'component-image' with
+        src: staggSrc,
+        alt: alt,
+        className: 'image stagg walkinDude',
+        scaleDown: true,
+        alignEnd: true,
+        irishFix: true
+      %}
+      {%
+        include 'component-image' with
+        src: atmosSrc,
+        alt: alt,
+        className: 'image atmos walkinDude',
+        scaleDown: true,
+        alignEnd: true,
+        irishFix: true
+      %}
+      {%
+        include 'component-image' with
+        src: clydeSrc,
+        alt: alt,
+        className: 'image clyde walkinDude',
+        scaleDown: true,
+        alignEnd: true,
+        irishFix: true
+      %}
+
+    </div>
+  </div>
+</section>

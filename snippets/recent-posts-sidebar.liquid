@@ -1,0 +1,23 @@
+<section class="articleSidebar__recentArticles">
+  <h3 class='caps'>Recent Posts</h3>
+  {%- for article in blog.articles limit: 3 -%}
+    <a href="{{ article.url }}">
+      <div class="recentArticle__single">
+        <div class='eyebrow'>
+          {{ article.published_at | time_tag: format: 'month_day_year' }}
+          {% comment %} {%- if section.settings.show_author -%}
+            <span>
+              By {{ author_name }}
+            </span>
+          {%- endif -%}
+          {%- if section.settings.blog_show_date -%}
+            <span>
+              {{ article.published_at | time_tag: format: 'month_day_year' }}
+            </span>
+          {%- endif -%} {% endcomment %}
+        </div>
+        <h4 class="recentArticle__title mt025">{{ article.title }}</h4>
+      </div>
+    </a>
+  {%- endfor -%}
+</section>

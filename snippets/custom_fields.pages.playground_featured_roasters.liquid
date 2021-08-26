@@ -1,0 +1,19 @@
+{% comment %}
+  DO NOT MODIFY THIS FILE DIRECTLY. THIS FILE WILL BE OVERWRITTEN.
+  YOU CAN MODIFY THE LIQUID CODE FOR THIS CUSTOM FIELD HERE:
+  https://customfields.bonify.io/dashboard/fellow-products.myshopify.com/pages/configure/97189/edit
+{% endcomment %}
+{% if page.metafields.custom_fields["playground_featured_roasters"] != blank %}
+  <div class="custom-field custom-field__playground-featured-roasters custom-field__type--article-reference">
+    <h3 class="custom-field--title">Featured Roasters</h3>
+    <div class="custom-field--value">  
+      {% assign article_blog_handle = page.metafields.custom_fields["playground_featured_roasters"] | split: "." %}
+      {% for article in blogs[article_blog_handle[0]].articles %}
+        {% if article.handle contains article_blog_handle[1] %}
+          {{ article.title | link_to: article.url }}
+          {% break %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}

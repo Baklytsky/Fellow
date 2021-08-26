@@ -1,0 +1,12 @@
+{% if product.metafields.custom_fields["key_features_circular_images"] != blank %}
+  <div class="custom-field custom-field__key-features-circular-images custom-field__type--checkbox">
+    <h3 class="custom-field--title">Key Features - Quadrature Images</h3>
+    <div class="custom-field--value">
+      {% if product.metafields.custom_fields["key_features_circular_images"] == 1 %}
+        TRUE
+      {% else %}
+        FALSE
+      {% endif %}
+    </div>
+  </div>
+{% endif %}

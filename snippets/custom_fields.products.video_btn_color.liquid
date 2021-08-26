@@ -1,0 +1,8 @@
+{% if product.metafields.custom_fields["video_btn_color"] != blank %}
+  <div class="custom-field custom-field__video-btn-color custom-field__type--text-list">
+    <h3 class="custom-field--title">Video Button Color</h3>
+    <div class="custom-field--value">  
+      {{ product.metafields.custom_fields["video_btn_color"] }}
+    </div>
+  </div>
+{% endif %}

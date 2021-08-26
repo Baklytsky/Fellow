@@ -1,0 +1,65 @@
+{% capture date %}{{ article.published_at | time_tag: format: 'month_day_year' }}{% endcapture %}
+{% if article.image %}
+  {%- assign imgSrc = article | img_url: '600x' -%}
+{% endif %}
+{% if article.metafields.custom_fields["author_name"] != blank %}
+  {%- assign author_name = article.metafields.custom_fields["author_name"] -%}
+{% else %}
+  {%- assign author_name = article.author -%}
+{% endif %}
+{% assign altText = article.title | handleize %}
+
+
+<article class='col-lg-4 col-md-6 col-sm-6 articleCard'>
+  {% if article.image %}
+    <a href="{{ article.url }}" class='articleCard__image'>
+      {%
+        include 'component-image' with
+        src: imgSrc,
+        alt: altText,
+        className: 'image'
+      %}
+    </a>
+  {% endif %}
+  <section class="articleCard__content">
+    <div class='articleCard__header'>
+      <p class='eyebrow'>{{ 'blogs.article.author_on_date_html' | t: author: author_name, date: date }}</p>
+      <h2 class='h4'>
+        <a href="{{ article.url }}">{{ article.title }}</a>
+      </h2>
+    </div>
+
+    <div class='rte articleCard__excerpt'>
+      {{ article.content | strip_html | truncatewords: 30, '...' }}
+    </div>
+
+    {% comment %}
+      See above comment about not using tags for time being
+      {% if blog.comments_enabled? or article.tags.size > 0 %}
+        <ul>
+          {% if blog.comments_enabled? %}
+            <li>
+              <a href="{{ article.url }}#comments">
+                {{ 'blogs.comments.with_count' | t: count: article.comments_count }}
+              </a>
+            </li>
+          {% endif %}
+            {% if article.tags.size > 0 %}
+              {% for tag in article.tags %}
+                <li>
+                  <a href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag }}</a>
+                  {% unless forloop.last %}, {% endunless %}
+                </li>
+              {% endfor %}
+            {% endif %}
+        </ul>
+      {% endif %}
+    {% endcomment %}
+
+    <p class="readMore">
+      <a href="{{ article.url }}" class="underline underlineArrow" aria-label='Read more about {{ article.title | escape }}'>{{ 'blogs.article.read_more' | t }}</a>
+    </p>
+  </section>
+</article>
+
+{% assign altText = blank %}

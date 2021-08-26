@@ -1,0 +1,41 @@
+<section data-component="cartUpsellItem">
+  <div class="js-cart-upsell-msg is-hidden">
+    {% if settings.cart_upsell_flavor_text != blank %}
+      {{ settings.cart_upsell_flavor_text }}
+    {% else %}
+      COMPLETE YOUR COFFEE CORNER
+    {% endif %}
+  </div>
+  <script class="json-upsell" type="application/json">
+    [
+    {%- for collection in collections -%}
+      {
+        "collectionID": "{{ collection.id }}",
+        "collectionHandle": "{{ collection.handle }}",
+        "isPrimary": {%- if collection.metafields.custom_fields["is_primary"] -%}true{% else %}false{%- endif -%}
+        {%- if collection.metafields.custom_fields["upsell_items"] != blank -%},
+            "upsellItems": [
+            {%- for item in collection.metafields.custom_fields["upsell_items"] -%}
+               {% assign upsell_product = all_products[item.upsell_item] %}
+                {
+                  "productId": "{{ upsell_product.id }}",
+                  {%- if item['upsell_item_variant_id'] != blank %}
+                  "variantId": "{{ item['upsell_item_variant_id'] }}",
+                  {% endif -%}
+                  "priority": "{{ item['priority'] }}",
+                  "productHandle": "{{ upsell_product.handle }}",
+                  "available": {{ upsell_product.available }}
+                }
+               {% unless forloop.last == true %},{% endunless %}
+            {%- endfor -%}
+          ]
+        {%- endif -%}
+      }
+      {% unless forloop.last == true %},
+      {% endunless %}
+    {%- endfor -%}
+    ]
+  </script>
+
+  <div class="js-upsell"></div>
+</section>

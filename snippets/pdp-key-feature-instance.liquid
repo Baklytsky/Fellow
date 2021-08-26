@@ -1,0 +1,52 @@
+<div class="keyFeatures__instance fc-index--{{ index }}">
+  <div class='row{% if key_feature_quadrature == 1 %} aic{% else %} aie{% endif %}'>
+    <div class='col-lg-6 order-lg-2'>
+      <div class="{% if key_feature_quadrature == 1 %}keyFeature__image-quadrature{% endif %} f jcc">
+        <div class="keyFeature__image-wrapper rel">
+          {% if imageSrc != blank %}
+            <section class='keyFeature__image{% if secondaryImageSrc != blank %} keyFeature__image--primary{% endif %} rel x y fill'>
+              {%
+                include 'component-image' with
+                src: imageSrc,
+                alt: alt,
+                className: classList,
+                fill: true
+              %}
+            </section>
+          {% endif %}
+          {% if secondaryImageSrc != blank %}
+            <section class='keyFeature__image keyFeature__image--secondary abs x y fill'>
+              {%
+                include 'component-image' with
+                src: secondaryImageSrc,
+                alt: alt,
+                className: classList,
+                fill: true
+              %}
+            </section>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class='col-lg-6 order-lg-1'>
+      <section class='keyFeature__details'>
+        {% if iconSrc != blank %}
+        <div class='keyFeatureDetails__icon'>
+          {%
+            include 'component-image' with
+            src: iconSrc,
+            alt: key_feature_title_array[index],
+            className: 'image',
+            fill: true,
+            centered: false,
+          %}
+        </div>
+        {% endif %}
+        <div class='keyFeatureDetails__copy'>
+          <h3 class='caps'>{{ key_feature_title_array[index] }}</h3>
+          <p>{{ key_feature_copy_array[index] }}</p>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>

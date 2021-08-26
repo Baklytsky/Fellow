@@ -1,0 +1,149 @@
+{% assign backgroundColor = section.settings.bgColor %}
+{% assign textColor = section.settings.noticeModule__textColor %}
+{% assign ctaCopy = section.settings.ctaCopy %}
+{% assign ctaURL = section.settings.ctaURL %}
+{% if textColor == 'u-cw' %}
+  {% assign btnClass = 'btn btn--lg btn--light noticeModule__cta' %}
+{% else %}
+  {% assign btnClass = 'btn btn--lg btn--dark noticeModule__cta' %}
+{% endif %}
+
+<section class='noticeModule rel my0' data-component='noticeModule' style="background-color: {{ backgroundColor }};">
+  <div class='noticeModule__container'>
+    <div class='noticeModule__copy z3 {{ textColor }}'>
+      {% if section.settings.noticeModule__eyebrow %}
+        <p class='eyebrow caps my0'>{{ section.settings.noticeModule__eyebrow }}</p>
+      {% endif %}
+      {% if section.settings.noticeModule__header %}
+        <h2 class='my1'>{{ section.settings.noticeModule__header }}</h2>
+      {% endif %}
+      {% if section.settings.subheader__text %}
+        <p class='noticeModule__subheaderText my0 small'>{{ section.settings.subheader__text }}</p>
+      {% endif %}
+      {% if section.settings.ctaCopy != blank %}
+        {% if section.settings.ctaStyle == 'button' %}
+          {%
+            include 'component-button' with
+            tag: 'a',
+            cta: ctaCopy,
+            href: ctaURL,
+            className: btnClass
+          %}
+        {% elsif section.settings.ctaStyle == 'underline' %}
+          <a class='noticeModule__cta underline' href='{{ ctaURL }}'>{{ ctaCopy }}</a>
+        {% elsif section.settings.ctaStyle == 'underlineArrow' %}
+          <a class='noticeModule__cta underline underlineArrow' href='{{ ctaURL }}'>{{ ctaCopy }}</a>
+        {% endif %}
+      {% endif %}
+    </div>
+    {% if section.settings.showImage %}
+      <div class='noticeModule__image abs fill x y top left' style='background-image: url({{ section.settings.image | img_url: "1400x" }})'></div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Notice Module",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Text Options"
+      },
+      {
+        "type": "text",
+        "id": "noticeModule__eyebrow",
+        "label": "Eyebrow Text",
+        "default": "Cool Sale Going On"
+      },
+      {
+        "type": "text",
+        "id": "noticeModule__header",
+        "label": "Header Text",
+        "default": "Get 20% Off Sitewide..."
+      },
+      {
+        "type": "text",
+        "id": "subheader__text",
+        "label": "Subheader Text",
+        "default": "*asterisk text here"
+      },
+      {
+        "type": "select",
+        "id": "noticeModule__textColor",
+        "label": "Text Color",
+        "options": [
+          {
+            "value": "u-cw",
+            "label": "White"
+          },
+          {
+            "value": "u-cb",
+            "label": "Black"
+          }
+        ],
+        "default": "u-cb"
+      },
+      {
+        "type": "header",
+        "content": "CTA Settings"
+      },
+      {
+        "type": "url",
+        "id": "ctaURL",
+        "label": "CTA URL"
+      },
+      {
+        "type": "text",
+        "id": "ctaCopy",
+        "label": "CTA Copy"
+      },
+      {
+        "type": "select",
+        "id": "ctaStyle",
+        "label": "CTA Style",
+        "options": [
+          {
+            "value": "underline",
+            "label": "Underline"
+          },
+          {
+            "value": "underlineArrow",
+            "label": "Underline w/ Arrow"
+          },
+          {
+            "value": "button",
+            "label": "Button"
+          }
+        ],
+        "default": "underline"
+      },
+      {
+        "type": "header",
+        "content": "Background Options"
+      },
+      {
+        "type": "color",
+        "id": "bgColor",
+        "label": "Background Color",
+        "default": "#F5F5F5"
+      },
+      {
+        "type": "checkbox",
+        "id": "showImage",
+        "label": "Show Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Background Image"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Notice Module",
+        "category": "Homepage Sections"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,31 @@
+{% if section.settings.show_newsletter %}
+  <div class="newsletter">
+    {% form 'customer' %}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      {% if section.settings.newsletter_heading != blank %}
+        <label for="NewsletterEmail" class="newsletter__label">
+          <p class='h5 caps pb025 mt0 mb025'>{{ section.settings.newsletter_heading }}</p>
+        </label>
+      {% endif %}
+      {% if section.settings.newsletter_subheading != blank %}
+        <p class='small pb025 mt0'>{{ section.settings.newsletter_subheading }}</p>
+      {% endif %}
+      <div class="newsletter__input f fdr jcb aic">
+        <input type="email" value="{% if customer %}{{ customer.email }}{% endif %}" placeholder="{{ 'general.newsletter_form.newsletter_placeholder' | t }}" name="contact[email]" id="NewsletterEmail" class="input-group__field newsletter-input" aria-label="{{ 'general.newsletter_form.newsletter_placeholder' | t }}" autocorrect="off" autocapitalize="off">
+        <div class="input-group__btn input-group__btn--newsletter">
+          <button type="submit" class="btn--newsletter__submit button--reset">
+            {{ 'general.newsletter_form.submit' | t }}
+            <span>&rarr;</span>
+          </button>
+        </div>
+      </div>
+      <div class="newsletter-message">
+        {% comment %}This keeps reappearing on pageload, not sure why -ae 08.07.19{% endcomment %}
+        {% if form.posted_successfully? %}
+          <p class="form-success oswald--n4 caps track--narrow u-cw" role="alert">You're gonna love these emails.</p>
+        {% endif %}
+        {{ form.errors | default_errors }}
+      </div>
+    {% endform %}
+  </div>
+{% endif %}

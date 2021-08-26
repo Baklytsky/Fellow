@@ -1,0 +1,35 @@
+{% comment %}
+  DO NOT MODIFY THIS FILE DIRECTLY. THIS FILE WILL BE OVERWRITTEN.
+  YOU CAN MODIFY THE LIQUID CODE FOR THIS CUSTOM FIELD HERE:
+  https://customfields.bonify.io/dashboard/fellow-products.myshopify.com/pages/configure/102997/edit
+{% endcomment %}
+{% if page.metafields.custom_fields["partnerships"] != blank %}
+  <div class="custom-field custom-field__partnerships custom-field__type--field-collection">
+    <h3 class="custom-field--title">Partnerships</h3>
+    <div class="custom-field--value">
+      {% assign separator = "|###|" %}
+      {% assign partnership_page_array = page.metafields.custom_fields["partnership_page"] | split: separator %}
+      {% assign partnership_title_array = page.metafields.custom_fields["partnership_title"] | split: separator %}
+      {% assign partnership_short_description_array = page.metafields.custom_fields["partnership_short_description"] | split: separator %}
+      {% assign partnership_image_array = page.metafields.custom_fields["partnership_image"] | split: separator %}
+      {% assign fc_keys = page.metafields.custom_fields["partnerships"] | split: "," %}
+      {% for i in fc_keys %}
+        {% assign index = i | plus: 0 %}
+        <div class="fc-item fc-item--partnership fc-index--{{ index }}">
+          <div class="fc-field field__partnership-page">
+            {{ partnership_page_array[index] }}
+          </div>
+          <div class="fc-field field__partnership-title">
+            {{ partnership_title_array[index] }}
+          </div>
+          <div class="fc-field field__partnership-short-description">
+            {{ partnership_short_description_array[index] }}
+          </div>
+          <div class="fc-field field__partnership-image">
+            {{ partnership_image_array[index] }}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}
