@@ -1,0 +1,12 @@
+{%- assign image = collection.image | img_url: '600x' -%}
+
+<div class='subcollection__introCard rel'>
+  {%
+    include 'component-image' with
+    src: image,
+    alt: alt,
+    absolute: true,
+    fill: true,
+    className: 'image'
+  %}
+</div>

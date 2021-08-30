@@ -1,0 +1,27 @@
+{% comment %}
+  DO NOT MODIFY THIS FILE DIRECTLY. THIS FILE WILL BE OVERWRITTEN.
+  YOU CAN MODIFY THE LIQUID CODE FOR THIS CUSTOM FIELD HERE:
+  https://customfields.bonify.io/dashboard/fellow-products.myshopify.com/products/configure/96351/edit
+{% endcomment %}
+{% if product.metafields.custom_fields["hero_module"] != blank %}
+  <div class="custom-field custom-field__hero-module custom-field__type--field-collection">
+    <h3 class="custom-field--title">Hero Module</h3>
+    <div class="custom-field--value">
+      {% assign separator = "|###|" %}
+      {% assign hero_image_array = product.metafields.custom_fields["hero_image"] | split: separator %}
+      {% assign hero_copy_array = product.metafields.custom_fields["hero_copy"] | split: separator %}
+      {% assign fc_keys = product.metafields.custom_fields["hero_module"] | split: "," %}
+      {% for i in fc_keys %}
+        {% assign index = i | plus: 0 %}
+        <div class="fc-item fc-item--hero module fc-index--{{ index }}">
+          <div class="fc-field field__hero-image">
+            {{ hero_image_array[index] }}
+          </div>
+          <div class="fc-field field__hero-copy">
+            {{ hero_copy_array[index] }}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}

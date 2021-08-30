@@ -1,0 +1,27 @@
+{% comment %}
+  DO NOT MODIFY THIS FILE DIRECTLY. THIS FILE WILL BE OVERWRITTEN.
+  YOU CAN MODIFY THE LIQUID CODE FOR THIS CUSTOM FIELD HERE:
+  https://customfields.bonify.io/dashboard/fellow-products.myshopify.com/products/configure/184118/edit
+{% endcomment %}
+{% if product.metafields.custom_fields["media_proof"] != blank %}
+  <div class="custom-field custom-field__media-proof custom-field__type--field-collection">
+    <h3 class="custom-field--title">Media Proof Items</h3>
+    <div class="custom-field--value">
+      {% assign separator = "|###|" %}
+      {% assign media_proof_item_image_array = product.metafields.custom_fields["media_proof_item_image"] | split: separator %}
+      {% assign media_proof_item_quote_array = product.metafields.custom_fields["media_proof_item_quote"] | split: separator %}
+      {% assign fc_keys = product.metafields.custom_fields["media_proof"] | split: "," %}
+      {% for i in fc_keys %}
+        {% assign index = i | plus: 0 %}
+        <div class="fc-item fc-item--media proof item fc-index--{{ index }}">
+          <div class="fc-field field__media-proof-item-image">
+            {{ media_proof_item_image_array[index] }}
+          </div>
+          <div class="fc-field field__media-proof-item-quote">
+            {{ media_proof_item_quote_array[index] }}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}

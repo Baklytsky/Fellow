@@ -1,0 +1,35 @@
+{% if page.metafields.custom_fields["how_it_works"] != blank %}
+{%- assign bg_color = page.metafields.custom_fields["how_it_works_color"] | replace: '#', '' -%}
+  <div class="how-it-works bg-xlightgrey" {% if bg_color != blank %} style="background-color: #{{ bg_color }}"{% endif %}>
+    <div class="container--m mx-auto">
+      {% if page.metafields.custom_fields["how_it_works_heading"] != blank %}
+        <h2 class="ac">{{ page.metafields.custom_fields["how_it_works_heading"] }}</h2>
+      {% endif %}
+
+      <div class="how-it-works__inner pt1">
+        {% assign steps = page.metafields.custom_fields["how_it_works_steps"] %}
+        {% for step in steps %}
+          <div class="how-it-works__item ac mx-auto">
+              <div class="how-it-works__circle mx-auto f aic jcc oswald">
+                {%- if step["icon"] != blank -%}
+                  {{ step["icon"] }}
+                {%- else -%}
+                  <span class="block">{{ forloop.index }}</span>
+                {%- endif -%}
+              </div>
+              <div class="mt15">
+                {% if step["title"] != blank %}
+                  <h4 class="how-it-works__item-title my0 open-sans p semi">
+                    {{ step["title"] }}
+                  </h4>
+                {% endif %}
+                <div class="how-it-works__item-body my0">
+                  {{ step["body"] | newline_to_br }}
+                </div>
+              </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endif %}

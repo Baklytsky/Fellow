@@ -1,0 +1,47 @@
+{% assign bgColor = section.settings.introCard__bgColor %}
+{% assign textColor = section.settings.introCard__textColor %}
+{% assign ctaBgColor = section.settings.introCard__ctaBgColor %}
+
+{% if bgColor != blank or textColor != blank %}
+  <style>
+    @media (min-width: 992px) {
+      .introCard--{{ section.id }} .introCard__inner {
+        {% if bgColor != blank %}
+          background-color: {{ bgColor }};
+        {% endif %}
+        {% if textColor != blank %}
+          color: {{ textColor }};
+        {% endif %}
+      }
+    }
+    @media (min-width: 992px) {
+      .introCard--{{ section.id }} .introCard__inner .btn--light:hover,
+      .introCard--{{ section.id }} .introCard__inner .btn--light:focus{
+        {% if ctaBgColor != blank %}
+          background: {{ ctaBgColor }};
+        {% endif %}
+      }
+    }
+  </style>
+{% endif %}
+
+<div class='introCard introCard--{{section.id}} {{ cx }}'>
+  <div class="introCard__inner y">
+    <div class='introCard__copy'>
+      {% if section.settings.eyebrow %}
+        <p class='eyebrow'>{{ section.settings.eyebrow }}</p>
+      {% endif %}
+      <h2 class='h3'>{{ section.settings.title }}</h2>
+      <div class='rte'>
+        {{ section.settings.copy }}
+      </div>
+    </div>
+    {% if section.settings.show_cta %}
+      <a href='{{ collection.url}}' class='button rel btn btn--light btn--lg mt0 aie' aria-label="{{ section.settings.cta_copy }}" role="button">{{ section.settings.cta_copy }}</a>
+    {% endif %}
+  </div>
+</div>
+
+{% assign bgColor = blank %}
+{% assign textColor = blank %}
+{% assign ctaBgColor = blank %}

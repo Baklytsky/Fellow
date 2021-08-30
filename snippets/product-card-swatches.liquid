@@ -1,0 +1,56 @@
+<form class='productCard__variants rel mt05'>
+  <div class='productCard__options'>
+    {% for product_option in product.options_with_values %}
+      {% assign option_name = product_option.name | handleize %}
+      {% if option_name == 'color' or option_name == 'material' %}
+        {% comment %}Found Color/Swatch, now loop through those{% endcomment %}
+        <div class='radio-group f aic' data-option-{{ option_name }}>
+          {% for value in product_option.values %}
+            {% for variant in product.variants %}
+              {% if variant.option1 == value or variant.option2 == value %}
+                <label class='radio f aic rel js-color-update' for='{{ product.title | handleize }}-{{ option_name }}__{{ value | handleize }}' {% if option_name == 'color' or option_name == 'material' %}data-color='{{ value | handleize }}'{% endif %}>
+                  <span class='u-sr-only'>Label for {{ product.title }} {{ option_name }}</span>
+                  <input
+                    type='radio'
+                    id='{{ product.title | handleize }}-{{ option_name }}__{{ value | handleize }}'
+                    data-value-handle='{{ value | handleize }}'
+                    {% if option_name == 'color' %}data-color='{{ value | handleize }}'{% endif %}
+                    {% if option_name == 'material' %}data-material='{{ value | handleize }}'{% endif %}
+                    value='{{ value }}'
+                    data-option-selector
+                  >
+                  <div class="radio__title js-productCard-option js-color-update"
+                    {% if option_name == 'color' %}data-color='{{ value | handleize }}'{% endif %}
+                    {% if option_name == 'material' %}data-material='{{ value | handleize }}'{% endif %}
+                    data-variant-url='{{ variant.url }}'
+                    data-variant-id='{{ variant.id }}'
+                  >
+                  </div>
+                  <a href="{{ variant.url }}" class='fill abs x y z2' aria-label='{{ product.title }} / {{ variant.title }}'></a>
+                </label>
+                {% break %}
+              {% endif %}
+            {% endfor %}
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+  {% for product_option in product.options_with_values %}
+    {% assign option_name = product_option.name | handleize %}
+    {% if option_name == 'color' or option_name == 'material' %}
+      {% comment %}Found Color/Swatch, now loop through those{% endcomment %}
+      <select name='id' title='{{ product.title | handleize }}_{{ option_name }}' class='is-hidden' aria-label="Product variants select">
+        {% for value in product_option.values %}
+          {% for variant in product.variants %}
+            {% if variant.option1 == value or variant.option2 == value %}
+              <option value='{{ variant.id }}' data-inventory-policy='{{ variant.inventory_policy }}' data-inventory-quantity='{{ variant.inventory_quantity }}' data-variant-url='{{ variant.url }}'>{{ value }}</option>
+              {% break %}
+            {% endif %}
+          {% endfor %}
+        {% endfor %}
+      </select>
+    {% endif %}
+  {% endfor %}
+  <button type="submit" style="display: none">Submit</button>
+</form>

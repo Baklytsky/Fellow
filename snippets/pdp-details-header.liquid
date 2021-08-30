@@ -1,0 +1,12 @@
+<div class='pdpCopy__header'>
+  {% if tagline != blank %}<div class='eyebrow'>{{ tagline }}</div>{% endif %}
+  <div class=' f jcb'>
+    <h1 class='h2'>{{ product.title }}</h1>
+    <h2 data-selected-var-price class="ml1">{{ current_variant.price | money | remove: '.00' }}</h2>
+  </div>
+
+  {%- assign reviews_count = product.metafields.yotpo.reviews_count | plus: 0 -%}
+  {%- if reviews_count > 0 -%}
+    {% include 'yotpo-star-rating-widget' %}
+  {%- endif -%}
+</div>

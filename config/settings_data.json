@@ -1,0 +1,432 @@
+{
+  "current": {
+    "social_instagram_link": "",
+    "social_facebook_link": "",
+    "social_twitter_link": "",
+    "social_youtube_link": "",
+    "social_pinterest_link": "",
+    "free_shipping_met_msg": "Good News! You get free continental US shipping.",
+    "enable_cart_banner": true,
+    "cart_banner_text": "Free Continental US Shipping on orders over $99",
+    "cart_empty_cta": "shopify:\/\/collections\/bestsellers",
+    "cart_empty_cta_text": "Shop Bestsellers",
+    "cart_notes_enable": false,
+    "favicon": "shopify:\/\/shop_images\/favicon.png",
+    "checkout_header_image": "",
+    "checkout_logo_image": "shopify:\/\/shop_images\/Fellow-Logo_Final_533C_f1b411d7-b158-474e-9c03-7ecc416399bb.jpg",
+    "checkout_logo_position": "left",
+    "checkout_logo_size": "medium",
+    "checkout_body_background_image": "",
+    "checkout_body_background_color": "#fff",
+    "checkout_input_background_color_mode": "white",
+    "checkout_sidebar_background_image": "",
+    "checkout_sidebar_background_color": "#fafafa",
+    "checkout_heading_font": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
+    "checkout_body_font": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
+    "checkout_accent_color": "#197bbd",
+    "checkout_button_color": "#197bbd",
+    "checkout_error_color": "#e32c2b",
+    "enable_free_product": false,
+    "free_product": "stagg-ekg-sticker-series",
+    "free_product_threshold": "100",
+    "free_product_not_met_msg": "Sticker Series",
+    "free_product_not_met_url": "",
+    "type_base_size": "16px",
+    "color_primary": "#000",
+    "color_body_text": "#000",
+    "social_sharing_blog": true,
+    "share_facebook": true,
+    "share_twitter": true,
+    "share_pinterest": true,
+    "social_snapchat_link": "",
+    "social_tumblr_link": "",
+    "social_vimeo_link": "",
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {
+          "logo_svg": "<svg class=\"headerLogo__svg\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\" viewbox=\"0 0 200 38\">\n<title id=\"headerLogo__title\">Logo<\/title>\n  <g>\n    <path class=\"path-fill\" d=\"M17.33,2H1.43a.94.94,0,0,0-.93.94V26.62a.94.94,0,0,0,.93.94H3A1,1,0,0,0,4,26.62V16h8.17a.92.92,0,0,0,.93-.93V13.62a.92.92,0,0,0-.93-.93H4V5.28H17.33a.94.94,0,0,0,.94-.93V2.94A1,1,0,0,0,17.33,2\"><\/path>\n    <path class=\"path-fill\" d=\"M50.84,5.28a.94.94,0,0,0,.94-.93V2.94A.94.94,0,0,0,50.84,2H34.57a.94.94,0,0,0-.93.94V26.62a.94.94,0,0,0,.93.94H50.84a.94.94,0,0,0,.94-.94V25.17a.94.94,0,0,0-.94-.93H37V16h8.09a.93.93,0,0,0,.94-.93V13.62a.93.93,0,0,0-.94-.93H37V5.28Z\"><\/path>\n    <path class=\"path-fill\" d=\"M83.45,24.24H71.14V2.94a.91.91,0,0,0-.28-.66A.9.9,0,0,0,70.2,2H68.67a.93.93,0,0,0-.93.93V26.62a.9.9,0,0,0,.27.66.91.91,0,0,0,.66.28H83.45a.94.94,0,0,0,.94-.94V25.18a.94.94,0,0,0-.94-.94\"><\/path>\n    <path class=\"path-fill\" d=\"M113.91,24.24H101.6V2.94a.93.93,0,0,0-.94-.93H99.13a.93.93,0,0,0-.93.93V26.62a.94.94,0,0,0,.93.94h14.78a.94.94,0,0,0,.94-.94V25.18a.94.94,0,0,0-.94-.94\"><\/path>\n  <\/g>\n  <g class=\"bowtie-group\">\n    <path class=\"path-fill\" d=\"M145.81,31.42c-.29,0-5.38,2-7.33,2.8-2-.78-7-2.8-7.34-2.8a.64.64,0,0,0-.64.64v6.2a.64.64,0,0,0,.64.64c.29,0,5.38-2,7.34-2.79,2,.78,7,2.79,7.33,2.79a.64.64,0,0,0,.65-.64v-6.2a.64.64,0,0,0-.65-.64\"><\/path>\n    <path class=\"path-fill\" d=\"M138.5,1.1a13.7,13.7,0,1,0,13.68,13.72A13.73,13.73,0,0,0,138.5,1.1m0,24.11a10.41,10.41,0,1,1,10.39-10.39A10.42,10.42,0,0,1,138.5,25.21\"><\/path>\n  <\/g>\n  <g class=\"w\">\n    <path class=\"path-fill\" d=\"M199.09,2.79,198,2a.94.94,0,0,0-.78-.13.91.91,0,0,0-.6.53l-7.82,18.05L181,2.48a1,1,0,0,0-.33-.4l0,0a1,1,0,0,0-1.43.41l-7.79,18-7.85-18A1,1,0,0,0,162.24,2l-1.15.56a.93.93,0,0,0-.44,1.21l9.81,22.68a.93.93,0,0,0,.86.56h0a.94.94,0,0,0,.86-.56l7.89-18.07,7.82,18.07a.93.93,0,0,0,.85.56h0a1,1,0,0,0,.86-.56l9.81-22.47a.94.94,0,0,0-.33-1.15\"><\/path>\n  <\/g>\n<\/svg>",
+          "logo_desktop_size": 160,
+          "logo_mobile_size": 120,
+          "menu_left": "main-menu",
+          "menu_right": "secondary-menu",
+          "show_announcement": false,
+          "announcement_text": "Text-to-order coffee! Sign up free at drops.fellowproducts.com",
+          "announcement_link": "https:\/\/drops.fellowproducts.com\/",
+          "announcement_color_bg": "#141414",
+          "announcement_color_text": "#ffffff",
+          "enable_timer": false,
+          "end_date": "July 15 , 2021 8:00 GMT-08:00"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "footer_menu": "footer",
+          "footer_menu_two": "main-menu",
+          "show_icons": true,
+          "instagram": true,
+          "facebook": true,
+          "twitter": true,
+          "youtube": true,
+          "pinterest": true,
+          "linkedin": true,
+          "bigfooter_marquee": false,
+          "bigfoot_url": "",
+          "show_newsletter": true,
+          "newsletter_heading": "Sign up FOR UPDATES + 10% OFF FIRST ORDER",
+          "newsletter_subheading": ""
+        }
+      },
+      "collection-template": {
+        "type": "collection-template",
+        "settings": {
+          "show_tagline": true
+        }
+      },
+      "1565155576930": {
+        "type": "hero-slider",
+        "blocks": {
+          "16ef4b2d-c962-4a2c-ba83-ad9c6f258f63": {
+            "type": "heroSlide",
+            "disabled": true,
+            "settings": {
+              "heroSlide": "shopify:\/\/shop_images\/1440x740_HeaderImages_Slider_Amos.jpg",
+              "desktopAlignment": "center",
+              "mobileAlignment": "center",
+              "heroSlide__header": "CONTROL THE HEAT",
+              "heroSlide__subheader": "THE COOLEST WAY TO MAKE WATER HOT",
+              "heroSlide__textAlignment": "left",
+              "heroSlide__color": "cb",
+              "heroSlide__ctaURL": "shopify:\/\/products\/staggekg",
+              "heroSlide__ctaCopy": "SHOP THE KETTLE",
+              "heroSlide__ctaColor": "black",
+              "subSlide__bgColor": "#ffffff",
+              "subSlide__textColor": "#231f20",
+              "subSlide__ghostBtn": false
+            }
+          },
+          "23b78945-8f28-45e8-a6b2-9dcaf7b40f4f": {
+            "type": "splitSlide",
+            "disabled": true,
+            "settings": {
+              "splitSlide__layout": "left",
+              "heroSlide": "shopify:\/\/shop_images\/1440x1620_HomepageSplitSlider_FellowDrops_3.jpg",
+              "desktopAlignment": "center",
+              "mobileAlignment": "center",
+              "heroSlide__header": "Introducing: Fellow Drops",
+              "heroSlide__subheader": "Text-to-order coffee, curated by us.",
+              "subSlide__bgColor": "#566ca3",
+              "subSlide__textColor": "#FFFFFF",
+              "heroSlide__ctaURL": "https:\/\/drops.fellowproducts.com\/",
+              "heroSlide__ctaCopy": "JOIN NOW",
+              "heroSlide__ctaColor": "black",
+              "subSlide__ghostBtn": false,
+              "heroSlide__ctaSubtext": "*Not a subscription. Free to Join."
+            }
+          },
+          "f867d9c0-2449-4554-9e60-e978084d178c": {
+            "type": "heroSlide",
+            "settings": {
+              "heroSlide": "shopify:\/\/shop_images\/1440x740_homepage_stagg.jpg",
+              "desktopAlignment": "center",
+              "mobileAlignment": "center",
+              "heroSlide__header": "A CALMING NEW COLOR",
+              "heroSlide__subheader": "SERENE STONE BLUE MEETS STURDY WALNUT",
+              "heroSlide__textAlignment": "left",
+              "heroSlide__color": "cw",
+              "heroSlide__ctaURL": "https:\/\/fellowproducts.com\/products\/staggekg?variant=39402234871908",
+              "heroSlide__ctaCopy": "SHOP STAGG EKG",
+              "heroSlide__ctaColor": "black",
+              "subSlide__bgColor": "#ffffff",
+              "subSlide__textColor": "#231f20",
+              "subSlide__ghostBtn": false
+            }
+          }
+        },
+        "block_order": [
+          "16ef4b2d-c962-4a2c-ba83-ad9c6f258f63",
+          "23b78945-8f28-45e8-a6b2-9dcaf7b40f4f",
+          "f867d9c0-2449-4554-9e60-e978084d178c"
+        ],
+        "settings": {
+          "addMargin": true
+        }
+      },
+      "product-template": {
+        "type": "product-template",
+        "settings": {
+          "show_quantity_selector": true,
+          "quantity_selector_inline": false
+        }
+      },
+      "1565223722827": {
+        "type": "featured-collection",
+        "settings": {
+          "eyebrow": "",
+          "title": "BEST SELLERS",
+          "copy": "<p>Consider your morning made.<br\/><br\/><\/p>",
+          "show_intro_card": true,
+          "introCard__bgColor": "#000000",
+          "introCard__textColor": "#FFFFFF",
+          "show_cta": true,
+          "cta_copy": "SHOP NOW",
+          "introCard__ctaBgColor": "#000000",
+          "collection": "smooth-brewing-ahead",
+          "count": 4,
+          "mobile_layout": "scroll_on_mobile"
+        }
+      },
+      "1592957403614": {
+        "type": "media-proof",
+        "blocks": {
+          "1592957633408": {
+            "type": "mediaProofItem",
+            "settings": {
+              "mediaProof__logo": "shopify:\/\/shop_images\/designmilk.jpg",
+              "mediaProof__quote": "Possibly the first consumer priced coffee burr grinder worthy of categorizing as a design object",
+              "mediaProof__link": ""
+            }
+          },
+          "1592957761825": {
+            "type": "mediaProofItem",
+            "settings": {
+              "mediaProof__logo": "shopify:\/\/shop_images\/GearPatrol.jpg",
+              "mediaProof__quote": "When it comes to superior products for making a cup of coffee in the morning, it’s hard to beat what Fellow does.",
+              "mediaProof__link": ""
+            }
+          }
+        },
+        "block_order": [
+          "1592957633408",
+          "1592957761825"
+        ],
+        "settings": {}
+      },
+      "collection-subcollection-template": {
+        "type": "collection-subcollection-template",
+        "settings": {
+          "show_tagline": false,
+          "show_collection_card": true,
+          "show_collection_copy": true
+        }
+      },
+      "blog-template": {
+        "type": "blog-template",
+        "settings": {}
+      },
+      "1606744233d875a5e8": {
+        "type": "feature-section",
+        "settings": {
+          "image": "shopify:\/\/shop_images\/corvo_lower_module_1600x903_63d3072f-2519-439f-9949-fe6a5a77b2ee.jpg",
+          "height": "small",
+          "layout": "right",
+          "centered": true,
+          "overlap": false,
+          "fullbleed": false,
+          "noPadding": false,
+          "textLayout": "center",
+          "eyebrow": "",
+          "title": "WE'RE BRANCHING OUT",
+          "text": "Our most versatile kettle is now available with our most coveted add-on—walnut accents!",
+          "button_link": "https:\/\/fellowproducts.com\/products\/corvo-ekg?variant=39402236412004",
+          "button_label": "SHOP CORVO EKG",
+          "bg_color": "#ffffff",
+          "text_color": "#000000"
+        }
+      },
+      "1614041685435c15f2": {
+        "type": "featured-post-blog",
+        "settings": {
+          "title": "Brew Recipes",
+          "eyebrow": "",
+          "title_location": "left_top",
+          "featuredPost": "brew-guides\/shimmy-coffee-sieve-stagg-x-dripper",
+          "blog": "brew-guides",
+          "post_limit": 2,
+          "show_author": false,
+          "show_date": false,
+          "show_view_all": true
+        }
+      },
+      "16213575933c562baf": {
+        "type": "feature-section",
+        "disabled": true,
+        "settings": {
+          "image": "shopify:\/\/shop_images\/Red_Carter_filled_with_fruits_and_wine.jpg",
+          "height": "medium",
+          "layout": "right",
+          "centered": true,
+          "overlap": false,
+          "fullbleed": false,
+          "noPadding": false,
+          "textLayout": "center",
+          "eyebrow": "",
+          "title": "<h2>THE LIFE OF THE PARTY<\/h2>",
+          "text": "<p>The room goes wild when Boxed Wine walks in. Meet Carter Move Mug in our newest, summeriest hue —<strong> available exclusively in 12 oz at fellowproducts.com.<\/strong><\/p>",
+          "button_link": "shopify:\/\/collections\/watch-party-collection",
+          "button_label": "GET A REFILL",
+          "bg_color": "#ffffff",
+          "text_color": "#000000"
+        }
+      },
+      "162136256702177739": {
+        "type": "value-prop",
+        "disabled": true,
+        "settings": {
+          "noticeModule__eyebrow": "PROMOTION details",
+          "noticeModule__header": "",
+          "subheader__text": "Get two free 12 oz Carter Move Mugs (1 Matte White, 1 Matte Black) with your Ode Brew Grinder purchase. Colors non-negotiable. Can not combine with other discounts. While supplies last. Offer valid 6\/23-6\/27",
+          "noticeModule__textColor": "u-cb",
+          "ctaURL": "",
+          "ctaCopy": "",
+          "ctaStyle": "underline",
+          "bgColor": "#f5f5f5",
+          "showImage": false
+        }
+      },
+      "1622090142291fb9ed": {
+        "type": "featured-collection",
+        "disabled": true,
+        "settings": {
+          "eyebrow": "",
+          "title": "LIGHTS, CAMERA, SNACKTION",
+          "copy": "<p>Be the host with the most. Meet the newest Carter collection inspired by our favorite movie night treats.<br\/><br\/><\/p>",
+          "show_intro_card": true,
+          "introCard__bgColor": "#fafafa",
+          "introCard__textColor": "#231f20",
+          "show_cta": true,
+          "cta_copy": "SHOP NOW",
+          "introCard__ctaBgColor": "",
+          "collection": "watch-party-collection",
+          "count": 4,
+          "mobile_layout": "scroll_on_mobile"
+        }
+      },
+      "1626855056246ca3dc": {
+        "type": "feature-section",
+        "settings": {
+          "image": "shopify:\/\/shop_images\/Coffee_Bags_and_Phone.jpg",
+          "height": "medium",
+          "layout": "right",
+          "centered": true,
+          "overlap": false,
+          "fullbleed": false,
+          "noPadding": false,
+          "textLayout": "center",
+          "eyebrow": "",
+          "title": "TEXT-TO-ORDER COFFEE, CURATED BY FELLOW",
+          "text": "<h4>Introducing: Fellow Drops<\/h4>\n<p align=\"center\">Every week we find a new coffee we love and text you about it, just reply if you want a bag: whole bean and roasted to order.<\/p><p>\n<br>\n*Not a subscription. Free to Join.<\/p>",
+          "button_link": "https:\/\/drops.fellowproducts.com\/",
+          "button_label": "JOIN FELLOW DROPS",
+          "bg_color": "#f2f2f2",
+          "text_color": "#000000"
+        }
+      },
+      "1626981712ae925814": {
+        "type": "featured-collection",
+        "disabled": true,
+        "settings": {
+          "eyebrow": "",
+          "title": "Ode Brew Grinder",
+          "copy": "",
+          "show_intro_card": true,
+          "introCard__bgColor": "",
+          "introCard__textColor": "#231f20",
+          "show_cta": false,
+          "cta_copy": "SHOP NOW",
+          "introCard__ctaBgColor": "",
+          "collection": "grinder",
+          "count": 3,
+          "mobile_layout": "scroll_on_mobile"
+        }
+      },
+      "1627320236f2afce60": {
+        "type": "feature-section",
+        "disabled": true,
+        "settings": {
+          "image": "shopify:\/\/shop_images\/shimmySieve-Homepage-ClaraModule.jpg",
+          "height": "medium",
+          "layout": "right",
+          "centered": true,
+          "overlap": false,
+          "fullbleed": false,
+          "noPadding": false,
+          "textLayout": "center",
+          "eyebrow": "",
+          "title": "Clara French Press",
+          "text": "Less silt in your cup and more clarity in your French press flavor notes.",
+          "button_link": "shopify:\/\/products\/clara-french-press",
+          "button_label": "SHOP NOW",
+          "bg_color": "#ffffff",
+          "text_color": "#000000"
+        }
+      },
+      "1628096060a354929a": {
+        "type": "feature-section",
+        "settings": {
+          "image": "shopify:\/\/shop_images\/1440X1080_HomepageModule_Amos_1.jpg",
+          "height": "medium",
+          "layout": "left",
+          "centered": true,
+          "overlap": false,
+          "fullbleed": false,
+          "noPadding": false,
+          "textLayout": "center",
+          "eyebrow": "",
+          "title": "A MUG WITH A VIEW",
+          "text": "<p>The first of our new Artist Series: a Carter Everywhere Mug customized by our SF neighbor, muralist Amos Goldbaum.<\/p>",
+          "button_link": "shopify:\/\/products\/artist-series-amos-carter-everywhere-mug",
+          "button_label": "SHOP THE SERIES",
+          "bg_color": "#ffffff",
+          "text_color": "#000000"
+        }
+      },
+      "1629758267ca531176": {
+        "type": "featured-collection",
+        "settings": {
+          "eyebrow": "",
+          "title": "KITS + BUNDLES",
+          "copy": "<p>That insurance company is not wrong: bundle and save!<\/p>",
+          "show_intro_card": true,
+          "introCard__bgColor": "#000000",
+          "introCard__textColor": "#FFFFFF",
+          "show_cta": true,
+          "cta_copy": "SHOP NOW",
+          "introCard__ctaBgColor": "",
+          "collection": "coffee-products-kits-bundles",
+          "count": 4,
+          "mobile_layout": "scroll_on_mobile"
+        }
+      }
+    },
+    "content_for_index": [
+      "1565155576930",
+      "162136256702177739",
+      "1606744233d875a5e8",
+      "1565223722827",
+      "1628096060a354929a",
+      "1627320236f2afce60",
+      "1629758267ca531176",
+      "1626855056246ca3dc",
+      "1592957403614",
+      "1614041685435c15f2",
+      "1626981712ae925814",
+      "16213575933c562baf",
+      "1622090142291fb9ed"
+    ]
+  },
+  "presets": {
+    "Default": {
+      "sections": {
+        "featured-product": {
+          "type": "featured-product",
+          "settings": {}
+        }
+      },
+      "content_for_index": [
+        "featured-product"
+      ]
+    }
+  }
+}

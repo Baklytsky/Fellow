@@ -1,0 +1,15 @@
+{%- assign reviews_count = product.metafields.yotpo.reviews_count | plus: 0 -%}
+{%- if reviews_count > 0 -%}
+  <section class="pdp-reviews outer container container--m">
+    <div class="ac pdp-reviews__header">
+      <h2 class="pdp-reviews__heading caps">People Said These Things</h2>
+      <div class="pdp-reviews__average">
+         {{ product.metafields.yotpo.reviews_average }}/5
+      </div>
+      {% include 'yotpo-star-rating-widget' with class: 'f jcc aic' %}
+      <div class="mt075">Based on {{ reviews_count }} reviews</div>
+    </div>
+    <div class="pdp-reviews__widget">{%- include 'yotpo-review-widget' -%}</div>
+  </section>
+{%- endif -%}
+

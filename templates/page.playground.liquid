@@ -1,0 +1,63 @@
+{%- include 'page-masthead', copy: 'Fellow Store + Playground' -%}
+
+<div data-component='page'>
+  <section class='container--l aic'>
+    <div class="rte">
+      {{ page.content }}
+    </div>
+  </section>
+
+  {% comment %} <section class='module'>
+    <div class='row'>
+      <div class='col-lg-1'>
+        <h2 class='t-vertical caps'>
+          Upcoming Events
+        </h2>
+      </div>
+      <div class='col-lg-4'>
+        <div class='cal' data-component='eventsCal'></div>
+      </div>
+      <div class='col-lg-1 offset-lg-2'>
+        <h2 class='t-vertical caps'>
+          Upcoming Classes
+        </h2>
+      </div>
+      <div class='col-lg-4'>
+        <div class='cal' data-component='classesCal'></div>
+      </div>
+    </div>
+    <div class='row aic'>
+      <div class='col-lg-8 offset-lg-2 ac'>
+        <a class='btn caps' href='https://calendar.google.com/calendar/embed?src=hello%40fellowproducts.com&ctz=America%2FLos_Angeles' target="_blank">
+          View Full Calendar
+        </a>
+      </div>
+    </div>
+  </section> {% endcomment %}
+
+  {% if page.metafields.custom_fields["playground_featured_roasters"] != blank %}
+    <section class='container--l'>
+      <div class='row'>
+        <h2 class='caps'>
+          Featured Roasters
+        </h2>
+      </div>
+      <div class='row'>
+        {% if page.metafields.custom_fields["playground_featured_roasters"] != blank %}
+          {% assign article_blog_handle = page.metafields.custom_fields["playground_featured_roasters"] | split: "." %}
+          {% for article in blogs[article_blog_handle[0]].articles %}
+            {% comment %} Not sure the below if is necessary {% endcomment %}
+            {% if article.handle contains article_blog_handle[1] %}
+              <div class='row'>
+                {% include 'featured-roasters-list' %}
+              </div>
+              <div class='row aic my3rem'>
+                {% include 'featured-roasters-info' %}
+              </div>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      </div>
+    </section>
+  {% endif %}
+</div>

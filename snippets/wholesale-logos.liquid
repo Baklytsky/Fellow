@@ -1,0 +1,41 @@
+{% if page.metafields.custom_fields["wholesale_logos"] != blank %}
+  {% assign separator = "|###|" %}
+  {% assign wholesale_logo_array = page.metafields.custom_fields["wholesale_logo"] | split: separator | compact %}
+  {% assign fc_keys = page.metafields.custom_fields["wholesale_logos"] | split: "," %}
+
+  {% if wholesale_logo_array.size <= 5 %}
+    {% assign logos_per_group = wholesale_logo_array.size %}
+  {% elsif wholesale_logo_array.size == 6 or wholesale_logo_array.size == 9 %}
+    {% assign logos_per_group = 3 %}
+  {% elsif wholesale_logo_array.size >= 7 %}
+    {% assign logos_per_group = 4 %}
+  {% endif %}
+
+  <div class="wholesale-logos">
+
+    <h2 class="caps ac pb05">{{ page.metafields.custom_fields["wholesale_logos_heading"] | default: 'Who We Work With' }}</h2>
+
+    <div class="container--l mx-auto wholesale-logos__carousel" data-flickity='{ "prevNextButtons": false, "cellAlign": "center", "wrapAround": true, "contain": true, "watchCSS": true }'>
+        {% for logo in wholesale_logo_array %}
+          {% assign index = forloop.index0 %}
+          {% assign index_modulo = index | modulo: logos_per_group %}
+          {% if index > 0 and index_modulo == 0 %}
+              </div>
+          {% endif %}
+
+          {% if index_modulo == 0 %}
+              <div class="wholesale-logos__slide f jcc aic x">
+          {% endif %}
+
+          <div class="wholesale-logos__logo col-12 col-md-3">
+            <img class="x" src="{{ logo }}" alt="Logo" role="img"/>
+          </div>
+
+          {% if forloop.last == true %}
+              </div>
+          {% endif %}
+
+        {% endfor %}
+    </div>
+  </div>
+{% endif %}

@@ -1,0 +1,62 @@
+{%- assign staggSrc = "kettleBud-min2.gif" | asset_url -%}
+{%- assign atmosSrc = "walkinAtmos-min2.gif" | asset_url -%}
+{%- assign clydeSrc = "walkinClyde-min2.gif" | asset_url -%}
+
+{%- assign bigfootWalk = "bigfootWalk-opt.gif" | asset_url -%}
+{%- assign bigfootWave = "bigfootWave-opt.gif" | asset_url -%}
+
+{%- assign staggStand = "standinKettle.png" | asset_url -%}
+{%- assign atmosStand = "standinAtmos.png" | asset_url -%}
+{%- assign clydeStand = "standinClyde-sm.png" | asset_url -%}
+
+{% assign bigfootUrl = section.settings.bigfoot_url %}
+
+<section class='full rel x y my0'>
+  <div class='is-hidden'>
+    <img class='stagg-standing' src="{{ staggStand }}" role="img">
+    {% comment %} <img class='atmos-standing' src="{{ atmosStand }}"> {% endcomment %}
+    <img class='clyde-standing' src="{{ clydeStand }}" role="img">
+    <img class='bigfoot-wave' src="{{ bigfootWave }}" role="img">
+  </div>
+  <div class="marquee--left bigfooter x y">
+    <div class="inner f jcb aie" data-component='bigfooterMarquee'>
+      {% comment %} {%
+        include 'component-image' with
+        src: atmosSrc,
+        alt: alt,
+        className: 'image atmos walkinDude',
+        scaleDown: true,
+        alignEnd: true,
+        irishFix: true
+      %} {% endcomment %}
+      {%
+        include 'component-image' with
+        src: staggSrc,
+        alt: alt,
+        className: 'image stagg walkinDude',
+        scaleDown: true,
+        alignEnd: true,
+        irishFix: true
+      %}
+      {%
+        include 'component-image' with
+        src: clydeSrc,
+        alt: alt,
+        className: 'image clyde walkinDude',
+        scaleDown: true,
+        alignEnd: true,
+        irishFix: true
+      %}
+      {%
+        include 'component-image' with
+        src: bigfootWalk,
+        alt: alt,
+        className: 'image bigfoot walkinDude z0',
+        scaleDown: true,
+        alignEnd: true,
+        irishFix: true,
+        href: bigfootUrl
+      %}
+    </div>
+  </div>
+</section>

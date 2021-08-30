@@ -1,0 +1,33 @@
+{% if product.metafields.custom_fields["pdp_rec_collection"] != blank %}
+
+	{%- assign rec_collection_heading = product.metafields.custom_fields["pdp_rec_collection_heading"] %}
+	{%- assign rec_collection = collections[product.metafields.custom_fields["pdp_rec_collection"]] -%}
+
+	<div class="pdpRecCollection">
+
+		<section class="module x jcc">
+			<div class="row jcc">
+				{% if rec_collection_heading != blank %}
+					<div class='col-lg-2'>
+						<h2 class='t-vertical caps'>{{ rec_collection_heading | escape }}</h2>
+					</div>
+				{% endif %}
+
+				<div class="col-lg-10">
+					<div class='f jcs fdr one-fourth pdpRecCollection__slideshow'>
+						{% for product in rec_collection.products limit: 12 %}
+							<div class="pdpRecCollection__slide">
+								{%
+									include 'product-card' with
+									cx: 'y'
+									product: product
+								%}
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+
+{% endif %}

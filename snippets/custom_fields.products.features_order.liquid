@@ -1,0 +1,13 @@
+{% comment %}
+  DO NOT MODIFY THIS FILE DIRECTLY. THIS FILE WILL BE OVERWRITTEN.
+  YOU CAN MODIFY THE LIQUID CODE FOR THIS CUSTOM FIELD HERE:
+  https://customfields.bonify.io/dashboard/fellow-products.myshopify.com/products/configure/111561/edit
+{% endcomment %}
+{% if product.metafields.custom_fields["features_order"] != blank %}
+  <div class="custom-field custom-field__features-order custom-field__type--text-list">
+    <h3 class="custom-field--title">Features Order</h3>
+    <div class="custom-field--value">  
+      {{ product.metafields.custom_fields["features_order"] }}
+    </div>
+  </div>
+{% endif %}

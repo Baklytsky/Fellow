@@ -1,0 +1,288 @@
+{% comment %}
+  Considerations for the header:
+    1. Schema.org tags
+      - <h1 itemscope itemtype='http://schema.org/Organization'>
+      - itemprop [url, logo] etc
+{% endcomment %}
+
+{% comment %}
+Hey Andy, it's you, Andy -
+That announcement bar class needs to get applied to the body tag so all elements can react to it.
+{% endcomment %}
+
+{% assign menu_left = section.settings.menu_left %}
+{% assign menu_right = section.settings.menu_right %}
+{%- assign logo_image = section.settings.logo -%}
+{%- assign logo_svg = section.settings.logo_svg -%}
+
+  {% capture headerLogo %}
+  <div class='header__logo y'>
+    <a href="{{ shop.secure_url }}" itemprop="url" class="site-header__logo y" aria-label='Link To {{ shop.name }} Homepage'>
+    {% if template.name == 'index' %}
+      <h1 class="site-header__logo-wrapper y" itemscope itemtype="http://schema.org/Organization">
+        <span class="u-sr-only">{{ shop.name }}</span>
+    {% else %}
+      <div class="site-header__logo-wrapper y" itemscope itemtype="http://schema.org/Organization">
+    {% endif %}
+        {%- if logo_image -%}
+          <img class='block x' src='{{ logo_image.src | img_url: '600x' }}' alt='{{ shop.name | escape }}' role="img"/>
+        {%- elsif logo_svg != blank -%}
+          {{ logo_svg }}
+        {%- else -%}
+          {% include 'fellow-logo' %}
+        {%- endif -%}
+    {% if template.name == 'index' %}
+      </h1>
+    {% else %}
+      </div>
+    {% endif %}
+    </a>
+  </div>
+{% endcapture %}
+
+<header role='banner' id='header' data-component='header' class='header__content'>
+  {% if section.settings.show_announcement %}
+    <style>
+      .announcement-bar {
+        background-color: {{ section.settings.announcement_color_bg }};
+      }
+
+      .announcement-bar--link:hover {
+        {% assign brightness = section.settings.announcement_color_bg | color_brightness %}
+
+        {% if brightness <= 192 %}
+          {% assign lightenAmount = 255 | minus: brightness | divided_by: 255 | times: 16 %}
+          background-color: {{ section.settings.announcement_color_bg | color_lighten: lightenAmount }};
+        {% else %}
+          {% assign darkenAmount = 255 | divided_by: brightness | times: 8 %}
+          background-color: {{ section.settings.announcement_color_bg | color_darken: darkenAmount }};
+        {% endif %}
+      }
+
+      .announcement-bar__message,
+      .announcement-bar__close {
+        color: {{ section.settings.announcement_color_text }};
+        font-weight: 700;
+      }
+    </style>
+
+    {% if section.settings.announcement_link == blank %}
+      <div class="announcement-bar rel f aic jcc p05 m0 ac z8" tabindex='-1'>
+    {% else %}
+      <a href="{{ section.settings.announcement_link }}"
+      class="announcement-bar rel f aic jcc p05 m0 ac z8 announcement-bar--link"
+      aria-label="{{ section.settings.announcement_text }}"
+      aria-labelledby="{{ section.settings.announcement_text }}">
+    {% endif %}
+      <p class="announcement-bar__message page-width my0">
+        {{ section.settings.announcement_text | escape }}
+        {%- if section.settings.enable_timer and section.settings.end_date != blank -%}
+          <div class="announcement-bar__timer" data-end-date="{{ section.settings.end_date }}">
+            <span class="announcement-bar__timer-days"></span>
+            <span class="announcement-bar__timer-hours"></span>
+            <span class="announcement-bar__timer-minutes"></span>
+            <span class="announcement-bar__timer-seconds"></span>
+          </div>
+        {%- endif -%}
+      </p>
+    {% if section.settings.announcement_link == blank %}
+      </div>
+    {% else %}
+      </a>
+    {% endif %}
+  {% endif %}
+
+  <div class='header__outer'>
+    <div class='header__mobile oswald--n4 rel f fdr jcb z9'>
+      <div class='mobileToggle js-mobile-nav-toggle'>
+        <span class='js-mobile-nav-toggle-copy'>Menu</span>
+      </div>
+      {{ headerLogo }}
+      <a href='/cart' class='js-cart-drawer-toggle' tabindex='0'>
+        Cart
+        (<span class='js-cart-count'>{{ cart.item_count }}</span>)
+      </a>
+    </div>
+
+    <div class='header__inner--constrain'>
+      <nav class='header__inner js-mobile-nav-target'>
+        {% if linklists[menu_left].links.size > 0 %}
+          <ul class='nav__list nav__list--left f aic'>
+            {% for link in linklists[menu_left].links %}
+                {% if link.links != blank %}
+                  {% include 'nav-drawer' %}
+                {% else %}
+                  <li class='mr1 pr1'>
+                    <a href="{{ link.url }}" >
+                      {{ link.title }}
+                    </a>
+                  </li>
+                {% endif %}
+            {% endfor %}
+          </ul>
+        {% endif %}
+
+        <div class='header__logo y hide-mobile'>
+          <a href="{{ shop.secure_url }}" itemprop="url" class="site-header__logo y" aria-label='Link To {{ shop.name }} Homepage'>
+            {% if template.name == 'index' %}
+            <h1 class="site-header__logo-wrapper y" itemscope itemtype="http://schema.org/Organization">
+              <span class="u-sr-only">{{ shop.name }}</span>
+              {% else %}
+              <div class="site-header__logo-wrapper y" itemscope itemtype="http://schema.org/Organization">
+                {% endif %}
+                {%- if logo_image -%}
+                  <img class='block x' src='{{ logo_image.src | img_url: '600x' }}' alt='{{ shop.name | escape }}' role="img"/>
+                  {%- elsif logo_svg != blank -%}
+                  {{ logo_svg }}
+                {%- else -%}
+                  {% include 'fellow-logo' %}
+                {%- endif -%}
+                {% if template.name == 'index' %}
+            </h1>
+            {% else %}
+        </div>
+        {% endif %}
+        </a>
+        </div>
+
+        <div class='nav__right f jcb fw'>
+          {% if linklists[menu_right].links.size > 0 %}
+            <ul class='nav__list nav__list--right f aic'>
+              {% for link in linklists[menu_right].links %}
+                {% if link.links != blank %}
+                  {% include 'nav-drawer' %}
+                {% else %}
+                  <a href="{{ link.url }}">
+                    {{ link.title }}
+                  </a>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          {% endif %}
+          {% if shop.customer_accounts_enabled %}
+            {% if customer %}
+              <a href="/account" class='block'>Account</a>
+            {% else %}
+              <a href="/account/login" class='block'>Log In</a>
+            {% endif %}
+          {% endif %}
+          {% comment %} todo: move cart and mobile nav toggle (and maybe logo) to a different element for easier mobile styling {% endcomment %}
+          <button class='nav__link js-cart-drawer-toggle d-none d-lg-block' aria-pressed='false' aria-label='Cart Toggle - Cart ({{ cart.item_count }})'>
+            <div class='navLink__focus'>
+              Cart (<span class='js-cart-count'>{{ cart.item_count }}</span>)
+            </div>
+          </button>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+
+  <style>
+  .site-header__logo-wrapper img,
+  .site-header__logo-wrapper svg {
+    max-width: {{ section.settings.logo_desktop_size }}px;
+  }
+
+  @media screen and (max-width: 991.98px) {
+    .site-header__logo-wrapper img,
+    .site-header__logo-wrapper svg {
+      max-width: {{ section.settings.logo_mobile_size }}px;
+    }
+  }
+</style>
+
+{% schema %}
+  {
+    "name": "Header",
+    "class": "header z8",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo image"
+      },
+      {
+        "type": "html",
+        "id": "logo_svg",
+        "label": "Logo svg"
+      },
+      {
+        "type": "range",
+        "id": "logo_desktop_size",
+        "min": 50,
+        "max": 200,
+        "step": 5,
+        "unit": "px",
+        "label": "Logo desktop size",
+        "default": 160
+      },
+      {
+        "type": "range",
+        "id": "logo_mobile_size",
+        "min": 50,
+        "max": 200,
+        "step": 5,
+        "unit": "px",
+        "label": "Logo mobile size",
+        "default": 120
+      },
+      {
+        "type": "link_list",
+        "id": "menu_left",
+        "label": "Left Menu"
+      },
+      {
+        "type": "link_list",
+        "id": "menu_right",
+        "label": "Right menu"
+      },
+      {
+        "type": "header",
+        "content": "Announcement"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_announcement",
+        "label": "Show announcement",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "announcement_text",
+        "label": "Announcement text",
+        "default": "Announce something here"
+      },
+      {
+        "type": "url",
+        "id": "announcement_link",
+        "label": "Announcement link",
+        "info": "Optional"
+      },
+      {
+        "type": "color",
+        "id": "announcement_color_bg",
+        "label": "Bar",
+        "default": "#141414"
+      },
+      {
+        "type": "color",
+        "id": "announcement_color_text",
+        "label": "Text",
+        "default": "#fff"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_timer",
+        "label": "Enable timer",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "end_date",
+        "label": "End date",
+        "info": "Example: Sep 30, 2021 07:30:00 GMT-08:00"
+      }
+    ]
+  }
+{% endschema %}

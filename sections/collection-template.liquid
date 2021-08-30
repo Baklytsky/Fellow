@@ -1,0 +1,98 @@
+{% comment %} Metafield represents index as 1, 2, 3, 4, etc. {% endcomment %}
+{% assign product_image_index = collection.metafields.custom_fields.product_image_index | minus: 1 | at_least: 0 | default: 0 %}
+
+{% paginate collection.products by 12 %}
+
+{% if collection.metafields.custom_fields["desktop_masthead_image"] != blank %}
+  {%- assign desktop_masthead = collection.metafields.custom_fields["desktop_masthead_image"] -%}
+{% endif %}
+{% if collection.metafields.custom_fields["mobile_masthead_image"] != blank %}
+  {%- assign mobile_masthead = collection.metafields.custom_fields["mobile_masthead_image"] -%}
+{% endif %}
+{%- assign collection_title = collection.title -%}
+
+<section class='collection' data-component='collection'>
+  {% if desktop_masthead != blank %}
+    {%
+      include 'component-masthead' with
+      img: desktop_masthead,
+      imgMobile: mobile_masthead,
+      dataAttr: 'componentMasthead',
+      copy: collection_title,
+      className: ''
+    %}
+  {% else %}
+    {%
+      include 'component-masthead' with
+      dataAttr: 'componentMasthead',
+      className: ''
+    %}
+  {% endif %}
+  {% comment %} <div class='f aic jcc fdc'>
+    <h1>{{ collection.title }}</h1>
+    {% if collection.description != blank %}
+      <div class="rte">
+        {{ collection.description }}
+      </div>
+    {% endif %}
+  </div> {% endcomment %}
+
+  {% comment %} {% if collection.all_tags.size > 0 %}
+    <ul>
+      {% for tag in collection.all_tags %}
+        {% if current_tags contains tag %}
+          <li class="active">
+            {{ tag | link_to_remove_tag: tag }}
+          </li>
+        {% else %}
+          <li>
+            {{ tag | link_to_tag: tag }}
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  {% endif %} {% endcomment %}
+  {% comment %} <section class='collection__details container--l'>
+    <h1 class='caps'>{{ collection.title }}</h1>
+  </section> {% endcomment %}
+
+  <div class='container--l'>
+    <div class='subcollection__products one-fourth'>
+      {% for product in collection.products %}
+        {% include 'product-card', product_image: product.images[product_image_index] %}
+      {% endfor %}
+    </div>
+    <div class='f fw'>
+      <div class='col-lg-12'>
+        {% if paginate.pages > 1 %}
+          {% include 'pagination' %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+
+</section>
+
+{% endpaginate %}
+
+{% schema %}
+  {
+    "name": {
+      "de": "Kategorie",
+      "en": "Collection",
+      "es": "Colección",
+      "fr": "Collection",
+      "it": "Collezione",
+      "ja": "コレクション",
+      "pt-BR": "Coleção"
+    },
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_tagline",
+        "label": "Show Product Taglines"
+      }
+    ]
+  }
+{% endschema %}

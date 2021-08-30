@@ -1,0 +1,25 @@
+{% if page.metafields.custom_fields["desktop_masthead_image"] != blank %}
+  {%- assign desktop_masthead = page.metafields.custom_fields["desktop_masthead_image"] -%}
+{% endif %}
+{% if page.metafields.custom_fields["mobile_masthead_image"] != blank %}
+  {%- assign mobile_masthead = page.metafields.custom_fields["mobile_masthead_image"] -%}
+{% endif %}
+
+{% if desktop_masthead != blank %}
+  {%
+    include 'component-masthead' with
+    img: desktop_masthead,
+    imgMobile: mobile_masthead,
+    dataAttr: 'componentMasthead',
+    className: '',
+    copy: copy,
+    overlap: false
+  %}
+{% else %}
+  {%
+    include 'component-masthead' with
+    dataAttr: 'componentMasthead',
+    className: '',
+    overlap: false
+  %}
+{% endif %}

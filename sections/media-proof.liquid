@@ -1,0 +1,48 @@
+<section class='mediaProof mediaProof--homepage rel'>
+  <div class='container--l'>
+    <div class='mediaProof__items f fw jca'>
+      {% for block in section.blocks %}
+        {% assign imageSrc = block.settings.mediaProof__logo | img_url: "400x" %}
+        {% assign imageAlt = block.settings.mediaProof__logo.alt | escape %}
+        {% assign quote = block.settings.mediaProof__quote %}
+        {% include 'media-proof-single' %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Media Proof",
+    "max_blocks": 4,
+    "blocks": [
+      {
+        "type": "mediaProofItem",
+        "name": "Media Proof Item",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "mediaProof__logo",
+            "label": "Logo"
+          },
+          {
+            "type": "text",
+            "id": "mediaProof__quote",
+            "label": "Quote"
+          },
+          {
+            "type": "url",
+            "id": "mediaProof__link",
+            "label": "Link"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Media Proof",
+        "category": "Homepage Sections"
+      }
+    ]
+  }
+{% endschema %}

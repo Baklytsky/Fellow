@@ -1,0 +1,280 @@
+/* Slick default styles */
+.slick-slider {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -ms-touch-action: pan-y;
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
+  z-index: 1;
+  overflow-x: hidden;
+}
+.slick-list {
+  position: relative;
+  overflow: hidden;
+  display: block;
+  margin: 0;
+  padding: 0;
+
+  &:focus {
+    outline: none;
+  }
+
+  &.dragging {
+    cursor: pointer;
+    cursor: hand;
+  }
+}
+.slick-slider .slick-track,
+.slick-slider .slick-list {
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+
+.slick-track {
+  position: relative;
+  left: 0;
+  top: 0;
+  display: flex;
+
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
+
+  .slick-loading & {
+    visibility: hidden;
+  }
+}
+.slick-slide {
+  float: left;
+  height: 100%;
+  min-height: 1px;
+  display: none;
+  [dir="rtl"] & {
+    float: right;
+  }
+  img {
+    display: block;
+  }
+  &.slick-loading img {
+    display: none;
+  }
+  &.dragging img {
+    pointer-events: none;
+  }
+  &:focus {
+    outline: none;
+  }
+
+  .slick-initialized & {
+    display: block;
+  }
+
+  .slick-loading & {
+    visibility: hidden;
+  }
+  .slick-vertical & {
+    display: block;
+    height: auto;
+    border: 1px solid transparent;
+  }
+}
+
+/* video */
+
+
+/* Announcement bar timer */
+.announcement-bar {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1rem 2rem;
+
+  @media (max-width: 991.98px) {
+    padding: 1rem;
+  }
+}
+.announcement-bar__message {
+  padding-right: 16px;
+}
+
+.announcement-bar__message,
+.announcement-bar__timer {
+  font-size: 16px;
+
+  @media (max-width: 991.98px) {
+    font-size: 14px;
+  }
+}
+
+.announcement-bar__timer {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  font-weight: 400;
+  line-height: 1.6;
+
+  * {
+    margin-right: 4px;
+    white-space: nowrap;
+  }
+}
+
+.announcement-bar__timer-days:empty {
+  display: none;
+}
+
+.site-header__logo-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img, svg {width: 100%}
+}
+
+.hide-mobile {
+  @media screen and (max-width: 991.98px) {
+    display: none;
+  }
+}
+.footer__icons {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+
+  @media (min-width: 991.98px) {
+    margin-top: 20px;
+  }
+}
+
+.footer__icons-item {
+  list-style-type: none;
+  margin-right: 15px;
+}
+
+.footer__icon {
+  border-radius: 52%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  height: 32px;
+  width: 32px;
+
+  svg {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+  }
+
+  path {
+    fill: #000000;
+  }
+
+  .instagram-icon {
+    width: 24px;
+    height: 24px;
+
+    path {
+      fill: none;
+    }
+  }
+}
+
+.footer__icon-link {
+  display: block;
+}
+
+/* Nav Drawer Header */
+
+@media (min-width: 992px) {
+  .header__inner--constrain .nav__item.is-open .nav__drawer {
+    top: var(--header-height) !important;
+  }
+}
+
+/* Product Recommended Collection */
+
+.pdpRecCollection {
+  .col-lg-10 {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.pdpRecCollection__slideshow {
+  padding: 0 20px;
+
+  .slick-arrow {
+    background: 0 0;
+    color: #737373;
+    font-size: 1.5rem;
+    transition: all var(--fast) var(--ease);
+
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 40px;
+    z-index: 1;
+
+    &:hover {
+      color: #000000;
+    }
+  }
+
+  .slick-disabled {
+    opacity: 0;
+  }
+
+  .slick-prev {
+    left: -10px;
+  }
+
+  .slick-next {
+    right: -10px;
+  }
+}
+
+.pdpRecCollection__slide {
+  &.slick-slide {
+    display: flex;
+    height: auto;
+    padding: 0 1vw;
+  }
+
+  .productCard {
+    width: 100%;
+  }
+}
+
+/* Page referral */
+
+#conjured_referral {
+  input,
+  select,
+  textarea {
+    border: 1px solid #000;
+  }
+}
+
+[data-color="stone-blue"],
+[data-material="stone-blue"] {
+  color: rgb(237, 200, 144);
+  &:after {
+    color: #2B3C4D;
+  }
+}

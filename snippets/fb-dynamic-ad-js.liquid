@@ -1,0 +1,21 @@
+{% comment %}
+This is being handled in product.js so it fires on page route actions. -ae 10.01.19
+
+<script defer id="fb-dynamic-ad-js" text="text/javascript">
+ window.addEventListener('load', function() {
+  fbq('track', 'ViewContent', {
+    currency: 'USD',
+    content_type: 'product',
+    content_name: '{{ product.title }}',
+    content_ids: [
+      '{{ product.selected_or_first_available_variant.id }}'
+    ],
+    contents: [
+      {
+        id: '{{ product.selected_or_first_available_variant.id }}',
+        quantity: 1
+      }]
+  });
+ });
+</script>
+{% endcomment %}

@@ -1,0 +1,39 @@
+{% comment %}
+  DO NOT MODIFY THIS FILE DIRECTLY. THIS FILE WILL BE OVERWRITTEN.
+  YOU CAN MODIFY THE LIQUID CODE FOR THIS CUSTOM FIELD HERE:
+  https://customfields.bonify.io/dashboard/fellow-products.myshopify.com/products/configure/96478/edit
+{% endcomment %}
+{% if product.metafields.custom_fields["key_features"] != blank %}
+  <div class="custom-field custom-field__key-features custom-field__type--field-collection">
+    <h3 class="custom-field--title">Key Features</h3>
+    <div class="custom-field--value">
+      {% assign separator = "|###|" %}
+      {% assign key_feature_icon_array = product.metafields.custom_fields["key_feature_icon"] | split: separator %}
+      {% assign key_feature_title_array = product.metafields.custom_fields["key_feature_title"] | split: separator %}
+      {% assign key_feature_copy_array = product.metafields.custom_fields["key_feature_copy"] | split: separator %}
+      {% assign key_feature_image_array = product.metafields.custom_fields["key_feature_image"] | split: separator %}
+      {% assign key_feature_secondary_image_array = product.metafields.custom_fields["key_feature_secondary_image"] | split: separator %}
+      {% assign fc_keys = product.metafields.custom_fields["key_features"] | split: "," %}
+      {% for i in fc_keys %}
+        {% assign index = i | plus: 0 %}
+        <div class="fc-item fc-item--key feature fc-index--{{ index }}">
+          <div class="fc-field field__key-feature-icon">
+            {{ key_feature_icon_array[index] }}
+          </div>
+          <div class="fc-field field__key-feature-title">
+            {{ key_feature_title_array[index] }}
+          </div>
+          <div class="fc-field field__key-feature-copy">
+            {{ key_feature_copy_array[index] }}
+          </div>
+          <div class="fc-field field__key-feature-image">
+            {{ key_feature_image_array[index] }}
+          </div>
+          <div class="fc-field field__key-feature-secondary-image">
+            {{ key_feature_secondary_image_array[index] }}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}

@@ -1,0 +1,22 @@
+{% if desktop_masthead != blank %}
+  {%
+    include 'component-masthead' with
+    img: desktop_masthead,
+    imgMobile: mobile_masthead,
+    dataAttr: 'masthead',
+    className: ''
+  %}
+{% else %}
+  {%
+    include 'component-masthead' with
+    dataAttr: 'componentMasthead',
+    className: ''
+  %}
+{% endif %}
+
+
+{% schema %}
+{
+  "name": "masthead"
+}
+{% endschema %}

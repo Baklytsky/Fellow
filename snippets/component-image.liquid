@@ -1,0 +1,49 @@
+{% if centered == blank %}
+  {% assign centered = true %}
+{% endif %}
+{% if alignEnd == true %}
+  {% assign centered = false %}
+{% endif %}
+
+<div
+    class='image x y f {% if absolute == true %}abs {% else %}rel {% endif %}{% unless centered != true %}aic jcc{% endunless %}{% if fill %} fill{% endif %}{% if alignEnd == true %} aie{% endif %} {{ className }}'
+    data-src='{{ src }}'
+    data-alt='{{ alt | escape }}'
+    {% if dataVariant != blank %}data-variant-img='{{ dataVariant }}'{% endif %}
+    {% if irishFix %}style='display:none'{% endif %}
+>
+  {% if href != blank %}<a class='x y fill abs z2' target='_blank' href='{{ href }}' aria-label="{{ alt }}" aria-labelledby="{{ alt }}"></a>{% endif %}
+  <img
+    class='block z1 {%if absolute == true%}abs {%else%}rel {%endif%}{%if fill%} x y fill{%else%} x{%endif%}{%if scaleDown%} scale-down{%endif%}'
+    alt='{{ alt }}'
+    role='img'
+    loading='lazy'
+  />
+</div>
+
+{% comment %}
+<pre>
+  DEBUG image.liquid
+
+  src:{{ src }}
+  file:{{ file }}
+  asset:{{ asset }}
+  size:{{ size }}
+  product:{{ product }}
+  _src:{{ _src }}
+</pre>
+{% endcomment %}
+
+{% comment %}reset{% endcomment %}
+{% assign src = blank %}
+{% assign alt = blank %}
+{% assign className = blank %}
+{% assign dataAttr = blank %}
+{% assign dataVariant = blank %}
+{% assign centered = blank %}
+{% assign alignEnd = blank %}
+{% assign absolute = false %}
+{% assign fill = false %}
+{% assign scaleDown = false %}
+{% assign irishFix = false %}
+{% assign href = blank %}

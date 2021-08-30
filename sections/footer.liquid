@@ -1,0 +1,252 @@
+{%- assign show_icons = section.settings.show_icons -%}
+{% assign footer_menu = section.settings.footer_menu %}
+
+{% if section.settings.bigfooter_marquee == true %}
+  {% include 'bigfooter-marquee' %}
+{% else %}
+  {% include 'footer-marquee' %}
+{% endif %}
+
+<footer class='footer'>
+  <div class='footer__inner container--l'>
+    <div class='row py1'>
+      <div class='col-lg-4'>
+        <div class='f fdc'>
+          {% include 'fellow-logo' %}
+          {% if section.settings.show_newsletter %}
+            {% include 'newsletter-snippet' %}
+          {% endif %}
+        </div>
+
+        {%- if show_icons -%}
+          <ul class="footer__icons">
+            {%- assign socials = "Instagram Facebook Twitter Pinterest YouTube LinkedIn" | split: ' ' -%}
+
+            {%- for social in socials -%}
+              {%- assign social_link = social | prepend: 'social_' | append: '_link' | handleize -%}
+              {%- assign icon_link = social | handleize -%}
+
+              {%- if settings[social_link] != blank and section.settings[icon_link] -%}
+                <li class="footer__icons-item">
+                  <a class="footer__icon-link" href="{{ settings[social_link] | escape }}" aria-label="Icon" aria-labelledby="Icon">
+                    <div class="footer__icon">
+                      {%- include 'icons-social' with icon_link -%}
+                    </div>
+                  </a>
+                </li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+      </div>
+
+      {% if linklists[footer_menu].links.size > 0 %}
+        <div class='col-lg-7 offset-lg-1'>
+          <nav class='f fw jcb x mb3rem'>
+            {% for link in linklists[footer_menu].links %}
+              <div class='footer__col'>
+                {% if link.links == blank %}
+                  <h3 class='h5 caps mb1'><a href="{{ link.url }}">{{ link.title }}</a></h3>
+                {% else %}
+                  <h3 class='h5 caps mb1'>{{ link.title }}</h3>
+                  <ul class='footer__links'>
+                    {% for link in link.links %}
+                      <li class='track--xNarrow'><a href="{{ link.url }}">{{ link.title }}</a></li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+              </div>
+            {% endfor %}
+          </nav>
+        </div>
+      {% endif %}
+
+      {% if shop.customer_accounts_enabled %}
+        <div>
+          {% if customer %}
+            <a href='/account'>Account</a>
+          {% else %}
+            <a href='/account/login'>Log In</a>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class='row'>
+      <div class='col'>
+        <div class='footer__colophon'>
+          <span class='ac xsmall caps'>&copy; Fellow Industries, Inc. {{ 'now' | date: '%Y' }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class='footer__payment-icons'>
+    <ul>
+      {%- for type in shop.enabled_payment_types -%}
+        <li>
+          {{ type | payment_type_svg_tag: class: 'img-grayscale' }}
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</footer>
+
+{% schema %}
+  {
+    "name": {
+      "en": "Footer",
+      "de": "Fußzeile",
+      "fr": "Pied de page"
+    },
+    "settings": [
+      {
+        "type": "link_list",
+        "id": "footer_menu",
+        "label": {
+          "en": "Primary menu",
+          "de": "Hauptmenü",
+          "fr": "Menu principal"
+        },
+        "default": "footer",
+        "info": {
+          "en": "This menu won't show dropdown items",
+          "de": "Dieses Menü zeigt keine Dropdowns an",
+          "fr": "Ce menu n'affichera pas les éléments des menus déroulants"
+        }
+      },
+      {
+        "type": "link_list",
+        "id": "footer_menu_two",
+        "label": {
+          "en": "Additional menu",
+          "de": "Extra Menü",
+          "fr": "Menu supplémentaire"
+        },
+        "default": "main-menu",
+        "info": {
+          "en": "This menu won't show dropdown items",
+          "de": "Dieses Menü zeigt keine Dropdowns an",
+          "fr": "Ce menu n'affichera pas les éléments des menus déroulants"
+        }
+      },
+      {
+        "type": "header",
+        "content": "Footer social icons"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_icons",
+        "label": "Show social icons",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Icons"
+      },
+      {
+        "type": "checkbox",
+        "id": "instagram",
+        "label": "Instagram",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "facebook",
+        "label": "Facebook",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "twitter",
+        "label": "Twitter",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "youtube",
+        "label": "YouTube",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "pinterest",
+        "label": "Pinterest",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "linkedin",
+        "label": "LinkedIn",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Footer Marquee"
+      },
+      {
+        "type": "checkbox",
+        "id": "bigfooter_marquee",
+        "label": "Show Bigfoot in Marquee?",
+        "default": true
+      },
+      {
+        "type": "url",
+        "id": "bigfoot_url",
+        "label": "URL for Bigfoot (Leave blank to not include a link)"
+      },
+      {
+      "type": "header",
+      "content": {
+        "de": "Newsletter",
+        "en": "Newsletter",
+        "es": "Boletín",
+        "fr": "Newsletter",
+        "it": "Newsletter",
+        "ja": "ニュースレター",
+        "pt-BR": "Newsletter"
+      }
+    },
+    {
+      "type": "checkbox",
+      "id": "show_newsletter",
+      "label": {
+        "de": "Newsletter Signup anzeigen",
+        "en": "Show newsletter signup",
+        "es": "Suscríbete al boletín",
+        "fr": "Afficher l'inscription à la newsletter",
+        "it": "Mostra iscrizione alla Newsletter",
+        "ja": "ニュースレターのサインアップを表示する",
+        "pt-BR": "Exibir assinatura da newsletter"
+      },
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "newsletter_heading",
+      "label": {
+        "de": "Titel",
+        "en": "Heading",
+        "es": "Título",
+        "fr": "Titre",
+        "it": "Heading",
+        "ja": "見出し",
+        "pt-BR": "Título"
+      }
+    },
+    {
+      "type": "text",
+      "id": "newsletter_subheading",
+      "label": {
+        "de": "Unter-Überschrift",
+        "en": "Subheading",
+        "es": "Subtítulo",
+        "fr": "Sous-titre",
+        "it": "Sottotitolo",
+        "ja": "小見出し",
+        "pt-BR": "Subtítulo"
+      }
+    }
+    ]
+  }
+{% endschema %}

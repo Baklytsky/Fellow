@@ -1,0 +1,17 @@
+<div class="large-text-with-cta">
+  {% if tagline != blank %}
+    <div class='eyebrow'>{{ tagline }}</div>
+  {% endif %}
+
+  {% if header != blank %}
+    <h2 class='caps large-text-with-cta__header h1'>{{ header }}</h2>
+  {% endif %}
+
+  {% if body != blank %}
+    <div class="large-text-with-cta__body">{{ body }}</div>
+  {% endif %}
+
+  {% if cta_html != blank and cta_html.size > 0 %}
+    {{ cta_html }}
+  {% endif %}
+</div>
