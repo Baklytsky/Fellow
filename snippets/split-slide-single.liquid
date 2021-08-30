@@ -15,54 +15,47 @@
   {% assign ctaClasses = 'btn btn--lg btn--dark' %}
 {% endif %}
 
-<div id='hero__slide--{{ block.id }}' class='hero__slide hero__slide--split' data-color='{{ dataColor }}'>
+<div id='hero__slide--{{ block.id }}' class='hero__slide hero__slide--split' data-color='{{ dataColor }}'
+     style="background-color: {{ backgroundColor }}; color: {{ textColor }}">
   {% if block.settings.mobileAlignment != 'center' or block.settings.desktopAlignment or layout != blank %}
     <style>
       {% if layout == 'right' %}
-        @media (min-width: 992px) {
-          #hero__slide--{{ block.id }} {
-            flex-direction: row-reverse;
-          }
-        }
-      {% endif %}
-      {% if block.settings.mobileAlignment %}
-        @media (max-width: 991.98px) {
-          #hero__slide--{{ block.id }} {
-            background-image: url({{ block.settings.heroSlide | img_url: "1440x" }});
-            background-position: {{ block.settings.mobileAlignment }};
-          }
-        }
-      {% endif %}
-      {% if block.settings.desktopAlignment %}
-        @media (min-width: 992px) {
-          #hero__slide--{{ block.id }} img {
-            object-position: {{ block.settings.desktopAlignment }};
-          }
-        }
-      {% endif %}
-    </style>
-  {% endif %}
-  {% if block.settings.heroSlide__textAlignment %}
-    <style>
       @media (min-width: 992px) {
-        #hero__slide--{{ block.id }} .hero__textWrapper {
-          {% if block.settings.heroSlide__textAlignment == 'left' %}
-            text-align: left;
-          {% endif %}
-          {% if block.settings.heroSlide__textAlignment == 'right' %}
-            text-align: right;
-          {% endif %}
+        #hero__slide--{{ block.id }} {
+          flex-direction: row-reverse;
         }
       }
+      {% endif %}
+      {% if block.settings.desktopAlignment %}
+      @media (min-width: 992px) {
+        #hero__slide--{{ block.id }} img {
+          object-position: {{ block.settings.desktopAlignment }};
+        }
+      }
+      {% endif %}
+
+      {% if block.settings.heroSlide__textAlignment %}
+      @media (min-width: 992px) {
+        #hero__slide--{{ block.id }} .hero__textWrapper {
+        {% if block.settings.heroSlide__textAlignment == 'left' %}
+          text-align: left;
+        {% endif %}
+        {% if block.settings.heroSlide__textAlignment == 'right' %}
+          text-align: right;
+        {% endif %}
+        }
+      }
+      {% endif %}
     </style>
   {% endif %}
+
   {% if block.settings.heroSlide__header != blank %}
-    <section class='splitSlide__textContainer' style="background-color: {{ backgroundColor }}; color: {{ textColor }}">
+    <section class='splitSlide__textContainer'>
       <div class='textContainer__desktopPadding'>
-        <h1 class='m0 p0'>{{ block.settings.heroSlide__header }}</h1>
+        <h1 class='m0 p0 splitSlide__Header'>{{ block.settings.heroSlide__header }}</h1>
         <div class='hero__subheader'>
           {% comment %} render this even if no text for spacing reasons {% endcomment %}
-          <p class='h3 mt2 mb0'>{{ block.settings.heroSlide__subheader }}</p>
+          <p class='h3 mt2 mb0 splitSlide__Description'>{{ block.settings.heroSlide__subheader }}</p>
           {% if ctaCopy != blank %}
             {%
               include 'component-button' with
@@ -80,8 +73,12 @@
     </section>
   {% endif %}
   <img
-    src='{{ block.settings.heroSlide | img_url: "600x" }}'
-    srcset='{{ block.settings.heroSlide | img_url: "600x" }} 600w, {{ block.settings.heroSlide | img_url: "1000x" }} 991w, {{ block.settings.heroSlide | img_url: "1280x" }} 1280w, {{ block.settings.heroSlide | img_url: "1440x" }} 1400w'
-    alt='{{ block.settings.heroSlide__header }}' role="img"
+      src='{{ block.settings.heroSlide | img_url: "600x" }}'
+      loading="lazy"
+      srcset='{{ block.settings.heroSlide | img_url: "600x" }} 600w,
+            {{ block.settings.heroSlide | img_url: "1000x" }} 991w,
+            {{ block.settings.heroSlide | img_url: "1280x" }} 1280w,
+            {{ block.settings.heroSlide | img_url: "1440x" }} 1400w'
+      alt='{{ block.settings.heroSlide__header | default: block.settings.heroSlide__header }}'
   >
 </div>

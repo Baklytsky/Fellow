@@ -1,0 +1,194 @@
+{%- if section.settings.enable_section -%}
+  {%- assign blocks = section.blocks -%}
+
+  {%- if blocks.size > 0 -%}
+    {%- capture 'slick-config' -%}
+      {
+      "slidesToShow": 1,
+      "arrows": true,
+      "dots": false,
+      "responsive": [
+      {
+      "breakpoint": 992,
+      "settings": {
+      "arrows": false,
+      "dots": true
+      }
+      }
+      ]
+      }
+    {%- endcapture -%}
+
+    {%- assign show_dots = section.settings.show_dots -%}
+    {%- assign show_arrows = section.settings.show_arrows -%}
+    {%- assign bg_color = section.settings.bg_color -%}
+    {%- assign text_color = section.settings.text_color -%}
+    <div id="section-{{ section.id }}"
+         class="ProductInfoSlider"
+         data-section-type="slick-slideshow"
+         data-slick-config='{{- slick-config -}}'
+         style="background-color: {{ bg_color }}; color: {{ text_color }};">
+
+      <div class="ProductInfoSlider__Wrapper jsSlickSlider" >
+        {%- for block in blocks -%}
+          {%- assign product = all_products[block.settings.product] -%}
+          {%- assign image = block.settings.image | default: product.featured_image -%}
+          {%- assign header = block.settings.header | default: false -%}
+          {%- assign description = block.settings.description | default: false -%}
+          {%- assign link_text = block.settings.link_text | default: 'See product' -%}
+          {%- assign link_url = block.settings.link_url | default: product.url -%}
+
+          {%- if product or image or header or description -%}
+            <div class="ProductInfoSlider__ItemWrapper">
+              <div class="ProductInfoSlider__Item">
+                {%- if image -%}
+                  <div class="ProductInfoSlider__ImageWrapper AspectRatio AspectRatio--square">
+                    <img class="ProductInfoSlider__Image"
+                         src='{{ image | img_url: "100x" }}'
+                         loading="lazy"
+                         srcset='{{ image | img_url: "450x" }} 450w,
+                                           {{ image | img_url: "560x" }} 560w,
+                                           {{ image | img_url: "650x" }} 650w,
+                                           {{ image | img_url: "900x" }} 900w'
+                         alt="{{ image.alt | default: header | escape }}">
+                  </div>
+                {%- endif -%}
+
+                {%- if product or header or description -%}
+                  <div class="ProductInfoSlider__Content">
+                    {%- if product != blank -%}
+                      <div class="ProductInfoSlider__ProductInfo">
+
+                        <h4 class="ProductInfoSlider__ProductTitle">{{ product.title }}</h4>
+                      </div>
+                    {%- endif -%}
+
+                    {%- if header -%}
+                      <h2 class="ProductInfoSlider__Header">{{ header }}</h2>
+                    {%- endif -%}
+
+                    {%- if description -%}
+                      <div class="ProductInfoSlider__Description">{{ description }}</div>
+                    {%- endif -%}
+
+                    {%- if link_url != blank -%}
+                      <a class="ProductInfoSlider__Link"
+                         href="{{ link_url }}"
+                         title="{{ link_text | strip_html | escape }}"
+                         aria-label="Link: {{ link_text | escape }}"
+                         title="{{ link_text | strip_html }}"
+                         role="button">
+
+                        {{- link_text -}}
+
+                      </a>
+                    {%- endif -%}
+                  </div>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+      <button class="ProductInfoSlider__Arrow ProductInfoSlider__ArrowPrev jsPrevSlide"
+              type="button"
+              aria-label="Previous slide">
+        {% render 'icon' with 'arrow-prev' %}
+        <i>Previous slide</i>
+      </button>
+
+      <button class="ProductInfoSlider__Arrow ProductInfoSlider__ArrowNext jsNextSlide"
+              type="button"
+              aria-label="Next slide">
+        {% render 'icon' with 'arrow-next' %}
+        <i>Next slide</i>
+      </button>
+    </div>
+  {%- endif -%}
+
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Product Info Slider",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_section",
+      "label": "Enable section",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_dots",
+      "label": "Show dots",
+      "info": "Mobile only",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrows",
+      "label": "Show arrows",
+      "info": "Desktop only",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "header",
+          "label": "Description Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Description text"
+        },
+        {
+          "type": "text",
+          "id": "link_text",
+          "label": "Link text",
+          "info": "By Default: 'See product'"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Link url",
+          "info": "By Default: PRODUCT_URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Info Slider",
+      "category": "Homepage Sections"
+    }
+  ]
+}
+{% endschema %}

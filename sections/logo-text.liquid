@@ -1,0 +1,69 @@
+{%- if section.settings.enable_section -%}
+  {%- assign text = section.settings.text | default: false -%}
+  {%- assign url = section.settings.url | default: false -%}
+  {%- assign icon = section.settings.icon -%}
+
+  {%- if icon or text -%}
+    <div class='LogoText'>
+      {%- if url -%}
+        <a class="LogoText__Message" href="{{ url }}" aria-label="Link" title="{{ text }}" role="button">
+          {{ text }}
+
+          {%- if icon -%}
+            <img class="LogoText__Icon" src="{{ icon | img_url: '50x50' }}" alt="{{ icon.alt | default: text }}" role="img" aria-label="Icon image" aria-hidden="true">
+          {%- endif -%}
+        </a>
+      {%- else -%}
+        <p class="LogoText__Message">
+          {{ text }}
+
+          {%- if icon -%}
+            <img class="LogoText__Icon" src="{{ icon | img_url: '50x50' }}" alt="{{ icon.alt | default: text }}" role="img" aria-label="Icon image" aria-hidden="true">
+          {%- endif -%}
+        </p>
+      {%- endif -%}
+
+    </div>
+  {%- endif -%}
+{%- endif -%}
+
+
+{% schema %}
+  {
+    "name": "Logo text",
+    "class": "m0",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable_section",
+        "label": "Enable section",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "text",
+        "label": "Text"
+      },
+      {
+        "type": "url",
+        "id": "url",
+        "label": "Text link"
+      },
+      {
+        "type": "image_picker",
+        "id": "icon",
+        "label": "Logo icon"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Logo text",
+        "category": "v1 | Homepage Modules",
+        "settings": {
+          "text": "Start your day on a bright note",
+          "url": "#"
+        }
+      }
+    ]
+  }
+{% endschema %}

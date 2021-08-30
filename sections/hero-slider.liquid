@@ -26,7 +26,8 @@
       {% assign firstColor = block.settings.subSlide__textColor %}
     {% endif %}
   {% endfor %}
-  <div class='hero__mobile_subslide x y js-mobile-subslide' style="background-color: {{ firstBg }}; color: {{ firstColor }}">
+  <div class='hero__mobile_subslide x y js-mobile-subslide'
+       style="display: none; background-color: {{ firstBg }}; color: {{ firstColor }}">
     {% for block in section.blocks %}
       {% assign subheader = block.settings.heroSlide__subheader %}
       {% assign ctaCopy = block.settings.heroSlide__ctaCopy %}

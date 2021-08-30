@@ -1,0 +1,199 @@
+{%- if section.settings.enable_section -%}
+  {%- assign image = section.settings.image -%}
+  {%- assign layout = section.settings.layout -%}
+  {%- assign header = section.settings.header | default: false -%}
+  {%- assign description = section.settings.description | default: false -%}
+  {%- assign bg_color = section.settings.bg_color -%}
+  {%- assign text_color = section.settings.text_color -%}
+  {%- assign cta_url = section.settings.cta_url | default: false -%}
+  {%- assign cta_copy = section.settings.cta_copy | default: false -%}
+  {%- assign cta_color = section.settings.cta_color -%}
+
+
+  {%- if image or header or description or cta_copy -%}
+
+    {%- capture 'header_block' -%}
+      {%- if header -%}
+        <h3 class="ImageWithText__Header m0">
+          {{ header }}
+        </h3>
+      {%- endif -%}
+    {%- endcapture -%}
+
+    {%- capture 'description_block' -%}
+      {%- if description -%}
+        <div class="ImageWithText__Description">
+          {{ description }}
+        </div>
+      {%- endif -%}
+
+      {%- if cta_copy and cta_url -%}
+        <div class="ImageWithText__ButtonWrapper">
+          <a class="btn btn--lg {{ cta_color }}"
+             href="{{ cta_url }}"
+             aria-label="Button Link"
+             title="{{ cta_copy }}"
+             role="button">
+            {{ cta_copy }}
+          </a>
+        </div>
+      {%- endif -%}
+    {%- endcapture -%}
+
+    {%- capture 'image_block' -%}
+      {%- if image -%}
+        <div class="AspectRatio ImageWithText__ImageWrapper" style="--aspect-ratio: {{ image.aspect_ratio }};">
+          <img class="ImageWithText__Image"
+               src='{{ image | img_url: "100x" }}'
+               loading="lazy"
+               srcset='{{ image | img_url: "450x" }} 450w,
+                       {{ image | img_url: "560x" }} 560w,
+                       {{ image | img_url: "650x" }} 650w,
+                       {{ image | img_url: "900x" }} 900w'
+               alt="{{ image.alt | default: header | escape }}">
+        </div>
+      {%- endif -%}
+    {%- endcapture -%}
+
+
+
+    <section  id="{{ section.id }}" class="ImageWithText" style="background-color: {{ bg_color }}; color: {{ text_color }};">
+      <div class="ImageWithText__Wrapper ImageWithText--{{ layout }}">
+        {%- case layout -%}
+        {%- when "left" -%}
+          {%- if image_block != blank -%}
+            {{ image_block }}
+          {%- endif -%}
+
+          {%- if header_block != blank or description_block != blank -%}
+            <div class="ImageWithText__CopyWrapper">
+              {{ header_block }}
+
+              {{ description_block }}
+            </div>
+          {%- endif -%}
+        {%- when "center" -%}
+          {%- if header_block != blank -%}
+            {{ header_block }}
+          {%- endif -%}
+
+          {%- if image_block != blank -%}
+            {{ image_block }}
+          {%- endif -%}
+
+          {%- if description_block != blank -%}
+            <div class="ImageWithText__CopyWrapper">
+              {{ description_block }}
+            </div>
+          {%- endif -%}
+
+        {%- when "right" -%}
+          {%- if header_block != blank or description_block != blank -%}
+            <div class="ImageWithText__CopyWrapper">
+              {{ header_block }}
+
+              {{ description_block }}
+            </div>
+          {%- endif -%}
+
+          {%- if image_block != blank -%}
+            {{ image_block }}
+          {%- endif -%}
+        {%- endcase -%}
+      </div>
+    </section>
+  {%- endif -%}
+
+
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Image with text v2",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_section",
+      "label": "Enable section",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Image alignment",
+      "default": "right",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "header",
+      "label": "Header"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA URL"
+    },
+    {
+      "type": "text",
+      "id": "cta_copy",
+      "label": "CTA Copy"
+    },
+    {
+      "type": "radio",
+      "id": "cta_color",
+      "label": "CTA color",
+      "options": [
+        {
+          "value": "btn--light",
+          "label": "White"
+        },
+        {
+          "value": "btn--dark",
+          "label": "Black"
+        }
+      ],
+      "default": "btn--dark"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image with text v2",
+      "category": "Homepage Sections"
+    }
+  ]
+}
+{% endschema %}
