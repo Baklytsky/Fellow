@@ -1,8 +1,0 @@
-{% if product.metafields.custom_fields["placeholder_badge"] != blank %}
-  <div class="custom-field custom-field__placeholder-badge custom-field__type--image">
-    <h3 class="custom-field--title">Placeholder Badge</h3>
-    <div class="custom-field--value">  
-      {% render 'cf-image' with image: product.metafields.custom_fields["placeholder_badge"] %}
-    </div>
-  </div>
-{% endif %}

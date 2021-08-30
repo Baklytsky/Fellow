@@ -1,8 +1,0 @@
-{% if product.metafields.custom_fields["video_poster"] != blank %}
-  <div class="custom-field custom-field__video-poster custom-field__type--image">
-    <h3 class="custom-field--title">Video Poster Image</h3>
-    <div class="custom-field--value">  
-      {% render 'cf-image' with image: product.metafields.custom_fields["video_poster"], print: 'url' %}
-    </div>
-  </div>
-{% endif %}
