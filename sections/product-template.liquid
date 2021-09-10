@@ -3,7 +3,12 @@
 
 <div class='gtm-pdp' data-component='product'>
   {% include 'product-head' %}
-  {% include 'pdp-masthead' %}
+  {%- comment -%}
+    {% include 'pdp-masthead' %}
+  {%- endcomment -%}
+  {%- if section.settings.show_breadcrumbs -%}
+    {% include 'breadcrumbs' %}
+  {%- endif -%}
   {% include 'pdp-main' %}
   <div class="f fdc">
     {% include 'pdp-hero' %}
@@ -13,11 +18,12 @@
     {% include 'pdp-video' %}
     {% include 'pdp-hero-bottom' %}
     {% include 'pdp-specs' %}
-    {% include 'pdp-related-products' %}
     {% include 'pdp-compare-products' %}
+    {% include 'pdp-learn-more' %}
+    {% include 'pdp-featured-blog-v2' %}
   </div>
   {% include 'pdp-reviews' %}
-
+  {% include 'pdp-related-products' %}
   {% include 'pdp-recommended-collection' %}
 </div>
 
@@ -30,6 +36,12 @@
       "en": "Product Details"
     },
     "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_breadcrumbs",
+        "label": "Show breadcrumbs",
+        "default": true
+      },
       {
         "type": "checkbox",
         "id": "show_quantity_selector",

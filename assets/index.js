@@ -9837,9 +9837,10 @@
     }));
     Dr.on("nav:toggle", (function(e) {
       e.navDrawerOpen && !e.isScrolling ? t.classList.add("is-opaque") : e.navDrawerOpen || e.isScrolling || t.classList.remove("is-opaque")
-    })), Dr.on("mobileNav:toggle", (function(e) {
-      e.mobileNavOpen ? (t.classList.add("is-open--mobile"), n.classList.add("noscroll"), a.innerHTML = "Close") : (t.classList.remove("is-open--mobile"), n.classList.remove("noscroll"), a.innerHTML = "Menu")
     }));
+    /*Dr.on("mobileNav:toggle", (function(e) {
+      e.mobileNavOpen ? (t.classList.add("is-open--mobile"), n.classList.add("noscroll"), a.innerHTML = "Close") : (t.classList.remove("is-open--mobile"), n.classList.remove("noscroll"), a.innerHTML = "Menu")
+    }));*/
     for (var l = t.querySelectorAll(".js-cart-count"), f = t.querySelectorAll(".js-cart-drawer-toggle"), h = 0; h < f.length; h++) f[h].addEventListener("click", (function(t) {
       t.preventDefault(), Dr.emit("cart:toggle", (function(t) {
         return {
@@ -9931,7 +9932,10 @@
     }), "");
     console.log("Can't reach cart.js")
   }
+
   var W = O((function(t, e) {
+        window.CartDrawer = e;
+
         var n = t.querySelector(".js-overlay"),
             r = t.querySelector(".js-close"),
             i = t.querySelector(".js-subtotal"),
@@ -10042,7 +10046,7 @@
               o.push(e = e.toLowerCase()), a.push([e, n]), s[e] = s[e] ? s[e] + "," + n : n
             })), n(u())
           }, i.onerror = r, i.withCredentials = "include" == e.credentials, e.headers) i.setRequestHeader(c, e.headers[c]);
-          i.send(e.body || null)
+            i.send(e.body || null)
         }))
       };
 
@@ -10052,6 +10056,7 @@
         if (r[i].variant_id === parseInt(t)) return G(i + 1, e)
     }))
   }
+
 
   function G(t, e) {
     return Dr.emit("cart:updating"), H("/cart/change.js", {
@@ -10139,6 +10144,9 @@
       }))
     }))
   }
+
+  window.UpdateCart = J;
+
   var $ = O((function(t, e) {
         var n = t.querySelector(".js-remove-item"),
             r = t.querySelector(".js-remove-single"),
@@ -13925,6 +13933,8 @@
               i = t.querySelector(".klaviyo-bis-trigger");
           null !== i && i.classList.remove("is-visible"), s(r)
         }));
+        theme.variantChange(a.id)
+        theme.selectedOption(a)
         var u = Math.floor(8e4 * Math.random());
         return function(t, e) {
           var n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : "Klaviyo Onsite";
@@ -14013,41 +14023,94 @@
           t.preventDefault(), u(++s)
         }))
       })),
-      Kn = O((function(t, e) {
-        var n = t.querySelectorAll(".js-color-update"),
-            r = t.querySelectorAll(".js-product-link"),
-            i = t.querySelectorAll(".js-variant-image"),
-            o = null,
-            a = null;
-        return n.forEach((function(t, e) {
-          if (t.hasAttribute("data-color")) {
-            if (t.getAttribute("data-color").includes("limited")) {
-              var n = t.getAttribute("data-color").toString();
-              n = n.replace("limited-edition-", ""), t.dataset.color = n
+      Kn = O((function(node, ctx) {
+        var colorSelectors = node.querySelectorAll('.js-color-update');
+        var productLinks = node.querySelectorAll('.js-product-link');
+        var productView = node.querySelectorAll('.js-product-view');
+        var variantImages = node.querySelectorAll('.js-variant-image');
+        var currentSelected = null;
+        var currentId = null;
+        var currentImage = null;
+
+        colorSelectors.forEach(function (item, i) {
+          if (item.hasAttribute('data-color')) {
+            if (item.getAttribute('data-color').includes('limited')) {
+              var swatchVal = item.getAttribute('data-color');
+              var strVal = swatchVal.toString();
+              strVal = strVal.replace('limited-edition-', '');
+              item.dataset.color = strVal;
             }
-          } else if (t.hasAttribute("data-material") && t.getAttribute("data-material").includes("limited")) {
-            var s = t.getAttribute("data-material").toString();
-            s = s.replace("limited-edition-", ""), t.dataset.color = s
+          } else if (item.hasAttribute('data-material')) {
+            if (item.getAttribute('data-material').includes('limited')) {
+              var _swatchVal = item.getAttribute('data-material');
+
+              var _strVal = _swatchVal.toString();
+
+              _strVal = _strVal.replace('limited-edition-', '');
+              item.dataset.color = _strVal;
+            }
           }
-          t.addEventListener("mouseover", (function() {
-            if (t !== o) {
-              o && o.querySelector("input").removeAttribute("checked"), t.querySelector("input").setAttribute("checked", "checked");
-              var e = (o = t).querySelector(".js-productCard-option").getAttribute("data-variant-url");
-              r.forEach((function(t) {
-                t.setAttribute("href", e)
-              })), a = o.querySelector(".js-productCard-option").getAttribute("data-variant-id"), i.forEach((function(t) {
-                t.getAttribute("data-variant-id") !== a ? t.classList.contains("is-visible") && t.classList.remove("is-visible") : t.classList.add("is-visible")
-              })), console.log(e)
+
+
+          item.addEventListener('click', function () {
+            // If moused-over item isn't currently selected, find what is and removed checked.
+            if (item !== currentSelected) {
+              if (item.querySelector('input')) {
+                if (currentSelected) {
+                  currentSelected.querySelector('input').removeAttribute('checked');
+                  currentSelected.querySelector('input').removeAttribute('class');
+                } // Set mouse-over to checked
+
+                item.querySelector('input').setAttribute('checked', 'checked');
+                item.querySelector('input').setAttribute('class', 'active');
+                currentSelected = item; // update productCard link
+
+                var currentLink = currentSelected.querySelector('.js-productCard-option').getAttribute('data-variant-url');
+
+                productLinks.forEach(function (link) {
+                  link.setAttribute('href', currentLink);
+                });
+                productView.forEach(function (link) {
+                  let viewLink = currentLink + '&view=quick-view';
+                  if (!currentLink.includes('variant=')) {
+                    viewLink = currentLink + '?view=quick-view';
+                  }
+                  link.setAttribute('data-quick-view', viewLink);
+                });
+                // change image
+
+                currentId = currentSelected.querySelector('.js-productCard-option').getAttribute('data-variant-id');
+                variantImages.forEach(function (image) {
+                  if (image.getAttribute('data-variant-id') !== currentId) {
+                    if (image.classList.contains('is-visible')) {
+                      image.classList.remove('is-visible');
+                    }
+                  } else {
+                    image.classList.add('is-visible');
+                  }
+                });
+              }
+
             }
-          }))
-        })), t.addEventListener("mouseleave", (function() {
-          n.forEach((function(t, e) {
-            o && o.querySelector("input").removeAttribute("checked"), o = null
-          })), i.forEach((function(t) {
-            t.classList.contains("is-visible") && t.classList.remove("is-visible")
-          }))
-        })),
-            function(t) {}
+          });
+        }); // Switches off variant image after hover.
+
+        // node.addEventListener('mouseleave', function () {
+        //   colorSelectors.forEach(function (item, i) {
+        //     if (currentSelected) {
+        //       currentSelected.querySelector('input').removeAttribute('checked');
+        //     }
+        //
+        //     currentSelected = null;
+        //   });
+        //   variantImages.forEach(function (image) {
+        //     if (image.classList.contains('is-visible')) {
+        //       image.classList.remove('is-visible');
+        //     }
+        //   });
+        // });
+
+        return function (node) {};
       }));
 
   function Jn(t, e) {
@@ -14115,12 +14178,14 @@
   function Zn() {
     var t = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : window.location.pathname.split("/").reverse()[0],
         e = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {};
-    return Xn[t] && !e.refetch ? Promise.resolve(Xn[t]) : fetch("".concat(window.location.origin, "/products/").concat(t, ".json")).then((function(t) {
-      return t.json()
-    })).then((function(e) {
-      var n = e.product;
-      return Xn[t] = n, n
-    }))
+    if (t.length) {
+      return Xn[t] && !e.refetch ? Promise.resolve(Xn[t]) : fetch("".concat(window.location.origin, "/products/").concat(t, ".json")).then((function(t) {
+        return t.json()
+      })).then((function(e) {
+        var n = e.product;
+        return Xn[t] = n, n
+      }))
+    }
   }
   var tr = O((function(t) {
         t.node;
@@ -14173,12 +14238,16 @@
               !1 === i && (d = !1), console.log("mainOpt reads ".concat(JSON.stringify(t), " | mainInv reads ").concat(e, " | mainPolicy returns ").concat(d, " | invManagement returns ").concat(i)), e <= 0 && d ? (c.forEach((function(t) {
                 t.innerHTML = y, u.setAttribute("disabled", "")
               })), null !== l && !1 === v && (l.classList.remove("is-hidden"), u.classList.add("is-hidden")), f.classList.add("is-hidden")) : c.forEach((function(t) {
-                t.innerHTML = m, u.hasAttribute("disabled") && u.removeAttribute("disabled"), null !== l && !1 === v && (l.classList.add("is-hidden"), u.classList.remove("is-hidden")), f.classList.remove("is-hidden")
+                if (u != null) {
+                  t.innerHTML = m, u.hasAttribute("disabled") && u.removeAttribute("disabled"), null !== l && !1 === v && (l.classList.add("is-hidden"), u.classList.remove("is-hidden")), f.classList.remove("is-hidden")
+                }
               })), s.forEach((function(t) {
                 t.innerHTML = o
               })), Dr.emit("productOptions:update", {
                 variantSelected: a.value
               });
+              theme.variantChange(a.value)
+              theme.selectedOption(r)
               var p, g = Jn(n);
               try {
                 for (g.s(); !(p = g.n()).done;) {
@@ -14229,7 +14298,9 @@
                   t.innerHTML = y, u.setAttribute("disabled", "")
                 })), null !== l && !1 === v && (l.classList.remove("is-hidden"), u.classList.add("is-hidden")), f.classList.add("is-hidden"));
                 e > 0 && d && c.forEach((function(t) {
-                  t.innerHTML = m, u.hasAttribute("disabled") && u.removeAttribute("disabled"), null !== l && !1 === v && (l.classList.add("is-hidden"), u.classList.remove("is-hidden")), f.classList.remove("is-hidden")
+                  if (u != null) {
+                    t.innerHTML = m, u.hasAttribute("disabled") && u.removeAttribute("disabled"), null !== l && !1 === v && (l.classList.add("is-hidden"), u.classList.remove("is-hidden")), f.classList.remove("is-hidden")
+                  }
                 }));
                 s.forEach((function(t) {
                   t.innerHTML = o
@@ -14874,6 +14945,7 @@
           return null !== n && (a = new Lr.a(n, {
             wrapAround: !0,
             bgLazyLoad: !0,
+            adaptiveHeight: !0,
             prevNextButtons: !1,
             autoPlay: 5e3,
             on: {

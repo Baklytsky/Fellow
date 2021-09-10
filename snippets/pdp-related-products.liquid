@@ -1,21 +1,14 @@
 {% if product.metafields.custom_fields["related_product"] != blank %}
-
   {%- assign related_products_heading = product.metafields.custom_fields["related_products_heading"] %}
-  {%- assign display_order = product.metafields.custom_fields["related_products_order"] %}
   {%- assign related_products_handles = product.metafields.custom_fields["related_product"] | split: "|" -%}
 
-
-  <div class='{% if display_order %} o-{{ display_order }}{% endif %}'>
-
-    <section class="module x relatedProducts">
-      <div class="relatedProducts__inner row">
+    <section class="x relatedProducts pdpRelatedProducts">
+      <div class="relatedProducts__inner x f fdc">
         {% if related_products_heading != blank %}
-          <div class='relatedProducts__title col-lg-2'>
-            <h2 class='t-vertical caps'>{{ related_products_heading | default: 'Related Products' | escape }}</h2>
-          </div>
+          <h2 class='relatedProducts__title'>{{ related_products_heading | default: 'Related Products' | escape }}</h2>
         {% endif %}
 
-        <div class="relatedProducts__row-wrapper col-lg-10">
+        <div class="relatedProducts__row-wrapper">
           <div class='f jcs fdr one-fourth relatedProducts__row'>
             {% for related_product_handle in related_products_handles limit: 4 %}
               {% assign related_product = all_products[related_product_handle] %}
@@ -31,6 +24,5 @@
         </div>
       </div>
     </section>
-  </div>
 
 {% endif %}

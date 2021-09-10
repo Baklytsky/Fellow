@@ -1,0 +1,24 @@
+{%- comment -%}
+  {% include 'pdp-badges' %}
+{%- endcomment -%}
+
+{% if product.metafields.custom_fields["product_badges"] != blank %}
+  <div class="pdpBadges">
+    {%- for item in product.metafields.custom_fields["product_badges"] -%}
+      <div class="pdpBadges-item f jcb aic">
+        <div class="pdpBadges-item-content f aic">
+          {%- if item["product_badge_icon"] != blank  -%}
+            {{ item["product_badge_icon"] }}
+          {%- endif -%}
+          {%- if item["product_badge_title"] != blank %}
+            <h4 class="pdpBadges-item-content-title">{{ item["product_badge_title"] }}</h4>
+          {%- endif -%}
+        </div>
+        {% if item["product_badge_learn_more_link"] != blank %}
+        <a href="{{ item["product_badge_learn_more_link"] }}" class="pdpBadges-item-link">Learn more</a>
+        {% endif %}
+      </div>
+    {%- endfor -%}
+  </div>
+{% endif %}
+

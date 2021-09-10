@@ -1,0 +1,26 @@
+{%- assign block_title = " " -%}
+
+{%- for block in section.blocks -%}
+  {%- assign block_title = block_title | append: block.settings.target | handleize -%}
+{%- endfor -%}
+
+{%- for link in menu.links -%}
+  {%- assign title = link.title | handleize -%}
+
+  <li class="mobileMenu__item">
+    {%- if link.links != blank  or block_title contains title -%}
+      <button data-target="mobile-{{ menu.title | handleize }}__{{ title }}"
+              data-selected="false" class="mobileMenu__link">
+        <p>{{ link.title }}</p>
+        {%- render 'icon', icon: 'arrow' -%}
+      </button>
+    {%- else -%}
+      <a data-target="mobile-{{ menu.title | handleize }}__{{ title }}"
+         data-selected="false" class="mobileMenu__link"
+         href="{{ link.url }}">
+        <p>{{ link.title }}</p>
+      </a>
+    {%- endif -%}
+    {%- render 'generate-menu', mobile_menu: true, menu: menu, section: section, title: title -%}
+  </li>
+{%- endfor -%}

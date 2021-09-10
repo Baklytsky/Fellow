@@ -1,0 +1,214 @@
+{%- if section.settings.enable_section -%}
+  {%- assign blog = blogs[section.settings.blog] | default: false -%}
+  {%- assign heading = section.settings.heading | default: blog.title -%}
+  {%- assign description = section.settings.description | default: false -%}
+  {%- assign cta_title = section.settings.cta_title | default: false -%}
+  {%- assign cta_url = section.settings.cta_url | default: blog.url -%}
+
+  {%- assign limit = section.settings.limit -%}
+  {%- assign bg_color = section.settings.bg_color -%}
+  {%- assign text_color = section.settings.text_color -%}
+  {%- assign cta_color = section.settings.cta_color -%}
+
+  {%- if blog or description or cta_title -%}
+
+    {%- capture 'slick-config' -%}
+      {
+        "slidesToShow": 3,
+        "arrows": false,
+        "dots": false,
+        "responsive": [
+          {
+            "breakpoint": 992,
+            "settings": {
+              "dots": true,
+              "infinite": false,
+              "centerMode": true,
+              "slidesToShow": 1.05
+            }
+          }
+        ]
+      }
+    {%- endcapture -%}
+
+    <section id="blog-{{ blog.id }}" class="BlogSection">
+      <div class="BlogSection__Wrapper" style="background: {{ bg_color }}; color: {{ text_color }}"
+           data-section-type="slick-slideshow"
+           data-slick-config='{{- slick-config -}}'>
+        <div class="BlogSection__Content">
+          {%- if description or blog -%}
+            <div class="BlogSection__Info">
+              <h3 class="BlogSection__InfoHeading">{{ heading }}</h3>
+
+              {%- if description -%}
+                <div class="BlogSection__InfoDescription">
+                  {{ description }}
+                </div>
+              {%- endif -%}
+
+              {%- if cta_title -%}
+                <div class="BlogSection__InfoButton">
+                  <a class="btn btn--lg {{ cta_color }}"
+                     href="{{ cta_url }}"
+                     aria-label="Open blog"
+                     title="{{ cta_title }} - {{ blog.title }}"
+                     role="button">
+                    {{ cta_title }}
+                  </a>
+                </div>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+
+          {%- if blog -%}
+            {%- if blog.articles_count < limit -%}
+              {%- assign limit = blog.articles_count -%}
+            {%- endif -%}
+
+            <div class="BlogSection__ArticleWrapper jsSlickSlider">
+              {%- for article in blog.articles limit: limit -%}
+                <div>
+                  <div class="BlogSection__Article">
+                    {%- if article.image != blank -%}
+                      <a class="BlogSectionArticle__ImageWrapper AspectRatio AspectRatio--square"
+                         href="{{ article.url }}"
+                         aria-label="Image link"
+                         aria-hidden="true"
+                         role="button"
+                         title="{{ article.title }}">
+                        <img class="BlogSectionArticle__Image"
+                             src='{{ article | img_url: "100x" }}'
+                             loading="lazy"
+                             srcset='{{ article | img_url: "450x" }} 450w,
+                                   {{ article | img_url: "560x" }} 560w,
+                                   {{ article | img_url: "650x" }} 650w,
+                                   {{ article | img_url: "900x" }} 900w'
+                             role="img"
+                             alt="{{ article.image.alt | default: article.title | escape }}">
+                      </a>
+                    {%- endif -%}
+                    <div class="BlogSectionArticle__Content">
+                      <a href="{{ article.url }}" aria-label="{{ article.title }}">
+                        <h3 class="BlogSectionArticle__Heading">{{ article.title }}</h3>
+                      </a>
+
+                      <a class="BlogSectionArticle__Button btn btn--lg {{ cta_color }}"
+                         href="{{ article.url }}"
+                         aria-label="{{ 'blogs.article.read_more' | t }}"
+                         role="button"
+                         title="{{ article.title }}">
+                        {{ 'blogs.article.read_more' | t }}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              {%- endfor -%}
+            </div>
+
+          {%- endif -%}
+        </div>
+      </div>
+    </section>
+
+  {%- endif -%}
+{%- endif -%}
+
+{% schema %}
+  {
+    "name": {
+      "en": "Blog posts v2",
+      "de": "Blogposts v2",
+      "fr": "Articles de blog v2"
+    },
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable_section",
+        "label": "Enable section",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "heading",
+        "label": {
+          "en": "Heading",
+          "de": "Titel",
+          "fr": "En-tête"
+        },
+        "default": "Commence Your Coffee Quest Here"
+      },
+      {
+        "type": "richtext",
+        "id": "description",
+        "label": "Description",
+        "default": "<p>We want to share our insider knowledge to make “specialty coffee” a language you can speak.</p>"
+      },
+      {
+        "type": "text",
+        "id": "cta_title",
+        "label": "CTA Copy",
+        "default": "Fellow Blog"
+      },
+      {
+        "type": "radio",
+        "id": "cta_color",
+        "label": "CTA color",
+        "options": [
+          {
+            "value": "btn--light",
+            "label": "White"
+          },
+          {
+            "value": "btn--dark",
+            "label": "Black"
+          }
+        ],
+        "default": "btn--light"
+      },
+      {
+        "type": "color",
+        "id": "bg_color",
+        "label": "Background color",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text color",
+        "default": "#ffffff"
+      },
+      {
+        "id": "blog",
+        "type": "blog",
+        "label": {
+          "en": "Blog",
+          "de": "Blog",
+          "fr": "Blog"
+        }
+      },
+      {
+        "type": "range",
+        "id": "limit",
+        "label": {
+          "en": "Posts",
+          "de": "Posts",
+          "fr": "Articles"
+        },
+        "min": 1,
+        "max": 10,
+        "step": 1,
+        "default": 3
+      }
+    ],
+    "presets": [
+      {
+        "name": {
+          "en": "Blog Posts | v2",
+          "de": "Blogposts | v2",
+          "fr": "Articles de blog | v2"
+        },
+        "category": "v1 | Homepage Modules"
+      }
+    ]
+  }
+{% endschema %}

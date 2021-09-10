@@ -1,5 +1,6 @@
 <div class='hero__module f fw jcc aic rel z2 x{% if section.settings.addMargin == true %} is-marginBottom{% endif %}' data-component='heroSlider'>
   <div class='hero__slider x y' data-heroSlider>
+    {%- assign aspect_ratio = blank -%}
     {% for block in section.blocks %}
       {% assign header = block.settings.heroSlide__header %}
       {% assign subheader = block.settings.heroSlide__subheader %}
@@ -15,6 +16,11 @@
       {% if block.type == 'heroSlide' %}
         {% include 'hero-slide-single' %}
       {% elsif block.type == 'splitSlide' %}
+
+        {%- if aspect_ratio == blank -%}
+          {%- assign aspect_ratio = block.settings.heroSlide.aspect_ratio -%}
+        {%- endif -%}
+
         {% include 'split-slide-single' %}
       {% endif %}
     {% endfor %}
@@ -220,37 +226,6 @@
             ],
             "default": "black",
             "info": "Change the CTA color. (Defaults to black.)"
-          },
-          {
-            "type": "header",
-            "content": "Mobile Subslide"
-          },
-          {
-            "type": "color",
-            "id": "subSlide__bgColor",
-            "label": "Mobile Subslide Background Color",
-            "default": "#FFFFFF"
-          },
-          {
-            "type": "select",
-            "id": "subSlide__textColor",
-            "label": "Mobile Subslide Text Color",
-            "options": [
-              {
-                "value": "#FFFFFF",
-                "label": "White"
-              },
-              {
-                "value": "#231f20",
-                "label": "Black"
-              }
-            ],
-            "default": "#231f20"
-          },
-          {
-            "type": "checkbox",
-            "id": "subSlide__ghostBtn",
-            "label": "Remove Button Background"
           }
         ]
       },
@@ -399,11 +374,6 @@
             ],
             "default": "black",
             "info": "Change the CTA color. (Defaults to black.)"
-          },
-          {
-            "type": "checkbox",
-            "id": "subSlide__ghostBtn",
-            "label": "Remove Button Background"
           },
           {
             "type": "text",

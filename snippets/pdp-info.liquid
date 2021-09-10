@@ -1,0 +1,27 @@
+{%- comment -%}
+  {% include 'pdp-info' %}
+{%- endcomment -%}
+{% if product.metafields.custom_fields["product_info"] != blank %}
+  <div class="pdpInfo">
+    {% for item in product.metafields.custom_fields["product_info"] %}
+      {%- if item["product_info_heading"] != blank and item["product_info_content"] != blank -%}
+        <div class="pdpInfo-item dropdown">
+          <div class="dropdownHeader" data-dropdown>
+            <h3 class="dropdownHeader-title">
+              {{ item["product_info_heading"] }}
+            </h3>
+            <div class="dropdownHeader-icon {% if forloop.first %} dropdownHeader-icon--rotate {% endif %}">
+              {% render 'icon' with 'dropdown' %}
+            </div>
+          </div>
+          <div class="dropdownContent" data-dropdown-list {% unless forloop.first %}style="display: none;"{% endunless %}>
+            <div class="dropdownContent--animate-block {% if forloop.first %} dropdownContent--animate-block-visible {% endif %}">
+              {{ item["product_info_content"] }}
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+    {% endfor %}
+  </div>
+{% endif %}
+

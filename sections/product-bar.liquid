@@ -1,0 +1,91 @@
+{%- assign show_product_bar = section.settings.show_product_bar -%}
+{%- assign product_bar_text_color = section.settings.product_bar_text_color -%}
+{%- assign product_bar_bg_color = section.settings.product_bar_bg_color -%}
+
+{%- if show_product_bar -%}
+  {%- capture 'slick-config' -%}
+  {
+    "slidesToShow": 1,
+    "slidesToScroll": 1,
+    "dots": false,
+    "arrows": false,
+    "autoplay": true,
+    "speed": 1000,
+    "autoplaySpeed": 4000
+  }
+  {%- endcapture -%}
+  <div class='pdpBar'
+       style="color: {{ product_bar_text_color }};background-color: {{ product_bar_bg_color }}"
+       data-slick-config='{{- slick-config -}}'>
+    {%- if section.blocks.size > 0 -%}
+    <div class="pdpBar__wrapper f jcb aic">
+      {%- for block in section.blocks -%}
+        {%- assign svg_icon = block.settings.svg_icon -%}
+        {%- assign title = block.settings.title-%}
+        {%- if svg_icon != blank or title != blank -%}
+            <div class="pdpBar__item">
+              <div class="pdpBar__item-wrapper f jcc aic">
+                {%- if svg_icon != blank -%}
+                  {{ svg_icon }}
+                {%- endif -%}
+                {%- if title != blank -%}
+                  <p class="pdpBar__item-title m0">{{ title | escape }}</p>
+                {%- endif -%}
+              </div>
+            </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+    {%- endif -%}
+  </div>
+{%- endif -%}
+
+{% schema %}
+  {
+    "name": {
+      "en": "Product Bar"
+    },
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_product_bar",
+        "label": {
+          "en": "Show product bar"
+        },
+        "default": true
+      },
+      {
+        "type": "color",
+        "id": "product_bar_text_color",
+        "label": "Text color",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "id": "product_bar_bg_color",
+        "label": "Background color",
+        "default": "#FFF9E5"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "block",
+        "name": "block",
+        "limit": 3,
+        "settings": [
+
+          {
+            "type": "html",
+            "id": "svg_icon",
+            "label": "Svg icon"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

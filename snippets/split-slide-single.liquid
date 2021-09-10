@@ -3,6 +3,7 @@
 {% assign ctaColor = block.settings.heroSlide__ctaColor %}
 {% assign layout = block.settings.splitSlide__layout %}
 
+
 {% if textColor == '#FFFFFF' %}
   {% assign dataColor = 'cw' %}
 {% else %}
@@ -16,20 +17,13 @@
 {% endif %}
 
 <div id='hero__slide--{{ block.id }}' class='hero__slide hero__slide--split' data-color='{{ dataColor }}'
-     style="background-color: {{ backgroundColor }}; color: {{ textColor }}">
+     style="background-color: {{ backgroundColor }}; color: {{ textColor }};">
   {% if block.settings.mobileAlignment != 'center' or block.settings.desktopAlignment or layout != blank %}
     <style>
       {% if layout == 'right' %}
       @media (min-width: 992px) {
         #hero__slide--{{ block.id }} {
           flex-direction: row-reverse;
-        }
-      }
-      {% endif %}
-      {% if block.settings.desktopAlignment %}
-      @media (min-width: 992px) {
-        #hero__slide--{{ block.id }} img {
-          object-position: {{ block.settings.desktopAlignment }};
         }
       }
       {% endif %}
@@ -55,7 +49,7 @@
         <h1 class='m0 p0 splitSlide__Header'>{{ block.settings.heroSlide__header }}</h1>
         <div class='hero__subheader'>
           {% comment %} render this even if no text for spacing reasons {% endcomment %}
-          <p class='h3 mt2 mb0 splitSlide__Description'>{{ block.settings.heroSlide__subheader }}</p>
+          <p class='h3 m0 splitSlide__Description'>{{ block.settings.heroSlide__subheader }}</p>
           {% if ctaCopy != blank %}
             {%
               include 'component-button' with
@@ -72,13 +66,15 @@
       </div>
     </section>
   {% endif %}
-  <img
-      src='{{ block.settings.heroSlide | img_url: "600x" }}'
-      loading="lazy"
-      srcset='{{ block.settings.heroSlide | img_url: "600x" }} 600w,
+
+  <div class="hero__slide--img-wrapper AspectRatio" style="--aspect-ratio: {{ aspect_ratio }};">
+    <img src='{{ block.settings.heroSlide | img_url: "600x" }}'
+        loading="lazy"
+        srcset='{{ block.settings.heroSlide | img_url: "600x" }} 600w,
             {{ block.settings.heroSlide | img_url: "1000x" }} 991w,
             {{ block.settings.heroSlide | img_url: "1280x" }} 1280w,
             {{ block.settings.heroSlide | img_url: "1440x" }} 1400w'
-      alt='{{ block.settings.heroSlide__header | default: block.settings.heroSlide__header }}'
-  >
+        alt='{{ block.settings.heroSlide__header | default: block.settings.heroSlide__header }}'>
+  </div>
+
 </div>

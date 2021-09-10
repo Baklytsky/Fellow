@@ -1,0 +1,128 @@
+{%- if product.metafields.custom_fields["show_featured_blog_section"] == 1 -%}
+  {%- assign blog = blogs[product.metafields.custom_fields["featured_blog"]] | default: false -%}
+  {%- assign heading = product.metafields.custom_fields["featured_blog_heading"] | default: blog.title -%}
+  {%- assign description = product.metafields.custom_fields["featured_blog_description"] | default: false -%}
+  {%- assign cta_title = product.metafields.custom_fields["feature_blog_cta_copy"] | default: false -%}
+  {%- assign cta_url = section.settings.cta_url | default: blog.url -%}
+
+  {%- assign limit = product.metafields.custom_fields["featured_blog_posts_limit"] -%}
+  {%- assign bg_color = '#000' -%}
+  {%- assign text_color = '#FFF' -%}
+
+  {%- if product.metafields.custom_fields["featured_blog_cta_color"] == 'White' -%}
+    {%- assign cta_color = 'btn--light' -%}
+  {%- else -%}
+    {%- assign cta_color = 'btn--dark' -%}
+  {%- endif -%}
+
+
+  {% comment %}Assign Media Proof Flex Order{% endcomment %}
+  {% assign flex_order = product.metafields.custom_fields["featured_blog_section_order"] | downcase %}
+  {% if flex_order %}
+    {% unless flex_order == 'default' %}
+    {% assign display_order = flex_order %}
+    {% endunless %}
+  {% endif %}
+
+  {%- if blog or description or cta_title -%}
+
+    {%- capture 'slick-config' -%}
+      {
+        "slidesToShow": 3,
+        "arrows": false,
+        "dots": false,
+        "responsive": [
+          {
+            "breakpoint": 992,
+            "settings": {
+              "dots": true,
+              "infinite": false,
+              "centerMode": true,
+              "slidesToShow": 1.05
+            }
+          }
+        ]
+      }
+    {%- endcapture -%}
+
+    <section id="blog-{{ blog.id }}" class="BlogSection {% if display_order %} o-{{ display_order }}{% endif %}">
+      <div class="BlogSection__Wrapper" style="background: {{ bg_color }}; color: {{ text_color }}"
+           data-section-type="slick-slideshow"
+           data-slick-config='{{- slick-config -}}'>
+        <div class="BlogSection__Content">
+          {%- if description or blog -%}
+            <div class="BlogSection__Info">
+              <h3 class="BlogSection__InfoHeading">{{ heading }}</h3>
+
+              {%- if description -%}
+                <div class="BlogSection__InfoDescription">
+                  <p>{{ description }}</p>
+                </div>
+              {%- endif -%}
+
+              {%- if cta_title -%}
+                <div class="BlogSection__InfoButton">
+                  <a class="btn btn--lg {{ cta_color }}"
+                     href="{{ cta_url }}"
+                     aria-label="Open blog"
+                     title="{{ cta_title }} - {{ blog.title }}"
+                     role="button">
+                    {{ cta_title }}
+                  </a>
+                </div>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+
+          {%- if blog -%}
+            {%- if blog.articles_count < limit -%}
+              {%- assign limit = blog.articles_count -%}
+            {%- endif -%}
+
+            <div class="BlogSection__ArticleWrapper jsSlickSlider">
+              {%- for article in blog.articles limit: limit -%}
+                <div>
+                  <div class="BlogSection__Article">
+                    {%- if article.image != blank -%}
+                      <a class="BlogSectionArticle__ImageWrapper AspectRatio AspectRatio--square"
+                         href="{{ article.url }}"
+                         aria-label="Image link"
+                         aria-hidden="true"
+                         role="button"
+                         title="{{ article.title }}">
+                        <img class="BlogSectionArticle__Image"
+                             src='{{ article | img_url: "100x" }}'
+                             loading="lazy"
+                             srcset='{{ article | img_url: "450x" }} 450w,
+                                   {{ article | img_url: "560x" }} 560w,
+                                   {{ article | img_url: "650x" }} 650w,
+                                   {{ article | img_url: "900x" }} 900w'
+                             role="img"
+                             alt="{{ article.image.alt | default: article.title | escape }}">
+                      </a>
+                    {%- endif -%}
+                    <div class="BlogSectionArticle__Content">
+                      <a href="{{ article.url }}" aria-label="{{ article.title }}">
+                        <h3 class="BlogSectionArticle__Heading">{{ article.title }}</h3>
+                      </a>
+
+                      <a class="BlogSectionArticle__Button btn btn--lg {{ cta_color }}"
+                         href="{{ article.url }}"
+                         aria-label="{{ 'blogs.article.read_more' | t }}"
+                         role="button"
+                         title="{{ article.title }}">
+                        {{ 'blogs.article.read_more' | t }}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              {%- endfor -%}
+            </div>
+
+          {%- endif -%}
+        </div>
+      </div>
+    </section>
+
+  {%- endif -%}
+{%- endif -%}

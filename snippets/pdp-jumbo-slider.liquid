@@ -11,7 +11,7 @@
     {% endunless %}
   {% endif %}
   <div class='jumboSlider__mobileWrap{% if display_order %} o-{{ display_order }}{% endif %}'>
-    <section class='jumboSlider module' data-component='jumboSlider'>
+    <section class='jumboSlider module pdpJumboSlider' data-component='jumboSlider'>
       <div class='x y block rel' data-jumboSlider>
         {% for i in fc_keys %}
           {% assign index = i | plus: 0 %}
@@ -33,10 +33,10 @@
         <div class='rel f fdr aic jcc y'>
           <div class='slider__nav rel f jcb x'>
             <button data-slidePrev>
-              &larr;
+              {% render 'icon' with 'arrow-prev' %}
             </button>
             <button data-slideNext>
-              &rarr;
+              {% render 'icon' with 'arrow-next' %}
             </button>
           </div>
         </div>

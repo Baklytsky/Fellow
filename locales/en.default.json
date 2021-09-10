@@ -50,11 +50,11 @@
       "submit": "Search"
     },
     "newsletter_form": {
-      "newsletter_placeholder": "name@domain.com",
+      "newsletter_placeholder": "Email Address",
       "confirmation": "Thanks!",
       "blank_error": "Email can't be blank.",
       "invalid_error": "Please enter a valid email address.",
-      "submit": "Sign Up"
+      "submit": "Submit"
     }
   },
   "blogs": {
@@ -85,6 +85,7 @@
   "cart": {
     "general": {
       "title": "Shopping Cart",
+      "short_title": "Cart",
       "remove": "Remove",
       "note": "Special instructions for seller",
       "subtotal": "Subtotal",
@@ -261,9 +262,10 @@
       "on_sale_from": "On Sale From",
       "on_sale_from_html": "On Sale from {{ price }}",
       "from_text_html": "From {{ price }}",
-      "from_text": "From",
+      "from_text": "from",
       "quantity": "Quantity",
-      "add_to_cart": "Add to Cart"
+      "add_to_cart": "Add to Cart",
+      "quick_view": "+ Quick Add"
     }
   },
   "sections": {

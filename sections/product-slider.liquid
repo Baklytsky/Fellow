@@ -1,33 +1,32 @@
 {%- if section.settings.enable_section -%}
   {%- assign blocks = section.blocks -%}
 
+
+  {%- assign show_dots = section.settings.show_dots -%}
+  {%- assign show_arrows = section.settings.show_arrows -%}
+
   {%- if blocks.size > 0 -%}
     {%- capture 'slick-config' -%}
       {
       "slidesToShow": 1,
-      "arrows": true,
+      "arrows": {{ show_arrows }},
       "dots": false,
       "responsive": [
       {
       "breakpoint": 992,
       "settings": {
       "arrows": false,
-      "dots": true
+      "dots": {{ show_dots }}
       }
       }
       ]
       }
     {%- endcapture -%}
 
-    {%- assign show_dots = section.settings.show_dots -%}
-    {%- assign show_arrows = section.settings.show_arrows -%}
-    {%- assign bg_color = section.settings.bg_color -%}
-    {%- assign text_color = section.settings.text_color -%}
     <div id="section-{{ section.id }}"
          class="ProductInfoSlider"
          data-section-type="slick-slideshow"
-         data-slick-config='{{- slick-config -}}'
-         style="background-color: {{ bg_color }}; color: {{ text_color }};">
+         data-slick-config='{{- slick-config -}}'>
 
       <div class="ProductInfoSlider__Wrapper jsSlickSlider" >
         {%- for block in blocks -%}
@@ -104,6 +103,14 @@
         {% render 'icon' with 'arrow-next' %}
         <i>Next slide</i>
       </button>
+
+      <style>
+        {%- unless show_arrows -%}
+          #section-{{ section.id }} .ProductInfoSlider__Arrow {
+            display: none;
+          }
+        {%- endunless -%}
+      </style>
     </div>
   {%- endif -%}
 
@@ -132,16 +139,6 @@
       "label": "Show arrows",
       "info": "Desktop only",
       "default": false
-    },
-    {
-      "type": "color",
-      "id": "bg_color",
-      "label": "Background color"
-    },
-    {
-      "type": "color",
-      "id": "text_color",
-      "label": "Text color"
     }
   ],
   "blocks": [

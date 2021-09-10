@@ -9,8 +9,8 @@
     <link rel="preload" href="{{ 'index.css' | asset_url }}" as="style">
     <link rel="preload" href="{{ 'custom.scss.css' | asset_url }}" as="style">
 
-    <link href="{{ 'index.js' | asset_url }}" as="script">
-    <link href="{{ 'custom.js' | asset_url }}" as="script">
+    <link rel="preload" href="{{ 'index.js' | asset_url }}" as="script">
+    <link rel="preload" href="{{ 'custom.js' | asset_url }}" as="script">
 
     {% capture seo_title %}
       {{ page_title }}
@@ -109,6 +109,7 @@
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
     {% section 'header' %}
+    {% include 'modal' %}
     {% include 'cart-drawer' %}
 
     <main role='main' id='root' tabindex='0'>
@@ -120,14 +121,12 @@
     {% include 'cloak' %}
 
     {{ 'jquery-1.11.0.min.js' | asset_url | script_tag }}
-
-    {%- if template == 'product' -%}
-      {{ 'custom-additional-vendor.js' | asset_url | script_tag }}
-    {%- endif -%}
+    {{ 'jquery.ba-throttle-debounce.min.js' | asset_url | script_tag }}
+    {{ 'custom-additional-vendor.js' | asset_url | script_tag }}
 
     <script src="{{ 'index.js' | asset_url }}" defer='defer'></script>
     <script src="{{ 'custom.js' | asset_url }}" defer='defer'></script>
     {% comment %} <script src="https://a.klaviyo.com/media/js/onsite/onsite.js"></script> {% endcomment %}
     <script src="https://cdn.attn.tv/fellow/dtag.js"></script>
-  </body>
+  {% include 'social-head-common' %}</body>
 </html>

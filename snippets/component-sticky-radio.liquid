@@ -1,0 +1,10 @@
+<div class='radio' data-copy-for='{{ label | handleize }}'>
+  <span class='u-sr-only'>{{ value | escape }}</span>
+  <div class="radio__title f aic jcc" data-{{ name }}='{{ label | handleize }}'><span>{{label}}</span></div>
+</div>
+
+{% assign label = blank %}
+{% assign name = blank %}
+{% assign value = blank %}
+{% assign attributes = blank %}
+{% assign checked = blank %}

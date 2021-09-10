@@ -1,5 +1,7 @@
 {%- assign show_icons = section.settings.show_icons -%}
 {% assign footer_menu = section.settings.footer_menu %}
+{%- assign footer_menu_bottom = section.settings.footer_menu_bottom -%}
+{%- assign show_footer_payment_icon = section.settings.show_footer_payment_icon -%}
 
 {% if section.settings.bigfooter_marquee == true %}
   {% include 'bigfooter-marquee' %}
@@ -8,11 +10,13 @@
 {% endif %}
 
 <footer class='footer'>
-  <div class='footer__inner container--l'>
-    <div class='row py1'>
-      <div class='col-lg-4'>
+  <div class='footer__inner'>
+    <div class='row'>
+      <div class='footerInner__Left'>
         <div class='f fdc'>
-          {% include 'fellow-logo' %}
+          <a class="logo-link" href="{{ routes.root_url }}" aria-label="Open Home page" title="{{ shop.name }}" role="button">
+            {% include 'fellow-logo' %}
+          </a>
           {% if section.settings.show_newsletter %}
             {% include 'newsletter-snippet' %}
           {% endif %}
@@ -28,7 +32,7 @@
 
               {%- if settings[social_link] != blank and section.settings[icon_link] -%}
                 <li class="footer__icons-item">
-                  <a class="footer__icon-link" href="{{ settings[social_link] | escape }}" aria-label="Icon" aria-labelledby="Icon">
+                  <a class="footer__icon-link" href="{{ settings[social_link] | escape }}" target="_blank" aria-label="Icon" aria-labelledby="Icon">
                     <div class="footer__icon">
                       {%- include 'icons-social' with icon_link -%}
                     </div>
@@ -41,14 +45,14 @@
       </div>
 
       {% if linklists[footer_menu].links.size > 0 %}
-        <div class='col-lg-7 offset-lg-1'>
-          <nav class='f fw jcb x mb3rem'>
+        <div class='col-lg-7'>
+          <nav class='footerInner__Right f fw x'>
             {% for link in linklists[footer_menu].links %}
               <div class='footer__col'>
                 {% if link.links == blank %}
-                  <h3 class='h5 caps mb1'><a href="{{ link.url }}">{{ link.title }}</a></h3>
+                  <h3 class='h5 m0'><a href="{{ link.url }}">{{ link.title }}</a></h3>
                 {% else %}
-                  <h3 class='h5 caps mb1'>{{ link.title }}</h3>
+                  <h3 class='h5 m0'>{{ link.title }}</h3>
                   <ul class='footer__links'>
                     {% for link in link.links %}
                       <li class='track--xNarrow'><a href="{{ link.url }}">{{ link.title }}</a></li>
@@ -61,35 +65,39 @@
         </div>
       {% endif %}
 
-      {% if shop.customer_accounts_enabled %}
-        <div>
-          {% if customer %}
-            <a href='/account'>Account</a>
-          {% else %}
-            <a href='/account/login'>Log In</a>
-          {% endif %}
-        </div>
-      {% endif %}
     </div>
 
     <div class='row'>
       <div class='col'>
         <div class='footer__colophon'>
-          <span class='ac xsmall caps'>&copy; Fellow Industries, Inc. {{ 'now' | date: '%Y' }}</span>
+          <span class='ac xsmall'>&copy; Fellow Industries, Inc. {{ 'now' | date: '%Y' }}</span>
+
+          {%- if linklists[footer_menu_bottom].links.size > 0 -%}
+            <ul class="footerColophon__BottomMenu">
+              {% for link in linklists[footer_menu_bottom].links %}
+                <li class="footerColophon__BottomItem">
+                  <a class="footerColophon__BottomLink" href="{{ link.url }}" role="menu" aria-label="Menu link" title="Open {{ link.title }}">{{ link.title }}</a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
         </div>
       </div>
     </div>
   </div>
 
-  <div class='footer__payment-icons'>
-    <ul>
-      {%- for type in shop.enabled_payment_types -%}
-        <li>
-          {{ type | payment_type_svg_tag: class: 'img-grayscale' }}
-        </li>
-      {%- endfor -%}
-    </ul>
-  </div>
+  {%- if show_footer_payment_icon -%}
+    <div class='footer__payment-icons'>
+      <ul>
+        {%- for type in shop.enabled_payment_types -%}
+          <li>
+            {{ type | payment_type_svg_tag: class: 'img-grayscale' }}
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  {%- endif -%}
+
 </footer>
 
 {% schema %}
@@ -117,18 +125,18 @@
       },
       {
         "type": "link_list",
-        "id": "footer_menu_two",
-        "label": {
-          "en": "Additional menu",
-          "de": "Extra Menü",
-          "fr": "Menu supplémentaire"
-        },
-        "default": "main-menu",
-        "info": {
-          "en": "This menu won't show dropdown items",
-          "de": "Dieses Menü zeigt keine Dropdowns an",
-          "fr": "Ce menu n'affichera pas les éléments des menus déroulants"
-        }
+        "id": "footer_menu_bottom",
+        "label": "Bottom menu"
+      },
+      {
+        "type": "header",
+        "content": "Footer payments icons"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_footer_payment_icon",
+        "label": "Show payment icons",
+        "default": false
       },
       {
         "type": "header",

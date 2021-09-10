@@ -9,6 +9,7 @@
     class='image x y f {% if absolute == true %}abs {% else %}rel {% endif %}{% unless centered != true %}aic jcc{% endunless %}{% if fill %} fill{% endif %}{% if alignEnd == true %} aie{% endif %} {{ className }}'
     data-src='{{ src }}'
     data-alt='{{ alt | escape }}'
+    {% if attr != blank %}{{ attr }}{% endif %}
     {% if dataVariant != blank %}data-variant-img='{{ dataVariant }}'{% endif %}
     {% if irishFix %}style='display:none'{% endif %}
 >

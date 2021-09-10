@@ -1,0 +1,117 @@
+{%- for item in menu.links -%}
+  {%- assign counter = 0 -%}
+  {%- assign render_menu = false -%}
+  {%- assign image_block = blank -%}
+  {%- assign link_title = item.title | handleize -%}
+
+  {%- for block in section.blocks -%}
+    {%- assign link_parent = block.settings.target | handleize -%}
+
+    {%- if link_parent == link_title -%}
+      {% assign image_block = block %}
+      {% break %}
+    {%- endif -%}
+  {%- endfor -%}
+
+  {%- if mobile_menu and link_title == title -%}
+    {%- assign render_menu = true -%}
+    {%- elsif mobile_menu == false and item.links != blank -%}
+    {%- assign render_menu = true -%}
+    {%- elsif mobile_menu == false and image_block != blank -%}
+    {%- assign render_menu = true -%}
+  {%- endif -%}
+
+  {%- if render_menu -%}
+    {%- assign title = item.title | handleize -%}
+
+    <div data-id="{{ menu.title | handleize }}__{{ title }}" data-selected="false" data-visible="true"
+         class="topMenu__megaMenu megaMenu {% if item.links == blank and image_block != blank %} megaMenu__onlyImagesBlock {% elsif item.links == blank and image_block == blank %} megaMenu__blank {% endif %}">
+      {%- if item.links != blank -%}
+        <ul class="megaMenu__list">
+          {%- for mega_item in item.links -%}
+            {%- if mobile_menu == true and forloop.index == 1 -%}
+              <li class="megaMenu__item">
+                <button class="megaMenu__itemHeading">
+                  {{ item.title }}
+                  {%- render 'icon', icon: 'arrow' -%}
+                </button>
+              </li>
+            {%- endif -%}
+            <li class="megaMenu__item {% if mega_item.links != blank %} megaMenu__itemBold {% endif %}">
+              {% if mega_item.links == blank %}
+                <a data-selected="false" class="newHeader__link linkBlack"
+                   href="{{ mega_item.url }}">
+                  {{ mega_item.title }}
+                  {%- if mobile_menu == true and mega_item.links != blank -%}
+                    {%- render 'icon', icon: 'arrow' -%}
+                  {%- endif -%}
+                </a>
+              {% else %}
+                <button data-selected="false" class="newHeader__link linkBlack newHeader__button">
+                  {{ mega_item.title }}
+                  {%- if mobile_menu == true and mega_item.links != blank -%}
+                    {%- render 'icon', icon: 'arrow' -%}
+                  {%- endif -%}
+                </button>
+              {% endif %}
+
+              {%- if mega_item.links != blank -%}
+                <ul class="megaMenu__subMenuList subMenuList">
+                  {%- for sub_item in mega_item.links -%}
+                    <li class="subMenuList__item">
+                      <a data-selected="false" class="newHeader__link linkBlack"
+                         href="{{ sub_item.url }}"> {{ sub_item.title }}</a>
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              {%- endif -%}
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+
+      {%- if image_block != blank -%}
+        <div class="megaMenu_blockImages blockImages">
+          {%- if mobile_menu == true and forloop.index == 1 and item.links == blank -%}
+            <div class="megaMenu__item">
+              <button class="megaMenu__itemHeading">
+                {{ title }}
+                {%- render 'icon', icon: 'arrow' -%}
+              </button>
+            </div>
+          {%- endif -%}
+
+          <ul class="blockImages__list">
+            {%- for i in (1..4) -%}
+              {%- assign image_index =  'image_' | append: i -%}
+              {%- assign image = image_block.settings[image_index] -%}
+              {%- assign title_index =  'title_' | append: i -%}
+              {%- assign title = image_block.settings[title_index] -%}
+              {%- assign url_index =  'url_' | append: i -%}
+              {%- assign url = image_block.settings[url_index] -%}
+
+              {%- if image != blank and url != blank -%}
+                <li class="blockImages__card ">
+                  <a href="{{ url }}">
+                    <div class="blockImages__img ">
+                      {% render 'bgset', image: image %}
+                    </div>
+
+                    {%- if  title != blank -%}
+                      <h5 class="blockImages__bottom linkBlack" data-selected="false">{{ title }}</h5>
+                    {%- endif -%}
+                  </a>
+                </li>
+                {%- assign counter = counter | plus: 1 -%}
+
+                {%- if item.links != blank and counter == 2 -%}
+                  {%- break -%}
+                {%- endif -%}
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+{%- endfor -%}

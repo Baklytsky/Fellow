@@ -1,10 +1,10 @@
 <div class='pdp__options rel'>
-  <div {% if product.has_only_default_variant or product.variants.size <= 1 %}style='display:none'{% endif %}>
+  <div {% if product.has_only_default_variant or product.variants.size <= 1 %}style='display:none'{% else %} class="f fdcr" {% endif %}>
     {% for option in product.options_with_values %}
       <div class='pb1{% if option.values.size <= 1 %} hide{% endif %}' data-option-radio data-index='{{ forloop.index0 }}' data-options-count='{{ option.values.size }}'>
         <label class='py025' data-option-label='{{ option.name }}'>
           {% include 'assign_option_label', value: option.selected_value %}
-          <span class='caps small mb05 block'><strong>{{ option.name }} | </strong><span data-option-current='{{ option.name }}'>{{ option_value_label }}</span></span>
+          <span class='option-title block'><strong>{{ option.name }} : </strong><span data-option-current='{{ option.name }}'>{{ option_value_label }}</span></span>
         </label>
 
         {% assign option_group_names = '' | split: '' %}

@@ -1,45 +1,47 @@
-{% if product.metafields.custom_fields["product_specs"] != blank %}
-  {% comment %} Assigning Specs Image {% endcomment %}
-  {% if product.metafields.custom_fields["product_specs_image"] != blank %}
-    {% assign specsImage = true %}
-    {% assign image = product.metafields.custom_fields["product_specs_image"] %}
-  {% endif %}
-  {% assign specs_order = product.metafields.custom_fields["product_specs_order"] %}
-  {% comment %}Assigning specs array fields{% endcomment %}
-  {% assign separator = "|###|" %}
-  {% assign specification_title_array = product.metafields.custom_fields["specification_title"] | split: separator %}
-  {% assign specification_copy_array = product.metafields.custom_fields["specification_copy"] | split: separator %}
-  {% assign fc_keys = product.metafields.custom_fields["product_specs"] | split: "," %}
+{% if product.metafields.custom_fields["show_product_specs_section"] == 1 %}
+  {% if product.metafields.custom_fields["product_specs"] != blank %}
+    {% comment %} Assigning Specs Image {% endcomment %}
+    {% if product.metafields.custom_fields["product_specs_image"] != blank %}
+      {% assign specsImage = true %}
+      {% assign image = product.metafields.custom_fields["product_specs_image"] %}
+    {% endif %}
+    {% assign specs_order = product.metafields.custom_fields["product_specs_order"] %}
+    {% comment %}Assigning specs array fields{% endcomment %}
+    {% assign separator = "|###|" %}
+    {% assign specification_title_array = product.metafields.custom_fields["specification_title"] | split: separator %}
+    {% assign specification_copy_array = product.metafields.custom_fields["specification_copy"] | split: separator %}
+    {% assign fc_keys = product.metafields.custom_fields["product_specs"] | split: "," %}
 
-  <section class='module {% if specs_order != blank %}o-{{ specs_order }}{% endif %}' data-component='pdp-specs'>
-    <div class='row'>
-      <div class='col-lg-2'>
-        <h2 class='t-vertical caps'>Get the Specs</h2>
-      </div>
-      <div class='col-lg-4'>
-        {% if specsImage == true %}
-          {%
-            include 'component-image' with
-            src: image,
-            alt: alt,
-            className: 'pdpSpecs__image image'
-          %}
-        {% endif %}
-      </div>
-      <div class='col-lg-1{% if specsImage == true %} divider{% endif %}'>
-      </div>
-      <div class='col-lg-5'>
-        <div class='pdpSpecs__list'>
-          <ul>
-            {% for i in fc_keys %}
-              {% assign index = i | plus: 0 %}
-              <li class="specs__item specs__item--{{ index }}">
-                <span>{{ specification_copy_array[index] }}</span>
-              </li>
-            {% endfor %}
-          </ul>
+    <section class='module o-{{ specs_order }}' data-component='pdp-specs'>
+      <div class='row'>
+        <div class='col-lg-2'>
+          <h2 class='t-vertical caps'>Get the Specs</h2>
+        </div>
+        <div class='col-lg-4'>
+          {% if specsImage == true %}
+            {%
+              include 'component-image' with
+              src: image,
+              alt: alt,
+              className: 'pdpSpecs__image image'
+            %}
+          {% endif %}
+        </div>
+        <div class='col-lg-1{% if specsImage == true %} divider{% endif %}'>
+        </div>
+        <div class='col-lg-5'>
+          <div class='pdpSpecs__list'>
+            <ul>
+              {% for i in fc_keys %}
+                {% assign index = i | plus: 0 %}
+                <li class="specs__item specs__item--{{ index }}">
+                  <span>{{ specification_copy_array[index] }}</span>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  {% endif %}
 {% endif %}

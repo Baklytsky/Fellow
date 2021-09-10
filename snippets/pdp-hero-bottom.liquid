@@ -1,54 +1,56 @@
-{% if product.metafields.custom_fields["hero_module_secondary"] != blank %}
-  {% assign hero_copy = product.metafields.custom_fields["hero_copy_bottom"] %}
+{% if product.metafields.custom_fields["show_hero_module_bottom"] == 1 %}
+  {% if product.metafields.custom_fields["hero_module_secondary"] != blank %}
+    {% assign hero_copy = product.metafields.custom_fields["hero_copy_bottom"] %}
 
-  {% assign hero_media_type = product.metafields.custom_fields["hero_bottom_media_type"] %}
-  {% assign hero_media_webm = product.metafields.custom_fields["hero_bottom_media_webm"] %}
-  {% assign hero_media_mp4 = product.metafields.custom_fields["hero_bottom_media_mp4"] %}
+    {% assign hero_media_type = product.metafields.custom_fields["hero_bottom_media_type"] %}
+    {% assign hero_media_webm = product.metafields.custom_fields["hero_bottom_media_webm"] %}
+    {% assign hero_media_mp4 = product.metafields.custom_fields["hero_bottom_media_mp4"] %}
 
-  {% assign image = product.metafields.custom_fields["hero_image_bottom"] %}
-  {% assign alt_text = product.metafields.custom_fields["hero_bottom_image_alt"] %}
-  {% if alt_text != blank %}
-    {% assign alt = alt_text %}
-  {% elsif hero_title != blank %}
-    {% assign alt = product.title %}
-  {% endif %}
+    {% assign image = product.metafields.custom_fields["hero_image_bottom"] %}
+    {% assign alt_text = product.metafields.custom_fields["hero_bottom_image_alt"] %}
+    {% if alt_text != blank %}
+      {% assign alt = alt_text %}
+      {% elsif hero_title != blank %}
+      {% assign alt = product.title %}
+    {% endif %}
 
-  {% assign flex_order = product.metafields.custom_fields["hero_module_bottom_order"] | downcase %}
-  {% if flex_order %}
-    {% unless flex_order == 'default' %}
+    {% assign flex_order = product.metafields.custom_fields["hero_module_bottom_order"] | downcase %}
+    {% if flex_order %}
+      {% unless flex_order == 'default' %}
       {% assign display_order = flex_order %}
-    {% endunless %}
-  {% endif %}
+      {% endunless %}
+    {% endif %}
 
-  <section class='module heroSection{% if display_order %} o-{{ display_order }}{% endif %}' data-component='pdp-hero'>
-    <div class='row aic'>
-      <div class='col-lg-6 offset-lg-1 order-lg-2'>
-        {% if hero_media_type == 'Video' %}
-          <video class='heroSection__image x y fill' autoplay muted loop playsinline controls>
-            {% if hero_media_webm != blank %}
-              <source src="{{ hero_media_webm }}" type="video/webm">
-            {% endif %}
-            {% if hero_media_mp4 != blank %}
-              <source src="{{ hero_media_mp4 }}" type="video/mp4">
-            {% endif %}
-          </video>
-        {% else %}
-          {% unless image == blank %}
-            {%
-              include 'component-image' with
-              src: image,
-              alt: alt,
-              className: 'heroSection__image image p3rem',
-              fill: true
-            %}
-          {% endunless %}
-        {% endif %}
-      </div>
-      <div class='col-lg-4 offset-lg-1 order-lg-1'>
-        <div class='heroSection__copy rte'>
-          {{ hero_copy }}
+    <section class='module heroSection{% if display_order %} o-{{ display_order }}{% endif %}' data-component='pdp-hero'>
+      <div class='row aic'>
+        <div class='col-lg-6 offset-lg-1 order-lg-2'>
+          {% if hero_media_type == 'Video' %}
+            <video class='heroSection__image x y fill' autoplay muted loop playsinline controls>
+              {% if hero_media_webm != blank %}
+                <source src="{{ hero_media_webm }}" type="video/webm">
+              {% endif %}
+              {% if hero_media_mp4 != blank %}
+                <source src="{{ hero_media_mp4 }}" type="video/mp4">
+              {% endif %}
+            </video>
+          {% else %}
+            {% unless image == blank %}
+              {%
+                include 'component-image' with
+                src: image,
+                alt: alt,
+                className: 'heroSection__image image p3rem',
+                fill: true
+              %}
+            {% endunless %}
+          {% endif %}
+        </div>
+        <div class='col-lg-4 offset-lg-1 order-lg-1'>
+          <div class='heroSection__copy rte'>
+            {{ hero_copy }}
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  {% endif %}
 {% endif %}

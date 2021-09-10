@@ -1,6 +1,6 @@
 <div class="keyFeatures__instance fc-index--{{ index }}">
-  <div class='row{% if key_feature_quadrature == 1 %} aic{% else %} aie{% endif %}'>
-    <div class='col-lg-6 order-lg-2'>
+  <div class='keyFeatures__instance-wrapper aic {% if position == 'Text left' %} keyFeatures__instance-wrapper--reverse{% endif %}'>
+    <div class='keyFeatures__media'>
       <div class="{% if key_feature_quadrature == 1 %}keyFeature__image-quadrature{% endif %} f jcc">
         <div class="keyFeature__image-wrapper rel">
         {% if mediaType == 'Video' %}
@@ -39,7 +39,7 @@
         </div>
       </div>
     </div>
-    <div class='col-lg-6 order-lg-1'>
+    <div class='keyFeatures__text'>
       <section class='keyFeature__details'>
         {% if iconSrc != blank %}
         <div class='keyFeatureDetails__icon'>
@@ -54,8 +54,18 @@
         </div>
         {% endif %}
         <div class='keyFeatureDetails__copy'>
-          <h3 class='caps'>{{ key_feature_title_array[index] }}</h3>
-          <p>{{ key_feature_copy_array[index] }}</p>
+          <h3 class='keyFeatureDetails__copy-heading'>{{ key_feature_title_array[index] }}</h3>
+          <p class="keyFeatureDetails__copy-text">{{ key_feature_copy_array[index] }}</p>
+          {%- if key_features_table_left_column_array[index] != blank or key_features_table_right_col_array[index] != blank -%}
+            <div class='keyFeatureDetails__Table x'>
+              {%- if key_features_table_left_column_array[index] != blank  -%}
+                <div class='keyFeatureDetails__Table-left'>{{ key_features_table_left_column_array[index] }}</div>
+              {%- endif -%}
+              {%- if key_features_table_right_col_array[index] != blank  -%}
+                <div class='keyFeatureDetails__Table-right'>{{ key_features_table_right_col_array[index] }}</div>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
         </div>
       </section>
     </div>

@@ -1,12 +1,6 @@
 {% comment %}form start & end moved to pdp-details-main to adjust for shop pay {% endcomment %}
 {% comment %} Always include product-options, product.js:20 reads from it for ATC {% endcomment %}
-{% include 'product-options' %}
-
-{% if section.settings.quantity_selector_inline != true %}
-  <div class='pb15' {% if section.settings.show_quantity_selector !=true or product.tags contains 'gift' %}style='display:none'{% endif %}>
-    {% include 'component-counter' %}
-  </div>
-{% endif %}
+{% include 'product-sticky-options' %}
 
 {% comment %}
 Uncomment to include
@@ -56,12 +50,12 @@ Uncomment to include
   {%
     include 'component-button' with
     tag: 'button',
-    id: 'pdp-atc',
+    id: 'pdp-sticky-atc',
     name: 'add',
-    type: 'submit',
+    type: 'button',
     href: '#',
-    className: 'js-add-to-cart cart__button',
-    dataAttr: 'data-atc="true"',
+    className: 'cart__button',
+    dataAttr: '',
     disabled: disableVal,
     cta: cta,
   %}
@@ -71,6 +65,9 @@ Uncomment to include
       {{ form | payment_button }}
     </div>
   </div>
-<div class='is-hidden' data-bis>
-  <button class='button cart__button klaviyo-bis-trigger'>Out of Stock | Notify Me</button>
-</div>
+    {%- comment -%}
+      <div class='is-hidden' data-bis>
+        <button class='button cart__button klaviyo-bis-trigger'>Out of Stock | Notify Me</button>
+      </div>
+    {%- endcomment -%}
+

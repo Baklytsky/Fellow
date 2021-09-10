@@ -1,4 +1,6 @@
-<form class='productCard__variants rel mt05'>
+{%- assign color_count = 0 -%}
+
+<form class='productCard__variants rel'>
   <div class='productCard__options'>
     {% for product_option in product.options_with_values %}
       {% assign option_name = product_option.name | handleize %}
@@ -8,25 +10,30 @@
           {% for value in product_option.values %}
             {% for variant in product.variants %}
               {% if variant.option1 == value or variant.option2 == value %}
+                {%- assign color_count = color_count | plus: 1 -%}
+                
                 <label class='radio f aic rel js-color-update' for='{{ product.title | handleize }}-{{ option_name }}__{{ value | handleize }}' {% if option_name == 'color' or option_name == 'material' %}data-color='{{ value | handleize }}'{% endif %}>
                   <span class='u-sr-only'>Label for {{ product.title }} {{ option_name }}</span>
                   <input
                     type='radio'
                     id='{{ product.title | handleize }}-{{ option_name }}__{{ value | handleize }}'
                     data-value-handle='{{ value | handleize }}'
-                    {% if option_name == 'color' %}data-color='{{ value | handleize }}'{% endif %}
+                    {% if option_name == 'color' %}
+                      data-color='{{ value | handleize }}'
+                      class="checked"
+                    {% endif %}
                     {% if option_name == 'material' %}data-material='{{ value | handleize }}'{% endif %}
                     value='{{ value }}'
-                    data-option-selector
-                  >
+                    data-option-selector>
                   <div class="radio__title js-productCard-option js-color-update"
                     {% if option_name == 'color' %}data-color='{{ value | handleize }}'{% endif %}
                     {% if option_name == 'material' %}data-material='{{ value | handleize }}'{% endif %}
                     data-variant-url='{{ variant.url }}'
-                    data-variant-id='{{ variant.id }}'
-                  >
+                    data-variant-id='{{ variant.id }}'>
                   </div>
-                  <a href="{{ variant.url }}" class='fill abs x y z2' aria-label='{{ product.title }} / {{ variant.title }}'></a>
+                  {% comment %}
+                    <a href="{{ variant.url }}" class='fill abs x y z2' aria-label='{{ product.title }} / {{ variant.title }}'></a>
+                  {% endcomment %}
                 </label>
                 {% break %}
               {% endif %}
@@ -36,6 +43,15 @@
       {% endif %}
     {% endfor %}
   </div>
+
+  {%- if color_count > 0 -%}
+    <div class="productCardVariants__ColorCount">
+      <a class="productCardVariants__CountButton" href="{{ product.url }}" aria-label="Open product page" title="{{ product.title }}" role="button">
+        {{ color_count }} {{ color_count | pluralize: 'color', 'colors' }}
+      </a>
+    </div>
+  {%- endif -%}
+
   {% for product_option in product.options_with_values %}
     {% assign option_name = product_option.name | handleize %}
     {% if option_name == 'color' or option_name == 'material' %}

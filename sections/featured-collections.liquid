@@ -1,6 +1,7 @@
 {%- if section.settings.enable_section -%}
   {%- assign heading = section.settings.heading | default: false -%}
   {%- assign blocks = section.blocks -%}
+  {%- assign show_view_all = section.settings.show_view_all -%}
 
   {%- if blocks.size > 0 or heading -%}
     <section class="FeaturedCollections">
@@ -43,13 +44,16 @@
               {%- endfor -%}
             </ul>
 
-            <a class="FeaturedCollections__CollectionLink"
-               href="{{ first_button_link }}"
-               title="{{ first_button_text }}"
-               aria-label="Open selected collection"
-               role="button">
-              {{ first_button_text }}
-            </a>
+            {%- if show_view_all -%}
+              <a class="FeaturedCollections__CollectionLink"
+                 href="{{ first_button_link }}"
+                 title="{{ first_button_text }}"
+                 aria-label="Open selected collection"
+                 role="button">
+                {{ first_button_text }}
+              </a>
+            {%- endif -%}
+
           </div>
 
           <div class="FeaturedCollections__ProductsWrapper">

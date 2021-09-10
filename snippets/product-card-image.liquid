@@ -30,8 +30,7 @@
                 {% if option_name == 'color' or option_name == 'material' %}data-color='{{ value | handleize }}'{% endif %}
                 data-variant-url='{{ variant.url }}'
                 data-variant-id='{{ variant.id }}'
-                aria-label='{{ variant.title }}'
-              >
+                aria-label='{{ variant.title }}'>
                 {%
                   include 'component-image' with
                   src: variantImg,
@@ -48,7 +47,10 @@
       {% endif %}
     {% endfor %}
   {% endif %}
-  <a href='{{ url }}' class='abs fill z2 js-product-link' aria-label='{{ product.title }}'></a>
+  <div class="productCardImg__QuickView">
+    <button class="productCardImg__QuickViewButton js-product-view" data-quick-view="{{ url }}?view=quick-view" type="button">{{ 'products.product.quick_view' | t }}</button>
+  </div>
+  <a class='productCardImg__ProductLink abs fill z2 js-product-link' href='{{ url }}' title="{{ product.title }}" aria-label='{{ product.title }}'></a>
 </div>
 
 {% assign image_url = blank %}

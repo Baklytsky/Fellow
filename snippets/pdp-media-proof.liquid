@@ -7,9 +7,20 @@
     {% endunless %}
   {% endif %}
 
-  <section class='mediaProof module rel{% if display_order %} o-{{ display_order }}{% endif %}'>
-    <div class='x container--l'>
-      <div class='mediaProof__items f fw jca'>
+  {%- capture 'slick-config' -%}
+  {
+    "slidesToShow": 1,
+    "slidesToScroll": 1,
+    "arrows": false,
+    "dots": true
+  }
+  {%- endcapture -%}
+
+  <section class='pdpMediaProof mediaProof rel f jcc aic{% if display_order %} o-{{ display_order }}{% endif %}'
+           data-section-type="slick-slideshow"
+           data-slick-config='{{- slick-config -}}'>
+    <div class='x pdpMediaProof__wrapper'>
+      <div class='mediaProof__items f fw jca jsSlickSlider'>
 
         {% assign separator = "|###|" %}
         {% assign image_array = product.metafields.custom_fields["media_proof_item_image"] | split: separator %}
@@ -20,7 +31,7 @@
           {% assign index = i | plus: 0 %}
           {% assign imageSrc = image_array[index] %}
           {% assign quote = quote_array[index] %}
-          {% include 'media-proof-single' %}
+            {% include 'media-proof-single' %}
         {% endfor %}
       </div>
     </div>
