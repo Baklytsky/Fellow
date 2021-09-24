@@ -18233,12 +18233,12 @@ textarea {
   border-color: #000
 }
 
-.radio-group[data-option-color] input:checked+.radio__title:before,
-.radio-group[data-option-color] input:checked+.radio__title:after,
-.radio-group[data-option-material] input:checked+.radio__title:before,
-.radio-group[data-option-material] input:checked+.radio__title:after {
-  border-color: #FFF
-}
+/*.radio-group[data-option-color] input:checked+.radio__title:before,*/
+/*.radio-group[data-option-color] input:checked+.radio__title:after,*/
+/*.radio-group[data-option-material] input:checked+.radio__title:after,*/
+/*.radio-group[data-option-material] input:checked+.radio__title:before {*/
+/*  border-color: #FFF*/
+/*}*/
 
 .radio-group[data-option-color] label:hover,
 .radio-group[data-option-material] label:hover {
@@ -18254,6 +18254,11 @@ textarea {
 .radio-group:not([data-option-color]):not([data-option-material]) label {
   padding-top: 1rem;
   padding-left: 1rem
+}
+
+.radio-group:not([data-option-color]):not([data-option-material]) label.radio__label-size-image {
+  padding-top: 16px;
+  padding-left: 16px
 }
 
 .radio-group:not([data-option-color]):not([data-option-material]) .radio__title {
@@ -18273,11 +18278,25 @@ textarea {
   transition: all var(--slow) var(--ease)
 }
 
+.radio-group:not([data-option-color]):not([data-option-material]) .radio__title-size-image {
+  height: auto;
+  padding: 0;
+  background-color: transparent;
+  outline: none;
+}
+
 @media screen and (max-width: 991.98px) {
   .radio-group:not([data-option-color]):not([data-option-material]) .radio__title {
     height: 29px;
     font-size: .75rem;
     font-weight: 600
+  }
+
+  .radio-group:not([data-option-color]):not([data-option-material]) .radio__title-size-image {
+    height: auto;
+    padding: 0;
+    background-color: transparent;
+    outline: none;
   }
 }
 
@@ -18289,6 +18308,27 @@ textarea {
   outline: 1px solid #000;
   background-color: #000;
   color: #fff
+}
+
+.radio-group:not([data-option-color]):not([data-option-material]) input:checked+.radio__title-size-image {
+  height: auto;
+  outline: none;
+  background-color: transparent;
+  color: #000
+}
+
+.radio-group:not([data-option-color]):not([data-option-material]) input:checked+.radio__title-size-image .size__wrapper {
+  border: 2px solid #C2C2C2;
+}
+
+.radio-group:not([data-option-color]):not([data-option-material]) input:checked+.radio__title-size-image .size__image-wrapper-not-selected {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.radio-group:not([data-option-color]):not([data-option-material]) input:checked+.radio__title-size-image .size__image-wrapper-not-active {
+  visibility: visible;
+  opacity: 1;
 }
 
 @media screen and (max-width: 991.98px) {
@@ -18303,10 +18343,22 @@ textarea {
   flex: 0 0 33.3%
 }
 
+.radio-group:not([data-option-color]):not([data-option-material]) .radio__label-size-image:first-child:nth-last-child(n+3),
+.radio-group:not([data-option-color]):not([data-option-material]) .radio__label-size-image:first-child:nth-last-child(n+3)~label {
+  max-width: 116px;
+  min-width: 116px;
+}
+
 @media screen and (max-width: 991.98px) {
   .radio-group:not([data-option-color]):not([data-option-material]) label:first-child:nth-last-child(n+3),
   .radio-group:not([data-option-color]):not([data-option-material]) label:first-child:nth-last-child(n+3)~label {
     flex: 0 0 33%
+  }
+
+  .radio-group:not([data-option-color]):not([data-option-material]) .radio__label-size-image:first-child:nth-last-child(n+3),
+  .radio-group:not([data-option-color]):not([data-option-material]) .radio__label-size-image:first-child:nth-last-child(n+3)~label {
+    max-width: 96px;
+    min-width: 96px;
   }
 }
 
@@ -19270,12 +19322,12 @@ ul.list {
   border-color: #000;
 }
 
-.productCard__content .radio-group[data-option-color] input.active+.radio__title:before,
-.productCard__content .radio-group[data-option-color] input.active+.radio__title:after,
-.productCard__content .radio-group[data-option-material] input.active+.radio__title:after,
-.productCard__content .radio-group[data-option-material] input.active+.radio__title:before {
-  border-color: #FFF;
-}
+/*.productCard__content .radio-group[data-option-color] input.active+.radio__title:before,*/
+/*.productCard__content .radio-group[data-option-color] input.active+.radio__title:after,*/
+/*.productCard__content .radio-group[data-option-material] input.active+.radio__title:after,*/
+/*.productCard__content .radio-group[data-option-material] input.active+.radio__title:before {*/
+/*  border-color: #FFF;*/
+/*}*/
 
 .productCard__content .radio-group[data-option-color] .radio__title:before,
 .productCard__content .radio-group[data-option-color] .radio__title:after,

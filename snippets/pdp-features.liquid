@@ -7,7 +7,11 @@
     {% endunless %}
   {% endif %}
   <div class='features_wrap {% if display_order %} o-{{ display_order }}{% endif %}'>
-    {% include 'pdp-key-features' %}
-    {% include 'pdp-addl-features' %}
+    {% if product.metafields.custom_fields["show_key_features"] == 1 %}
+      {% include 'pdp-key-features' %}
+    {% endif %}
+    {% if product.metafields.custom_fields["show_additional_features"] == 1 %}
+      {% include 'pdp-addl-features' %}
+    {% endif %}
   </div>
 {% endif %}

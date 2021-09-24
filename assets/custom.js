@@ -455,7 +455,7 @@ theme.pdpMain = function () {
       }
     } else {
       if (selectedVariantImage.length) {
-        mobileProductSlider.slick('slickGoTo', parseInt(slideIndexMobile), true);
+        mobileProductSlider.slick('slickGoTo', parseInt(slideIndexMobile), false);
       }
     }
   }

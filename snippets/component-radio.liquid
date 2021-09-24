@@ -1,4 +1,21 @@
-<label class='radio' for='{{ label | handleize }}'>
+{%- assign option_lable = label | handleize -%}
+{%- assign option_name = name | handleize -%}
+
+{% if product.metafields.custom_fields["product_size_images"] != blank and option_name == 'size' %}
+  {% for item in product.metafields.custom_fields["product_size_images"] %}
+    {% if item["size_name"] != blank and item["size_image"] != blank %}
+      {%- assign item_size_handleize = item["size_name"] | handleize -%}
+      {%- if item_size_handleize == option_lable -%}
+        {%- assign has_size_image = true -%}
+        {%- assign size_image = item["size_image"] -%}
+        {%- assign size_image_active = item["size_image_active"] -%}
+        {% break %}
+      {%- endif -%}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+<label class='radio {% if has_size_image %}radio__label-size-image{% endif %}' for='{{ label | handleize }}'>
   <span class='u-sr-only'>{{ value | escape }}</span>
   <input
     id='{{ label | handleize }}'
@@ -11,7 +28,27 @@
     {{ attributes }}
     {% if checked == true %}checked{% endif %}
   />
-  <div class="radio__title f aic jcc" data-{{ name }}='{{ label | handleize }}'><span>{{label}}</span></div>
+  <div class="radio__title f aic jcc {% if has_size_image %}radio__title-size-image{% endif %}" data-{{ name }}='{{ label | handleize }}'>
+    {%- if has_size_image -%}
+      <div class="size__wrapper">
+        <div class="size__image-wrapper rel">
+          <div class="size__image-wrapper-not-selected">
+            {{ size_image }}
+          </div>
+          {%- if size_image_active != blank -%}
+            <div class="size__image-wrapper-not-active">
+              {{ size_image_active }}
+            </div>
+          {%- endif -%}
+        </div>
+        <span>{{ label }}</span>
+      </div>
+    {%- endif -%}
+
+    {%- unless has_size_image -%}
+      <span>{{ label }}</span>
+    {%- endunless -%}
+  </div>
 </label>
 
 {% assign label = blank %}
@@ -19,3 +56,7 @@
 {% assign value = blank %}
 {% assign attributes = blank %}
 {% assign checked = blank %}
+{% assign has_size_image = false %}
+{%- assign size_image = blank -%}
+{%- assign size_image_active = blank -%}
+

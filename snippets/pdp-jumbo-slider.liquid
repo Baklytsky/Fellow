@@ -1,3 +1,4 @@
+{% if product.metafields.custom_fields["show_jumbo_slider"] == 1 %}
 {% if product.metafields.custom_fields["jumbo_slider"] != blank %}
   {% assign separator = "|###|" %}
   {% assign jumbo_slide_array = product.metafields.custom_fields["jumbo_slide"] | split: separator %}
@@ -44,6 +45,7 @@
       {% endif %}
     </section>
   </div>
+{% endif %}
 {% endif %}
 
 {% comment %} Reset {% endcomment %}
