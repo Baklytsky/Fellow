@@ -1,0 +1,17 @@
+{% assign current_variant = product.selected_or_first_available_variant %}
+{% if product.metafields.custom_fields["desktop_masthead_image"] or product.metafields.custom_fields["mobile_masthead_image"] != blank %}
+  {%- assign masthead_exists = true -%}
+{% endif %}
+<section class='full pdpMain__container' data-component='pdpMain'>
+  <div class='pdpMain row no-gutters'>
+    <div class='col-lg-7 order-lg-1'>
+      {% include 'pdb-image-thumbnails.liquid' %}
+      {%- comment -%}
+        {% include 'pdp-images' %}
+      {%- endcomment -%}
+    </div>
+    <div class='col-lg-5 order-lg-2'>
+      {% include 'pdp-details-bundle' %}
+    </div>
+  </div>
+</section>

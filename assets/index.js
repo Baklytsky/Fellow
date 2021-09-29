@@ -9923,14 +9923,54 @@
   };
 
   function z(t) {
-    if (void 0 !== t) return t.length <= 0 ? "" : t.reduce((function(t, e) {
-      return t + (r = (n = e).product_id, i = n.variant_id, o = n.product_title, a = n.line_price, s = n.options_with_values, u = n.image, c = n.url, l = n.quantity, f = U(s), h = u ? F(u.replace("." + function(t) {
-        var e = t.match(/.+_((?:pico|icon|thumb|small|compact|medium|large|grande)|\d{1,4}x\d{0,4}|x\d{1,4})[_\.@]/);
-        return e ? e[1] : null
-      }(u), ""), "200x") : "https://source.unsplash.com/R9OS29xJb-8/2000x1333", "\n    <div class='cart-drawer__item' data-component='cartDrawerItem' data-pid=".concat(r, " data-id=").concat(i, " >\n      <a href='").concat(c, "' class=\"cart-drawer__itemImage\">\n        <img src='").concat(h, "' />\n      </a>\n\n      <div class='cart-drawer__itemContent f fdc'>\n        <div class='cart-drawer__itemDetails'>\n          <a href='").concat(c, "' class='oswald caps mv0 p'>").concat(o, "</a>\n          <div class='xxsmall sans caps cm mt025 book'>").concat(f, "</div>\n        </div>\n\n        <div class='f aic jcb pt05'>\n          <div class='cart-item__stepper aic f ").concat(0 === a ? "is-disabled" : "", "'>\n            <div class='cart-stepper js-remove-single'>-</div>\n            <div class='cart-quantity js-single-quantity'>").concat(l, "</div>\n            <div class='cart-stepper js-add-single'>+</div>\n          </div>\n\n          <div class='oswald--n4'>").concat(V(Q(a)), "</div>\n        </div>\n\n        <button class='button--reset cart-drawer__itemAction js-remove-item'>").concat('\n  <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentcolor" stroke-width="3" style="display:inline-block;vertical-align:middle;overflow:visible;"><path d="M1.0606601717798212 1.0606601717798212 L14.939339828220179 14.939339828220179"></path><path d="M14.939339828220179 1.0606601717798212 L1.0606601717798212 14.939339828220179"></path></svg>\n', "</button>\n      </div>\n    </div>\n"));
-      var n, r, i, o, a, s, u, c, l, f, h
-    }), "");
-    console.log("Can't reach cart.js")
+    if (void 0 !== t)
+      return t.length <= 0
+          ? ""
+          : t.reduce(function (t, e) {
+            return (
+                t +
+                ((r = (n = e).product_id),
+                    (i = n.variant_id),
+                    (o = n.product_title),
+                    (a = n.line_price),
+                    (p = (n.line_price === n.original_line_price) ? V(Q(a)) : '<span style="text-decoration: line-through; padding-right: 5px;">' + V(Q(n.original_line_price)) + '</span>' + V(Q(a))),
+                    (s = n.options_with_values),
+                    (u = n.image),
+                    (c = n.url),
+                    (l = n.quantity),
+                    (f = U(s)),
+                    (h = u
+                        ? F(
+                            u.replace(
+                                "." +
+                                (function (t) {
+                                  var e = t.match(/.+_((?:pico|icon|thumb|small|compact|medium|large|grande)|\d{1,4}x\d{0,4}|x\d{1,4})[_\.@]/);
+                                  return e ? e[1] : null;
+                                })(u),
+                                ""
+                            ),
+                            "200x"
+                        )
+                        : "https://source.unsplash.com/R9OS29xJb-8/2000x1333"),
+                    "\n    <div class='cart-drawer__item' data-component='cartDrawerItem' data-pid="
+                        .concat(r, " data-id=")
+                        .concat(i, " >\n      <a href='")
+                        .concat(c, "' class=\"cart-drawer__itemImage\">\n        <img src='")
+                        .concat(h, "' />\n      </a>\n\n      <div class='cart-drawer__itemContent f fdc'>\n        <div class='cart-drawer__itemDetails'>\n          <a href='")
+                        .concat(c, "' class='oswald caps mv0 p'>")
+                        .concat(o, "</a>\n          <div class='xxsmall sans caps cm mt025 book'>")
+                        .concat(f, "</div>\n        </div>\n\n        <div class='f aic jcb pt05'>\n          <div class='cart-item__stepper aic f ")
+                        .concat(0 === a ? "is-disabled" : "", "'>\n            <div class='cart-stepper js-remove-single' data-key='" + n.key + "'>-</div>\n            <div class='cart-quantity js-single-quantity'>")
+                        .concat(l, "</div>\n            <div class='cart-stepper js-add-single' data-key='" + n.key + "'>+</div>\n          </div>\n\n          <div class='oswald--n4'>")
+                        .concat(p, "</div>\n        </div>\n\n        <button class='button--reset cart-drawer__itemAction js-remove-item' data-key='" + n.key + "'>")
+                        .concat(
+                            '\n  <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentcolor" stroke-width="3" style="display:inline-block;vertical-align:middle;overflow:visible;"><path d="M1.0606601717798212 1.0606601717798212 L14.939339828220179 14.939339828220179"></path><path d="M14.939339828220179 1.0606601717798212 L1.0606601717798212 14.939339828220179"></path></svg>\n',
+                            "</button>\n      </div>\n    </div>\n"
+                        ))
+            );
+            var n, r, i, o, a, s, u, c, l, f, h;
+          }, "");
+    console.log("Can't reach cart.js");
   }
 
   var W = O((function(t, e) {
@@ -9951,8 +9991,15 @@
             p = t.querySelector(".js-free-shipping-amount-remaining"),
             v = t.querySelector(".js-free-shipping-unmet-msg"),
             y = t.querySelector(".js-free-shipping-met-msg"),
-            m = function(t) {
-              a.innerHTML = z(t.items), i.innerHTML = V(Q(t.total_price)), void 0 === t.items ? (c.classList.add("is-hidden"), a.classList.add("is-hidden"), l.classList.remove("is-hidden"), f.classList.add("is-hidden")) : 0 === t.items.length ? (c.classList.add("is-hidden"), a.classList.add("is-hidden"), l.classList.remove("is-hidden")) : (c.classList.remove("is-hidden"), a.classList.remove("is-hidden"), l.classList.add("is-hidden"))
+            m = function (t) {
+              var q = (t.total_price === t.original_total_price) ? V(Q(t.total_price)) : '<span style="text-decoration: line-through; padding-right: 5px;">' + V(Q(t.original_total_price)) + '</span>' + V(Q(t.total_price));
+              (a.innerHTML = z(t.items)),
+                  (i.innerHTML = q),
+                  void 0 === t.items
+                      ? (c.classList.add("is-hidden"), a.classList.add("is-hidden"), l.classList.remove("is-hidden"), f.classList.add("is-hidden"))
+                      : 0 === t.items.length
+                          ? (c.classList.add("is-hidden"), a.classList.add("is-hidden"), l.classList.remove("is-hidden"))
+                          : (c.classList.remove("is-hidden"), a.classList.remove("is-hidden"), l.classList.add("is-hidden"));
             },
             g = function() {
               t.classList.remove("is-visible"), document.getElementById.tabIndex = 0, setTimeout((function() {
