@@ -1,0 +1,140 @@
+{% if product.metafields.custom_fields["enable_compare_products"] == 1 %}
+  {% assign compare_product_array = product.metafields.custom_fields["compare_products_list"] %}
+  {%- assign compare_product_array_size = '' -%}
+
+  {%- for item in product.metafields.custom_fields["compare_products_list"] -%}
+    {%- if item["compare_product"] != blank -%}
+      {%- assign compare_product_array_size = compare_product_array_size | plus: 1 -%}
+    {%- endif -%}
+  {%- endfor -%}
+
+  {%- case compare_product_array_size -%}
+  {%- when 1 -%}
+  {%- assign table_style_class = 'pdpCompare__table-half' -%}
+  {%- when 2 -%}
+  {%- assign table_style_class = 'pdpCompare__table-third' -%}
+  {%- when 3 -%}
+  {%- assign table_style_class = 'pdpCompare__table-four' -%}
+  {%- endcase -%}
+
+  {% if compare_product_array_size > 1 %}
+    {%- assign compare_products_heading = product.metafields.custom_fields["compare_products_heading"] %}
+    {%- assign display_order = product.metafields.custom_fields["compare_products_order"] %}
+
+    <section class='pdpCompare {% if display_order != blank %} o-{{ display_order }}{% endif %}'>
+      <div class="pdpCompare__wrapper">
+        {%- if compare_products_heading != blank -%}
+          <h3 class="pdpCompare__heading">{{ compare_products_heading }}</h3>
+        {%- endif -%}
+
+        <table class="pdpCompare__table {{ table_style_class }}">
+            <thead>
+            <tr>
+              <th></th>
+              {%- for item in product.metafields.custom_fields["compare_products_list"] -%}
+                {%- assign _product = all_products[item["compare_product"]] -%}
+                {%- assign _product_image = _product.featured_image | img_url: 'master' -%}
+
+                {%- if item["compare_product_image"] != blank -%}
+                  {%- assign _product_image = item["compare_product_image"] -%}
+                {%- endif -%}
+
+                <th>
+                  <div class="pdpCompare__table-th">
+                    <h3 class="pdpCompare__table-productTitle">{{ _product.title }}</h3>
+                    <div class="pdpCompare__table-productImage rel">
+                      {% include 'component-image' with
+                        src: _product_image,
+                        alt: _product.title,
+                        className: 'image image-abs-cover',
+                        absolute: true,
+                        fill: true %}
+                    </div>
+                  </div>
+                </th>
+
+              {%- endfor -%}
+            </tr>
+            </thead>
+            <tbody>
+            {%- for i in (1..6) -%}
+              {%- assign key_name = i | append: "_characteristic" -%}
+              {%- assign characteristic_name = product.metafields.custom_fields[key_name] -%}
+              <tr>
+                <th>{{ characteristic_name }}</th>
+                {%- for item in product.metafields.custom_fields["compare_products_list"] -%}
+                  {%- if item["compare_product"] != blank -%}
+                    {%- assign product_key_name = "product_characteristic_" | append: i -%}
+                    {%- assign characteristic_text = item[product_key_name] -%}
+                    <td>
+                      <div class="pdpCompare__table-td">
+                        {{ characteristic_text }}
+                      </div>
+                    </td>
+                  {%- endif -%}
+                {%- endfor -%}
+              </tr>
+            {%- endfor -%}
+            </tbody>
+          </table>
+
+        <div class="pdpCompare__tabs">
+          <ul class="pdpCompare__tabsList">
+            {%- for item in product.metafields.custom_fields["compare_products_list"] -%}
+              {%- assign _product = all_products[item["compare_product"]] -%}
+              <li>
+                <button class="pdpCompare__tabButton"
+                        type="button"
+                        data-action="toggle-tab"
+                        aria-controls="tab-{{ _product.id | append: forloop.index }}"
+                        aria-label="Tab button"
+                        {% if forloop.first != blank %} aria-selected="true"{% endif %}
+                        role="tab">
+                  {{ _product.title }}
+                </button>
+              </li>
+            {%- endfor -%}
+          </ul>
+        </div>
+
+        <div class="pdpCompare__tabsProducts-wrapper">
+          {%- for item in product.metafields.custom_fields["compare_products_list"] -%}
+          {%- assign _product = all_products[item["compare_product"]] -%}
+          {%- assign _product_image = _product.featured_image | img_url: 'master' -%}
+
+            {%- if _product != blank -%}
+              <div id="tab-{{ _product.id | append: forloop.index }}"
+                   data-tab="tab-{{ _product.id | append: forloop.index }}"
+                   {% if forloop.first != blank %} aria-selected="true"{% endif %}>
+
+                {%- if item["compare_product_image"] != blank -%}
+                  {%- assign _product_image = item["compare_product_image"] -%}
+                {%- endif -%}
+
+                <div class="pdpCompare__tabsProductsImage rel">
+                  {% include 'component-image' with
+                    src: _product_image,
+                    alt: _product.title,
+                    className: 'image image-abs-cover',
+                    absolute: true,
+                    fill: true %}
+                </div>
+                <h3 class="pdpCompare__tabsProductsTitle">{{ _product.title }}</h3>
+                {%- for i in (1..6) -%}
+                  {%- assign key_name = i | append: "_characteristic" -%}
+                  {%- assign characteristic_name = product.metafields.custom_fields[key_name] -%}
+                  {%- assign product_key_name = "product_characteristic_" | append: i -%}
+                  {%- assign characteristic_text = item[product_key_name] -%}
+                  <h3 class="pdpCompare__tabsProductsSettings">{{ characteristic_name }}</h3>
+                  <div class="pdpCompare__tabsProductsDescription">{{ characteristic_text }}</div>
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+
+        </div>
+
+      </div>
+    </section>
+  {% endif %}
+{% endif %}

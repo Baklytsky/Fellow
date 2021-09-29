@@ -3,7 +3,7 @@
 {% assign comparePrice = product.compare_at_price | money %}
 
 {% assign image_url = product_image_url %}
-{% if image_url == blank or image_url.size < 1%}
+{% if image_url == blank or image_url.size < 1 %}
   {% assign image_url = product_image | default: product.featured_image | img_url: '300x' %}
 {% endif %}
 
@@ -38,11 +38,11 @@
 {%- endcapture -%}
 
 <div class='productCard productCard--{{ product.title | handleize }} {{ cx }}' data-component='productCard'>
-  <div class='productCard__content y {{ content_cx }}'>
+  <div class='productCard__content y {{ content_cx }}' data-image-url="{{ image_url }}">
     {% include 'product-card-image',
       hide_variants: hide_variants,
-      image_url: image_url
-      alt: alt
+      image_url: image_url,
+      alt: alt,
       transparent_image: transparent_image
     %}
     {% include 'product-card-details', large_title: large_title %}
