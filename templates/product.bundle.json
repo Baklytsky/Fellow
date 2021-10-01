@@ -1,11 +1,16 @@
 {
   "sections": {
+    "bar": {
+      "type": "product-bar",
+      "settings": {}
+    },
     "main": {
       "type": "product-template-bundle",
       "settings": {}
     }
   },
   "order": [
+    "bar",
     "main"
   ]
 }

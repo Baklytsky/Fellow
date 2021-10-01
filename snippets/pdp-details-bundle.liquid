@@ -25,18 +25,21 @@
       <div class=' f jcb aic'>
         <h1 class='pdpCopy__header-title'>{{ product.title }}</h1>
         <h2 data-selected-var-price class="ml1 visually-hidden">{{ current_variant.price | money | remove: '.00' }}</h2>
-        <div class="pdpCopy__price hide-mobile">
+        <div class="pdpCopy__price hide-mobile f aic">
           {% if product.available %}
           {% if product.compare_at_price > product.price %}
           {% comment %}
             Product is available and on sale
           {% endcomment %}
           {% comment %} <strong> tag added to satisfy compliance concern -ae 03.23.21 {% endcomment %}
+            <span class="inline-block strike card__price--regular ml1 pdpCopy__header-price pdpCopy__header-price-small rel">
+              {{ current_variant.compare_at_price | money_without_trailing_zeros }}
+              <div class="price-round-arrow">{% render 'icon' with 'round-arrow' %}</div>
+            </span>
+            <span class="visually-hidden">{{ 'products.current_variant.regular_price' | t }}</span>
             <h2 class="inline-block card__price--sale ml1 pdpCopy__header-price">
               {{ current_variant.price | money_without_trailing_zeros }}
             </h2>
-            <span class="visually-hidden">{{ 'products.current_variant.regular_price' | t }}</span>
-            <strong class="inline-block strike card__price--regular ml1 pdpCopy__header-price">{{ current_variant.compare_at_price | money_without_trailing_zeros }}</strong>
             {% else %}
               {% comment %}
                 Product is available and not on sale
@@ -65,11 +68,14 @@
           Product is available and on sale
         {% endcomment %}
         {% comment %} <strong> tag added to satisfy compliance concern -ae 03.23.21 {% endcomment %}
+          <span class="inline-block strike card__price--regular ml1 pdpCopy__header-price pdpCopy__header-price-small rel">
+              {{ current_variant.compare_at_price | money_without_trailing_zeros }}
+              <div class="price-round-arrow">{% render 'icon' with 'round-arrow' %}</div>
+            </span>
+          <span class="visually-hidden">{{ 'products.current_variant.regular_price' | t }}</span>
           <h2 class="inline-block card__price--sale ml1 pdpCopy__header-price">
             {{ current_variant.price | money_without_trailing_zeros }}
           </h2>
-          <span class="visually-hidden">{{ 'products.current_variant.regular_price' | t }}</span>
-          <strong class="inline-block strike card__price--regular ml1 pdpCopy__header-price">{{ current_variant.compare_at_price | money_without_trailing_zeros }}</strong>
           {% else %}
             {% comment %}
               Product is available and not on sale
@@ -88,6 +94,7 @@
         {{ form | payment_terms }}
       </div>
     </div>
+    {% include 'pdp-bundle-description' %}
     {% include 'pdp-details-form-bundle' %}
   {% endform %}
 

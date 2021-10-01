@@ -1,0 +1,43 @@
+{%- assign bundle_description_heading = product.metafields.custom_fields["bundle_description_heading"] -%}
+{%- assign bundle_description_items = product.metafields.custom_fields["bundle_description_items"] -%}
+
+{%- if bundle_description_items != blank -%}
+  <div class="bundleDescription">
+    {%- if bundle_description_heading != blank -%}
+      <h3 class="bundleDescription__Heading">{{ bundle_description_heading }}</h3>
+    {%- endif -%}
+
+    {%- for item in bundle_description_items -%}
+      {%- assign bundle_description_icon = item["bundle_description_icon"] -%}
+      {%- assign bundle_description_title = item["bundle_description_title"] -%}
+      {%- assign bundle_description_title_link = item["bundle_description_title_link"] -%}
+      {%- assign bundle_description_title_subtitle = item["bundle_description_subtitle"]  -%}
+
+      <div class="bundleDescription__Content f aic">
+        {% if bundle_description_icon != blank %}
+          <div class="bundleDescription__ContentImage rel">
+              {% include 'component-image' with
+                  src: bundle_description_icon,
+                  alt: bundle_description_title,
+                  className: 'image image-abs-cover',
+                  absolute: true,
+                  fill: true %}
+          </div>
+        {% endif %}
+        {% if bundle_description_title != blank or bundle_description_title_subtitle != blank %}
+          <div class="bundleDescription__ContentText">
+            {%- if bundle_description_title_link != blank -%}
+              <a href="{{ bundle_description_title_link }}" class="bundleDescription__ContentTitle">{{ bundle_description_title }}</a>
+            {%- else -%}
+              <h4 class="bundleDescription__ContentTitle">{{ bundle_description_title }}</h4>
+            {%- endif -%}
+            {%- if bundle_description_title_subtitle != blank -%}
+              <p class="bundleDescription__ContentSubTitle">{{ bundle_description_title_subtitle }}</p>
+            {%- endif -%}
+          </div>
+        {% endif %}
+      </div>
+    {%- endfor -%}
+  </div>
+{%- endif -%}
+
