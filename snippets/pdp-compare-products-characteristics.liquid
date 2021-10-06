@@ -41,11 +41,12 @@
 
                 <th>
                   <div class="pdpCompare__table-th">
-                    <h3 class="pdpCompare__table-productTitle">{{ _product.title }}</h3>
+                    <a href="{{ _product.url }}" class="pdpCompare__table-productTitle">{{ _product.title }}</a>
                     <div class="pdpCompare__table-productImage rel">
                       {% include 'component-image' with
                         src: _product_image,
                         alt: _product.title,
+                        href: _product.url,
                         className: 'image image-abs-cover',
                         absolute: true,
                         fill: true %}
@@ -60,20 +61,22 @@
             {%- for i in (1..6) -%}
               {%- assign key_name = i | append: "_characteristic" -%}
               {%- assign characteristic_name = product.metafields.custom_fields[key_name] -%}
-              <tr>
-                <th>{{ characteristic_name }}</th>
-                {%- for item in product.metafields.custom_fields["compare_products_list"] -%}
-                  {%- if item["compare_product"] != blank -%}
-                    {%- assign product_key_name = "product_characteristic_" | append: i -%}
-                    {%- assign characteristic_text = item[product_key_name] -%}
-                    <td>
-                      <div class="pdpCompare__table-td">
-                        {{ characteristic_text }}
-                      </div>
-                    </td>
-                  {%- endif -%}
-                {%- endfor -%}
-              </tr>
+              {%- if characteristic_name != blank -%}
+                <tr>
+                  <th>{{ characteristic_name }}</th>
+                  {%- for item in product.metafields.custom_fields["compare_products_list"] -%}
+                    {%- if item["compare_product"] != blank -%}
+                      {%- assign product_key_name = "product_characteristic_" | append: i -%}
+                      {%- assign characteristic_text = item[product_key_name] -%}
+                      <td>
+                        <div class="pdpCompare__table-td">
+                          {{ characteristic_text }}
+                        </div>
+                      </td>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </tr>
+              {%- endif -%}
             {%- endfor -%}
             </tbody>
           </table>
@@ -115,11 +118,12 @@
                   {% include 'component-image' with
                     src: _product_image,
                     alt: _product.title,
+                    href: _product.url,
                     className: 'image image-abs-cover',
                     absolute: true,
                     fill: true %}
                 </div>
-                <h3 class="pdpCompare__tabsProductsTitle">{{ _product.title }}</h3>
+                <a href="{{ _product.url }}" class="pdpCompare__tabsProductsTitle">{{ _product.title }}</a>
                 {%- for i in (1..6) -%}
                   {%- assign key_name = i | append: "_characteristic" -%}
                   {%- assign characteristic_name = product.metafields.custom_fields[key_name] -%}

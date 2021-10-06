@@ -36,6 +36,7 @@ body {
   font-family: $font-base;
   font-size: 14px;
   -webkit-tap-highlight-color: transparent;
+  overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -900,12 +901,24 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .slick-dots {
-  width: 100%;
+  width: fit-content;
+  width: -moz-fit-content;
+  max-width: 100%;
   padding: 12px 16px;
+  margin: 0 auto;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-wrap: nowrap;
   align-items: center;
+  overflow-x: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  ::-webkit-scrollbar {
+    display: none;
+  }
 
   li {
     margin: 4px;
@@ -2335,6 +2348,20 @@ img.BlogSectionArticle__Image {
   }
 }
 
+.pdpMain__Media {
+  @media screen and (min-width: $tablet) {
+    flex: 0 0 59.3%;
+    max-width: 59.3%;
+  }
+}
+
+.pdpMain__Content {
+  @media screen and (min-width: $tablet) {
+    flex: 0 0 40.7%;
+    max-width: 40.7%;
+  }
+}
+
 .pdpMain__gallery-wrapper {
   margin-bottom: -16px;
   padding: 0 24px;
@@ -2352,7 +2379,7 @@ img.BlogSectionArticle__Image {
 .pdpMain__gallery-thumbnails {
   width: 100%;
   max-width: 92px;
-  height: 590px;
+  height: 610px;
   position: sticky;
   top: calc(var(--header-height) + 24px);
   display: block;
@@ -2373,9 +2400,9 @@ img.BlogSectionArticle__Image {
 
   .pdpMain__gallery-thumbnails-item {
     width: 100%;
-    height: 88px;
     cursor: pointer;
     transition: all .2s linear;
+    padding-top: calc(100% - 4px);
 
     &:hover {
       border: 2px solid #F5F5F5;
@@ -2510,13 +2537,39 @@ h2.pdpCopy__header-price ,
       font-weight: normal;
       font-size: 14px;
     }
+
+    [data-disabled-size="true"] {
+      visibility: hidden;
+      opacity: 0;
+    }
   }
 
-  .cart__button {
+  .pdpDetails__btns {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    @media screen and (max-width: $mobile) {
+      flex-direction: column-reverse;
+    }
+
+    [data-bis] {
+      margin-right: 16px;
+
+      @media screen and (max-width: $mobile) {
+        margin-right: 0;
+      }
+    }
+  }
+
+  .cart__button--select-size,
+  .cart__button,
+  .customize-btn {
     max-width: 320px;
     padding: 13px 20px;
-    margin: 16px 0;
-    border-radius: 15px;
+    margin: 16px 16px 16px 0;
+    border-radius: 12px;
     outline: none;
     font-family: 'Inter', sans-serif;
     font-style: normal;
@@ -2527,8 +2580,58 @@ h2.pdpCopy__header-price ,
 
     @media screen and (max-width: $mobile) {
       max-width: 100%;
+      margin: 12px 0;
     }
   }
+
+  .customize-btn {
+    width: 100%;
+    max-width: 220px;
+    padding: 13px 25px;
+    margin: 16px 0 16px 0;
+    font-size: 16px;
+    white-space: nowrap;
+    border: 2px solid #000000;
+    box-sizing: border-box;
+    color: #000000;
+    background-color: transparent;
+
+    @media screen and (max-width: $mobile) {
+      max-width: 100%;
+      font-size: 18px;
+      line-height: 24px;
+    }
+
+    &:hover {
+      background-color: #000000;
+      color: #FFFFFF;
+    }
+  }
+
+  .cart__button--select-size {
+    display: none;
+    width: 100%;
+    background-color: #ABABAB;
+    color: $color-white;
+  }
+
+  .pdpDetails__btns[data-disabled-size='true'] {
+    #pdp-atc,
+    #quickAdd,
+    [data-bis] {
+      display: none !important;
+    }
+
+    .cart__button--select-size {
+      display: block;
+    }
+  }
+}
+
+#ProductQuickView {
+ .cart__button--select-size {
+   margin: 0;
+ }
 }
 
 .dropdown {
@@ -2550,7 +2653,7 @@ h2.pdpCopy__header-price ,
   }
 
   .dropdownContent {
-    padding: 0 24px 24px;
+    padding: 0 24px 8px;
     font-size: 14px;
     line-height: 120%;
 
@@ -2561,17 +2664,27 @@ h2.pdpCopy__header-price ,
     h1,h2,h3,h4,h5,h6,a,p {
       font-size: 14px;
       line-height: 120%;
+      margin: 0 0 16px 0;
+    }
+
+    em {
+      font-style: normal;
+      margin: 0 0 8px 0;
     }
   }
 
   .dropdownContent--animate-block {
     opacity: 0;
+    -webkit-transition: opacity .5s cubic-bezier(.215,.61,.355,1),visibility .5s cubic-bezier(.215,.61,.355,1);
+    -o-transition: opacity .5s cubic-bezier(.215,.61,.355,1),visibility .5s cubic-bezier(.215,.61,.355,1);
     transition: opacity .5s cubic-bezier(.215,.61,.355,1),visibility .5s cubic-bezier(.215,.61,.355,1);
     visibility: hidden;
   }
 
   .dropdownContent--animate-block-visible {
     opacity: 1;
+    -webkit-transition: opacity .8s cubic-bezier(.215,.61,.355,1) .4s,visibility .8s cubic-bezier(.215,.61,.355,1) .4s;
+    -o-transition: opacity .8s cubic-bezier(.215,.61,.355,1) .4s,visibility .8s cubic-bezier(.215,.61,.355,1) .4s;
     transition: opacity .8s cubic-bezier(.215,.61,.355,1) .4s,visibility .8s cubic-bezier(.215,.61,.355,1) .4s;
     visibility: visible;
 
@@ -2594,7 +2707,7 @@ h2.pdpCopy__header-price ,
 }
 
 .pdpInfo {
-  margin-top: 16px;
+  margin-top: 28px;
 }
 .pdpInfo-item {
   margin-bottom: 16px;
@@ -2645,26 +2758,47 @@ h2.pdpCopy__header-price ,
     margin: 0 auto 24px;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1, h2, h3 {
     margin: 0 0 24px 0;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 72px;
     line-height: 100%;
 
+    @media screen and (max-width: $large_desk) {
+      font-size: 62px;
+      margin: 0 0 16px 0;
+    }
+
     @media screen and (max-width: $tablet) {
       font-size: 56px;
-      margin: 0 0 16px 0;
     }
   }
 
-  p {
+
+  h4, h5, h6, p {
     font-size: 20px;
     line-height: 120%;
     margin: 0 0 16px 0;
+    font-weight: 400;
+
+    @media screen and (max-width: $large_desk) {
+      font-size: 18px;
+    }
 
     @media screen and (max-width: $tablet) {
       font-size: 16px;
       line-height: 130%;
+    }
+  }
+
+  h4, h5, h6 {
+    font-family: $font-base;
+    font-weight: 600;
+    margin: 0;
+
+    @media screen and (max-width: $tablet) {
+      margin: 0 0 16px 0;
+      line-height: 120%;
     }
   }
 
@@ -2716,6 +2850,14 @@ h2.pdpCopy__header-price ,
       max-width: 100%;
     }
   }
+
+  .video-section__load-player-button {
+    width: 48px;
+
+    @media screen and (max-width: $tablet) {
+      width: 46px;
+    }
+  }
 }
 
 .pdpStickyBar {
@@ -2728,6 +2870,7 @@ h2.pdpCopy__header-price ,
   background-color: #fff;
   box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
   z-index: 10;
+  outline: none;
 
   .pdpStickyBar__wrapper {
     padding: 16px 30px;
@@ -2746,11 +2889,16 @@ h2.pdpCopy__header-price ,
     line-height: 100%;
   }
 
+  .card__price--regular {
+    color: #ABABAB;
+  }
+
   .pdp__options {
     padding-right: 64px;
   }
 
   #pdp-sticky-atc {
+    min-width: 218px;
     margin: 0;
   }
 
@@ -2767,6 +2915,29 @@ h2.pdpCopy__header-price ,
   [data-option-color] .radio {
     &:not(:last-child) {
       margin-right: 20px;
+    }
+  }
+
+  .cart__button {
+    font-size: 16px;
+  }
+
+  .cart__button--select-size {
+    margin: 0;
+    min-width: 218px;
+
+    &:hover {
+      border-color: transparent;
+    }
+  }
+
+  [data-disabled-size="true"] {
+    #pdp-sticky-atc {
+      display: none;
+    }
+
+    .cart__button--select-size {
+      display: block;
     }
   }
 }
@@ -2857,6 +3028,15 @@ h2.pdpCopy__header-price ,
     }
   }
 
+  .option-groups-size[data-disabled-size="true"] {
+    .radio.checked {
+      .radio__title {
+        color: #000000;
+        background-color: #e7e8e6;
+      }
+    }
+  }
+
   .option-groups__group {
     padding: 0;
   }
@@ -2867,12 +3047,12 @@ h2.pdpCopy__header-price ,
 }
 
 .pdpStickyBar {
-  @media screen and (max-width: $tablet) {
+  @media screen and (max-width: $large_desk) {
     top: unset;
     bottom: 0;
 
     .pdpStickyBar__wrapper {
-      padding: 6px 16px;
+      padding: 16px;
       justify-content: center;
     }
 
@@ -2880,7 +3060,8 @@ h2.pdpCopy__header-price ,
       padding-right: 20px;
     }
 
-    #pdp-sticky-atc {
+    #pdp-sticky-atc,
+    .cart__button--select-size {
       min-width: 167px;
     }
 
@@ -3080,6 +3261,8 @@ h2.pdpCopy__header-price ,
     padding-left: 64px;
     display: none;
   }
+
+  .dropdownContent--animate-block-visible p,
   p {
     margin: 0;
     font-size: 16px;
@@ -3116,7 +3299,7 @@ h2.pdpCopy__header-price ,
 .pdpJumboSlider {
   height: 53vw;
   padding: 0 !important;
-  margin: 34px 0 0 0;
+  margin: 34px 0 -1px 0;
 
   .slider__controls {
     padding: 50px;
@@ -3272,9 +3455,9 @@ h2.pdpCopy__header-price ,
 }
 
 .pdpRelatedProducts {
-  max-width: calc(1376px + 68px);
+  max-width: 1440px;
   margin: 64px auto;
-  padding: 0 34px;
+  overflow: hidden;
 
   @media screen and (max-width: $tablet) {
     padding: 0 16px;
@@ -3282,11 +3465,16 @@ h2.pdpCopy__header-price ,
 
   .relatedProducts__title {
     margin: 0 0 24px 0;
+    padding: 0 34px;
     font-size: 48px;
     line-height: 100%;
 
     @media screen and (max-width: $tablet) {
       font-size: 40px;
+    }
+
+    @media screen and (max-width: $mobile) {
+      padding: 0;
     }
   }
 
@@ -3355,13 +3543,13 @@ h2.pdpCopy__header-price ,
 
   .heroSection__copy {
     h1,h2,h3,h4,h5,h6 {
-      margin-bottom: 20px;
+      margin: 0 0 20px 0;
       font-weight: normal;
       font-size: 72px;
       line-height: 100%;
 
       @media screen and (max-width: $tablet) {
-        margin-bottom: 16px;
+        margin: 0 0 16px 0;
         font-weight: 500;
         font-size: 56px;
         line-height: 100%;
@@ -3647,6 +3835,7 @@ h2.pdpCopy__header-price ,
 }
 
 .pdpImgCollection__content-subheading {
+  font-family: $font-base;
   margin: 0 0 16px;
   font-weight: bold;
   font-size: 16px;
@@ -3674,6 +3863,7 @@ h2.pdpCopy__header-price ,
   margin: 0 0 32px;
   font-size: 20px;
   line-height: 120%;
+  font-weight: 400;
 
   @media screen and (max-width: $large_desk) {
     margin: 0 0 48px;
@@ -3708,10 +3898,12 @@ h2.pdpCopy__header-price ,
 }
 
 .pdpImgCollection__slider-wrapper {
-  width: 48%;
+  width: 55.5%;
+  padding: 0 4.5%;
 
   @media screen and (max-width: $large_desk) {
     width: 70%;
+    padding: 0;
   }
 
   @media screen and (max-width: $tablet) {
@@ -3728,18 +3920,32 @@ h2.pdpCopy__header-price ,
     color: inherit;
     background-color: transparent;
     z-index: 1;
-
-    @media screen and (max-width: $tablet) {
-      display: none;
-    }
   }
 
   .jsPrevSlide {
-    left: -53px;
+    left: 0;
+
+    @media screen and (max-width: $large_desk) {
+      left: -50px;
+    }
+
+    @media screen and (max-width: $tablet) {
+      left: 25px;
+      color: #000000;
+    }
   }
 
   .jsNextSlide {
-    right: -53px;
+    right: 0;
+
+    @media screen and (max-width: $large_desk) {
+      right: -50px;
+    }
+
+    @media screen and (max-width: $tablet) {
+      right: 25px;
+      color: #000000;
+    }
   }
 }
 
@@ -3773,7 +3979,8 @@ h2.pdpCopy__header-price ,
 }
 
 .pdpCompare__table {
-  margin-top: 50px;
+  width: 100%;
+  margin-top: 24px;
   border-collapse: collapse;
 
   @media screen and (max-width: $large_desk) {
@@ -3801,20 +4008,21 @@ h2.pdpCopy__header-price ,
     }
   }
 
-  tr, td {
-    border-bottom: 2px solid #DBDBDB;
+  tbody {
+    tr, td {
+      border-bottom: 2px solid #DBDBDB;
+    }
   }
 
-  tr:first-child {
-    border: none;
-    td {
-      border: none;
+  thead {
+    th {
+      padding: 16px 24px 8px 0;
     }
   }
 }
 
 .pdpCompare__table-th {
-  max-width: 320px;
+  max-width: 326px;
   height: inherit;
   display: flex;
   flex-direction: column;
@@ -3822,10 +4030,11 @@ h2.pdpCopy__header-price ,
 }
 
 .pdpCompare__table-td {
-  max-width: 320px;
+  max-width: 326px;
 }
 
 .pdpCompare__table-productTitle {
+  font-family: $font-header;
   margin: 0 0 16px;
   font-weight: 500;
   font-size: 26px;
@@ -3835,7 +4044,7 @@ h2.pdpCopy__header-price ,
 
 .pdpCompare__table-productImage {
   width: 100%;
-  max-width: 320px;
+  max-width: 326px;
   padding-top: 100%;
   background-color: $color-dim-white;
 }
@@ -3862,7 +4071,7 @@ h2.pdpCopy__header-price ,
 
 .pdpCompare__table-four {
   th, td {
-    width: 25%;
+    width: 25.5%;
   }
 
   thead tr th:first-child {
@@ -3870,8 +4079,8 @@ h2.pdpCopy__header-price ,
   }
 
   thead tr th:last-child {
-    width: 33%;
-    padding-right: calc(8% + 24px);
+    width: 31.5%;
+    padding-right: calc(6% + 24px);
   }
 
   tbody tr th {
@@ -3879,8 +4088,8 @@ h2.pdpCopy__header-price ,
   }
 
   tbody tr td:last-child {
-    width: 33%;
-    padding-right: calc(8% + 24px);
+    width: 31.5%;
+    padding-right: calc(6% + 24px);
   }
 }
 
@@ -3904,6 +4113,7 @@ h2.pdpCopy__header-price ,
 }
 
 .pdpCompare__tabsProductsTitle {
+  font-family: $font-header;
   margin: 24px 0 16px;
   font-weight: 500;
   font-size: 24px;
@@ -3963,15 +4173,16 @@ h2.pdpCopy__header-price ,
 
 .bundleDescription {
   padding: 24px;
-  margin-bottom: 16px;
+  margin: 32px 0 16px;
   background-color: $color-dim-white;
 
   @media screen and (max-width: $tablet) {
-    margin-bottom: 24px;
+    margin: 40px 0 24px;
   }
 }
 
 .bundleDescription__Heading {
+  font-family: $font-base;
   margin: 0 0 16px 0;
   font-weight: 500;
   font-size: 20px;
@@ -3983,10 +4194,19 @@ h2.pdpCopy__header-price ,
   }
 }
 
+.bundleDescription__Content:not(:last-child) {
+  margin-bottom: 16px;
+}
+
 .bundleDescription__ContentImage {
   margin-right: 16px;
   width: 56px;
   height: 56px;
+
+  @media screen and (max-width: $tablet) {
+    width: 48px;
+    height: 48px;
+  }
 }
 
 .bundleDescription__ContentTitle,
@@ -3999,9 +4219,10 @@ h2.pdpCopy__header-price ,
 .bundleDescription__ContentTitle {
   margin: 0 0 8px 0;
   text-decoration: underline;
+  display: inline-block;
 }
 
-.bundleDescription__ContentTitle {
+.bundleDescription__ContentSubTitle {
   margin: 0;
 }
 
@@ -4115,7 +4336,7 @@ h2.pdpCopy__header-price ,
 .pdpBundleInclude__descriptionTitle {
   margin: 0 0 16px;
   font-family: $font-base;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 20px;
   line-height: 120%;
   padding-right: 10px;
@@ -4135,6 +4356,19 @@ h2.pdpCopy__header-price ,
 
   @media screen and (max-width: $tablet) {
     margin: 8px 0 0;
+  }
+}
+
+.pdpBundleInclude__descriptionLink--desktop {
+  @media screen and (max-width: $large_desk) {
+    display: none;
+  }
+}
+
+.pdpBundleInclude__descriptionLink--mobile {
+  display: none;
+  @media screen and (max-width: $large_desk) {
+    display: block;
   }
 }
 
@@ -4172,7 +4406,12 @@ h2.pdpCopy__header-price ,
 }
 
 .pdpBundleInclude__featureItemText {
-  font-weight: 500;
+  font-weight: 600;
   font-size: 20px;
   line-height: 120%;
+
+  @media screen and (max-width: $large_desk) {
+    font-weight: 400;
+    font-size: 14px;
+  }
 }

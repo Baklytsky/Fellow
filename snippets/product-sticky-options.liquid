@@ -1,4 +1,5 @@
 <div class='pdp__options rel f1 f jce aic'>
+  {%- assign product_has_size_option = false -%}
   {%- unless template contains 'bundle' -%}
     <div {% if product.has_only_default_variant or product.variants.size <= 1 %}style='display:none'{% else %} class="pdp__sticky-options" {% endif %}>
       {% for option in product.options_with_values %}
@@ -26,7 +27,13 @@
             {% endif %}
           {% endfor %}
 
-          <div class="option-groups {% if option_name_handle != 'size' %}f ais rel{% else %} option-groups-size{% endif %}">
+          {%- assign option_name_handleize = option.name | handleize -%}
+
+          {%- if option_name_handleize == 'size' -%}
+            {%- assign product_has_size_option = true -%}
+          {%- endif -%}
+
+          <div class="option-groups {% if option_name_handle != 'size' %}f ais rel{% else %} option-groups-size{% endif %}" {% if product_has_size_option %}data-disabled-size="true"{% endif %}>
             {% for group in option_group_names %}
               <div class="option-groups__group x">
                 {%- comment -%}

@@ -259,19 +259,30 @@
                 {%- endcapture -%}
 
                 {%- assign cta_data = product.selected_or_first_available_variant.id | prepend: 'data-add-id="' | append: '" data-add-qty="1"' -%}
+                  <div class="pdpDetails__btns" data-disabled-size="{{ product_has_size_option }}">
 
-                {%
-                  include 'component-button' with
-                  tag: 'button',
-                  id: 'quickAdd',
-                  name: 'add',
-                  type: 'submit',
-                  href: '#',
-                  className: 'cart__button',
-                  dataAttr: cta_data,
-                  disabled: disableVal,
-                  cta: cta,
-                %}
+                    {%- if product_has_size_option -%}
+                      <button type="button" class="cart__button--select-size" disabled>Select size</button>
+                    {%- endif -%}
+
+                    {%
+                      include 'component-button' with
+                      tag: 'button',
+                      id: 'quickAdd',
+                      name: 'add',
+                      type: 'submit',
+                      href: '#',
+                      className: 'cart__button',
+                      dataAttr: cta_data,
+                      disabled: disableVal,
+                      cta: cta,
+                    %}
+
+                    <div class='is-hidden' data-bis>
+                      <button class='button cart__button klaviyo-bis-trigger'>Out of Stock | Notify Me</button>
+                    </div>
+                  </div>
+
               </div>
               
               <p id="PdpErrorMessage"></p>
@@ -280,10 +291,6 @@
                 <div class='py1'>
                   {{ form | payment_button }}
                 </div>
-              </div>
-
-              <div class='is-hidden' data-bis>
-                <button class='button cart__button klaviyo-bis-trigger'>Out of Stock | Notify Me</button>
               </div>
             </div>
           {% endform %}

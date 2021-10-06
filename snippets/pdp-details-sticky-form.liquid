@@ -47,18 +47,25 @@ Uncomment to include
     {% endif %}
   {%- endcapture -%}
   {% comment %} Add catch for low stock variants {% endcomment %}
-  {%
-    include 'component-button' with
-    tag: 'button',
-    id: 'pdp-sticky-atc',
-    name: 'add',
-    type: 'button',
-    href: '#',
-    className: 'cart__button',
-    dataAttr: '',
-    disabled: disableVal,
-    cta: cta,
-  %}
+    <div class="pdpStickyDetails__btns" data-disabled-size="{{ product_has_size_option }}">
+
+      {%- if product_has_size_option -%}
+        <button type="button" class="cart__button cart__button--select-size">Select size</button>
+      {%- endif -%}
+
+      {%
+        include 'component-button' with
+        tag: 'button',
+        id: 'pdp-sticky-atc',
+        name: 'add',
+        type: 'button',
+        href: '#',
+        className: 'cart__button',
+        dataAttr: '',
+        disabled: disableVal,
+        cta: cta,
+      %}
+    </div>
 </div>
   <div class='none' data-pay-btn>
     <div class='py1'>
