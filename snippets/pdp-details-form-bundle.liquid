@@ -1,0 +1,143 @@
+{% comment %}form start & end moved to pdp-details-main to adjust for shop pay {% endcomment %}
+{% comment %} Always include product-options, product.js:20 reads from it for ATC {% endcomment %}
+{% include 'product-options' %}
+{%- assign product_bundles_array = product.metafields.custom_fields["bundle_products_group"] -%}
+{%- assign variant_bundles_array = product.metafields.custom_fields["bundle_variants_id"] -%}
+
+{%- assign component_button_id = 'pdp-atc' -%}
+
+{% if section.settings.quantity_selector_inline != true %}
+  <div class='pb15' {% if section.settings.show_quantity_selector !=true or product.tags contains 'gift' %}style='display:none'{% endif %}>
+    {% include 'component-counter' %}
+  </div>
+{% endif %}
+
+{% comment %}
+Uncomment to include
+<div class='f aic py1'>
+  <span data-selected-var-price>{{ current_variant.price | money }}</span>
+  <s data-compare-price style='display: none'>{{ current_variant.compare_at_price | money }}</s>
+</div>
+{% endcomment %}
+
+{%- assign available_bundle_product = true -%}
+{%- assign available_bundle_variant = true -%}
+
+{% if product_bundles_array != blank %}
+  {%- assign component_button_id = 'pdp-bundle-atc' -%}
+  {% assign product_bundles = product_bundles_array | split: "|" %}
+  <ul class="bundle-products is-hidden">
+    {% if variant_bundles_array != blank %}
+      {% assign variant_bundles = variant_bundles_array | split: "," %}
+    {% endif %}
+    {% for product_handle in product_bundles %}
+      {%- assign has_selected_variant_id = false -%}
+      {% assign _product = all_products[product_handle] %}
+
+      {%- if _product != blank -%}
+        {%- for variant in _product.variants -%}
+          {%- assign variant_id = variant.id | times: 1 -%}
+          {%- for bundle_variant_id in variant_bundles -%}
+            {%- assign bundle_id = bundle_variant_id | times: 1 -%}
+            {%- if variant_id == bundle_id -%}
+              {%- unless variant.available -%}
+              {%- assign available_bundle_variant = false -%}
+              {%- endunless -%}
+              <li
+                      id='{{ variant.id }}'
+                      data-variant-available="{{ variant.available }}"
+                      data-variant-price='{{ variant.price | money | remove: ".00" }}'
+                      data-variant-inventory-quantity='{{ variant.inventory_quantity }}'
+                      data-variant-inventory-policy='{{ variant.inventory_policy }}'
+                      data-variant-inventory-management='{{ variant.inventory_management }}'
+                      data-product-title='{{ _product.title }}'>
+                {{ variant.title }}
+              </li>
+              {%- assign has_selected_variant_id = true -%}
+              {% break %}
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endfor -%}
+
+        {%- unless has_selected_variant_id -%}
+        {%- assign current_bundle_variant = _product.selected_or_first_available_variant -%}
+          {%- unless current_bundle_variant.available -%}
+          {%- assign available_bundle_variant = false -%}
+          {%- endunless -%}
+          <li
+                  id='{{ current_bundle_variant.id }}'
+                  data-variant-available="{{ current_bundle_variant.available }}"
+                  data-variant-price='{{ current_bundle_variant.price | money | remove: ".00" }}'
+                  data-variant-inventory-quantity='{{ current_bundle_variant.inventory_quantity }}'
+                  data-variant-inventory-policy='{{ current_bundle_variant.inventory_policy }}'
+                  data-variant-inventory-management='{{ current_bundle_variant.inventory_management }}'
+                  data-product-title='{{ _product.title }}'>
+            {{ current_bundle_variant.title }}
+          </li>
+        {% endunless %}
+      {%- else -%}
+        {%- assign available_bundle_product = false -%}
+      {%- endif -%}
+
+    {% endfor %}
+  </ul>
+{% endif %}
+
+{% if template contains 'gift_card' %}
+  <div class='f fdc jcb' id='atc-wrapper'>
+{% else %}
+  <div class='f fdr jcb' id='atc-wrapper'>
+{% endif %}
+  {% unless template contains 'gift_card' %}
+    {% if section.settings.show_quantity_selector and section.settings.quantity_selector_inline %}
+      <div class="f is-inline">
+        {% include 'component-counter' %}
+      </div>
+    {% endif %}
+  {% endunless %}
+  {%- capture cta -%}
+    {% if product.available and available_bundle_variant and available_bundle_product %}
+      <span data-atc-copy class="js-atc-copy">
+        {% if product.tags contains 'preorder' %}
+          Preorder
+        {% else %}
+          Add to Cart
+        {% endif %}
+      </span>
+      {%- comment -%}
+        <span> | </span>
+        <span data-selected-var-price>{{ current_variant.price | money }}</span>
+      {%- endcomment -%}
+
+      {%- assign disableVal = false -%}
+    {% else %}
+      {% if product.tags contains 'discontinued' %}
+        Discontinued
+      {% else %}
+        Out of Stock
+      {% endif %}
+      {%- assign disableVal = true -%}
+    {% endif %}
+  {%- endcapture -%}
+  {% comment %} Add catch for low stock variants {% endcomment %}
+  {%
+    include 'component-button' with
+    tag: 'button',
+    id: component_button_id,
+    name: 'add',
+    type: 'submit',
+    href: '#',
+    className: 'js-add-to-cart cart__button',
+    dataAttr: 'data-atc="true"',
+    disabled: disableVal,
+    cta: cta,
+  %}
+</div>
+  <div class='none' data-pay-btn>
+    <div class='py1'>
+      {{ form | payment_button }}
+    </div>
+  </div>
+<div class='is-hidden' data-bis>
+  <button class='button cart__button klaviyo-bis-trigger'>Out of Stock | Notify Me</button>
+</div>

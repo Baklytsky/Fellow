@@ -1,0 +1,106 @@
+{% if product.metafields.custom_fields["show_features_redesign"] == 1 %}
+  {% comment %}Assign Media Proof Flex Order{% endcomment %}
+  {% assign flex_order = product.metafields.custom_fields["features_redesign_order"] | downcase %}
+  {% if flex_order %}
+    {% unless flex_order == 'default' %}
+    {% assign display_order = flex_order %}
+    {% endunless %}
+  {% endif %}
+
+  {%- assign section_heading = product.metafields.custom_fields["feature_heading"] -%}
+  {%- assign desktop_image = product.metafields.custom_fields["feature_desktop_image"] -%}
+
+  {%- capture 'slick-config' -%}
+  {
+    "slidesToShow": 1,
+    "adaptiveHeight": true,
+    "arrows": false,
+    "dots": true
+  }
+  {%- endcapture -%}
+
+  <section class='pdpFeature {% if display_order %} o-{{ display_order }}{% endif %}'
+           data-section-type='slick-slideshow'
+           data-slick-config='{{- slick-config -}}'>
+    <div class="pdpFeature__wrapper">
+      {%- if section_heading != blank -%}
+        <h3 class="pdpFeature__heading">{{ section_heading }}</h3>
+      {%- endif -%}
+
+      {%- if product.metafields.custom_fields["feature_blocks"] != blank -%}
+        {% for item in product.metafields.custom_fields["feature_blocks"] %}
+          {%- assign logo = item["feature_block_logo"] -%}
+          {%- assign heading = item["feature_block_heading"] -%}
+          {%- assign text = item["feature_block_text"] -%}
+          {%- assign mobile_image = item["feature_block_mobile_image"] -%}
+
+          {%- capture capture_name -%}
+            <div class='pdpFeature__details'>
+              {%- if mobile_image != blank -%}
+                <div class="pdpFeature__mobileImage rel">
+                  {{ mobile_image }}
+                </div>
+              {%- endif -%}
+              {%- if heading != blank or text != blank -%}
+                <div class='pdpFeature__copy {% if forloop.first %}pdpFeature__copy-textEnd{% endif %}'>
+                  {% if logo != blank %}
+                    <div class='pdpFeature__icon x rel'>
+                      {{ logo }}
+                    </div>
+                  {% endif %}
+                  <div class="pdpFeature__copy-wrapper {% if forloop.first %}pdpFeature__copy-textRight{% endif %}">
+                    {%- if heading != blank -%}
+                      <h4 class='pdpFeature__copy-heading'>{{ heading }}</h4>
+                    {%- endif -%}
+                    {%- if text != blank -%}
+                      <p class="pdpFeature__copy-text">{{ text }}</p>
+                    {%- endif -%}
+                  </div>
+                </div>
+              {%- endif -%}
+            </div>
+          {%- endcapture -%}
+
+          {%- case forloop.index -%}
+          {%- when 1 -%}
+          {%- assign feature_block_1 = capture_name -%}
+          {%- when 2 -%}
+          {%- assign feature_block_2 = capture_name -%}
+            {%- else -%}
+          {%- assign feature_block_3 = capture_name -%}
+          {%- endcase -%}
+
+        {%- endfor -%}
+      {%- endif -%}
+
+      {%- if desktop_image != blank or product.metafields.custom_fields["feature_blocks"] != blank -%}
+        <div class="pdpFeature__content pdpFeature__content-desktop">
+          {%- if feature_block_1 != blank -%}
+            <div class="pdpFeature__content-left">
+              {{ feature_block_1 }}
+            </div>
+          {%- endif -%}
+          {%- if desktop_image != blank -%}
+            <div class="pdpFeature__content-image">
+              <div class="pdpFeature__content-imageWrapper x rel">
+                {{ desktop_image }}
+              </div>
+            </div>
+          {%- endif -%}
+          {%- if feature_block_2 != blank or feature_block_3 != blank -%}
+            <div class="pdpFeature__content-right">
+              {{ feature_block_2 }}
+              {{ feature_block_3 }}
+            </div>
+          {%- endif -%}
+        </div>
+
+        <div class="pdpFeature__content pdpFeature__content-mobile jsSlickSlider">
+          {{ feature_block_1 }}
+          {{ feature_block_2 }}
+          {{ feature_block_3 }}
+        </div>
+      {%- endif -%}
+    </div>
+  </section>
+{% endif %}

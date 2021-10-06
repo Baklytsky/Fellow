@@ -1,10 +1,25 @@
-<div class='pdp__options rel'>
+<div class='pdp__options pdp__options-main rel'>
+  {%- assign product_has_size_option = false -%}
   <div {% if product.has_only_default_variant or product.variants.size <= 1 %}style='display:none'{% else %} class="f fdcr" {% endif %}>
     {% for option in product.options_with_values %}
-      <div class='pb1{% if option.values.size <= 1 %} hide{% endif %}' data-option-radio data-index='{{ forloop.index0 }}' data-options-count='{{ option.values.size }}'>
-        <label class='py025' data-option-label='{{ option.name }}'>
+      <div class='{% if option.values.size <= 1 %} hide{% endif %}' data-option-radio data-index='{{ forloop.index0 }}' data-options-count='{{ option.values.size }}'>
+        {% for value in option.values %}
+          {% include 'assign_option_label', option: option, value: value %}
+          {% if option_value_group != blank %}
+            {% assign option_group_arr = option_value_group | split: '|anything-to-make-an-array|' %}
+            {% assign option_group_names = option_group_names | concat: option_group_arr | uniq %}
+          {% endif %}
+        {% endfor %}
+
+        {%- assign option_name_handleize = option.name | handleize -%}
+
+        {%- if option_name_handleize == 'size' -%}
+          {%- assign product_has_size_option = true -%}
+        {%- endif -%}
+
+        <label class='py025 block' data-option-label='{{ option.name }}' {% if option_group_names.size > 2 and option_name_handleize == 'color' %} style="display: none"{% endif %}>
           {% include 'assign_option_label', value: option.selected_value %}
-          <span class='option-title block'><strong>{{ option.name }} : </strong><span data-option-current='{{ option.name }}'>{{ option_value_label }}</span></span>
+          <span class='option-title block'><strong>{% if option_group_names.size <= 2 and option_name_handleize == 'color' %}Classic{% else %}{{ option.name }}{% endif %} : </strong><span data-option-current='{{ option.name }}' {% if option_name_handleize == 'size' %}data-disabled-size="true"{% endif %}>{{ option_value_label }}</span></span>
         </label>
 
         {% assign option_group_names = '' | split: '' %}
@@ -15,12 +30,15 @@
             {% assign option_group_names = option_group_names | concat: option_group_arr | uniq %}
           {% endif %}
         {% endfor %}
-        <div class="option-groups f ais jcs fw rel">
+        <div class="option-groups f ais jcs fw rel" {% if product_has_size_option %} data-disabled-size="true"{% endif %}>
           {% for group in option_group_names %}
-            <div class="option-groups__group x">
+            <div class="option-groups__group pb1 x">
               {% if option_group_names.size > 1 %}
                 <label>
-                  <span class='caps small my05 block'>{{ group }}</span>
+                  {%- comment -%}
+                    <span class='caps small my05 block' data-option-label='{{ option.name }}'>{{ group }}</span>
+                  {%- endcomment -%}
+                  <span class='option-title option-group-title block'><strong>{{ group }} : </strong><span class="option-group-title-value"></span></span>
                 </label>
               {% endif %}
               <div class='radio-group f aic' data-option-{{ option.name | handleize }}>

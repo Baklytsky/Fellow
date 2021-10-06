@@ -22,9 +22,28 @@
       {% endunless %}
     {% endif %}
 
-    <section class='module full no-gutters full heroSection{% if display_order %} o-{{ display_order }}{% endif %}' data-component='pdp-hero'>
-      <div class='row no-gutters aic'>
-        <div class='col-lg-6'>
+    {% if product.metafields.custom_fields["hero_module_bg_color"] != blank %}
+      {%- assign section_bg_color = product.metafields.custom_fields["hero_module_bg_color"] -%}
+    {% endif %}
+
+    {% if product.metafields.custom_fields["hero_module_text_color"] != blank %}
+      {%- assign section_text_color = product.metafields.custom_fields["hero_module_text_color"] -%}
+    {% endif %}
+
+    {% if product.metafields.custom_fields["enable_round_image"] == 1 %}
+      {%- assign enable_round_image = true -%}
+    {% endif %}
+
+    <section class='heroSection{% if display_order %} o-{{ display_order }}{% endif %}'
+             data-component='pdp-hero'
+             style="background-color: {{ section_bg_color }}; color: {{ section_text_color }}">
+      <div class='heroSection__wrapper'>
+        <div class='heroSection__text-block x'>
+          <div class='heroSection__copy rte'>
+            {{ hero_copy }}
+          </div>
+        </div>
+        <div class='heroSection__image-block x {% if enable_round_image and hero_media_type != 'Video' %} heroSection__image-block-round{% endif %}'>
           {% if hero_media_type == 'Video' %}
             <video class='heroSection__image x y fill' autoplay muted loop playsinline controls>
               {% if hero_media_webm != blank %}
@@ -45,11 +64,6 @@
               %}
             {% endunless %}
           {% endif %}
-        </div>
-        <div class='col-lg-4 offset-lg-1'>
-          <div class='heroSection__copy rte'>
-            {{ hero_copy }}
-          </div>
         </div>
       </div>
     </section>

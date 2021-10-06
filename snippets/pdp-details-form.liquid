@@ -19,7 +19,7 @@ Uncomment to include
 {% if template contains 'gift_card' %}
   <div class='f fdc jcb' id='atc-wrapper'>
 {% else %}
-  <div class='f fdr jcb' id='atc-wrapper'>
+  <div class='f fdr fw' id='atc-wrapper'>
 {% endif %}
   {% unless template contains 'gift_card' %}
     {% if section.settings.show_quantity_selector and section.settings.quantity_selector_inline %}
@@ -53,24 +53,42 @@ Uncomment to include
     {% endif %}
   {%- endcapture -%}
   {% comment %} Add catch for low stock variants {% endcomment %}
-  {%
-    include 'component-button' with
-    tag: 'button',
-    id: 'pdp-atc',
-    name: 'add',
-    type: 'submit',
-    href: '#',
-    className: 'js-add-to-cart cart__button',
-    dataAttr: 'data-atc="true"',
-    disabled: disableVal,
-    cta: cta,
-  %}
-</div>
-  <div class='none' data-pay-btn>
-    <div class='py1'>
-      {{ form | payment_button }}
+  <div class="pdpDetails__btns" data-disabled-size="{{ product_has_size_option }}">
+
+    {%- if product_has_size_option -%}
+      <button type="button" class="cart__button--select-size" disabled>Select size</button>
+    {%- endif -%}
+
+    {%
+      include 'component-button' with
+      tag: 'button',
+      id: 'pdp-atc',
+      name: 'add',
+      type: 'submit',
+      href: '#',
+      className: 'js-add-to-cart cart__button',
+      dataAttr: 'data-atc="true"',
+      disabled: disableVal,
+      cta: cta,
+    %}
+
+    <div class='is-hidden' data-bis>
+      <button class='button cart__button klaviyo-bis-trigger'>Out of Stock | Notify Me</button>
     </div>
+
+    {% if product.metafields.custom_fields["enable_customize_button"] == 1 and product.metafields.custom_fields["customize_button_url"] != blank %}
+      {%
+        include 'component-button' with
+        tag: 'a',
+        href: product.metafields.custom_fields["customize_button_url"],
+        className: 'customize-btn',
+        cta: 'Customize your mug',
+      %}
+    {% endif %}
   </div>
-<div class='is-hidden' data-bis>
-  <button class='button cart__button klaviyo-bis-trigger'>Out of Stock | Notify Me</button>
+</div>
+<div class='none' data-pay-btn>
+  <div class='py1'>
+    {{ form | payment_button }}
+  </div>
 </div>

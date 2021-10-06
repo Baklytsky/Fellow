@@ -18,7 +18,7 @@
        style="color: {{ product_bar_text_color }};background-color: {{ product_bar_bg_color }}"
        data-slick-config='{{- slick-config -}}'>
     {%- if section.blocks.size > 0 -%}
-    <div class="pdpBar__wrapper f jcb aic">
+    <div class="pdpBar__wrapper f {% if section.blocks < 3 %}jca{% else %}jcb{% endif %} aic">
       {%- for block in section.blocks -%}
         {%- assign svg_icon = block.settings.svg_icon -%}
         {%- assign title = block.settings.title-%}

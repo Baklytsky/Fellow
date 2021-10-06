@@ -1,11 +1,13 @@
 <div class='pdp__options rel f1 f jce aic'>
-  <div {% if product.has_only_default_variant or product.variants.size <= 1 %}style='display:none'{% else %} class="pdp__sticky-options" {% endif %}>
-    {% for option in product.options_with_values %}
-      {%- assign option_name_handle = option.name | handleize -%}
-      <div class='pdp__sticky-options-item {% if option_name_handle == 'size' %} stickySize{% endif %} rel{% if option.values.size <= 1 %} hide{% endif %}' data-index='{{ forloop.index0 }}' data-options-count='{{ option.values.size }}'>
-        <label class='pdp__sticky-options-label' data-option-label='{{ option.name }}'>
-          {% include 'assign_option_label', value: option.selected_value %}
-          <span class='option-title  {% if option_name_handle == 'size' %}f aic rel{% endif %}'>
+  {%- assign product_has_size_option = false -%}
+  {%- unless template contains 'bundle' -%}
+    <div {% if product.has_only_default_variant or product.variants.size <= 1 %}style='display:none'{% else %} class="pdp__sticky-options" {% endif %}>
+      {% for option in product.options_with_values %}
+        {%- assign option_name_handle = option.name | handleize -%}
+        <div class='pdp__sticky-options-item {% if option_name_handle == 'size' %} stickySize{% endif %} rel{% if option.values.size <= 1 %} hide{% endif %}' data-index='{{ forloop.index0 }}' data-options-count='{{ option.values.size }}'>
+          <label class='pdp__sticky-options-label' data-option-label='{{ option.name }}'>
+            {% include 'assign_option_label', value: option.selected_value %}
+            <span class='option-title  {% if option_name_handle == 'size' %}f aic rel{% endif %}'>
             <strong>{{ option.name }} {% if option_name_handle != 'size' %}:{% endif %} </strong>
             {%- if option_name_handle == 'size' -%}
               <div class="pdp__sticky-dropdown-icon" data-open-size-group>
@@ -14,54 +16,69 @@
             {%- endif -%}
             <span data-option-current='{{ option.name }}' style="display: none">{{ option_value_label }}</span>
           </span>
-        </label>
+          </label>
 
-        {% assign option_group_names = '' | split: '' %}
-        {% for value in option.values %}
-          {% include 'assign_option_label', option: option, value: value %}
-          {% if option_value_group != blank %}
-            {% assign option_group_arr = option_value_group | split: '|anything-to-make-an-array|' %}
-            {% assign option_group_names = option_group_names | concat: option_group_arr | uniq %}
-          {% endif %}
-        {% endfor %}
-
-        <div class="option-groups {% if option_name_handle != 'size' %}f ais rel{% else %} option-groups-size{% endif %}">
-          {% for group in option_group_names %}
-            <div class="option-groups__group x">
-              {%- comment -%}
-                {% if option_group_names.size > 1 %}
-                  <label>
-                    <span class='caps small my05 block'>{{ group }}</span>
-                  </label>
-                {% endif %}
-              {%- endcomment -%}
-
-              <div class='radio-group {% if option_name_handle != 'size' %}f aic{% else %} radio-group-size{% endif %}' data-option-{{ option.name | handleize }}>
-                {% for value in option.values %}
-                  {% include 'assign_option_label', option: option, value: value %}
-                  {% if option_value_group == group %}
-                    {% if option.selected_value == value %}
-                      {%- assign checkedVal = true -%}
-                    {% else %}
-                      {%- assign checkedVal = false -%}
-                    {% endif %}
-
-                    {%
-                      include 'component-sticky-radio' with
-                      label: option_value_label,
-                      value: value,
-                      name: option.name,
-                      checked: checkedVal
-                    %}
-                  {% endif %}
-                {% endfor %}
-              </div>
-            </div>
+          {% assign option_group_names = '' | split: '' %}
+          {% for value in option.values %}
+            {% include 'assign_option_label', option: option, value: value %}
+            {% if option_value_group != blank %}
+              {% assign option_group_arr = option_value_group | split: '|anything-to-make-an-array|' %}
+              {% assign option_group_names = option_group_names | concat: option_group_arr | uniq %}
+            {% endif %}
           {% endfor %}
+
+          {%- assign option_name_handleize = option.name | handleize -%}
+
+          {%- if option_name_handleize == 'size' -%}
+            {%- assign product_has_size_option = true -%}
+          {%- endif -%}
+
+          <div class="option-groups {% if option_name_handle != 'size' %}f ais rel{% else %} option-groups-size{% endif %}" {% if product_has_size_option %}data-disabled-size="true"{% endif %}>
+            {% for group in option_group_names %}
+              <div class="option-groups__group x">
+                {%- comment -%}
+                  {% if option_group_names.size > 1 %}
+                    <label>
+                      <span class='caps small my05 block'>{{ group }}</span>
+                    </label>
+                  {% endif %}
+                {%- endcomment -%}
+
+                <div class='radio-group {% if option_name_handle != 'size' %}f aic{% else %} radio-group-size{% endif %}' data-option-{{ option.name | handleize }}>
+                  {% for value in option.values %}
+                    {% include 'assign_option_label', option: option, value: value %}
+                    {% if option_value_group == group %}
+                      {% if option.selected_value == value %}
+                        {%- assign checkedVal = true -%}
+                      {% else %}
+                        {%- assign checkedVal = false -%}
+                      {% endif %}
+
+                      {%
+                        include 'component-sticky-radio' with
+                        label: option_value_label,
+                        value: value,
+                        name: option.name,
+                        checked: checkedVal
+                      %}
+                    {% endif %}
+                  {% endfor %}
+                </div>
+              </div>
+            {% endfor %}
+          </div>
         </div>
-      </div>
-    {% endfor %}
-  </div>
+      {% endfor %}
+    </div>
+  {%- endunless -%}
+
+  {%- if template contains 'bundle' -%}
+    <div class="pdpStickyBar__badge f aic">
+      {% include 'pdp-badges' %}
+      <span class="separator">|</span>
+    </div>
+  {%- endif -%}
+
   <div class="pdpCopy__price">
     {% if product.available %}
     {% if product.compare_at_price > product.price %}
@@ -69,11 +86,11 @@
       Product is available and on sale
     {% endcomment %}
     {% comment %} <strong> tag added to satisfy compliance concern -ae 03.23.21 {% endcomment %}
+      <span class="inline-block strike card__price--regular pdpCopy__header-price">{{ current_variant.compare_at_price | money_without_trailing_zeros }}</span>
+      <span class="visually-hidden">{{ 'products.current_variant.regular_price' | t }}</span>
       <h2 class="inline-block card__price--sale pdpCopy__header-price">
         {{ current_variant.price | money_without_trailing_zeros }}
       </h2>
-      <span class="visually-hidden">{{ 'products.current_variant.regular_price' | t }}</span>
-      <strong class="inline-block strike card__price--regular pdpCopy__header-price">{{ current_variant.compare_at_price | money_without_trailing_zeros }}</strong>
       {% else %}
         {% comment %}
           Product is available and not on sale
@@ -84,7 +101,7 @@
         {% comment %}
           Sold Out
         {% endcomment %}
-        <h2 class='strike'>{{ current_variant.price | money_without_trailing_zeros }}</h2>
+        <h2 class='strike pdpCopy__header-price'>{{ current_variant.price | money_without_trailing_zeros }}</h2>
       {% endif %}
   </div>
 </div>

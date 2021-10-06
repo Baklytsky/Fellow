@@ -1,3 +1,4 @@
+{% if product.metafields.custom_fields["enable_compare_products"] == 1 %}
 {% assign separator = "|###|" %}
 {% assign compare_product_array = product.metafields.custom_fields["compare_product"] | split: separator %}
 
@@ -75,4 +76,5 @@
       </div>
     </section>
   </div>
+{% endif %}
 {% endif %}

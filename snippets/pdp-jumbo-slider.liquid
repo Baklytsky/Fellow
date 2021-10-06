@@ -1,3 +1,4 @@
+{% if product.metafields.custom_fields["show_jumbo_slider"] == 1 %}
 {% if product.metafields.custom_fields["jumbo_slider"] != blank %}
   {% assign separator = "|###|" %}
   {% assign jumbo_slide_array = product.metafields.custom_fields["jumbo_slide"] | split: separator %}
@@ -29,7 +30,7 @@
         {% endfor %}
       </div>
       {% if jumbo_slide_array.size > 1 %}
-      <div class='slider__controls abs block fill z2'>
+      <div class='slider__controls abs block fill'>
         <div class='rel f fdr aic jcc y'>
           <div class='slider__nav rel f jcb x'>
             <button data-slidePrev>
@@ -44,6 +45,7 @@
       {% endif %}
     </section>
   </div>
+{% endif %}
 {% endif %}
 
 {% comment %} Reset {% endcomment %}

@@ -1,0 +1,106 @@
+{% if product.metafields.custom_fields["show_bundle_include_section"] == 1 %}
+  {% comment %}Assign Media Proof Flex Order{% endcomment %}
+  {% assign flex_order = product.metafields.custom_fields["bundle_include_section_order"] | downcase %}
+  {% if flex_order %}
+    {% unless flex_order == 'default' %}
+    {% assign display_order = flex_order %}
+    {% endunless %}
+  {% endif %}
+
+  {%- assign section_heading = product.metafields.custom_fields["bundle_include_section_heading"] -%}
+
+  {% if product.metafields.custom_fields["bundle_includes"] != blank %}
+    <section class='pdpBundleInclude {% if display_order %} o-{{ display_order }}{% endif %}'>
+      {%- if section_heading != blank -%}
+        <h3 class="pdpBundleInclude__heading">
+          {{ section_heading }}
+        </h3>
+      {%- endif -%}
+      {% for item in product.metafields.custom_fields["bundle_includes"] %}
+        {%- assign bundle_include_product = all_products[item["bundle_product"]] -%}
+        {%- assign bundle_include_product_title = item["bundle_product_custom_title"] | default: bundle_include_product.title -%}
+        {%- assign bundle_include_product_image = item["bundle_product_image"] -%}
+        {%- assign bundle_include_description_title = item["bundle_description_title"] -%}
+        {%- assign bundle_include_description_text = item["bundle_description_text"] -%}
+        {%- assign bundle_include_features = item["bundle_features"] -%}
+
+        <div class="pdpBundleInclude__dropdown-wrapper">
+          <div class="pdpBundleInclude__dropdown pdpBundleInclude__dropdown--{{ forloop.index0 }} dropdown">
+            {%- if bundle_include_product != blank -%}
+              <div class="pdpBundleInclude__dropdown-header f jcb aic" data-dropdown>
+                <div class="pdpBundleInclude__dropdown-title">
+                  {{ bundle_include_product_title }}
+                </div>
+                <div class="dropdownHeader-icon">
+                  {% render 'icon' with 'dropdown' %}
+                </div>
+              </div>
+            {%- endif -%}
+            <div class="pdpBundleInclude__dropdown-content dropdownContent--animate-block" data-dropdown-list style="display: none">
+              {%- if bundle_include_product != blank -%}
+                {%- assign bundle_ip_image_url = product.featured_image.src | img_url: '800x' -%}
+
+                <div class="pdpBundleInclude__imageWrapper">
+                  <div class="pdpBundleInclude__image rel x">
+                    {%- if bundle_include_product_image != blank -%}
+                      {%- assign bundle_ip_image_url = bundle_include_product_image -%}
+                    {%- endif -%}
+                    {% include 'component-image' with
+                      src: bundle_ip_image_url,
+                      alt: bundle_include_product_title,
+                      className: 'image image-abs-cover',
+                      absolute: true,
+                      href: bundle_include_product.url,
+                      fill: true %}
+                  </div>
+                </div>
+
+                <div class="pdpBundleInclude__description">
+                  {%- if bundle_include_description_title != blank -%}
+                    <h4 class="pdpBundleInclude__descriptionTitle">{{ bundle_include_description_title }}</h4>
+                  {%- endif -%}
+                  {%- if bundle_include_description_text != blank -%}
+                    <div class="pdpBundleInclude__descriptionText">
+                      {{ bundle_include_description_text }}
+                    </div>
+                  {%- endif -%}
+                  <a href="{{ bundle_include_product.url }}" class="pdpBundleInclude__descriptionLink pdpBundleInclude__descriptionLink--desktop">Learn more</a>
+                </div>
+
+                <div class="pdpBundleInclude__feature">
+                  {%- for feature in bundle_include_features -%}
+                    {%- assign feature_icon = feature["bundle_feature_icon"] -%}
+                    {%- assign feature_text = feature["bundle_feature_text"] -%}
+                    {%- if feature_icon != blank or feature_text != blank -%}
+                      <div class="pdpBundleInclude__featureItem f aic">
+                        {%- if feature_icon != blank -%}
+                          <div class="pdpBundleInclude__featureItemIconWrapper">
+                            <div class="pdpBundleInclude__featureItemIcon rel x">
+                              {% include 'component-image' with
+                                src: feature_icon,
+                                alt: feature_text,
+                                className: 'image image-abs-cover',
+                                absolute: true,
+                                fill: true %}
+                            </div>
+                          </div>
+                        {%- endif -%}
+                        {%- if feature_text != blank -%}
+                          <div class="pdpBundleInclude__featureItemText">
+                            {{ feature_text }}
+                          </div>
+                        {%- endif -%}
+                      </div>
+                    {%- endif -%}
+                  {%- endfor -%}
+                  <a href="{{ bundle_include_product.url }}" class="pdpBundleInclude__descriptionLink pdpBundleInclude__descriptionLink--mobile">Learn more</a>
+                </div>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
+    </section>
+  {% endif %}
+{% endif %}
+
