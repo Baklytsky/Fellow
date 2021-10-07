@@ -18,6 +18,7 @@ theme.closeModal = function (clean) {
   $('#modalContent').fadeOut().html('').text('');
   $('#emptyModal').fadeIn();
   theme.enableScroll();
+  $(document).off('click.QvClose')
 }
 
 theme.header = function () {
@@ -370,6 +371,15 @@ theme.pdpMain = function () {
   // scrolls:
   $(document).off('scroll.galleryImage')
   $(document).off('scroll.pdpStickyBar')
+  $(document).off('scroll.pdp')
+
+  // $(document).on('scroll.pdp', function () {
+  //   var $pdpDetailsSection = $('.pdpMain__details');
+  //   let pdpDetailsPosition = $pdpDetailsSection[0].getBoundingClientRect();
+  //   if (pdpDetailsPosition.bottom < $(window).height()) {
+  //     $pdpDetailsSection.addClass('pdpDetails--fixed')
+  //   }
+  // })
 
   function thumbnailScrollOnClick () {
     $(document).on('click.thumbnails', '.pdpMain__container .pdpMain__gallery-thumbnails-item', function () {
@@ -486,14 +496,21 @@ theme.pdpMain = function () {
 
     $(document).on('click.pdpStickyAtc', '#pdp-sticky-atc', function (e) {
       e.preventDefault();
-      ($('#pdp-atc').length) ? $('#pdp-atc').trigger('click') : $('#pdp-bundle-atc').trigger('click');
+      if ($('#pdp-atc').is(":visible") || $('#pdp-bundle-atc').is(":visible")) {
+        ($('#pdp-atc').length) ? $('#pdp-atc').trigger('click') : $('#pdp-bundle-atc').trigger('click');
+      } else {
+        $('.klaviyo-bis-trigger').trigger('click')
+      }
     })
 
     $(document).on('click.pdpStickySelectSize', '.pdpStickyBar .cart__button--select-size', function (e) {
       e.preventDefault();
-      $([document.documentElement, document.body]).animate({
-        scrollTop: $('.pdpMain__Content').offset().top - 100
-      }, 500);
+      if ($(window).width() < 1200) {
+        console.log('click')
+        $([document.documentElement, document.body]).animate({
+          scrollTop: $('.pdpMain__Content').offset().top - 100
+        }, 500);
+      }
     })
 
     $(document).on('click.pdpSelectSize', '[data-option-size] .radio', function () {
@@ -615,6 +632,14 @@ theme.pdpQuickView = function () {
   // clicks:
   $(document).off('click.thumbnailsModal')
   $(document).off('click.pdpQvSelectSize')
+  $(document).off('click.QvClose')
+
+  $(document).on('click.QvClose', function (e) {
+    var $container = $('.Modal');
+    if (!$container.is(e.target) && $container.has(e.target).length === 0) {
+      theme.closeModal();
+    }
+  })
 
   function modalThumbnailScrollOnClick () {
     $(document).on('click.thumbnailsModal', '.pdpMain__gallery-thumbnails-item', function () {

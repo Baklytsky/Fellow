@@ -41,7 +41,7 @@
 
                 <th>
                   <div class="pdpCompare__table-th">
-                    <a href="{{ _product.url }}" class="pdpCompare__table-productTitle">{{ _product.title }}</a>
+                    <a href="{{ _product.url }}" target='_blank' class="pdpCompare__table-productTitle">{{ _product.title }}</a>
                     <div class="pdpCompare__table-productImage rel">
                       {% include 'component-image' with
                         src: _product_image,
@@ -123,7 +123,7 @@
                     absolute: true,
                     fill: true %}
                 </div>
-                <a href="{{ _product.url }}" class="pdpCompare__tabsProductsTitle">{{ _product.title }}</a>
+                <a href="{{ _product.url }}" target='_blank' class="pdpCompare__tabsProductsTitle">{{ _product.title }}</a>
                 {%- for i in (1..6) -%}
                   {%- assign key_name = i | append: "_characteristic" -%}
                   {%- assign characteristic_name = product.metafields.custom_fields[key_name] -%}

@@ -14306,7 +14306,7 @@
                 g.f()
               }
             } else c.forEach((function(t) {
-              t.innerHTML = "Unavailable", l.classList.add("is-hidden"), u.classList.remove("is-hidden"), u.setAttribute("disabled", "")
+              theme.variantChange(a.value), theme.selectedOption(r), t.innerHTML = "Unavailable", l.classList.add("is-hidden"), u.classList.remove("is-hidden"), u.setAttribute("disabled", "")
             }))
           }
           return m = p ? "Preorder" : "Add to Cart", i.forEach((function(t) {
