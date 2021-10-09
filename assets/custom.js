@@ -47,18 +47,6 @@ theme.header = function () {
     }
   };
 
-  $(document).mouseup(function (e){
-    var div = $('.newHeader');
-    var divChild = div.find('.newHeader__openedBlock[aria-hidden="false"]');
-
-    if (!div.is(e.target)
-        && div.has(e.target).length === 0
-        && !divChild.is(e.target)
-        && divChild.has(e.target).length === 0) {
-      closeOpenedBlock();
-    }
-  });
-
   $(window).on('resize', () => {
     if ($(window).width() < 992) {
       closeOpenedBlock ();
@@ -76,12 +64,8 @@ theme.header = function () {
     }
   })
 
-  $(document).on('click', ".mainMenu__cardWrapper", function (e) {
-    e.preventDefault();
-  })
-
-  $(document).on('click', '.newHeader__link', function (e) {
-    if ($(this).attr('data-selected') == 'false') {
+  $(document).on('mouseover', '.newHeader__MainLink', function () {
+    if ($(this).attr('data-target')) {
       let target = $(this).attr('data-target'),
           findDataId = $(`[data-id=${target}]`);
 
@@ -102,56 +86,30 @@ theme.header = function () {
         $openedBlock.slideUp();
         $openedBlock.attr('aria-hidden', 'true');
       }
-    } else if ($(this).attr('data-selected') == 'true') {
-      $('.newHeader__link').attr('data-selected', 'false');
-      $openedBlock.slideUp();
-      $openedBlock.attr('aria-hidden', 'true');
+    } else {
+      closeOpenedBlock()
     }
   })
+
+  $(document).on('mouseleave', '.newHeader', function () {
+    if ($openedBlock.attr('data-selected', 'false')) {
+      closeOpenedBlock()
+    }
+  });
 
   $mobileItem.on('click', function (e) {
     if (!$(this).find($megaMenu).hasClass('active') && !$(this).find($megaMenu).hasClass('megaMenu__blank')) {
       $(this).find($megaMenu).addClass('active');
-    } else if ($(e.target).hasClass('megaMenu__itemHeading')) {
+    } else if ($(e.target).hasClass('megaMenu__itemHeading') || $(e.target).parent().hasClass('megaMenu__itemHeading')) {
       $(this).find($megaMenu).removeClass('active');
     }
   })
 
-  $('.newHeader__link').on('click', function () {
+  $('.mobileMenu .newHeader__link').on('click', function () {
     if ($(this).parents('.mobileMenu')) {
       $(this).siblings('.subMenuList').slideToggle();
       $(this).toggleClass('active')
     }
-  })
-
-  $('.newHeader__link').on("mouseover", function (e) {
-    if ($openedBlock.attr('aria-hidden') == 'false' && $(this).attr('data-selected') == 'false') {
-      let target = $(this).attr('data-target'),
-          findDataId = $(`[data-id=${target}]`);
-
-      findDataId.attr('data-visible', 'false');
-      $(target).attr('data-visible', 'false');
-
-      if ($(target).attr('data-visible') == 'false') {
-        findDataId.attr('data-visible', 'true');
-        $(target).attr('data-visible', 'true');
-      }
-    }
-  })
-
-  $('.newHeader__link').on("mouseout", function (e) {
-    if ($openedBlock.attr('aria-hidden') == 'false') {
-      let target = $(this).attr('data-target'),
-          findDataId = $(`[data-id=${target}]`);
-
-      findDataId.attr('data-visible', 'true');
-      $(target).attr('data-visible', 'true');
-      if ($(target).attr('data-visible') == 'false') {
-        findDataId.attr('data-visible', 'true');
-        $(target).attr('data-visible', 'true');
-      }
-    }
-
   })
 
   theme.countdownTimer = function () {
@@ -375,9 +333,13 @@ theme.pdpMain = function () {
 
   // $(document).on('scroll.pdp', function () {
   //   var $pdpDetailsSection = $('.pdpMain__details');
-  //   let pdpDetailsPosition = $pdpDetailsSection[0].getBoundingClientRect();
-  //   if (pdpDetailsPosition.bottom < $(window).height()) {
-  //     $pdpDetailsSection.addClass('pdpDetails--fixed')
+  //   let pdpDetailsPosition = $pdpDetailsSection[0].getBoundingClientRect(),
+  //       headerHeight = document.getElementById('MainHeader').offsetHeight;
+  //   if (pdpDetailsPosition.bottom > $(window).height()) {
+  //     let stickyTopPosition = 0 - ($(window).height() - pdpDetailsPosition.bottom + headerHeight + 24);
+  //     $pdpDetailsSection.css('top', stickyTopPosition)
+  //   } else {
+  //     $pdpDetailsSection.css('position', 'static');
   //   }
   // })
 

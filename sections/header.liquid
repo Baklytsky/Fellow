@@ -23,10 +23,31 @@
           <ul class="topMenu__menu topMenu__menu--left leftMenu">
             {%- for item in left_menu.links -%}
               {%- assign title = item.title | handleize -%}
+              {%- assign has_submenu_blocks = false -%}
+
+              {%- if section.blocks.size > 0 -%}
+                {%- for block in section.blocks -%}
+                  {%- assign link_target = block.settings.target | handleize  -%}
+                  {%- if link_target == title  -%}
+                    {%- assign has_submenu_blocks = true -%}
+                    {% break %}
+                  {%- endif -%}
+                {%- endfor -%}
+              {%- endif -%}
 
               <li class="leftMenu__item">
-                <button data-target="{{ left_menu.title | handleize }}__{{ title }}" data-selected="false"
-                   class="newHeader__link linkWhite newHeader__button" >{{ item.title }}</button>
+                {%- if item.links != blank or has_submenu_blocks -%}
+                <button data-target="{{ left_menu.title | handleize }}__{{ title }}"
+                        data-selected="false"
+                        class="newHeader__link linkWhite newHeader__button newHeader__MainLink" >
+                  {{ item.title }}
+                </button>
+                {%- else -%}
+                  <a href="{{ item.url }}"
+                     class="newHeader__link linkWhite newHeader__button newHeader__MainLink" >
+                    {{ item.title }}
+                  </a>
+                {%- endif -%}
               </li>
             {%- endfor -%}
           </ul>
@@ -51,10 +72,31 @@
           <ul class="topMenu__menu topMenu__menu--right rightMenu">
             {%- for item in right_menu.links -%}
               {%- assign title = item.title | handleize -%}
+              {%- assign has_submenu_blocks = false -%}
+
+              {%- if section.blocks.size > 0 -%}
+                {%- for block in section.blocks -%}
+                  {%- assign link_target = block.settings.target | handleize  -%}
+                  {%- if link_target == title  -%}
+                    {%- assign has_submenu_blocks = true -%}
+                    {% break %}
+                  {%- endif -%}
+                {%- endfor -%}
+              {%- endif -%}
 
               <li class="rightMenu__item">
-                <button data-target="{{ right_menu.title | handleize }}__{{ title }}" data-selected="false"
-                   class="newHeader__link linkWhite newHeader__button" >{{ item.title }}</button>
+                {%- if item.links != blank or has_submenu_blocks -%}
+                  <button data-target="{{ right_menu.title | handleize }}__{{ title }}"
+                          data-selected="false"
+                          class="newHeader__link linkWhite newHeader__button newHeader__MainLink" >
+                    {{ item.title }}
+                  </button>
+                {%- else -%}
+                  <a href="{{ item.url }}"
+                     class="newHeader__link linkWhite newHeader__button newHeader__MainLink" >
+                    {{ item.title }}
+                  </a>
+                {%- endif -%}
               </li>
             {%- endfor -%}
 
@@ -120,34 +162,42 @@
           <ul class="mainMenu__list">
             {%- for link in main_menu.links -%}
               {%- assign title = link.title | handleize -%}
+              {%- assign has_submenu_blocks = false -%}
+
+              {%- if section.blocks.size > 0 -%}
+                {%- for block in section.blocks -%}
+                  {%- assign link_target = block.settings.target | handleize  -%}
+                  {%- if link_target == title  -%}
+                    {%- assign has_submenu_blocks = true -%}
+                    {% break %}
+                  {%- endif -%}
+                {%- endfor -%}
+              {%- endif -%}
 
               <li class="mainMenu__item">
-                {%- if link.links != blank -%}
+                {%- if link.links != blank or has_submenu_blocks -%}
                   <button data-target="{{ main_menu.title | handleize }}__{{ title }}"
                           data-selected="false"
-                          class="newHeader__link linkBlack">{{ link.title }}</button>
+                          class="newHeader__link linkBlack newHeader__MainLink">{{ link.title }}</button>
                 {%- else -%}
-                  <a data-target="{{ main_menu.title | handleize }}__{{ title }}"
-                     data-selected="false"
-                     class="newHeader__link linkBlack"
+                  <a class="newHeader__link linkBlack newHeader__MainLink"
                      href="{{ link.url }}">{{ link.title }}</a>
                 {%- endif -%}
               </li>
             {%- endfor -%}
           </ul>
         </nav>
-        <a href='/cart'
-           class="mainMenu__cardWrapper js-cart-drawer-toggle"
-           tabindex='0'>
-          <p class="mainMenu__cardTitle">{{ 'cart.general.short_title' | t }}</p>
+        <button class="mainMenu__cardWrapper js-cart-drawer-toggle"
+                tabindex='0'>
+          <span class="mainMenu__cardTitle">{{ 'cart.general.short_title' | t }}</span>
 
-          <div class="mainMenu__cardIcon">
+          <span class="mainMenu__cardIcon">
             {%- render 'icon' with 'cart' -%}
             <p class="mainMenu__cardCount js-cart-count">
               {{ count_cart }}
             </p>
-          </div>
-        </a>
+          </span>
+        </button>
       </div>
     {%- endif -%}
   </div>

@@ -47,7 +47,7 @@
                   {%- endif -%}
                 </a>
               {% else %}
-                <button data-selected="false" class="newHeader__link linkBlack newHeader__button">
+                <button data-selected="false" class="newHeader__link newHeader__button">
                   {{ mega_item.title }}
                   {%- if mobile_menu == true and mega_item.links != blank -%}
                     {%- render 'icon', icon: 'arrow' -%}
