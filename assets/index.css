@@ -17230,7 +17230,7 @@ body.is-masthead--empty main {
 }
 
 .footer {
-  padding: 80px 35px 40px;
+  padding: 80px 32px 40px;
   background: #000;
   color: #fff
 }
@@ -17319,7 +17319,7 @@ body.is-masthead--empty main {
 
 .footer__col .h5 {
   margin-top: 0;
-  margin-bottom: 30px;
+  margin-bottom: 16px;
   font-family: "Inter", sans-serif;
   font-style: normal;
   font-weight: bold;
@@ -17344,10 +17344,10 @@ body.is-masthead--empty main {
   transition: all var(--fast) var(--ease)
 }
 
-.footer__links li a:hover,
-.footer__links li a:focus {
-  color: rgba(255, 255, 255, .8);
-}
+/*.footer__links li a:hover,*/
+/*.footer__links li a:focus {*/
+/*  color: rgba(255, 255, 255, .8);*/
+/*}*/
 
 @media screen and (max-width: 991.98px) {
   .footer__col .h5 {
@@ -17367,10 +17367,6 @@ body.is-masthead--empty main {
   width: auto;
   max-width: 250px;
   fill: #fff;
-}
-
-.footer svg:hover {
-  opacity: .75
 }
 
 .footer__colophon {
@@ -19313,7 +19309,6 @@ ul.list {
 .newsletter .btn--newsletter__submit:focus,
 .newsletter .btn--newsletter__submit:hover {
   cursor: pointer;
-  opacity: .8;
 }
 
 .newsletter-message {
@@ -19388,8 +19383,9 @@ h3.productCard__title {
   border-radius: 12px;
   font-style: normal;
   font-weight: normal;
-  font-size: 20px;
+  font-size: 14px;
   line-height: 1.2em;
+  background-color: #EBE9E9;
 }
 
 .productCard h1,
@@ -19570,9 +19566,10 @@ h3.productCard__title {
   align-items: flex-start;
 }
 
-.productCard__price-wrapper h3 {
+.productCard .productCard__details .productCard__price-wrapper h3,
+.productCard .productCard__details .productCard__price-wrapper .strike {
   font-style: normal;
-  font-weight: normal;
+  font-weight: 700;
   font-size: 24px;
 }
 
@@ -19679,6 +19676,12 @@ h3.productCard__title {
     font-size: 16px;
     font-weight: 500;
     line-height: 1.2em;
+  }
+
+  .productCard .productCard__details .productCard__price-wrapper h3,
+  .productCard .productCard__details .productCard__price-wrapper .strike {
+    font-size: 16px;
+    font-weight: 700;
   }
 }
 
@@ -22088,13 +22091,9 @@ input[name=product_search_field] {
 .pdpMain__details {
   background: #fff;
   position: sticky;
+  transition: top .3s linear;
   top: calc(var(--header-height) + 24px);
 }
-
-/*.pdpDetails--fixed {*/
-/*  position: fixed;*/
-/*  bottom: 24px;*/
-/*}*/
 
 @media screen and (max-width: 991.98px) {
   .pdpMain__details {
