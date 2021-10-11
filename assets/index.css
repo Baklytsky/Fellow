@@ -22091,13 +22091,9 @@ input[name=product_search_field] {
 .pdpMain__details {
   background: #fff;
   position: sticky;
+  transition: top .3s linear;
   top: calc(var(--header-height) + 24px);
 }
-
-/*.pdpDetails--fixed {*/
-/*  position: fixed;*/
-/*  bottom: 24px;*/
-/*}*/
 
 @media screen and (max-width: 991.98px) {
   .pdpMain__details {

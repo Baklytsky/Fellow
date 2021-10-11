@@ -329,19 +329,89 @@ theme.pdpMain = function () {
   // scrolls:
   $(document).off('scroll.galleryImage')
   $(document).off('scroll.pdpStickyBar')
-  $(document).off('scroll.pdp')
+  $(window).off('scroll.pdp')
+  // resize:
+  $(window).off("resize.pdp");
 
-  // $(document).on('scroll.pdp', function () {
-  //   var $pdpDetailsSection = $('.pdpMain__details');
-  //   let pdpDetailsPosition = $pdpDetailsSection[0].getBoundingClientRect(),
-  //       headerHeight = document.getElementById('MainHeader').offsetHeight;
-  //   if (pdpDetailsPosition.bottom > $(window).height()) {
-  //     let stickyTopPosition = 0 - ($(window).height() - pdpDetailsPosition.bottom + headerHeight + 24);
-  //     $pdpDetailsSection.css('top', stickyTopPosition)
-  //   } else {
-  //     $pdpDetailsSection.css('position', 'static');
-  //   }
-  // })
+  function stickyScrolling(options) {
+    var $container = options.container || undefined;
+    var $elements = options.elements || [];
+    var topSpacer = options.topSpacer || 0;
+    if ($container.length < 1 || typeof $container === "undefined")
+      return false;
+    var lastScrollPosition = window.scrollY;
+    var currentScrollPosition = window.scrollY;
+    var viewportHeight;
+    var startPosition;
+    var endPosition;
+    var elementDetails = {};
+
+    var recalculateHeights = function() {
+      viewportHeight = window.innerHeight,
+      startPosition = $container.offset().top,
+      endPosition = $container.innerHeight() + startPosition - viewportHeight;
+      $.each($elements, function(index) {
+        var element = $(this);
+        elementDetails[index] = {
+          height: element.height(),
+          position: elementDetails.hasOwnProperty(index) ? elementDetails[index].position : 0
+        }
+      })
+    };
+    recalculateHeights();
+
+    var updatePosition = function() {
+      currentScrollPosition = window.scrollY;
+      $.each($elements, function(index) {
+        var element = $(this);
+        var height = elementDetails[index].height;
+        var position = elementDetails[index].position;
+        var overflow = topSpacer + height - viewportHeight;
+        position += currentScrollPosition - lastScrollPosition;
+        position = currentScrollPosition <= startPosition ? 0 : position;
+        position = currentScrollPosition > endPosition ? overflow : position;
+        position = Math.abs(position) === position && Math.abs(position) > overflow ? overflow : position;
+        position = Math.abs(position) !== position ? 0 : position;
+        elementDetails[index].position = position;
+        element.css({
+          top: topSpacer + position * -1
+        })
+      });
+      lastScrollPosition = currentScrollPosition
+    };
+    updatePosition();
+
+    var refetchElements = function() {
+      if ($container) {
+        $container = $($container.selector)
+      }
+      if ($elements.length > 1) {
+        var freshElements = [];
+        $.each($elements, function(index) {
+          freshElements.push($($elements[index].className))
+        });
+        $elements = freshElements
+      } else {
+        $elements = $($elements.selector)
+      }
+    };
+
+    $(window).on("resize.pdp", recalculateHeights);
+    $(window).on("scroll.pdp", updatePosition);
+    $(window).on("recalculateScroll", function(event, clickEvent) {
+      refetchElements()
+      recalculateHeights()
+      if (!clickEvent) {
+        updatePosition()
+      }
+    })
+  }
+
+  stickyScrolling({
+    container: $(".pdpMain__container"),
+    elements: $(".pdpMain__details"),
+    topSpacer: document.getElementById('MainHeader').offsetHeight + 24
+  });
 
   function thumbnailScrollOnClick () {
     $(document).on('click.thumbnails', '.pdpMain__container .pdpMain__gallery-thumbnails-item', function () {
@@ -393,20 +463,23 @@ theme.pdpMain = function () {
 
   function pdpDropdown() {
     $(document).on('click.pdpDropdown', '[data-dropdown]', function (e) {
+      var _this = $(this);
       e.preventDefault();
       let $dropdownList = $(this).parent().find('[data-dropdown-list]');
       if ($dropdownList.length) {
-        $(this).parent().find('[data-dropdown-list]').slideToggle();
+        $(this).parent().find('[data-dropdown-list]').slideToggle(400);
         $(this).find('.dropdownHeader-icon').toggleClass('dropdownHeader-icon--rotate');
         $(this).parent().find('.dropdownContent--animate-block').toggleClass('dropdownContent--animate-block-visible');
       }
-    });
+      setTimeout(function () {
+        if (_this.parents('.pdpMain__details').length) {
+          window.requestAnimationFrame(function() {
+            $(window).trigger("recalculateScroll", false)
+          })
+        }
+        }, 400);
 
-    // if ($(window).width() < 992 && $('.pdpInfo').length) {
-    //   $('.pdpInfo [data-dropdown-list]').css('display', 'none')
-    //   $('.pdpInfo .dropdownHeader-icon').removeClass('dropdownHeader-icon--rotate');
-    //   $('.dropdownContent--animate-block').removeClass('dropdownContent--animate-block-visible');
-    // }
+    });
 
     if ($('.pdpAdditionalFeatures ').length) {
       $(window).on('resize', $.debounce(300, function () {
@@ -468,7 +541,6 @@ theme.pdpMain = function () {
     $(document).on('click.pdpStickySelectSize', '.pdpStickyBar .cart__button--select-size', function (e) {
       e.preventDefault();
       if ($(window).width() < 1200) {
-        console.log('click')
         $([document.documentElement, document.body]).animate({
           scrollTop: $('.pdpMain__Content').offset().top - 100
         }, 500);
