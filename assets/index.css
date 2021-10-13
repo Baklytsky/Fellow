@@ -19629,6 +19629,12 @@ h3.productCard__title {
   max-width: 200px;
   overflow-x: scroll;
   overflow-y: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.productCard__variants .productCard__options::-webkit-scrollbar {
+  display: none;
 }
 
 @media screen and (max-width: 640px) {
@@ -21845,13 +21851,12 @@ input[name=product_search_field] {
 .subcollection__products {
   display: flex;
   flex-flow: row wrap;
-  margin-top: 4vw
 }
 
 @media screen and (min-width: 1200px) {
   .subcollection__products {
-    margin-left: -0.75vw;
-    margin-right: -0.75vw
+    margin-left: -12px;
+    margin-right: -12px
   }
 }
 
@@ -21863,21 +21868,35 @@ input[name=product_search_field] {
 
 .subcollection__products>div {
   width: 100%;
-  margin-bottom: 2rem
+  margin-bottom: 16px
+}
+
+.subcollection__products.one-third>div {
+  margin-bottom: 16px;
+  width: calc(50% - 24px)
 }
 
 @media screen and (min-width: 768px) {
   .subcollection__products.one-fourth>div {
-    margin-bottom: 3vw;
-    width: calc(50% - 1.5vw)
+    margin-bottom: 64px;
+    width: calc(50% - 24px)
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .subcollection__products.one-third>div {
+    width: calc((100% / 3) - 24px);
+    margin-left: 12px;
+    margin-right: 12px;
+    margin-bottom: 64px;
   }
 }
 
 @media screen and (min-width: 1200px) {
   .subcollection__products.one-fourth>div {
-    width: calc(25% - 1.5vw);
-    margin-left: .75vw;
-    margin-right: .75vw
+    width: calc(25% - 24px);
+    margin-left: 12px;
+    margin-right: 12px
   }
 }
 

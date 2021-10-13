@@ -258,14 +258,6 @@ theme.toggleTab = function ($this) {
   }
 }
 
-theme.dropdown = function () {
-  $(document).on('click', '[data-dropdown]', function (e) {
-    e.preventDefault();
-    $(this).parent().find('[data-dropdown-list]').slideToggle();
-    $(this).find('.dropdown__icon').toggleClass('dropdown__icon--rotate');
-  });
-}
-
 theme.mutation = function updateProductColors ($targetNode, callback) {
   var config = { attributes: true, childList: true, subtree: true };
   let observer = new MutationObserver(callback);
@@ -720,6 +712,105 @@ theme.pdpQuickView = function () {
   }
 }
 
+theme.collection = function () {
+  // Remove all $(document) Events
+  $(document).off('click.dropdownFilters')
+  $(document).off('click.deleteFilterResult')
+  $(document).off('change.inputFilters')
+
+  if ($('[data-dropdown-filter]').length) {
+    $(document).on('click.dropdownFilters', '[data-dropdown-filter]', function () {
+      let $dropdownList = $(this).parent().find('[data-dropdown-list]');
+      if ($dropdownList.length) {
+        $(this).parent().find('[data-dropdown-list]').slideToggle(400);
+        $(this).find('.dropdownHeader-icon').toggleClass('dropdownHeader-icon--rotate');
+        $(this).parent().find('.dropdownContent--animate-block').toggleClass('dropdownContent--animate-block-visible');
+      }
+    });
+  }
+
+  if ($('.collectionFilters').length) {
+    var $filterForm = $('#filter-form'),
+        $collectionProducts = $(document).find('.collection__products-results'),
+        $collectionFilterResults = $('.collection__products-filter-results'),
+        $filterFormInput = $filterForm.find('input'),
+        $filterFormRadioInput = $filterForm.find('input[type="radio"]'),
+        $filterPriceMin = $filterForm.find('.filter-group__price-range-min-value'),
+        $filterPriceMax = $filterForm.find('.filter-group__price-range-max-value');
+
+    function filterResultsBlock() {
+      $filterFormRadioInput.map(function (index, element) {
+        if ($(element).is(':checked')) {
+          $('[data-result-type="' + $(element).attr('data-filter-type') + '"]').remove()
+          if ($(element).attr('data-filter-type') === 'Color') {
+            $collectionFilterResults.append(
+                `<span class="filter-result f aic" data-result-type="${$(element).attr('data-filter-type')}">
+                  <span class="filter-group-circle f aic jcc rel" data-color="${$(element).attr('data-color')}"></span>
+                  ${$(element).attr('title')}
+                  <span class="filter-result-close"></span>
+                </span>`)
+          } else {
+            $collectionFilterResults.append(
+                `<span class="filter-result f aic" data-result-type="${$(element).attr('data-filter-type')}">
+                  ${$(element).attr('title')}
+                  <span class="filter-result-close"></span>
+                </span>`)
+          }
+        }
+      })
+    }
+
+    filterResultsBlock()
+
+    function filterResults(element) {
+      let formData = $filterForm.serialize(),
+          url = window.location.protocol + '//' + window.location.host + window.location.pathname + '?view=ajax&' + formData,
+          newUrl = window.location.protocol + '//' + window.location.host + window.location.pathname + '?' + formData;
+
+      $filterFormInput.attr('disabled','true');
+      ($(element).attr('type') === 'range') ? $filterPriceMax.html($(element).val() + '.00') : filterResultsBlock()
+      window.history.replaceState({ path: newUrl }, '', newUrl);
+      window.history.pushState({ path: newUrl }, '', newUrl);
+
+      $.ajax({
+        url: url,
+        method: 'GET',
+        success: function (data) {
+          let $collectionNewProducts = $(data).find('.collection__products-results').html(),
+              $filterNewPriceMin = $(data).find('.filter-group__price-range-min-value').html();
+          $collectionProducts.html($collectionNewProducts)
+          $filterPriceMin.html($filterNewPriceMin)
+          $filterFormInput.removeAttr('disabled');
+        }
+      });
+
+    }
+
+    $(document).on('click.deleteFilterResult', '.filter-result-close', function () {
+      $('[data-filter-type="' + $(this).parent().attr('data-result-type') + '"]').removeAttr('checked')
+      $(this).parent().remove()
+      filterResults()
+    })
+
+    $filterFormInput.on('change.inputFilters', function () {
+      filterResults(this)
+    })
+
+    window.onpopstate = function(event) {
+      let ajaxUrlBack = event.state.path;
+
+      $.ajax({
+        url: ajaxUrlBack,
+        method: 'GET',
+        success: function (data) {
+          let $collectionNewProducts = $(data).find('.collection__products-type')
+          $collectionProducts.html($collectionNewProducts)
+        }
+      });
+    };
+  }
+}
+
 $(document).ready(function () {
   theme.header()
 
@@ -885,6 +976,10 @@ theme.GLOBAL = function () {
 
   if ($('[data-section-type]').attr('data-section-type') == 'slick-slideshow') {
     theme.slickSlider()
+  }
+
+  if ($('.collection').length) {
+    theme.collection()
   }
 
   if ($('.pdpMain').length) {
