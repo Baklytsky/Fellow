@@ -56,11 +56,11 @@
         <div class='pdpMain__variant-image rel x f aic'
              data-variant-media='{{ variantId }}'>
           {%- if forloop.first and badge_text != blank -%}
-              <span class="productCard__badge abs z2 xsmall cb bg-xlightgrey">{{ badge_text }}</span>
+              <span class="productCard__badge abs z3 xsmall cb bg-xlightgrey">{{ badge_text }}</span>
           {%- endif -%}
           {%- if image.alt contains 'tag:' and forloop.first == false -%}
             {%- assign image_custom_tag = image.alt | split: 'tag:' | last -%}
-            <span class="productCard__badge abs z2 xsmall cb bg-xlightgrey">{{ image_custom_tag }}</span>
+            <span class="productCard__badge abs z3 xsmall cb bg-xlightgrey">{{ image_custom_tag }}</span>
           {%- endif -%}
           <img src="{{ imageSrc }}" class='x' alt='{{ image.alt }}' role='img' loading='lazy'/>
         </div>

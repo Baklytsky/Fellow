@@ -30,7 +30,12 @@
   <div class='collectionContainer'>
     <div class="collectionFilters">
       <form id="filter-form" class="filter-form" name="filter">
-        <div class="filter-group dropdown">
+        <div class="filter-group-mobile">
+          <button type="button" data-mobile-filter="custom">Filter <span></span> {% render 'icon' with 'dropdown' %}</button>
+          <button type="button" data-clear-filter="{{ collection.url }}">Clear all</button>
+          <button type="button" data-mobile-filter="sort">Sort By {% render 'icon' with 'dropdown' %}</button>
+        </div>
+        <div class="filter-group-wrapper filter-group-sort dropdown" data-mobile-dropdown="sort">
           <div class="dropdownHeader" data-dropdown-filter>
             <h3 class="dropdownHeader-title">
               Sort by
@@ -39,8 +44,8 @@
               {% render 'icon' with 'dropdown' %}
             </div>
           </div>
-          <div class="dropdownContent" data-dropdown-list style="display: none;">
-            <div class="filter-group-sort-by dropdownContent--animate-block">
+          <div class="dropdownContent" data-dropdown-list>
+            <ul class="filter-group-sort-by dropdownContent--animate-block">
               {% assign sort_by = collection.sort_by | default: collection.default_sort_by %}
               {%- assign order = 100 -%}
 
@@ -64,44 +69,47 @@
                 {%- endcase -%}
 
                 {%- if show_sort_filter -%}
-                <label class='filter-group-radio f aic'
-                       for='Filter-sort-by-{{ option.value }}-{{ forloop.index }}'
-                       style="order: {{ order }}">
-                  <input id='Filter-sort-by-{{ option.value }}-{{ forloop.index }}'
-                         type=radio
-                         name='sort_by'
-                         class="filter-group-input"
-                         value='{{ option.value }}'
-                         title='{{ filter_title }}'
-                         data-filter-type="sort-by"
-                         {% if option.value == sort_by %}checked{% endif %} />
-                  <span class="filter-group-circle f aic jcc rel"></span>
-                  <span class="filter-group-title">{{ filter_title }}</span>
-                </label>
+                  <li class="filter-group__list-item">
+                    <label class='filter-group-radio f aic'
+                           for='Filter-sort-by-{{ option.value }}-{{ forloop.index }}'
+                           style="order: {{ order }}">
+                      <input id='Filter-sort-by-{{ option.value }}-{{ forloop.index }}'
+                             type=radio
+                             name='sort_by'
+                             class="filter-group-input"
+                             value='{{ option.value }}'
+                             title='{{ filter_title }}'
+                             data-filter-type="sort-by"
+                             {% if option.value == sort_by %}checked{% endif %} />
+                      <span class="filter-group-circle f aic jcc rel"></span>
+                      <span class="filter-group-title">{{ filter_title }}</span>
+                    </label>
+                  </li>
                 {%- endif -%}
               {% endfor %}
-            </div>
+            </ul>
           </div>
         </div>
-        {%- for filter in collection.filters -%}
-          {%- assign filter_title = filter.label -%}
+        <div class="filter-group-wrapper filter-group-custom dropdown" data-mobile-dropdown="custom">
+          {%- for filter in collection.filters -%}
+            {%- assign filter_title = filter.label -%}
 
-          {%- if filter.label == 'Product type' -%}
-            {%- assign filter_title = 'Category' -%}
-          {%- endif -%}
+            {%- if filter.label == 'Product type' -%}
+              {%- assign filter_title = 'Category' -%}
+            {%- endif -%}
 
-          <div class="filter-group dropdown">
-            <div class="dropdownHeader" data-dropdown-filter>
-              <h3 class="dropdownHeader-title">
-                {{ filter_title }}
-              </h3>
-              <div class="dropdownHeader-icon">
-                {% render 'icon' with 'dropdown' %}
+            <div class="filter-group dropdown {% if filter.label == 'Price' %} filter-group-price {% endif %}">
+              <div class="dropdownHeader" data-dropdown-filter>
+                <h3 class="dropdownHeader-title">
+                  {{ filter_title }}
+                </h3>
+                <div class="dropdownHeader-icon">
+                  {% render 'icon' with 'dropdown' %}
+                </div>
               </div>
-            </div>
 
-            <div class="dropdownContent" data-dropdown-list style="display: none;">
-              <div class="dropdownContent--animate-block">
+              <div class="dropdownContent" data-dropdown-list>
+                <div class="dropdownContent--animate-block">
                   {%- case filter.type -%}
                   {%- when 'list' -%}
                     <ul class="filter-group__list">
@@ -111,38 +119,36 @@
                         {%- if filter_title == 'Color' -%}
                           {%- assign color_name = filter_value.value | handleize -%}
                           {%- if filter_value.value contains 'Limited Edition:' -%}
-                            {%- assign color_name = filter_value.value | split: 'Limited Edition:' | last | handleize  -%}
+                            {%- assign color_name = filter_value.value | split: 'Limited Edition:' | last | handleize -%}
                           {%- endif -%}
                           {%- assign color_title = color_name | replace: '-', ' '  | capitalize -%}
                         {%- endif -%}
 
-                          <li class="filter-group__list-item {% if color_name != blank -%}filter-group__list-item-color{%- endif %}">
-                            <label class='filter-group-radio f aic'
-                                   for='Filter-{{ filter.label }}-{{ forloop.index }}'
-                                    {% if color_name != blank -%} data-color="{{ color_name }}" {%- endif %}>
-                              <input id='Filter-{{ filter.label }}-{{ forloop.index }}'
-                                     type='radio'
-                                     name='{{ filter_value.param_name }}'
-                                     class="filter-group-input"
-                                     value='{{ filter_value.value }}'
-                                     title='{% if color_name != blank -%}{{ color_title }}{% else %}{{ filter_name }}{%- endif %}'
-                                     data-filter-type="{{ filter_title }}"
-                                     {% if color_name != blank -%} data-color="{{ color_name }}" {%- endif %}
-                                     {% if filter_value.active -%}checked{%- endif %} />
-                              <span class="filter-group-circle f aic jcc rel"
+                        <li class="filter-group__list-item {% if color_name != blank -%}filter-group__list-item-color{%- endif %}">
+                          <label class='filter-group-radio f aic'
+                                 for='Filter-{{ filter.label }}-{{ forloop.index }}'
+                                  {% if color_name != blank -%} data-color="{{ color_name }}" {%- endif %}>
+                            <input id='Filter-{{ filter.label }}-{{ forloop.index }}'
+                                   type='radio'
+                                   name='{{ filter_value.param_name }}'
+                                   class="filter-group-input"
+                                   value='{{ filter_value.value }}'
+                                   title='{% if color_name != blank -%}{{ color_title }}{% else %}{{ filter_name }}{%- endif %}'
+                                   data-filter-type="{{ filter_title }}"
+                                    {% if color_name != blank -%} data-color="{{ color_name }}" {%- endif %}
+                                    {% if filter_value.active -%}checked{%- endif %} />
+                            <span class="filter-group-circle f aic jcc rel"
                                       {% if color_name != blank -%} data-color="{{ color_name }}" {%- endif %}></span>
-                              {%- unless color_name != blank -%}
-                                <span class="filter-group-title">{{ filter_name }}</span>
-                              {%- endunless -%}
-                            </label>
-                          </li>
+                            <span class="filter-group-title">{% if color_name != blank -%}{{ color_title }}{% else %}{{ filter_name }}{%- endif %}</span>
+                          </label>
+                        </li>
                       {%- endfor -%}
                     </ul>
 
                   {%- when 'price_range' -%}
                     <div class="filter-group__price-range">
                       {% assign minPrice = collection.products | sort: 'price' %}
-                      <div class="filter-group__price-range-from" >
+                      <div class="filter-group__price-range-from">
                         <input name="{{ filter.min_value.param_name }}"
                                id="Filter-{{ filter.label }}-{{ forloop.index }}"
                                value="0"
@@ -176,13 +182,14 @@
                       </div>
                     </div>
                   {%- endcase -%}
+                </div>
               </div>
             </div>
-          </div>
-        {%- endfor -%}
+          {%- endfor -%}
+        </div>
       </form>
     </div>
-    <div class='collection__products'>
+    <div class='collection__products rel'>
       <div class="collection__products-filter-results"></div>
       <div class="collection__products-results">
         {%- assign collection_product_types = '' -%}

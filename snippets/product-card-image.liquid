@@ -3,7 +3,7 @@
 <div role='img' aria-label='Image of {{ product.title }}' class='productCard__img rel z0{% unless transparent_image == true %} productCard__img--solid{% endunless %}'>
 
   {% if badge_text and badge_text != blank %}
-    <span class="productCard__badge abs z2 xsmall cb bg-xlightgrey">{{ badge_text }}</span>
+    <span class="productCard__badge abs z3 xsmall cb bg-xlightgrey">{{ badge_text }}</span>
   {% endif %}
 
   <div class='productCard__img-container default'>
@@ -56,8 +56,20 @@
   <div class="productCardImg__QuickView">
     <button class="productCardImg__QuickViewButton js-product-view" data-quick-view="{{ url }}?view=quick-view" type="button">{{ 'products.product.quick_view' | t }}</button>
   </div>
-  <a class='productCardImg__ProductLink abs fill z2 js-product-link' href='{{ url }}' title="{{ product.title }}" aria-label='{{ product.title }}'></a>
+  <a class='productCardImg__ProductLink abs fill z2 js-product-link' href='{{ url }}' title="{{ product.title }}" aria-label='{{ product.title }}'>
+    {%- if product.metafields.custom_fields["product_alternative_image"] != blank -%}
+      {%- assign alternative_url = product.metafields.custom_fields["product_alternative_image"] -%}
+      <img src="{{ alternative_url }}"
+           alt="{{ alt }}"
+           class="productCardImg__AlternativeImage image-abs-cover"
+           role='img'
+           loading='lazy'>
+    {%- endif -%}
+  </a>
 </div>
 
 {% assign image_url = blank %}
 {% assign transparent_image = blank %}
+{% assign url = blank %}
+{% assign alternative_url = blank %}
+

@@ -14160,6 +14160,8 @@
         return function (node) {};
       }));
 
+  theme.updateSwatches = Kn;
+
   function Jn(t, e) {
     var n;
     if ("undefined" == typeof Symbol || null == t[Symbol.iterator]) {
