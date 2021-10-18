@@ -1,0 +1,43 @@
+{% assign badge_text = product.metafields.custom_fields.card_badge %}
+<div class='pdpMain__gallery x rel f'>
+  <div class='pdpMain__gallery-thumbnails'>
+    {% for image in product.images %}
+      {% if image.variants.size > 0 %}
+        {% for variant in image.variants %}
+          {%- assign variantId = variant.id -%}
+        {% endfor %}
+      {% else %}
+        {%- assign variantId = product.id | append: forloop.index -%}
+      {% endif %}
+      {%- assign imageSrc = image.src | img_url: '200x' -%}
+      <div class='pdpMain__gallery-thumbnails-item rel x' data-variant-img='{{ variantId }}'>
+        <img src='{{ imageSrc }}' class='image-abs-cover x' alt='{{ image.alt }}' role='img' loading='lazy'/>
+      </div>
+    {% endfor %}
+  </div>
+  <div class='pdpMain__gallery-wrapper x f rel'>
+    {% for image in product.images %}
+      {% if image.variants.size > 0 %}
+        {% for variant in image.variants %}
+          {%- assign variantId = variant.id -%}
+        {% endfor %}
+      {% else %}
+        {%- assign variantId = product.id | append: forloop.index -%}
+      {% endif %}
+      {%- assign imageSrc = image.src | img_url: '900x' -%}
+      <div class="x">
+        <div class='pdpMain__variant-image rel x rel'
+             data-variant-media='{{ variantId }}'>
+          {%- if forloop.first and badge_text != blank -%}
+            <span class="productCard__badge abs z3 xsmall cb bg-xlightgrey">{{ badge_text }}</span>
+          {%- endif -%}
+          {%- if image.alt contains 'tag:' and forloop.first == false -%}
+            {%- assign image_custom_tag = image.alt | split: 'tag:' | last -%}
+            <span class="productCard__badge abs z3 xsmall cb bg-xlightgrey">{{ image_custom_tag }}</span>
+          {%- endif -%}
+          <img src="{{ imageSrc }}" class='x image-abs-cover' alt='{{ image.alt }}' role='img'/>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>

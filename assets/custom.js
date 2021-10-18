@@ -282,6 +282,11 @@ theme.checkSlickResponse = function ($slider, config, response, maxMedia) {
   });
 }
 
+theme.qvChangeSlide = function () {
+  let modalVariantId = $('#ProductQuickView #quickAdd').attr('data-add-id'),
+      $modalSelectedVariantThumbnail = $('#modalContent').find('[data-variant-img="' + modalVariantId + '"]');
+  if ($modalSelectedVariantThumbnail.length) {$modalSelectedVariantThumbnail.trigger('click')}
+}
 
 theme.quickView = function (URL, innerContainer) {
   theme.openModal();
@@ -291,11 +296,12 @@ theme.quickView = function (URL, innerContainer) {
     method: 'GET',
     success: function (data) {
       innerContainer.html($(data).find('.pdpTemplate'));
-      theme.pdpQuickView();
-      theme.slickSlider();
+      if ($('#ProductQuickView .pdpMain__variant-image').length) {
+        theme.pdpQuickView();
+      }
       theme.qvChangeColorGroupName();
       $('#emptyModal').hide();
-      innerContainer.fadeIn("slow");
+      innerContainer.fadeIn(1000);
     }
   });
 }
@@ -656,7 +662,6 @@ theme.pdpQuickView = function () {
 
   // Remove all $(document) Events
   // clicks:
-  $(document).off('click.thumbnailsModal')
   $(document).off('click.pdpQvSelectSize')
   $(document).off('click.QvClose')
 
@@ -667,49 +672,43 @@ theme.pdpQuickView = function () {
     }
   })
 
-  function modalThumbnailScrollOnClick () {
-    $(document).on('click.thumbnailsModal', '.pdpMain__gallery-thumbnails-item', function () {
-      let scrollElement = $('[data-variant-media="' + $(this).attr('data-variant-img') + '"]');
-        $('#modalContent').animate({
-          scrollTop: scrollElement.position().top
-        }, 500);
-      $('.pdpMain__gallery-thumbnails-item').removeClass('current-thumbnail')
-      $(this).addClass('current-thumbnail')
-    })
-  }
-
   $(document).on('click.pdpQvSelectSize', '#ProductQuickView [data-option-size] .radio', function () {
     var $attrToRemove = $('#ProductQuickView [data-disabled-size="true"]')
     $attrToRemove.map((index, element) => $(element).removeAttr('data-disabled-size'))
   })
+  
+  function modalGallerySlider() {
+    let $gallerySlider = $('#ProductQuickView .pdpMain__gallery-wrapper'),
+        $thumbnailsSlider = $('#ProductQuickView .pdpMain__gallery-thumbnails');
 
-  function modalChangeActiveThumbnail() {
-    var $modalVariantImage = $('#modalContent .pdpMain__variant-image'),
-        $modalThumbnailSlider = $('#modalContent .pdpMain__gallery-thumbnails');
-    $('#modalContent .pdpMain__gallery-thumbnails-item').removeClass('current-thumbnail')
-    $("#modalContent .pdpMain__gallery-thumbnails-item:first").addClass('current-thumbnail')
-    $('#modalContent').on('scroll.modalGalleryImage', $.debounce(300, function () {
-      $modalVariantImage.each(function () {
-        let modalImagePosition = $(this)[0].getBoundingClientRect();
-        if (modalImagePosition.top < 150) {
-          let $thumbnailImage = $('#modalContent').find('[data-variant-img="' + $(this).attr('data-variant-media') + '"]')
-          let slideIndex = $thumbnailImage.data('slick-index')
-          $('.pdpMain__gallery-thumbnails-item').removeClass('current-thumbnail')
-          $thumbnailImage.addClass('current-thumbnail')
-          $modalThumbnailSlider.slick('slickGoTo', parseInt(slideIndex), true);
-        }
-      })
-    }))
+    $gallerySlider.slick({
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      arrows: false,
+      dots: false,
+      autoplay: false,
+      infinite: false,
+      fade: true,
+      asNavFor: $thumbnailsSlider
+    });
+
+    $thumbnailsSlider.slick({
+      slidesToShow: 6,
+      slidesToScroll: 1,
+      vertical: true,
+      verticalSwiping: true,
+      arrows: false,
+      dots: false,
+      autoplay: false,
+      infinite: false,
+      adaptiveHeight: true,
+      focusOnSelect: true,
+      asNavFor: $gallerySlider,
+    });
   }
 
-  function modalPdpThumbnails() {
-    modalThumbnailScrollOnClick()
-    modalChangeActiveThumbnail()
-  }
-
-  if ($('#modalContent .pdpMain__gallery-thumbnails').length) {
-    modalPdpThumbnails();
-  }
+  setTimeout(modalGallerySlider, 0);
+  setTimeout(theme.qvChangeSlide, 0);
 }
 
 theme.collection = function () {
@@ -864,8 +863,16 @@ $(document).ready(function () {
 })
 
 theme.GLOBAL = function () {
+  // Remove all $(document) Events
+  // clicks:
+  $(document).off('click.toggleTab')
+  $(document).off('click.closeModal')
+  $(document).off('click.dataQuickView')
+  $(document).off('click.quickViewATC')
+  $(document).off('click.jsCounterRemove')
+  $(document).off('click.radioGroup')
 
-  $(document).on('click', '[data-action="toggle-tab"]', function () {
+  $(document).on('click.toggleTab', '[data-action="toggle-tab"]', function () {
     theme.toggleTab($(this));
 
     if ($('.FeaturedCollections__CollectionLink').length) {
@@ -879,35 +886,26 @@ theme.GLOBAL = function () {
     }
   })
 
-  $(document).on('click', '[data-color]', function () {
-    let $parentElement = $(this).closest('[data-option-color]');
-    if ($parentElement.length) {
-      let $tabList = $parentElement[0];
-      let $elements = $('[data-color]');
-      theme.horizontalScroll($tabList, $elements, 20);
-    }
-  })
-
-  $(document).on('click', '#closeModal', function () {
+  $(document).on('click.closeModal', '#closeModal', function () {
     theme.closeModal();
   });
 
-  $(document).on('click', '[data-quick-view]', function () {
+  $(document).on('click.dataQuickView', '[data-quick-view]', function () {
     let viewURL = $(this).attr('data-quick-view');
     theme.quickView(viewURL, $('#modalContent'));
   });
 
-  $(document).on('click', '#ProductQuickView .js-counter-add', function () {
+  $(document).on('click.quickViewATC', '#ProductQuickView .js-counter-add', function () {
     qvChangeQTY(1);
     qvVariantChange ();
   })
 
-  $(document).on('click', '#ProductQuickView .js-counter-remove', function () {
+  $(document).on('click.jsCounterRemove', '#ProductQuickView .js-counter-remove', function () {
     qvChangeQTY(-1);
     qvVariantChange ();
   })
 
-  $(document).on('click', '#ProductQuickView .radio-group label', function () {
+  $(document).on('click.radioGroup', '#ProductQuickView .radio-group label', function () {
     let optionName = $($(this).find('input')).attr('name');
     let optionValue = $($(this).find('input')).attr('value');
     let $currentOption = $('[data-option-current]');
@@ -919,6 +917,8 @@ theme.GLOBAL = function () {
         qvVariantChange();
       }
     })
+
+    setTimeout(theme.qvChangeSlide, 0)
   });
 
 
@@ -987,10 +987,6 @@ theme.GLOBAL = function () {
         }
       }
     }
-
-    let modalVariantId = $('#ProductQuickView #quickAdd').attr('data-add-id'),
-        $modalSelectedVariantThumbnail = $('#modalContent').find('[data-variant-img="' + modalVariantId + '"]');
-      if ($modalSelectedVariantThumbnail.length) {$modalSelectedVariantThumbnail.trigger('click')}
 
     theme.qvChangeColorGroupName()
   }

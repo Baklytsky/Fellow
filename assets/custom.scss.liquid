@@ -1205,10 +1205,13 @@ h1, h2, h3, h4, h5, h6 {
   transform: translate(-50%, -50%);
   width: 100%;
   max-width: 910px;
-  max-height: 90%;
+  min-height: 410px;
+  max-height: 630px;
   padding: 40px;
   background: $color-white;
   border-radius: 12px;
+  transition: all .2s linear;
+  overflow: hidden;
 }
 
 #emptyModal {
@@ -1243,9 +1246,7 @@ h1, h2, h3, h4, h5, h6 {
 
 #modalContent {
   width: 100%;
-  max-height: 80vh;
-  overflow-y: auto;
-  overflow-x: hidden;
+  height: inherit;
 
   .pdpTemplate {
     margin: 0;
@@ -1258,6 +1259,15 @@ h1, h2, h3, h4, h5, h6 {
       display: none;
     }
 
+    .pdpQuickView__gallery {
+      width: 61%;
+    }
+
+    .pdpQuickView__description {
+      width: 39%;
+      overflow-x: hidden;
+    }
+
     .pdpMain__container {
       padding: 0;
     }
@@ -1268,24 +1278,84 @@ h1, h2, h3, h4, h5, h6 {
 
     .pdpMain__gallery-thumbnails,
     .pdpMain__details {
-      top: 0;
+      position: static;
+      top: unset;
+      height: 100%;
+      overflow: hidden;
 
       .cart__button {
         margin: 0;
       }
     }
 
+    .pdpMain__gallery-thumbnails {
+      .slick-current {
+        border: 2px solid #ABABAB;
+      }
+    }
+
     .pdpMain__details {
       padding-right: 2px;
+      height: 100%;
+
+      form {
+        display: flex;
+        flex-direction: column;
+        height: inherit;
+        max-height: 550px;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+          display: none;
+        }
+        ::-webkit-scrollbar {
+          display: none;
+        }
+      }
+
+      .pdp__options {
+        margin-top: auto;
+      }
+
+      .pdp__options>div {
+        flex-direction: column;
+      }
+
+      .option-groups {
+        margin-top: 0;
+      }
+
+      .option-groups__group {
+        padding-top: 0;
+        padding-bottom: 16px;
+      }
+    }
+
+    .pdp__description p {
+      font-size: 14px;
+      line-height: 120%;
     }
 
     .pdpMain__gallery-thumbnails {
       max-width: 47px;
+      height: auto;
       margin-bottom: 6px;
     }
 
     .pdpMain__gallery-wrapper {
-      padding-bottom: 125%;
+      height: inherit;
+      max-height: 412px;
+      margin: 0;
+      padding: 0 34px 0 13px;
+      overflow: hidden;
+    }
+
+    .pdpMain__variant-image {
+      padding-top: 100%;
+      margin: 0;
     }
 
     .pdpMain__gallery-thumbnails .pdpMain__gallery-thumbnails-item {
@@ -1309,6 +1379,10 @@ h1, h2, h3, h4, h5, h6 {
       font-weight: bold;
       font-size: 16px;
       line-height: 1em;
+    }
+
+    #atc-wrapper {
+      margin-top: 8px;
     }
   }
 }
@@ -4465,11 +4539,12 @@ h2.pdpCopy__header-price ,
 }
 
 #ProductQuickView {
-  .option-groups {
+  .option-groups__group .radio-group {
     width: 225px;
     overflow-x: scroll;
     overflow-y: hidden;
     margin-left: 0;
+    padding-left: 0;
     -ms-overflow-style: none;
     scrollbar-width: none;
 
@@ -4481,8 +4556,17 @@ h2.pdpCopy__header-price ,
     }
   }
 
-  .option-groups__group {
-    padding-left: 0;
+  .option-groups__group .radio-group[data-option-size] {
+    width: 100%;
+    flex-wrap: nowrap;
+    margin-left: -16px;
+    margin-top: -0.25rem;
+
+    .radio__label-size-image {
+      max-width: 92px;
+      min-width: 92px;
+      padding-top: 0;
+    }
   }
 
   .pdpMain__details {
