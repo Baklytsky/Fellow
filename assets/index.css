@@ -18188,6 +18188,10 @@ textarea {
   transition: border-color var(--fast) var(--ease)
 }
 
+.radio-group[data-option-color] .radio__title-bg-image {
+  border: 2px solid white;
+}
+
 .radio-group[data-option-color] .radio__title:before,
 .radio-group[data-option-color] .radio__title:after,
 .radio-group[data-option-material] .radio__title:before,
@@ -18209,7 +18213,7 @@ textarea {
 .radio-group[data-option-material] .radio__title:before {
   z-index: 2;
   transform: rotate(-45deg);
-  clip: rect(0px, 10px, 20px, 0px)
+  clip: rect(0px, 12px, 24px, 0px)
 }
 
 @media screen and (max-width: 991.98px) {
@@ -18226,7 +18230,7 @@ textarea {
 
 .radio-group[data-option-color] input:checked+.radio__title,
 .radio-group[data-option-material] input:checked+.radio__title {
-  border-color: #000
+  border-color: #000;
 }
 
 /*.radio-group[data-option-color] input:checked+.radio__title:before,*/
@@ -19340,7 +19344,7 @@ ul.list {
 }
 .productCard__content .radio-group[data-option-color] input.active+.radio__title,
 .productCard__content .radio-group[data-option-material] input.active+.radio__title {
-  border-color: #000;
+  border-color: #000 !important;
 }
 
 /*.productCard__content .radio-group[data-option-color] input.active+.radio__title:before,*/
@@ -19356,12 +19360,12 @@ ul.list {
 .productCard__content .radio-group[data-option-material] .radio__title:after {
   content: "";
   position: absolute;
-  top: 1px;
+  top: 0;
   bottom: 0;
-  left: 1px;
+  left: 0;
   right: 0;
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
   border: 2px solid #C2C2C2;
   border-radius: 100px;
   background-color: currentColor
@@ -19525,6 +19529,11 @@ h3.productCard__title {
   -webkit-transition: all 150ms var(--ease);
 }
 
+.productCardImg__AlternativeImage {
+  opacity: 0;
+  visibility: hidden;
+}
+
 @media screen and (min-width: 992px) {
   .productCardImg__QuickView {
     display: block;
@@ -19539,6 +19548,12 @@ h3.productCard__title {
     -o-transition: opacity 500ms var(--ease);
     -moz-transition: opacity 500ms var(--ease);
     -webkit-transition: opacity 500ms var(--ease);
+  }
+
+  .productCardImg__ProductLink:hover .productCardImg__AlternativeImage {
+    opacity: 1;
+    visibility: visible;
+    z-index: 2;
   }
 }
 
@@ -19629,6 +19644,12 @@ h3.productCard__title {
   max-width: 200px;
   overflow-x: scroll;
   overflow-y: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.productCard__variants .productCard__options::-webkit-scrollbar {
+  display: none;
 }
 
 @media screen and (max-width: 640px) {
@@ -21845,39 +21866,46 @@ input[name=product_search_field] {
 .subcollection__products {
   display: flex;
   flex-flow: row wrap;
-  margin-top: 4vw
+  margin: 0 -12px 48px;
 }
 
 @media screen and (min-width: 1200px) {
   .subcollection__products {
-    margin-left: -0.75vw;
-    margin-right: -0.75vw
-  }
-}
-
-@media screen and (max-width: 1199.98px) {
-  .subcollection__products {
-    justify-content: space-between
+    margin: 0 -12px;
   }
 }
 
 .subcollection__products>div {
   width: 100%;
-  margin-bottom: 2rem
+  margin-bottom: 16px
+}
+
+.subcollection__products.one-third>div {
+  margin: 0 12px 16px;
+  width: calc(50% - 24px)
 }
 
 @media screen and (min-width: 768px) {
   .subcollection__products.one-fourth>div {
-    margin-bottom: 3vw;
-    width: calc(50% - 1.5vw)
+    margin-bottom: 64px;
+    width: calc(50% - 24px)
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .subcollection__products.one-third>div {
+    width: calc((100% / 3) - 24px);
+    margin-left: 12px;
+    margin-right: 12px;
+    margin-bottom: 64px;
   }
 }
 
 @media screen and (min-width: 1200px) {
   .subcollection__products.one-fourth>div {
-    width: calc(25% - 1.5vw);
-    margin-left: .75vw;
-    margin-right: .75vw
+    width: calc(25% - 24px);
+    margin-left: 12px;
+    margin-right: 12px
   }
 }
 
@@ -22091,8 +22119,8 @@ input[name=product_search_field] {
 .pdpMain__details {
   background: #fff;
   position: sticky;
-  transition: top .3s linear;
   top: calc(var(--header-height) + 24px);
+  padding-bottom: 24px;
 }
 
 @media screen and (max-width: 991.98px) {

@@ -152,150 +152,134 @@
     {% if product.metafields.custom_fields["desktop_masthead_image"] or product.metafields.custom_fields["mobile_masthead_image"] != blank %}
       {%- assign masthead_exists = true -%}
     {% endif %}
-    <div class='module full' {%- comment -%}data-component='pdpMain'{%- endcomment -%}>
-      <div class='pdpMain row no-gutters'>
-        <div class='col-lg-7 order-lg-1'>
+    <div class='pdpMain no-gutters'>
+      <div class='pdpQuickView__gallery'>
 
-          {% include 'pdb-image-thumbnails.liquid' %}
+        {% include 'pdp-image-thumbnails-quick-view.liquid' %}
 
-        </div>
-        <div class='col-lg-5 order-lg-2'>
+      </div>
+      <div class='pdpQuickView__description'>
 
-          {% if product.metafields.custom_fields["product_tagline"] != blank %}
-            {% assign tagline = product.metafields.custom_fields["product_tagline"] %}
+        {% if product.metafields.custom_fields["product_tagline"] != blank %}
+          {% assign tagline = product.metafields.custom_fields["product_tagline"] %}
+        {% endif %}
+
+        {% capture dataProductForm %}
+          { "money_format": {{ shop.money_format | json }}, "button": {{ 'products.product.add_to_cart' | t | json }} }
+        {% endcapture %}
+
+        <div class='pdpMain__details z2 rel'>
+          {% form 'product', product, data-product-form: dataProductForm %}
+          <div class='pdpCopy__header'>
+            <div class='f fdc jcc ais'>
+              <h1 class='pdpCopy__header-title'>{{ product.title }}</h1>
+              <h2 data-selected-var-price
+                  class="ml1 visually-hidden">{{ current_variant.price | money | remove: '.00' }}</h2>
+              {% if product.available %}
+                {% if product.compare_at_price > product.price %}
+
+                  <h2 class="inline-block card__price--sale ml1 pdpCopy__header-price">
+                    {{ current_variant.price | money_without_trailing_zeros }}
+                  </h2>
+                  <span class="visually-hidden">{{ 'products.current_variant.regular_price' | t }}</span>
+                  <strong class="inline-block strike card__price--regular ml1 pdpCopy__header-price">{{ current_variant.compare_at_price | money_without_trailing_zeros }}</strong>
+                {% else %}
+                  <h2 data-selected-var-price
+                      class="m0 pdpCopy__header-price">{{ current_variant.price | money | remove: '.00' }}</h2>
+                {% endif %}
+              {% else %}
+                <h2 class='strike'>{{ current_variant.price | money_without_trailing_zeros }}</h2>
+              {% endif %}
+            </div>
+
+            {% if product.description != blank %}
+              <div class='pdp__description'>
+                <p>{{ product.description | truncate: 80 | strip_html }}</p>
+              </div>
+            {% endif %}
+
+            <div data-shop-pay class='shop-pay mb15'>
+              {{ form | payment_terms }}
+            </div>
+          </div>
+
+          {% include 'product-options' %}
+
+          {% if section.settings.quantity_selector_inline != true and section.settings.show_quantity_selector != true %}
+            <div class='pb15'
+                {% if section.settings.show_quantity_selector != true or product.tags contains 'gift' %}
+                style='display:none'
+                {% endif %}>
+              {% include 'component-counter' %}
+            </div>
           {% endif %}
 
-          {% capture dataProductForm %}
-            { "money_format": {{ shop.money_format | json }}, "button": {{ 'products.product.add_to_cart' | t | json}} }
-          {% endcapture %}
+          <div class='f fdr jcb' id='atc-wrapper'>
 
-          <div class='pdpMain__details z2 rel'>
-            {% form 'product', product, data-product-form: dataProductForm %}
-              <div class='pdpCopy__header'>
-                <div class='f fdc jcc ais'>
-                  <h1 class='pdpCopy__header-title'>{{ product.title }}</h1>
-                  <h2 data-selected-var-price class="ml1 visually-hidden">{{ current_variant.price | money | remove: '.00' }}</h2>
-                  {% if product.available %}
-                    {% if product.compare_at_price > product.price %}
-
-                      <h2 class="inline-block card__price--sale ml1 pdpCopy__header-price">
-                        {{ current_variant.price | money_without_trailing_zeros }}
-                      </h2>
-                      <span class="visually-hidden">{{ 'products.current_variant.regular_price' | t }}</span>
-                      <strong class="inline-block strike card__price--regular ml1 pdpCopy__header-price">{{ current_variant.compare_at_price | money_without_trailing_zeros }}</strong>
-                    {% else %}
-                      <h2 data-selected-var-price class="m0 pdpCopy__header-price">{{ current_variant.price | money | remove: '.00' }}</h2>
-                    {% endif %}
-                  {% else %}
-                    <h2 class='strike'>{{ current_variant.price | money_without_trailing_zeros }}</h2>
-                  {% endif %}
-                </div>
-
-                {% if tagline != blank %}
-                  <div class='pdp__tagline'>
-                    {{ tagline | capitalize }}
-                  </div>
-                {% endif %}
-
-                {% if product.description != blank %}
-                  <div class='pdp__description'>
-                    <p>{{ product.description | truncate: 300 | strip_html }}</p>
-                  </div>
-                {% endif %}
-
-                <div class="pdp__reviews hide-mobile">
-                  {%- assign reviews_count = product.metafields.yotpo.reviews_count | plus: 0 -%}
-                  {%- if reviews_count > 0 -%}
-                    {% include 'yotpo-star-rating-widget' %}
-                  {%- endif -%}
-                </div>
-
-                <div data-shop-pay class='shop-pay mb15'>
-                  {{ form | payment_terms }}
-                </div>
-              </div>
-
-              {% include 'product-options' %}
-
-              {% if section.settings.quantity_selector_inline != true %}
-                <div class='pb15'
-                    {% if section.settings.show_quantity_selector !=true or product.tags contains 'gift' %}
-                      style='display:none'
-                    {% endif %}>
-
+            {% unless template contains 'gift_card' %}
+              {% if section.settings.show_quantity_selector and section.settings.quantity_selector_inline %}
+                <div class="f is-inline">
                   {% include 'component-counter' %}
                 </div>
               {% endif %}
+            {% endunless %}
 
-                <div class='{% if template contains 'gift_card' %}f fdc jcb{% else %}f fdr jcb{% endif %}'  id='atc-wrapper'>
-
-                {% unless template contains 'gift_card' %}
-                  {% if section.settings.show_quantity_selector and section.settings.quantity_selector_inline %}
-                    <div class="f is-inline">
-                      {% include 'component-counter' %}
-                    </div>
-                  {% endif %}
-                {% endunless %}
-
-                {%- capture cta -%}
-                  {% if product.available %}
-                    <span data-atc-copy class="js-atc-copy">
+            {%- capture cta -%}
+              {% if product.available %}
+                <span data-atc-copy class="js-atc-copy">
                       {% if product.tags contains 'preorder' %}
                         Preorder
                       {% else %}
                         Add to Cart
                       {% endif %}
                     </span>
-                    <span data-selected-var-price style="display: none">{{ current_variant.price | money }}</span>
-                    {%- assign disableVal = false -%}
-                  {% else %}
-                    {% if product.tags contains 'discontinued' %}
-                      Discontinued
-                    {% else %}
-                      Out of Stock
-                    {% endif %}
-                    {%- assign disableVal = true -%}
-                  {% endif %}
-                {%- endcapture -%}
+                <span data-selected-var-price style="display: none">{{ current_variant.price | money }}</span>
+                {%- assign disableVal = false -%}
+              {% else %}
+                {% if product.tags contains 'discontinued' %}
+                  Discontinued
+                {% else %}
+                  Out of Stock
+                {% endif %}
+                {%- assign disableVal = true -%}
+              {% endif %}
+            {%- endcapture -%}
 
-                {%- assign cta_data = product.selected_or_first_available_variant.id | prepend: 'data-add-id="' | append: '" data-add-qty="1"' -%}
-                  <div class="pdpDetails__btns" data-disabled-size="{{ product_has_size_option }}">
+            {%- assign cta_data = product.selected_or_first_available_variant.id | prepend: 'data-add-id="' | append: '" data-add-qty="1"' -%}
+            <div class="pdpDetails__btns" data-disabled-size="{{ product_has_size_option }}">
 
-                    {%- if product_has_size_option -%}
-                      <button type="button" class="cart__button--select-size" disabled>Select size</button>
-                    {%- endif -%}
+              {%- if product_has_size_option -%}
+                <button type="button" class="cart__button--select-size" disabled>Select size</button>
+              {%- endif -%}
 
-                    {%
-                      include 'component-button' with
-                      tag: 'button',
-                      id: 'quickAdd',
-                      name: 'add',
-                      type: 'submit',
-                      href: '#',
-                      className: 'cart__button',
-                      dataAttr: cta_data,
-                      disabled: disableVal,
-                      cta: cta,
-                    %}
+              {% include 'component-button' with
+                tag: 'button',
+                id: 'quickAdd',
+                name: 'add',
+                type: 'submit',
+                href: '#',
+                className: 'cart__button',
+                dataAttr: cta_data,
+                disabled: disableVal,
+                cta: cta, %}
 
-                    <div class='is-hidden' data-bis>
-                      <button class='button cart__button klaviyo-bis-trigger'>Out of Stock | Notify Me</button>
-                    </div>
-                  </div>
-
+              <div class='is-hidden' data-bis>
+                <button class='button cart__button klaviyo-bis-trigger'>Out of Stock | Notify Me</button>
               </div>
-              
-              <p id="PdpErrorMessage"></p>
-
-              <div class='d-md-none' data-pay-btn>
-                <div class='py1'>
-                  {{ form | payment_button }}
-                </div>
-              </div>
-            <a href="{{ product.url }}" class="QuickView__FullPage">See full page</a>
             </div>
-          {% endform %}
+
+          </div>
+
+          <p id="PdpErrorMessage"></p>
+
+          <div class='d-md-none' data-pay-btn>
+            <div class='py1'>
+              {{ form | payment_button }}
+            </div>
+          </div>
+          <a href="{{ product.url }}" class="QuickView__FullPage">See full page</a>
         </div>
+        {% endform %}
       </div>
     </div>
   </div>

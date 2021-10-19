@@ -1,0 +1,55 @@
+{% if altText != blank %}
+  {% assign img_alt = altText | replace: "'", ' ' %}
+{% else %}
+  {% assign img_alt = section.settings.title | replace: "'", ' ' %}
+{% endif %}
+
+{%- assign desctop_image_class = 'image image-abs-cover' -%}
+
+{%- if imgMobile != blank -%}
+  {%- assign desctop_image_class = 'image image-abs-cover hide-mobile' -%}
+{%- endif -%}
+
+<div class="collectionHero">
+  <div class="collectionHero__media rel">
+    {% if img != blank %}
+      {%
+        include 'component-image' with
+        src: img,
+        alt: img_alt,
+        className: desctop_image_class,
+        absolute: true,
+        fill: true
+      %}
+    {% endif %}
+    {%- if imgMobile != blank -%}
+      {%
+        include 'component-image' with
+        src: imgMobile,
+        alt: img_alt,
+        className: 'image image-abs-cover hide-desktop',
+        absolute: true,
+        fill: true
+      %}
+    {%- endif -%}
+  </div>
+  <div class='collectionHero__content'>
+      <h2 class='collectionHero__contentHeading'>{{ heading }}</h2>
+      {% if copy != blank %}
+        <div class="collectionHero__contentDescription">
+          {{ copy }}
+        </div>
+      {% endif %}
+  </div>
+</div>
+
+{% assign copy = blank %}
+{% assign img = blank %}
+{% assign imgMobile = blank %}
+{% assign alt = blank %}
+{% assign className = blank %}
+{% assign mobileHidden = blank %}
+{% assign dataAttr = blank %}
+{% assign overlay = blank %}
+{% assign overlap = blank %}
+{% assign cx = '' %}

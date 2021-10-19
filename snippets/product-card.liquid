@@ -1,10 +1,10 @@
-{% assign url = product.url %}
+{% assign url = '/products/' | append: product.handle %}
 {% assign price = product.price | money %}
 {% assign comparePrice = product.compare_at_price | money %}
 
 {% assign image_url = product_image_url %}
 {% if image_url == blank or image_url.size < 1 %}
-  {% assign image_url = product_image | default: product.featured_image | img_url: '400x' %}
+  {% assign image_url = product_image | default: product.featured_image | img_url: '500x' %}
 {% endif %}
 
 {% assign alt = product.featured_image.alt | default: product.title | escape %}
@@ -43,7 +43,8 @@
       hide_variants: hide_variants,
       image_url: image_url,
       alt: alt,
-      transparent_image: true
+      transparent_image: true,
+      url: url
     %}
     {% include 'product-card-details', large_title: large_title %}
     {% if product.options and hide_variants != true %}

@@ -11,6 +11,12 @@
             {% for variant in product.variants %}
               {% if variant.option1 == value or variant.option2 == value %}
                 {%- assign color_count = color_count | plus: 1 -%}
+
+                {%- if option_name == 'color'-%}
+                  {%- assign color_name = value | handleize -%}
+                  {%- assign color_swatch_name = product.handle | append: '_' | append: color_name | append: '.png' -%}
+                  {%- assign color_swatch_image = images[color_swatch_name] -%}
+                {%- endif -%}
                 
                 <label class='radio f aic rel js-color-update' for='{{ product.title | handleize }}-{{ option_name }}__{{ value | handleize }}' {% if option_name == 'color' or option_name == 'material' %}data-color='{{ value | handleize }}'{% endif %}>
                   <span class='u-sr-only'>Label for {{ product.title }} {{ option_name }}</span>
@@ -25,11 +31,12 @@
                     {% if option_name == 'material' %}data-material='{{ value | handleize }}'{% endif %}
                     value='{{ value }}'
                     data-option-selector>
-                  <div class="radio__title js-productCard-option js-color-update"
+                  <div class="radio__title js-productCard-option js-color-update {% if color_swatch_image != blank %}radio__title-bg-image{% endif %}"
                     {% if option_name == 'color' %}data-color='{{ value | handleize }}'{% endif %}
                     {% if option_name == 'material' %}data-material='{{ value | handleize }}'{% endif %}
                     data-variant-url='{{ variant.url }}'
-                    data-variant-id='{{ variant.id }}'>
+                    data-variant-id='{{ variant.id }}'
+                    {% if color_swatch_image != blank %}style="background: url({{ color_swatch_image | img_url: '64x64' }}) no-repeat center center / cover; color: transparent; border-color: white"{% endif %}>
                   </div>
                   {% comment %}
                     <a href="{{ variant.url }}" class='fill abs x y z2' aria-label='{{ product.title }} / {{ variant.title }}'></a>
