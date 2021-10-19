@@ -718,6 +718,7 @@ theme.collection = function () {
   $(document).off('click.mobileFilterBar')
   $(document).off('click.mobileClearAll')
   $(document).off('change.inputFilters')
+  $(document).off('input.changeRange')
   $(document).off('resize.filter')
 
   if ($('[data-dropdown-filter]').length) {
@@ -757,40 +758,41 @@ theme.collection = function () {
     function filterResultsBlock() {
       let $filterFormRadioInput = $(document).find('#filter-form input[type="radio"]'),
           $collectionFilterResults = $(document).find('.collection__products-filter-results');
-      $filterFormRadioInput.map(function (index, element) {
-        if ($(element).is(':checked')) {
-          $('[data-result-type="' + $(element).attr('data-filter-type') + '"]').remove()
-          if ($(element).attr('data-filter-type') === 'Color') {
-            $collectionFilterResults.append(
-                `<span class="filter-result f aic" data-result-type="${$(element).attr('data-filter-type')}">
+      if ($filterFormRadioInput.length) {
+        $filterFormRadioInput.map(function (index, element) {
+          if ($(element).is(':checked')) {
+            $('[data-result-type="' + $(element).attr('data-filter-type') + '"]').remove()
+            if ($(element).attr('data-filter-type') === 'Color') {
+              $collectionFilterResults.append(
+                  `<span class="filter-result f aic" data-result-type="${$(element).attr('data-filter-type')}">
                   <span class="filter-group-circle f aic jcc rel" data-color="${$(element).attr('data-color')}"></span>
                   ${$(element).attr('title')}
                   <span class="filter-result-close"></span>
                 </span>`)
-          } else {
-            $collectionFilterResults.append(
-                `<span class="filter-result f aic" data-result-type="${$(element).attr('data-filter-type')}">
+            } else {
+              $collectionFilterResults.append(
+                  `<span class="filter-result f aic" data-result-type="${$(element).attr('data-filter-type')}">
                   ${$(element).attr('title')}
                   <span class="filter-result-close"></span>
                 </span>`)
+            }
           }
-        }
-      })
+        })
+      }
     }
 
     filterResultsBlock()
 
-    function filterResults(element) {
+    function filterResults() {
       let $filterForm = $(document).find('#filter-form'),
           $collectionProducts = $(document).find('.collection__products-results'),
           $filterFormInput = $filterForm.find('input'),
           $filterPriceMin = $filterForm.find('.filter-group__price-range-min-value'),
-          $filterPriceMax = $filterForm.find('.filter-group__price-range-max-value'),
           formData = $filterForm.serialize(),
           url = window.location.protocol + '//' + window.location.host + window.location.pathname + '?view=ajax&' + formData;
 
       $filterFormInput.attr('disabled','true');
-      ($(element).attr('type') === 'range') ? $filterPriceMax.html($(element).val() + '.00') : filterResultsBlock()
+      filterResultsBlock()
 
       $.ajax({
         url: url,
@@ -815,7 +817,7 @@ theme.collection = function () {
     })
 
     $(document).on('change.inputFilters', '#filter-form input', function () {
-      filterResults(this)
+      filterResults()
       $(this).parents('ul').find('.filter-group__list-item').removeClass('active-input')
       $(this).parents('.filter-group__list-item').addClass('active-input')
 
@@ -830,6 +832,11 @@ theme.collection = function () {
           checkedInputs = $(document).find('#filter-form input:checked').length,
           rangeValueChanged = (parseInt($filterPriceRange.attr('max')) !== parseInt($filterPriceMax.text()));
       (checkedInputs || rangeValueChanged ) ? $('[data-clear-filter]').show() : $('[data-clear-filter]').hide()
+    })
+
+    $(document).on('input.changeRange', '#filter-form input[type="range"]', function () {
+      let $filterPriceMax = $(document).find('.filter-group__price-range-max-value');
+      $filterPriceMax.html($(this).val() + '.00')
     })
 
     $(document).on('click.mobileClearAll', '[data-clear-filter]', function () {
