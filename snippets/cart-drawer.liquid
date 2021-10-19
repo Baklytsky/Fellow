@@ -2,34 +2,39 @@
 <section class='cart-drawer-outer fix fill x z10' aria-expanded='false' tabindex='-1' data-component='cartDrawer'>
   <div class='cart-drawer-overlay abs fill js-overlay'></div>
   <div id='cart-drawer-content' class='cart-drawer y x f abs top right bottom js-cart-drawer'>
-    <header class='outer x z2'>
-      <div class='f aic rel'>
-        <h3 class='mv0 ac x b'>YOUR CART (<span class='js-cart-count'>{{ cart.item_count }}</span>)</h3>
-        <button aria-label="Cart Close" type="button" id="closeCart" class='abs right button--reset js-close'>
-          {% include 'icon-close' %}
+    <header class='cart-drawer__header f fdc x z2'>
+      <div class="cart-drawer__header-content f aic jcc">
+        {%- render 'icon' with 'cart' -%}
+        <span class='js-cart-count cart-drawer__count'>{{ cart.item_count }}</span>
+
+        <button aria-label="Cart Close" type="button" id="closeCart" class='cart-drawer__close button--reset js-close'>
+          {%- render 'icon', icon: 'arrow-next' -%}
         </button>
       </div>
-    </header>
 
-    <div class='free-shipping outer ac mb2'>
-      <div class='free-shipping__meter f aic'>
-        <div class='free-shipping__meter__progress js-shipping-progress-bar'></div>
-      </div>
-        <div class='free-shipping--unmet oswald caps mt075 js-free-shipping-unmet-msg
+      <p class='cart-drawer__header-text ac js-empty-cart-text'>{{ 'cart.general.empty' | t }}</p>
+
+      <div class="free-shipping js-free-shipping is-hidden">
+        <div class='free-shipping--unmet js-free-shipping-unmet-msg
         {% if cart.total_price > 9900 %} is-hidden{% endif %}'>
-          You're <strong><span class='js-free-shipping-amount-remaining'>$99</span></strong> away from free US shipping
+          You're <strong><span class='js-free-shipping-amount-remaining'>$99.00</span></strong> away from free US shipping
         </div>
-        <div class='free-shipping--met oswald caps mt075 js-free-shipping-met-msg
+        <div class='free-shipping--met js-free-shipping-met-msg
         {% if cart.total_price < 9900 %} is-hidden{% endif %}'>
           {% if settings.free_shipping_met_msg != blank %}
             {{ settings.free_shipping_met_msg }}
           {% else %}
-            Good news! You get free standard shipping.
+            Congrats! You get free US Shipping!
           {% endif %}
         </div>
-    </div>
 
-    <div class='cart-drawer__items-outer outer'>
+        <div class='free-shipping__meter f aic'>
+          <div class='free-shipping__meter__progress js-shipping-progress-bar'></div>
+        </div>
+      </div>
+    </header>
+
+    <div class='cart-drawer__items-outer'>
       <div class='cart-drawer__items-inner js-cart-drawer-items'>
         <div class='js-items rel x y'>
           <div class='abs fill'>
@@ -42,7 +47,11 @@
       </div>
     </div>
 
-    <footer class='cart-drawer__footer outer js-cart-footer'>
+    {%- comment -%}
+      {% include 'cart-upsell' %}
+    {%- endcomment -%}
+
+    <footer class='cart-drawer__footer js-cart-footer f aic jcb'>
       {% comment %}
       Disabled. Recommend removing this and adding functionality to cart upsell
       -ae 04.20.21
@@ -51,26 +60,25 @@
       {% endif %}
       related schema available in assets/cart-free-product-schema.js
       {% endcomment %}
-      {% if settings.enable_cart_banner %}
-        {% include 'cart-banner' %}
-      {% endif %}
 
       <section class='cart-footer__total'>
-        <div class='cart-footer__totalLine f aic jcb oswald--n4'>
-          <span class='mv1 sans caps ac medium'>Subtotal</span>
-          <span class='js-subtotal'>$-.--</span>
+        <div class='cart-footer__total-item f aic js-shipping-free-text is-hidden'>
+          <span>{{ 'cart.general.shipping_free' | t }}</span>
         </div>
-
-        {%
-          include 'component-button' with
-          tag: 'a',
-          cta: 'Checkout',
-          href: '/checkout',
-          className: 'y no-ajax cart__button cart-checkout__button gradient-hover'
-        %}
+        <div class='cart-footer__total-item f aic'>
+          <span>{{ 'cart.general.subtotal' | t }}</span>
+          <span class='js-subtotal'></span>
+        </div>
       </section>
+
+      {%
+        include 'component-button' with
+        tag: 'a',
+        cta: 'Checkout',
+        href: '/checkout',
+        className: 'btn btn--light no-ajax cart-checkout__button'
+      %}
     </footer>
 
-    {% include 'cart-upsell' %}
   </div>
 </section>

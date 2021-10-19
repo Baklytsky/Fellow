@@ -9919,7 +9919,7 @@
       var e = t.name,
           n = t.value;
       return "color" === e.toLowerCase() && n.indexOf(":") > -1 ? n.split(":")[1] : "Default Title" === n ? "" : n
-    })).join(" / ") : ""
+    })).join(" | ") : ""
   };
 
   function z(t) {
@@ -9957,11 +9957,11 @@
                         .concat(i, " >\n      <a href='")
                         .concat(c, "' class=\"cart-drawer__itemImage\">\n        <img src='")
                         .concat(h, "' />\n      </a>\n\n      <div class='cart-drawer__itemContent f fdc'>\n        <div class='cart-drawer__itemDetails'>\n          <a href='")
-                        .concat(c, "' class='oswald caps mv0 p'>")
-                        .concat(o, "</a>\n          <div class='xxsmall sans caps cm mt025 book'>")
+                        .concat(c, "' class='cart-drawer__itemTitle'>")
+                        .concat(o, "</a>\n          <div class='cart-drawer__itemOptions'>")
                         .concat(f, "</div>\n        </div>\n\n        <div class='f aic jcb pt05'>\n          <div class='cart-item__stepper aic f ")
                         .concat(0 === a ? "is-disabled" : "", "'>\n            <div class='cart-stepper js-remove-single' data-key='" + n.key + "'>-</div>\n            <div class='cart-quantity js-single-quantity'>")
-                        .concat(l, "</div>\n            <div class='cart-stepper js-add-single' data-key='" + n.key + "'>+</div>\n          </div>\n\n          <div class='oswald--n4'>")
+                        .concat(l, "</div>\n            <div class='cart-stepper js-add-single' data-key='" + n.key + "'>+</div>\n          </div>\n\n          <div class='cart-item__price'>")
                         .concat(p, "</div>\n        </div>\n\n        <button class='button--reset cart-drawer__itemAction js-remove-item' data-key='" + n.key + "'>")
                         .concat(
                             '\n  <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentcolor" stroke-width="3" style="display:inline-block;vertical-align:middle;overflow:visible;"><path d="M1.0606601717798212 1.0606601717798212 L14.939339828220179 14.939339828220179"></path><path d="M14.939339828220179 1.0606601717798212 L1.0606601717798212 14.939339828220179"></path></svg>\n',
@@ -9991,17 +9991,22 @@
             p = t.querySelector(".js-free-shipping-amount-remaining"),
             v = t.querySelector(".js-free-shipping-unmet-msg"),
             y = t.querySelector(".js-free-shipping-met-msg"),
+            emptyCartText = t.querySelector(".js-empty-cart-text"),
+            freeShipping = t.querySelector(".js-free-shipping"),
+            freeShippingTotal = t.querySelector(".js-shipping-free-text"),
             m = function (t) {
+              theme.disableScroll();
               var q = (t.total_price === t.original_total_price) ? V(Q(t.total_price)) : '<span style="text-decoration: line-through; padding-right: 5px;">' + V(Q(t.original_total_price)) + '</span>' + V(Q(t.total_price));
               (a.innerHTML = z(t.items)),
                   (i.innerHTML = q),
                   void 0 === t.items
-                      ? (c.classList.add("is-hidden"), a.classList.add("is-hidden"), l.classList.remove("is-hidden"), f.classList.add("is-hidden"))
+                      ? (c.classList.add("is-hidden"), a.classList.add("is-hidden"), l.classList.remove("is-hidden"), f.classList.add("is-hidden"), s.classList.add("cart-drawer--empty"), emptyCartText.classList.remove("is-hidden"), freeShipping.classList.add("is-hidden") )
                       : 0 === t.items.length
-                          ? (c.classList.add("is-hidden"), a.classList.add("is-hidden"), l.classList.remove("is-hidden"))
-                          : (c.classList.remove("is-hidden"), a.classList.remove("is-hidden"), l.classList.add("is-hidden"));
+                          ? (c.classList.add("is-hidden"), a.classList.add("is-hidden"), l.classList.remove("is-hidden"), s.classList.add("cart-drawer--empty"), emptyCartText.classList.remove("is-hidden"), freeShipping.classList.add("is-hidden"))
+                          : (c.classList.remove("is-hidden"), a.classList.remove("is-hidden"), l.classList.add("is-hidden"), s.classList.remove("cart-drawer--empty"),  emptyCartText.classList.add("is-hidden"), freeShipping.classList.remove("is-hidden"));
             },
             g = function() {
+              theme.enableScroll();
               t.classList.remove("is-visible"), document.getElementById.tabIndex = 0, setTimeout((function() {
                 t.classList.remove("is-active"), t.tabIndex = -1, s.tabIndex = -1, t.setAttribute("aria-expanded", "false")
               }), 400)
@@ -10023,11 +10028,11 @@
             if (t.classList.add("is-active"), a.innerHTML = h, setTimeout((function() {
               t.classList.add("is-visible"), t.tabIndex = 0, s.tabIndex = 0, t.setAttribute("aria-expanded", "true"), document.getElementById("root").tabIndex = -1, setTimeout(m(e), 10), Dr.mount()
             }), 50), e.total_price < 9900) {
-              v.classList.remove("is-hidden"), y.classList.add("is-hidden");
+              v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
               var n = Q(9900 - e.total_price),
                   r = (e.total_price / 100).toFixed(2);
               d.style.width = "".concat(r, "%"), p.innerHTML = n
-            } else y.classList.remove("is-hidden"), v.classList.add("is-hidden"), d.style.width = "100%";
+            } else y.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
             Dr.emit("nav:toggle", {
               navDrawerOpen: !1,
               whichNavDrawer: void 0,
@@ -10040,11 +10045,11 @@
           t.state;
           var n = t.cart;
           if (m(e.getState().cart), b(Dr.getState()), n.total_price < 9900) {
-            v.classList.remove("is-hidden"), y.classList.add("is-hidden");
+            v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
             var r = Q(9900 - n.total_price),
                 i = (n.total_price / 100).toFixed(2);
             d.style.width = "".concat(i, "%"), p.innerHTML = r
-          } else y.classList.remove("is-hidden"), v.classList.add("is-hidden"), d.style.width = "100%";
+          } else y.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
           u.forEach((function(t) {
             t.innerHTML = e.getState().cart.item_count
           })), Dr.mount()

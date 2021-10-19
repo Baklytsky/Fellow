@@ -60,30 +60,6 @@
       },
       {
         "type": "header",
-        "content": "Cart Banner"
-      },
-      {
-        "type": "checkbox",
-        "id": "enable_cart_banner",
-        "label": "Enable cart banner",
-        "default": true
-      },
-      {
-        "type": "text",
-        "id": "cart_banner_text",
-        "label": "Cart banner text",
-        "default": {
-          "en": "FREE SHIPPING ON ORDERS OVER $50 & FREE RETURNS*"
-        }
-      },
-      {
-        "type": "url",
-        "id": "cart_banner_link",
-        "label": "Cart banner link",
-        "info": "Optional"
-      },
-      {
-        "type": "header",
         "content": "Cart Upsell Messaging"
       },
       {
@@ -95,6 +71,17 @@
       {
         "type": "header",
         "content": "Cart Empty State"
+      },
+      {
+        "type": "text",
+        "id": "cart_empty_text",
+        "label": "Text",
+        "default": "Discover products for your brew bar"
+      },
+      {
+        "type": "image_picker",
+        "id": "cart_empty_image",
+        "label": "Image"
       },
       {
         "type": "url",
