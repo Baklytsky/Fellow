@@ -175,7 +175,7 @@
                           <span class="filter-group__price-range-max">
                             {{ cart.currency.symbol }}
                             <span class="filter-group__price-range-max-value">
-                              {{ filter.range_max | money_without_currency | replace: ',', '' }}
+                              {{ filter.range_max | money_without_currency | replace: ',', '' | round: 1 }}
                             </span>
                           </span>
                         </div>

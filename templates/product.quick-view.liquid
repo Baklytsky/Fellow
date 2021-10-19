@@ -171,8 +171,8 @@
         <div class='pdpMain__details z2 rel'>
           {% form 'product', product, data-product-form: dataProductForm %}
           <div class='pdpCopy__header'>
-            <div class='f fdc jcc ais'>
-              <h1 class='pdpCopy__header-title'>{{ product.title }}</h1>
+            <h1 class='pdpCopy__header-title'><a href="{{ product.url }}" class="QuickView__FullPageLink">{{ product.title }}</a></h1>
+            <div class='f ais'>
               <h2 data-selected-var-price
                   class="ml1 visually-hidden">{{ current_variant.price | money | remove: '.00' }}</h2>
               {% if product.available %}
@@ -182,7 +182,7 @@
                     {{ current_variant.price | money_without_trailing_zeros }}
                   </h2>
                   <span class="visually-hidden">{{ 'products.current_variant.regular_price' | t }}</span>
-                  <strong class="inline-block strike card__price--regular ml1 pdpCopy__header-price">{{ current_variant.compare_at_price | money_without_trailing_zeros }}</strong>
+                  <strong class="inline-block strike card__price--regular pl-2 pdpCopy__header-price">{{ current_variant.compare_at_price | money_without_trailing_zeros }}</strong>
                 {% else %}
                   <h2 data-selected-var-price
                       class="m0 pdpCopy__header-price">{{ current_variant.price | money | remove: '.00' }}</h2>
@@ -277,7 +277,7 @@
               {{ form | payment_button }}
             </div>
           </div>
-          <a href="{{ product.url }}" class="QuickView__FullPage">See full page</a>
+          <a href="{{ product.url }}" class="QuickView__FullPage QuickView__FullPageLink">See full page</a>
         </div>
         {% endform %}
       </div>
