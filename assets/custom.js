@@ -413,22 +413,24 @@ theme.pdpMain = function () {
   });
 
   function thumbnailScrollOnClick () {
+    $(document).off('click.thumbnails')
     $(document).on('click.thumbnails', '.pdpMain__container .pdpMain__gallery-thumbnails-item', function () {
-      let scrollElement = $('[data-variant-media="' + $(this).attr('data-variant-img') + '"]'),
+      let scrollElement = $(document).find('[data-variant-media="' + $(this).attr('data-variant-img') + '"]'),
           headerHeight = document.getElementById('MainHeader').offsetHeight;
         $([document.documentElement, document.body]).animate({
           scrollTop: scrollElement.offset().top - headerHeight
         }, 500);
-      $('.pdpMain__gallery-thumbnails-item').removeClass('current-thumbnail')
+      $(document).find('.pdpMain__gallery-thumbnails-item').removeClass('current-thumbnail')
       $(this).addClass('current-thumbnail')
     })
   }
 
   function changeActiveThumbnail() {
-    var $variantImage = $('.pdpMain__variant-image'),
-        $thumbnailSlider = $('.pdpMain__gallery-thumbnails');
-    $('.pdpMain__gallery-thumbnails-item').removeClass('current-thumbnail')
-    $(".pdpMain__gallery-thumbnails-item:first").addClass('current-thumbnail')
+    $(document).off('scroll.galleryImage')
+    var $variantImage = $(document).find('.pdpMain__variant-image'),
+        $thumbnailSlider = $(document).find('.pdpMain__gallery-thumbnails');
+    $(document).find('.pdpMain__gallery-thumbnails-item').removeClass('current-thumbnail')
+    $(document).find(".pdpMain__gallery-thumbnails-item:first").addClass('current-thumbnail')
     $(document).on('scroll.galleryImage', $.debounce(300, function () {
       $variantImage.each(function () {
         let imagePosition = $(this)[0].getBoundingClientRect();
@@ -455,7 +457,7 @@ theme.pdpMain = function () {
   }
 
   function pdpGallary() {
-    var $pdpGalleryWrapper = $('.pdpMain__gallery-wrapper'),
+    var $pdpGalleryWrapper = $(document).find('.pdpMain__gallery-wrapper'),
         pdpGalleryConfig = $.parseJSON($pdpGalleryWrapper.attr('data-slick-config'));
     theme.checkSlickResponse($pdpGalleryWrapper, pdpGalleryConfig, 992, true)
   }
@@ -490,10 +492,10 @@ theme.pdpMain = function () {
   }
 
   function changeVariantImage(variantId) {
-    var selectedVariantThumbnail = $('[data-variant-img="' + variantId + '"]'),
-        selectedVariantImage = $('[data-variant-media="' + variantId + '"]'),
+    var selectedVariantThumbnail = $(document).find('[data-variant-img="' + variantId + '"]'),
+        selectedVariantImage = $(document).find('[data-variant-media="' + variantId + '"]'),
         slideIndexMobile = selectedVariantImage.parent().data('slick-index'),
-        mobileProductSlider = $('.pdpMain__gallery-wrapper');
+        mobileProductSlider = $(document).find('.pdpMain__gallery-wrapper');
 
     if ($(window).width() > 992) {
       if (selectedVariantThumbnail.length) {
@@ -635,7 +637,28 @@ theme.pdpMain = function () {
 
   theme.variantChange = function (variantId) {
     theme.selectedVariantId = variantId
-    changeVariantImage(theme.selectedVariantId)
+    function changeMedia() {
+      var ajaxUrl = window.location.protocol + '//' + window.location.host + window.location.pathname + '?variant=' + variantId + '&view=ajax',
+          $productMedia = $(document).find('.pdpMain__Media');
+
+      $.ajax({
+        url: ajaxUrl,
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest' // This is needed as currently there is a bug in Shopify that assumes this header
+        },
+        success: function (data) {
+          var $newProductMedia = $(data).find('.pdpMain__Media').html()
+          $productMedia.html($newProductMedia);
+          theme.slickSlider()
+          pdpGallary()
+          pdpThumbnails()
+          changeVariantImage(theme.selectedVariantId)
+        }
+      });
+    }
+    changeMedia()
 
     if ($('.option-group-title').length) {
       var selectedColor = $('.pdp__options-main [data-option-label="Color"] [data-option-current]').text();
