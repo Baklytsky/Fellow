@@ -860,6 +860,8 @@ theme.cartDrawer = function () {
   // Remove all $(document) Events
   $(document).off('click.openItemRemovePopup');
   $(document).off('click.closeItemRemovePopup');
+  $(document).off('click.updateRecommendedAddId');
+  $(document).off('click.addRecommendedProduct');
 
   theme.openItemRemovePopup = function (cartItemRemoveBtn) {
     $(document).off('click.removeItemInCart');
@@ -889,6 +891,54 @@ theme.cartDrawer = function () {
     $('[data-action="open-item-remove-popup"]').attr('aria-expanded', 'false');
     theme.closeItemRemovePopup();
   });
+
+  // Change button id on color changes, recommended products section
+
+  $(document).on('click.updateRecommendedAddId', '.productCard__recommended .js-productCard-option', function (e) {
+    e.preventDefault();
+    let $addButton = $(this).parents('.productCard__recommended').find('[data-action="add-to-cart-recommended"]'),
+        variantId = $(this).attr('data-variant-id');
+    $addButton.attr('data-variant-id', variantId);
+  });
+
+  $(document).on('click.addRecommendedProduct', '[data-action="add-to-cart-recommended"]', function (e) {
+    e.preventDefault();
+    let id = $(this).attr('data-variant-id');
+    let data = {
+      id: id,
+      quantity: 1
+    };
+
+    $.ajax({
+      type: 'POST',
+      url: '/cart/add.js',
+      data: data,
+      dataType: 'json',
+      success: function() {
+        // CartDrawer.emit("cart:updating");
+        UpdateCart();
+      },
+      error: function (error) {
+        if (error.status == 422) {
+          $('#CartRecommendedErrorMessage').text(error.responseJSON.description).fadeIn('slow');
+          setTimeout(function () {$('#CartRecommendedErrorMessage').fadeOut('slow').text('');}, 3500);
+        }
+      }
+    })
+  });
+
+  theme.updateCartRecommendedProducts = function () {
+    var $sectionWrapper = $('.cart-drawer__footer-recommended-wrapper');
+    if ($sectionWrapper.length) {
+      $.ajax({
+        type: 'GET',
+        url: '/?section_id=cart-recommended',
+        success: function(content) {
+          $sectionWrapper.html(content);
+        }
+      })
+    }
+  }
 }
 
 $(document).ready(function () {

@@ -10145,6 +10145,8 @@
 
   function J(t, e) {
     var n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : null;
+
+    theme.updateCartRecommendedProducts();
     return Dr.emit("cart:updating"), n ? H("/cart/add.js", {
       method: "POST",
       credentials: "include",

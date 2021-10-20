@@ -43,11 +43,7 @@
       </div>
     </div>
 
-    {%- comment -%}
-      {% include 'cart-upsell' %}
-    {%- endcomment -%}
-
-    <footer class='cart-drawer__footer js-cart-footer f aic jcb'>
+    <footer class='cart-drawer__footer js-cart-footer'>
       {% comment %}
       Disabled. Recommend removing this and adding functionality to cart upsell
       -ae 04.20.21
@@ -57,23 +53,31 @@
       related schema available in assets/cart-free-product-schema.js
       {% endcomment %}
 
-      <section class='cart-footer__total'>
-        <div class='cart-footer__total-item f aic js-shipping-free-text is-hidden'>
-          <span>{{ 'cart.general.shipping_free' | t }}</span>
+      {%- if settings.cart_recommended_enable -%}
+        <div class="cart-drawer__footer-recommended-wrapper">
+          {% section 'cart-recommended' %}
         </div>
-        <div class='cart-footer__total-item f aic'>
-          <span>{{ 'cart.general.subtotal' | t }}</span>
-          <span class='js-subtotal'></span>
-        </div>
-      </section>
+      {%- endif -%}
 
-      {%
-        include 'component-button' with
-        tag: 'a',
-        cta: 'Checkout',
-        href: '/checkout',
-        className: 'btn btn--light no-ajax cart-checkout__button'
-      %}
+      <div class="cart-drawer__footer-action f aic jcb">
+        <section class='cart-footer__total'>
+          <div class='cart-footer__total-item f aic js-shipping-free-text is-hidden'>
+            <span>{{ 'cart.general.shipping_free' | t }}</span>
+          </div>
+          <div class='cart-footer__total-item f aic'>
+            <span>{{ 'cart.general.subtotal' | t }}</span>
+            <span class='js-subtotal'></span>
+          </div>
+        </section>
+
+        {%
+          include 'component-button' with
+          tag: 'a',
+          cta: 'Checkout',
+          href: '/checkout',
+          className: 'btn btn--light no-ajax cart-checkout__button'
+        %}
+      </div>
     </footer>
 
     <div class="remove-item__popup js-cart-drawer-popup" aria-hidden="true">

@@ -1,0 +1,73 @@
+{% assign url = '/products/' | append: product.handle %}
+{% assign price = product.price | money %}
+{% assign comparePrice = product.compare_at_price | money %}
+
+{% assign image_url = product_image_url %}
+{% if image_url == blank or image_url.size < 1 %}
+  {% assign image_url = product_image | default: product.featured_image | img_url: '500x' %}
+{% endif %}
+
+{% assign alt = product.featured_image.alt | default: product.title | escape %}
+
+{% if product.metafields.custom_fields["product_nickname"] != blank %}
+  {% assign nickname = product.metafields.custom_fields["product_nickname"] %}
+{% endif %}
+{% if product.metafields.custom_fields["product_tagline"] != blank %}
+  {% assign tagline = product.metafields.custom_fields["product_tagline"] %}
+{% endif %}
+
+{% if product.variants.size > 1 %}
+  {% capture available_variant_prices %}
+    {% for variant in product.variants %}
+      {% unless variant.sku == '1151' %}
+        {{ variant.price }}
+      {% endunless %}
+    {% endfor %}
+  {% endcapture %}
+{% endif %}
+
+{% comment %} Set Title to Nickname if Using Nickname in Section {% endcomment %}
+{% if section.settings.use_nickname and nickname != blank %}
+  {% assign title = nickname %}
+{% else %}
+  {% assign title = product.title %}
+{% endif %}
+
+{%- capture cx -%}
+  {{ className }}
+{%- endcapture -%}
+
+<div class='productCard productCard__recommended productCard--{{ product.title | handleize }} {{ cx }}' data-component='productCard'>
+  <div class='productCard__content f' data-image-url="{{ image_url }}">
+    <div class="productCard__image-wrapper">
+      {% include 'product-card-recommended-image',
+        hide_variants: hide_variants,
+        image_url: image_url,
+        alt: alt,
+        transparent_image: true,
+        url: url
+      %}
+    </div>
+    <div class="productCard__content-inner">
+      {% include 'product-card-details', large_title: large_title %}
+      {% if product.options and hide_variants != true %}
+        {% include 'product-card-recommended-swatches' %}
+      {% endif %}
+      {% if bottom_content != blank %}
+        {{ bottom_content }}
+      {% endif %}
+
+      <button type="button" class="btn--clear cart-recommended__add-button" data-action="add-to-cart-recommended" data-variant-id="{{ product.selected_or_first_available_variant.id }}">Add to cart</button>
+    </div>
+  </div>
+</div>
+
+{% comment %} Reset {% endcomment %}
+{% assign className = blank %}
+{% assign tagline = blank %}
+{% assign nickname = blank %}
+{% assign product_image = blank %}
+{% assign image_url = blank %}
+{% assign available_variant_prices = blank %}
+{% assign large_title = false %}
+{% assign transparent_image = false %}
