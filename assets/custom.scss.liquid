@@ -3926,7 +3926,6 @@ h2.pdpCopy__header-price ,
 
 .pdpFeature__content {
   display: flex;
-  justify-content: space-between;
   align-items: stretch;
 
   @media screen and (max-width: $large_desk) {
@@ -3947,9 +3946,10 @@ h2.pdpCopy__header-price ,
 }
 
 .pdpFeature__details {
+  margin-bottom: 24px;
+
   @media screen and (max-width: $large_desk) {
     width: 100%;
-    margin-bottom: 20px;
   }
 }
 
@@ -3966,12 +3966,10 @@ h2.pdpCopy__header-price ,
 
 .pdpFeature__content-left {
   padding-right: 24px;
-  justify-content: center;
 }
 
 .pdpFeature__content-right {
   padding-left: 24px;
-  justify-content: space-between;
 }
 
 .pdpFeature__content-image {
@@ -3983,6 +3981,9 @@ h2.pdpCopy__header-price ,
 }
 
 .pdpFeature__content-imageWrapper {
+  @media screen and (max-width: $large_desk) {
+    margin-bottom: 32px;
+  }
   img {
     width: 100%;
     object-fit: contain;
@@ -4626,7 +4627,7 @@ h2.pdpCopy__header-price ,
   .option-groups__group .radio-group[data-option-size] {
     width: 100%;
     flex-wrap: nowrap;
-    margin-left: -16px;
+    margin-left: -15px;
     margin-top: -0.25rem;
 
     .radio__label-size-image {

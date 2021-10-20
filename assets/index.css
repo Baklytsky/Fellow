@@ -18366,7 +18366,7 @@ textarea {
 
 .radio-group:not([data-option-color]):not([data-option-material]) label:first-child:nth-last-child(n+3),
 .radio-group:not([data-option-color]):not([data-option-material]) label:first-child:nth-last-child(n+3)~label {
-  flex: 0 0 33.3%
+  flex: 0 0 33%
 }
 
 .radio-group:not([data-option-color]):not([data-option-material]) .radio__label-size-image:first-child:nth-last-child(n+3),
