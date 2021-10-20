@@ -39,6 +39,19 @@
       <div class='pdpMain__gallery-thumbnails-item rel x' data-variant-img='{{ variantId }}'>
         <img src='{{ imageSrc }}' class='image-abs-cover x' alt='{{ image.alt }}' role='img' loading='lazy'/>
       </div>
+      {%- for variant in product.variants -%}
+        {%- if variant.id == variantId -%}
+          {%- for i in (1..10) -%}
+            {%- assign metafield_key =  'variant_image_' | append: i -%}
+            {%- assign metafield_variant_image = variant.metafields.my_fields[metafield_key] -%}
+            {%- if metafield_variant_image != blank -%}
+              <div class='pdpMain__gallery-thumbnails-item rel x' data-variant-img='{{ variantId | append: forloop.index }}'>
+                <img src='{{ metafield_variant_image | img_url: '200x' }}' class='image-abs-cover x' alt='{{ image.alt }}' role='img' loading='lazy'/>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+      {%- endfor -%}
     {% endfor %}
   </div>
   <div class='pdpMain__gallery-wrapper x y block rel'
@@ -65,6 +78,22 @@
           <img src="{{ imageSrc }}" class='x' alt='{{ image.alt }}' role='img' loading='lazy'/>
         </div>
       </div>
+      {%- for variant in product.variants -%}
+        {%- if variant.id == variantId -%}
+          {%- for i in (1..10) -%}
+            {%- assign metafield_key =  'variant_image_' | append: i -%}
+            {%- assign metafield_variant_image = variant.metafields.my_fields[metafield_key] -%}
+            {%- if metafield_variant_image != blank -%}
+              <div class="x">
+                <div class='pdpMain__variant-image rel x f aic'
+                     data-variant-media='{{ variantId | append: forloop.index }}'>
+                  <img src="{{ metafield_variant_image | img_url: '900x' }}" class='x' alt='{{ image.alt }}' role='img' loading='lazy'/>
+                </div>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+      {%- endfor -%}
     {% endfor %}
   </div>
 </div>
