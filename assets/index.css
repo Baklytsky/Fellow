@@ -17647,7 +17647,7 @@ body.is-masthead--empty main {
 .cart-item__stepper .cart-stepper {
   color: #DBDBDB;
   cursor: pointer;
-  padding: 0 10px;
+  padding: 0 6px;
   line-height: 1.1;
   font-size: 24px;
 }
@@ -17659,7 +17659,12 @@ body.is-masthead--empty main {
 }
 
 .cart-quantity {
-  margin-left: 2px;
+  border: none;
+  padding: 0;
+  width: auto;
+  outline: none;
+  text-align: center;
+  max-width: 27px;
 }
 
 .cart-item__stepper .cart-stepper:hover {

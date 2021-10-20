@@ -862,6 +862,7 @@ theme.cartDrawer = function () {
   $(document).off('click.closeItemRemovePopup');
   $(document).off('click.updateRecommendedAddId');
   $(document).off('click.addRecommendedProduct');
+  $(document).off('click.updateCartInputQTY');
 
   theme.openItemRemovePopup = function (cartItemRemoveBtn) {
     $(document).off('click.removeItemInCart');
@@ -939,6 +940,12 @@ theme.cartDrawer = function () {
       })
     }
   }
+
+  $(document).on('change.updateCartInputQTY', 'input.cart-quantity', function () {
+    let value = parseInt($(this).val(), 10);
+    let id = $(this).parents('.cart-drawer__item').attr('data-id');
+    updateCartItemQuantity(id, value);
+  });
 }
 
 $(document).ready(function () {

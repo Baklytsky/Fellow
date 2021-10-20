@@ -9960,8 +9960,8 @@
                         .concat(c, "' class='cart-drawer__itemTitle'>")
                         .concat(o, "</a>\n          <div class='cart-drawer__itemOptions'>")
                         .concat(f, "</div>\n        </div>\n\n        <div class='f aic jcb pt05'>\n          <div class='cart-item__stepper aic f ")
-                        .concat(0 === a ? "is-disabled" : "", "'>\n            <div class='cart-stepper js-remove-single' data-key='" + n.key + "'>-</div>\n            <div class='cart-quantity js-single-quantity'>")
-                        .concat(l, "</div>\n            <div class='cart-stepper js-add-single' data-key='" + n.key + "'>+</div>\n          </div>\n\n          <div class='cart-item__price'>")
+                        .concat(0 === a ? "is-disabled" : "", "'>\n            <div class='cart-stepper js-remove-single' data-key='" + n.key + "'>-</div>\n            <input type='text' class='cart-quantity js-single-quantity' value='")
+                        .concat(l, "'>\n            <div class='cart-stepper js-add-single' data-key='" + n.key + "'>+</div>\n          </div>\n\n          <div class='cart-item__price'>")
                         .concat(p, "</div>\n        </div>\n\n        <button class='button--reset cart-drawer__itemAction js-remove-item' data-key='" + n.key + "' style='display: none'>")
                         .concat(
                             '\n  <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentcolor" stroke-width="3" style="display:inline-block;vertical-align:middle;overflow:visible;"><path d="M1.0606601717798212 1.0606601717798212 L14.939339828220179 14.939339828220179"></path><path d="M14.939339828220179 1.0606601717798212 L1.0606601717798212 14.939339828220179"></path></svg>\n',
@@ -10111,6 +10111,8 @@
     }))
   }
 
+  window.updateCartItemQuantity = Y;
+
 
   function G(t, e) {
     return Dr.emit("cart:updating"), H("/cart/change.js", {
@@ -10207,7 +10209,7 @@
         var n = t.querySelector(".js-remove-item"),
             r = t.querySelector(".js-remove-single"),
             i = t.querySelector(".js-add-single"),
-            o = t.querySelector(".js-single-quantity").innerHTML,
+            o = t.querySelector(".js-single-quantity").value,
             a = t.getAttribute("data-id");
         n.addEventListener("click", (function(t) {
           t.preventDefault(),
