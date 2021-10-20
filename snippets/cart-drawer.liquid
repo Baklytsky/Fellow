@@ -21,11 +21,7 @@
         </div>
         <div class='free-shipping--met js-free-shipping-met-msg
         {% if cart.total_price < 9900 %} is-hidden{% endif %}'>
-          {% if settings.free_shipping_met_msg != blank %}
-            {{ settings.free_shipping_met_msg }}
-          {% else %}
-            Congrats! You get free US Shipping!
-          {% endif %}
+          {{ settings.free_shipping_met_msg | default: 'Congrats! You get free US Shipping!' }}
         </div>
 
         <div class='free-shipping__meter f aic'>
@@ -80,5 +76,16 @@
       %}
     </footer>
 
+    <div class="remove-item__popup js-cart-drawer-popup" aria-hidden="true">
+      <div class="remove-item__inner">
+        {%- if settings.cart_remove_text != blank -%}
+          <p class="remove-item__text">{{ settings.cart_remove_text }}</p>
+        {%- endif -%}
+        <div class="remove-item__btn-group f jcc aic">
+          <button type="button" class="btn--clear remove-item__btn--close" data-action="close-item-remove-popup">{{ 'cart.general.popup_keep' | t }}</button>
+          <button type="button" class="btn--clear remove-item__btn--remove js-remove-item-trigger">{{ 'cart.general.popup_remove' | t }}</button>
+        </div>
+      </div>
+    </div>
   </div>
 </section>

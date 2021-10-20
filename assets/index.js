@@ -9962,10 +9962,12 @@
                         .concat(f, "</div>\n        </div>\n\n        <div class='f aic jcb pt05'>\n          <div class='cart-item__stepper aic f ")
                         .concat(0 === a ? "is-disabled" : "", "'>\n            <div class='cart-stepper js-remove-single' data-key='" + n.key + "'>-</div>\n            <div class='cart-quantity js-single-quantity'>")
                         .concat(l, "</div>\n            <div class='cart-stepper js-add-single' data-key='" + n.key + "'>+</div>\n          </div>\n\n          <div class='cart-item__price'>")
-                        .concat(p, "</div>\n        </div>\n\n        <button class='button--reset cart-drawer__itemAction js-remove-item' data-key='" + n.key + "'>")
+                        .concat(p, "</div>\n        </div>\n\n        <button class='button--reset cart-drawer__itemAction js-remove-item' data-key='" + n.key + "' style='display: none'>")
                         .concat(
                             '\n  <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentcolor" stroke-width="3" style="display:inline-block;vertical-align:middle;overflow:visible;"><path d="M1.0606601717798212 1.0606601717798212 L14.939339828220179 14.939339828220179"></path><path d="M14.939339828220179 1.0606601717798212 L1.0606601717798212 14.939339828220179"></path></svg>\n',
-                            "</button>\n      </div>\n    </div>\n"
+                            "</button>\n")
+                        .concat('\n <button type="button" data-action="open-item-remove-popup" aria-expanded="false" class="button--reset cart-drawer__itemAction cart-drawer__remove-open"> <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentcolor" stroke-width="3" style="display:inline-block;vertical-align:middle;overflow:visible;"><path d="M1.0606601717798212 1.0606601717798212 L14.939339828220179 14.939339828220179"></path><path d="M14.939339828220179 1.0606601717798212 L1.0606601717798212 14.939339828220179"></path></svg>\n',
+                            "</button>\n </div>\n    </div>\n"
                         ))
             );
             var n, r, i, o, a, s, u, c, l, f, h;
@@ -9995,7 +9997,6 @@
             freeShipping = t.querySelector(".js-free-shipping"),
             freeShippingTotal = t.querySelector(".js-shipping-free-text"),
             m = function (t) {
-              theme.disableScroll();
               var q = (t.total_price === t.original_total_price) ? V(Q(t.total_price)) : '<span style="text-decoration: line-through; padding-right: 5px;">' + V(Q(t.original_total_price)) + '</span>' + V(Q(t.total_price));
               (a.innerHTML = z(t.items)),
                   (i.innerHTML = q),
@@ -10025,6 +10026,7 @@
         })), e.on("cart:toggle", (function(e) {
           var n = e.cart;
           e.cartOpen && function(e) {
+            theme.disableScroll();
             if (t.classList.add("is-active"), a.innerHTML = h, setTimeout((function() {
               t.classList.add("is-visible"), t.tabIndex = 0, s.tabIndex = 0, t.setAttribute("aria-expanded", "true"), document.getElementById("root").tabIndex = -1, setTimeout(m(e), 10), Dr.mount()
             }), 50), e.total_price < 9900) {

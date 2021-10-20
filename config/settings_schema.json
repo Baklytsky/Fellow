@@ -99,6 +99,16 @@
         "id": "cart_notes_enable",
         "label": "Enable cart notes",
         "default": true
+      },
+      {
+        "type": "header",
+        "content": "Remove item popup"
+      },
+      {
+        "type": "text",
+        "id": "cart_remove_text",
+        "label": "Popup text",
+        "default": "Are you sure you want to remove this item?"
       }
     ]
   },

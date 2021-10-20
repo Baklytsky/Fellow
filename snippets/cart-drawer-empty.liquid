@@ -21,12 +21,14 @@
         </div>
       {%- endif -%}
 
-      {%
-        include 'component-button' with
-        tag: 'a',
-        cta: cart_empty_cta_text,
-        href: settings.cart_empty_cta.url,
-        className: 'btn btn--dark cart-drawer__empty-btn'
-      %}
+      {%- if cart_empty_cta_text != blank -%}
+        {%
+          include 'component-button' with
+          tag: 'a',
+          cta: cart_empty_cta_text,
+          href: settings.cart_empty_cta.url,
+          className: 'btn btn--dark cart-drawer__empty-btn'
+        %}
+      {%- endif -%}
   </div>
 </section>
