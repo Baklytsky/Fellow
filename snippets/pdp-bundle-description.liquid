@@ -16,12 +16,7 @@
       <div class="bundleDescription__Content f aic">
         {% if bundle_description_icon != blank %}
           <div class="bundleDescription__ContentImage rel">
-              {% include 'component-image' with
-                  src: bundle_description_icon,
-                  alt: bundle_description_title,
-                  className: 'image image-abs-cover',
-                  absolute: true,
-                  fill: true %}
+              <img src="{{ bundle_description_icon }}" class="image image-abs-cover" alt="{{ bundle_description_title }}">
           </div>
         {% endif %}
         {% if bundle_description_title != blank or bundle_description_title_subtitle != blank %}
