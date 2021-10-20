@@ -16,7 +16,7 @@ theme.openModal = function () {
 theme.closeModal = function (clean) {
   $('#modal').attr('aria-hidden', 'true').fadeOut();
   $('#modalContent').fadeOut().html('').text('');
-  $('#emptyModal').fadeIn();
+  $('#emptyModal').show(800);
   theme.enableScroll();
   $(document).off('click.QvClose')
 }
@@ -230,6 +230,7 @@ theme.addProduct = function () {
     success: function() {
       CartDrawer.emit("cart:updating");
       UpdateCart();
+      theme.closeModal();
     },
     error: function (error) {
       if (error.status == 422) {
@@ -412,22 +413,24 @@ theme.pdpMain = function () {
   });
 
   function thumbnailScrollOnClick () {
+    $(document).off('click.thumbnails')
     $(document).on('click.thumbnails', '.pdpMain__container .pdpMain__gallery-thumbnails-item', function () {
-      let scrollElement = $('[data-variant-media="' + $(this).attr('data-variant-img') + '"]'),
+      let scrollElement = $(document).find('[data-variant-media="' + $(this).attr('data-variant-img') + '"]'),
           headerHeight = document.getElementById('MainHeader').offsetHeight;
         $([document.documentElement, document.body]).animate({
           scrollTop: scrollElement.offset().top - headerHeight
         }, 500);
-      $('.pdpMain__gallery-thumbnails-item').removeClass('current-thumbnail')
+      $(document).find('.pdpMain__gallery-thumbnails-item').removeClass('current-thumbnail')
       $(this).addClass('current-thumbnail')
     })
   }
 
   function changeActiveThumbnail() {
-    var $variantImage = $('.pdpMain__variant-image'),
-        $thumbnailSlider = $('.pdpMain__gallery-thumbnails');
-    $('.pdpMain__gallery-thumbnails-item').removeClass('current-thumbnail')
-    $(".pdpMain__gallery-thumbnails-item:first").addClass('current-thumbnail')
+    $(document).off('scroll.galleryImage')
+    var $variantImage = $(document).find('.pdpMain__variant-image'),
+        $thumbnailSlider = $(document).find('.pdpMain__gallery-thumbnails');
+    $(document).find('.pdpMain__gallery-thumbnails-item').removeClass('current-thumbnail')
+    $(document).find(".pdpMain__gallery-thumbnails-item:first").addClass('current-thumbnail')
     $(document).on('scroll.galleryImage', $.debounce(300, function () {
       $variantImage.each(function () {
         let imagePosition = $(this)[0].getBoundingClientRect();
@@ -454,7 +457,7 @@ theme.pdpMain = function () {
   }
 
   function pdpGallary() {
-    var $pdpGalleryWrapper = $('.pdpMain__gallery-wrapper'),
+    var $pdpGalleryWrapper = $(document).find('.pdpMain__gallery-wrapper'),
         pdpGalleryConfig = $.parseJSON($pdpGalleryWrapper.attr('data-slick-config'));
     theme.checkSlickResponse($pdpGalleryWrapper, pdpGalleryConfig, 992, true)
   }
@@ -489,10 +492,10 @@ theme.pdpMain = function () {
   }
 
   function changeVariantImage(variantId) {
-    var selectedVariantThumbnail = $('[data-variant-img="' + variantId + '"]'),
-        selectedVariantImage = $('[data-variant-media="' + variantId + '"]'),
+    var selectedVariantThumbnail = $(document).find('[data-variant-img="' + variantId + '"]'),
+        selectedVariantImage = $(document).find('[data-variant-media="' + variantId + '"]'),
         slideIndexMobile = selectedVariantImage.parent().data('slick-index'),
-        mobileProductSlider = $('.pdpMain__gallery-wrapper');
+        mobileProductSlider = $(document).find('.pdpMain__gallery-wrapper');
 
     if ($(window).width() > 992) {
       if (selectedVariantThumbnail.length) {
@@ -634,7 +637,28 @@ theme.pdpMain = function () {
 
   theme.variantChange = function (variantId) {
     theme.selectedVariantId = variantId
-    changeVariantImage(theme.selectedVariantId)
+    function changeMedia() {
+      var ajaxUrl = window.location.protocol + '//' + window.location.host + window.location.pathname + '?variant=' + variantId + '&view=ajax',
+          $productMedia = $(document).find('.pdpMain__Media');
+
+      $.ajax({
+        url: ajaxUrl,
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest' // This is needed as currently there is a bug in Shopify that assumes this header
+        },
+        success: function (data) {
+          var $newProductMedia = $(data).find('.pdpMain__Media').html()
+          $productMedia.html($newProductMedia);
+          theme.slickSlider()
+          pdpGallary()
+          pdpThumbnails()
+          changeVariantImage(theme.selectedVariantId)
+        }
+      });
+    }
+    changeMedia()
 
     if ($('.option-group-title').length) {
       var selectedColor = $('.pdp__options-main [data-option-label="Color"] [data-option-current]').text();
@@ -663,9 +687,9 @@ theme.pdpQuickView = function () {
   // Remove all $(document) Events
   // clicks:
   $(document).off('click.pdpQvSelectSize')
-  $(document).off('click.QvClose')
+  $(document).off('mousedown.QvClose')
 
-  $(document).on('click.QvClose', function (e) {
+  $(document).on('mousedown.QvClose', function (e) {
     var $container = $('.Modal');
     if (!$container.is(e.target) && $container.has(e.target).length === 0) {
       theme.closeModal();
@@ -721,39 +745,41 @@ theme.collection = function () {
   $(document).off('input.changeRange')
   $(document).off('resize.filter')
 
-  if ($('[data-dropdown-filter]').length) {
-    $(document).on('click.dropdownFilters', '[data-dropdown-filter]', function () {
-      if ($(window).width() > 992) {
-        let $dropdownList = $(this).parent().find('[data-dropdown-list]');
-        if ($dropdownList.length) {
-          $(this).parent().find('[data-dropdown-list]').slideToggle(400);
-          $(this).find('.dropdownHeader-icon').toggleClass('dropdownHeader-icon--rotate');
-          $(this).parent().find('.dropdownContent--animate-block').toggleClass('dropdownContent--animate-block-visible');
-        }
-      }
-    });
-
-    $(window).on('resize.filter', function() {
-      if ($(window).width() < 992) {
-        $('[data-dropdown-list]').map(function (i, element) {
-            $(element).removeAttr('style')
-            $(element).parent().find('.dropdownHeader-icon').removeClass('dropdownHeader-icon--rotate')
-        });
-      } else {
-        $('[data-mobile-dropdown]').removeAttr('style')
-      }
-    })
-  }
-
-  $(document).on('click.mobileFilterBar', '[data-mobile-filter]', function() {
-    let $targetFilter = $('[data-mobile-dropdown="' + $(this).data('mobile-filter') + '"]');
-    $(this).toggleClass('open-filter')
-    $('[data-mobile-filter]:not([data-mobile-filter="'+ $(this).data('mobile-filter') +'"])').removeClass('open-filter')
-    $('[data-mobile-dropdown]:not([data-mobile-dropdown="'+ $(this).data('mobile-filter') +'"])').slideUp(400)
-    $targetFilter.slideToggle(400)
-  })
-
   if ($('.collectionFilters').length) {
+
+    if ($('[data-dropdown-filter]').length) {
+      $(document).on('click.dropdownFilters', '[data-dropdown-filter]', function () {
+        if (window.innerWidth > 992) {
+          let $dropdownList = $(this).parent().find('[data-dropdown-list]');
+          if ($dropdownList.length) {
+            $(this).parent().find('[data-dropdown-list]').slideToggle(400);
+            $(this).find('.dropdownHeader-icon').toggleClass('dropdownHeader-icon--rotate');
+            $(this).parent().find('.dropdownContent--animate-block').toggleClass('dropdownContent--animate-block-visible');
+          }
+        }
+      });
+
+      $(window).on('resize.filter', function () {
+        if (window.innerWidth < 992) {
+          $('[data-dropdown-list]').map(function (i, element) {
+            $(element).parent().find('.dropdownHeader-icon').removeClass('dropdownHeader-icon--rotate')
+            $(element).find('.dropdownContent--animate-block-visible').removeClass('dropdownContent--animate-block-visible')
+            $(element).removeAttr('style')
+          });
+        } else {
+          $('[data-mobile-dropdown]').removeAttr('style')
+        }
+      })
+    }
+
+    $(document).on('click.mobileFilterBar', '[data-mobile-filter]', function () {
+      let $targetFilter = $('[data-mobile-dropdown="' + $(this).data('mobile-filter') + '"]');
+      $(this).toggleClass('open-filter')
+      $('[data-mobile-filter]:not([data-mobile-filter="' + $(this).data('mobile-filter') + '"])').removeClass('open-filter')
+      $('[data-mobile-dropdown]:not([data-mobile-dropdown="' + $(this).data('mobile-filter') + '"])').slideUp(400)
+      $targetFilter.slideToggle(400)
+    })
+
 
     function filterResultsBlock() {
       let $filterFormRadioInput = $(document).find('#filter-form input[type="radio"]'),
@@ -787,20 +813,25 @@ theme.collection = function () {
       let $filterForm = $(document).find('#filter-form'),
           $collectionProducts = $(document).find('.collection__products-results'),
           $filterFormInput = $filterForm.find('input'),
+          $filterPriceRange = $filterForm.find('.filter-group__price-range-to input'),
           $filterPriceMin = $filterForm.find('.filter-group__price-range-min-value'),
           formData = $filterForm.serialize(),
-          url = window.location.protocol + '//' + window.location.host + window.location.pathname + '?view=ajax&' + formData;
+          url = window.location.protocol + '//' + window.location.host + window.location.pathname + '?view=ajax&' + formData,
+          $noResultsMessage = `<h3 class="collection__products-no-results">No results</h3>`;
 
-      $filterFormInput.attr('disabled','true');
+      $filterFormInput.attr('disabled', 'true');
       filterResultsBlock()
 
       $.ajax({
         url: url,
         method: 'GET',
         success: function (data) {
-          let $collectionNewProducts = $(data).find('.collection__products-results').html(),
+          let $collectionNewProducts = $(data).find('.collection__products-results'),
               $filterNewPriceMin = $(data).find('.filter-group__price-range-min-value').html();
-          $collectionProducts.html($collectionNewProducts)
+          ($collectionNewProducts.find('.productCard').length) ? $collectionProducts.html($collectionNewProducts.html()) : $collectionProducts.html($noResultsMessage);
+          $filterPriceRange.prop({
+            'min': $filterNewPriceMin.trim()
+          });
           $filterPriceMin.html($filterNewPriceMin)
           $filterFormInput.removeAttr('disabled')
           $('.productCard').each(function () {
@@ -831,12 +862,12 @@ theme.collection = function () {
           $filterPriceMax = $(document).find('.filter-group__price-range-max-value'),
           checkedInputs = $(document).find('#filter-form input:checked').length,
           rangeValueChanged = (parseInt($filterPriceRange.attr('max')) !== parseInt($filterPriceMax.text()));
-      (checkedInputs || rangeValueChanged ) ? $('[data-clear-filter]').show() : $('[data-clear-filter]').hide()
+      (checkedInputs || rangeValueChanged) ? $('[data-clear-filter]').show() : $('[data-clear-filter]').hide()
     })
 
     $(document).on('input.changeRange', '#filter-form input[type="range"]', function () {
       let $filterPriceMax = $(document).find('.filter-group__price-range-max-value');
-      $filterPriceMax.html($(this).val() + '.00')
+      $filterPriceMax.html($(this).val() + '.0')
     })
 
     $(document).on('click.mobileClearAll', '[data-clear-filter]', function () {
@@ -966,6 +997,7 @@ theme.GLOBAL = function () {
   // clicks:
   $(document).off('click.toggleTab')
   $(document).off('click.closeModal')
+  $(document).off('click.closeQvFullPage')
   $(document).off('click.dataQuickView')
   $(document).off('click.quickViewATC')
   $(document).off('click.jsCounterRemove')
@@ -986,6 +1018,10 @@ theme.GLOBAL = function () {
   })
 
   $(document).on('click.closeModal', '#closeModal', function () {
+    theme.closeModal();
+  });
+
+  $(document).on('click.closeQvFullPage', '.QuickView__FullPageLink', function () {
     theme.closeModal();
   });
 
@@ -1049,6 +1085,15 @@ theme.GLOBAL = function () {
   function qvVariantChange () {
     let selectedOption = $('#ProductQuickView .radio-group input:checked');
 
+    var currentOptions = $.map(selectedOption, function(element, index) {
+      var $element = $(element);
+      var currentOption = {};
+
+        currentOption.value = $element.val();
+        currentOption.index = `option${index + 1}`;
+        return currentOption;
+    });
+
     if (selectedOption.length < 3) {
       $('#ProductQuickView #quickAdd').attr('disabled', 'disabled');
       let selectedOption1 = $(selectedOption[0]).attr('value');
@@ -1059,31 +1104,56 @@ theme.GLOBAL = function () {
       let productJSON  = $.parseJSON(innerJSON)['product'];
       let variants = productJSON['variants'];
 
-      for (let i = 0; i < variants.length; i++) {
-        if (variants[i].option1 == selectedOption1 && variants[i].option2 == selectedOption2 && variants[i].option3 == selectedOption3) {
-          if ($('#ProductQuickView #selectid').find('[selected]').length) {
-            $($('#ProductQuickView #selectid').find('[selected]')).removeAttr('selected');
+      var selectedVariant = function() {
+        var selectedValues = currentOptions;
+        var found = false;
+
+        variants.forEach(function(variant) {
+          var satisfied = true;
+
+          selectedValues.forEach(function(option) {
+            if (satisfied) {
+              satisfied = (option.value === variant[option.index]);
+            }
+          });
+
+          if (satisfied) {
+            found = variant;
           }
+        });
 
-          $('#ProductQuickView #selectid').val(variants[i].id);
+        return found || null;
+      };
 
-          $($('#ProductQuickView #selectid').find('[value="' + variants[i].id + '"]')).attr('selected', 'selected');
-          $('[data-selected-var-price]').text($($('#ProductQuickView #selectid').find('[value="' + variants[i].id + '"]')).attr('data-variant-price'))
+      if (selectedVariant()) {
+        for (let i = 0; i < variants.length; i++) {
+          if (variants[i].option1 == selectedOption1 && variants[i].option2 == selectedOption2 && variants[i].option3 == selectedOption3) {
+            if ($('#ProductQuickView #selectid').find('[selected]').length) {
+              $($('#ProductQuickView #selectid').find('[selected]')).removeAttr('selected');
+            }
 
-          if ($('.js-counter-quantity').val() < 1) {
-            $('.js-counter-quantity').val(1)
-          }
+            $('#ProductQuickView #selectid').val(variants[i].id);
 
-          $('#ProductQuickView #quickAdd').attr('data-add-qty', $('.js-counter-quantity').val());
+            $($('#ProductQuickView #selectid').find('[value="' + variants[i].id + '"]')).attr('selected', 'selected');
+            $('[data-selected-var-price]').text($($('#ProductQuickView #selectid').find('[value="' + variants[i].id + '"]')).attr('data-variant-price'))
 
-          if (variants[i].available) {
-            $($('#ProductQuickView #quickAdd').find('[data-atc-copy]')).text(window.theme.strings.addToCart);
-            $('#ProductQuickView #quickAdd').attr('data-add-id', variants[i].id).removeAttr('disabled');
-          } else {
-            $($('#ProductQuickView #quickAdd').find('[data-atc-copy]')).text(window.theme.strings.soldOut);
-            $('#ProductQuickView #quickAdd').attr('data-add-id', variants[i].id)
+            if ($('.js-counter-quantity').val() < 1) {
+              $('.js-counter-quantity').val(1)
+            }
+
+            $('#ProductQuickView #quickAdd').attr('data-add-qty', $('.js-counter-quantity').val());
+
+            if (variants[i].available) {
+              $($('#ProductQuickView #quickAdd').find('[data-atc-copy]')).text(window.theme.strings.addToCart);
+              $('#ProductQuickView #quickAdd').attr('data-add-id', variants[i].id).removeAttr('disabled');
+            } else {
+              $($('#ProductQuickView #quickAdd').find('[data-atc-copy]')).text(window.theme.strings.soldOut);
+              $('#ProductQuickView #quickAdd').attr('data-add-id', variants[i].id)
+            }
           }
         }
+      } else {
+        $($('#ProductQuickView #quickAdd').find('[data-atc-copy]')).text(window.theme.strings.unavailable);
       }
     }
 

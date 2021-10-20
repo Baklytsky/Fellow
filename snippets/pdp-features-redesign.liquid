@@ -9,6 +9,10 @@
 
   {%- assign section_heading = product.metafields.custom_fields["feature_heading"] -%}
   {%- assign desktop_image = product.metafields.custom_fields["feature_desktop_image"] -%}
+  {%- assign mobile_image = product.metafields.custom_fields["feature_mobile_image"] -%}
+  {%- assign left_blocks_counter = 0 -%}
+  {%- assign right_blocks_counter = 0 -%}
+
 
   {%- capture 'slick-config' -%}
   {
@@ -27,79 +31,146 @@
         <h3 class="pdpFeature__heading">{{ section_heading }}</h3>
       {%- endif -%}
 
+      {%- comment -%}
+          // Left Column blocks
+      {%- endcomment -%}
+
       {%- if product.metafields.custom_fields["feature_blocks"] != blank -%}
         {% for item in product.metafields.custom_fields["feature_blocks"] %}
-          {%- assign logo = item["feature_block_logo"] -%}
+          {%- assign logo = item["feature_block_logo_left"] -%}
           {%- assign heading = item["feature_block_heading"] -%}
           {%- assign text = item["feature_block_text"] -%}
-          {%- assign mobile_image = item["feature_block_mobile_image"] -%}
 
-          {%- capture capture_name -%}
-            <div class='pdpFeature__details'>
-              {%- if mobile_image != blank -%}
-                <div class="pdpFeature__mobileImage rel">
-                  {{ mobile_image }}
-                </div>
-              {%- endif -%}
-              {%- if heading != blank or text != blank -%}
-                <div class='pdpFeature__copy {% if forloop.first %}pdpFeature__copy-textEnd{% endif %}'>
-                  {% if logo != blank %}
-                    <div class='pdpFeature__icon x rel'>
-                      {{ logo }}
+          {%- capture left_blocks -%}
+            {%- if logo != blank or heading != blank or text != blank -%}
+              {%- assign left_blocks_counter = left_blocks_counter | plus: 1 -%}
+              <div class='pdpFeature__details'>
+                {%- if heading != blank or text != blank -%}
+                  <div class='pdpFeature__copy pdpFeature__copy-textEnd'>
+                    {% if logo != blank %}
+                      <div class='pdpFeature__icon x rel'>
+                        <img src="{{ logo }}" alt="{{ heading }}">
+                      </div>
+                    {% endif %}
+                    <div class="pdpFeature__copy-wrapper pdpFeature__copy-textRight">
+                      {%- if heading != blank -%}
+                        <h4 class='pdpFeature__copy-heading'>{{ heading }}</h4>
+                      {%- endif -%}
+                      {%- if text != blank -%}
+                        <p class="pdpFeature__copy-text">{{ text }}</p>
+                      {%- endif -%}
                     </div>
-                  {% endif %}
-                  <div class="pdpFeature__copy-wrapper {% if forloop.first %}pdpFeature__copy-textRight{% endif %}">
-                    {%- if heading != blank -%}
-                      <h4 class='pdpFeature__copy-heading'>{{ heading }}</h4>
-                    {%- endif -%}
-                    {%- if text != blank -%}
-                      <p class="pdpFeature__copy-text">{{ text }}</p>
-                    {%- endif -%}
                   </div>
-                </div>
-              {%- endif -%}
-            </div>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
           {%- endcapture -%}
 
           {%- case forloop.index -%}
           {%- when 1 -%}
-          {%- assign feature_block_1 = capture_name -%}
+          {%- assign left_feature_block_1 = left_blocks -%}
           {%- when 2 -%}
-          {%- assign feature_block_2 = capture_name -%}
+          {%- assign left_feature_block_2 = left_blocks -%}
             {%- else -%}
-          {%- assign feature_block_3 = capture_name -%}
+          {%- assign left_feature_block_3 = left_blocks -%}
+          {%- endcase -%}
+
+        {%- endfor -%}
+      {%- endif -%}
+
+      {%- comment -%}
+        // Right Column blocks
+      {%- endcomment -%}
+
+      {%- if product.metafields.custom_fields["right_column_feature_blocks"] != blank -%}
+        {% for item in product.metafields.custom_fields["right_column_feature_blocks"] %}
+          {%- assign logo = item["feature_block_logo_right"] -%}
+          {%- assign heading = item["feature_block_heading_right"] -%}
+          {%- assign text = item["feature_block_text_right"] -%}
+
+          {%- capture right_blocks -%}
+            {%- if logo != blank or heading != blank or text != blank -%}
+              {%- assign right_blocks_counter = right_blocks_counter | plus: 1 -%}
+              <div class='pdpFeature__details'>
+                {%- if heading != blank or text != blank -%}
+                  <div class='pdpFeature__copy'>
+                    {% if logo != blank %}
+                      <div class='pdpFeature__icon x rel'>
+                        <img src="{{ logo }}" alt="{{ heading }}">
+                      </div>
+                    {% endif %}
+                    <div class="pdpFeature__copy-wrapper">
+                      {%- if heading != blank -%}
+                        <h4 class='pdpFeature__copy-heading'>{{ heading }}</h4>
+                      {%- endif -%}
+                      {%- if text != blank -%}
+                        <p class="pdpFeature__copy-text">{{ text }}</p>
+                      {%- endif -%}
+                    </div>
+                  </div>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          {%- endcapture -%}
+
+          {%- case forloop.index -%}
+          {%- when 1 -%}
+          {%- assign right_feature_block_1 = right_blocks -%}
+          {%- when 2 -%}
+          {%- assign right_feature_block_2 = right_blocks -%}
+            {%- else -%}
+          {%- assign right_feature_block_3 = right_blocks -%}
           {%- endcase -%}
 
         {%- endfor -%}
       {%- endif -%}
 
       {%- if desktop_image != blank or product.metafields.custom_fields["feature_blocks"] != blank -%}
-        <div class="pdpFeature__content pdpFeature__content-desktop">
-          {%- if feature_block_1 != blank -%}
-            <div class="pdpFeature__content-left">
-              {{ feature_block_1 }}
+        <div class="pdpFeature__content pdpFeature__content-desktop {% if left_blocks_counter > 1 and right_blocks_counter > 1 %}jcb{% else %}jcc{% endif %}">
+          {%- if left_blocks_counter > 0 -%}
+            <div class="pdpFeature__content-left {% if left_blocks_counter > 1 %}jcb{% else %}jcc{% endif %}">
+              {{ left_feature_block_1 }}
+              {{ left_feature_block_2 }}
+              {{ left_feature_block_3 }}
             </div>
           {%- endif -%}
           {%- if desktop_image != blank -%}
-            <div class="pdpFeature__content-image">
+            <div class="pdpFeature__content-image f aic">
               <div class="pdpFeature__content-imageWrapper x rel">
-                {{ desktop_image }}
+                <img src="{{ desktop_image }}" alt="{{ section_heading }}">
               </div>
             </div>
           {%- endif -%}
-          {%- if feature_block_2 != blank or feature_block_3 != blank -%}
-            <div class="pdpFeature__content-right">
-              {{ feature_block_2 }}
-              {{ feature_block_3 }}
+          {%- if right_blocks_counter > 0 -%}
+            <div class="pdpFeature__content-right {% if right_blocks_counter > 1 %}jcb{% else %}jcc{% endif %}">
+              {{ right_feature_block_1 }}
+              {{ right_feature_block_2 }}
+              {{ right_feature_block_3 }}
             </div>
           {%- endif -%}
         </div>
 
-        <div class="pdpFeature__content pdpFeature__content-mobile jsSlickSlider">
-          {{ feature_block_1 }}
-          {{ feature_block_2 }}
-          {{ feature_block_3 }}
-        </div>
+        {%- if left_blocks_counter > 0 or right_blocks_counter > 0 or  mobile_image != blank -%}
+          <div class="pdpFeature__content-mobile">
+            {%- if mobile_image != blank -%}
+              <div class="pdpFeature__content-imageWrapper x rel">
+                <img src="{{ mobile_image }}" alt="{{ section_heading }}">
+              </div>
+            {%- endif -%}
+            <div class="pdpFeature__content jsSlickSlider">
+              {%- if left_blocks_counter > 0 -%}
+                {{ left_feature_block_1 }}
+                {{ left_feature_block_2 }}
+                {{ left_feature_block_3 }}
+              {%- endif -%}
+              {%- if right_blocks_counter > 0 -%}
+                {{ right_feature_block_1 }}
+                {{ right_feature_block_2 }}
+                {{ right_feature_block_3 }}
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endif -%}
       {%- endif -%}
     </div>
   </section>

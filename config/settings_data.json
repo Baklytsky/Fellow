@@ -219,12 +219,12 @@
             "type": "splitSlide",
             "settings": {
               "splitSlide__layout": "right",
-              "heroSlide": "shopify:\/\/shop_images\/HeroImage_Mockup_51ad69a9-c167-49fc-9c41-a13a4abf63b0.png",
+              "heroSlide": "shopify:\/\/shop_images\/HP_HeroImage_Ultimate_Hosting.jpg",
               "desktopAlignment": "center",
               "mobileAlignment": "center",
               "heroSlide__header": "Personalize Your Carter",
               "heroSlide__subheader": "A monogram, an inside joke, or your favorite quote, Carter can convey the message.",
-              "subSlide__bgColor": "#000000",
+              "subSlide__bgColor": "#b0533e",
               "subSlide__textColor": "#FFFFFF",
               "heroSlide__ctaURL": "shopify:\/\/products\/staggekg",
               "heroSlide__ctaCopy": "Customize Now",
@@ -291,8 +291,8 @@
         "type": "hp-iwt",
         "settings": {
           "enable_section": true,
-          "image": "shopify:\/\/shop_images\/HP_LargeModule_Ode.jpg",
-          "layout": "right",
+          "image": "shopify:\/\/shop_images\/HP_LargeModule_Set.jpg",
+          "layout": "left",
           "header": "Shake it till you make it",
           "description": "<p>Shimmy has arrived to shake things up.<\/p>",
           "bg_color": "",
@@ -447,10 +447,6 @@
           "cta_copy": "Join Fellow Drops",
           "cta_color": "btn--dark"
         }
-      },
-      "cart-recommended": {
-        "type": "cart-recommended",
-        "settings": {}
       }
     },
     "content_for_index": [

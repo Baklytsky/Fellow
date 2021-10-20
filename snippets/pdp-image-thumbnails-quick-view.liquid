@@ -9,10 +9,23 @@
       {% else %}
         {%- assign variantId = product.id | append: forloop.index -%}
       {% endif %}
-      {%- assign imageSrc = image.src | img_url: '200x' -%}
+      {%- assign imageSrc = image.src | img_url: '100x' -%}
       <div class='pdpMain__gallery-thumbnails-item rel x' data-variant-img='{{ variantId }}'>
         <img src='{{ imageSrc }}' class='image-abs-cover x' alt='{{ image.alt }}' role='img' loading='lazy'/>
       </div>
+      {%- for variant in product.variants -%}
+        {%- if variant.id == variantId -%}
+          {%- for i in (1..10) -%}
+            {%- assign metafield_key =  'variant_image_' | append: i -%}
+            {%- assign metafield_variant_image = variant.metafields.my_fields[metafield_key] -%}
+            {%- if metafield_variant_image != blank -%}
+              <div class='pdpMain__gallery-thumbnails-item rel x' data-variant-img='{{ variantId | append: forloop.index }}'>
+                <img src='{{ metafield_variant_image | img_url: '100x' }}' class='image-abs-cover x' alt='{{ image.alt }}' role='img' loading='lazy'/>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+      {%- endfor -%}
     {% endfor %}
   </div>
   <div class='pdpMain__gallery-wrapper x f rel'>
@@ -24,7 +37,7 @@
       {% else %}
         {%- assign variantId = product.id | append: forloop.index -%}
       {% endif %}
-      {%- assign imageSrc = image.src | img_url: '900x' -%}
+      {%- assign imageSrc = image.src | img_url: '600x' -%}
       <div class="x">
         <div class='pdpMain__variant-image rel x rel'
              data-variant-media='{{ variantId }}'>
@@ -35,9 +48,25 @@
             {%- assign image_custom_tag = image.alt | split: 'tag:' | last -%}
             <span class="productCard__badge abs z3 xsmall cb bg-xlightgrey">{{ image_custom_tag }}</span>
           {%- endif -%}
-          <img src="{{ imageSrc }}" class='x image-abs-cover' alt='{{ image.alt }}' role='img'/>
+          <img src="{{ imageSrc }}" class='x image-abs-cover' alt='{{ image.alt }}' role='img' loading='lazy'/>
         </div>
       </div>
+      {%- for variant in product.variants -%}
+        {%- if variant.id == variantId -%}
+          {%- for i in (1..10) -%}
+            {%- assign metafield_key =  'variant_image_' | append: i -%}
+            {%- assign metafield_variant_image = variant.metafields.my_fields[metafield_key] -%}
+            {%- if metafield_variant_image != blank -%}
+              <div class="x">
+                <div class='pdpMain__variant-image rel x f aic'
+                     data-variant-media='{{ variantId | append: forloop.index }}'>
+                  <img src="{{ metafield_variant_image | img_url: '600x' }}" class='x image-abs-cover' alt='{{ image.alt }}' role='img' loading='lazy'/>
+                </div>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+      {%- endfor -%}
     {% endfor %}
   </div>
 </div>
