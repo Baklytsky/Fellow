@@ -8,7 +8,7 @@
     "free_shipping_met_msg": "Good News! You get free continental US shipping.",
     "enable_cart_banner": true,
     "cart_banner_text": "Free Continental US Shipping on orders over $99",
-    "cart_empty_cta": "shopify:\/\/collections\/bestsellers",
+    "cart_empty_cta": "shopify:\/\/collections\/best-sellers",
     "cart_empty_cta_text": "Shop Bestsellers",
     "cart_notes_enable": false,
     "favicon": "shopify:\/\/shop_images\/favicon.png",
@@ -45,16 +45,16 @@
       "header": {
         "type": "header",
         "blocks": {
-          "611ef270-4511-4b7d-ab48-c33f740748e5": {
+          "1bac7421-9445-4285-b56b-0927744a65ae": {
             "type": "sub_menu",
             "settings": {
-              "target": "learn",
-              "image_1": "shopify:\/\/shop_images\/1440x740_HeaderImages_homepage.jpg",
+              "target": "Learn",
+              "image_1": "shopify:\/\/shop_images\/Mask_Group_4.jpg",
               "title_1": "Brew Guides",
-              "url_1": "shopify:\/\/collections",
-              "image_2": "shopify:\/\/shop_images\/1440X1080_HomepageModule_CLARA.jpg",
+              "url_1": "shopify:\/\/blogs\/brew-guides",
+              "image_2": "shopify:\/\/shop_images\/Mask_Group_5.jpg",
               "title_2": "Blog",
-              "url_2": "shopify:\/\/collections",
+              "url_2": "shopify:\/\/blogs\/learn",
               "title_3": "",
               "url_3": "",
               "title_4": "",
@@ -65,16 +65,16 @@
             "type": "sub_menu",
             "settings": {
               "target": "wholesale",
-              "image_1": "shopify:\/\/shop_images\/1440X1080_GearProgram_Homepage-V6.jpg",
+              "image_1": "shopify:\/\/shop_images\/Frame_1760.jpg",
               "title_1": "Wholesale",
               "url_1": "shopify:\/\/collections\/all",
-              "image_2": "shopify:\/\/shop_images\/Image.jpg",
+              "image_2": "shopify:\/\/shop_images\/Frame_1762.jpg",
               "title_2": "Collaborations",
               "url_2": "shopify:\/\/collections\/all",
-              "image_3": "shopify:\/\/shop_images\/Fellow_Atmos_LindseyShea-25_1.jpg",
+              "image_3": "shopify:\/\/shop_images\/Frame_1763.jpg",
               "title_3": "International",
               "url_3": "shopify:\/\/collections\/all",
-              "image_4": "shopify:\/\/shop_images\/2021-2-19_fellow_burrs_bags2761_1.png",
+              "image_4": "shopify:\/\/shop_images\/Frame_1763_1.jpg",
               "title_4": "Customizations",
               "url_4": "shopify:\/\/collections\/all"
             }
@@ -83,10 +83,11 @@
             "type": "sub_menu",
             "settings": {
               "target": "featured",
-              "image_1": "shopify:\/\/shop_images\/ShimmySieve_Dance_9x16_1.png",
-              "title_1": "Shop All",
+              "image_1": "shopify:\/\/shop_images\/Nav-2up-holiday-under100.jpg",
+              "title_1": "Gifts Under $100",
               "url_1": "#",
-              "title_2": "",
+              "image_2": "shopify:\/\/shop_images\/Nav-2up-holiday-superFancy.jpg",
+              "title_2": "Super Fancy Gifts",
               "url_2": "",
               "title_3": "",
               "url_3": "",
@@ -98,12 +99,12 @@
             "type": "sub_menu",
             "settings": {
               "target": "kettles",
-              "image_1": "shopify:\/\/shop_images\/image_2.png",
+              "image_1": "shopify:\/\/shop_images\/Mask_Group.jpg",
               "title_1": "All Kettles",
-              "url_1": "#",
-              "image_2": "shopify:\/\/shop_images\/ShimmySieve_Dance_9x16_1.png",
-              "title_2": "Featured",
-              "url_2": "#",
+              "url_1": "shopify:\/\/collections\/all-kettles",
+              "image_2": "shopify:\/\/shop_images\/Nav-2up-Kettles-Featured.jpg",
+              "title_2": "Matte Black Bundle",
+              "url_2": "",
               "title_3": "",
               "url_3": "",
               "title_4": "",
@@ -114,12 +115,12 @@
             "type": "sub_menu",
             "settings": {
               "target": "grind+brew",
-              "image_1": "shopify:\/\/shop_images\/1440x1080_HeaderImages_Slider_Amos.jpg",
+              "image_1": "shopify:\/\/shop_images\/Mask_Group_1.jpg",
               "title_1": "All Grind + Brew",
-              "url_1": "#",
-              "image_2": "shopify:\/\/shop_images\/1440X1080_HomepageModule_CLARA.jpg",
-              "title_2": "Featured",
-              "url_2": "#",
+              "url_1": "shopify:\/\/collections\/all-grind-brew",
+              "image_2": "shopify:\/\/shop_images\/Nav-2up-holiday-designLovers.jpg",
+              "title_2": "Gifts for Design Lovers",
+              "url_2": "",
               "title_3": "",
               "url_3": "",
               "title_4": "",
@@ -130,12 +131,27 @@
             "type": "sub_menu",
             "settings": {
               "target": "Drink+Serve",
-              "image_1": "shopify:\/\/shop_images\/1E4A4907_1.png",
+              "image_1": "shopify:\/\/shop_images\/Mask_Group_2.jpg",
               "title_1": "All Drink + Serve",
-              "url_1": "#",
-              "image_2": "shopify:\/\/shop_images\/1440x1080_HeaderImages_Slider_Amos.jpg",
-              "title_2": "Featured",
-              "url_2": "#",
+              "url_1": "shopify:\/\/collections\/all-drink-serve",
+              "image_2": "shopify:\/\/shop_images\/Mask_Group_3.jpg",
+              "title_2": "Artist Series",
+              "url_2": "shopify:\/\/collections\/artist-series",
+              "title_3": "",
+              "url_3": "",
+              "title_4": "",
+              "url_4": ""
+            }
+          },
+          "9d051490-e4a2-42fc-aff7-458f600203d6": {
+            "type": "sub_menu",
+            "settings": {
+              "target": "coffee",
+              "image_1": "shopify:\/\/shop_images\/Nav-Single-Coffee-Drops.jpg",
+              "title_1": "Text-to-Order Coffee",
+              "url_1": "https:\/\/drops.fellowproducts.com",
+              "title_2": "",
+              "url_2": "",
               "title_3": "",
               "url_3": "",
               "title_4": "",
@@ -144,16 +160,17 @@
           }
         },
         "block_order": [
-          "611ef270-4511-4b7d-ab48-c33f740748e5",
+          "1bac7421-9445-4285-b56b-0927744a65ae",
           "2f0f418e-df55-4822-aeca-dd696ac6211b",
           "fd354e24-d05d-4c44-b2c3-09dbe4884b85",
           "751bf283-f99d-4a6b-8c37-761a0253cc3d",
           "07a7325a-a427-41ba-8978-d7a7838d1890",
-          "b24e904e-5612-41ff-a0e9-515e8062e8f4"
+          "b24e904e-5612-41ff-a0e9-515e8062e8f4",
+          "9d051490-e4a2-42fc-aff7-458f600203d6"
         ],
         "settings": {
           "logo_svg": "",
-          "logo_desktop_size": 200,
+          "logo_desktop_size": 125,
           "logo_mobile_size": 120,
           "center_menu": "main-menu-1",
           "menu_left": "left-menu",
@@ -188,9 +205,7 @@
       },
       "collection-template": {
         "type": "collection-template",
-        "settings": {
-          "show_tagline": true
-        }
+        "settings": {}
       },
       "1565155576930": {
         "type": "hero-slider",
@@ -199,12 +214,12 @@
             "type": "splitSlide",
             "settings": {
               "splitSlide__layout": "right",
-              "heroSlide": "shopify:\/\/shop_images\/1.png",
+              "heroSlide": "shopify:\/\/shop_images\/HP_HeroImage_Ultimate_Hosting.jpg",
               "desktopAlignment": "center",
               "mobileAlignment": "center",
-              "heroSlide__header": "Fellow - by you and for you",
-              "heroSlide__subheader": "Check out the Fellow Customizer for a Carter Mug that is perfectly you.",
-              "subSlide__bgColor": "#000000",
+              "heroSlide__header": "Personalize Your Carter",
+              "heroSlide__subheader": "A monogram, an inside joke, or your favorite quote, Carter can convey the message.",
+              "subSlide__bgColor": "#b0533e",
               "subSlide__textColor": "#FFFFFF",
               "heroSlide__ctaURL": "shopify:\/\/products\/staggekg",
               "heroSlide__ctaCopy": "Customize Now",
@@ -241,55 +256,24 @@
         "settings": {
           "enable_section": true,
           "text": "Start your day on a bright note",
-          "url": "#",
           "icon": "shopify:\/\/shop_images\/Fellow-logo-icon.png"
         }
       },
       "162997622949d3f8ee": {
         "type": "featured-collections",
         "blocks": {
-          "ee108b41-b5ec-4fa2-a387-628fee162d06": {
+          "1c8f9541-a475-428c-9638-4b46c17cf01e": {
             "type": "collection",
             "settings": {
-              "tab_text": "",
-              "collection": "bestsellers",
-              "button_text": "",
-              "button_url": ""
-            }
-          },
-          "7278a1b4-bb88-4c92-862f-ec8fd6eb9d02": {
-            "type": "collection",
-            "settings": {
-              "tab_text": "Kettles",
-              "collection": "electric",
-              "button_text": "",
-              "button_url": ""
-            }
-          },
-          "7cb3eee1-e23e-4d91-bcc9-40b6a133d523": {
-            "type": "collection",
-            "settings": {
-              "tab_text": "Brew + Grind",
-              "collection": "brew",
-              "button_text": "",
-              "button_url": ""
-            }
-          },
-          "0c83843c-14c5-470a-ac14-104b792b3fc4": {
-            "type": "collection",
-            "settings": {
-              "tab_text": "Drink + Serve",
-              "collection": "drinkware",
+              "tab_text": "Test",
+              "collection": "development",
               "button_text": "",
               "button_url": ""
             }
           }
         },
         "block_order": [
-          "ee108b41-b5ec-4fa2-a387-628fee162d06",
-          "7278a1b4-bb88-4c92-862f-ec8fd6eb9d02",
-          "7cb3eee1-e23e-4d91-bcc9-40b6a133d523",
-          "0c83843c-14c5-470a-ac14-104b792b3fc4"
+          "1c8f9541-a475-428c-9638-4b46c17cf01e"
         ],
         "settings": {
           "enable_section": true,
@@ -302,8 +286,8 @@
         "type": "hp-iwt",
         "settings": {
           "enable_section": true,
-          "image": "shopify:\/\/shop_images\/ShimmySieve_Dance_9x16_1.png",
-          "layout": "right",
+          "image": "shopify:\/\/shop_images\/HP_LargeModule_Set.jpg",
+          "layout": "left",
           "header": "Shake it till you make it",
           "description": "<p>Shimmy has arrived to shake things up.<\/p>",
           "bg_color": "",
@@ -319,7 +303,7 @@
           "enable_section": true,
           "image": "shopify:\/\/shop_images\/1E4A4907_1.png",
           "layout": "center",
-          "header": "Hi.  We’re  Fellow.",
+          "header": "About Fellow",
           "description": "<p>We’re on a mission to give you the gear and the guidance to make your brewing routine a moment of creativity. We believe in terribly good design that results in ridiculously good coffee. This way to a brighter, less boring morning<\/p>",
           "bg_color": "#fff9e5",
           "text_color": "#000000",
@@ -443,6 +427,21 @@
           "product_bar_text_color": "#000000",
           "product_bar_bg_color": "#fff9e5"
         }
+      },
+      "16342252676e2388c3": {
+        "type": "hp-iwt",
+        "settings": {
+          "enable_section": true,
+          "image": "shopify:\/\/shop_images\/Cool_Beans_2_d.png",
+          "layout": "left",
+          "header": "Text-to-order coffee, curated by Fellow.",
+          "description": "",
+          "bg_color": "#cfe8e6",
+          "text_color": "",
+          "cta_url": "https:\/\/fellowproducts.com",
+          "cta_copy": "Join Fellow Drops",
+          "cta_color": "btn--dark"
+        }
       }
     },
     "content_for_index": [
@@ -453,7 +452,8 @@
       "163005286553dd2458",
       "1630069783d5517455",
       "163041601834c99057",
-      "163040772842cf0e69"
+      "163040772842cf0e69",
+      "16342252676e2388c3"
     ]
   },
   "presets": {
