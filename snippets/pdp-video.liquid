@@ -27,6 +27,7 @@
     {% if video_poster %}data-poster='{{ video_hasposter }}'{% endif %}>
 
     {% if video_copy != blank or video_url != blank %}
+      <div class="pdpVideo__Container">
       <div class='pdpVideo__Wrapper x f {% if video_in_line %} pdpVideo__Wrapper-row{% endif %}'>
         {%- if video_copy != blank -%}
           <div class='pdpVideo__Copy'>
@@ -52,6 +53,7 @@
             </div>
           </div>
         {%- endif -%}
+      </div>
       </div>
     {% endif %}
   </section>

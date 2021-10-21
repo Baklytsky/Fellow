@@ -92,6 +92,11 @@ h1, h2, h3, h4, h5, h6 {
   color: inherit;
 }
 
+.newHeader__openedBlockContainer {
+  margin: 0 auto;
+  max-width: 1440px;
+}
+
 
 .newHeader {
   position: fixed;
@@ -110,10 +115,18 @@ h1, h2, h3, h4, h5, h6 {
     }
   }
 
+  .newHeader__topMenu {
+    background: $color-black;
+  }
+
+  .newHeader__topMenuContainer {
+    margin: 0 auto;
+    max-width: 1440px;
+  }
+
   .topMenu {
     position: relative;
     width: 100%;
-    background: $color-black;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -155,6 +168,16 @@ h1, h2, h3, h4, h5, h6 {
     }
   }
 
+  .newHeader__mainMenu {
+    box-shadow: 0 0 4px 5px rgba(0, 0, 0, 0.1);
+    background-color: $color-white;
+  }
+
+  .newHeader__mainMenuContainer {
+    margin: 0 auto;
+    max-width: 1440px;
+  }
+
   .mainMenu {
     background: $color-white;
     display: flex;
@@ -164,7 +187,6 @@ h1, h2, h3, h4, h5, h6 {
     padding: 17px 33px;
     align-items: center;
     font-weight: 500;
-    box-shadow: 0 0 4px 5px rgba(0, 0, 0, 0.1);
 
     @media screen and (max-width: $tablet) {
       padding: 5px 16px;
@@ -237,6 +259,7 @@ h1, h2, h3, h4, h5, h6 {
     outline: none;
     margin-left: 20px;
     background-color: transparent;
+    color: currentColor;
   }
 
   .mainMenu__cardTitle {
@@ -322,16 +345,20 @@ h1, h2, h3, h4, h5, h6 {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    max-height: 245px;
+    height: 245px;
     max-width: 700px;
     margin: 35px 0 0 105px;
 
     @media screen and (min-width: $tablet) {
-      flex-direction: row;
-      flex-wrap: nowrap;
       max-width: none;
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
       flex-flow: row wrap;
+      -ms-flex-line-pack: start;
       align-content: flex-start;
+      -webkit-writing-mode: vertical-lr;
+      -ms-writing-mode: tb-lr;
       writing-mode: vertical-lr;
     }
 
@@ -349,10 +376,14 @@ h1, h2, h3, h4, h5, h6 {
     width: 210px;
 
     @media screen and (min-width: $tablet) {
+      -webkit-writing-mode: horizontal-tb;
+      -ms-writing-mode: lr-tb;
       writing-mode: horizontal-tb;
     }
 
     @media screen and (max-width: $desk) {
+      width: -webkit-fit-content;
+      width: -moz-fit-content;
       width: fit-content;
     }
   }
@@ -584,6 +615,7 @@ h1, h2, h3, h4, h5, h6 {
       button {
         background: none;
         padding: 0;
+        color: currentColor;
       }
 
       p {
@@ -713,7 +745,7 @@ h1, h2, h3, h4, h5, h6 {
       }
 
       &::after {
-        content: none;
+        content: '';
       }
     }
 
@@ -2519,7 +2551,9 @@ img.BlogSectionArticle__Image {
 }
 
 .pdpMain__container {
+  margin: 0 auto;
   padding: 24px 33px 0;
+  max-width: 1440px;
 
   @media screen and (max-width: $tablet) {
     padding: 0;
@@ -2548,7 +2582,13 @@ img.BlogSectionArticle__Image {
   padding: 0 24px;
 
   .slick-dots {
-    width: 145px;
+    width: fit-content;
+    width: -moz-fit-content;
+    max-width: 145px;
+
+    li:only-child {
+      display: none;
+    }
   }
 
   @media screen and (max-width: $tablet) {
@@ -2632,7 +2672,9 @@ img.BlogSectionArticle__Image {
 }
 
 .breadcrumbs {
+  margin: 0 auto;
   padding: 24px 33px 0;
+  max-width: 1440px;
   font-weight: 500;
   font-size: 14px;
   line-height: 16px;
@@ -2920,11 +2962,16 @@ h2.pdpCopy__header-price ,
   font-weight: 400;
 }
 
+.pdpVideo__Container {
+  background-color: #000;
+}
+
 .pdpVideo__Wrapper {
+  margin: 0 auto;
   padding: 80px 33px;
+  max-width: 1440px;
   flex-direction: column;
   color: #ffffff;
-  background-color: #000;
 
   @media screen and (max-width: $tablet) {
     padding: 40px 15px;
@@ -3055,7 +3102,9 @@ h2.pdpCopy__header-price ,
   outline: none;
 
   .pdpStickyBar__wrapper {
-    padding: 16px 30px;
+    margin: 0 auto;
+    padding: 16px 33px;
+    max-width: 1440px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -3261,7 +3310,9 @@ h2.pdpCopy__header-price ,
 }
 
 .keyFeatures {
-  padding: 34px;
+  margin: 0 auto;
+  padding: 32px 33px;
+  max-width: 1440px;
 
   @media screen and (max-width: $tablet) {
     padding: 34px 0;
@@ -3700,31 +3751,24 @@ h2.pdpCopy__header-price ,
 
 .size__image-wrapper {
   width: 100%;
-  padding-top: 100%;
+  height: 80px;
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  background-color: #F5F5F5;
+}
 
-  img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
+.size__image-wrapper-icon {
+  display: flex;
+  justify-content: center;
+  svg {
+    fill: #DBDBDB;
+
+    path {
+      fill: #DBDBDB;
+    }
   }
-}
-
-.size__image-wrapper-active,
-.size__image-wrapper-not-active {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.size__image-wrapper-not-active {
-  visibility: hidden;
-  opacity: 0;
 }
 
 .heroSection {
@@ -4064,10 +4108,33 @@ h2.pdpCopy__header-price ,
 
 .pdpImgCollection__content-logo {
   max-width: 210px;
-  margin: 0 auto;
+  margin: 0 auto 24px;
 
   img {
     width: 100%;
+  }
+}
+
+.pdpImgCollection__content-btn-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.pdpImgCollection__content-btn {
+  min-width: 167px;
+  width: -moz-fit-content;
+  width: fit-content;
+  font-family: Inter,sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  text-transform: capitalize;
+}
+
+.pdpImgCollection__content-btn.btn--light {
+  &:hover {
+    border: 2px solid #FFF;
   }
 }
 
@@ -4649,9 +4716,10 @@ h2.pdpCopy__header-price ,
 }
 
 .collectionHero {
-  min-height: 21.5vw;
-  margin: 24px 0 0;
-  padding: 0 32px;
+  min-height: 310px;
+  margin: 24px auto 0;
+  max-width: 1440px;
+  padding: 0 33px;
   display: flex;
   align-items: stretch;
 
@@ -4732,8 +4800,10 @@ h2.pdpCopy__header-price ,
 }
 
 .collectionModule {
-  min-height: 44.8vw;
-  padding: 45px 40px 90px;
+  min-height: 640px;
+  max-width: 1374px;
+  margin: 0 auto;
+  padding: 45px 33px 90px;
   display: flex;
   justify-content: space-between;
   align-items: stretch;

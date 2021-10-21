@@ -18466,7 +18466,8 @@ textarea {
   border: 2px solid transparent;
   border-radius: 100px;
   cursor: pointer;
-  transition: border-color var(--fast) var(--ease)
+  transition: border-color var(--fast) var(--ease);
+  outline: none !important;
 }
 
 .radio-group[data-option-color] .radio__title-bg-image {
@@ -18556,7 +18557,8 @@ textarea {
   font-size: .66rem;
   text-transform: uppercase;
   letter-spacing: .125em;
-  transition: all var(--slow) var(--ease)
+  transition: all var(--slow) var(--ease);
+  outline: none !important;
 }
 
 .radio-group:not([data-option-color]):not([data-option-material]) .radio__title-size-image {
@@ -18618,14 +18620,20 @@ textarea {
   border: 2px solid transparent;
 }
 
-.radio-group:not([data-option-color]):not([data-option-material]) input:checked+.radio__title-size-image .size__image-wrapper-not-selected {
-  visibility: hidden;
-  opacity: 0;
+.radio-group:not([data-option-color]):not([data-option-material]) input:checked+.radio__title-size-image .size__image-wrapper-icon svg {
+  fill: #000000;
 }
 
-[data-disabled-size="true"] .radio-group:not([data-option-color]):not([data-option-material]) input:checked+.radio__title-size-image .size__image-wrapper-not-selected {
-  visibility: visible;
-  opacity: 1;
+.radio-group:not([data-option-color]):not([data-option-material]) input:checked+.radio__title-size-image .size__image-wrapper-icon svg path {
+  fill: #000000;
+}
+
+[data-disabled-size="true"] .radio-group:not([data-option-color]):not([data-option-material]) input:checked+.radio__title-size-image .size__image-wrapper-icon svg {
+  fill: #DBDBDB;
+}
+
+[data-disabled-size="true"] .radio-group:not([data-option-color]):not([data-option-material]) input:checked+.radio__title-size-image .size__image-wrapper-icon svg path {
+  fill: #DBDBDB;
 }
 
 .radio-group:not([data-option-color]):not([data-option-material]) input:checked+.radio__title-size-image .size__image-wrapper-not-active {
@@ -19760,10 +19768,6 @@ h3.productCard__title {
 }
 
 @media screen and (max-width: 991px) {
-  .productCard__img {
-    padding-top: 113%;
-  }
-
   .productCard__recommended .productCard__img {
     padding-top: 82%;
   }
@@ -20167,6 +20171,9 @@ h3.productCard__title {
 }
 
 .jumboSlider__mobileWrap {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1440px;
   overflow: hidden
 }
 
@@ -20178,6 +20185,7 @@ h3.productCard__title {
 
 .jumboSlider {
   height: 90vh;
+  max-height: 760px;
   overflow: hidden;
   pointer-events: auto
 }
@@ -20291,6 +20299,11 @@ h3.productCard__title {
   background-size: cover;
   background-position: 50%;
   width: 100%
+}
+
+.hero__slideWrapper {
+  margin: 0 auto;
+  max-width: 1440px;
 }
 
 .hero__slide img {

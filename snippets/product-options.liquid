@@ -2,7 +2,11 @@
   {%- assign product_has_size_option = false -%}
   <div {% if product.has_only_default_variant or product.variants.size <= 1 %}style='display:none'{% else %} class="f fdcr" {% endif %}>
     {% for option in product.options_with_values %}
-      <div class='{% if option.values.size <= 1 %} hide{% endif %}' data-option-radio data-index='{{ forloop.index0 }}' data-options-count='{{ option.values.size }}'>
+      {%- assign option_name_handleize = option.name | handleize -%}
+      <div class='{% if option.values.size <= 1 %} hide{% endif %}'
+           data-option-radio data-index='{{ forloop.index0 }}'
+           data-options-count='{{ option.values.size }}'
+        {% if option_name_handleize == 'size' %} style='order: 1'{% endif %}>
         {% for value in option.values %}
           {% include 'assign_option_label', option: option, value: value %}
           {% if option_value_group != blank %}
@@ -11,7 +15,6 @@
           {% endif %}
         {% endfor %}
 
-        {%- assign option_name_handleize = option.name | handleize -%}
 
         {%- if option_name_handleize == 'size' -%}
           {%- assign product_has_size_option = true -%}

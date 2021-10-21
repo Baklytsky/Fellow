@@ -491,22 +491,22 @@ theme.pdpMain = function () {
     }
   }
 
-  function changeVariantImage(variantId) {
-    var selectedVariantThumbnail = $(document).find('[data-variant-img="' + variantId + '"]'),
-        selectedVariantImage = $(document).find('[data-variant-media="' + variantId + '"]'),
-        slideIndexMobile = selectedVariantImage.parent().data('slick-index'),
-        mobileProductSlider = $(document).find('.pdpMain__gallery-wrapper');
-
-    if ($(window).width() > 992) {
-      if (selectedVariantThumbnail.length) {
-        selectedVariantThumbnail.trigger('click');
-      }
-    } else {
-      if (selectedVariantImage.length) {
-        mobileProductSlider.slick('slickGoTo', parseInt(slideIndexMobile), false);
-      }
-    }
-  }
+  // function changeVariantImage(variantId) {
+  //   var selectedVariantThumbnail = $(document).find('[data-variant-img="' + variantId + '"]'),
+  //       selectedVariantImage = $(document).find('[data-variant-media="' + variantId + '"]'),
+  //       slideIndexMobile = selectedVariantImage.parent().data('slick-index'),
+  //       mobileProductSlider = $(document).find('.pdpMain__gallery-wrapper');
+  //
+  //   if ($(window).width() < 992) {
+  //     if (selectedVariantThumbnail.length) {
+  //       mobileProductSlider.slick('slickGoTo', parseInt(slideIndexMobile), false);
+  //     }
+  //   } else {
+  //     if (selectedVariantImage.length) {
+  //       mobileProductSlider.slick('slickGoTo', parseInt(slideIndexMobile), false);
+  //     }
+  //   }
+  // }
 
   function pdpStickyBar() {
     var $productStickyBar = $('.pdpStickyBar'),
@@ -635,10 +635,9 @@ theme.pdpMain = function () {
     }
   }
 
-  theme.variantChange = function (variantId) {
-    theme.selectedVariantId = variantId
+  theme.variantChange = function (variantId, changeMediaContent) {
     function changeMedia() {
-      var ajaxUrl = window.location.protocol + '//' + window.location.host + window.location.pathname + '?variant=' + variantId + '&view=ajax',
+      var ajaxUrl = window.location.protocol + '//' + window.location.host + window.location.pathname + '?variant=' + variantId + '&view=ajax-media',
           $productMedia = $(document).find('.pdpMain__Media');
 
       $.ajax({
@@ -654,11 +653,14 @@ theme.pdpMain = function () {
           theme.slickSlider()
           pdpGallary()
           pdpThumbnails()
-          changeVariantImage(theme.selectedVariantId)
         }
       });
     }
-    changeMedia()
+
+    if (changeMediaContent) {
+      changeMedia()
+    }
+    pdpThumbnails()
 
     if ($('.option-group-title').length) {
       var selectedColor = $('.pdp__options-main [data-option-label="Color"] [data-option-current]').text();
@@ -671,14 +673,29 @@ theme.pdpMain = function () {
     }
   }
 
+  function pdpCompare() {
+    $(document).off('click.thumbnails')
+    function changeTableHeight() {
+      let trHeight = $(document).find('.pdpCompare__table thead').height() - 24;
+      $('.pdpCompare__table-th').css('minHeight', trHeight)
+    }
+    changeTableHeight()
+
+    $(document).on('resize.pdpCompare', function () {
+      $('.pdpCompare__table-th').css('minHeight', 'auto')
+      changeTableHeight()
+    })
+  }
+
   if ($('.pdpBar__wrapper').length) {pdpBar();}
   if ($('.pdpMain__gallery-thumbnails').length) {pdpThumbnails();}
   if ($('.pdpMain__gallery-wrapper').length) {pdpGallary();}
   if ($('.pdpRecCollection').length) {theme.pdpRecCollection();}
-  if ($('.pdpInfo').length || $('.pdpAdditionalFeatures ').length) {pdpDropdown();}
+  if ($('[data-dropdown]').length) {pdpDropdown();}
   if ($('.pdpMediaProof').length) {pdpMediaProof();}
   if ($('.pdpLearnMore').length) {pdpLearMore();}
   if ($('.pdpMain-bundle__details').length) {bundle();}
+  if ($('.pdpCompare').length) {pdpCompare();}
   pdpStickyBar()
 }
 

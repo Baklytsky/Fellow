@@ -18,7 +18,8 @@
   <div id="MainHeader">
 
     {%- if right_menu != blank or left_menu != blank or text_bar != blank -%}
-      <div class="newHeader__topMenu topMenu">
+      <div class="newHeader__topMenu">
+        <div class="newHeader__topMenuContainer topMenu">
         {%- if left_menu != blank -%}
           <ul class="topMenu__menu topMenu__menu--left leftMenu">
             {%- for item in left_menu.links -%}
@@ -113,11 +114,13 @@
             {%- endif -%}
           </ul>
         {%- endif -%}
+        </div>
       </div>
     {%- endif -%}
 
     {%- if main_menu != blank -%}
-      <div id="Menu" class="newHeader__mainMenu mainMenu">
+      <div id="Menu" class="newHeader__mainMenu">
+        <div class="newHeader__mainMenuContainer mainMenu">
         <button type="button" class="burgerMenu">
           <span></span>
           <span></span>
@@ -198,11 +201,13 @@
             </p>
           </span>
         </button>
+        </div>
       </div>
     {%- endif -%}
   </div>
 
   <div class="newHeader__openedBlock">
+    <div class="newHeader__openedBlockContainer">
     {%- if left_menu != blank -%}
       {%- render 'generate-menu',mobile_menu: false, menu: left_menu, section: section -%}
     {%- endif -%}
@@ -214,6 +219,7 @@
     {%- if main_menu != blank -%}
       {%- render 'generate-menu',mobile_menu: false, menu: main_menu, section: section -%}
     {%- endif -%}
+    </div>
   </div>
 
   <div class="mobileMenu">

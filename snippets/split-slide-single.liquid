@@ -16,13 +16,14 @@
   {% assign ctaClasses = 'btn btn--lg btn--dark' %}
 {% endif %}
 
-<div id='hero__slide--{{ block.id }}' class='hero__slide hero__slide--split' data-color='{{ dataColor }}'
+<div id='hero__slide--{{ block.id }}' class='hero__slide' data-color='{{ dataColor }}'
      style="background-color: {{ backgroundColor }}; color: {{ textColor }};">
+  <div class="hero__slideWrapper hero__slide--split">
   {% if block.settings.mobileAlignment != 'center' or block.settings.desktopAlignment or layout != blank %}
     <style>
       {% if layout == 'right' %}
       @media (min-width: 992px) {
-        #hero__slide--{{ block.id }} {
+        #hero__slide--{{ block.id }} .hero__slide--split {
           flex-direction: row-reverse;
         }
       }
@@ -76,5 +77,5 @@
             {{ block.settings.heroSlide | img_url: "1440x" }} 1400w'
         alt='{{ block.settings.heroSlide__header | default: block.settings.heroSlide__header }}'>
   </div>
-
+  </div>
 </div>

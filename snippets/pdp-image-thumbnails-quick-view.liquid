@@ -9,7 +9,7 @@
       {% else %}
         {%- assign variantId = product.id | append: forloop.index -%}
       {% endif %}
-      {%- assign imageSrc = image.src | img_url: '100x' -%}
+      {%- assign imageSrc = image.src | img_url: '200x' -%}
       <div class='pdpMain__gallery-thumbnails-item rel x' data-variant-img='{{ variantId }}'>
         <img src='{{ imageSrc }}' class='image-abs-cover x' alt='{{ image.alt }}' role='img' loading='lazy'/>
       </div>
@@ -20,7 +20,7 @@
             {%- assign metafield_variant_image = variant.metafields.my_fields[metafield_key] -%}
             {%- if metafield_variant_image != blank -%}
               <div class='pdpMain__gallery-thumbnails-item rel x' data-variant-img='{{ variantId | append: forloop.index }}'>
-                <img src='{{ metafield_variant_image | img_url: '100x' }}' class='image-abs-cover x' alt='{{ image.alt }}' role='img' loading='lazy'/>
+                <img src='{{ metafield_variant_image | img_url: '200x' }}' class='image-abs-cover x' alt='{{ image.alt }}' role='img' loading='lazy'/>
               </div>
             {%- endif -%}
           {%- endfor -%}
