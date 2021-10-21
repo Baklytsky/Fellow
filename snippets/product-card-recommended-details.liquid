@@ -1,0 +1,75 @@
+<div class='productCard__details rel {% unless large_title == true %}productCard__details--small{% endunless %}'>
+  <h3 class='productCard__title js-product-card-title'>{{ title }}</h3>
+  <div class="productCard__price js-product-card-price">
+    {% if product.available %}
+      {% if product.price_varies %}
+        <p class='productCard__from eyebrow'>{{ 'products.product.from_text' | t }}</p>
+      {% else %}
+        <p class='productCard__eyebrow--placeholder'></p>
+      {% endif %}
+    {% else %}
+      <p class='productCard__from eyebrow'>{{ 'products.product.sold_out' | t }}</p>
+    {% endif %}
+    <div class="ar productCard__price-wrapper">
+      {% if product.available %}
+      {% if product.compare_at_price > product.price %}
+      {% comment %}
+        Product is available and on sale
+      {% endcomment %}
+      {% comment %} <strong> tag added to satisfy compliance concern -ae 03.23.21 {% endcomment %}
+        <div class="pdpCopy__price hide-mobile f aic">
+            <span class="inline-block  ml1 rel strike productCard__strike eyebrow">
+              {{ product.compare_at_price | money_without_trailing_zeros }}
+
+              {%- comment -%}
+                <div class="price-round-arrow">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="14" viewBox="0 0 25 14" fill="none">
+                  <path d="M21.8717 2.55273L22.064 7.23249L17.2605 7.54226" stroke="black" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round"></path>
+                  <path d="M21 6.49951C21 6.49951 16.3627 1.55385 10.0543 3.38802C3.74592 5.22219 1.9372 10.8949 1.9372 10.8949"
+                        stroke="black" stroke-width="1.5" stroke-linecap="round"></path>
+                </svg>
+              </div>
+              {%- endcomment -%}
+            </span>
+          <span class="visually-hidden">{{ product.price | money_without_trailing_zeros }}</span>
+          <h3 class="inline-block card__price--sale ml1 pdpCopy__header-price">
+            {{ product.price | money_without_trailing_zeros }}
+          </h3>
+        </div>
+
+        <div class="f aic hide-desktop pdpCopy__price">
+          <span class="inline-block  ml1 rel strike productCard__strike eyebrow">
+           {{ product.compare_at_price | money_without_trailing_zeros }}
+            {%- comment -%}
+              <div class="price-round-arrow">
+              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="14" viewBox="0 0 25 14" fill="none">
+                <path d="M21.8717 2.55273L22.064 7.23249L17.2605 7.54226" stroke="black" stroke-width="1.5" stroke-linecap="round"
+                      stroke-linejoin="round"></path>
+                <path d="M21 6.49951C21 6.49951 16.3627 1.55385 10.0543 3.38802C3.74592 5.22219 1.9372 10.8949 1.9372 10.8949"
+                      stroke="black" stroke-width="1.5" stroke-linecap="round"></path>
+              </svg>
+             </div>
+            {%- endcomment -%}
+          </span>
+          <span class="visually-hidden">{{ product.price | money_without_trailing_zeros }}</span>
+          <h3 class="inline-block card__price--sale ml1 pdpCopy__header-price">
+            {{ product.price | money_without_trailing_zeros }}
+          </h3>
+        </div>
+        {% else %}
+          {% comment %}
+            Product is available and not on sale
+          {% endcomment %}
+          <h3>{{ product.price | money_without_trailing_zeros }}</h3>
+        {% endif %}
+        {% else %}
+          {% comment %}
+            Sold Out
+          {% endcomment %}
+          <h3 class='strike'>{{ product.price | money_without_trailing_zeros }}</h3>
+        {% endif %}
+    </div>
+  </div>
+  <a href='{{ url }}' class='abs fill z2 js-product-link' aria-label='{{ product.title }}'></a>
+</div>
