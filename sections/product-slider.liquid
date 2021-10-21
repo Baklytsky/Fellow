@@ -57,7 +57,9 @@
                   <div class="ProductInfoSlider__Content">
                     {%- if product != blank -%}
                       <div class="ProductInfoSlider__ProductInfo">
-
+<div class="yotpo bottomLine mb1"
+  data-product-id="{{ product.id }}">
+</div>
                         <h4 class="ProductInfoSlider__ProductTitle">{{ product.title }}</h4>
                       </div>
                     {%- endif -%}
