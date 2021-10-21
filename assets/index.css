@@ -19690,7 +19690,7 @@ h3.productCard__title {
 .productCard .productCard__details--small .h3 {
   font-size: 24px;
   line-height: 1;
-  font-family: "Inter", sans-serif;
+  font-family: "PP Right Grotesk", sans-serif;
 }
 
 .productCard .radio-group[data-option-color] label:not(:last-child) .radio__title,
@@ -19866,7 +19866,7 @@ h3.productCard__title {
 .productCard .productCard__details .productCard__price-wrapper h3,
 .productCard .productCard__details .productCard__price-wrapper .strike {
   font-style: normal;
-  font-weight: 700;
+  font-weight: 500;
   font-size: 24px;
 }
 

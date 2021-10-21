@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang='{{ shop.locale }}'>
   <head>
+    <script type="text/javascript">(function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/JKrJpoWVtOiKekxIZEcsIIya88lPfCthqp3OznJ5/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();</script>
+    
+    
     <meta charset='utf-8'>
     <meta name='viewport' content='width=device-width,initial-scale=1,shrink-to-fit=no'>
     <link rel='canonical' href='{{ canonical_url }}'>
@@ -129,4 +132,7 @@
     {% comment %} <script src="https://a.klaviyo.com/media/js/onsite/onsite.js"></script> {% endcomment %}
     <script src="https://cdn.attn.tv/fellow/dtag.js"></script>
   {% include 'social-head-common' %}</body>
+  <script>
+jQuery('a[href^="http"]').not('a[href^="{{ shop.url }}"]').attr('target', '_blank');
+</script>
 </html>
