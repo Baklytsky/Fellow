@@ -1,0 +1,41 @@
+{%- assign cart_recommended_heading = settings.cart_recommended_heading -%}
+{%- assign cart_recommended_icon = settings.cart_recommended_icon -%}
+{%- assign cart_recommended_collection = settings.cart_recommended_collection -%}
+
+
+ {%- if collections[cart_recommended_collection].products.size > 0 -%}
+   <section class="cart-recommended" id="{{ section.id }}">
+     {%- if cart_recommended_heading != blank -%}
+       <div class="cart-recommended__header">
+         <h4 class="cart-recommended__heading">
+           <span>{{ cart_recommended_heading }}</span>
+           {%- if cart_recommended_icon != blank -%}
+             {{ cart_recommended_icon }}
+           {%- endif -%}
+         </h4>
+       </div>
+     {%- endif -%}
+
+     <div class="cart-recommended__content">
+       {%- for product in collections[cart_recommended_collection].products -%}
+         {%- assign has_in_cart = false -%}
+
+         {%- for cart_item in cart.items -%}
+           {%- if product.id == cart_item.product.id -%}
+             {%- assign has_in_cart = true -%}
+           {%- endif -%}
+         {%- endfor -%}
+
+         {%- unless product.available == false or has_in_cart -%}
+           {%
+             include 'product-card-recommended' with
+             product: product
+           %}
+         {%- endunless -%}
+       {%- endfor -%}
+     </div>
+
+     <p id="CartRecommendedErrorMessage" class="p05" style="display:none;"></p>
+   </section>
+ {%- endif -%}
+

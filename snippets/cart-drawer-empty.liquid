@@ -1,16 +1,34 @@
-{%- assign emptyCTA = settings.cart_empty_cta.url -%}
-{%- assign emptyCTACopy = settings.cart_empty_cta_text -%}
+{%- assign image =  settings.cart_empty_image -%}
+{%- assign cart_empty_text = settings.cart_empty_text -%}
+{%- assign cart_empty_cta_text = settings.cart_empty_cta_text -%}
+{%- assign cart_empty_cta = settings.cart_empty_cta.url -%}
+
 <section class='cart-drawer__empty rel x y js-no-items'>
-  <div class='x y f jcc aic abs ac'>
-    <div>
-      <h4 class='caps'>Your Cart Is Empty</h4>
-      {%
-        include 'component-button' with
-        tag: 'a',
-        cta: emptyCTACopy,
-        href: emptyCTA,
-        className: 'y cart__button cart-drawer__button gradient-hover'
-      %}
-    </div>
+  <div class='x y f fdc jcc aic ac'>
+      {%- if cart_empty_text != blank -%}
+        <h4 class='cart-drawer__empty-heading'>{{ cart_empty_text }}</h4>
+      {%- endif -%}
+
+      {%- if image != blank -%}
+        <div class="AspectRatio cart-drawer__empty-image" style="--aspect-ratio: {{ image.aspect_ratio }};">
+          <img src='{{ image | img_url: "100x" }}'
+               loading="lazy"
+               srcset='{{ image | img_url: "450x" }} 450w,
+                       {{ image | img_url: "560x" }} 560w,
+                       {{ image | img_url: "650x" }} 650w,
+                       {{ image | img_url: "900x" }} 900w'
+               alt="{{ image.alt | default: header | escape }}">
+        </div>
+      {%- endif -%}
+
+      {%- if cart_empty_cta_text != blank -%}
+        {%
+          include 'component-button' with
+          tag: 'a',
+          cta: cart_empty_cta_text,
+          href: settings.cart_empty_cta.url,
+          className: 'btn btn--dark cart-drawer__empty-btn'
+        %}
+      {%- endif -%}
   </div>
 </section>
