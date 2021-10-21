@@ -9912,7 +9912,8 @@
   }
 
   function V(t) {
-    return t.includes("$") ? parseFloat(t.substring(1), 10) % 1 == 0 ? t = "$".concat(parseInt(t.substring(1), 10)) : t : t = parseFloat(t.substring(0), 10) % 1 == 0 ? "$".concat(parseInt(t.substring(0), 10)) : "$".concat(t)
+    //return t.includes("$") ? parseFloat(t.substring(1), 10) % 1 == 0 ? t = "$".concat(parseInt(t.substring(1), 10)) : t : t = parseFloat(t.substring(0), 10) % 1 == 0 ? "$".concat(parseInt(t.substring(0), 10)) : "$".concat(t)
+    return t.includes("$") ? parseFloat(t.substring(1), 10) % 1 == 0 ? t = "$".concat(parseInt(t.substring(1).replace(/,/g, ''), 10)) : t : t = parseFloat(t.substring(0), 10) % 1 == 0 ? "$".concat(parseInt(t.substring(0).replace(/,/g, ''), 10)) : "$".concat(t)
   }
   var U = function(t) {
     return t && 0 !== t.length ? t.map((function(t) {

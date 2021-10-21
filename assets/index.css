@@ -17725,7 +17725,7 @@ body.is-masthead--empty main {
 .cart-drawer__footer-action .cart-checkout__button {
   padding: 18px;
   margin: 0;
-  width: 100%;
+  width: 50%;
   max-width: 220px;
   font-style: normal;
   font-weight: 500;
@@ -17880,7 +17880,7 @@ body.is-masthead--empty main {
 
 .cart-recommended__header {
   background-color: #FFF9E5;
-  padding: 18px 50px;
+  padding: 12px 50px;
   text-align: center;
   overflow: hidden;
 }
@@ -17902,7 +17902,7 @@ body.is-masthead--empty main {
 }
 
 .cart-recommended__content {
-  padding: 16px 0 16px 22px;
+  padding: 12px 0 12px 22px;
   display: flex;
   width: 100%;
   overflow-x: auto;
@@ -17918,6 +17918,10 @@ body.is-masthead--empty main {
 }
 
 @media screen and (max-width: 992px) {
+
+  /*.cart-drawer__items-inner {*/
+  /*  height: auto;*/
+  /*}*/
 
   .btn.cart-drawer__empty-btn {
     max-width: 400px;
@@ -17937,12 +17941,13 @@ body.is-masthead--empty main {
   }
 
   .cart-drawer__empty-image {
-    margin-bottom: 40px;
+    margin-bottom: 30px;
+    width: 80%;
   }
 
   .cart-drawer__empty-heading {
     font-size: 33px;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
   }
 
   .cart-drawer__items-outer {
@@ -17971,7 +17976,7 @@ body.is-masthead--empty main {
   }
 
   .cart-drawer__footer-action {
-    padding: 24px 16px;
+    padding: 14px 16px;
   }
 
   .remove-item__text {
@@ -19756,6 +19761,12 @@ h3.productCard__title {
   overflow: hidden;
 }
 
+@media screen and (max-width: 991px) {
+  .productCard__recommended .productCard__img {
+    padding-top: 82%;
+  }
+}
+
 .productCard__img-container {
   position: absolute;
   top: 0;
@@ -20015,6 +20026,10 @@ h3.productCard__title {
   flex-shrink: 0;
 }
 
+.productCard__recommended .productCard__price {
+  padding-top: 0;
+}
+
 .productCard__recommended .productCard__image-wrapper {
   width: 50%;
   max-width: 165px;
@@ -20035,10 +20050,12 @@ h3.productCard__title {
   font-size: 16px;
   line-height: 1;
   font-weight: 700;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 .productCard__recommended .productCard__from,
+.productCard.productCard__recommended .productCard__price-wrapper .strike,
+.productCard.productCard__recommended .eyebrow,
 .productCard.productCard__recommended .productCard__details .card__price--sale,
 .productCard.productCard__recommended .productCard__details .card__price--regular {
   font-size: 16px;
@@ -20046,6 +20063,12 @@ h3.productCard__title {
   font-weight: 400;
   text-transform: capitalize;
   margin: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+.productCard.productCard__recommended .strike.productCard__strike {
+  color: #585858;
+  margin-right: 5px;
 }
 
 .productCard.productCard__recommended .productCard__price-wrapper h3 {
