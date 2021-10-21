@@ -259,6 +259,7 @@ h1, h2, h3, h4, h5, h6 {
     outline: none;
     margin-left: 20px;
     background-color: transparent;
+    color: currentColor;
   }
 
   .mainMenu__cardTitle {
@@ -344,16 +345,20 @@ h1, h2, h3, h4, h5, h6 {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    max-height: 245px;
+    height: 245px;
     max-width: 700px;
     margin: 35px 0 0 105px;
 
     @media screen and (min-width: $tablet) {
-      flex-direction: row;
-      flex-wrap: nowrap;
       max-width: none;
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
       flex-flow: row wrap;
+      -ms-flex-line-pack: start;
       align-content: flex-start;
+      -webkit-writing-mode: vertical-lr;
+      -ms-writing-mode: tb-lr;
       writing-mode: vertical-lr;
     }
 
@@ -371,10 +376,14 @@ h1, h2, h3, h4, h5, h6 {
     width: 210px;
 
     @media screen and (min-width: $tablet) {
+      -webkit-writing-mode: horizontal-tb;
+      -ms-writing-mode: lr-tb;
       writing-mode: horizontal-tb;
     }
 
     @media screen and (max-width: $desk) {
+      width: -webkit-fit-content;
+      width: -moz-fit-content;
       width: fit-content;
     }
   }
@@ -606,6 +615,7 @@ h1, h2, h3, h4, h5, h6 {
       button {
         background: none;
         padding: 0;
+        color: currentColor;
       }
 
       p {
@@ -735,7 +745,7 @@ h1, h2, h3, h4, h5, h6 {
       }
 
       &::after {
-        content: none;
+        content: '';
       }
     }
 
@@ -3741,31 +3751,24 @@ h2.pdpCopy__header-price ,
 
 .size__image-wrapper {
   width: 100%;
-  padding-top: 100%;
+  height: 80px;
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  background-color: #F5F5F5;
+}
 
-  img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
+.size__image-wrapper-icon {
+  display: flex;
+  justify-content: center;
+  svg {
+    fill: #DBDBDB;
+
+    path {
+      fill: #DBDBDB;
+    }
   }
-}
-
-.size__image-wrapper-active,
-.size__image-wrapper-not-active {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.size__image-wrapper-not-active {
-  visibility: hidden;
-  opacity: 0;
 }
 
 .heroSection {

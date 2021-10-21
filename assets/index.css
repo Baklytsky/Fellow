@@ -18620,14 +18620,20 @@ textarea {
   border: 2px solid transparent;
 }
 
-.radio-group:not([data-option-color]):not([data-option-material]) input:checked+.radio__title-size-image .size__image-wrapper-not-selected {
-  visibility: hidden;
-  opacity: 0;
+.radio-group:not([data-option-color]):not([data-option-material]) input:checked+.radio__title-size-image .size__image-wrapper-icon svg {
+  fill: #000000;
 }
 
-[data-disabled-size="true"] .radio-group:not([data-option-color]):not([data-option-material]) input:checked+.radio__title-size-image .size__image-wrapper-not-selected {
-  visibility: visible;
-  opacity: 1;
+.radio-group:not([data-option-color]):not([data-option-material]) input:checked+.radio__title-size-image .size__image-wrapper-icon svg path {
+  fill: #000000;
+}
+
+[data-disabled-size="true"] .radio-group:not([data-option-color]):not([data-option-material]) input:checked+.radio__title-size-image .size__image-wrapper-icon svg {
+  fill: #DBDBDB;
+}
+
+[data-disabled-size="true"] .radio-group:not([data-option-color]):not([data-option-material]) input:checked+.radio__title-size-image .size__image-wrapper-icon svg path {
+  fill: #DBDBDB;
 }
 
 .radio-group:not([data-option-color]):not([data-option-material]) input:checked+.radio__title-size-image .size__image-wrapper-not-active {

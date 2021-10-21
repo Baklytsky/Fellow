@@ -660,6 +660,7 @@ theme.pdpMain = function () {
     if (changeMediaContent) {
       changeMedia()
     }
+    pdpThumbnails()
 
     if ($('.option-group-title').length) {
       var selectedColor = $('.pdp__options-main [data-option-label="Color"] [data-option-current]').text();
@@ -672,6 +673,20 @@ theme.pdpMain = function () {
     }
   }
 
+  function pdpCompare() {
+    $(document).off('click.thumbnails')
+    function changeTableHeight() {
+      let trHeight = $(document).find('.pdpCompare__table thead').height() - 24;
+      $('.pdpCompare__table-th').css('minHeight', trHeight)
+    }
+    changeTableHeight()
+
+    $(document).on('resize.pdpCompare', function () {
+      $('.pdpCompare__table-th').css('minHeight', 'auto')
+      changeTableHeight()
+    })
+  }
+
   if ($('.pdpBar__wrapper').length) {pdpBar();}
   if ($('.pdpMain__gallery-thumbnails').length) {pdpThumbnails();}
   if ($('.pdpMain__gallery-wrapper').length) {pdpGallary();}
@@ -680,6 +695,7 @@ theme.pdpMain = function () {
   if ($('.pdpMediaProof').length) {pdpMediaProof();}
   if ($('.pdpLearnMore').length) {pdpLearMore();}
   if ($('.pdpMain-bundle__details').length) {bundle();}
+  if ($('.pdpCompare').length) {pdpCompare();}
   pdpStickyBar()
 }
 
