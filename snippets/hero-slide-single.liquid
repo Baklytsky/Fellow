@@ -5,7 +5,8 @@
   {% assign ctaClasses = 'btn btn--lg btn--dark' %}
 {% endif %}
 
-<div id='hero__slide--{{ block.id }}' class='hero__slide f aic jcc' data-flickity-bg-lazyload='{{ block.settings.heroSlide | img_url: "1440x" }}' data-color='{{ block.settings.heroSlide__color }}'>
+<div id='hero__slide--{{ block.id }}' class='hero__slide' data-flickity-bg-lazyload='{{ block.settings.heroSlide | img_url: "1440x" }}' data-color='{{ block.settings.heroSlide__color }}'>
+  <div class="hero__slideWrapper f aic jcc">
   {% if block.settings.mobileAlignment != 'center' or block.settings.desktopAlignment %}
     <style>
       {% if block.settings.mobileAlignment %}
@@ -65,4 +66,5 @@
       </div>
     </div>
   {% endif %}
+  </div>
 </div>

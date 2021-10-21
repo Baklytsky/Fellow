@@ -13,6 +13,24 @@
   {%- assign heading = product.metafields.custom_fields["image_collection_heading"] -%}
   {%- assign description = product.metafields.custom_fields["image_collection_description"] -%}
   {%- assign logo = product.metafields.custom_fields["image_collection_logo"] -%}
+  {% if product.metafields.custom_fields["image_collection_show_button"] == 1 %}
+    {%- assign show_button = true -%}
+  {% else %}
+    {%- assign show_button = false -%}
+  {% endif %}
+  {%- assign button_color = product.metafields.custom_fields["image_collection_button_color"] -%}
+  {%- assign button_text = product.metafields.custom_fields["image_collection_button_text"] -%}
+  {%- assign button_link = product.metafields.custom_fields["image_collection_button_link"] -%}
+
+  {%- case button_color -%}
+  {%- when 'white' -%}
+  {%- assign button_color_class = 'btn--light' -%}
+  {%- when 'black' -%}
+  {%- assign button_color_class = 'btn--dark' -%}
+    {%- else -%}
+  {%- assign button_color_class = 'btn--light' -%}
+  {%- endcase -%}
+
 
   {%- capture 'slick-config' -%}
   {
@@ -47,8 +65,15 @@
           {%- if description != blank -%}
             <p class="pdpImgCollection__content-description">{{ description }}</p>
           {%- endif -%}
-          {%- if description != blank -%}
+          {%- if logo != blank -%}
             <div class="pdpImgCollection__content-logo x">{{ logo }}</div>
+          {%- endif -%}
+          {%- if show_button and button_text != blank and button_link != blank -%}
+            <div class="pdpImgCollection__content-btn-wrapper">
+              <a href="{{ button_link }}" class="button rel btn pdpImgCollection__content-btn {{ button_color_class }}">
+                {{ button_text }}
+              </a>
+            </div>
           {%- endif -%}
         </div>
       {%- endif -%}

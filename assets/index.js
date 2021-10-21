@@ -13991,7 +13991,7 @@
               i = t.querySelector(".klaviyo-bis-trigger");
           null !== i && i.classList.remove("is-visible"), s(r)
         }));
-        theme.variantChange(a.id)
+        theme.variantChange(a.id, false)
         theme.selectedOption(a)
         var u = Math.floor(8e4 * Math.random());
         return function(t, e) {
@@ -14306,7 +14306,7 @@
               })), Dr.emit("productOptions:update", {
                 variantSelected: a.value
               });
-              theme.variantChange(a.value)
+              theme.variantChange(a.value, true)
               theme.selectedOption(r)
               var p, g = Jn(n);
               try {
@@ -14319,7 +14319,7 @@
                 g.f()
               }
             } else c.forEach((function(t) {
-              theme.variantChange(a.value), theme.selectedOption(r), t.innerHTML = "Unavailable", l.classList.add("is-hidden"), u.classList.remove("is-hidden"), u.setAttribute("disabled", "")
+              theme.variantChange(a.value, true), theme.selectedOption(r), t.innerHTML = "Unavailable", l.classList.add("is-hidden"), u.classList.remove("is-hidden"), u.setAttribute("disabled", "")
             }))
           }
           return m = p ? "Preorder" : "Add to Cart", i.forEach((function(t) {
