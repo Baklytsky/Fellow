@@ -345,7 +345,6 @@ h1, h2, h3, h4, h5, h6 {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    height: 245px;
     max-width: 700px;
     margin: 35px 0 0 105px;
 
@@ -360,6 +359,7 @@ h1, h2, h3, h4, h5, h6 {
       -webkit-writing-mode: vertical-lr;
       -ms-writing-mode: tb-lr;
       writing-mode: vertical-lr;
+      height: 245px;
     }
 
     @media screen and (max-width: $desk) {
@@ -587,7 +587,7 @@ h1, h2, h3, h4, h5, h6 {
   right: 0;
   bottom: 0;
   width: 100%;
-  height: 105%;
+  height: 100%;
   transform: translateX(-100%);
   transition: 0.3s;
   padding: 0 0 30px;
@@ -740,6 +740,7 @@ h1, h2, h3, h4, h5, h6 {
       border-bottom: 1px solid #c4c4c4;
 
       svg {
+        margin-left: auto;
         transform: rotate(90deg);
         transition: 0.4s;
       }
@@ -857,7 +858,9 @@ h1, h2, h3, h4, h5, h6 {
 
   &:hover {
     &::after {
-      width: 100%;
+      @media screen and (min-width: $tablet) {
+        width: 100%;
+      }
     }
   }
 }

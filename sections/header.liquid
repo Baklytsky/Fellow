@@ -238,15 +238,18 @@
             {%- render 'mobile-menu', menu: right_menu, section: section -%}
           {%- endif -%}
 
-          <li class="mobileMenu__item">
-            <a class="mobileMenu__link" aria-label="open search"
-               role="button"
-               href="/search">
-              <p>{{ 'general.search.submit' | t }}</p>
+          {%- if show_search != false -%}
+            <li class="mobileMenu__item">
+              <a class="mobileMenu__link" aria-label="open search"
+                 role="button"
+                 href="/search">
+                <p>{{ 'general.search.submit' | t }}</p>
 
-              {%- render 'icon' with 'search' -%}
-            </a>
-          </li>
+                {%- render 'icon' with 'search' -%}
+              </a>
+            </li>
+          {%- endif -%}
+
         </ul>
       </nav>
     {%- endif -%}
