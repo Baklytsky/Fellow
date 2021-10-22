@@ -18,7 +18,7 @@ theme.closeModal = function (clean) {
   $('#modalContent').fadeOut().html('').text('');
   $('#emptyModal').show(800);
   theme.enableScroll();
-  $(document).off('click.QvClose')
+  $(document).off('mousedown.QvClose')
 }
 
 theme.header = function () {
@@ -313,24 +313,6 @@ theme.handleize = function (str) {
 };
 
 theme.pdpMain = function () {
-
-  // Remove all $(document) Events
-  // clicks:
-  $(document).off('click.thumbnails')
-  $(document).off('click.pdpDropdown')
-  $(document).off('click.pdpStickyAtc')
-  $(document).off('click.pdpStickyOptions')
-  $(document).off('click.pdpStickySize')
-  $(document).off('click.pdpStickyCloseSize')
-  $(document).off('click.pdpLearMoreShowAll')
-  $(document).off('click.pdpSelectSize')
-  $(document).off('click.click.pdpStickySelectSize')
-  // scrolls:
-  $(document).off('scroll.galleryImage')
-  $(document).off('scroll.pdpStickyBar')
-  $(window).off('scroll.pdp')
-  // resize:
-  $(window).off("resize.pdp");
 
   function stickyScrolling(options) {
     var $container = options.container || undefined;
@@ -660,7 +642,6 @@ theme.pdpMain = function () {
     if (changeMediaContent) {
       changeMedia()
     }
-    pdpThumbnails()
 
     if ($('.option-group-title').length) {
       var selectedColor = $('.pdp__options-main [data-option-label="Color"] [data-option-current]').text();
@@ -1019,6 +1000,23 @@ theme.GLOBAL = function () {
   $(document).off('click.quickViewATC')
   $(document).off('click.jsCounterRemove')
   $(document).off('click.radioGroup')
+  //PDP
+  $(document).off('click.thumbnails')
+  $(document).off('click.pdpDropdown')
+  $(document).off('click.thumbnails')
+  $(document).off('click.pdpStickyAtc')
+  $(document).off('click.pdpStickyOptions')
+  $(document).off('click.pdpStickySize')
+  $(document).off('click.pdpStickyCloseSize')
+  $(document).off('click.pdpLearMoreShowAll')
+  $(document).off('click.pdpSelectSize')
+  $(document).off('click.click.pdpStickySelectSize')
+  // scrolls:
+  $(document).off('scroll.galleryImage')
+  $(document).off('scroll.pdpStickyBar')
+  $(window).off('scroll.pdp')
+  // resize:
+  $(window).off("resize.pdp");
 
   $(document).on('click.toggleTab', '[data-action="toggle-tab"]', function () {
     theme.toggleTab($(this));
