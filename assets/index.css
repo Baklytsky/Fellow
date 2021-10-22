@@ -15610,6 +15610,7 @@ https://flickity.metafizzy.co
   opacity: 1
 }
 
+/*
 main#root .yotpo * {
   color: #000;
   font-size: 1rem
@@ -15797,7 +15798,7 @@ main#root .pdp-reviews .yotpo.bottomLine .standalone-bottomline .rating-star {
 main#root .pdp-reviews .yotpo.bottomLine .standalone-bottomline .rating-star:last-child {
   margin-right: 0
 }
-
+*/
 :root {
   --slow: .33s;
   --medium: .25s;
@@ -21665,15 +21666,6 @@ h3.productCard__title {
 
 .password a {
   text-decoration: underline
-}
-
-.pdp-reviews__average {
-  font-weight: 700;
-  font-size: 1.875rem
-}
-
-.pdp-reviews__header {
-  margin-bottom: 3rem
 }
 
 .responsive-table th {

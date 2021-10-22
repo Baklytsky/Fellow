@@ -89,13 +89,13 @@
             <h2 class='strike'>{{ current_variant.price | money_without_trailing_zeros }}</h2>
           {% endif %}
       </div>
-      {% comment %} Shop Pay Snippet {% endcomment %}
-      <div data-shop-pay class='shop-pay mb15'>
-        {{ form | payment_terms }}
-      </div>
     </div>
     {% include 'pdp-bundle-description' %}
     {% include 'pdp-details-form-bundle' %}
+    {% comment %} Shop Pay Snippet {% endcomment %}
+    <div data-shop-pay class='shop-pay mb15'>
+      {{ form | payment_terms }}
+    </div>
   {% endform %}
 
     {% include 'pdp-badges' %}
