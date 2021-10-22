@@ -127,8 +127,8 @@
     {{ 'jquery.ba-throttle-debounce.min.js' | asset_url | script_tag }}
     {{ 'custom-additional-vendor.js' | asset_url | script_tag }}
 
-    <script src="{{ 'index.js' | asset_url }}" defer='defer'></script>
     <script src="{{ 'custom.js' | asset_url }}" defer='defer'></script>
+    <script src="{{ 'index.js' | asset_url }}" defer='defer'></script>
     {% comment %} <script src="https://a.klaviyo.com/media/js/onsite/onsite.js"></script> {% endcomment %}
     <script src="https://cdn.attn.tv/fellow/dtag.js"></script>
   {% include 'social-head-common' %}</body>
