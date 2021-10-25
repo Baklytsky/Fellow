@@ -1,6 +1,6 @@
-{% if product.metafields.custom_fields["related_product"] != blank %}
-  {%- assign related_products_heading = product.metafields.custom_fields["related_products_heading"] %}
-  {%- assign related_products_handles = product.metafields.custom_fields["related_product"] | split: "|" -%}
+{% if product.metafields.custom_fields["related_product_new"] != blank %}
+  {%- assign related_products_heading = product.metafields.custom_fields["related_products_heading_new"] %}
+  {%- assign related_products_handles = product.metafields.custom_fields["related_product_new"] | split: "|" -%}
 
     <section class="x relatedProducts pdpRelatedProducts">
       <div class="relatedProducts__inner x f fdc">

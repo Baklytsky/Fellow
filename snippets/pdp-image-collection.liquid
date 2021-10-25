@@ -1,26 +1,26 @@
-{% if product.metafields.custom_fields["show_image_collection"] == 1 %}
+{% if product.metafields.custom_fields["show_image_collection_new"] == 1 %}
   {% comment %}Assign Media Proof Flex Order{% endcomment %}
-  {% assign flex_order = product.metafields.custom_fields["image_collection_order"] | downcase %}
+  {% assign flex_order = product.metafields.custom_fields["image_collection_order_new"] | downcase %}
   {% if flex_order %}
     {% unless flex_order == 'default' %}
     {% assign display_order = flex_order %}
     {% endunless %}
   {% endif %}
 
-  {%- assign section_bg = product.metafields.custom_fields["image_collection_bg_color"] -%}
-  {%- assign section_text_color = product.metafields.custom_fields["image_collection_text_color"] -%}
-  {%- assign subheading = product.metafields.custom_fields["image_collection_subheading"] -%}
-  {%- assign heading = product.metafields.custom_fields["image_collection_heading"] -%}
-  {%- assign description = product.metafields.custom_fields["image_collection_description"] -%}
-  {%- assign logo = product.metafields.custom_fields["image_collection_logo"] -%}
-  {% if product.metafields.custom_fields["image_collection_show_button"] == 1 %}
+  {%- assign section_bg = product.metafields.custom_fields["image_collection_bg_color_new"] -%}
+  {%- assign section_text_color = product.metafields.custom_fields["imagecollection_text_color_new"] -%}
+  {%- assign subheading = product.metafields.custom_fields["imagecollection_subheading_new"] -%}
+  {%- assign heading = product.metafields.custom_fields["imagecollection_heading_new"] -%}
+  {%- assign description = product.metafields.custom_fields["imagecollection_description_n"] -%}
+  {%- assign logo = product.metafields.custom_fields["image_collection_logo_new"] -%}
+  {% if product.metafields.custom_fields["image_col_show_button_new"] == 1 %}
     {%- assign show_button = true -%}
   {% else %}
     {%- assign show_button = false -%}
   {% endif %}
-  {%- assign button_color = product.metafields.custom_fields["image_collection_button_color"] -%}
-  {%- assign button_text = product.metafields.custom_fields["image_collection_button_text"] -%}
-  {%- assign button_link = product.metafields.custom_fields["image_collection_button_link"] -%}
+  {%- assign button_color = product.metafields.custom_fields["image_col_button_color_new_"] -%}
+  {%- assign button_text = product.metafields.custom_fields["image_col_button_text_new"] -%}
+  {%- assign button_link = product.metafields.custom_fields["image_col_button_link_new"] -%}
 
   {%- case button_color -%}
   {%- when 'white' -%}
@@ -77,11 +77,11 @@
           {%- endif -%}
         </div>
       {%- endif -%}
-      {%- if product.metafields.custom_fields["image_collection_slides"] != blank -%}
+      {%- if product.metafields.custom_fields["image_collection_slides_new"] != blank -%}
         <div class="pdpImgCollection__slider-wrapper rel">
           <div class="pdpImgCollection__slider jsSlickSlider">
-            {% for item in product.metafields.custom_fields["image_collection_slides"] %}
-              {%- assign slide = item["collection_slide"] -%}
+            {% for item in product.metafields.custom_fields["image_collection_slides_new"] %}
+              {%- assign slide = item["image_slide_new"] -%}
               {%- if slide != blank -%}
                 <div class="pdpImgCollection__slide">
                   <div class="pdpImgCollection__slide-image rel">
