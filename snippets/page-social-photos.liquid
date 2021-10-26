@@ -11,7 +11,7 @@
             {{ photo['link'] }}
             <img class="social-photos__item-image x block" src="{{ photo['image'] }}" alt="{{ photo['caption'] | escape }}" role="img">
             <p class="xsmall social-photos__item-body mb0 mt025">
-              <u>{{ photo["caption"] }}</u>
+              {{ photo["caption"] }}
             </p>
         </div>
       {% endfor %}
