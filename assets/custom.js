@@ -1032,6 +1032,18 @@ theme.GLOBAL = function () {
     }
   })
 
+  if ($('.FeaturedCollections__ProductsTabs').length) {
+    $('.FeaturedCollections__ScrollNext').on('click', function () {
+      $(this).parent().animate({scrollLeft: $(this).parent().width()}, 600);
+    })
+
+    $('.FeaturedCollections__ScrollPrev').on('click', function () {
+      $(this).parent().animate({scrollLeft: 0}, 300);
+    })
+  }
+
+  $(document).on('click', )
+
   $(document).on('click.closeModal', '#closeModal', function () {
     theme.closeModal();
   });

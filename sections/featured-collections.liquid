@@ -56,7 +56,7 @@
 
           </div>
 
-          <div class="FeaturedCollections__ProductsWrapper">
+          <div class="FeaturedCollections__ProductsWrapper rel">
             {%- for block in blocks -%}
               {%- assign limit = section.settings.limit -%}
 
@@ -75,6 +75,11 @@
                       {% include 'product-card', cx: 'y', product_image: product.images[product_image_index] %}
                     </div>
                   {% endfor %}
+
+                  {%- if collection.products_count  > 3 -%}
+                    <button type="button" class="FeaturedCollections__ScrollPrev">{% render 'icon' with 'arrow-prev' %}</button>
+                    <button type="button" class="FeaturedCollections__ScrollNext">{% render 'icon' with 'arrow-next' %}</button>
+                  {%- endif -%}
                 </div>
               {%- endif -%}
             {%- endfor -%}
