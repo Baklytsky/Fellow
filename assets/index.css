@@ -15610,6 +15610,13 @@ https://flickity.metafizzy.co
   opacity: 1
 }
 
+ .productCard_ratings .text-m,
+.productCard_ratings .text-s,
+.productCard_ratings .text-l
+{
+ display:none; 
+}
+
 main#root .yotpo * {
   color: #000;
   font-size: 1rem
@@ -15699,6 +15706,7 @@ main#root .yotpo .main-widget .rating-star {
   float: none
 }
 
+
 main#root .yotpo .main-widget .rating-star:last-child {
   margin-right: 0
 }
@@ -15728,7 +15736,8 @@ main#root .yotpo .main-widget .yotpo-review .content-title {
   line-height: 1.2;
   font-weight: 600;
   padding-bottom: 0;
-  margin-top: 0
+  margin-top: 0;
+  font-family: "PP Right Grotesk", sans-serif;
 }
 
 main#root .yotpo .main-widget .yotpo-review .content-review {
@@ -15758,6 +15767,10 @@ main#root .yotpo .main-widget .yotpo-review .yotpo-review-stars {
     left: 0;
     bottom: 0
   }
+ main#root .yotpo .standalone-bottomline .rating-star {
+  margin-right: 2px;
+  float: none
+}
 }
 
 @media screen and (min-width: 992px) {
@@ -15797,6 +15810,7 @@ main#root .pdp-reviews .yotpo.bottomLine .standalone-bottomline .rating-star {
 main#root .pdp-reviews .yotpo.bottomLine .standalone-bottomline .rating-star:last-child {
   margin-right: 0
 }
+
 
 :root {
   --slow: .33s;
@@ -19915,10 +19929,16 @@ h3.productCard__title {
   align-items: flex-start;
   padding-top: 12px;
 }
+    
+ .productCard__reviewNum {
+  position:relative;
+ }
 
 .productCard__price {
   display: flex;
   align-items: flex-start;
+  font-family: 'Inter', sans-serif;
+  max-height: 1.5rem;
 }
 
 .productCard .productCard__details .productCard__price-wrapper h3,
@@ -19926,6 +19946,7 @@ h3.productCard__title {
   font-style: normal;
   font-weight: 500;
   font-size: 24px;
+  font-family: 'Inter', sans-serif;
 }
 
 .productCard .eyebrow,
@@ -19936,6 +19957,17 @@ h3.productCard__title {
   font-size: 14px;
   margin: 0 3px;
   text-transform: lowercase;
+}
+    
+.productCard__strike.eyebrow {
+  white-space: nowrap;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  margin: 0 3px;
+  text-transform: lowercase;
+  text-decoration: line-through;
+  color:#585858;
 }
 
 /*.productCard__eyebrow--placeholder {*/
@@ -19976,9 +20008,6 @@ h3.productCard__title {
   opacity: 1
 }
 
-.productCard__variants {
-  padding-top: 12px;
-}
 
 .productCard__variants .productCard__options {
   max-width: 200px;
@@ -20011,6 +20040,10 @@ h3.productCard__title {
   .productCard__tagline {
     display: none
   }
+  
+  main#root .yotpo .standalone-bottomline {
+   padding: 8px 0 0; 
+  }
 
   .productCardVariants__CountButton,
   .productCard__variants,
@@ -20037,6 +20070,7 @@ h3.productCard__title {
     font-size: 16px;
     font-weight: 500;
     line-height: 1.2em;
+    margin-left: 0;
   }
 
   .productCard .productCard__details .productCard__price-wrapper h3,
@@ -21668,13 +21702,16 @@ h3.productCard__title {
 }
 
 .pdp-reviews__average {
-  font-weight: 700;
-  font-size: 1.875rem
+  font-weight: 600;
+  font-size: 1.25rem;
+font-family: "PP Right Grotesk",sans-serif;
+}
+    
+    .pdp-reviews__summary {
+  font-weight: 600;
+  font-size: 1rem
 }
 
-.pdp-reviews__header {
-  margin-bottom: 3rem
-}
 
 .responsive-table th {
   text-align: left;
