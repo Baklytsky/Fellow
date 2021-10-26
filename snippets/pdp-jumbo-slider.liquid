@@ -1,9 +1,5 @@
-{% if product.metafields.custom_fields["show_jumbo_slider"] == 1 %}
-{% if product.metafields.custom_fields["jumbo_slider"] != blank %}
-  {% assign separator = "|###|" %}
-  {% assign jumbo_slide_array = product.metafields.custom_fields["jumbo_slide"] | split: separator %}
-  {% assign jumbo_slide_alt_array = product.metafields.custom_fields["jumbo_slide_alt"] | split: separator %}
-  {% assign fc_keys = product.metafields.custom_fields["jumbo_slider"] | split: "," %}
+{% if product.metafields.custom_fields["show_jumbo_slider_new"] == 1 %}
+{% if product.metafields.custom_fields["jumbo_slider_new"] != blank %}
 
   {% assign flex_order = product.metafields.custom_fields["jumbo_slider_order"] | downcase %}
   {% if flex_order %}
@@ -14,10 +10,9 @@
   <div class='jumboSlider__mobileWrap{% if display_order %} o-{{ display_order }}{% endif %}'>
     <section class='jumboSlider module pdpJumboSlider' data-component='jumboSlider'>
       <div class='x y block rel' data-jumboSlider>
-        {% for i in fc_keys %}
-          {% assign index = i | plus: 0 %}
-          {% assign imageSrc = jumbo_slide_array[index] %}
-          {% assign alt = jumbo_slide_alt_array[index] | escape %}
+        {% for item in product.metafields.custom_fields["jumbo_slider_new"] %}
+          {% assign imageSrc = item["jumbo_slide_new"] %}
+          {% assign alt = item["jumbo_slide_alt_text_new"] | escape %}
           <div class='jumboSlider__slide x y fill abs'>
             {%
               include 'component-image' with
@@ -29,7 +24,7 @@
           </div>
         {% endfor %}
       </div>
-      {% if jumbo_slide_array.size > 1 %}
+      {% if product.metafields.custom_fields["jumbo_slider_new"].size > 1 %}
       <div class='slider__controls abs block fill'>
         <div class='rel f fdr aic jcc y'>
           <div class='slider__nav rel f jcb x'>
