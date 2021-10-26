@@ -1,6 +1,6 @@
 {%- assign color_count = 0 -%}
 
-<form class='productCard__variants rel'>
+<form class='productCard__variants rel {% if product.metafields.yotpo.reviews_count == blank %}mt05{% endif %}'>
   <div class='productCard__options'>
     {% for product_option in product.options_with_values %}
       {% assign option_name = product_option.name | handleize %}

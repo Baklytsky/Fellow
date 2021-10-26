@@ -55,7 +55,7 @@
         </div>
       </div>
       {% if tagline != blank %}<div class='pdp__tagline hide-mobile'>{{ tagline | capitalize }}</div>{% endif %}
-      <div class="pdp__reviews">
+      <div class="pdp__reviews mb1 mt1">
         {%- assign reviews_count = product.metafields.yotpo.reviews_count | plus: 0 -%}
         {%- if reviews_count > 0 -%}
           {% include 'yotpo-star-rating-widget' %}
