@@ -1,29 +1,34 @@
-{% if product.metafields.custom_fields["addl_features"] != blank %}
-  {% assign separator = "|###|" %}
-  {% assign addl_feature_icon_array = product.metafields.custom_fields["addl_feature_icon"] | split: separator %}
-  {% assign addl_feature_title_array = product.metafields.custom_fields["addl_feature_title"] | split: separator %}
-  {% assign addl_feature_copy_array = product.metafields.custom_fields["addl_feature_copy"] | split: separator %}
-  {% assign fc_keys = product.metafields.custom_fields["addl_features"] | split: "," %}
-  <section class='pdpAdditionalFeatures {% if product.metafields.custom_fields["key_features"] == blank %} no-key{% endif %}'
+{% if product.metafields.custom_fields["additional_features_new"] != blank %}
+  <section
+          class='pdpAdditionalFeatures {% if product.metafields.custom_fields["additional_features_new"] == blank %} no-key{% endif %}'
           data-component='pdp-addlFeatures'>
     <div class="pdpAdditionalFeatures__wrapper">
       <h2 class='pdpAdditionalFeatures__title'>Additional Features</h2>
       <div>
-        {% if product.metafields.custom_fields["key_features"] == blank %}
         <div class='x'>
           <div class='pdpAdditionalFeatures__items'>
-            {% else %}
-            <div class='x'>
-              <div class='pdpAdditionalFeatures__items'>
-                {% endif %}
-                {% for i in fc_keys %}
-                  {% assign index = i | plus: 0 %}
-                  {% assign iconSrc = addl_feature_icon_array[index] %}
-                  {% assign alt = addl_feature_title_array[index] %}
-                  <div class="pdpAdditionalFeatures__item dropdown addlFeature--{{ index }}">
-                    <section class='addlFeature__details'>
+            {% for item in product.metafields.custom_fields["additional_features_new"] %}
+              {% assign iconSrc = item["additional_feature_icon_new"] %}
+              {% assign addl_feature_title = item["additional_feature_title_new"] %}
+              {% assign addl_feature_copy = item["additional_feature_copy_new"] %}
+              {% assign index = item | plus: 0 %}
+              {% assign alt = addl_feature_title %}
+              <div class="pdpAdditionalFeatures__item dropdown addlFeature--{{ index }}">
+                <section class='addlFeature__details'>
+                  {% if iconSrc != blank %}
+                    <div class="addlFeature__icon addlFeature__icon-desktop">
+                      {% include 'component-image' with
+                        src: iconSrc,
+                        alt: alt,
+                        className: 'image',
+                        fill: true,
+                        centered: false %}
+                    </div>
+                  {% endif %}
+                  <div class="pdpAdditionalFeatures__mobile-dropdown x" data-dropdown>
+                    {%- if iconSrc != blank or addl_feature_title != blank -%}
                       {% if iconSrc != blank %}
-                        <div class="addlFeature__icon addlFeature__icon-desktop">
+                        <div class="addlFeature__icon">
                           {% include 'component-image' with
                             src: iconSrc,
                             alt: alt,
@@ -32,44 +37,32 @@
                             centered: false %}
                         </div>
                       {% endif %}
-                      <div class="pdpAdditionalFeatures__mobile-dropdown x" data-dropdown>
-                        {%- if iconSrc != blank or addl_feature_title_array[index] != blank -%}
-                          {% if iconSrc != blank %}
-                            <div class="addlFeature__icon">
-                              {% include 'component-image' with
-                                src: iconSrc,
-                                alt: alt,
-                                className: 'image',
-                                fill: true,
-                                centered: false %}
-                            </div>
-                          {% endif %}
-                          {%- if addl_feature_title_array[index] != blank -%}
-                            <h3 class="addlFeature__title">
-                              {{ addl_feature_title_array[index] }}
-                            </h3>
-                          {%- endif -%}
-                          <div class="dropdownHeader-icon">
-                            {% render 'icon' with 'dropdown' %}
-                          </div>
-                        {%- endif -%}
+                      {%- if addl_feature_title != blank -%}
+                        <h3 class="addlFeature__title">
+                          {{ addl_feature_title }}
+                        </h3>
+                      {%- endif -%}
+                      <div class="dropdownHeader-icon">
+                        {% render 'icon' with 'dropdown' %}
                       </div>
-                      <div class="addlFeature__copy hide-mobile" data-dropdown-list>
-                        <div class="dropdownContent--animate-block">
-                          <h3 class="addlFeature__title hide-mobile">
-                            {{ addl_feature_title_array[index] }}
-                          </h3>
-                          <p>
-                            {{ addl_feature_copy_array[index] }}
-                          </p>
-                        </div>
-                      </div>
-                    </section>
+                    {%- endif -%}
                   </div>
-                {% endfor %}
+                  <div class="addlFeature__copy hide-mobile" data-dropdown-list>
+                    <div class="dropdownContent--animate-block">
+                      <h3 class="addlFeature__title hide-mobile">
+                        {{ addl_feature_title }}
+                      </h3>
+                      <p>
+                        {{ addl_feature_copy }}
+                      </p>
+                    </div>
+                  </div>
+                </section>
               </div>
-            </div>
+            {% endfor %}
           </div>
+        </div>
+      </div>
     </div>
   </section>
 {% endif %}
