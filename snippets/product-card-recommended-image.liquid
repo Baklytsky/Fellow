@@ -4,11 +4,11 @@
 
 <div role='img' aria-label='Image of {{ product.title }}' class='productCard__img rel z0{% unless transparent_image == true %} productCard__img--solid{% endunless %}'>
 
-  {%- comment -%}
-    <span class="productCard__badge xsmall cb bg-xlightgrey" {% if badge_text == blank %}style="visibility: hidden" {% endif %}>{% if badge_text != blank %}{{ badge_text }}{% else %}Badge{% endif %}</span>
-  {%- endcomment -%}
-  
-  <div class='productCard__img-container default rel'>
+  {% if badge_text and badge_text != blank %}
+    <span class="productCard__badge abs z3 xsmall cb bg-xlightgrey">{{ badge_text }}</span>
+  {% endif %}
+
+  <div class='productCard__img-container default'>
     <img src="{{ image_url }}" alt="{{ alt }}" class="productCard__image image image-abs-cover">
     {%- comment -%}
       {%
