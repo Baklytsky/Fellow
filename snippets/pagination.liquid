@@ -4,14 +4,14 @@
 <ul class="f jcb aic pagination">
   {% unless paginate.previous.is_link %}
     <li aria-hidden="true">
-      <div class="btn btn--secondary btn--narrow btn--disabled is-hidden">
+      <div class="btn btn--sm btn--outline btn--disabled is-hidden">
         <span>&larr;</span>
         <span class="icon__fallback-text">Previous</span>
       </div>
     </li>
     {% else %}
     <li>
-      <a href="{{ paginate.previous.url }}" class="btn btn--secondary btn--narrow">
+      <a href="{{ paginate.previous.url }}" class="btn btn--sm btn--outline">
         <span>&larr;</span>
         <span class="icon__fallback-text">Previous</span>
       </a>
@@ -22,16 +22,14 @@
   </li>
   {% unless paginate.next.is_link %}
     <li aria-hidden="true">
-      <div class="btn btn--secondary btn--narrow btn--disabled">
+      <div class="btn btn--sm btn--outline btn--disabled">
         <span class="icon__fallback-text">Next</span>
-        <span>&rarr;</span>
       </div>
     </li>
   {% else %}
     <li>
-      <a href="{{ paginate.next.url }}" class="btn btn--secondary btn--narrow">
+      <a href="{{ paginate.next.url }}" class="btn btn--sm btn--outline">
         <span class="icon__fallback-text">Next</span>
-        <span>&rarr;</span>
       </a>
     </li>
   {% endunless %}

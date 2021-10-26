@@ -16362,6 +16362,51 @@ em,
   letter-spacing: normal;
   margin-bottom: .5em
 }
+    
+    .articleCard__header>.eyebrow {
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 100%;
+  text-transform: capitalize;
+  letter-spacing: normal;
+  margin-bottom: 1rem
+}
+    
+       .articleCard__header>h2.h4 {
+  font-size: 1.625rem;
+  font-weight: 500;
+  line-height: 100%;
+  text-transform: capitalize;
+  letter-spacing: normal;
+         min-height: 3.5rem;
+         margin-top: 1rem;
+      margin-bottom: 1rem;
+}
+   
+    
+    .articleCard__excerpt {
+      overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-line-clamp: 3; /* number of lines to show */
+   -webkit-box-orient: vertical;
+      line-height:1.25rem;
+    }
+    
+    .articleCard__image {
+     min-height:280px; 
+    }
+    
+    .articleCard {
+     min-height:552px; 
+    }
+    
+    a.underline {
+      text-transform: capitalize;
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.25rem;
+    }
 
 #root {
   transition: opacity 200ms var(--cubic);
@@ -19683,8 +19728,8 @@ ul.list {
 
 .pagination {
   font-style: normal;
-  font-weight: 400;
-  text-transform: uppercase
+  font-weight: 500;
+  text-transform: capitalize;
 }
 
 .productCard__content {
@@ -21269,7 +21314,7 @@ h3.productCard__title {
 }
 
 .card-link__body {
-  padding: 0 8vw;
+  padding: 0 36px;
 }
 
 @media screen and (min-width: 768px) {
@@ -21342,7 +21387,9 @@ h3.productCard__title {
 
 .quick-links__item {
   display: block;
-  border-bottom: 1px solid var(--xlightgrey)
+  border-bottom: 1px solid var(--xlightgrey);
+        font-weight: 500;
+    font-size: 1rem;
 }
 
 .quick-links__item:first-child {
@@ -22207,9 +22254,15 @@ input[name=product_search_field] {
 }
 
 .article__header {
-  margin-bottom: 4rem;
-  text-transform: uppercase
+  margin-bottom: 1.5rem;
+  text-transform: Capitalize;
 }
+  .eyebrow {
+  text-transform: Capitalize;
+}
+      .article__body a {
+        font-weight: 500;
+      }
 
 .article__header h1,
 .article__header h2,
