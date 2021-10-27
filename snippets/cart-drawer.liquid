@@ -14,20 +14,37 @@
 
       <p class='cart-drawer__header-text ac js-empty-cart-text'>{{ 'cart.general.empty' | t }}</p>
 
-      <div class="free-shipping js-free-shipping is-hidden">
-        <div class='free-shipping--unmet js-free-shipping-unmet-msg
-        {% if cart.total_price > 9900 %} is-hidden{% endif %}'>
-          You're <strong><span class='js-free-shipping-amount-remaining'>$99.00</span></strong> away from free US shipping
-        </div>
-        <div class='free-shipping--met js-free-shipping-met-msg
-        {% if cart.total_price < 9900 %} is-hidden{% endif %}'>
-          {{ settings.free_shipping_met_msg | default: 'Congrats! You get free US Shipping!' }}
-        </div>
+      {%- if settings.enable_gwp and settings.gwp_threshold > 0 and all_products[settings.gwp_product ].type == 'Gift product' -%}
+        <div class="free-shipping js-free-shipping is-hidden">
+          <div class='free-shipping--unmet js-free-shipping-unmet-msg
+        {% if cart.total_price > settings.gwp_threshold %} is-hidden{% endif %}'>
+            You're <strong><span class='js-free-shipping-amount-remaining'>${{ settings.gwp_threshold }}</span></strong> away from free gift
+          </div>
+          <div class='free-shipping--met js-free-shipping-met-msg
+        {% if cart.total_price < settings.gwp_threshold %} is-hidden{% endif %}'>
+            Good news! You get a free gift product.
+          </div>
 
-        <div class='free-shipping__meter f aic'>
-          <div class='free-shipping__meter__progress js-shipping-progress-bar'></div>
+          <div class='free-shipping__meter f aic'>
+            <div class='free-shipping__meter__progress js-shipping-progress-bar'></div>
+          </div>
         </div>
-      </div>
+      {%- else -%}
+        <div class="free-shipping js-free-shipping is-hidden">
+          <div class='free-shipping--unmet js-free-shipping-unmet-msg
+        {% if cart.total_price > 9900 %} is-hidden{% endif %}'>
+            You're <strong><span class='js-free-shipping-amount-remaining'>$99.00</span></strong> away from free US shipping
+          </div>
+          <div class='free-shipping--met js-free-shipping-met-msg
+        {% if cart.total_price < 9900 %} is-hidden{% endif %}'>
+            Congrats! You get free US Shipping!
+          </div>
+
+          <div class='free-shipping__meter f aic'>
+            <div class='free-shipping__meter__progress js-shipping-progress-bar'></div>
+          </div>
+        </div>
+      {%- endif -%}
     </header>
 
     <div class='cart-drawer__items-outer'>

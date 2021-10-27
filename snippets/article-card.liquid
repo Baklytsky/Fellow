@@ -10,7 +10,7 @@
 {% assign altText = article.title | handleize %}
 
 
-<article class='col-lg-4 col-md-6 col-sm-6 articleCard'>
+<article class='articleCard'>
   {% if article.image %}
     <a href="{{ article.url }}" class='articleCard__image' aria-label="{{ altText }}" aria-labelledby="{{ altText }}">
       {%
