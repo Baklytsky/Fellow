@@ -4409,6 +4409,14 @@ h2.pdpCopy__header-price ,
 .pdpCompare__tabsProducts-wrapper {
   padding: 0 14px 60px;
   background-color: $color-grey;
+
+  [data-tab] {
+    display: none;
+
+    &[aria-selected='true'] {
+      display: block;
+    }
+  }
 }
 
 .pdpCompare__tabsProductsImage {

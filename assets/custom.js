@@ -111,9 +111,9 @@ theme.header = function () {
       $(this).toggleClass('active')
     }
     // mega hack pico sidestep on mobile
-    if (window.innerWidth < 500 && this.hasAttribute('href')){
-      window.location.href = this.getAttribute('href');
-    }
+    // if (window.innerWidth < 500 && this.hasAttribute('href')){
+    //   window.location.href = this.getAttribute('href');
+    // }
   })
 
   theme.countdownTimer = function () {
@@ -233,7 +233,7 @@ theme.addProduct = function () {
     dataType: 'json',
     success: function() {
       CartDrawer.emit("cart:updating");
-      UpdateCart();
+      UpdateCart('', '', true)
       theme.closeModal();
     },
     error: function (error) {
@@ -836,6 +836,9 @@ theme.collection = function () {
           });
           $filterPriceMin.html($filterNewPriceMin)
           $filterFormInput.removeAttr('disabled')
+          if (typeof window.yotpo !== "undefined") {
+            window.yotpo.initWidgets();
+          }
           $('.productCard').each(function () {
             theme.updateSwatches($(this)[0])
           })
@@ -897,13 +900,14 @@ theme.cartDrawer = function () {
   $(document).off('click.addRecommendedProduct');
   $(document).off('click.updateCartInputQTY');
 
-  theme.openItemRemovePopup = function (cartItemRemoveBtn) {
+  theme.openItemRemovePopup = function (cartItemRemoveBtn, isGWP) {
     $(document).off('click.removeItemInCart');
 
     $('.js-cart-drawer-popup').attr('aria-hidden', 'false');
 
     $(document).on('click.removeItemInCart', '.js-remove-item-trigger', function (e) {
       e.preventDefault();
+      if (isGWP) {localStorage.setItem('removeGWP', isGWP);}
       cartItemRemoveBtn.trigger('click');
       theme.closeItemRemovePopup();
     });
@@ -915,9 +919,10 @@ theme.cartDrawer = function () {
 
   $(document).on('click.openItemRemovePopup', '[data-action="open-item-remove-popup"]', function (e) {
     e.preventDefault();
-    var cartItemRemoveBtn = $(this).parents('.cart-drawer__item').find('.js-remove-item');
+    var cartItemRemoveBtn = $(this).parents('.cart-drawer__item').find('.js-remove-item'),
+        isGWP = !!(($(this).attr('data-gift-product')));
     $(this).attr('aria-expanded', 'true');
-    theme.openItemRemovePopup(cartItemRemoveBtn);
+    theme.openItemRemovePopup(cartItemRemoveBtn, isGWP);
   });
 
   $(document).on('click.closeItemRemovePopup', '[data-action="close-item-remove-popup"]', function (e) {
@@ -950,7 +955,7 @@ theme.cartDrawer = function () {
       dataType: 'json',
       success: function() {
         // CartDrawer.emit("cart:updating");
-        UpdateCart();
+        UpdateCart('', '', false)
       },
       error: function (error) {
         if (error.status == 422) {
@@ -981,8 +986,49 @@ theme.cartDrawer = function () {
   });
 }
 
+theme.gwp = function (cart, url, id, quantity, openCart) {
+  $.ajax({
+    type: 'POST',
+    url: url,
+    data: {
+      id: id,
+      quantity: quantity,
+    },
+    dataType: 'json',
+    success: function () {
+      CartDrawer.emit("cart:updating");
+      UpdateCart('', '', openCart);
+    }
+  })
+}
+
+theme.checkGwp = function (cart) {
+  let hasGwp = false;
+  cart.items.forEach(function (element) {
+    if (element.product_type === 'Gift product') { hasGwp = true }
+  });
+  return hasGwp;
+}
+
+theme.checkGwpOnLoad = function (element) {
+  $.ajax({
+    type: 'POST',
+    url: '/cart/change.js',
+    data: {
+      id: element.id,
+      quantity: 0,
+    },
+    dataType: 'json',
+    success: function () {
+      UpdateCart('', '', false);
+    }
+  })
+}
+
 $(document).ready(function () {
   theme.header()
+
+  console.log('(document).ready')
 
   theme.GLOBAL()
 
@@ -1045,8 +1091,6 @@ theme.GLOBAL = function () {
       $(this).parent().animate({scrollLeft: 0}, 300);
     })
   }
-
-  $(document).on('click', )
 
   $(document).on('click.closeModal', '#closeModal', function () {
     theme.closeModal();
@@ -1226,12 +1270,12 @@ theme.GLOBAL = function () {
   }
 
   // PICO app mega hack to bypass on mobile
-  var links = document.getElementsByTagName('a');
-  for(var i = 0; i < links.length; i++) {
-    links[i].addEventListener('click', (e) => {
-      if (window.innerWidth < 500 && e.currentTarget.hasAttribute('href')){
-        window.location.href = e.currentTarget.getAttribute('href');
-      }
-    });
-  }
+  // var links = document.getElementsByTagName('a');
+  // for(var i = 0; i < links.length; i++) {
+  //   links[i].addEventListener('click', (e) => {
+  //     if (window.innerWidth < 500 && e.currentTarget.hasAttribute('href')){
+  //       window.location.href = e.currentTarget.getAttribute('href');
+  //     }
+  //   });
+  // }
 }

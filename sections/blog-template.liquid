@@ -35,7 +35,7 @@
     </header>
   {% endif %}
   {% paginate blog.articles by 12 %}
-    <div class='f fw fdr row mt3rem'>
+    <div class='f fw fdr mt3rem'>
       {% for article in blog.articles %}
         {% include 'article-card' %}
       {% endfor %}

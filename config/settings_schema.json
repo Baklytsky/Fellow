@@ -51,15 +51,6 @@
     "settings": [
       {
         "type": "header",
-        "content": "Free Shipping Notice"
-      },
-      {
-        "type": "text",
-        "id": "free_shipping_met_msg",
-        "label": "Free Shipping Met Text"
-      },
-      {
-        "type": "header",
         "content": "Recommended Products"
       },
       {
@@ -118,6 +109,26 @@
         "id": "cart_remove_text",
         "label": "Popup text",
         "default": "Are you sure you want to remove this item?"
+      },
+      {
+        "type": "header",
+        "content": "Cart GWP"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_gwp",
+        "label": "Enable GWP",
+        "default": true
+      },
+      {
+        "type": "number",
+        "id": "gwp_threshold",
+        "label": "GWP threshold"
+      },
+      {
+        "type": "product",
+        "id": "gwp_product",
+        "label": "GWP Product"
       }
     ]
   },
