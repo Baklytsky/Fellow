@@ -434,6 +434,7 @@ theme.pdpMain = function () {
   function pdpThumbnails() {
     thumbnailScrollOnClick()
     changeActiveThumbnail()
+    console.log('pdpThumbnails')
   }
 
   function pdpBar() {
@@ -659,7 +660,6 @@ theme.pdpMain = function () {
   }
 
   function pdpCompare() {
-    $(document).off('click.thumbnails')
     function changeTableHeight() {
       let trHeight = $(document).find('.pdpCompare__table thead').height() - 24;
       $('.pdpCompare__table-th').css('minHeight', trHeight)
@@ -1051,9 +1051,7 @@ theme.GLOBAL = function () {
   $(document).off('click.jsCounterRemove')
   $(document).off('click.radioGroup')
   //PDP
-  $(document).off('click.thumbnails')
   $(document).off('click.pdpDropdown')
-  $(document).off('click.thumbnails')
   $(document).off('click.pdpStickyAtc')
   $(document).off('click.pdpStickyOptions')
   $(document).off('click.pdpStickySize')

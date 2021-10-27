@@ -1,3 +1,10 @@
+{%- assign gift_product_type = 'Gift product' | handleize -%}
+{%- assign product_type_handleize = product.type | handleize -%}
+{%- if product_type_handleize == gift_product_type -%}
+  <script>
+    window.location.href = '/'
+  </script>
+{%- endif -%}
 <div class="pdpTemplate">
   <script text="text/javascript">
     var _learnq = _learnq || [];

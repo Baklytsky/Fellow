@@ -10027,12 +10027,13 @@
         window.Cart = e.getState().cart;
 
         if (window.theme.gwpSettings.gwpEnable !== 'true' || window.theme.gwpSettings.gwpThreshold <= 0 || window.theme.gwpSettings.gwpProductAvailable !== 'true' || window.theme.gwpSettings.gwpProductType !== 'Gift product' || localStorage.getItem('removeGWP')) {
-          Cart.items.forEach(function (element) {
-            if (element.product_type === 'Gift product') {
-              console.log(element)
-              theme.checkGwpOnLoad(element)
-            }
-          });
+          setTimeout(function () {
+            Cart.items.forEach(function (element) {
+              if (element.product_type === 'Gift product') {
+                theme.checkGwpOnLoad(element)
+              }
+            });
+          }, 500)
         }
 
         if (window.theme.gwpSettings.gwpEnable === 'true' && window.theme.gwpSettings.gwpThreshold > 0 && window.theme.gwpSettings.gwpProductAvailable === 'true' && window.theme.gwpSettings.gwpProductType === 'Gift product' && !localStorage.getItem('removeGWP')) {
