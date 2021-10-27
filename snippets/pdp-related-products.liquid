@@ -8,7 +8,7 @@
           <h2 class='relatedProducts__title'>{{ related_products_heading | default: 'Related Products' | escape }}</h2>
         {% endif %}
 
-        <div class="relatedProducts__row-wrapper">
+        <div class="relatedProducts__row-wrapper rel">
           <div class='f jcs fdr one-fourth relatedProducts__row'>
             {% for related_product_handle in related_products_handles limit: 4 %}
               {% assign related_product = all_products[related_product_handle] %}

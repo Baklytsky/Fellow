@@ -110,6 +110,10 @@ theme.header = function () {
       $(this).siblings('.subMenuList').slideToggle();
       $(this).toggleClass('active')
     }
+    // mega hack pico sidestep on mobile
+    if (window.innerWidth < 500 && this.hasAttribute('href')){
+      window.location.href = this.getAttribute('href');
+    }
   })
 
   theme.countdownTimer = function () {
@@ -1032,6 +1036,18 @@ theme.GLOBAL = function () {
     }
   })
 
+  if ($('.FeaturedCollections__ProductsTabs').length) {
+    $('.FeaturedCollections__ScrollNext').on('click', function () {
+      $(this).parent().animate({scrollLeft: $(this).parent().width()}, 600);
+    })
+
+    $('.FeaturedCollections__ScrollPrev').on('click', function () {
+      $(this).parent().animate({scrollLeft: 0}, 300);
+    })
+  }
+
+  $(document).on('click', )
+
   $(document).on('click.closeModal', '#closeModal', function () {
     theme.closeModal();
   });
@@ -1207,5 +1223,15 @@ theme.GLOBAL = function () {
 
   if ($('.cart-drawer').length) {
     theme.cartDrawer()
+  }
+
+  // PICO app mega hack to bypass on mobile
+  var links = document.getElementsByTagName('a');
+  for(var i = 0; i < links.length; i++) {
+    links[i].addEventListener('click', (e) => {
+      if (window.innerWidth < 500 && e.currentTarget.hasAttribute('href')){
+        window.location.href = e.currentTarget.getAttribute('href');
+      }
+    });
   }
 }

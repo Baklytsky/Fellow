@@ -73,6 +73,10 @@ h1, h2, h3, h4, h5, h6 {
   font-family: $font-header;
 }
 
+button {
+  color: currentColor;
+}
+
 
 //-----------------------Header navigation----------------------------------
 #header .newHeader__openedBlock .newHeader__button {
@@ -395,10 +399,6 @@ h1, h2, h3, h4, h5, h6 {
     width: -moz-fit-content;
     width: fit-content;
     transition: 0.3s;
-
-    &:hover {
-      font-weight: bold;
-    }
   }
 
   .megaMenu__itemBold {
@@ -479,9 +479,6 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 16px;
     font-weight: normal;
     transition: 0.3s;
-    &:hover {
-      font-weight: bold;
-    }
   }
 
   .blockImages {
@@ -801,6 +798,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .linkWhite[data-selected="true"], .linkWhite[data-selected="false"] {
   position: relative;
+  display: inline-block;
 
   &::after {
     position: absolute;
@@ -832,6 +830,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .linkBlack[data-selected="true"], .linkBlack[data-selected="false"] {
   position: relative;
+  display: inline-block;
 
   &::after {
     position: absolute;
@@ -1749,7 +1748,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 .FeaturedCollections__TabsWrapper {
   width: 100%;
+  overflow: hidden;
 }
+
 .FeaturedCollections__TabsHeader {
   display: flex;
   align-items: flex-start;
@@ -1857,6 +1858,7 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 20px;
   line-height: 26px;
   text-decoration: none;
+  white-space: nowrap;
 
   @media screen and (max-width: $tablet) {
     font-weight: 500;
@@ -1876,11 +1878,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .FeaturedCollections__ProductsWrapper {
   margin: 0 25px;
-  padding: 0 5px;
+  padding: 0 25px 0 5px;
   height: 100%;
   width: 100%;
   max-width: calc(100% - 30px);
-  overflow: hidden;
 
   @media screen and (max-width: $tablet) {
     margin: 0 8px;
@@ -1892,6 +1893,37 @@ h1, h2, h3, h4, h5, h6 {
     padding: 0 8px 25px;
   }
 }
+
+.FeaturedCollections__ScrollPrev,
+.FeaturedCollections__ScrollNext {
+  position: absolute;
+  top: 202px;
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+
+  @media screen and (max-width: $tablet) {
+    display: none;
+  }
+}
+
+.FeaturedCollections__ScrollPrev {
+  left: -45px;
+  transform: translate(50%, -50%);
+}
+
+.FeaturedCollections__ScrollNext {
+  right: -25px;
+  transform: translate(-50%, -50%);
+}
+
+.FeaturedCollections__ProductsTabs[aria-selected="false"] {
+  .FeaturedCollections__ScrollPrev,
+  .FeaturedCollections__ScrollNext {
+    display: none;
+  }
+}
+
 .FeaturedCollections__ProductsTabs {
   display: flex;
   overflow-x: auto;
@@ -3763,7 +3795,7 @@ h2.pdpCopy__header-price ,
 }
 
 .size__image-wrapper {
-  width: 100%;
+  width: 80px;
   height: 80px;
   padding: 8px;
   display: flex;
@@ -3773,9 +3805,11 @@ h2.pdpCopy__header-price ,
 }
 
 .size__image-wrapper-icon {
+  height: inherit;
   display: flex;
   justify-content: center;
   svg {
+    width: 100%;
     fill: #DBDBDB;
 
     path {
@@ -4727,6 +4761,11 @@ h2.pdpCopy__header-price ,
       line-height: 16px;
       text-decoration-line: underline;
     }
+  }
+
+  .size__image-wrapper {
+    width: 60px;
+    height: 60px;
   }
 }
 
