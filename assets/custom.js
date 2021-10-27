@@ -685,7 +685,6 @@ theme.pdpMain = function () {
 }
 
 theme.pdpQuickView = function () {
-
   // Remove all $(document) Events
   // clicks:
   $(document).off('click.pdpQvSelectSize')
@@ -731,6 +730,59 @@ theme.pdpQuickView = function () {
       focusOnSelect: true,
       asNavFor: $gallerySlider,
     });
+  }
+
+  function bundle () {
+    var selectors = {
+      addBundle: '#pdp-bundle-atc',
+      cartButton: '.js-cart-drawer-toggle',
+      cartCount: '.js-cart-count',
+      cartDrawer: '#cart-drawer-content',
+      form: '[action="/cart/add"]'
+    };
+
+    $(document).on('click', selectors.addBundle, function (e) {
+      e.preventDefault();
+      var $availableVariants = $('[data-variant-available="true"]');
+      let products_data = [];
+
+      $availableVariants.each(function () {
+        products_data.push({
+          quantity: 1,
+          id: $(this).attr('id'),
+          properties: {
+            bundle: true
+          }
+        })
+      });
+
+      $.ajax({
+        type: 'post',
+        url: '/cart/add.js',
+        data: {items: products_data},
+        dataType: 'json',
+        success: function () {
+          updateCartDrawer()
+        },
+        error: function (XMLHttpRequest) {
+        }
+      })
+    })
+
+    function updateCartDrawer() {
+      fetch('/cart.js')
+        .then(response => response.json())
+        .then(function (cartObject) {
+          $(selectors.cartCount).html(cartObject.item_count)
+          CartDrawer.emit("cart:updated", {cart: cartObject})
+          CartDrawer.emit("cart:toggle", {cartOpen: !0})
+        });
+    }
+  }
+
+  const contentInner = $('#ProductQuickView').parents('[data-product-template]');
+  if (contentInner.length && contentInner.attr('data-product-template').includes('bundle')) {
+    bundle();
   }
 
   setTimeout(modalGallerySlider, 0);
