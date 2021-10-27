@@ -15266,6 +15266,10 @@
       }), 300)
     }))
   }, {
+    path: "/products",
+    ignore: true,
+    cache: false
+  }, {
     path: "/products/digital-gift-card",
     ignore: !0
   }, {
