@@ -5816,6 +5816,18 @@ h2.pdpCopy__header-price ,
       .search-in-progress {
         margin-top: 40px;
       }
+
+      .yotpo-icon.yotpo-icon-down-triangle {
+        &:before {
+          content: url("{{ 'right-arrow.svg' | asset_url }}");
+          width: 30px;
+          height: 30px;
+          display: block;
+          transform: rotate(90deg);
+          object-position: center;
+
+        }
+      }
     }
 
     .yotpo-pager {
