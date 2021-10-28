@@ -17833,6 +17833,7 @@ body.is-masthead--empty main {
 
 .cart-footer__total-item {
   margin: 4px 0;
+  padding-right: 10px;
 }
 
 .cart-footer__total-item span {
@@ -17846,6 +17847,9 @@ body.is-masthead--empty main {
 
 .cart-drawer__empty {
   padding: 40px;
+  min-height: 650px;
+  display: flex;
+  align-items: center;
 }
 
 .cart-drawer__items-inner {
@@ -20465,7 +20469,6 @@ h3.productCard__title {
 
 @media screen and (max-width:991.98px) {
   .hero__slide img {
-    touch-action: none;
     height: 375px;
     -o-object-fit: cover;
     object-fit: cover
