@@ -28,14 +28,14 @@
 <section class='container--l f fdc'>
   {% if desktop_masthead == blank %}
     <header class='f'>
-      <h1 class='caps'>{{ blog_title }}</h1>
+      <h1 class=''>{{ blog_title }}</h1>
       {% if current_tags %}
         {% capture blog_title %}{{ blog.title | link_to: blog.url }} &mdash; {{ current_tags.first }}{% endcapture %}
       {% endif %}
     </header>
   {% endif %}
   {% paginate blog.articles by 12 %}
-    <div class='f fw fdr row mt3rem'>
+    <div class='f fw fdr mt3rem'>
       {% for article in blog.articles %}
         {% include 'article-card' %}
       {% endfor %}

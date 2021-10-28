@@ -115,6 +115,8 @@
                     <ul class="filter-group__list">
                       {%- for filter_value in filter.values -%}
                         {%- assign filter_name = filter_value.value | replace: '-', ' '  | capitalize -%}
+                        {%- assign gift_product_type = 'Gift product' | handleize -%}
+                        {%- assign filter_name_handleize = filter_name | handleize -%}
 
                         {%- if filter_title == 'Color' -%}
                           {%- assign color_name = filter_value.value | handleize -%}
@@ -124,24 +126,26 @@
                           {%- assign color_title = color_name | replace: '-', ' '  | capitalize -%}
                         {%- endif -%}
 
-                        <li class="filter-group__list-item {% if color_name != blank -%}filter-group__list-item-color{%- endif %}">
-                          <label class='filter-group-radio f aic'
-                                 for='Filter-{{ filter.label }}-{{ forloop.index }}'
-                                  {% if color_name != blank -%} data-color="{{ color_name }}" {%- endif %}>
-                            <input id='Filter-{{ filter.label }}-{{ forloop.index }}'
-                                   type='radio'
-                                   name='{{ filter_value.param_name }}'
-                                   class="filter-group-input"
-                                   value='{{ filter_value.value }}'
-                                   title='{% if color_name != blank -%}{{ color_title }}{% else %}{{ filter_name }}{%- endif %}'
-                                   data-filter-type="{{ filter_title }}"
-                                    {% if color_name != blank -%} data-color="{{ color_name }}" {%- endif %}
-                                    {% if filter_value.active -%}checked{%- endif %} />
-                            <span class="filter-group-circle f aic jcc rel"
+                        {%- if filter_name_handleize != gift_product_type -%}
+                          <li class="filter-group__list-item {% if color_name != blank -%}filter-group__list-item-color{%- endif %}">
+                            <label class='filter-group-radio f aic'
+                                   for='Filter-{{ filter.label }}-{{ forloop.index }}'
+                                    {% if color_name != blank -%} data-color="{{ color_name }}" {%- endif %}>
+                              <input id='Filter-{{ filter.label }}-{{ forloop.index }}'
+                                     type='radio'
+                                     name='{{ filter_value.param_name }}'
+                                     class="filter-group-input"
+                                     value='{{ filter_value.value }}'
+                                     title='{% if color_name != blank -%}{{ color_title }}{% else %}{{ filter_name }}{%- endif %}'
+                                     data-filter-type="{{ filter_title }}"
+                                      {% if color_name != blank -%} data-color="{{ color_name }}" {%- endif %}
+                                      {% if filter_value.active -%}checked{%- endif %} />
+                              <span class="filter-group-circle f aic jcc rel"
                                       {% if color_name != blank -%} data-color="{{ color_name }}" {%- endif %}></span>
-                            <span class="filter-group-title">{% if color_name != blank -%}{{ color_title }}{% else %}{{ filter_name }}{%- endif %}</span>
-                          </label>
-                        </li>
+                              <span class="filter-group-title">{% if color_name != blank -%}{{ color_title }}{% else %}{{ filter_name }}{%- endif %}</span>
+                            </label>
+                          </li>
+                        {%- endif -%}
                       {%- endfor -%}
                     </ul>
 
@@ -193,8 +197,12 @@
       <div class="collection__products-filter-results"></div>
       <div class="collection__products-results">
         {%- assign collection_product_types = '' -%}
+        {%- assign gift_product_type = 'Gift product' | handleize -%}
         {% for product in collection.products %}
-          {%- assign collection_product_types = collection_product_types | append: '|#|' | append: product.type -%}
+          {%- assign product_type_handleize = product.type | handleize -%}
+          {%- if product_type_handleize != gift_product_type -%}
+            {%- assign collection_product_types = collection_product_types | append: '|#|' | append: product.type -%}
+          {%- endif -%}
         {% endfor %}
 
         {%- assign uniq_collection_product_types = collection_product_types | split: '|#|' | uniq | join: '|#|' -%}
@@ -208,8 +216,10 @@
               <div class="subcollection__products one-third">
                 {% for product in collection.products %}
                   {%- assign product_type_handleize = product.type | handleize -%}
-                  {%- if product_type_handleize == collection_product_type_handleize -%}
-                    {% include 'product-card', product_image: product.images[product_image_index] %}
+                  {%- if product_type_handleize != gift_product_type -%}
+                    {%- if product_type_handleize == collection_product_type_handleize -%}
+                      {% include 'product-card', product_image: product.images[product_image_index] %}
+                    {%- endif -%}
                   {%- endif -%}
                 {%- endfor -%}
               </div>

@@ -7,7 +7,7 @@
   {% assign fc_keys = page.metafields.custom_fields["partnerships"] | split: "," %}
   <section class="module">
     <div class='row'>
-      <div class='col-lg-8 offset-lg-2'>
+      <div class='col-lg-11 offset-lg-1'>
         {% for i in fc_keys %}
           {% assign index = i | plus: 0 %}
           {% assign pageRef = pages[partnership_page_array[index]] %}
@@ -17,7 +17,7 @@
           <div class='partners__listing my3rem'>
             <div class='row'>
               {% if partnershipImage != blank %}
-                <div class='col-lg-6'>
+                <div class='col-lg-6 pr25'>
                   {%
                     include 'component-image' with
                     src: partnershipImage,
@@ -29,14 +29,15 @@
               {% endif %}
 
               {% if partnershipShortDesc != blank %}
-                <div class='col-lg-6'>
+                <div class='col-lg-6 pl2.5'>
                   {% if partnershipTitle != blank %}
-                    <h2 class='caps'>{{ partnershipTitle }}</h2>
+                    <h2>{{ partnershipTitle }}</h2>
                   {% else if pageRef != blank %}
                     <h2 class='caps'>{{ pageRef.title }}</h2>
                   {% endif %}
                   {{ partnershipShortDesc }}
-                  <a class='btn my1' href='{{ pageRef.url }}' aria-label="Learn more about {{ pageRef.title }}" aria-labelledby="Learn more about {{ pageRef.title }}">Learn More &rarr;</a>
+                  <a class='btn my1 btn--sm btn--dark' href='{{ pageRef.url }}' aria-label="Learn more about {{ pageRef.title }}" aria-labelledby="Learn more about {{ pageRef.title }}">Learn More
+                  </a>
                 </div>
               {% endif %}
             </div>

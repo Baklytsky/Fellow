@@ -1,6 +1,6 @@
-{% if product.metafields.custom_fields["media_proof"] != blank %}
+{% if product.metafields.custom_fields["media_proof_items_new"] != blank %}
   {% comment %}Assign Media Proof Flex Order{% endcomment %}
-  {% assign flex_order = product.metafields.custom_fields["media_proof_order"] | downcase %}
+  {% assign flex_order = product.metafields.custom_fields["media_proof_order_new"] | downcase %}
   {% if flex_order %}
     {% unless flex_order == 'default' %}
       {% assign display_order = flex_order %}
@@ -21,16 +21,10 @@
            data-slick-config='{{- slick-config -}}'>
     <div class='x pdpMediaProof__wrapper'>
       <div class='mediaProof__items f fw jca jsSlickSlider'>
-
-        {% assign separator = "|###|" %}
-        {% assign image_array = product.metafields.custom_fields["media_proof_item_image"] | split: separator %}
-        {% assign quote_array = product.metafields.custom_fields["media_proof_item_quote"] | split: separator %}
-        {% assign fc_keys = product.metafields.custom_fields["media_proof"] | split: "," %}
-
-        {% for i in fc_keys %}
+        {% for item in product.metafields.custom_fields["media_proof_items_new"] %}
           {% assign index = i | plus: 0 %}
-          {% assign imageSrc = image_array[index] %}
-          {% assign quote = quote_array[index] %}
+          {% assign imageSrc = item["media_proof_item_image_new"] %}
+          {% assign quote = item["media_proof_item_quote_new"] %}
             {% include 'media-proof-single' %}
         {% endfor %}
       </div>

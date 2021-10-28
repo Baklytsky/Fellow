@@ -9928,49 +9928,95 @@
       return t.length <= 0
           ? ""
           : t.reduce(function (t, e) {
-            return (
-                t +
-                ((r = (n = e).product_id),
-                    (i = n.variant_id),
-                    (o = n.product_title),
-                    (a = n.line_price),
-                    (p = (n.line_price === n.original_line_price) ? V(Q(a)) : '<span style="text-decoration: line-through; padding-right: 5px;">' + V(Q(n.original_line_price)) + '</span>' + V(Q(a))),
-                    (s = n.options_with_values),
-                    (u = n.image),
-                    (c = n.url),
-                    (l = n.quantity),
-                    (f = U(s)),
-                    (h = u
-                        ? F(
-                            u.replace(
-                                "." +
-                                (function (t) {
-                                  var e = t.match(/.+_((?:pico|icon|thumb|small|compact|medium|large|grande)|\d{1,4}x\d{0,4}|x\d{1,4})[_\.@]/);
-                                  return e ? e[1] : null;
-                                })(u),
-                                ""
-                            ),
-                            "200x"
-                        )
-                        : "https://source.unsplash.com/R9OS29xJb-8/2000x1333"),
-                    "\n    <div class='cart-drawer__item' data-component='cartDrawerItem' data-pid="
-                        .concat(r, " data-id=")
-                        .concat(i, " >\n      <a href='")
-                        .concat(c, "' class=\"cart-drawer__itemImage\">\n        <img src='")
-                        .concat(h, "' />\n      </a>\n\n      <div class='cart-drawer__itemContent f fdc'>\n        <div class='cart-drawer__itemDetails'>\n          <a href='")
-                        .concat(c, "' class='cart-drawer__itemTitle'>")
-                        .concat(o, "</a>\n          <div class='cart-drawer__itemOptions'>")
-                        .concat(f, "</div>\n        </div>\n\n        <div class='f aic jcb pt05'>\n          <div class='cart-item__stepper aic f ")
-                        .concat(0 === a ? "is-disabled" : "", "'>\n            <div class='cart-stepper js-remove-single' data-key='" + n.key + "'>-</div>\n            <input type='text' class='cart-quantity js-single-quantity' value='")
-                        .concat(l, "'>\n            <div class='cart-stepper js-add-single' data-key='" + n.key + "'>+</div>\n          </div>\n\n          <div class='cart-item__price'>")
-                        .concat(p, "</div>\n        </div>\n\n        <button class='button--reset cart-drawer__itemAction js-remove-item' data-key='" + n.key + "' style='display: none'>")
-                        .concat(
-                            '\n  <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentcolor" stroke-width="3" style="display:inline-block;vertical-align:middle;overflow:visible;"><path d="M1.0606601717798212 1.0606601717798212 L14.939339828220179 14.939339828220179"></path><path d="M14.939339828220179 1.0606601717798212 L1.0606601717798212 14.939339828220179"></path></svg>\n',
-                            "</button>\n")
-                        .concat('\n <button type="button" data-action="open-item-remove-popup" aria-expanded="false" class="button--reset cart-drawer__itemAction cart-drawer__remove-open"> <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentcolor" stroke-width="3" style="display:inline-block;vertical-align:middle;overflow:visible;"><path d="M1.0606601717798212 1.0606601717798212 L14.939339828220179 14.939339828220179"></path><path d="M14.939339828220179 1.0606601717798212 L1.0606601717798212 14.939339828220179"></path></svg>\n',
-                            "</button>\n </div>\n    </div>\n"
-                        ))
-            );
+            if (e.product_type != 'Gift product') {
+              return (
+                  t +
+                  ((r = (n = e).product_id),
+                      (i = n.variant_id),
+                      (o = n.product_title),
+                      (a = n.line_price),
+                      (p = (n.line_price === n.original_line_price) ? V(Q(a)) : '<span style="text-decoration: line-through; padding-right: 5px;">' + V(Q(n.original_line_price)) + '</span>' + V(Q(a))),
+                      (s = n.options_with_values),
+                      (u = n.image),
+                      (c = n.url),
+                      (l = n.quantity),
+                      (f = U(s)),
+                      (h = u
+                          ? F(
+                              u.replace(
+                                  "." +
+                                  (function (t) {
+                                    var e = t.match(/.+_((?:pico|icon|thumb|small|compact|medium|large|grande)|\d{1,4}x\d{0,4}|x\d{1,4})[_\.@]/);
+                                    return e ? e[1] : null;
+                                  })(u),
+                                  ""
+                              ),
+                              "200x"
+                          )
+                          : "https://source.unsplash.com/R9OS29xJb-8/2000x1333"),
+                      "\n    <div class='cart-drawer__item' data-component='cartDrawerItem' data-pid="
+                          .concat(r, " data-id=")
+                          .concat(i, " >\n      <a href='")
+                          .concat(c, "' class=\"cart-drawer__itemImage\">\n        <img src='")
+                          .concat(h, "' />\n      </a>\n\n      <div class='cart-drawer__itemContent f fdc'>\n        <div class='cart-drawer__itemDetails'>\n          <a href='")
+                          .concat(c, "' class='cart-drawer__itemTitle'>")
+                          .concat(o, "</a>\n          <div class='cart-drawer__itemOptions'>")
+                          .concat(f, "</div>\n        </div>\n\n        <div class='f aic jcb pt05'>\n          <div class='cart-item__stepper aic f ")
+                          .concat(0 === a ? "is-disabled" : "", "'>\n            <div class='cart-stepper js-remove-single' data-key='" + n.key + "'>-</div>\n            <input type='text' class='cart-quantity js-single-quantity' value='")
+                          .concat(l, "'>\n            <div class='cart-stepper js-add-single' data-key='" + n.key + "'>+</div>\n          </div>\n\n          <div class='cart-item__price'>")
+                          .concat(p, "</div>\n        </div>\n\n        <button class='button--reset cart-drawer__itemAction js-remove-item' data-key='" + n.key + "' style='display: none'>")
+                          .concat(
+                              '\n  <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentcolor" stroke-width="3" style="display:inline-block;vertical-align:middle;overflow:visible;"><path d="M1.0606601717798212 1.0606601717798212 L14.939339828220179 14.939339828220179"></path><path d="M14.939339828220179 1.0606601717798212 L1.0606601717798212 14.939339828220179"></path></svg>\n',
+                              "</button>\n")
+                          .concat('\n <button type="button" data-action="open-item-remove-popup" aria-expanded="false" class="button--reset cart-drawer__itemAction cart-drawer__remove-open"> <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentcolor" stroke-width="3" style="display:inline-block;vertical-align:middle;overflow:visible;"><path d="M1.0606601717798212 1.0606601717798212 L14.939339828220179 14.939339828220179"></path><path d="M14.939339828220179 1.0606601717798212 L1.0606601717798212 14.939339828220179"></path></svg>\n',
+                              "</button>\n </div>\n    </div>\n"
+                          ))
+              );
+            } else {
+              return (
+                  t +
+                  ((r = (n = e).product_id),
+                      (i = n.variant_id),
+                      (o = n.product_title),
+                      (a = n.line_price),
+                      (p = (n.line_price === n.original_line_price) ? V(Q(a)) : '<span style="text-decoration: line-through; padding-right: 5px;">' + V(Q(n.original_line_price)) + '</span>' + V(Q(a))),
+                      (s = n.options_with_values),
+                      (u = n.image),
+                      (c = n.url),
+                      (l = n.quantity),
+                      (f = U(s)),
+                      (h = u
+                          ? F(
+                              u.replace(
+                                  "." +
+                                  (function (t) {
+                                    var e = t.match(/.+_((?:pico|icon|thumb|small|compact|medium|large|grande)|\d{1,4}x\d{0,4}|x\d{1,4})[_\.@]/);
+                                    return e ? e[1] : null;
+                                  })(u),
+                                  ""
+                              ),
+                              "200x"
+                          )
+                          : "https://source.unsplash.com/R9OS29xJb-8/2000x1333"),
+                      "\n    <div class='cart-drawer__item' data-component='cartDrawerItem' data-pid="
+                          .concat(r, " data-id=")
+                          .concat(i, " >\n      <div data-free-product='")
+                          .concat('Free gift', "' class=\"cart-drawer__itemImage\">\n        <img src='")
+                          .concat(h, "' />\n      </div>\n\n      <div class='cart-drawer__itemContent f fdc'>\n        <div class='cart-drawer__itemDetails'>\n          <p data-free-product='")
+                          .concat('Free gift', "' class='cart-drawer__itemTitle'>")
+                          .concat(o, "</p>\n          <div class='cart-drawer__itemOptions'>")
+                          .concat(f, "</div>\n        </div>\n\n        <div class='f aic jce pt05'>\n          <div style='display: none' class='cart-item__stepper aic f ")
+                          .concat(0 === a ? "is-disabled" : "", "'>\n            <div class='cart-stepper js-remove-single' data-key='" + n.key + "'>-</div>\n            <input type='text' class='cart-quantity js-single-quantity' value='")
+                          .concat(l, "'>\n            <div class='cart-stepper js-add-single' data-key='" + n.key + "'>+</div>\n          </div>\n\n          <div class='cart-item__price'>")
+                          .concat('Free', "</div>\n        </div>\n\n        <button class='button--reset cart-drawer__itemAction js-remove-item' data-key='" + n.key + "' style='display: none'>")
+                          .concat(
+                              '\n  <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentcolor" stroke-width="3" style="display:inline-block;vertical-align:middle;overflow:visible;"><path d="M1.0606601717798212 1.0606601717798212 L14.939339828220179 14.939339828220179"></path><path d="M14.939339828220179 1.0606601717798212 L1.0606601717798212 14.939339828220179"></path></svg>\n',
+                              "</button>\n")
+                          .concat('\n <button type="button" data-action="open-item-remove-popup" data-gift-product="true" aria-expanded="false" class="button--reset cart-drawer__itemAction cart-drawer__remove-open"> <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentcolor" stroke-width="3" style="display:inline-block;vertical-align:middle;overflow:visible;"><path d="M1.0606601717798212 1.0606601717798212 L14.939339828220179 14.939339828220179"></path><path d="M14.939339828220179 1.0606601717798212 L1.0606601717798212 14.939339828220179"></path></svg>\n',
+                              "</button>\n </div>\n    </div>\n"
+                          ))
+              );
+            }
             var n, r, i, o, a, s, u, c, l, f, h;
           }, "");
     console.log("Can't reach cart.js");
@@ -9978,6 +10024,26 @@
 
   var W = O((function(t, e) {
         window.CartDrawer = e;
+        window.Cart = e.getState().cart;
+
+        if (window.theme.gwpSettings.gwpEnable !== 'true' || window.theme.gwpSettings.gwpThreshold <= 0 || window.theme.gwpSettings.gwpProductAvailable !== 'true' || window.theme.gwpSettings.gwpProductType !== 'Gift product' || localStorage.getItem('removeGWP')) {
+          setTimeout(function () {
+            Cart.items.forEach(function (element) {
+              if (element.product_type === 'Gift product') {
+                theme.checkGwpOnLoad(element)
+              }
+            });
+          }, 500)
+        }
+
+        if (window.theme.gwpSettings.gwpEnable === 'true' && window.theme.gwpSettings.gwpThreshold > 0 && window.theme.gwpSettings.gwpProductAvailable === 'true' && window.theme.gwpSettings.gwpProductType === 'Gift product' && !localStorage.getItem('removeGWP')) {
+          var gwpThreshold = window.theme.gwpSettings.gwpThreshold * 100,
+              gwpProductId = window.theme.gwpSettings.gwpProductId;
+
+          if (Cart.total_price >= gwpThreshold && !theme.checkGwp(Cart)) {
+            theme.gwp(Cart, '/cart/add.js', gwpProductId, 1, false)
+          }
+        }
 
         var n = t.querySelector(".js-overlay"),
             r = t.querySelector(".js-close"),
@@ -10002,9 +10068,9 @@
               (a.innerHTML = z(t.items)),
                   (i.innerHTML = q),
                   void 0 === t.items
-                      ? (c.classList.add("is-hidden"), a.classList.add("is-hidden"), l.classList.remove("is-hidden"), f.classList.add("is-hidden"), s.classList.add("cart-drawer--empty"), emptyCartText.classList.remove("is-hidden"), freeShipping.classList.add("is-hidden") )
+                      ? (c.classList.add("is-hidden"), a.classList.add("is-hidden"), l.classList.remove("is-hidden"), f.classList.add("is-hidden"), s.classList.add("cart-drawer--empty"), emptyCartText.classList.remove("is-hidden"), freeShipping.classList.add("is-hidden"), localStorage.setItem('removeGWP', 'false') )
                       : 0 === t.items.length
-                          ? (c.classList.add("is-hidden"), a.classList.add("is-hidden"), l.classList.remove("is-hidden"), s.classList.add("cart-drawer--empty"), emptyCartText.classList.remove("is-hidden"), freeShipping.classList.add("is-hidden"))
+                          ? (c.classList.add("is-hidden"), a.classList.add("is-hidden"), l.classList.remove("is-hidden"), s.classList.add("cart-drawer--empty"), emptyCartText.classList.remove("is-hidden"), freeShipping.classList.add("is-hidden"), localStorage.removeItem('removeGWP'))
                           : (c.classList.remove("is-hidden"), a.classList.remove("is-hidden"), l.classList.add("is-hidden"), s.classList.remove("cart-drawer--empty"),  emptyCartText.classList.add("is-hidden"), freeShipping.classList.remove("is-hidden"));
             },
             g = function() {
@@ -10026,33 +10092,73 @@
           })
         })), e.on("cart:toggle", (function(e) {
           var n = e.cart;
-          e.cartOpen && function(e) {
-            theme.disableScroll();
-            if (t.classList.add("is-active"), a.innerHTML = h, setTimeout((function() {
-              t.classList.add("is-visible"), t.tabIndex = 0, s.tabIndex = 0, t.setAttribute("aria-expanded", "true"), document.getElementById("root").tabIndex = -1, setTimeout(m(e), 10), Dr.mount()
-            }), 50), e.total_price < 9900) {
-              v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
-              var n = Q(9900 - e.total_price),
-                  r = (e.total_price / 100).toFixed(2);
-              d.style.width = "".concat(r, "%"), p.innerHTML = n
-            } else y.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
-            Dr.emit("nav:toggle", {
-              navDrawerOpen: !1,
-              whichNavDrawer: void 0,
-              navReclick: !1
-            })
-          }(n)
+          if (window.theme.gwpSettings.gwpEnable === 'true' && window.theme.gwpSettings.gwpThreshold > 0 && window.theme.gwpSettings.gwpProductAvailable === 'true' && window.theme.gwpSettings.gwpProductType === 'Gift product' && !localStorage.getItem('removeGWP')) {
+            e.cartOpen && function(e) {
+              theme.disableScroll();
+              if (t.classList.add("is-active"), a.innerHTML = h, setTimeout((function() {
+                t.classList.add("is-visible"), t.tabIndex = 0, s.tabIndex = 0, t.setAttribute("aria-expanded", "true"), document.getElementById("root").tabIndex = -1, setTimeout(m(e), 10), Dr.mount()
+              }), 50), e.total_price < (window.theme.gwpSettings.gwpThreshold * 100)) {
+                v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
+                var n = Q((window.theme.gwpSettings.gwpThreshold * 100) - e.total_price),
+                    r = (e.total_price / window.theme.gwpSettings.gwpThreshold).toFixed(2);
+                d.style.width = "".concat(r, "%"), p.innerHTML = n, v.innerHTML = `You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from free free gift`
+              } else y.innerHTML = 'Good news! You get a free gift product.', y.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.innerHTML = 'Good news! You get a free gift product.', freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
+              Dr.emit("nav:toggle", {
+                navDrawerOpen: !1,
+                whichNavDrawer: void 0,
+                navReclick: !1
+              })
+            }(n)
+          } else {
+            e.cartOpen && function(e) {
+              theme.disableScroll();
+              if (t.classList.add("is-active"), a.innerHTML = h, setTimeout((function() {
+                t.classList.add("is-visible"), t.tabIndex = 0, s.tabIndex = 0, t.setAttribute("aria-expanded", "true"), document.getElementById("root").tabIndex = -1, setTimeout(m(e), 10), Dr.mount()
+              }), 50), e.total_price < 9900) {
+                v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
+                var n = Q(9900 - e.total_price),
+                    r = (e.total_price / 100).toFixed(2);
+                d.style.width = "".concat(r, "%"), p.innerHTML = n, v.innerHTML = `You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from free US shipping`
+              } else y.innerHTML = 'Congrats! You get free US Shipping!', y.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.innerHTML = 'Congrats! You get free US Shipping!', freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
+              Dr.emit("nav:toggle", {
+                navDrawerOpen: !1,
+                whichNavDrawer: void 0,
+                navReclick: !1
+              })
+            }(n)
+          }
         })), Dr.on("cart:toggle", (function(t) {
           t.cartOpen || g()
         })), e.on("cart:updated", (function(t) {
+          if (window.theme.gwpSettings.gwpEnable === 'true' && window.theme.gwpSettings.gwpThreshold > 0 && window.theme.gwpSettings.gwpProductAvailable === 'true' && window.theme.gwpSettings.gwpProductType === 'Gift product' && !localStorage.getItem('removeGWP')) {
+            var gwpThreshold = window.theme.gwpSettings.gwpThreshold * 100,
+                gwpProductId = window.theme.gwpSettings.gwpProductId;
+
+            if (t.cart.total_price >= gwpThreshold && !theme.checkGwp(t.cart)) {
+              theme.gwp(t.cart, '/cart/add.js', gwpProductId, 1, true)
+            }
+
+            if (t.cart.total_price < gwpThreshold && theme.checkGwp(t.cart)) {
+              theme.gwp(t.cart, '/cart/change.js', gwpProductId, 0, true)
+            }
+          }
           t.state;
           var n = t.cart;
-          if (m(e.getState().cart), b(Dr.getState()), n.total_price < 9900) {
-            v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
-            var r = Q(9900 - n.total_price),
-                i = (n.total_price / 100).toFixed(2);
-            d.style.width = "".concat(i, "%"), p.innerHTML = r
-          } else y.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
+          if (window.theme.gwpSettings.gwpEnable === 'true' && window.theme.gwpSettings.gwpThreshold > 0 && window.theme.gwpSettings.gwpProductAvailable === 'true' && window.theme.gwpSettings.gwpProductType === 'Gift product' && !localStorage.getItem('removeGWP')) {
+            if (m(e.getState().cart), b(Dr.getState()), n.total_price < (window.theme.gwpSettings.gwpThreshold * 100)) {
+              v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
+              var r = Q((window.theme.gwpSettings.gwpThreshold * 100) - n.total_price),
+                  i = (n.total_price / window.theme.gwpSettings.gwpThreshold).toFixed(2);
+              d.style.width = "".concat(i, "%"), p.innerHTML = r, v.innerHTML = `You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from free free gift`
+            } else y.innerHTML = 'Good news! You get a free gift product.', y.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.innerHTML = 'Good news! You get a free gift product.', freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
+          } else {
+            if (m(e.getState().cart), b(Dr.getState()), n.total_price < 9900) {
+              v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
+              var r = Q(9900 - n.total_price),
+                  i = (n.total_price / 100).toFixed(2);
+              d.style.width = "".concat(i, "%"), p.innerHTML = r, v.innerHTML = `You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from free US shipping`
+            } else y.innerHTML = 'Congrats! You get free US Shipping!', y.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.innerHTML = 'Congrats! You get free US Shipping!', freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
+          }
           u.forEach((function(t) {
             t.innerHTML = e.getState().cart.item_count
           })), Dr.mount()
@@ -10146,8 +10252,8 @@
     }))
   }
 
-  function J(t, e) {
-    var n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : null;
+  function J(t, e, openCart) {
+    var n = arguments.length > 3 && void 0 !== arguments[3] ? arguments[3] : null;
 
     theme.updateCartRecommendedProducts();
     return Dr.emit("cart:updating"), n ? H("/cart/add.js", {
@@ -10168,8 +10274,14 @@
         return Dr.hydrate({
           cart: e
         }), Dr.emit("cart:updated"), Dr.emit("cart:toggle", (function(t) {
-          return {
-            cartOpen: !0
+          if (openCart) {
+            return {
+              cartOpen: !0
+            }
+          } else {
+            return {
+              cartOpen: !1
+            }
           }
         })), {
           item: t,
@@ -10193,8 +10305,14 @@
         return Dr.hydrate({
           cart: e
         }), Dr.emit("cart:updated"), Dr.emit("cart:toggle", (function(t) {
-          return {
-            cartOpen: !0
+          if (openCart) {
+            return {
+              cartOpen: !0
+            }
+          } else {
+            return {
+              cartOpen: !1
+            }
           }
         })), {
           item: t,
@@ -13656,7 +13774,7 @@
                   return o = e.sent, e.next = 6, kn(i);
                 case 6:
                   a = e.sent, n.innerHTML = Tn(o, a), console.log("selectedUpsell is", o), s = o ? t.querySelector(".js-upsell-item-data").getAttribute("data-id") : null, u = o ? t.querySelector(".js-upsell-item-add") : null, s && u && u.addEventListener("click", (function(t) {
-                    t.preventDefault(), J(s, 1)
+                    t.preventDefault(), J(s, 1,  true)
                   }));
                 case 12:
                 case "end":
@@ -13678,7 +13796,7 @@
                   return o = e.sent, e.next = 6, kn(i);
                 case 6:
                   a = e.sent, n.innerHTML = Tn(o, a), console.log("selectedUpsell is", o), s = o ? t.querySelector(".js-upsell-item-data").getAttribute("data-id") : null, u = o ? t.querySelector(".js-upsell-item-add") : null, s && u && u.addEventListener("click", (function(t) {
-                    t.preventDefault(), J(s, 1)
+                    t.preventDefault(), J(s, 1,  true)
                   }));
                 case 12:
                 case "end":
@@ -14053,7 +14171,7 @@
                 var a = "There are only ".concat(r, " of that product available, requested ").concat(o, ".");
                 throw Dr.emit("error", a), new Error(a)
               }
-              return J(t.id, e, n)
+              return J(t.id, e, true, n)
             }))
           }(a, r.elements.quantity.value);
           var e = e || [];
@@ -15265,6 +15383,10 @@
         return document.body.classList.remove("is-transitioning")
       }), 300)
     }))
+  }, {
+    path: "*",
+    ignore: true,
+    cache: false
   }, {
     path: "/products/digital-gift-card",
     ignore: !0

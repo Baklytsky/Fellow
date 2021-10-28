@@ -2,7 +2,7 @@
   <div class='keyFeatures__instance-wrapper aic {% if position == 'Text left' %} keyFeatures__instance-wrapper--reverse{% endif %}'>
     <div class='keyFeatures__media'>
       <div class="{% if key_feature_quadrature == 1 %}keyFeature__image-quadrature{% endif %} f jcc">
-        <div class="keyFeature__image-wrapper rel">
+        <div class="keyFeature__image-wrapper rel x">
         {% if mediaType == 'Video' %}
           <video class="x y fill" autoplay muted loop playsinline controls>
             {% if webmSrc != blank %}
@@ -46,7 +46,7 @@
           {%
             include 'component-image' with
             src: iconSrc,
-            alt: key_feature_title_array[index],
+            alt: key_feature_title,
             className: 'image',
             fill: true,
             centered: false,
@@ -54,15 +54,15 @@
         </div>
         {% endif %}
         <div class='keyFeatureDetails__copy'>
-          <h3 class='keyFeatureDetails__copy-heading'>{{ key_feature_title_array[index] }}</h3>
-          <p class="keyFeatureDetails__copy-text">{{ key_feature_copy_array[index] }}</p>
-          {%- if key_features_table_left_column_array[index] != blank or key_features_table_right_col_array[index] != blank -%}
+          <h3 class='keyFeatureDetails__copy-heading'>{{ key_feature_title }}</h3>
+          <p class="keyFeatureDetails__copy-text">{{ key_feature_copy }}</p>
+          {%- if key_features_table_left_column != blank or key_features_table_right_column != blank -%}
             <div class='keyFeatureDetails__Table x'>
-              {%- if key_features_table_left_column_array[index] != blank  -%}
-                <div class='keyFeatureDetails__Table-left'>{{ key_features_table_left_column_array[index] }}</div>
+              {%- if key_features_table_left_column != blank  -%}
+                <div class='keyFeatureDetails__Table-left'>{{ key_features_table_left_column }}</div>
               {%- endif -%}
-              {%- if key_features_table_right_col_array[index] != blank  -%}
-                <div class='keyFeatureDetails__Table-right'>{{ key_features_table_right_col_array[index] }}</div>
+              {%- if key_features_table_right_column != blank  -%}
+                <div class='keyFeatureDetails__Table-right'>{{ key_features_table_right_column }}</div>
               {%- endif -%}
             </div>
           {%- endif -%}

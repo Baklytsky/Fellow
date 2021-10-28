@@ -10,7 +10,7 @@
 {% assign altText = article.title | handleize %}
 
 
-<article class='col-lg-4 col-md-6 col-sm-6 articleCard'>
+<article class='articleCard'>
   {% if article.image %}
     <a href="{{ article.url }}" class='articleCard__image' aria-label="{{ altText }}" aria-labelledby="{{ altText }}">
       {%
@@ -57,7 +57,7 @@
     {% endcomment %}
 
     <p class="readMore">
-      <a href="{{ article.url }}" class="underline underlineArrow" aria-label='Read more about {{ article.title | escape }}'>{{ 'blogs.article.read_more' | t }}</a>
+      <a href="{{ article.url }}" class="underline" aria-label='Read more about {{ article.title | escape }}'>{{ 'blogs.article.read_more' | t }}</a>
     </p>
   </section>
 </article>

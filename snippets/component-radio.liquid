@@ -1,13 +1,13 @@
 {%- assign option_lable = label | handleize -%}
 {%- assign option_name = name | handleize -%}
 
-{% if product.metafields.custom_fields["product_size_images"] != blank and option_name == 'size' %}
-  {% for item in product.metafields.custom_fields["product_size_images"] %}
-    {% if item["size_name"] != blank and item["size_svg_icon"] != blank %}
-      {%- assign item_size_handleize = item["size_name"] | handleize -%}
+{% if product.metafields.custom_fields["product_size_images_new"] != blank and option_name == 'size' %}
+  {% for item in product.metafields.custom_fields["product_size_images_new"] %}
+    {% if item["size_name_new"] != blank and item["size_svg_icon_new"] != blank %}
+      {%- assign item_size_handleize = item["size_name_new"] | handleize -%}
       {%- if item_size_handleize == option_lable -%}
         {%- assign has_size_image = true -%}
-        {%- assign size_image = item["size_svg_icon"] -%}
+        {%- assign size_image = item["size_svg_icon_new"] -%}
         {% break %}
       {%- endif -%}
     {% endif %}
@@ -39,7 +39,7 @@
     {%- if has_size_image -%}
       <div class="size__wrapper">
         <div class="size__image-wrapper rel">
-          <div class="size__image-wrapper-icon">
+          <div class="size__image-wrapper-icon x">
             {{ size_image }}
           </div>
         </div>

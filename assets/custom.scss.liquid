@@ -64,13 +64,17 @@ $widescreen: 1440px;
 
 body {
   font-family: $font-base;
-  font-size: 14px;
+  font-size: 16px;
   -webkit-tap-highlight-color: transparent;
   overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: $font-header;
+}
+
+button {
+  color: currentColor;
 }
 
 
@@ -395,10 +399,6 @@ h1, h2, h3, h4, h5, h6 {
     width: -moz-fit-content;
     width: fit-content;
     transition: 0.3s;
-
-    &:hover {
-      font-weight: bold;
-    }
   }
 
   .megaMenu__itemBold {
@@ -479,9 +479,6 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 16px;
     font-weight: normal;
     transition: 0.3s;
-    &:hover {
-      font-weight: bold;
-    }
   }
 
   .blockImages {
@@ -801,6 +798,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .linkWhite[data-selected="true"], .linkWhite[data-selected="false"] {
   position: relative;
+  display: inline-block;
 
   &::after {
     position: absolute;
@@ -832,6 +830,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .linkBlack[data-selected="true"], .linkBlack[data-selected="false"] {
   position: relative;
+  display: inline-block;
 
   &::after {
     position: absolute;
@@ -1637,14 +1636,15 @@ h1, h2, h3, h4, h5, h6 {
     font-family: $font-base;
     font-style: normal;
     font-weight: normal;
-    font-size: 24px;
-    line-height: 1.2em;
+    font-size: 1.25rem;
+    line-height: 100%;
     text-align: left;
     text-transform: none;
 
     @media screen and (max-width: $tablet) {
       font-size: 20px;
       padding: 20px 0;
+      line-height: 100%;
     }
   }
 }
@@ -1725,6 +1725,11 @@ h1, h2, h3, h4, h5, h6 {
   margin: 32px auto;
   width: 100%;
   max-width: 1440px;
+
+
+  @media screen and (max-width: $tablet) {
+    margin-bottom: 0;
+  }
 }
 
 .FeaturedCollections__Heading {
@@ -1738,12 +1743,14 @@ h1, h2, h3, h4, h5, h6 {
 
   @media screen and (max-width: $tablet) {
     padding: 0 16px;
-    font-size: 40px;
+    font-size: 2rem;
   }
 }
 .FeaturedCollections__TabsWrapper {
   width: 100%;
+  overflow: hidden;
 }
+
 .FeaturedCollections__TabsHeader {
   display: flex;
   align-items: flex-start;
@@ -1792,7 +1799,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: $font-base;
   font-style: normal;
   font-weight: 600;
-  font-size: 20px;
+  font-size: 1.125rem;
   line-height: 24px;
   color: $color-dim-dark;
 
@@ -1851,6 +1858,7 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 20px;
   line-height: 26px;
   text-decoration: none;
+  white-space: nowrap;
 
   @media screen and (max-width: $tablet) {
     font-weight: 500;
@@ -1870,11 +1878,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .FeaturedCollections__ProductsWrapper {
   margin: 0 25px;
-  padding: 0 5px;
+  padding: 0 25px 0 5px;
   height: 100%;
   width: 100%;
   max-width: calc(100% - 30px);
-  overflow: hidden;
 
   @media screen and (max-width: $tablet) {
     margin: 0 8px;
@@ -1886,6 +1893,37 @@ h1, h2, h3, h4, h5, h6 {
     padding: 0 8px 25px;
   }
 }
+
+.FeaturedCollections__ScrollPrev,
+.FeaturedCollections__ScrollNext {
+  position: absolute;
+  top: 202px;
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+
+  @media screen and (max-width: $tablet) {
+    display: none;
+  }
+}
+
+.FeaturedCollections__ScrollPrev {
+  left: -45px;
+  transform: translate(50%, -50%);
+}
+
+.FeaturedCollections__ScrollNext {
+  right: -25px;
+  transform: translate(-50%, -50%);
+}
+
+.FeaturedCollections__ProductsTabs[aria-selected="false"] {
+  .FeaturedCollections__ScrollPrev,
+  .FeaturedCollections__ScrollNext {
+    display: none;
+  }
+}
+
 .FeaturedCollections__ProductsTabs {
   display: flex;
   overflow-x: auto;
@@ -1926,6 +1964,7 @@ h1, h2, h3, h4, h5, h6 {
 
   @media screen and (max-width: $tablet) {
     padding: 65px 0;
+    margin: 0 auto;
   }
 }
 .ImageWithText__Wrapper {
@@ -1970,8 +2009,8 @@ h1, h2, h3, h4, h5, h6 {
   font-family: $font-header;
   font-style: normal;
   font-weight: 500;
-  font-size: 72px;
-  line-height: 64px;
+  font-size: 3.75rem;
+  line-height: 3.75rem;
 
   @media screen and (max-width: $tablet) {
     margin-bottom: 16px;
@@ -1984,7 +2023,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: $font-base;
   font-style: normal;
   font-weight: normal;
-  font-size: 24px;
+  font-size: 1.25rem;
   line-height: 140%;
 
   @media screen and (max-width: $tablet) {
@@ -2049,8 +2088,8 @@ h1, h2, h3, h4, h5, h6 {
 
     @media screen and (max-width: $tablet) {
       font-weight: 500;
-      font-size: 80px;
-      line-height: 70px;
+      font-size: 3.5rem;
+      line-height: 3.5rem;
       padding: 0 16px;
     }
   }
@@ -2075,6 +2114,7 @@ h1, h2, h3, h4, h5, h6 {
 
       .ImageWithText__Description p {
         margin: 0;
+        font-size: 1.125rem;
       }
     }
   }
@@ -2175,7 +2215,6 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 .ProductInfoSlider__ProductTitle {
-  margin: 0;
   font-family: $font-base;
   font-size: 24px;
   line-height: 1.2em;
@@ -2189,7 +2228,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: $font-header;
   font-style: normal;
   font-weight: 500;
-  font-size: 42px;
+  font-size: 2.375rem;
   line-height: 1em;
 
   @media screen and (max-width: $tablet) {
@@ -2741,12 +2780,15 @@ h2.pdpCopy__header-price ,
   left: 75%;
 }
 
+.pdp__tagline::first-letter { text-transform: uppercase }
+
 .pdp__tagline {
-  margin-bottom: 16px;
   font-weight: bold;
   font-size: 16px;
   line-height: 120%;
-  text-transform: capitalize;
+  text-transform: lowercase;
+
+
 
   @media screen and (max-width: $tablet) {
     display: none;
@@ -3774,7 +3816,7 @@ h2.pdpCopy__header-price ,
 }
 
 .size__image-wrapper {
-  width: 100%;
+  width: 80px;
   height: 80px;
   padding: 8px;
   display: flex;
@@ -3784,9 +3826,11 @@ h2.pdpCopy__header-price ,
 }
 
 .size__image-wrapper-icon {
+  height: inherit;
   display: flex;
   justify-content: center;
   svg {
+    width: 100%;
     fill: #DBDBDB;
 
     path {
@@ -4386,6 +4430,14 @@ h2.pdpCopy__header-price ,
 .pdpCompare__tabsProducts-wrapper {
   padding: 0 14px 60px;
   background-color: $color-grey;
+
+  [data-tab] {
+    display: none;
+
+    &[aria-selected='true'] {
+      display: block;
+    }
+  }
 }
 
 .pdpCompare__tabsProductsImage {
@@ -4528,7 +4580,7 @@ h2.pdpCopy__header-price ,
 
 .pdpBundleInclude__heading {
   margin: 0 0 16px 0;
-  font-weight: normal;
+  font-weight: 500;
   font-size: 48px;
   line-height: 100%;
   text-align: center;
@@ -4561,8 +4613,9 @@ h2.pdpCopy__header-price ,
 
 .pdpBundleInclude__dropdown-title {
   font-weight: 500;
-  font-size: 42px;
+  font-size: 38px;
   line-height: 100%;
+  font-family:$font-header;
 
   @media screen and (max-width: $large_desk) {
     font-size: 20px;
@@ -4597,6 +4650,7 @@ h2.pdpCopy__header-price ,
   padding-top: 100%;
   border-radius: 12px;
   overflow: hidden;
+  background: #fff;
 
   @media screen and (max-width: $large_desk) {
     border-radius: 24px;
@@ -4736,6 +4790,11 @@ h2.pdpCopy__header-price ,
       line-height: 16px;
       text-decoration-line: underline;
     }
+  }
+
+  .size__image-wrapper {
+    width: 60px;
+    height: 60px;
   }
 }
 

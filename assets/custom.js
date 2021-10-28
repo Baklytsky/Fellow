@@ -110,6 +110,10 @@ theme.header = function () {
       $(this).siblings('.subMenuList').slideToggle();
       $(this).toggleClass('active')
     }
+    // mega hack pico sidestep on mobile
+    // if (window.innerWidth < 500 && this.hasAttribute('href')){
+    //   window.location.href = this.getAttribute('href');
+    // }
   })
 
   theme.countdownTimer = function () {
@@ -229,7 +233,7 @@ theme.addProduct = function () {
     dataType: 'json',
     success: function() {
       CartDrawer.emit("cart:updating");
-      UpdateCart();
+      UpdateCart('', '', true)
       theme.closeModal();
     },
     error: function (error) {
@@ -430,6 +434,7 @@ theme.pdpMain = function () {
   function pdpThumbnails() {
     thumbnailScrollOnClick()
     changeActiveThumbnail()
+    console.log('pdpThumbnails')
   }
 
   function pdpBar() {
@@ -655,7 +660,6 @@ theme.pdpMain = function () {
   }
 
   function pdpCompare() {
-    $(document).off('click.thumbnails')
     function changeTableHeight() {
       let trHeight = $(document).find('.pdpCompare__table thead').height() - 24;
       $('.pdpCompare__table-th').css('minHeight', trHeight)
@@ -681,7 +685,6 @@ theme.pdpMain = function () {
 }
 
 theme.pdpQuickView = function () {
-
   // Remove all $(document) Events
   // clicks:
   $(document).off('click.pdpQvSelectSize')
@@ -727,6 +730,59 @@ theme.pdpQuickView = function () {
       focusOnSelect: true,
       asNavFor: $gallerySlider,
     });
+  }
+
+  function bundle () {
+    var selectors = {
+      addBundle: '#pdp-bundle-atc',
+      cartButton: '.js-cart-drawer-toggle',
+      cartCount: '.js-cart-count',
+      cartDrawer: '#cart-drawer-content',
+      form: '[action="/cart/add"]'
+    };
+
+    $(document).on('click', selectors.addBundle, function (e) {
+      e.preventDefault();
+      var $availableVariants = $('[data-variant-available="true"]');
+      let products_data = [];
+
+      $availableVariants.each(function () {
+        products_data.push({
+          quantity: 1,
+          id: $(this).attr('id'),
+          properties: {
+            bundle: true
+          }
+        })
+      });
+
+      $.ajax({
+        type: 'post',
+        url: '/cart/add.js',
+        data: {items: products_data},
+        dataType: 'json',
+        success: function () {
+          updateCartDrawer()
+        },
+        error: function (XMLHttpRequest) {
+        }
+      })
+    })
+
+    function updateCartDrawer() {
+      fetch('/cart.js')
+        .then(response => response.json())
+        .then(function (cartObject) {
+          $(selectors.cartCount).html(cartObject.item_count)
+          CartDrawer.emit("cart:updated", {cart: cartObject})
+          CartDrawer.emit("cart:toggle", {cartOpen: !0})
+        });
+    }
+  }
+
+  const contentInner = $('#ProductQuickView').parents('[data-product-template]');
+  if (contentInner.length && contentInner.attr('data-product-template').includes('bundle')) {
+    bundle();
   }
 
   setTimeout(modalGallerySlider, 0);
@@ -832,6 +888,9 @@ theme.collection = function () {
           });
           $filterPriceMin.html($filterNewPriceMin)
           $filterFormInput.removeAttr('disabled')
+          if (typeof window.yotpo !== "undefined") {
+            window.yotpo.initWidgets();
+          }
           $('.productCard').each(function () {
             theme.updateSwatches($(this)[0])
           })
@@ -893,13 +952,14 @@ theme.cartDrawer = function () {
   $(document).off('click.addRecommendedProduct');
   $(document).off('click.updateCartInputQTY');
 
-  theme.openItemRemovePopup = function (cartItemRemoveBtn) {
+  theme.openItemRemovePopup = function (cartItemRemoveBtn, isGWP) {
     $(document).off('click.removeItemInCart');
 
     $('.js-cart-drawer-popup').attr('aria-hidden', 'false');
 
     $(document).on('click.removeItemInCart', '.js-remove-item-trigger', function (e) {
       e.preventDefault();
+      if (isGWP) {localStorage.setItem('removeGWP', isGWP);}
       cartItemRemoveBtn.trigger('click');
       theme.closeItemRemovePopup();
     });
@@ -911,9 +971,10 @@ theme.cartDrawer = function () {
 
   $(document).on('click.openItemRemovePopup', '[data-action="open-item-remove-popup"]', function (e) {
     e.preventDefault();
-    var cartItemRemoveBtn = $(this).parents('.cart-drawer__item').find('.js-remove-item');
+    var cartItemRemoveBtn = $(this).parents('.cart-drawer__item').find('.js-remove-item'),
+        isGWP = !!(($(this).attr('data-gift-product')));
     $(this).attr('aria-expanded', 'true');
-    theme.openItemRemovePopup(cartItemRemoveBtn);
+    theme.openItemRemovePopup(cartItemRemoveBtn, isGWP);
   });
 
   $(document).on('click.closeItemRemovePopup', '[data-action="close-item-remove-popup"]', function (e) {
@@ -946,7 +1007,7 @@ theme.cartDrawer = function () {
       dataType: 'json',
       success: function() {
         // CartDrawer.emit("cart:updating");
-        UpdateCart();
+        UpdateCart('', '', false)
       },
       error: function (error) {
         if (error.status == 422) {
@@ -977,8 +1038,49 @@ theme.cartDrawer = function () {
   });
 }
 
+theme.gwp = function (cart, url, id, quantity, openCart) {
+  $.ajax({
+    type: 'POST',
+    url: url,
+    data: {
+      id: id,
+      quantity: quantity,
+    },
+    dataType: 'json',
+    success: function () {
+      CartDrawer.emit("cart:updating");
+      UpdateCart('', '', openCart);
+    }
+  })
+}
+
+theme.checkGwp = function (cart) {
+  let hasGwp = false;
+  cart.items.forEach(function (element) {
+    if (element.product_type === 'Gift product') { hasGwp = true }
+  });
+  return hasGwp;
+}
+
+theme.checkGwpOnLoad = function (element) {
+  $.ajax({
+    type: 'POST',
+    url: '/cart/change.js',
+    data: {
+      id: element.id,
+      quantity: 0,
+    },
+    dataType: 'json',
+    success: function () {
+      UpdateCart('', '', false);
+    }
+  })
+}
+
 $(document).ready(function () {
   theme.header()
+
+  console.log('(document).ready')
 
   theme.GLOBAL()
 
@@ -1001,9 +1103,7 @@ theme.GLOBAL = function () {
   $(document).off('click.jsCounterRemove')
   $(document).off('click.radioGroup')
   //PDP
-  $(document).off('click.thumbnails')
   $(document).off('click.pdpDropdown')
-  $(document).off('click.thumbnails')
   $(document).off('click.pdpStickyAtc')
   $(document).off('click.pdpStickyOptions')
   $(document).off('click.pdpStickySize')
@@ -1031,6 +1131,16 @@ theme.GLOBAL = function () {
       theme.horizontalScroll($tabList, $elements, 50);
     }
   })
+
+  if ($('.FeaturedCollections__ProductsTabs').length) {
+    $('.FeaturedCollections__ScrollNext').on('click', function () {
+      $(this).parent().animate({scrollLeft: $(this).parent().width()}, 600);
+    })
+
+    $('.FeaturedCollections__ScrollPrev').on('click', function () {
+      $(this).parent().animate({scrollLeft: 0}, 300);
+    })
+  }
 
   $(document).on('click.closeModal', '#closeModal', function () {
     theme.closeModal();
@@ -1208,4 +1318,14 @@ theme.GLOBAL = function () {
   if ($('.cart-drawer').length) {
     theme.cartDrawer()
   }
+
+  // PICO app mega hack to bypass on mobile
+  // var links = document.getElementsByTagName('a');
+  // for(var i = 0; i < links.length; i++) {
+  //   links[i].addEventListener('click', (e) => {
+  //     if (window.innerWidth < 500 && e.currentTarget.hasAttribute('href')){
+  //       window.location.href = e.currentTarget.getAttribute('href');
+  //     }
+  //   });
+  // }
 }

@@ -1,21 +1,21 @@
-{% if product.metafields.custom_fields["video_url"] != blank %}
+{% if product.metafields.custom_fields["video_url_new"] != blank %}
   {% assign video_title_array = product.metafields.custom_fields["video_title"] %}
-  {% assign video_url = product.metafields.custom_fields["video_url"] %}
-  {% assign video_poster = product.metafields.custom_fields["video_poster"] %}
-  {% assign video_btn_color = product.metafields.custom_fields["video_btn_color"] | downcase %}
-  {% assign video_copy = product.metafields.custom_fields["video_copy"] %}
+  {% assign video_url = product.metafields.custom_fields["video_url_new"] %}
+  {% assign video_poster = product.metafields.custom_fields["video_poster_image_new"] %}
+  {% assign video_btn_color = product.metafields.custom_fields["video_button_color_new"] | downcase %}
+  {% assign video_copy = product.metafields.custom_fields["video_copy_new"] %}
   {% if video_poster %}
     {% include 'cf-image' with image: video_poster, print: "none", size: "1920x1080", format: "pjpg" %}
   {% endif %}
 
-  {% assign flex_order = product.metafields.custom_fields["video_order"] | downcase %}
+  {% assign flex_order = product.metafields.custom_fields["video_order_new"] | downcase %}
   {% if flex_order %}
     {% unless flex_order == 'default' %}
       {% assign display_order = flex_order %}
     {% endunless %}
   {% endif %}
 
-  {% if product.metafields.custom_fields["video_and_copy_position"] == 1 %}
+  {% if product.metafields.custom_fields["video_and_copy_position_new"] == 1 %}
     {%- assign video_in_line = true -%}
   {% else %}
     {%- assign video_in_line = false -%}
