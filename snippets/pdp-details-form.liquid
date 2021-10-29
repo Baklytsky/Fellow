@@ -76,14 +76,22 @@ Uncomment to include
       <button class='button cart__button klaviyo-bis-trigger'>Out of Stock | Notify Me</button>
     </div>
 
-    {% if product.metafields.custom_fields["enable_customize_button"] == 1 and product.metafields.custom_fields["customize_button_url"] != blank %}
-      {%
-        include 'component-button' with
-        tag: 'a',
-        href: product.metafields.custom_fields["customize_button_url"],
-        className: 'customize-btn',
-        cta: 'Customize your mug',
-      %}
+    {%- comment -%}
+      {% if product.metafields.custom_fields["enable_customize_button"] == 1 and product.metafields.custom_fields["customize_button_url"] != blank %}
+        {%
+          include 'component-button' with
+          tag: 'a',
+          href: product.metafields.custom_fields["customize_button_url"],
+          className: 'customize-btn',
+          cta: 'Customize your mug',
+        %}
+      {% endif %}
+    {%- endcomment -%}
+
+    {% if product.tags contains 'customizer' %}
+      <div class="f is-inline">
+        {% include 'component-customize' %}
+      </div>
     {% endif %}
   </div>
 </div>
