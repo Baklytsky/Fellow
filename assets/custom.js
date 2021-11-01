@@ -434,7 +434,6 @@ theme.pdpMain = function () {
   function pdpThumbnails() {
     thumbnailScrollOnClick()
     changeActiveThumbnail()
-    console.log('pdpThumbnails')
   }
 
   function pdpBar() {
@@ -1079,8 +1078,6 @@ theme.checkGwpOnLoad = function (element) {
 
 $(document).ready(function () {
   theme.header()
-
-  console.log('(document).ready')
 
   theme.GLOBAL()
 
