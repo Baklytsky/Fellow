@@ -5,7 +5,7 @@
 <section class='full pdpMain__container' data-component='pdpMain'>
   <div class='pdpMain row no-gutters'>
     {% if product.tags contains 'customizer' %}
-      <div class='pdpMain row no-gutters product-main-section animate__animated animate__fadeInLeft animate__delay-800ms'>
+      <div class='pdpMain row no-gutters product-main-section'>
       {% else %}
       <div class='pdpMain row no-gutters product-main-section'>
     {% endif %}
@@ -19,7 +19,7 @@
       {% include 'pdp-details' %}
     </div>
   </div>
-  <div class="pdpMain row no-gutters player-app-container animate__animated animate__fadeInLeft animate__delay-800ms">
+  <div class="pdpMain row no-gutters player-app-container">
     <div class='col-lg-12 back-button-container'>
       <span class='back-button' onclick="hidePlayer()"><strong><i class="fas fa-arrow-alt-circle-left icon"></i></strong></span>
     </div>

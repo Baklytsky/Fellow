@@ -113,7 +113,7 @@
       {{ 'player-chunk.css' | asset_url | stylesheet_tag }}
     {% endif %}
     {{ 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css' | stylesheet_tag }}
-    {{ 'https://preview.threekit.com/app/js/threekit-player-bundle.js' | script_tag }}
+    {{ 'https://admin-fts.threekit.com/app/js/threekit-player-bundle.js' | script_tag }}
 
     {{ content_for_header }}
   </head>
@@ -148,8 +148,8 @@
     <script src="{{ 'index.js' | asset_url }}" defer='defer'></script>
     {% comment %} <script src="https://a.klaviyo.com/media/js/onsite/onsite.js"></script> {% endcomment %}
     <script src="https://cdn.attn.tv/fellow/dtag.js"></script>
-  {% include 'social-head-common' %}
-  </body>
+  
+  {% include 'social-head-common' %}</body>
   <script>
 jQuery('a[href^="http"]').not('a[href^="{{ shop.url }}"]').attr('target', '_blank');
 </script>
