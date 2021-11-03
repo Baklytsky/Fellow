@@ -22682,6 +22682,7 @@ input[name=product_search_field] {
 }
 
 .pdpMain {
+  width: 100%;
   position: relative;
   display: flex;
   flex-direction: column;
