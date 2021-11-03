@@ -133,6 +133,16 @@
     ]
   },
   {
+    "name": "Personalization product",
+    "settings": [
+      {
+        "type": "product",
+        "id": "personalization_product",
+        "label": "Personalization product"
+      }
+    ]
+  },
+  {
     "name": "Favicon",
     "settings": [
       {

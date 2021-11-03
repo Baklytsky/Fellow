@@ -1037,7 +1037,7 @@ theme.cartDrawer = function () {
   });
 }
 
-theme.gwp = function (cart, url, id, quantity, openCart) {
+theme.addCustomProduct = function (cart, url, id, quantity, openCart) {
   $.ajax({
     type: 'POST',
     url: url,

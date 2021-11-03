@@ -46,6 +46,10 @@
           gwpProductId: "{{ all_products[settings.gwp_product].selected_or_first_available_variant.id }}",
           gwpProductType: "{{ all_products[settings.gwp_product].type }}"
         },
+        personalization: {
+          perProductAvailable: "{{ all_products[settings.personalization_product].available }}",
+          perProductID: "{{ all_products[settings.personalization_product].selected_or_first_available_variant.id  }}"
+        },
         moneyFormat: "{{ shop.money_format }}"
       }
     </script>
