@@ -1017,6 +1017,20 @@ theme.cartDrawer = function () {
     })
   });
 
+  theme.updateGiftWrappingProduct = function () {
+    var $sectionWrapper = $('.cart-drawer__footer-gift-wrapping');
+    if ($sectionWrapper.length) {
+      $.ajax({
+        type: 'GET',
+        url: '/?section_id=cart-gift-wrapping',
+        success: function(content) {
+          $sectionWrapper.html(content);
+          console.log('refresh')
+        }
+      })
+    }
+  }
+
   theme.updateCartRecommendedProducts = function () {
     var $sectionWrapper = $('.cart-drawer__footer-recommended-wrapper');
     if ($sectionWrapper.length) {

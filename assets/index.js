@@ -10348,6 +10348,7 @@
   function J(t, e, openCart) {
     var n = arguments.length > 3 && void 0 !== arguments[3] ? arguments[3] : null;
 
+    theme.updateGiftWrappingProduct();
     theme.updateCartRecommendedProducts();
     return Dr.emit("cart:updating"), n ? H("/cart/add.js", {
       method: "POST",

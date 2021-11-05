@@ -112,6 +112,36 @@
       },
       {
         "type": "header",
+        "content": "Gift wrapping"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_gift_wrapping",
+        "label": "Enable gift wrapping",
+        "default": true
+      },
+      {
+        "type": "product",
+        "id": "gift_box_product",
+        "label": "Gift box product"
+      },
+      {
+        "type": "textarea",
+        "id": "gift_wrapping_icon",
+        "label": "Icon"
+      },
+      {
+        "type": "text",
+        "id": "gift_wrapping_heading",
+        "label": "Heading"
+      },
+      {
+        "type": "text",
+        "id": "gift_wrapping_result_heading",
+        "label": "Result heading"
+      },
+      {
+        "type": "header",
         "content": "Cart GWP"
       },
       {
