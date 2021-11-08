@@ -1,7 +1,17 @@
 {%- assign gift_wrapping_product = all_products[settings.gift_box_product] -%}
 {%- assign gift_wrapping__icon = settings.gift_wrapping_icon -%}
+{%- assign gift_wrapping_message = settings.gift_wrapping_message -%}
+{%- assign gift_wrapping_result_message = settings.gift_wrapping_result_message | default: 'Your order will be sent in a gift box' -%}
 {%- assign gift_wrapping_heading = settings.gift_wrapping_heading -%}
-{%- assign gift_wrapping_result_heading = settings.gift_wrapping_result_heading | default: 'Your order will be sent in a gift box' -%}
+
+{%- assign gift_box_in_cart = false -%}
+
+{%- for item in cart.items -%}
+  {%- if item.product.type == 'Gift box' -%}
+    {%- assign gift_box_in_cart = true -%}
+    {%- break -%}
+  {%- endif -%}
+{%- endfor -%}
 
  {%- if gift_wrapping_product.available -%}
    <section class="cart-gift-wrapping" id="{{ section.id }}">
@@ -11,56 +21,77 @@
            {{ gift_wrapping__icon }}
          </div>
        {%- endif -%}
-       {%- if cart.attributes["Gift Note"]  -%}
-         <span>{{ gift_wrapping_result_heading }}</span>
+       {%- if gift_box_in_cart -%}
+         <span>{{ gift_wrapping_result_message }}</span>
        {%- else -%}
-         {%- if gift_wrapping_heading != blank -%}
-           <span>{{ gift_wrapping_heading }}</span>
+         {%- if gift_wrapping_message != blank -%}
+           <span>{{ gift_wrapping_message }}</span>
          {%- endif -%}
          <button type="button" class="cart-gift-wrapping-btn" data-open-gift-note aria-hidden="false" hidden>Add gift wrapping</button>
        {%- endif -%}
      </div>
    </section>
    <div class="cart-gift-wrapping-modal" aria-expanded='false'>
-     <header class='cart-drawer__header f fdc x z2'>
-       <div class="cart-drawer__header-content f aic jcc">
-         {%- render 'icon' with 'cart' -%}
-         <span class='js-cart-count cart-drawer__count'>{{ cart.item_count }}</span>
-
-         <button aria-label="Cart Close" type="button" id="closeCart" class='cart-drawer__close button--reset js-close'>
-           {%- render 'icon', icon: 'arrow-next' -%}
-         </button>
-       </div>
-     </header>
      <div class="cart-gift-wrapping-modal__content">
-       <div class="cart-drawer__item">
-         <div class="cart-drawer__itemImage">
-           <img src="{{ gift_wrapping_product.featured_image | img_url: '200x' }}">
+       {%- if gift_wrapping_heading != blank -%}
+         <div class="cart-gift-wrapping-modal__content-header rel">
+           {{ gift_wrapping_heading }}
+           <button type="button" data-close-gift-note>
+             {%- render 'icon', icon: 'x' -%}
+           </button>
          </div>
-
-         <div class="cart-drawer__itemContent f fdc">
-           <div class="cart-drawer__itemDetails">
-             <div class="cart-drawer__itemTitle">
-               {{ gift_wrapping_product.title }}
-             </div>
-             <div class="cart-drawer__itemOptions">{{ gift_wrapping_product.description }}</div>
+       {%- endif -%}
+       {%- unless gift_box_in_cart -%}
+         <div class="cart-drawer__item">
+           <div class="cart-drawer__itemImage">
+             <img src="{{ gift_wrapping_product.featured_image | img_url: '200x' }}">
            </div>
-           <div class="cart-item__price">{{ gift_wrapping_product.price | money_without_trailing_zeros }}</div>
+
+           <div class="cart-drawer__itemContent f">
+             <div class="cart-drawer__itemDetails">
+               <div class="cart-drawer__itemTitle">
+                 {{ gift_wrapping_product.title }}
+               </div>
+               <div class="cart-drawer__itemOptions" style="max-width: 220px">
+                 {%- if cart.attributes["Gift note"] -%}
+                   "{{- cart.attributes["Gift note"] -}}"
+                 {%- else -%}
+                   {{ gift_wrapping_product.description }}
+                 {%- endif -%}
+               </div>
+             </div>
+             <div class="cart-item__price">{{ gift_wrapping_product.price | money_without_trailing_zeros }}</div>
+           </div>
          </div>
+       {%- endunless -%}
+       <div class="cart-gift-wrapping-modal__note" {% if gift_box_in_cart %} style="padding: 40px 16px 16px" {% endif %}>
+         <label for="cart-note">
+           {%- if gift_box_in_cart and cart.attributes["Gift note"] -%}
+             Edit Your Note (Optional)
+           {%- else -%}
+             Add a Note (Optional)
+           {%- endif -%}
+         </label>
+         <textarea id="cart-note"
+                   name="attributes[Gift note]"
+                   maxlength="500"
+                   rows="5"
+                   placeholder="Write a note">
+         {{- cart.attributes["Gift note"] -}}
+         </textarea>
+         {%- assign gift_note_length = cart.attributes["Gift note"] | size -%}
+         <div class="note-length">{{- 500 | minus: gift_note_length }} Characters Remaining</div>
        </div>
-       <label for="cart-note">Add a Note (Optional)</label>
-       <textarea id="cart-note"
-                 class=""
-                 name="attributes[Gift message]"
-                 maxlength="{{ cart_notes_symbols }}"
-                 rows="5"
-                 placeholder="Write a note">
-       {{ cart.attributes["Gift Note"] }}
-     </textarea>
      </div>
      <footer class="cart-gift-wrapping-modal__footer f jcb aic">
-       <button type="button" class="btn--dark">Cancel</button>
-       <button type="button" class="btn--light">Add To Order</button>
+       <button type="button" class="btn--dark" data-close-gift-note>Cancel</button>
+       <button type="button" class="btn--light" data-add-gift-note>
+         {%- if gift_box_in_cart -%}
+           Save
+         {%- else -%}
+           Add To Order
+         {%- endif -%}
+       </button>
      </footer>
    </div>
  {%- endif -%}

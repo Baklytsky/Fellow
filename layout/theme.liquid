@@ -50,6 +50,11 @@
           perProductAvailable: "{{ all_products[settings.personalization_product].available }}",
           perProductID: "{{ all_products[settings.personalization_product].selected_or_first_available_variant.id  }}"
         },
+        giftWrapping: {
+          giftWrappingEnable: "{{ settings.enable_gift_wrapping }}",
+          giftWrappingAvailable: "{{ all_products[settings.gift_box_product].available }}",
+          giftWrappingProductID: "{{ all_products[settings.gift_box_product].selected_or_first_available_variant.id  }}"
+        },
         moneyFormat: "{{ shop.money_format }}"
       }
     </script>

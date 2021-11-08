@@ -132,13 +132,18 @@
       },
       {
         "type": "text",
-        "id": "gift_wrapping_heading",
-        "label": "Heading"
+        "id": "gift_wrapping_message",
+        "label": "Gift wrapping message"
       },
       {
         "type": "text",
-        "id": "gift_wrapping_result_heading",
-        "label": "Result heading"
+        "id": "gift_wrapping_result_message",
+        "label": "Gift wrapping result message"
+      },
+      {
+        "type": "text",
+        "id": "gift_wrapping_heading",
+        "label": "Heading"
       },
       {
         "type": "header",
