@@ -10002,9 +10002,9 @@
                           .concat(r, " data-id=")
                           .concat(i, " >\n      <div data-per-product='")
                           .concat('Personalization product', "' class=\"cart-drawer__itemImage\">\n        <img src='")
-                          .concat(h, "' />\n      </div>\n\n      <div class='cart-drawer__itemContent f fdc'>\n        <div class='cart-drawer__itemDetails'>\n          <p data-per-product='")
+                          .concat(h, "' />\n      </div>\n\n      <div class='cart-drawer__itemContent f fdc'>\n        <div class='cart-drawer__itemDetails'>\n          <span data-per-product='")
                           .concat('Personalization product', "' class='cart-drawer__itemTitle'>")
-                          .concat(o, "</p>\n          <div class='cart-drawer__itemOptions'>")
+                          .concat(o, "</span>\n          <div class='cart-drawer__itemOptions'>")
                           .concat(f, "</div>\n        </div>\n\n        <div class='f aic jce pt05'>\n          <div style='display: none' class='cart-item__stepper aic f ")
                           .concat(0 === a ? "is-disabled" : "", "'>\n            <div class='cart-stepper js-remove-single' data-key='" + n.key + "'>-</div>\n            <input type='text' class='cart-quantity js-single-quantity' value='")
                           .concat(l, "'>\n            <div class='cart-stepper js-add-single' data-key='" + n.key + "'>+</div>\n          </div>\n\n          <div class='cart-item__price'>")
@@ -10042,9 +10042,9 @@
                           .concat(r, " data-id=")
                           .concat(i, " >\n      <div data-free-product='")
                           .concat('Free gift', "' class=\"cart-drawer__itemImage\">\n        <img src='")
-                          .concat(h, "' />\n      </div>\n\n      <div class='cart-drawer__itemContent f fdc'>\n        <div class='cart-drawer__itemDetails'>\n          <p data-free-product='")
+                          .concat(h, "' />\n      </div>\n\n      <div class='cart-drawer__itemContent f fdc'>\n        <div class='cart-drawer__itemDetails'>\n          <span data-free-product='")
                           .concat('Free gift', "' class='cart-drawer__itemTitle'>")
-                          .concat(o, "</p>\n          <div class='cart-drawer__itemOptions'>")
+                          .concat(o, "</span>\n          <div class='cart-drawer__itemOptions'>")
                           .concat(f, "</div>\n        </div>\n\n        <div class='f aic jce pt05'>\n          <div style='display: none' class='cart-item__stepper aic f ")
                           .concat(0 === a ? "is-disabled" : "", "'>\n            <div class='cart-stepper js-remove-single' data-key='" + n.key + "'>-</div>\n            <input type='text' class='cart-quantity js-single-quantity' value='")
                           .concat(l, "'>\n            <div class='cart-stepper js-add-single' data-key='" + n.key + "'>+</div>\n          </div>\n\n          <div class='cart-item__price'>")
@@ -10092,9 +10092,9 @@
                           .concat(r, " data-id=")
                           .concat(i, " >\n      <div data-gift-box-product='")
                           .concat('Gift box', "' class=\"cart-drawer__itemImage\">\n        <img src='")
-                          .concat(h, "' />\n      </div>\n\n      <div class='cart-drawer__itemContent f fdc'>\n        <div class='cart-drawer__itemDetails'>\n          <p data-gift-box-product='")
+                          .concat(h, "' />\n      </div>\n\n      <div class='cart-drawer__itemContent f fdc'>\n        <div class='cart-drawer__itemDetails'>\n          <span data-gift-box-product='")
                           .concat('Gift box', "' class='cart-drawer__itemTitle'>")
-                          .concat(o, "</p>\n          <div class='cart-drawer__itemOptions f fdc ais'>")
+                          .concat(o, "</span>\n          <div class='cart-drawer__itemOptions f fdc ais'>")
                           .concat(giftBoxDescriptionBlock, "</div>\n        </div>\n\n        <div class='f aic jce pt05'>\n          <div style='display:none;' class='cart-item__stepper test aic f ")
                           .concat(0 === a ? "is-disabled" : "", "'>\n            <div class='cart-stepper js-remove-single' data-key='" + n.key + "'>-</div>\n            <input type='text' class='cart-quantity js-single-quantity' value='")
                           .concat(l, "'>\n            <div class='cart-stepper js-add-single' data-key='" + n.key + "'>+</div>\n          </div>\n\n          <div class='cart-item__price'>")
@@ -10321,7 +10321,9 @@
           window.giftNote = (t.cart.attributes['Gift note']) ? t.cart.attributes['Gift note'] : false
           t.state;
           var n = t.cart;
-          theme.updateGiftWrappingProduct()
+          if (window.theme.giftWrapping.giftWrappingEnable && window.theme.giftWrapping.giftWrappingAvailable) {
+            theme.updateGiftWrappingProduct()
+          }
           if (window.theme.gwpSettings.gwpEnable === 'true' && window.theme.gwpSettings.gwpThreshold > 0 && window.theme.gwpSettings.gwpProductAvailable === 'true' && window.theme.gwpSettings.gwpProductType === 'Gift product' && !localStorage.getItem('removeGWP')) {
             if (m(e.getState().cart), b(Dr.getState()), n.total_price < (window.theme.gwpSettings.gwpThreshold * 100)) {
               v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");

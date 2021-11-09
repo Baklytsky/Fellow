@@ -952,6 +952,8 @@ theme.cartDrawer = function () {
   $(document).off('click.updateCartInputQTY');
   $(document).off('click.openGWModal');
   $(document).off('click.closeGWModal');
+  $(document).off('click.addGWNote');
+  $(document).off('input.noteLength');
 
   theme.openItemRemovePopup = function (cartItemRemoveBtn, isGWP) {
     $(document).off('click.removeItemInCart');
@@ -1079,7 +1081,7 @@ theme.cartDrawer = function () {
     let target = e.currentTarget,
         maxLength = target.getAttribute("maxlength"),
         currentLength = target.value.length;
-    $(this).parent().find('.note-length').text(`${maxLength - currentLength} Characters Remaining`)
+    $(this).parents('.cart-gift-wrapping-modal__note').find('.note-length').text(`${maxLength - currentLength} Characters Remaining`)
   })
 
   theme.updateCartRecommendedProducts = function () {

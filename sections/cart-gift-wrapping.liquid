@@ -22,7 +22,7 @@
          </div>
        {%- endif -%}
        {%- if gift_box_in_cart -%}
-         <span>{{ gift_wrapping_result_message }}</span>
+         <span class="wrapping-result-message">{{ gift_wrapping_result_message }}</span>
        {%- else -%}
          {%- if gift_wrapping_message != blank -%}
            <span>{{ gift_wrapping_message }}</span>
@@ -72,13 +72,15 @@
              Add a Note (Optional)
            {%- endif -%}
          </label>
-         <textarea id="cart-note"
-                   name="attributes[Gift note]"
-                   maxlength="500"
-                   rows="5"
-                   placeholder="Write a note">
+         <div class="cart-note-wrapper rel">
+                    <textarea id="cart-note"
+                              name="attributes[Gift note]"
+                              maxlength="500"
+                              rows="5"
+                              placeholder="Write a note">
          {{- cart.attributes["Gift note"] -}}
          </textarea>
+         </div>
          {%- assign gift_note_length = cart.attributes["Gift note"] | size -%}
          <div class="note-length">{{- 500 | minus: gift_note_length }} Characters Remaining</div>
        </div>
