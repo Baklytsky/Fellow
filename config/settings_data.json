@@ -5,13 +5,13 @@
     "social_twitter_link": "",
     "social_youtube_link": "#",
     "social_pinterest_link": "",
-    "free_shipping_met_msg": "Congrats! You get free US Shipping!",
     "cart_recommended_heading": "Complete Your Coffee Corner",
     "cart_recommended_icon": "<svg width=\"50\" height=\"52\" viewbox=\"0 0 50 52\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M37.8418 40.702C41.4521 35.3625 42.5595 22.5001 31.0001 15.5C17.5 7.32466 4.5 19.4999 4.5 19.4999\" stroke=\"black\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><\/path>\n<path d=\"M43.8696 39.0845L37.3033 42.5193L33.8924 35.9229\" stroke=\"black\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><\/path>\n<\/svg>",
     "cart_recommended_collection": "bestsellers",
     "cart_empty_image": "shopify:\/\/shop_images\/Frame_1752.png",
     "cart_empty_cta": "shopify:\/\/collections\/best-sellers",
     "cart_empty_cta_text": "Shop Bestsellers",
+    "personalization_product": "personalization-fee",
     "favicon": "shopify:\/\/shop_images\/favicon.png",
     "checkout_header_image": "",
     "checkout_logo_image": "shopify:\/\/shop_images\/Fellow-Logo_Final_533C_f1b411d7-b158-474e-9c03-7ecc416399bb.jpg",
@@ -27,6 +27,7 @@
     "checkout_accent_color": "#197bbd",
     "checkout_button_color": "#197bbd",
     "checkout_error_color": "#e32c2b",
+    "free_shipping_met_msg": "Congrats! You get free US Shipping!",
     "cart_upsell_flavor_text": "Complete Your Coffee Corner",
     "cart_notes_enable": true,
     "enable_cart_banner": true,
@@ -178,9 +179,9 @@
           "logo_svg": "<svg xmlns=\"http:\/\/www.w3.org\/2000\/svg\" width=\"126\" height=\"26\" viewbox=\"0 0 126 26\" fill=\"none\">\n<g clip-path=\"url(#clip0_612:2863)\">\n<path d=\"M92.6035 20.7278L87.7853 22.5287L82.9671 20.7278C82.4758 20.5372 81.9443 20.8984 81.9443 21.4301V25.2476C81.9443 25.7793 82.4758 26.1405 82.9722 25.9499L87.7853 24.144L92.5985 25.9499C93.0899 26.1405 93.6263 25.7793 93.6263 25.2476V21.4301C93.6263 20.8984 93.0949 20.5372 92.6035 20.7278Z\" fill=\"black\"><\/path>\n<path d=\"M12.785 2.70892V1.25417C12.785 0.837808 12.4491 0.501709 12.0329 0.501709H0.752059C0.33592 0.501709 0 0.837808 0 1.25417V17.8083C0 18.2246 0.33592 18.5607 0.752059 18.5607H2.25618C2.67232 18.5607 3.00824 18.2246 3.00824 17.8083V10.7101H8.42306C8.8392 10.7101 9.17512 10.374 9.17512 9.95762V8.50287C9.17512 8.08651 8.8392 7.75041 8.42306 7.75041H3.00824V3.46138H12.0329C12.4491 3.46138 12.785 3.12529 12.785 2.70892Z\" fill=\"black\"><\/path>\n<path d=\"M32.89 2.70892V1.25417C32.89 0.837808 32.5541 0.501709 32.1379 0.501709H20.857C20.4409 0.501709 20.105 0.837808 20.105 1.25417V17.8083C20.105 18.2246 20.4409 18.5607 20.857 18.5607H32.1379C32.5541 18.5607 32.89 18.2246 32.89 17.8083V16.3535C32.89 15.9372 32.5541 15.6011 32.1379 15.6011H23.1132V10.7101H28.528C28.9442 10.7101 29.2801 10.374 29.2801 9.95762V8.50287C29.2801 8.08651 28.9442 7.75041 28.528 7.75041H23.1132V3.46138H32.1379C32.5541 3.46138 32.89 3.12529 32.89 2.70892Z\" fill=\"black\"><\/path>\n<path d=\"M44.4467 15.6011V1.25417C44.4467 0.837808 44.1108 0.501709 43.6947 0.501709H42.1905C41.7744 0.501709 41.4385 0.837808 41.4385 1.25417V17.8083C41.4385 18.2246 41.7744 18.5607 42.1905 18.5607H53.2207C53.6369 18.5607 53.9728 18.2246 53.9728 17.8083V16.3535C53.9728 15.9372 53.6369 15.6011 53.2207 15.6011H44.4467Z\" fill=\"black\"><\/path>\n<path d=\"M87.7402 0C82.4808 0 78.2141 4.26896 78.2141 9.53116C78.2141 14.7934 82.4808 19.0623 87.7402 19.0623C92.9996 19.0623 97.2663 14.7934 97.2663 9.53116C97.2663 4.26896 92.9996 0 87.7402 0ZM87.7402 16.203C84.0802 16.203 81.1722 13.3386 81.1722 9.53116C81.1722 5.72371 84.0802 2.85935 87.7402 2.85935C91.4002 2.85935 94.3082 5.72371 94.3082 9.53116C94.3082 13.3386 91.4002 16.203 87.7402 16.203Z\" fill=\"black\"><\/path>\n<path d=\"M64.1056 15.6011V1.25417C64.1056 0.837808 63.7697 0.501709 63.3536 0.501709H61.8495C61.4333 0.501709 61.0974 0.837808 61.0974 1.25417V17.8083C61.0974 18.2246 61.4333 18.5607 61.8495 18.5607H72.8797C73.2958 18.5607 73.6317 18.2246 73.6317 17.8083V16.3535C73.6317 15.9372 73.2958 15.6011 72.8797 15.6011H64.1056Z\" fill=\"black\"><\/path>\n<path d=\"M125.248 0.501709H123.638C123.297 0.501709 123.002 0.727447 122.911 1.05351L119.246 14.4523L115.581 1.05351C115.491 0.727447 115.195 0.501709 114.854 0.501709H112.658C112.317 0.501709 112.022 0.727447 111.931 1.05351L108.261 14.4623L104.591 1.05351C104.501 0.727447 104.205 0.501709 103.864 0.501709H102.16C101.653 0.501709 101.292 0.9883 101.443 1.47489L106.501 18.029C106.597 18.345 106.893 18.5607 107.223 18.5607L109.189 18.5557C109.525 18.5557 109.821 18.33 109.911 18.0039L113.706 4.14362L117.502 18.0089C117.592 18.335 117.888 18.5658 118.229 18.5607L120.189 18.5557C120.52 18.5557 120.811 18.34 120.906 18.024L125.97 1.47489C126.115 0.993316 125.754 0.501709 125.248 0.501709Z\" fill=\"black\"><\/path>\n<\/g>\n<defs>\n<clippath id=\"clip0_612:2863\">\n<rect width=\"126\" height=\"26\" fill=\"white\"><\/rect>\n<\/clippath>\n<\/defs>\n<\/svg>",
           "logo_desktop_size": 125,
           "logo_mobile_size": 120,
-          "center_menu": "new-main-menu",
-          "menu_left": "new-left-menu-1",
-          "menu_right": "new-right-menu",
+          "center_menu": "main-menu-1",
+          "menu_left": "left-menu",
+          "menu_right": "right-menu",
           "show_search": false,
           "show_announcement": true,
           "announcement_text": "Get your holiday gifting done early and save with our all-inclusive brewing sets.",
@@ -192,8 +193,8 @@
       "footer": {
         "type": "footer",
         "settings": {
-          "footer_menu": "new-footer-nav",
-          "footer_menu_bottom": "new-bottom-menu",
+          "footer_menu": "footer",
+          "footer_menu_bottom": "footer-bottom-menu",
           "show_footer_payment_icon": false,
           "show_icons": true,
           "instagram": true,
@@ -272,34 +273,14 @@
             "type": "collection",
             "settings": {
               "tab_text": "",
-              "collection": "bestsellers",
-              "button_text": "",
-              "button_url": ""
-            }
-          },
-          "0bc35052-fa24-4ee9-8955-ae08bee2e924": {
-            "type": "collection",
-            "settings": {
-              "tab_text": "",
-              "collection": "coffee-products-kits-bundles",
-              "button_text": "",
-              "button_url": ""
-            }
-          },
-          "a739270d-13fd-4aaf-9bd0-c54e753ab0a7": {
-            "type": "collection",
-            "settings": {
-              "tab_text": "",
-              "collection": "gifts-under-50",
+              "collection": "coffee",
               "button_text": "",
               "button_url": ""
             }
           }
         },
         "block_order": [
-          "1c8f9541-a475-428c-9638-4b46c17cf01e",
-          "0bc35052-fa24-4ee9-8955-ae08bee2e924",
-          "a739270d-13fd-4aaf-9bd0-c54e753ab0a7"
+          "1c8f9541-a475-428c-9638-4b46c17cf01e"
         ],
         "settings": {
           "enable_section": true,

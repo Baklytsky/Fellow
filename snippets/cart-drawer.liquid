@@ -70,6 +70,12 @@
       related schema available in assets/cart-free-product-schema.js
       {% endcomment %}
 
+      {%- if settings.enable_gift_wrapping and settings.gift_box_product -%}
+        <div class="cart-drawer__footer-gift-wrapping">
+          {% section 'cart-gift-wrapping' %}
+        </div>
+      {%- endif -%}
+
       {%- if settings.cart_recommended_enable -%}
         <div class="cart-drawer__footer-recommended-wrapper">
           {% section 'cart-recommended' %}

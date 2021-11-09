@@ -17598,8 +17598,8 @@ body.is-masthead--empty main {
 }
 
 .cart-drawer__header-content .icon--cart {
-  width: 32px;
-  height: 42px;
+  width: 24px;
+  height: 32px;
 }
 
 .cart-drawer__header-content .cart-drawer__count {
@@ -17615,7 +17615,7 @@ body.is-masthead--empty main {
 }
 
 .cart-drawer__header {
-  padding: 28px 20px;
+  padding: 16px 26px;
 }
 
 @media screen and (max-width: 992px) {
@@ -17640,7 +17640,7 @@ body.is-masthead--empty main {
 .cart-drawer__header-text {
   font-size: 14px;
   line-height: 120%;
-  margin: 10px 0 0;
+  margin: 16px 0 0;
 }
 
 .cart-drawer .outer {
@@ -17891,7 +17891,7 @@ body.is-masthead--empty main {
 
 .free-shipping--unmet,
 .free-shipping--met {
-  margin: 10px 0 15px;
+  margin: 16px 0;
   text-align: center;
 }
 
@@ -22682,6 +22682,7 @@ input[name=product_search_field] {
 }
 
 .pdpMain {
+  width: 100%;
   position: relative;
   display: flex;
   flex-direction: column;

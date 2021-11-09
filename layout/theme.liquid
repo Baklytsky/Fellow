@@ -2,7 +2,7 @@
 <html lang='{{ shop.locale }}'>
   <head>
     <meta charset='utf-8'>
-    <meta name='viewport' content='width=device-width,initial-scale=1,shrink-to-fit=no'>
+    <meta name='viewport' content='width=device-width,initial-scale=1,maximum-scale=1,shrink-to-fit=no'>
     <link rel='canonical' href='{{ canonical_url }}'>
     <link rel='shortcut icon' href='{{ settings.favicon | img_url: "32x32" }}' type='image/png'>
 
@@ -45,6 +45,15 @@
           gwpProductAvailable : "{{ all_products[settings.gwp_product].available }}",
           gwpProductId: "{{ all_products[settings.gwp_product].selected_or_first_available_variant.id }}",
           gwpProductType: "{{ all_products[settings.gwp_product].type }}"
+        },
+        personalization: {
+          perProductAvailable: "{{ all_products[settings.personalization_product].available }}",
+          perProductID: "{{ all_products[settings.personalization_product].selected_or_first_available_variant.id  }}"
+        },
+        giftWrapping: {
+          giftWrappingEnable: "{{ settings.enable_gift_wrapping }}",
+          giftWrappingAvailable: "{{ all_products[settings.gift_box_product].available }}",
+          giftWrappingProductID: "{{ all_products[settings.gift_box_product].selected_or_first_available_variant.id  }}"
         },
         moneyFormat: "{{ shop.money_format }}"
       }
@@ -107,6 +116,14 @@
     {{ 'index.css' | asset_url | stylesheet_tag }}
     {{ 'custom.scss.css' | asset_url | stylesheet_tag }}
 
+    {{ 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css' | stylesheet_tag }}
+    {{ 'player_customized.css' | asset_url | stylesheet_tag }}
+    {% if template == 'product'%}
+      {{ 'player-chunk.css' | asset_url | stylesheet_tag }}
+    {% endif %}
+    {{ 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css' | stylesheet_tag }}
+    {{ 'https://admin-fts.threekit.com/app/js/threekit-player-bundle.js' | script_tag }}
+
     {{ content_for_header }}
   </head>
 
@@ -131,10 +148,16 @@
     {{ 'jquery.ba-throttle-debounce.min.js' | asset_url | script_tag }}
     {{ 'custom-additional-vendor.js' | asset_url | script_tag }}
 
+    {{ 'player-event.js' | asset_url | script_tag }}
+    {{ 'player-inline.js' | asset_url | script_tag }}
+    {{ 'player-chunk-one.js' | asset_url | script_tag }}
+    {{ 'player-chunk-two.js' | asset_url | script_tag }}
+
     <script src="{{ 'custom.js' | asset_url }}" defer='defer'></script>
     <script src="{{ 'index.js' | asset_url }}" defer='defer'></script>
     {% comment %} <script src="https://a.klaviyo.com/media/js/onsite/onsite.js"></script> {% endcomment %}
     <script src="https://cdn.attn.tv/fellow/dtag.js"></script>
+  
   {% include 'social-head-common' %}</body>
   <script>
 jQuery('a[href^="http"]').not('a[href^="{{ shop.url }}"]').attr('target', '_blank');

@@ -434,7 +434,6 @@ theme.pdpMain = function () {
   function pdpThumbnails() {
     thumbnailScrollOnClick()
     changeActiveThumbnail()
-    console.log('pdpThumbnails')
   }
 
   function pdpBar() {
@@ -951,6 +950,10 @@ theme.cartDrawer = function () {
   $(document).off('click.updateRecommendedAddId');
   $(document).off('click.addRecommendedProduct');
   $(document).off('click.updateCartInputQTY');
+  $(document).off('click.openGWModal');
+  $(document).off('click.closeGWModal');
+  $(document).off('click.addGWNote');
+  $(document).off('input.noteLength');
 
   theme.openItemRemovePopup = function (cartItemRemoveBtn, isGWP) {
     $(document).off('click.removeItemInCart');
@@ -1018,6 +1021,69 @@ theme.cartDrawer = function () {
     })
   });
 
+  theme.updateGiftWrappingProduct = function () {
+    var $sectionWrapper = $('.cart-drawer__footer-gift-wrapping');
+    if ($sectionWrapper.length) {
+      $.ajax({
+        type: 'GET',
+        url: '/?section_id=cart-gift-wrapping',
+        success: function(content) {
+          $sectionWrapper.html(content);
+        }
+      })
+    }
+  }
+
+  theme.changeGiftWrappingNote = function () {
+    var data = {
+      attributes: {
+        'Gift note': $(document).find('#cart-note').val(),
+      }
+    }
+
+    $.ajax({
+      type: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: JSON.stringify(data),
+      dataType: 'json',
+      url: '/cart/update.js',
+      success: function(cart) {
+        console.log(cart)
+        var giftBoxInCart = false
+        cart.items.forEach(function (element) {
+          if (element.product_type === 'Gift box') {giftBoxInCart = true}
+        });
+        if (!giftBoxInCart) {
+          theme.addCustomProduct('/cart/add.js', window.theme.giftWrapping.giftWrappingProductID, 1, true)
+        } else {
+          UpdateCart('', '', true);
+        }
+        theme.updateGiftWrappingProduct()
+        theme.closeGiftWrappingModal()
+      }
+    })
+  }
+
+  theme.openGiftWrappingModal = function () {
+    $(document).find('.cart-gift-wrapping-modal').attr('aria-expanded', true)
+  }
+
+  theme.closeGiftWrappingModal = function () {
+    $(document).find('.cart-gift-wrapping-modal').attr('aria-expanded', false)
+  }
+
+  $(document).on('click.openGWModal', '[data-open-gift-note]', theme.openGiftWrappingModal)
+  $(document).on('click.closeGWModal', '[data-close-gift-note]', theme.closeGiftWrappingModal)
+  $(document).on('click.addGWNote', '[data-add-gift-note]', theme.changeGiftWrappingNote)
+  $(document).on('input.noteLength', '#cart-note', function (e) {
+    let target = e.currentTarget,
+        maxLength = target.getAttribute("maxlength"),
+        currentLength = target.value.length;
+    $(this).parents('.cart-gift-wrapping-modal__note').find('.note-length').text(`${maxLength - currentLength} Characters Remaining`)
+  })
+
   theme.updateCartRecommendedProducts = function () {
     var $sectionWrapper = $('.cart-drawer__footer-recommended-wrapper');
     if ($sectionWrapper.length) {
@@ -1038,7 +1104,7 @@ theme.cartDrawer = function () {
   });
 }
 
-theme.gwp = function (cart, url, id, quantity, openCart) {
+theme.addCustomProduct = function (url, id, quantity, openCart) {
   $.ajax({
     type: 'POST',
     url: url,
@@ -1079,8 +1145,6 @@ theme.checkGwpOnLoad = function (element) {
 
 $(document).ready(function () {
   theme.header()
-
-  console.log('(document).ready')
 
   theme.GLOBAL()
 

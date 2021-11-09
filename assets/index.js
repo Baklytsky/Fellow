@@ -9928,7 +9928,7 @@
       return t.length <= 0
           ? ""
           : t.reduce(function (t, e) {
-            if (e.product_type != 'Gift product') {
+            if (e.product_type !== 'Gift product' && e.product_type !== 'Gift box' && e.sku.indexOf('ENGRAVE') === -1) {
               return (
                   t +
                   ((r = (n = e).product_id),
@@ -9972,7 +9972,47 @@
                               "</button>\n </div>\n    </div>\n"
                           ))
               );
-            } else {
+            } else if (e.sku.indexOf('ENGRAVE') !== -1) {
+              return (
+                  t +
+                  ((r = (n = e).product_id),
+                      (i = n.variant_id),
+                      (o = n.product_title),
+                      (a = n.line_price),
+                      (p = (n.line_price === n.original_line_price) ? V(Q(a)) : '<span style="text-decoration: line-through; padding-right: 5px;">' + V(Q(n.original_line_price)) + '</span>' + V(Q(a))),
+                      (s = n.options_with_values),
+                      (u = n.image),
+                      (c = n.url),
+                      (l = n.quantity),
+                      (f = U(s)),
+                      (h = u
+                          ? F(
+                              u.replace(
+                                  "." +
+                                  (function (t) {
+                                    var e = t.match(/.+_((?:pico|icon|thumb|small|compact|medium|large|grande)|\d{1,4}x\d{0,4}|x\d{1,4})[_\.@]/);
+                                    return e ? e[1] : null;
+                                  })(u),
+                                  ""
+                              ),
+                              "200x"
+                          )
+                          : "https://source.unsplash.com/R9OS29xJb-8/2000x1333"),
+                      "\n    <div class='cart-drawer__item' data-component='cartDrawerItem' data-pid="
+                          .concat(r, " data-id=")
+                          .concat(i, " >\n      <div data-per-product='")
+                          .concat('Personalization product', "' class=\"cart-drawer__itemImage\">\n        <img src='")
+                          .concat(h, "' />\n      </div>\n\n      <div class='cart-drawer__itemContent f fdc'>\n        <div class='cart-drawer__itemDetails'>\n          <span data-per-product='")
+                          .concat('Personalization product', "' class='cart-drawer__itemTitle'>")
+                          .concat(o, "</span>\n          <div class='cart-drawer__itemOptions'>")
+                          .concat(f, "</div>\n        </div>\n\n        <div class='f aic jce pt05'>\n          <div style='display: none' class='cart-item__stepper aic f ")
+                          .concat(0 === a ? "is-disabled" : "", "'>\n            <div class='cart-stepper js-remove-single' data-key='" + n.key + "'>-</div>\n            <input type='text' class='cart-quantity js-single-quantity' value='")
+                          .concat(l, "'>\n            <div class='cart-stepper js-add-single' data-key='" + n.key + "'>+</div>\n          </div>\n\n          <div class='cart-item__price'>")
+                          .concat(p, "</div>\n        </div>\n\n")
+                          .concat('\n', "</div>\n    </div>\n"
+                          ))
+              );
+            } else if (e.product_type === 'Gift product') {
               return (
                   t +
                   ((r = (n = e).product_id),
@@ -10002,13 +10042,63 @@
                           .concat(r, " data-id=")
                           .concat(i, " >\n      <div data-free-product='")
                           .concat('Free gift', "' class=\"cart-drawer__itemImage\">\n        <img src='")
-                          .concat(h, "' />\n      </div>\n\n      <div class='cart-drawer__itemContent f fdc'>\n        <div class='cart-drawer__itemDetails'>\n          <p data-free-product='")
+                          .concat(h, "' />\n      </div>\n\n      <div class='cart-drawer__itemContent f fdc'>\n        <div class='cart-drawer__itemDetails'>\n          <span data-free-product='")
                           .concat('Free gift', "' class='cart-drawer__itemTitle'>")
-                          .concat(o, "</p>\n          <div class='cart-drawer__itemOptions'>")
+                          .concat(o, "</span>\n          <div class='cart-drawer__itemOptions'>")
                           .concat(f, "</div>\n        </div>\n\n        <div class='f aic jce pt05'>\n          <div style='display: none' class='cart-item__stepper aic f ")
                           .concat(0 === a ? "is-disabled" : "", "'>\n            <div class='cart-stepper js-remove-single' data-key='" + n.key + "'>-</div>\n            <input type='text' class='cart-quantity js-single-quantity' value='")
                           .concat(l, "'>\n            <div class='cart-stepper js-add-single' data-key='" + n.key + "'>+</div>\n          </div>\n\n          <div class='cart-item__price'>")
                           .concat('Free', "</div>\n        </div>\n\n        <button class='button--reset cart-drawer__itemAction js-remove-item' data-key='" + n.key + "' style='display: none'>")
+                          .concat(
+                              '\n  <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentcolor" stroke-width="3" style="display:inline-block;vertical-align:middle;overflow:visible;"><path d="M1.0606601717798212 1.0606601717798212 L14.939339828220179 14.939339828220179"></path><path d="M14.939339828220179 1.0606601717798212 L1.0606601717798212 14.939339828220179"></path></svg>\n',
+                              "</button>\n")
+                          .concat('\n <button type="button" data-action="open-item-remove-popup" data-gift-product="true" aria-expanded="false" class="button--reset cart-drawer__itemAction cart-drawer__remove-open"> <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentcolor" stroke-width="3" style="display:inline-block;vertical-align:middle;overflow:visible;"><path d="M1.0606601717798212 1.0606601717798212 L14.939339828220179 14.939339828220179"></path><path d="M14.939339828220179 1.0606601717798212 L1.0606601717798212 14.939339828220179"></path></svg>\n',
+                              "</button>\n </div>\n    </div>\n"
+                          ))
+              );
+            } else if (e.product_type === 'Gift box') {
+              var giftBoxDescriptionBlock = '';
+              if (window.giftNote) {
+                giftBoxDescriptionBlock = `<span style="max-width: 220px" class="pb05">"${window.giftNote}"</span><button type="button" class="cart-gift-wrapping-btn" data-open-gift-note>Edit</button>`;
+              } else {
+                giftBoxDescriptionBlock = `<span style="max-width: 220px" class="pb05">${e.product_description}</span><button type="button" class="cart-gift-wrapping-btn" data-open-gift-note>Edit</button>`;
+              }
+              return (
+                  t +
+                  ((r = (n = e).product_id),
+                      (i = n.variant_id),
+                      (o = n.product_title),
+                      (a = n.line_price),
+                      (p = (n.line_price === n.original_line_price) ? V(Q(a)) : '<span style="text-decoration: line-through; padding-right: 5px;">' + V(Q(n.original_line_price)) + '</span>' + V(Q(a))),
+                      (s = n.options_with_values),
+                      (u = n.image),
+                      (c = n.url),
+                      (l = n.quantity),
+                      (f = U(s)),
+                      (h = u
+                          ? F(
+                              u.replace(
+                                  "." +
+                                  (function (t) {
+                                    var e = t.match(/.+_((?:pico|icon|thumb|small|compact|medium|large|grande)|\d{1,4}x\d{0,4}|x\d{1,4})[_\.@]/);
+                                    return e ? e[1] : null;
+                                  })(u),
+                                  ""
+                              ),
+                              "200x"
+                          )
+                          : "https://source.unsplash.com/R9OS29xJb-8/2000x1333"),
+                      "\n    <div class='cart-drawer__item' data-component='cartDrawerItem' data-pid="
+                          .concat(r, " data-id=")
+                          .concat(i, " >\n      <div data-gift-box-product='")
+                          .concat('Gift box', "' class=\"cart-drawer__itemImage\">\n        <img src='")
+                          .concat(h, "' />\n      </div>\n\n      <div class='cart-drawer__itemContent f fdc'>\n        <div class='cart-drawer__itemDetails'>\n          <span data-gift-box-product='")
+                          .concat('Gift box', "' class='cart-drawer__itemTitle'>")
+                          .concat(o, "</span>\n          <div class='cart-drawer__itemOptions f fdc ais'>")
+                          .concat(giftBoxDescriptionBlock, "</div>\n        </div>\n\n        <div class='f aic jce pt05'>\n          <div style='display:none;' class='cart-item__stepper test aic f ")
+                          .concat(0 === a ? "is-disabled" : "", "'>\n            <div class='cart-stepper js-remove-single' data-key='" + n.key + "'>-</div>\n            <input type='text' class='cart-quantity js-single-quantity' value='")
+                          .concat(l, "'>\n            <div class='cart-stepper js-add-single' data-key='" + n.key + "'>+</div>\n          </div>\n\n          <div class='cart-item__price'>")
+                          .concat(p, "</div>\n        </div>\n\n        <button class='button--reset cart-drawer__itemAction js-remove-item' data-key='" + n.key + "' style='display: none'>")
                           .concat(
                               '\n  <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentcolor" stroke-width="3" style="display:inline-block;vertical-align:middle;overflow:visible;"><path d="M1.0606601717798212 1.0606601717798212 L14.939339828220179 14.939339828220179"></path><path d="M14.939339828220179 1.0606601717798212 L1.0606601717798212 14.939339828220179"></path></svg>\n',
                               "</button>\n")
@@ -10026,6 +10116,32 @@
         window.CartDrawer = e;
         window.Cart = e.getState().cart;
 
+        if (window.theme.personalization.perProductAvailable === 'true' ) {
+          var engraveCounter = 0,
+              perProductId = window.theme.personalization.perProductID,
+              perCounter = 0;
+
+          window.Cart.items.forEach(function (element) {
+            if (element.sku.indexOf('-PER') !== -1) {perCounter += element.quantity}
+            if (element.sku.indexOf('ENGRAVE') !== -1) {engraveCounter += element.quantity}
+          });
+
+          if (perCounter > 0 && engraveCounter !== perCounter) {
+            switch (true) {
+              case engraveCounter === 0:
+                theme.addCustomProduct('/cart/add.js', perProductId, perCounter, false);
+                break;
+              case engraveCounter > 0:
+                theme.addCustomProduct('/cart/change.js', perProductId, perCounter, false);
+                break;
+            }
+          }
+
+          if (perCounter === 0 && engraveCounter > 0) {
+            theme.addCustomProduct('/cart/change.js', perProductId, 0, false);
+          }
+        }
+
         if (window.theme.gwpSettings.gwpEnable !== 'true' || window.theme.gwpSettings.gwpThreshold <= 0 || window.theme.gwpSettings.gwpProductAvailable !== 'true' || window.theme.gwpSettings.gwpProductType !== 'Gift product' || localStorage.getItem('removeGWP')) {
           setTimeout(function () {
             Cart.items.forEach(function (element) {
@@ -10041,9 +10157,26 @@
               gwpProductId = window.theme.gwpSettings.gwpProductId;
 
           if (Cart.total_price >= gwpThreshold && !theme.checkGwp(Cart)) {
-            theme.gwp(Cart, '/cart/add.js', gwpProductId, 1, false)
+            theme.addCustomProduct('/cart/add.js', gwpProductId, 1, false)
           }
         }
+
+        if (Cart.attributes['Gift note']) {
+          var giftBoxInCart = false
+          Cart.items.forEach(function (element) {
+            if (element.product_type === 'Gift box') {giftBoxInCart = true}
+          });
+          if (!giftBoxInCart) {
+            var data = {attributes: {'Gift note': ''}}
+            fetch('/cart/update.js', {
+              method: 'POST',
+              headers: {'Content-Type': 'application/json'},
+              body: JSON.stringify(data)
+            }).then(response => {theme.updateGiftWrappingProduct()})
+          }
+        }
+
+        window.giftNote = (Cart.attributes['Gift note']) ? Cart.attributes['Gift note'] : false
 
         var n = t.querySelector(".js-overlay"),
             r = t.querySelector(".js-close"),
@@ -10130,20 +10263,67 @@
         })), Dr.on("cart:toggle", (function(t) {
           t.cartOpen || g()
         })), e.on("cart:updated", (function(t) {
+
+          if (window.theme.personalization.perProductAvailable === 'true' ) {
+            var engraveCounter = 0,
+                perProductId = window.theme.personalization.perProductID,
+                perCounter = 0;
+
+            t.cart.items.forEach(function (element) {
+              if (element.sku.indexOf('-PER') !== -1) {perCounter += element.quantity}
+              if (element.sku.indexOf('ENGRAVE') !== -1) {engraveCounter += element.quantity}
+            });
+
+            if (perCounter > 0 && engraveCounter !== perCounter) {
+              switch (true) {
+                case engraveCounter === 0:
+                  theme.addCustomProduct('/cart/add.js', perProductId, perCounter, true);
+                  break;
+                case engraveCounter > 0:
+                  theme.addCustomProduct('/cart/change.js', perProductId, perCounter, true);
+                  break;
+              }
+            }
+
+            if (perCounter === 0 && engraveCounter > 0) {
+              theme.addCustomProduct('/cart/change.js', perProductId, 0, true);
+            }
+          }
+
           if (window.theme.gwpSettings.gwpEnable === 'true' && window.theme.gwpSettings.gwpThreshold > 0 && window.theme.gwpSettings.gwpProductAvailable === 'true' && window.theme.gwpSettings.gwpProductType === 'Gift product' && !localStorage.getItem('removeGWP')) {
             var gwpThreshold = window.theme.gwpSettings.gwpThreshold * 100,
                 gwpProductId = window.theme.gwpSettings.gwpProductId;
 
             if (t.cart.total_price >= gwpThreshold && !theme.checkGwp(t.cart)) {
-              theme.gwp(t.cart, '/cart/add.js', gwpProductId, 1, true)
+              theme.addCustomProduct('/cart/add.js', gwpProductId, 1, true)
             }
 
             if (t.cart.total_price < gwpThreshold && theme.checkGwp(t.cart)) {
-              theme.gwp(t.cart, '/cart/change.js', gwpProductId, 0, true)
+              theme.addCustomProduct('/cart/change.js', gwpProductId, 0, true)
             }
           }
+
+          if (t.cart.attributes['Gift note']) {
+            var giftBoxInCart = false
+            t.cart.items.forEach(function (element) {
+              if (element.product_type === 'Gift box') {giftBoxInCart = true}
+            });
+            if (!giftBoxInCart) {
+              var data = {attributes: {'Gift note': ''}}
+              fetch('/cart/update.js', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(data)
+              }).then(response => {theme.updateGiftWrappingProduct()})
+            }
+          }
+
+          window.giftNote = (t.cart.attributes['Gift note']) ? t.cart.attributes['Gift note'] : false
           t.state;
           var n = t.cart;
+          if (window.theme.giftWrapping.giftWrappingEnable && window.theme.giftWrapping.giftWrappingAvailable) {
+            theme.updateGiftWrappingProduct()
+          }
           if (window.theme.gwpSettings.gwpEnable === 'true' && window.theme.gwpSettings.gwpThreshold > 0 && window.theme.gwpSettings.gwpProductAvailable === 'true' && window.theme.gwpSettings.gwpProductType === 'Gift product' && !localStorage.getItem('removeGWP')) {
             if (m(e.getState().cart), b(Dr.getState()), n.total_price < (window.theme.gwpSettings.gwpThreshold * 100)) {
               v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
