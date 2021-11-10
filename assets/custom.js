@@ -448,6 +448,12 @@ theme.pdpMain = function () {
     theme.checkSlickResponse($pdpGalleryWrapper, pdpGalleryConfig, 992, true)
   }
 
+  function pdpBundleGallary() {
+    var $pdpBundleGalleryWrapper = $(document).find('.pdpMain__bundle-gallery-wrapper'),
+        pdpBundleGalleryConfig = $.parseJSON($('.pdpMain__bundle-gallery').attr('data-slick-config'));
+    theme.checkSlickResponse($pdpBundleGalleryWrapper, pdpBundleGalleryConfig, 992, true)
+  }
+
   function pdpDropdown() {
     $(document).on('click.pdpDropdown', '[data-dropdown]', function (e) {
       var _this = $(this);
@@ -674,6 +680,7 @@ theme.pdpMain = function () {
   if ($('.pdpBar__wrapper').length) {pdpBar();}
   if ($('.pdpMain__gallery-thumbnails').length) {pdpThumbnails();}
   if ($('.pdpMain__gallery-wrapper').length) {pdpGallary();}
+  if ($('.pdpMain__bundle-gallery').length) {pdpBundleGallary();}
   if ($('.pdpRecCollection').length) {theme.pdpRecCollection();}
   if ($('[data-dropdown]').length) {pdpDropdown();}
   if ($('.pdpMediaProof').length) {pdpMediaProof();}

@@ -1,0 +1,33 @@
+
+
+{%- if option_name != 'Title' -%}
+  <div class="bundle-product__option-group">
+    <label class="py025 block" data-option-label="{{ option_name }}">
+      <span class="option-title block"><strong>{{ option_name }}: </strong><span>{{ options_array | first }}</span></span>
+    </label>
+    {%- if options_array.size > 1 -%}
+      <div class="bundle-product__radio-group f">
+        {%- for item in options_array -%}
+          {%- assign option_value = item -%}
+          {%- if item contains 'Limited Edition:' -%}
+            {%- assign option_value = item | split: 'Limited Edition:' | last | strip -%}
+          {%- endif -%}
+          <div class="radio-group f aic" data-option-{{ option_name | handleize }}>
+            <label class="bundle-radio" for="{{ option_value | handleize | append: '-' | append: bundle_product.id }}">
+              <span class="u-sr-only">{{ option_value }}</span>
+              <input id="{{ option_value | handleize | append: '-' | append: bundle_product.id }}"
+                     type="radio"
+                     name="{{ option_name | append: '-' | append: bundle_product.id  }}"
+                     value="{{ option_value }}"
+                     title="{{ option_value }}">
+              <div class="radio__title f aic jcc"
+                   data-{{ option_name | handleize }}="{{ option_value | handleize }}">
+                <span style="white-space: nowrap">{{ option_value }}</span>
+              </div>
+            </label>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+{%- endif -%}
