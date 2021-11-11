@@ -5679,11 +5679,31 @@ h2.pdpCopy__header-price ,
   display: flex;
   align-items: center;
   background-color: #f5f5f5;
+  overflow: hidden;
+
+  @media screen and (max-width: $tablet) {
+    align-items: unset;
+  }
+}
+
+.bundle-product__heading {
+  margin: 0 0 16px 0;
+  font-family: $font-base;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 20px;
 }
 
 .bundle-product__icon-wrapper {
   width: 82px;
   height: 82px;
+  min-width: 82px;
+
+  @media screen and (max-width: $tablet) {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+  }
 }
 
 .bundle-product__description {
@@ -5696,4 +5716,23 @@ h2.pdpCopy__header-price ,
   font-weight: 700;
   font-size: 16px;
   line-height: 100%;
+}
+
+.bundle-product__option-group {
+  .option-title {
+    margin-bottom: 8px;
+  }
+
+  .bundle-radio-group {
+    margin-bottom: 8px;
+    margin-right: 8px;
+
+    @media screen and (max-width: $tablet) {
+      margin-right: 13px;
+    }
+  }
+}
+
+.bundle-product__radio-group {
+  flex-wrap: wrap;
 }

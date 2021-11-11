@@ -677,10 +677,87 @@ theme.pdpMain = function () {
     })
   }
 
+  function pdpBundleMix() {
+    $(document).off('click.bundleRadio')
+    $(document).off('click.addBundleMix')
+
+    $(document).find('.bundle-product').each(function () {
+      let selectedOptions = '',
+          checked = $(this).find('.bundle-radio-group input:checked').map((i, option) => option.value);
+      checked.each((i, option) => selectedOptions = (i !== checked.length - 1) ? selectedOptions + option + '/' : selectedOptions + option)
+      $(this).find('.js-bundle-variant option').removeAttr('selected')
+      let selectedVariant = $(this).find('[data-variant-options="' + selectedOptions + '"]');
+      selectedVariant.attr('selected', 'selected')
+      selectedVariant.parent().attr('value', selectedVariant.val())
+    })
+
+    function checkBundleMixAvailable() {
+      var $disabledOptions = $(document).find('.js-bundle-variant option:disabled'),
+          checkForSelected = $disabledOptions.filter((i, e) => e.hasAttribute('selected'));
+
+      if (checkForSelected.length) {
+        $(document).find('#pdp-bundle-atc').attr('disabled', 'disabled').text('Out Of Stock')
+        $(document).find('#pdp-sticky-atc').attr('disabled', 'disabled').text('Out Of Stock')
+      } else {
+        $(document).find('#pdp-bundle-atc').removeAttr('disabled').text('Add to Cart')
+        $(document).find('#pdp-sticky-atc').removeAttr('disabled').text('Add to Cart')
+      }
+    }
+    checkBundleMixAvailable()
+
+    function changeBandleImage(variantID) {
+      let $selectedImage = $('[data-variant-media="' + variantID + '"]');
+      $selectedImage.parent().find('[data-variant-media]:visible').css('visibility','hidden')
+      $selectedImage.css('visibility','visible')
+    }
+
+    $(document).on('click.bundleRadio', '.bundle-radio', function () {
+      let $bundleWrapper = $(this).parents('.bundle-product'),
+          selectedOptions = '',
+          checked = $bundleWrapper.find('.bundle-radio-group input:checked').map((i, option) => option.value);
+      checked.each((i, option) => selectedOptions = (i !== checked.length - 1) ? selectedOptions + option + '/' : selectedOptions + option)
+      $bundleWrapper.find('.js-bundle-variant option').removeAttr('selected')
+      let selectedVariant = $bundleWrapper.find('[data-variant-options="' + selectedOptions + '"]');
+      selectedVariant.attr('selected', 'selected')
+      selectedVariant.parent().attr('value', selectedVariant.val())
+      changeBandleImage(selectedVariant.val());
+      checkBundleMixAvailable()
+    })
+
+    $(document).on('click.addBundleMix', '#pdp-bundle-atc', function (e) {
+      e.preventDefault();
+      var selectedBundleOptions = $(this).parents('.pdpForm').find('.js-bundle-variant select'),
+          products_data = [];
+
+      selectedBundleOptions.each(function () {
+        products_data.push({
+          quantity: 1,
+          id: $(this).attr('value'),
+          properties: {
+            bundle: true
+          }
+        })
+      });
+
+      $.ajax({
+        type: 'post',
+        url: '/cart/add.js',
+        data: {items: products_data},
+        dataType: 'json',
+        success: function () {
+          UpdateCart('', '', true)
+        },
+        error: function (XMLHttpRequest) {
+        }
+      })
+    })
+  }
+
   if ($('.pdpBar__wrapper').length) {pdpBar();}
   if ($('.pdpMain__gallery-thumbnails').length) {pdpThumbnails();}
   if ($('.pdpMain__gallery-wrapper').length) {pdpGallary();}
   if ($('.pdpMain__bundle-gallery').length) {pdpBundleGallary();}
+  if ($('.bundle-product').length) {pdpBundleMix();}
   if ($('.pdpRecCollection').length) {theme.pdpRecCollection();}
   if ($('[data-dropdown]').length) {pdpDropdown();}
   if ($('.pdpMediaProof').length) {pdpMediaProof();}
