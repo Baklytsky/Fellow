@@ -683,8 +683,12 @@ theme.pdpMain = function () {
 
     $(document).find('.bundle-product').each(function () {
       let selectedOptions = '',
-          checked = $(this).find('.bundle-radio-group input:checked').map((i, option) => option.value);
-      checked.each((i, option) => selectedOptions = (i !== checked.length - 1) ? selectedOptions + option + '/' : selectedOptions + option)
+          checkedInputs = $(this).find('.bundle-radio-group input:checked'),
+          checkedOptions = $(this).find('.bundle-radio-group input:checked').map((i, option) => option.value);
+      checkedOptions.each((i, option) => selectedOptions = (i !== checkedOptions.length - 1) ? selectedOptions + option + '/' : selectedOptions + option)
+      checkedInputs.each(function() {
+        $(this).parents('.bundle-product__option-group').find('.option-title-value').text($(this).attr('title'))
+      })
       $(this).find('.js-bundle-variant option').removeAttr('selected')
       let selectedVariant = $(this).find('[data-variant-options="' + selectedOptions + '"]');
       selectedVariant.attr('selected', 'selected')
@@ -714,8 +718,12 @@ theme.pdpMain = function () {
     $(document).on('click.bundleRadio', '.bundle-radio', function () {
       let $bundleWrapper = $(this).parents('.bundle-product'),
           selectedOptions = '',
-          checked = $bundleWrapper.find('.bundle-radio-group input:checked').map((i, option) => option.value);
-      checked.each((i, option) => selectedOptions = (i !== checked.length - 1) ? selectedOptions + option + '/' : selectedOptions + option)
+          checkedInputs = $bundleWrapper.find('.bundle-radio-group input:checked'),
+          checkedOptions = $bundleWrapper.find('.bundle-radio-group input:checked').map((i, option) => option.value);
+      checkedOptions.each((i, option) => selectedOptions = (i !== checkedOptions.length - 1) ? selectedOptions + option + '/' : selectedOptions + option)
+      checkedInputs.each(function() {
+        $(this).parents('.bundle-product__option-group').find('.option-title-value').text($(this).attr('title'))
+      })
       $bundleWrapper.find('.js-bundle-variant option').removeAttr('selected')
       let selectedVariant = $bundleWrapper.find('[data-variant-options="' + selectedOptions + '"]');
       selectedVariant.attr('selected', 'selected')
