@@ -24,11 +24,11 @@
           {%- assign option_value = item | split: 'Limited Edition:' | last | strip -%}
         {%- endif -%}
         <div class="radio-group bundle-radio-group f aic" data-option-{{ option_name | handleize }}>
-          <label class="bundle-radio" for="{{ option_value | handleize | append: '-' | append: bundle_product.id }}">
+          <label class="bundle-radio" for="{{ option_value | handleize | append: '-' | append: uniq_id  }}">
             <span class="u-sr-only">{{ option_value }}</span>
-            <input id="{{ option_value | handleize | append: '-' | append: bundle_product.id }}"
+            <input id="{{ option_value | handleize | append: '-' | append: uniq_id }}"
                    type="radio"
-                   name="{{ option_name | append: '-' | append: bundle_product.id  }}"
+                   name="{{ option_name | append: '-' | append: uniq_id }}"
                    value="{{ option_value | handleize }}"
                    title="{{ option_value }}" {% if forloop.first %}checked{% endif %}>
             <div class="radio__title f aic jcc"

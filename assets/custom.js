@@ -695,13 +695,16 @@ theme.pdpMain = function () {
       selectedVariant.parent().attr('value', selectedVariant.val())
     })
 
-    function checkBundleMixAvailable() {
+    function checkBundleMixAvailable(unavailableProduct) {
       var $disabledOptions = $(document).find('.js-bundle-variant option:disabled'),
           checkForSelected = $disabledOptions.filter((i, e) => e.hasAttribute('selected'));
 
       if (checkForSelected.length) {
         $(document).find('#pdp-bundle-atc').attr('disabled', 'disabled').text('Out Of Stock')
         $(document).find('#pdp-sticky-atc').attr('disabled', 'disabled').text('Out Of Stock')
+      } else if (unavailableProduct) {
+        $(document).find('#pdp-bundle-atc').attr('disabled', 'disabled').text('Unavailable')
+        $(document).find('#pdp-sticky-atc').attr('disabled', 'disabled').text('Unavailable')
       } else {
         $(document).find('#pdp-bundle-atc').removeAttr('disabled').text('Add to Cart')
         $(document).find('#pdp-sticky-atc').removeAttr('disabled').text('Add to Cart')
@@ -709,8 +712,8 @@ theme.pdpMain = function () {
     }
     checkBundleMixAvailable()
 
-    function changeBandleImage(variantID) {
-      let $selectedImage = $('[data-variant-media="' + variantID + '"]');
+    function changeBandleImage(variantUniqID) {
+      let $selectedImage = $('[data-variant-media="' + variantUniqID + '"]');
       $selectedImage.parent().find('[data-variant-media]:visible').css('visibility','hidden')
       $selectedImage.css('visibility','visible')
     }
@@ -724,28 +727,58 @@ theme.pdpMain = function () {
       checkedInputs.each(function() {
         $(this).parents('.bundle-product__option-group').find('.option-title-value').text($(this).attr('title'))
       })
-      $bundleWrapper.find('.js-bundle-variant option').removeAttr('selected')
       let selectedVariant = $bundleWrapper.find('[data-variant-options="' + selectedOptions + '"]');
+      $bundleWrapper.find('.js-bundle-variant option').removeAttr('selected')
       selectedVariant.attr('selected', 'selected')
       selectedVariant.parent().attr('value', selectedVariant.val())
-      changeBandleImage(selectedVariant.val());
-      checkBundleMixAvailable()
+      if (selectedVariant.length) {
+        changeBandleImage(selectedVariant.attr('data-variant-uniq_id'));
+        checkBundleMixAvailable()
+      } else {
+        checkBundleMixAvailable(true)
+      }
     })
 
     $(document).on('click.addBundleMix', '#pdp-bundle-atc', function (e) {
       e.preventDefault();
-      var selectedBundleOptions = $(this).parents('.pdpForm').find('.js-bundle-variant select'),
-          products_data = [];
+      var $selectedBundleOptions = $(this).parents('.pdpForm').find('.js-bundle-variant select'),
+          products_data = [],
+          products = [];
 
-      selectedBundleOptions.each(function () {
+      $selectedBundleOptions.each(function () {
+        var variant_id = $(this).attr('value');
+        products.push(variant_id);
+      });
+
+      products.sort();
+      var current = null;
+      var cnt = 0;
+      for (var i = 0; i < products.length; i++) {
+        if (products[i] !== current) {
+          if (cnt > 0) {
+            products_data.push({
+              quantity: cnt,
+              id: current,
+              properties: {
+                "_bundles": true
+              }
+            })
+          }
+          current = products[i];
+          cnt = 1;
+        } else {
+          cnt++;
+        }
+      }
+      if (cnt > 0) {
         products_data.push({
-          quantity: 1,
-          id: $(this).attr('value'),
+          quantity: cnt,
+          id: current,
           properties: {
-            bundle: true
+            "_bundles": true
           }
         })
-      });
+      }
 
       $.ajax({
         type: 'post',
@@ -755,7 +788,11 @@ theme.pdpMain = function () {
         success: function () {
           UpdateCart('', '', true)
         },
-        error: function (XMLHttpRequest) {
+        error: function (error) {
+          if (error.status === 422) {
+            $('#PdpErrorMessage').text(error.responseJSON.description).fadeIn('slow');
+            setTimeout(function () {$('#PdpErrorMessage').fadeOut('slow').text('');}, 5500);
+          }
         }
       })
     })
@@ -1190,9 +1227,10 @@ theme.cartDrawer = function () {
   }
 
   $(document).on('change.updateCartInputQTY', 'input.cart-quantity', function () {
-    let value = parseInt($(this).val(), 10);
-    let id = $(this).parents('.cart-drawer__item').attr('data-id');
-    updateCartItemQuantity(id, value);
+    let value = parseInt($(this).val(), 10),
+        id = $(this).parents('.cart-drawer__item').attr('data-id'),
+        key = $(this).parents('.cart-drawer__item').attr('data-key');
+    updateCartItemQuantity(id, value, key);
   });
 }
 

@@ -9956,7 +9956,8 @@
                           : "https://source.unsplash.com/R9OS29xJb-8/2000x1333"),
                       "\n    <div class='cart-drawer__item' data-component='cartDrawerItem' data-pid="
                           .concat(r, " data-id=")
-                          .concat(i, " >\n      <a href='")
+                          .concat(i, " data-key=")
+                          .concat(n.key, " >\n      <a href='")
                           .concat(c, "' class=\"cart-drawer__itemImage\">\n        <img src='")
                           .concat(h, "' />\n      </a>\n\n      <div class='cart-drawer__itemContent f fdc'>\n        <div class='cart-drawer__itemDetails'>\n          <a href='")
                           .concat(c, "' class='cart-drawer__itemTitle'>")
@@ -10000,7 +10001,8 @@
                           : "https://source.unsplash.com/R9OS29xJb-8/2000x1333"),
                       "\n    <div class='cart-drawer__item' data-component='cartDrawerItem' data-pid="
                           .concat(r, " data-id=")
-                          .concat(i, " >\n      <div data-per-product='")
+                          .concat(i, " data-key=")
+                          .concat(n.key, " >\n      <div data-per-product='")
                           .concat('Personalization product', "' class=\"cart-drawer__itemImage\">\n        <img src='")
                           .concat(h, "' />\n      </div>\n\n      <div class='cart-drawer__itemContent f fdc'>\n        <div class='cart-drawer__itemDetails'>\n          <span data-per-product='")
                           .concat('Personalization product', "' class='cart-drawer__itemTitle'>")
@@ -10040,7 +10042,8 @@
                           : "https://source.unsplash.com/R9OS29xJb-8/2000x1333"),
                       "\n    <div class='cart-drawer__item' data-component='cartDrawerItem' data-pid="
                           .concat(r, " data-id=")
-                          .concat(i, " >\n      <div data-free-product='")
+                          .concat(i, " data-key=")
+                          .concat(n.key, " >\n      <div data-free-product='")
                           .concat('Free gift', "' class=\"cart-drawer__itemImage\">\n        <img src='")
                           .concat(h, "' />\n      </div>\n\n      <div class='cart-drawer__itemContent f fdc'>\n        <div class='cart-drawer__itemDetails'>\n          <span data-free-product='")
                           .concat('Free gift', "' class='cart-drawer__itemTitle'>")
@@ -10090,7 +10093,8 @@
                           : "https://source.unsplash.com/R9OS29xJb-8/2000x1333"),
                       "\n    <div class='cart-drawer__item' data-component='cartDrawerItem' data-pid="
                           .concat(r, " data-id=")
-                          .concat(i, " >\n      <div data-gift-box-product='")
+                          .concat(i, " data-key=")
+                          .concat(n.key, " >\n      <div data-gift-box-product='")
                           .concat('Gift box', "' class=\"cart-drawer__itemImage\">\n        <img src='")
                           .concat(h, "' />\n      </div>\n\n      <div class='cart-drawer__itemContent f fdc'>\n        <div class='cart-drawer__itemDetails'>\n          <span data-gift-box-product='")
                           .concat('Gift box', "' class='cart-drawer__itemTitle'>")
@@ -10391,10 +10395,13 @@
         }))
       };
 
-  function Y(t, e) {
+  function Y(t, e, key) {
     return K().then((function(n) {
-      for (var r = n.items, i = 0; i < r.length; i++)
-        if (r[i].variant_id === parseInt(t)) return G(i + 1, e)
+      for (var r = n.items, i = 0; i < r.length; i++) {
+        if (r[i].variant_id === parseInt(t) && r[i].key === key) {
+          return G(i + 1, e)
+        }
+      }
     }))
   }
 
@@ -10509,16 +10516,17 @@
             r = t.querySelector(".js-remove-single"),
             i = t.querySelector(".js-add-single"),
             o = t.querySelector(".js-single-quantity").value,
-            a = t.getAttribute("data-id");
+            a = t.getAttribute("data-id"),
+            key = t.getAttribute("data-key");
         n.addEventListener("click", (function(t) {
           t.preventDefault(),
               function(t) {
-                Y(t, 0)
+                Y(t, 0, key)
               }(a)
         })), r.addEventListener("click", (function(t) {
-          t.preventDefault(), Y(a, parseInt(o) - 1)
+          t.preventDefault(), Y(a, parseInt(o) - 1, key)
         })), i.addEventListener("click", (function(t) {
-          t.preventDefault(), Y(a, parseInt(o) + 1)
+          t.preventDefault(), Y(a, parseInt(o) + 1, key)
         }))
       })),
       X = O((function(t, e) {

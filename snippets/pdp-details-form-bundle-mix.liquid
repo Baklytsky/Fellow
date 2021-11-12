@@ -7,16 +7,18 @@
 
     {%- if product.metafields.custom_fields["bundle_product"] != blank -%}
       {% for item in product.metafields.custom_fields["bundle_product"] %}
-        {%- assign bundle_product_icon = bundle_product.featured_image | img_url: '200x' -%}
         {% if item["product"] != blank %}
           {%- assign bundle_product = all_products[item["product"]] -%}
         {% endif %}
+        {%- assign bundle_product_icon = bundle_product.featured_image | img_url: '200x' -%}
         {% if item["product_icon"] != blank %}
           {%- assign bundle_product_icon = item["product_icon"] -%}
         {% endif %}
         {% if item["product_variants_id"] != blank %}
           {%- assign bundle_product_variants_id = item["product_variants_id"] | split: ',' -%}
         {% endif %}
+
+        {%- assign uniq_id = bundle_product.id | append: '-' | append: forloop.index -%}
 
         {%- if bundle_product != blank -%}
           <div class="bundle-product">
@@ -126,7 +128,8 @@
                   {%- endfor -%}
 
                   <option value='{{ variant.id }}'
-                        data-variant-options="{{ options }}"
+                        data-variant-options='{{ options }}'
+                        data-variant-uniq_id='{{ variant.id | append: '-' | append: uniq_id }}'
                         data-variant-price='{{ variant.price | money | remove: ".00" }}'
                         data-variant-inventory-quantity='{{ variant.inventory_quantity }}'
                         data-variant-inventory-policy='{{ variant.inventory_policy }}'
@@ -158,6 +161,7 @@
         {%- assign bundle_product_icon = blank -%}
         {%- assign bundle_product = blank -%}
         {%- assign bundle_product_variants_id = blank -%}
+        {%- assign uniq_id = blank -%}
       {%- endfor -%}
     {% endif %}
 
@@ -196,6 +200,7 @@
     cta: cta,
   %}
 </div>
+<p id="PdpErrorMessage"></p>
   <div class='none' data-pay-btn>
     <div class='py1'>
       {{ form | payment_button }}
