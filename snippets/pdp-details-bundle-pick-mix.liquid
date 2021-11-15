@@ -89,7 +89,11 @@
       {% include 'pdp-bundle-description' %}
     {%- endcomment -%}
 
-    {% include 'pdp-details-form-bundle-mix' %}
+    {%- if product.metafields.custom_fields["bundle_product"] != blank -%}
+      {% include 'pdp-details-form-bundle-pick-mix' %}
+    {%- else -%}
+      {% include 'pdp-details-form-bundle' %}
+    {%- endif -%}
   {% endform %}
 
     {% include 'pdp-badges' %}
