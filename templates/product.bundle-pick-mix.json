@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "bar": {
+      "type": "product-bar",
+      "settings": {}
+    },
+    "main": {
+      "type": "product-template-bundle-pick-mix",
+      "settings": {}
+    }
+  },
+  "order": [
+    "bar",
+    "main"
+  ]
+}

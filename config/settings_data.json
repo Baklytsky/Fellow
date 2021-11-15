@@ -1,20 +1,30 @@
 {
   "current": {
     "social_instagram_link": "https:\/\/www.instagram.com\/fellowproducts",
-    "social_facebook_link": "#",
+    "social_facebook_link": "https:\/\/www.facebook.com\/fellowproducts\/",
     "social_twitter_link": "",
-    "social_youtube_link": "#",
+    "social_youtube_link": "https:\/\/www.youtube.com\/channel\/UCrtS-B4xQtbNVnyqC4lSSHg",
     "social_pinterest_link": "",
+    "cart_recommended_enable": true,
     "cart_recommended_heading": "Complete Your Coffee Corner",
     "cart_recommended_icon": "<svg width=\"50\" height=\"52\" viewbox=\"0 0 50 52\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M37.8418 40.702C41.4521 35.3625 42.5595 22.5001 31.0001 15.5C17.5 7.32466 4.5 19.4999 4.5 19.4999\" stroke=\"black\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><\/path>\n<path d=\"M43.8696 39.0845L37.3033 42.5193L33.8924 35.9229\" stroke=\"black\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><\/path>\n<\/svg>",
-    "cart_recommended_collection": "bestsellers",
+    "cart_recommended_collection": "complete-your-coffee-corner",
     "cart_empty_image": "shopify:\/\/shop_images\/Frame_1752.png",
-    "cart_empty_cta": "shopify:\/\/collections\/best-sellers",
-    "cart_empty_cta_text": "Shop Bestsellers",
-    "personalization_product": "personalization-fee",
+    "cart_empty_cta": "shopify:\/\/collections\/bestsellers",
+    "cart_empty_cta_text": "Shop Best Sellers",
+    "enable_gift_wrapping": false,
+    "gift_box_product": "gift-box",
+    "gift_wrapping_icon": "<svg xmlns=\"http:\/\/www.w3.org\/2000\/svg\" width=\"32\" height=\"32\" viewbox=\"0 0 32 32\" fill=\"none\">\n<path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M24.0933 8.33333H27C28.48 8.33333 29.6667 9.52 29.6667 11L29.6667 17.9393V20.6058L29.6667 25.6667C29.6667 27.1467 28.48 28.3333 27 28.3333H5.66667C4.18667 28.3333 3 27.1467 3 25.6667L3.0046 20.6058H3V17.9393H3.00702L3.01333 11C3.01333 9.52 4.18667 8.33333 5.66667 8.33333H8.57333C8.42667 7.92 8.33333 7.46667 8.33333 7C8.33333 4.78667 10.12 3 12.3333 3C13.7333 3 14.9467 3.72 15.6667 4.78667L16.3333 5.69333L17 4.8C17.72 3.72 18.9333 3 20.3333 3C22.5467 3 24.3333 4.78667 24.3333 7C24.3333 7.46667 24.24 7.92 24.0933 8.33333ZM5.66667 20.6058V25.6667H15.0002V20.6058H5.66667ZM17.6667 25.6667H27V20.6058H17.6667V25.6667ZM27 17.9393V11H20.2267L23 14.7733L20.84 16.3333L17.6667 12.0147L17.6667 17.9393H27ZM15.0002 12.0143L15.0002 17.9393H5.66667V11H12.44L9.66667 14.7733L11.8267 16.3333L15.0002 12.0143ZM21.6667 7C21.6667 6.26667 21.0667 5.66667 20.3333 5.66667C19.6 5.66667 19 6.26667 19 7C19 7.73333 19.6 8.33333 20.3333 8.33333C21.0667 8.33333 21.6667 7.73333 21.6667 7ZM13.6667 7C13.6667 6.26667 13.0667 5.66667 12.3333 5.66667C11.6 5.66667 11 6.26667 11 7C11 7.73333 11.6 8.33333 12.3333 8.33333C13.0667 8.33333 13.6667 7.73333 13.6667 7Z\" fill=\"black\"><\/path>\n<\/svg>",
+    "gift_wrapping_message": "Is this a gift?",
+    "gift_wrapping_result_message": "Your order will be sent in a gift box",
+    "gift_wrapping_heading": "Gift Wrap + Note",
+    "enable_gwp": false,
+    "gwp_threshold": 150,
+    "gwp_product": "stagg-double-wall-carafe-1",
+    "personalization_product": "personalization-add-on",
     "favicon": "shopify:\/\/shop_images\/favicon.png",
     "checkout_header_image": "",
-    "checkout_logo_image": "shopify:\/\/shop_images\/Fellow-Logo_Final_533C_f1b411d7-b158-474e-9c03-7ecc416399bb.jpg",
+    "checkout_logo_image": "shopify:\/\/shop_images\/Fellow-Logo-black_b1dd77c0-05ce-4fe0-a402-efa5219057d0.png",
     "checkout_logo_position": "left",
     "checkout_logo_size": "medium",
     "checkout_body_background_image": "",
@@ -28,11 +38,12 @@
     "checkout_button_color": "#197bbd",
     "checkout_error_color": "#e32c2b",
     "free_shipping_met_msg": "Congrats! You get free US Shipping!",
+    "gift_wrapping_result_heading": "Your order will be sent in a gift box",
     "cart_upsell_flavor_text": "Complete Your Coffee Corner",
     "cart_notes_enable": true,
     "enable_cart_banner": true,
     "cart_banner_text": "Free Continental US Shipping on orders over $99",
-    "enable_free_product": false,
+    "enable_free_product": true,
     "free_product": "stagg-ekg-sticker-series",
     "free_product_threshold": "100",
     "free_product_not_met_msg": "Sticker Series",
@@ -107,7 +118,7 @@
               "target": "kettles",
               "image_1": "shopify:\/\/shop_images\/Nav-2up-Kettles-All.jpg",
               "title_1": "All Kettles",
-              "url_1": "shopify:\/\/collections\/kettles-1",
+              "url_1": "shopify:\/\/collections\/kettles",
               "image_2": "shopify:\/\/shop_images\/Nav-2up-Kettles-Featured.jpg",
               "title_2": "Matte Black Bundle",
               "url_2": "shopify:\/\/products\/matte-black-bundle",
@@ -123,7 +134,7 @@
               "target": "grind+brew",
               "image_1": "shopify:\/\/shop_images\/Nav-2up-AllGrindBrew.jpg",
               "title_1": "All Grind + Brew",
-              "url_1": "shopify:\/\/collections\/brew",
+              "url_1": "shopify:\/\/collections\/grind-brew",
               "image_2": "shopify:\/\/shop_images\/Nav-2up-holiday-designLovers.jpg",
               "title_2": "Gifts for Design Lovers",
               "url_2": "shopify:\/\/collections\/gifts-for-design-lovers",
@@ -179,13 +190,13 @@
           "logo_svg": "<svg xmlns=\"http:\/\/www.w3.org\/2000\/svg\" width=\"126\" height=\"26\" viewbox=\"0 0 126 26\" fill=\"none\">\n<g clip-path=\"url(#clip0_612:2863)\">\n<path d=\"M92.6035 20.7278L87.7853 22.5287L82.9671 20.7278C82.4758 20.5372 81.9443 20.8984 81.9443 21.4301V25.2476C81.9443 25.7793 82.4758 26.1405 82.9722 25.9499L87.7853 24.144L92.5985 25.9499C93.0899 26.1405 93.6263 25.7793 93.6263 25.2476V21.4301C93.6263 20.8984 93.0949 20.5372 92.6035 20.7278Z\" fill=\"black\"><\/path>\n<path d=\"M12.785 2.70892V1.25417C12.785 0.837808 12.4491 0.501709 12.0329 0.501709H0.752059C0.33592 0.501709 0 0.837808 0 1.25417V17.8083C0 18.2246 0.33592 18.5607 0.752059 18.5607H2.25618C2.67232 18.5607 3.00824 18.2246 3.00824 17.8083V10.7101H8.42306C8.8392 10.7101 9.17512 10.374 9.17512 9.95762V8.50287C9.17512 8.08651 8.8392 7.75041 8.42306 7.75041H3.00824V3.46138H12.0329C12.4491 3.46138 12.785 3.12529 12.785 2.70892Z\" fill=\"black\"><\/path>\n<path d=\"M32.89 2.70892V1.25417C32.89 0.837808 32.5541 0.501709 32.1379 0.501709H20.857C20.4409 0.501709 20.105 0.837808 20.105 1.25417V17.8083C20.105 18.2246 20.4409 18.5607 20.857 18.5607H32.1379C32.5541 18.5607 32.89 18.2246 32.89 17.8083V16.3535C32.89 15.9372 32.5541 15.6011 32.1379 15.6011H23.1132V10.7101H28.528C28.9442 10.7101 29.2801 10.374 29.2801 9.95762V8.50287C29.2801 8.08651 28.9442 7.75041 28.528 7.75041H23.1132V3.46138H32.1379C32.5541 3.46138 32.89 3.12529 32.89 2.70892Z\" fill=\"black\"><\/path>\n<path d=\"M44.4467 15.6011V1.25417C44.4467 0.837808 44.1108 0.501709 43.6947 0.501709H42.1905C41.7744 0.501709 41.4385 0.837808 41.4385 1.25417V17.8083C41.4385 18.2246 41.7744 18.5607 42.1905 18.5607H53.2207C53.6369 18.5607 53.9728 18.2246 53.9728 17.8083V16.3535C53.9728 15.9372 53.6369 15.6011 53.2207 15.6011H44.4467Z\" fill=\"black\"><\/path>\n<path d=\"M87.7402 0C82.4808 0 78.2141 4.26896 78.2141 9.53116C78.2141 14.7934 82.4808 19.0623 87.7402 19.0623C92.9996 19.0623 97.2663 14.7934 97.2663 9.53116C97.2663 4.26896 92.9996 0 87.7402 0ZM87.7402 16.203C84.0802 16.203 81.1722 13.3386 81.1722 9.53116C81.1722 5.72371 84.0802 2.85935 87.7402 2.85935C91.4002 2.85935 94.3082 5.72371 94.3082 9.53116C94.3082 13.3386 91.4002 16.203 87.7402 16.203Z\" fill=\"black\"><\/path>\n<path d=\"M64.1056 15.6011V1.25417C64.1056 0.837808 63.7697 0.501709 63.3536 0.501709H61.8495C61.4333 0.501709 61.0974 0.837808 61.0974 1.25417V17.8083C61.0974 18.2246 61.4333 18.5607 61.8495 18.5607H72.8797C73.2958 18.5607 73.6317 18.2246 73.6317 17.8083V16.3535C73.6317 15.9372 73.2958 15.6011 72.8797 15.6011H64.1056Z\" fill=\"black\"><\/path>\n<path d=\"M125.248 0.501709H123.638C123.297 0.501709 123.002 0.727447 122.911 1.05351L119.246 14.4523L115.581 1.05351C115.491 0.727447 115.195 0.501709 114.854 0.501709H112.658C112.317 0.501709 112.022 0.727447 111.931 1.05351L108.261 14.4623L104.591 1.05351C104.501 0.727447 104.205 0.501709 103.864 0.501709H102.16C101.653 0.501709 101.292 0.9883 101.443 1.47489L106.501 18.029C106.597 18.345 106.893 18.5607 107.223 18.5607L109.189 18.5557C109.525 18.5557 109.821 18.33 109.911 18.0039L113.706 4.14362L117.502 18.0089C117.592 18.335 117.888 18.5658 118.229 18.5607L120.189 18.5557C120.52 18.5557 120.811 18.34 120.906 18.024L125.97 1.47489C126.115 0.993316 125.754 0.501709 125.248 0.501709Z\" fill=\"black\"><\/path>\n<\/g>\n<defs>\n<clippath id=\"clip0_612:2863\">\n<rect width=\"126\" height=\"26\" fill=\"white\"><\/rect>\n<\/clippath>\n<\/defs>\n<\/svg>",
           "logo_desktop_size": 125,
           "logo_mobile_size": 120,
-          "center_menu": "main-menu-1",
-          "menu_left": "left-menu",
-          "menu_right": "right-menu",
+          "center_menu": "new-main-menu",
+          "menu_left": "new-left-menu-1",
+          "menu_right": "new-right-menu",
           "show_search": false,
           "show_announcement": true,
-          "announcement_text": "Get your holiday gifting done early and save with our all-inclusive brewing sets.",
-          "announcement_link": "shopify:\/\/collections\/gifts-for-brewing-beginners",
+          "announcement_text": "Pair your crisp new grinder with the freshest coffee 😎 Join Fellow Drops",
+          "announcement_link": "https:\/\/drops.fellowproducts.com\/",
           "enable_timer": false,
           "end_date": "Sep 30, 2021 07:30:00 GMT-08:00"
         }
@@ -193,8 +204,8 @@
       "footer": {
         "type": "footer",
         "settings": {
-          "footer_menu": "footer",
-          "footer_menu_bottom": "footer-bottom-menu",
+          "footer_menu": "new-footer-nav",
+          "footer_menu_bottom": "new-bottom-menu",
           "show_footer_payment_icon": false,
           "show_icons": true,
           "instagram": true,
@@ -212,19 +223,22 @@
       },
       "collection-template": {
         "type": "collection-template",
-        "settings": {}
+        "settings": {
+          "show_breadcrumbs": true
+        }
       },
       "1565155576930": {
         "type": "hero-slider",
         "blocks": {
           "e6275e05-4fc2-4478-85db-37e4aceedf86": {
             "type": "splitSlide",
+            "disabled": true,
             "settings": {
               "splitSlide__layout": "right",
-              "heroSlide": "shopify:\/\/shop_images\/HP_HeroImage_Matte_Black_Bundle.jpg",
+              "heroSlide": "shopify:\/\/shop_images\/HP_HeroImage_Matte_Black_Bundle_4c15cb68-4d92-46a5-a866-5dc9ecf2e178.jpg",
               "desktopAlignment": "center",
               "mobileAlignment": "center",
-              "heroSlide__header": "Get one set ahead",
+              "heroSlide__header": "All Eyes On Ode",
               "heroSlide__subheader": "Shop early and save with our delightful new brewing kits.",
               "subSlide__bgColor": "#000000",
               "subSlide__textColor": "#FFFFFF",
@@ -233,10 +247,28 @@
               "heroSlide__ctaColor": "white",
               "heroSlide__ctaSubtext": ""
             }
+          },
+          "c15c0d5c-f86c-436e-95b6-2f10cb6c8b20": {
+            "type": "splitSlide",
+            "settings": {
+              "splitSlide__layout": "right",
+              "heroSlide": "shopify:\/\/shop_images\/hp_hero_1.png",
+              "desktopAlignment": "center",
+              "mobileAlignment": "center",
+              "heroSlide__header": "All Eyes On Ode",
+              "heroSlide__subheader": "Our award-winning brew grinder is now available in crisp Matte White!",
+              "subSlide__bgColor": "#000000",
+              "subSlide__textColor": "#FFFFFF",
+              "heroSlide__ctaURL": "https:\/\/fellowproducts.com\/products\/ode-brew-grinder?variant=39495206371428",
+              "heroSlide__ctaCopy": "Take A Peek",
+              "heroSlide__ctaColor": "white",
+              "heroSlide__ctaSubtext": ""
+            }
           }
         },
         "block_order": [
-          "e6275e05-4fc2-4478-85db-37e4aceedf86"
+          "e6275e05-4fc2-4478-85db-37e4aceedf86",
+          "c15c0d5c-f86c-436e-95b6-2f10cb6c8b20"
         ],
         "settings": {
           "addMargin": false
@@ -269,38 +301,101 @@
       "162997622949d3f8ee": {
         "type": "featured-collections",
         "blocks": {
+          "7acc7b63-cc70-4ca0-83e1-ffa6c28c031a": {
+            "type": "collection",
+            "settings": {
+              "tab_text": "Matte White",
+              "collection": "matte-white",
+              "button_text": "",
+              "button_url": ""
+            }
+          },
           "1c8f9541-a475-428c-9638-4b46c17cf01e": {
             "type": "collection",
             "settings": {
               "tab_text": "",
-              "collection": "coffee",
+              "collection": "bestsellers",
+              "button_text": "",
+              "button_url": ""
+            }
+          },
+          "0bc35052-fa24-4ee9-8955-ae08bee2e924": {
+            "type": "collection",
+            "settings": {
+              "tab_text": "",
+              "collection": "coffee-products-kits-bundles",
+              "button_text": "",
+              "button_url": ""
+            }
+          },
+          "a739270d-13fd-4aaf-9bd0-c54e753ab0a7": {
+            "type": "collection",
+            "disabled": true,
+            "settings": {
+              "tab_text": "",
+              "collection": "super-fancy-gifts",
+              "button_text": "",
+              "button_url": ""
+            }
+          },
+          "db2a2a28-0b9f-4295-9b8c-60c865322da2": {
+            "type": "collection",
+            "disabled": true,
+            "settings": {
+              "tab_text": "Personalize Me",
+              "collection": "personalization",
+              "button_text": "Shop All",
+              "button_url": "shopify:\/\/collections\/all-products"
+            }
+          },
+          "34a21fe6-0cfe-4b56-85f5-42725eb153e6": {
+            "type": "collection",
+            "settings": {
+              "tab_text": "Drink + serve",
+              "collection": "serve",
+              "button_text": "",
+              "button_url": ""
+            }
+          },
+          "61c6e91f-6505-42c0-866f-25296dbe3d4e": {
+            "type": "collection",
+            "settings": {
+              "tab_text": "Grind + Brew",
+              "collection": "grind-brew",
               "button_text": "",
               "button_url": ""
             }
           }
         },
         "block_order": [
-          "1c8f9541-a475-428c-9638-4b46c17cf01e"
+          "7acc7b63-cc70-4ca0-83e1-ffa6c28c031a",
+          "1c8f9541-a475-428c-9638-4b46c17cf01e",
+          "0bc35052-fa24-4ee9-8955-ae08bee2e924",
+          "a739270d-13fd-4aaf-9bd0-c54e753ab0a7",
+          "db2a2a28-0b9f-4295-9b8c-60c865322da2",
+          "34a21fe6-0cfe-4b56-85f5-42725eb153e6",
+          "61c6e91f-6505-42c0-866f-25296dbe3d4e"
         ],
         "settings": {
           "enable_section": true,
-          "heading": "Brewing gifts for every stage of the journey.",
+          "heading": "Discover products for your brew bar",
           "limit": 4,
           "show_view_all": true
         }
       },
       "1630052841314f69dd": {
         "type": "hp-iwt",
+        "disabled": true,
         "settings": {
           "enable_section": true,
-          "image": "shopify:\/\/shop_images\/HP-Bundle-Product-Feature-1.jpg",
+          "image": "shopify:\/\/shop_images\/HP_LargeModule_Set.jpg",
           "layout": "left",
-          "header": "Begin anywhere",
+          "header": "Begin Anywhere",
           "description": "<p>Intuitive coffee tools that need no introduction.<\/p>",
           "bg_color": "",
           "text_color": "#000000",
           "cta_url": "shopify:\/\/collections\/gifts-for-brewing-beginners",
-          "cta_copy": "Shop All Gifts",
+          "cta_copy": "Shop Beginner Gifts",
           "cta_color": "btn--dark"
         }
       },
@@ -311,7 +406,7 @@
           "image": "shopify:\/\/shop_images\/Fellow-Highlight.jpg",
           "layout": "center",
           "header": "Hi. We're Fellow.",
-          "description": "<p>We’re on a mission to give you the gear and the guidance to make your brewing routine a moment of creativity. We believe in terribly good design that results in ridiculously good coffee. This way to a brighter, less boring morning.<\/p>",
+          "description": "<p>We’re on a mission to give you the gear and the guidance to make your brewing routine a moment of creativity. We believe in terribly good design that results in ridiculously good coffee. Welcome to a brighter, less boring morning!<\/p>",
           "bg_color": "#fff9e5",
           "text_color": "#000000",
           "cta_url": "",
@@ -405,7 +500,7 @@
             "type": "block",
             "settings": {
               "svg_icon": "<svg xmlns=\"http:\/\/www.w3.org\/2000\/svg\" width=\"31\" height=\"30\" viewbox=\"0 0 31 30\" fill=\"none\">\n<path d=\"M29.25 15L26.2 11.5125L26.625 6.9L22.1125 5.875L19.75 1.875L15.5 3.7L11.25 1.875L8.8875 5.8625L4.375 6.875L4.8 11.5L1.75 15L4.8 18.4875L4.375 23.1125L8.8875 24.1375L11.25 28.125L15.5 26.2875L19.75 28.1125L22.1125 24.125L26.625 23.1L26.2 18.4875L29.25 15ZM12.225 20.0125L9.25 17.0125C8.7625 16.525 8.7625 15.7375 9.25 15.25L9.3375 15.1625C9.825 14.675 10.625 14.675 11.1125 15.1625L13.125 17.1875L19.5625 10.7375C20.05 10.25 20.85 10.25 21.3375 10.7375L21.425 10.825C21.9125 11.3125 21.9125 12.1 21.425 12.5875L14.025 20.0125C13.5125 20.5 12.725 20.5 12.225 20.0125Z\" fill=\"black\"><\/path>\n<\/svg>",
-              "title": "1 Year Full Warranty"
+              "title": "30-day return policy"
             }
           },
           "94f80824-48d0-4beb-987b-ba5b194f019b": {
@@ -445,12 +540,32 @@
       "cart-recommended": {
         "type": "cart-recommended",
         "settings": {}
+      },
+      "cart-gift-wrapping": {
+        "type": "cart-gift-wrapping",
+        "settings": {}
+      },
+      "1636101715cd2df3c8": {
+        "type": "hp-iwt",
+        "settings": {
+          "enable_section": true,
+          "image": "shopify:\/\/shop_images\/670x650_LargeModule-JeremyFish.jpg",
+          "layout": "right",
+          "header": "Carter in Residence",
+          "description": "<p>Pick up the new custom Carter Everywhere Mug designed by San Francisco icon Jeremy Fish, the latest in our Artist Series.<br\/><\/p>",
+          "bg_color": "",
+          "text_color": "",
+          "cta_url": "shopify:\/\/products\/the-caffeinated-cranium",
+          "cta_copy": "Go Fish",
+          "cta_color": "btn--dark"
+        }
       }
     },
     "content_for_index": [
       "1565155576930",
       "1629968785d9d2e1c7",
       "162997622949d3f8ee",
+      "1636101715cd2df3c8",
       "1630052841314f69dd",
       "163005286553dd2458",
       "16342252676e2388c3",

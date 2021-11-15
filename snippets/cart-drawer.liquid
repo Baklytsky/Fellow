@@ -1,3 +1,10 @@
+{%- assign cart_has_canal = false -%}
+{% for item in cart.items %}  
+{% if item.sku contains 'CANAL' %}
+{% assign cart_has_canal = true %}
+{% endif %}
+{% endfor %}
+
 {% comment %} To-do: Add ARIA Live updates for items added/removed from cart. -ae102220 {% endcomment %}
 <section class='cart-drawer-outer fix fill x z10' aria-expanded='false' tabindex='-1' data-component='cartDrawer'>
   <div class='cart-drawer-overlay abs fill js-overlay'></div>
@@ -22,7 +29,7 @@
           </div>
           <div class='free-shipping--met js-free-shipping-met-msg
         {% if cart.total_price < settings.gwp_threshold %} is-hidden{% endif %}'>
-            Good news! You get a free gift product.
+            Good news! You get a free {{ settings.gwp_product.title }}.
           </div>
 
           <div class='free-shipping__meter f aic'>
@@ -32,11 +39,11 @@
       {%- else -%}
         <div class="free-shipping js-free-shipping is-hidden">
           <div class='free-shipping--unmet js-free-shipping-unmet-msg
-        {% if cart.total_price > 9900 %} is-hidden{% endif %}'>
+        {% if cart.total_price > 9900 and cart_has_canal %} is-hidden{% endif %}'>
             You're <strong><span class='js-free-shipping-amount-remaining'>$99.00</span></strong> away from free US shipping
           </div>
           <div class='free-shipping--met js-free-shipping-met-msg
-        {% if cart.total_price < 9900 %} is-hidden{% endif %}'>
+        {% if cart.total_price < 9900 and cart_has_canal %} is-hidden{% endif %}'>
             Congrats! You get free US Shipping!
           </div>
 
@@ -59,7 +66,8 @@
         {% include 'cart-drawer-empty' %}
       </div>
     </div>
-
+    
+    
     <footer class='cart-drawer__footer js-cart-footer'>
       {% comment %}
       Disabled. Recommend removing this and adding functionality to cart upsell
@@ -69,8 +77,8 @@
       {% endif %}
       related schema available in assets/cart-free-product-schema.js
       {% endcomment %}
-
-      {%- if settings.enable_gift_wrapping and settings.gift_box_product -%}
+      
+      {%- if settings.enable_gift_wrapping and settings.gift_box_product and cart_has_canal == false -%}
         <div class="cart-drawer__footer-gift-wrapping">
           {% section 'cart-gift-wrapping' %}
         </div>

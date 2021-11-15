@@ -2,7 +2,7 @@
 <html lang='{{ shop.locale }}'>
   <head>
     <meta charset='utf-8'>
-    <meta name='viewport' content='width=device-width,initial-scale=1,maximum-scale=1,shrink-to-fit=no'>
+    <meta name='viewport' content='width=device-width,initial-scale=1,shrink-to-fit=no'>
     <link rel='canonical' href='{{ canonical_url }}'>
     <link rel='shortcut icon' href='{{ settings.favicon | img_url: "32x32" }}' type='image/png'>
 
@@ -32,7 +32,7 @@
       <script src='{{ 'shopify_common.js' | shopify_asset_url }}' defer='defer'></script>
     {% endif %}
 
-    <script>
+     <script>
       window.theme = {
         strings: {
           addToCart: "{{ 'products.product.add_to_cart' | t }}",
@@ -58,23 +58,6 @@
         moneyFormat: "{{ shop.money_format }}"
       }
     </script>
-
-    <!-- begin Convert Experiences code-->
-    <script type="text/javascript">
-    var _conv_page_type = "{% if template == 'index' %}homepage{% else template == "collections" %}collection{% else template == "article" %}article{% else template == "product" %}product{% else template == "cart" %}cart{% else %}other{% endif %}";
-     var _conv_category_id = "";
-     var _conv_category_name = "{{ collection.title }}";
-     var _conv_product_sku = "";
-     var _conv_product_name = "{{ product.title }}";
-     var _conv_product_price = "{{ product.compare_at_price_min | money }}";
-     var _conv_customer_id = "";
-     var _conv_custom_v1 = "{{ tag }}";
-     var _conv_custom_v2 = "{{ order.shipping_address.province }}";
-     var _conv_custom_v3 = "{{ cart.item_count }}";
-     var _conv_custom_v4 = "{{ cart.total_price | money_without_currency }}";
-    </script>
-    <script type="text/javascript" src="//cdn-3.convertexperiments.com/js/1002950-10025167.js"></script>
-    <!-- end Convert Experiences code -->
 
   
     <!-- Google Tag Manager -->
@@ -110,24 +93,35 @@
       <link rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&family=Oswald:wght@300;400;700&display=swap" />
     </noscript>
-
+    
+ 
+    
     {% include 'preconnect' %}
 
     {{ 'index.css' | asset_url | stylesheet_tag }}
     {{ 'custom.scss.css' | asset_url | stylesheet_tag }}
 
+     {% include 'preconnect' %}
+
+    {{ 'index.css' | asset_url | stylesheet_tag }}
+    {{ 'custom.scss.css' | asset_url | stylesheet_tag }}
+    
+ {%- if product.handle contains 'carter-move-mug' or product.handle contains 'carter-everywhere-mug' -%}
     {{ 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css' | stylesheet_tag }}
     {{ 'player_customized.css' | asset_url | stylesheet_tag }}
-    {% if template == 'product'%}
       {{ 'player-chunk.css' | asset_url | stylesheet_tag }}
-    {% endif %}
     {{ 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css' | stylesheet_tag }}
     {{ 'https://admin-fts.threekit.com/app/js/threekit-player-bundle.js' | script_tag }}
-
+    {%- endif -%}
+    
     {{ content_for_header }}
   </head>
 
   <body>
+{% capture the_snippet_content %}{% render 'socialshopwave-helper' %}{% endcapture %}
+            {% unless the_snippet_content contains 'Liquid error' %}
+              {{ the_snippet_content }}
+            {% endunless %}
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K9G7563"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -147,18 +141,19 @@
     {{ 'jquery-1.11.0.min.js' | asset_url | script_tag }}
     {{ 'jquery.ba-throttle-debounce.min.js' | asset_url | script_tag }}
     {{ 'custom-additional-vendor.js' | asset_url | script_tag }}
-
+  
+     {%- if product.handle contains 'carter-move-mug' or product.handle contains 'carter-everywhere-mug' -%}
     {{ 'player-event.js' | asset_url | script_tag }}
     {{ 'player-inline.js' | asset_url | script_tag }}
     {{ 'player-chunk-one.js' | asset_url | script_tag }}
     {{ 'player-chunk-two.js' | asset_url | script_tag }}
+    {%- endif -%}
 
     <script src="{{ 'custom.js' | asset_url }}" defer='defer'></script>
     <script src="{{ 'index.js' | asset_url }}" defer='defer'></script>
     {% comment %} <script src="https://a.klaviyo.com/media/js/onsite/onsite.js"></script> {% endcomment %}
-    <script src="https://cdn.attn.tv/fellow/dtag.js"></script>
   
-  {% include 'social-head-common' %}</body>
+  </body>
   <script>
 jQuery('a[href^="http"]').not('a[href^="{{ shop.url }}"]').attr('target', '_blank');
 </script>
