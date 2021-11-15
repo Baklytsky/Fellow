@@ -72,7 +72,7 @@
     </div>
   {%- endunless -%}
 
-  {%- if template contains 'bundle' -%}
+  {%- if template contains 'bundle' and product.metafields.custom_fields["product_badges"] != blank -%}
     <div class="pdpStickyBar__badge f aic">
       {% include 'pdp-badges' %}
       <span class="separator">|</span>

@@ -448,6 +448,12 @@ theme.pdpMain = function () {
     theme.checkSlickResponse($pdpGalleryWrapper, pdpGalleryConfig, 992, true)
   }
 
+  function pdpBundleGallary() {
+    var $pdpBundleGalleryWrapper = $(document).find('.pdpMain__bundle-gallery-wrapper'),
+        pdpBundleGalleryConfig = $.parseJSON($('.pdpMain__bundle-gallery').attr('data-slick-config'));
+    theme.checkSlickResponse($pdpBundleGalleryWrapper, pdpBundleGalleryConfig, 992, true)
+  }
+
   function pdpDropdown() {
     $(document).on('click.pdpDropdown', '[data-dropdown]', function (e) {
       var _this = $(this);
@@ -671,9 +677,132 @@ theme.pdpMain = function () {
     })
   }
 
+  function pdpBundleMix() {
+    $(document).off('click.bundleRadio')
+    $(document).off('click.addBundleMix')
+
+    $(document).find('.bundle-product').each(function () {
+      let selectedOptions = '',
+          checkedInputs = $(this).find('.bundle-radio-group input:checked'),
+          checkedOptions = $(this).find('.bundle-radio-group input:checked').map((i, option) => option.value);
+      checkedOptions.each((i, option) => selectedOptions = (i !== checkedOptions.length - 1) ? selectedOptions + option + '/' : selectedOptions + option)
+      checkedInputs.each(function() {
+        $(this).parents('.bundle-product__option-group').find('.option-title-value').text($(this).attr('title'))
+      })
+      $(this).find('.js-bundle-variant option').removeAttr('selected')
+      let selectedVariant = $(this).find('[data-variant-options="' + selectedOptions + '"]');
+      selectedVariant.attr('selected', 'selected')
+      selectedVariant.parent().attr('value', selectedVariant.val())
+    })
+
+    function checkBundleMixAvailable(unavailableProduct) {
+      var $disabledOptions = $(document).find('.js-bundle-variant option:disabled'),
+          checkForSelected = $disabledOptions.filter((i, e) => e.hasAttribute('selected'));
+
+      if (checkForSelected.length) {
+        $(document).find('#pdp-bundle-atc').attr('disabled', 'disabled').text('Out Of Stock')
+        $(document).find('#pdp-sticky-atc').attr('disabled', 'disabled').text('Out Of Stock')
+      } else if (unavailableProduct) {
+        $(document).find('#pdp-bundle-atc').attr('disabled', 'disabled').text('Unavailable')
+        $(document).find('#pdp-sticky-atc').attr('disabled', 'disabled').text('Unavailable')
+      } else {
+        $(document).find('#pdp-bundle-atc').removeAttr('disabled').text('Add to Cart')
+        $(document).find('#pdp-sticky-atc').removeAttr('disabled').text('Add to Cart')
+      }
+    }
+    checkBundleMixAvailable()
+
+    function changeBandleImage(variantUniqID) {
+      let $selectedImage = $('[data-variant-media="' + variantUniqID + '"]');
+      $selectedImage.parent().find('[data-variant-media]:visible').css('visibility','hidden')
+      $selectedImage.css('visibility','visible')
+    }
+
+    $(document).on('click.bundleRadio', '.bundle-radio', function () {
+      let $bundleWrapper = $(this).parents('.bundle-product'),
+          selectedOptions = '',
+          checkedInputs = $bundleWrapper.find('.bundle-radio-group input:checked'),
+          checkedOptions = $bundleWrapper.find('.bundle-radio-group input:checked').map((i, option) => option.value);
+      checkedOptions.each((i, option) => selectedOptions = (i !== checkedOptions.length - 1) ? selectedOptions + option + '/' : selectedOptions + option)
+      checkedInputs.each(function() {
+        $(this).parents('.bundle-product__option-group').find('.option-title-value').text($(this).attr('title'))
+      })
+      let selectedVariant = $bundleWrapper.find('[data-variant-options="' + selectedOptions + '"]');
+      $bundleWrapper.find('.js-bundle-variant option').removeAttr('selected')
+      selectedVariant.attr('selected', 'selected')
+      selectedVariant.parent().attr('value', selectedVariant.val())
+      if (selectedVariant.length) {
+        changeBandleImage(selectedVariant.attr('data-variant-uniq_id'));
+        checkBundleMixAvailable()
+      } else {
+        checkBundleMixAvailable(true)
+      }
+    })
+
+    $(document).on('click.addBundleMix', '#pdp-bundle-atc', function (e) {
+      e.preventDefault();
+      var $selectedBundleOptions = $(this).parents('.pdpForm').find('.js-bundle-variant select'),
+          products_data = [],
+          products = [];
+
+      $selectedBundleOptions.each(function () {
+        var variant_id = $(this).attr('value');
+        products.push(variant_id);
+      });
+
+      products.sort();
+      var current = null;
+      var cnt = 0;
+      for (var i = 0; i < products.length; i++) {
+        if (products[i] !== current) {
+          if (cnt > 0) {
+            products_data.push({
+              quantity: cnt,
+              id: current,
+              properties: {
+                "_bundles": true
+              }
+            })
+          }
+          current = products[i];
+          cnt = 1;
+        } else {
+          cnt++;
+        }
+      }
+      if (cnt > 0) {
+        products_data.push({
+          quantity: cnt,
+          id: current,
+          properties: {
+            "_bundles": true
+          }
+        })
+      }
+
+      $.ajax({
+        type: 'post',
+        url: '/cart/add.js',
+        data: {items: products_data},
+        dataType: 'json',
+        success: function () {
+          UpdateCart('', '', true)
+        },
+        error: function (error) {
+          if (error.status === 422) {
+            $('#PdpErrorMessage').text(error.responseJSON.description).fadeIn('slow');
+            setTimeout(function () {$('#PdpErrorMessage').fadeOut('slow').text('');}, 5500);
+          }
+        }
+      })
+    })
+  }
+
   if ($('.pdpBar__wrapper').length) {pdpBar();}
   if ($('.pdpMain__gallery-thumbnails').length) {pdpThumbnails();}
   if ($('.pdpMain__gallery-wrapper').length) {pdpGallary();}
+  if ($('.pdpMain__bundle-gallery').length) {pdpBundleGallary();}
+  if ($('.bundle-product').length) {pdpBundleMix();}
   if ($('.pdpRecCollection').length) {theme.pdpRecCollection();}
   if ($('[data-dropdown]').length) {pdpDropdown();}
   if ($('.pdpMediaProof').length) {pdpMediaProof();}
@@ -1098,9 +1227,10 @@ theme.cartDrawer = function () {
   }
 
   $(document).on('change.updateCartInputQTY', 'input.cart-quantity', function () {
-    let value = parseInt($(this).val(), 10);
-    let id = $(this).parents('.cart-drawer__item').attr('data-id');
-    updateCartItemQuantity(id, value);
+    let value = parseInt($(this).val(), 10),
+        id = $(this).parents('.cart-drawer__item').attr('data-id'),
+        key = $(this).parents('.cart-drawer__item').attr('data-key');
+    updateCartItemQuantity(id, value, key);
   });
 }
 

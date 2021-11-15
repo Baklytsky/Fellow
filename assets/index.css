@@ -18608,6 +18608,25 @@ textarea {
 }
 
 @media screen and (max-width: 991.98px) {
+  .radio-group.bundle-radio-group[data-option-color] .radio__title,
+  .radio-group.bundle-radio-group[data-option-material] .radio__title {
+    width: 35px;
+    height: 35px;
+  }
+
+  .radio-group.bundle-radio-group[data-option-color] .radio__title:before,
+  .radio-group.bundle-radio-group[data-option-color] .radio__title:after,
+  .radio-group.bundle-radio-group[data-option-material] .radio__title:before,
+  .radio-group.bundle-radio-group[data-option-material] .radio__title:after {
+    width: 31px;
+    height: 31px;
+  }
+
+  .radio-group.bundle-radio-group[data-option-color] .radio__title:before,
+  .radio-group.bundle-radio-group[data-option-material] .radio__title:before {
+    clip: rect(0px, 15px, 35px, 0px)
+  }
+
   .radio-group[data-option-color] .radio__title:before,
   .radio-group[data-option-material] .radio__title:before {
     clip: rect(0px, 12px, 28px, 0px)
