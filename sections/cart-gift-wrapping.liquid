@@ -27,7 +27,7 @@
          {%- if gift_wrapping_message != blank -%}
            <span>{{ gift_wrapping_message }}</span>
          {%- endif -%}
-         <button type="button" class="cart-gift-wrapping-btn" data-open-gift-note aria-hidden="false" hidden>Add gift wrapping</button>
+         <button type="button" class="cart-gift-wrapping-btn" data-open-gift-note aria-hidden="false" hidden>Add a gift box + note</button>
        {%- endif -%}
      </div>
    </section>
@@ -67,9 +67,9 @@
        <div class="cart-gift-wrapping-modal__note" {% if gift_box_in_cart %} style="padding: 40px 16px 16px" {% endif %}>
          <label for="cart-note">
            {%- if gift_box_in_cart and cart.attributes["Gift note"] -%}
-             Edit Your Note (Optional)
+             Edit Your Gift Note (Optional)
            {%- else -%}
-             Add a Note (Optional)
+             Add a Gift Note (Optional)
            {%- endif -%}
          </label>
          <div class="cart-note-wrapper rel">
@@ -97,4 +97,5 @@
      </footer>
    </div>
  {%- endif -%}
+
 

@@ -2,7 +2,7 @@
   <h3 class='productCard__title js-product-card-title'>{{ title }}</h3>
   <div class="productCard__price js-product-card-price">
     {% if product.available %}
-      {% if product.price_varies %}
+      {% if product.price_varies and product.compare_at_price == blank %}
         <p class='productCard__from eyebrow'>{{ 'products.product.from_text' | t }}</p>
       {% else %}
         <p class='productCard__eyebrow--placeholder'></p>
@@ -62,7 +62,7 @@
       {% endif %}
     </div>
   </div>
-  <a href='{{ url }}' class='abs fill z2 js-product-link' aria-label='{{ product.title }}'></a>
+  <a href='{{ product.url }}' class='abs fill z2 js-product-link' aria-label='{{ product.title }}'></a>
 </div>
   
   <div class="productCard_ratings f fdr aie mb05" {% if product.metafields.yotpo.reviews_count == blank %}style="display:none;"{% endif %}>

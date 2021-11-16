@@ -249,6 +249,18 @@ button {
       font-size: inherit;
       padding: 0;
       font-weight: 500;
+       align-items: flex-start;
+text-align: center;
+    }
+    
+    a {
+      background: none;
+      font-size: inherit;
+      padding: 0;
+      font-weight: 500;
+      margin: 2px;
+      align-items: flex-start;
+text-align: center;
     }
 
     @media screen and (max-width: $desk) {
@@ -506,6 +518,19 @@ button {
         }
       }
     }
+  }
+  
+  .leftMenu,
+  .rightMenu {
+    width: 15vw;
+  }
+  
+  .leftMenu {
+   justify-content:flex-start; 
+  }
+  
+  .rightMenu {
+   justify-content:flex-end; 
   }
 
   .newHeader__blockImages {
@@ -1021,7 +1046,7 @@ button {
   width: 100%;
   height: 100%;
   object-position: center;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .image-abs-contain {
@@ -1230,10 +1255,12 @@ button {
 
 [data-color="stone-blue"],
 [data-material="stone-blue"] {
-  color: rgb(237, 200, 144);
-  &:after {
     color: #2B3C4D;
-  }
+}
+
+[data-color="matte-grey"],
+[data-material="matte-grey"] {
+    color: #D8D8D8;
 }
 
 
@@ -1584,6 +1611,7 @@ button {
     font-weight: 500;
     font-size: 18px;
     line-height: 24px;
+    text-transform: none;
 
     @media screen and (max-width: $tablet) {
       padding: 16px 18px;
@@ -2618,8 +2646,7 @@ img.BlogSectionArticle__Image {
   }
 }
 
-.pdpMain__gallery-wrapper,
-.pdpMain__bundle-gallery-wrapper {
+.pdpMain__gallery-wrapper {
   margin-bottom: -16px;
   padding: 0 24px;
 
@@ -2684,20 +2711,19 @@ img.BlogSectionArticle__Image {
 .pdpMain__variant-image {
   background-color: #F5F5F5;
   margin-bottom: 16px;
-  padding-top: 100%;
-
-  img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-position: center;
-    object-fit: contain;
-  }
-
   @media screen and (max-width: $tablet) {
     margin-bottom: 0;
+    padding-top: 100%;
+
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-position: center;
+      object-fit: contain;
+    }
   }
 
   .productCard__badge {
@@ -2761,6 +2787,7 @@ h2.pdpCopy__header-price ,
   font-family: $font-header;
   font-size: 26px;
   line-height: 100%;
+  text-transform:none;
 
   @media screen and (max-width: $tablet) {
     font-size: 24px;
@@ -2787,7 +2814,7 @@ h2.pdpCopy__header-price ,
   font-weight: bold;
   font-size: 16px;
   line-height: 120%;
-  text-transform: lowercase;
+  text-transform: none;
 
 
 
@@ -2847,6 +2874,7 @@ h2.pdpCopy__header-price ,
     font-size: 18px;
     line-height: 24px;
     text-transform: capitalize;
+    cursor:pointer;
 
     @media screen and (max-width: $mobile) {
       max-width: 100%;
@@ -3791,14 +3819,14 @@ h2.pdpCopy__header-price ,
     font-weight: 500;
     font-size: 14px;
     line-height: 16px;
-    text-transform: none;
+    text-transform: lowercase;
   }
 }
 
 .size__image-wrapper {
   width: 80px;
   height: 80px;
-  padding: 8px;
+  padding: 8px 8px 0 8px;
   display: flex;
   justify-content: center;
   align-items: flex-end;
@@ -3806,10 +3834,9 @@ h2.pdpCopy__header-price ,
 }
 
 .size__image-wrapper-icon {
-  height: 100%;
+  height: inherit;
   display: flex;
   justify-content: center;
-  align-items: flex-end;
   svg {
     width: 100%;
     fill: #DBDBDB;
@@ -4757,8 +4784,8 @@ h2.pdpCopy__header-price ,
     margin-top: -0.25rem;
 
     .radio__label-size-image {
-      max-width: 96px;
-      min-width: 96px;
+      max-width: 92px;
+      min-width: 92px;
       padding-top: 0;
     }
   }
@@ -4776,10 +4803,6 @@ h2.pdpCopy__header-price ,
   .size__image-wrapper {
     width: 60px;
     height: 60px;
-  }
-
-  .size__image-wrapper-icon svg {
-    max-height: 100%;
   }
 }
 
@@ -5436,6 +5459,34 @@ h2.pdpCopy__header-price ,
   line-height: 20px;
 }
 
+.kl-private-reset-css-Xuajs1 > button {
+ height: 24px !important; 
+   border-radius: 0 12px 12px 0 !important;
+  margin-left: 44px !important;
+  padding-top: 11px !important;
+    padding-bottom: 11px  !important;
+  padding-left:  26px !important;
+    padding-right:  26px !important;
+  width: auto !important;
+
+}
+
+.kl-private-reset-css-Xuajs1 > input,
+.kl-private-reset-css-Xuajs1 > .go2323703347 
+{
+ border: 1px solid #fff !important;
+  border-radius: 12px 0 0 12px !important;
+  margin-right: -2px !important;
+  padding-left: 8px !important;
+  width: 231px !important;
+}
+
+
+.kl-private-reset-css-Xuajs1 > .go581579764 {
+ width: 100% !important;
+  border-radius: 12px !important;
+   margin-left: 0 !important;
+}
 
 // Gift wrapping
 
@@ -5497,7 +5548,7 @@ h2.pdpCopy__header-price ,
   width: 100%;
   height: calc(100% - 64px);
   background-color: #fff;
-  z-index: 2;
+  z-index: 3;
   display: flex;
   flex-direction: column;
   transition: all var(--medium) var(--ease);

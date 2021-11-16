@@ -2,13 +2,8 @@
 {% if product.metafields.custom_fields["desktop_masthead_image"] or product.metafields.custom_fields["mobile_masthead_image"] != blank %}
   {%- assign masthead_exists = true -%}
 {% endif %}
-<section class='full pdpMain__container' data-component='pdpMain'>
-  <div class='pdpMain row no-gutters'>
-    {% if product.tags contains 'customizer' %}
-      <div class='pdpMain no-gutters product-main-section'>
-      {% else %}
-      <div class='pdpMain no-gutters product-main-section'>
-    {% endif %}
+<section class='full pdpMain__container product-main-section' data-component='pdpMain'>
+  <div class='pdpMain row no-gutters'> 
     <div class='pdpMain__Media order-lg-1 rel x'>
       {% include 'pdb-image-thumbnails.liquid' %}
       {%- comment -%}
@@ -18,11 +13,5 @@
     <div class='pdpMain__Content order-lg-2 rel x'>
       {% include 'pdp-details' %}
     </div>
-  </div>
-  <div class="pdpMain row no-gutters player-app-container">
-    <div class='col-lg-12 back-button-container'>
-      <span class='back-button' onclick="hidePlayer()"><strong><i class="fas fa-arrow-alt-circle-left icon"></i></strong></span>
-    </div>
-    <div id="player-app" class='col-lg-12'></div>
   </div>
 </section>

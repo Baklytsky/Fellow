@@ -310,5 +310,12 @@
   },
   "date_formats": {
     "month_day_year": "%B %d, %Y"
+  },
+  "socialshopwave": {
+    "add_to_cart": "Add To Cart",
+    "adding_to_cart": "Adding...",
+    "sold_out": "Sold Out",
+    "description": "Description",
+    "view_on_instagram": "View on Instagram"
   }
 }

@@ -1,71 +1,6 @@
-<div id="Product" data-product-template="{{ product.template_suffix }}" class="pdpTemplate">
+<div id="Product" class="pdpTemplate">
   {%- assign meta_reviews_count = product.metafields.yotpo.reviews_count | plus: 0 -%}
   {%- assign current_variant = product.selected_or_first_available_variant -%}
-
-  {%- assign product_bundles_array = product.metafields.custom_fields["bundle_products_group"] -%}
-  {%- assign variant_bundles_array = product.metafields.custom_fields["bundle_variants_id"] -%}
-  {%- assign available_bundle_product = true -%}
-  {%- assign available_bundle_variant = true -%}
-
-  {% if product_bundles_array != blank %}
-    {%- assign component_button_id = 'pdp-bundle-atc' -%}
-    {% assign product_bundles = product_bundles_array | split: "|" %}
-    <ul class="bundle-products is-hidden">
-      {% if variant_bundles_array != blank %}
-        {% assign variant_bundles = variant_bundles_array | split: "," %}
-      {% endif %}
-      {% for product_handle in product_bundles %}
-        {%- assign has_selected_variant_id = false -%}
-        {% assign _product = all_products[product_handle] %}
-
-        {%- if _product != blank -%}
-          {%- for variant in _product.variants -%}
-            {%- assign variant_id = variant.id | times: 1 -%}
-            {%- for bundle_variant_id in variant_bundles -%}
-              {%- assign bundle_id = bundle_variant_id | times: 1 -%}
-              {%- if variant_id == bundle_id -%}
-                {%- unless variant.available -%}
-                {%- assign available_bundle_variant = false -%}
-                {%- endunless -%}
-                <li
-                  id='{{ variant.id }}'
-                  data-variant-available="{{ variant.available }}"
-                  data-variant-price='{{ variant.price | money | remove: ".00" }}'
-                  data-variant-inventory-quantity='{{ variant.inventory_quantity }}'
-                  data-variant-inventory-policy='{{ variant.inventory_policy }}'
-                  data-variant-inventory-management='{{ variant.inventory_management }}'
-                  data-product-title='{{ _product.title }}'>
-                  {{ variant.title }}
-                </li>
-                {%- assign has_selected_variant_id = true -%}
-                {% break %}
-              {%- endif -%}
-            {%- endfor -%}
-          {%- endfor -%}
-
-          {%- unless has_selected_variant_id -%}
-          {%- assign current_bundle_variant = _product.selected_or_first_available_variant -%}
-            {%- unless current_bundle_variant.available -%}
-            {%- assign available_bundle_variant = false -%}
-            {%- endunless -%}
-            <li
-              id='{{ current_bundle_variant.id }}'
-              data-variant-available="{{ current_bundle_variant.available }}"
-              data-variant-price='{{ current_bundle_variant.price | money | remove: ".00" }}'
-              data-variant-inventory-quantity='{{ current_bundle_variant.inventory_quantity }}'
-              data-variant-inventory-policy='{{ current_bundle_variant.inventory_policy }}'
-              data-variant-inventory-management='{{ current_bundle_variant.inventory_management }}'
-              data-product-title='{{ _product.title }}'>
-              {{ current_bundle_variant.title }}
-            </li>
-          {% endunless %}
-        {%- else -%}
-          {%- assign available_bundle_product = false -%}
-        {%- endif -%}
-
-      {% endfor %}
-    </ul>
-  {% endif %}
 
   <div class='hide'>
     <meta itemprop="name" content="{{ product.title }}{% unless product.has_only_default_variant %} - {{ current_variant.title }}{% endunless %}">
@@ -259,7 +194,7 @@
 
             {% if product.description != blank %}
               <div class='pdp__description'>
-                <p>{{ product.description | truncate: 80 | strip_html }}</p>
+                <p>{{ product.description | strip_html }}</p>
               </div>
             {% endif %}
 
@@ -313,55 +248,20 @@
             {%- assign cta_data = product.selected_or_first_available_variant.id | prepend: 'data-add-id="' | append: '" data-add-qty="1"' -%}
             <div class="pdpDetails__btns" data-disabled-size="{{ product_has_size_option }}">
 
-              {%- if product.template_suffix == 'bundle' -%}
-                {%- capture cta -%}
-                  {% if product.available and available_bundle_variant and available_bundle_product %}
-                    <span data-atc-copy class="js-atc-copy">
-                      {% if product.tags contains 'preorder' %}
-                        Preorder
-                      {% else %}
-                        Add to Cart
-                      {% endif %}
-                    </span>
-
-                    {%- assign disableVal = false -%}
-                  {% else %}
-                    {% if product.tags contains 'discontinued' %}
-                      Discontinued
-                    {% else %}
-                      Out of Stock
-                    {% endif %}
-                    {%- assign disableVal = true -%}
-                  {% endif %}
-                {%- endcapture -%}
-                {%
-                  include 'component-button' with
-                  tag: 'button',
-                  id: component_button_id,
-                  name: 'add',
-                  type: 'submit',
-                  href: '#',
-                  className: 'js-add-to-cart cart__button',
-                  dataAttr: 'data-atc="true"',
-                  disabled: disableVal,
-                  cta: cta,
-                %}
-              {% else %}
-                {%- if product_has_size_option -%}
-                  <button type="button" class="cart__button--select-size" disabled>Select size</button>
-                {%- endif -%}
-
-                {% include 'component-button' with
-                  tag: 'button',
-                  id: 'quickAdd',
-                  name: 'add',
-                  type: 'submit',
-                  href: '#',
-                  className: 'cart__button',
-                  dataAttr: cta_data,
-                  disabled: disableVal,
-                  cta: cta, %}
+              {%- if product_has_size_option -%}
+                <button type="button" class="cart__button--select-size" disabled>Select size</button>
               {%- endif -%}
+
+              {% include 'component-button' with
+                tag: 'button',
+                id: 'quickAdd',
+                name: 'add',
+                type: 'submit',
+                href: '#',
+                className: 'cart__button',
+                dataAttr: cta_data,
+                disabled: disableVal,
+                cta: cta, %}
 
               <div class='is-hidden' data-bis>
                 <button class='button cart__button klaviyo-bis-trigger'>Out of Stock | Notify Me</button>
