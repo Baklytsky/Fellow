@@ -64,10 +64,10 @@
   </div>
   <a href='{{ product.url | within: collection }}' class='abs fill z2 js-product-link' aria-label='{{ product.title }}'></a>
 </div>
-  
-  <div class="productCard_ratings f fdr aie mb05" {% if product.metafields.yotpo.reviews_count == blank %}style="display:none;"{% endif %}>
-      <div class="yotpo bottomLine" style="display:inline-block;"
-  data-product-id="{{ product.id }}">
-  </div><span class="productCard__reviewNum">({{ product.metafields.yotpo.reviews_count }})</span></div>
+  {%- assign reviews_count = product.metafields.yotpo.reviews_count | plus: 0 -%}
+  <div class="productCard_ratings f fdr aie mb05" {% if reviews_count == 0 %}style="display:none;"{% endif %}>
+      <div class="yotpo bottomLine" style="display:inline-block;" data-product-id="{{ product.id }}"></div>
+    <span class="productCard__reviewNum">({{ reviews_count }})</span>
+  </div>
      
  
