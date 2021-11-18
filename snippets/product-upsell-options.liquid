@@ -1,0 +1,76 @@
+{%- assign option_name_handle = option_name | handleize -%}
+
+{%- case option_name_handle -%}
+{%- when 'size' -%}
+{%- assign order = 1 -%}
+{%- when 'version' -%}
+{%- assign order = 2 -%}
+{%- when 'material' -%}
+{%- assign order = 3 -%}
+{%- when 'color' -%}
+{%- assign order = 4 -%}
+  {%- else -%}
+{%- assign order = 0 -%}
+{%- endcase -%}
+
+{%- if option_name_handle == 'size' and has_upsell_variant -%}
+  {%- assign hide_size_option = true -%}
+{%- endif -%}
+
+{%- for item in options_array -%}
+  {%- assign option_value = item -%}
+  {%- if item contains 'Limited Edition:' -%}
+    {%- assign option_value = item | split: 'Limited Edition:' | last | strip -%}
+  {%- endif -%}
+
+  {%- if has_upsell_variant -%}
+    {% if product_upsell_variant.title contains option_value %}
+      {%- assign selected_value = option_value -%}
+    {% endif %}
+  {%- else -%}
+    {%- if forloop.first -%}
+      {%- assign selected_value = option_value -%}
+    {%- endif -%}
+  {%- endif -%}
+{%- endfor -%}
+
+<div class="upsell-product__option-group"
+     style="order: {{ order }}; {% if option_name_handle == 'title' %}display: none;{% endif %}">
+  <label class="block" data-option-label="{{ option_name }}">
+    <span class="option-title block">
+      <strong>{{ option_name }}: </strong>
+      <span class="option-title-value">{{ selected_value }}</span>
+    </span>
+  </label>
+  <div class="upsell-product__radio-group f"
+       {% if options_array.size == 1 or hide_size_option %}style="display: none"{% endif %}>
+    {%- for item in options_array -%}
+      {%- assign option_value = item -%}
+      {%- if item contains 'Limited Edition:' -%}
+        {%- assign option_value = item | split: 'Limited Edition:' | last | strip -%}
+      {%- endif -%}
+      <div class="radio-group upsell-radio-group f aic" data-option-{{ option_name | handleize }}>
+        <label class="upsell-radio" for="{{ option_value | handleize | append: '-' | append: uniq_id }}">
+          <span class="u-sr-only">{{ option_value }}</span>
+          <input id="{{ option_value | handleize | append: '-' | append: uniq_id }}"
+                 type="radio"
+                 name="{{ option_name | append: '-' | append: uniq_id }}"
+                 value="{{ option_value | handleize }}"
+                 title="{{ option_value }}"
+                  {% if has_upsell_variant %}
+            {% if product_upsell_variant.title contains option_value %}checked{% endif %}
+          {% else %}
+            {% if forloop.first %}checked{% endif %}
+                  {% endif %}>
+          <div class="radio__title f aic jcc"
+               data-{{ option_name | handleize }}="{{ option_value | handleize }}">
+            <span style="white-space: nowrap">{{ option_value }}</span>
+          </div>
+        </label>
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+{%- assign hide_size_option = false -%}
+{%- assign selected_value = blank -%}

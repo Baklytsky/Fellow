@@ -143,6 +143,13 @@
       }
     }]);
   </script>
+  
+    <script>
+    // ======================================== Neels code starts here ========================================
+    var json_product = {{ product | json }};
+    // ======================================== Neels code ends here ========================================
+  </script>
+  
   {%- assign show_quantity_selector = true -%}
   {%- assign current_variant = product.selected_or_first_available_variant -%}
   {%- assign featured_image = current_variant.featured_image | default: product.featured_image -%}

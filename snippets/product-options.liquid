@@ -5,8 +5,7 @@
       {%- assign option_name_handleize = option.name | handleize -%}
       <div class='{% if option.values.size <= 1 %} hide{% endif %}'
            data-option-radio data-index='{{ forloop.index0 }}'
-           data-options-count='{{ option.values.size }}'
-        {% if option_name_handleize == 'size' %} style='order:1'{% endif %}>
+           data-options-count='{{ option.values.size }}'>
         {% for value in option.values %}
           {% include 'assign_option_label', option: option, value: value %}
           {% if option_value_group != blank %}
