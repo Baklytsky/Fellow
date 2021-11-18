@@ -5769,12 +5769,14 @@ h2.pdpCopy__header-price ,
   line-height: 100%;
 }
 
-.bundle-product__option-group {
+.bundle-product__option-group,
+.upsell-product__option-group {
   .option-title {
     margin-bottom: 8px;
   }
 
-  .bundle-radio-group {
+  .bundle-radio-group,
+  .upsell-radio-group {
     margin-bottom: 8px;
     margin-right: 8px;
 
@@ -5784,6 +5786,92 @@ h2.pdpCopy__header-price ,
   }
 }
 
-.bundle-product__radio-group {
+.bundle-product__radio-group,
+.upsell-product__radio-group {
   flex-wrap: wrap;
+}
+
+.upsell-product {
+  display: none;
+}
+
+.upsell-product__wrapper {
+  padding: 16px;
+  display: flex;
+  background-color: $color-sand;
+}
+
+.upsell-product__image-wrapper {
+  width: 140px;
+  min-width: 140px;
+  height: 140px;
+  background-color: $color-white;
+
+  img {
+    visibility: hidden;
+  }
+
+  @media screen and (max-width: $tablet) {
+    width: 96px;
+    min-width: 96px;
+    height: 96px;
+  }
+}
+
+.upsell-product__content {
+  flex-grow: 1;
+  padding-left: 16px;
+}
+
+.upsell-product__content-title {
+  margin: 0 0 8px 0;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 100%;
+
+  @media screen and (max-width: $tablet) {
+    font-size: 18px;
+    flex-direction: column;
+    justify-content: unset;
+  }
+}
+
+.upsell-product__content-price {
+  font-family: $font-base;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 120%;
+
+  @media screen and (max-width: $tablet) {
+    margin-top: 8px;
+    font-size: 16px;
+  }
+}
+
+.upsell-product__content-description {
+  margin-bottom: 16px;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 130%;
+
+  @media screen and (max-width: $tablet) {
+    font-size: 14px;
+    line-height: 120%;
+  }
+}
+
+#pdp-product-upsell-atc {
+  padding: 0;
+  display: inline-block;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+#pdp-product-upsell-atc[disabled] {
+  pointer-events: none;
 }

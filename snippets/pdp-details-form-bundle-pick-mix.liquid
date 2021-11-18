@@ -134,7 +134,7 @@
                         data-variant-inventory-quantity='{{ variant.inventory_quantity }}'
                         data-variant-inventory-policy='{{ variant.inventory_policy }}'
                         data-variant-inventory-management='{{ variant.inventory_management }}'
-                        {% unless variant.available %}disabled{% endunless %}
+                        {% unless variant.available %}disabled="disabled"{% endunless %}
                         {% if forloop.first %}selected{% endif %}>
                   {{ variant.title }}
                 </option>
