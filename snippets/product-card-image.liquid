@@ -53,10 +53,10 @@
       {% endif %}
     {% endfor %}
   {% endif %}
-  <div class="productCardImg__QuickView">
+  <div class="productCardImg__QuickView" {% if product.template_suffix contains 'pick' %}style="display:none;"{% endif %}>
     <button class="productCardImg__QuickViewButton js-product-view" data-quick-view="{{ url }}?view=quick-view" type="button">{{ 'products.product.quick_view' | t }}</button>
   </div>
-  <a class='productCardImg__ProductLink abs fill z2 js-product-link' href='{{ product.url | within: collection }}' title="{{ product.title }}" aria-label='{{ product.title }}'>
+  <a class='productCardImg__ProductLink abs fill z2 js-product-link' href='{{ product.url }}' title="{{ product.title }}" aria-label='{{ product.title }}'>
     {%- if product.metafields.custom_fields["product_alternative_image"] != blank -%}
       {%- assign alternative_url = product.metafields.custom_fields["product_alternative_image"] -%}
       <img src="{{ alternative_url }}"

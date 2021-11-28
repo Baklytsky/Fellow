@@ -1,6 +1,3 @@
-{%- comment -%}
-  {% include 'pdp-info' %}
-{%- endcomment -%}
 <div class="pdpInfo">
   {%- if product.description != blank -%}
     <div class="pdpInfo-item dropdown">
@@ -14,7 +11,8 @@
       </div>
       <div class="dropdownContent" data-dropdown-list>
         <div class="dropdownContent--animate-block dropdownContent--animate-block-visible">
-          {{ product.description }}
+          {% if product.template_suffix contains 'bundle' %}<p {% if product.title contains "The Greatest Hits Kit" %}style="display:none;"{% endif %}><b>Bundles just got better! During our Black Friday sale, we returned all Kits + Bundles to full price so you can take advantage of the extra discount.</b></p>{% endif %}
+          <p>{{ product.description }}</p>
         </div>
       </div>
     </div>
@@ -25,7 +23,7 @@
         <div class="pdpInfo-item dropdown">
           <div class="dropdownHeader" data-dropdown>
             <h3 class="dropdownHeader-title">
-              {{ item["product_info_heading_new"] }}
+              {{ item["product_info_heading_new"]}}
             </h3>
             <div class="dropdownHeader-icon {% if product.description == blank and forloop.first %} dropdownHeader-icon--rotate {% endif %}">
               {% render 'icon' with 'dropdown' %}
@@ -35,13 +33,35 @@
                {% if product.description == blank and forloop.first %}style="display: block;"
                {% else %}style="display: none;"{% endif %}>
             <div class="dropdownContent--animate-block {% if product.description == blank and forloop.first %} dropdownContent--animate-block-visible {% endif %}">
-              {{ item["product_info_content_new"] }}
+              <p>{{ item["product_info_content_new"] }}</p>
             </div>
           </div>
         </div>
       {%- endif -%}
     {% endfor %}
   {% endif %}
-       
+  
+   <div class="pdpInfo-item dropdown">
+          <div class="dropdownHeader" data-dropdown>
+            <h3 class="dropdownHeader-title">
+             🔥 Cyber Weekend Details
+            </h3>
+            <div class="dropdownHeader-icon {% if product.description == blank and forloop.first %} dropdownHeader-icon--rotate {% endif %}">
+              {% render 'icon' with 'dropdown' %}
+            </div>
+          </div>
+          <div class="dropdownContent" data-dropdown-list
+               {% if product.description == blank and forloop.first %}style="display: block;"
+               {% else %}style="display: none;"{% endif %}>
+            <div class="dropdownContent--animate-block {% if product.description == blank and forloop.first %} dropdownContent--animate-block-visible {% endif %}">
+              <p><strong>Summary:</strong></p>
+           <p>   <ul><li> • 15% off orders up to $200</li>
+                <li> • 20% off orders $200 or more</li></ul></p>
+              <p><strong>Terms and Conditions:</strong></p>               
+<p>All orders placed with a minimum qualifying subtotal of $200.00 will receive 20% off their order subtotal. Orders under $200.00 will receive 15% off their order subtotal. Discount is automatically applied to products based on the cart subtotal excluding Gift Box, Coffee Beans, Personalization Fees, and Digital Gift Cards. Offer valid while supplies last. Offer is only valid on orders placed between 11/22/21 7:00 AM PST and 11/29/21 at 11:59 PM PST, cannot be retroactively applied, and cannot be combined with other promo codes or discounts.</p>
+            </div>
+          </div>
+        </div>
+
 </div>
 
