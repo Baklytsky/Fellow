@@ -49,8 +49,8 @@
             {% endif %}
         </div>
       </div>
-      {% if tagline != blank %}<div class='pdp__tagline hide-mobile'>{{ tagline | capitalize }}</div>{% endif %}
-      <div class="pdp__reviews">
+      {% if tagline != blank %}<div class='pdp__tagline'>{{ tagline }}</div>{% endif %}
+      <div class="pdp__reviews mb1 mt1">
         {%- assign reviews_count = product.metafields.yotpo.reviews_count | plus: 0 -%}
         {%- if reviews_count > 0 -%}
           {% include 'yotpo-star-rating-widget' %}
@@ -80,10 +80,6 @@
             <h2 class='strike'>{{ current_variant.price | money_without_trailing_zeros }}</h2>
           {% endif %}
       </div>
-      {% comment %} Shop Pay Snippet {% endcomment %}
-      <div data-shop-pay class='shop-pay mb15'>
-        {{ form | payment_terms }}
-      </div>
     </div>
     {%- comment -%}
       {% include 'pdp-bundle-description' %}
@@ -94,6 +90,10 @@
     {%- else -%}
       {% include 'pdp-details-form-bundle' %}
     {%- endif -%}
+  {% comment %} Shop Pay Snippet {% endcomment %}
+  <div data-shop-pay class="shop-pay mb1">
+        {{ form | payment_terms }}
+      </div>
   {% endform %}
 
     {% include 'pdp-badges' %}

@@ -49,6 +49,10 @@ textarea {
   top: 0
 }
 
+.text-align-right {
+ text-align:right; 
+}
+
 .fill,
 .bottom {
   bottom: 0
@@ -16280,9 +16284,8 @@ em,
 }
 
 .caps {
-  text-transform: lowercase
+  text-transform: capitalize;
 }
-.caps::first-letter { text-transform: uppercase }
 
 .no-under {
   text-decoration: none
@@ -17358,7 +17361,7 @@ body.is-masthead--empty main {
     max-width: 100%;
   }
   .footerInner__Left .fdc {
-    align-items: center;
+    align-items: left;
   }
 
   .footerInner__Right {
@@ -17371,6 +17374,8 @@ body.is-masthead--empty main {
     justify-content: flex-start;
   }
 }
+    
+    
 
 .footer__col {
   margin-bottom: 25px;
@@ -17378,10 +17383,13 @@ body.is-masthead--empty main {
   padding-right: 30px;
 }
 
+    
+    
 @media screen and (min-width: 992px) {
   .footer__col {
     margin-left: 30px;
     padding-right: 0;
+      max-width: 25%;
   }
   .footer__col:first-child {
     margin-left: 0;
@@ -17440,7 +17448,7 @@ body.is-masthead--empty main {
 }
 
 .footer svg {
-  margin-bottom: 25px;
+  margin-bottom: 0;
   width: auto;
   max-width: 250px;
   fill: #fff;
@@ -17509,7 +17517,7 @@ body.is-masthead--empty main {
 }
 
 .footer__payment-icons {
-  margin: 2rem auto 0 auto;
+  margin: 0 auto 2rem auto;
   position: relative;
   width: 100%
 }
@@ -17518,7 +17526,7 @@ body.is-masthead--empty main {
   display: grid;
   gap: .8rem;
   grid-template-columns: repeat(auto-fit, 38px);
-  justify-content: center;
+  justify-content: start;
   padding: 0
 }
 
@@ -17550,7 +17558,7 @@ body.is-masthead--empty main {
 
   .footer svg {
     max-width: 120px;
-    margin-bottom: 16px;
+    margin-bottom: 0;
   }
 }
 
@@ -17835,13 +17843,23 @@ body.is-masthead--empty main {
   font-size: 20px;
   line-height: 120%;
 }
+    
+     @media screen and (max-width: 992px) {
+      .cart-footer__total {
+  width: 50%;
+  flex-shrink: 0;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 120%;
+} 
+     }
 
 .cart-footer__total-item {
   margin: 4px 0;
 }
 
 .cart-footer__total-item span {
-  margin-right: 8px;
+  margin-right: 5px;
 }
 
 .cart-drawer__empty .image {

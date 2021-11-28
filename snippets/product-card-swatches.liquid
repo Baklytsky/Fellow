@@ -1,6 +1,7 @@
+{%- assign reviews_count = product.metafields.yotpo.reviews_count | plus: 0 -%}
 {%- assign color_count = 0 -%}
 
-<form class='productCard__variants rel {% if product.metafields.yotpo.reviews_count == blank %}mt05{% endif %}'>
+<form class='productCard__variants rel {% if reviews_count == 0 %}mt1{% endif %}'>
   <div class='productCard__options'>
     {% for product_option in product.options_with_values %}
       {% assign option_name = product_option.name | handleize %}
@@ -53,7 +54,7 @@
 
   {%- if color_count > 0 -%}
     <div class="productCardVariants__ColorCount">
-      <a class="productCardVariants__CountButton" href="{{ product.url | within: collection }}" aria-label="Open product page" title="{{ product.title }}" role="button">
+      <a class="productCardVariants__CountButton" href="{{ product.url }}" aria-label="Open product page" title="{{ product.title }}" role="button">
         {{ color_count }} {{ color_count | pluralize: 'color', 'colors' }}
       </a>
     </div>

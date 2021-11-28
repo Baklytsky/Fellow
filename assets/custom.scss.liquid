@@ -249,8 +249,6 @@ button {
       font-size: inherit;
       padding: 0;
       font-weight: 500;
-       align-items: flex-start;
-text-align: center;
     }
     
     a {
@@ -258,9 +256,7 @@ text-align: center;
       font-size: inherit;
       padding: 0;
       font-weight: 500;
-      margin: 2px;
-      align-items: flex-start;
-text-align: center;
+      max-width:fit-content;
     }
 
     @media screen and (max-width: $desk) {
@@ -1614,11 +1610,11 @@ text-align: center;
     text-transform: none;
 
     @media screen and (max-width: $tablet) {
-      padding: 16px 18px;
+      padding: 16px 62px;
       width: auto;
       font-size: 16px;
       line-height: 20px;
-      margin-top: 20px;
+      margin-top: 0;
     }
   }
 
@@ -1634,7 +1630,7 @@ text-align: center;
 
     @media screen and (max-width: $tablet) {
       .textContainer__desktopPadding {
-        padding: 16px 16px 65px;
+        padding: 16px 16px 50px;
       }
     }
   }
@@ -1643,35 +1639,38 @@ text-align: center;
     font-family: $font-header;
     font-style: normal;
     font-weight: 500;
-    font-size: 72px;
-    line-height: 1em;
+    font-size: 60px;
+    line-height: 60px;
     text-align: left;
     text-transform: none;
+    margin-bottom: 24px;
 
     @media screen and (max-width: $desk) {
       font-size: 60px;
     }
 
     @media screen and (max-width: $tablet) {
-      font-size: 56px;
+      font-size: 42px;
+      line-height:100%;
     }
   }
 
   .splitSlide__Description {
-    margin: 0;
-    padding: 25px 0;
+margin-bottom: 24px;
+    padding: 0 0;
     font-family: $font-base;
     font-style: normal;
     font-weight: normal;
-    font-size: 1.25rem;
-    line-height: 100%;
+    font-size: 20px;
+    line-height: 24px;
     text-align: left;
     text-transform: none;
 
     @media screen and (max-width: $tablet) {
-      font-size: 20px;
-      padding: 20px 0;
-      line-height: 100%;
+      font-size: 18px;
+      padding: 0 0;
+      line-height: 22px;
+      
     }
   }
 }
@@ -1699,13 +1698,13 @@ text-align: center;
 
 /*Text Logo Section*/
 .LogoText {
-  padding: 15px;
+  padding: 16px;
   text-align: center;
   background-color: $color-sand;
 
 
   @media screen and (max-width: $tablet){
-    padding: 5px 15px;
+    padding: 16px;
   }
 }
 .LogoText__Message {
@@ -1719,8 +1718,8 @@ text-align: center;
   color: $color-black;
 
   @media screen and (max-width: $tablet){
-    font-size: 24px;
-    line-height: 2em;
+    font-size: 20px;
+    line-height: 100%;
   }
 
   &:hover, &:active, &:visited {
@@ -1749,13 +1748,14 @@ text-align: center;
 /*Featured Collections*/
 
 .FeaturedCollections {
-  margin: 32px auto;
+  margin: 64px auto 0;
   width: 100%;
   max-width: 1440px;
 
 
   @media screen and (max-width: $tablet) {
-    margin-bottom: 0;
+    margin-bottom: 32px;
+    margin-top: 40px;
   }
 }
 
@@ -1986,11 +1986,11 @@ text-align: center;
 
 /*Image With Text Section*/
 .ImageWithText {
-  margin: 32px auto;
-  padding: 35px 25px 64px;
+  margin: 0 auto;
+  padding: 32px 25px 32px;
 
   @media screen and (max-width: $tablet) {
-    padding: 65px 0;
+    padding: 0 0 64px;
     margin: 0 auto;
   }
 }
@@ -2041,7 +2041,8 @@ text-align: center;
 
   @media screen and (max-width: $tablet) {
     margin-bottom: 16px;
-    font-size: 56px;
+    font-size: 42px;
+    line-height: 42px;
   }
 }
 
@@ -2055,7 +2056,8 @@ text-align: center;
 
   @media screen and (max-width: $tablet) {
     margin: 0 0 16px;
-    font-size: 20px;
+    font-size: 18px;
+    line-height: 22px;
   }
 }
 
@@ -2075,7 +2077,7 @@ text-align: center;
 
 
     @media screen and (max-width: $tablet) {
-      padding: 16px 18px;
+      padding: 16px 62px;
       width: auto;
       max-width: unset;
       font-size: 16px;
@@ -2141,7 +2143,12 @@ text-align: center;
 
       .ImageWithText__Description p {
         margin: 0;
-        font-size: 1.125rem;
+        font-size: 18px;
+        line-height: 22px;
+      }
+      
+      .ImageWithText__ButtonWrapper {
+        margin-top: 16px;
       }
     }
   }
@@ -2787,7 +2794,6 @@ h2.pdpCopy__header-price ,
   font-family: $font-header;
   font-size: 26px;
   line-height: 100%;
-  text-transform:none;
 
   @media screen and (max-width: $tablet) {
     font-size: 24px;
@@ -2808,19 +2814,10 @@ h2.pdpCopy__header-price ,
   left: 75%;
 }
 
-.pdp__tagline::first-letter { text-transform: uppercase }
-
 .pdp__tagline {
   font-weight: bold;
   font-size: 16px;
   line-height: 120%;
-  text-transform: none;
-
-
-
-  @media screen and (max-width: $tablet) {
-    display: none;
-  }
 }
 
 .pdpMain__details {
@@ -2898,6 +2895,7 @@ h2.pdpCopy__header-price ,
       max-width: 100%;
       font-size: 18px;
       line-height: 24px;
+      text-align: center;
     }
 
     &:hover {
@@ -3063,7 +3061,7 @@ h2.pdpCopy__header-price ,
 
   h1, h2, h3 {
     margin: 0 0 24px 0;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 72px;
     line-height: 100%;
 
@@ -3427,7 +3425,7 @@ h2.pdpCopy__header-price ,
 
 .keyFeatures__Heading {
   margin: 0 0 56px;
-  font-weight: normal;
+  font-weight: 500;
   font-size: 48px;
   line-height: 100%;
   text-align: center;
@@ -3819,7 +3817,7 @@ h2.pdpCopy__header-price ,
     font-weight: 500;
     font-size: 14px;
     line-height: 16px;
-    text-transform: lowercase;
+    text-transform: none;
   }
 }
 
@@ -4429,15 +4427,15 @@ h2.pdpCopy__header-price ,
 .pdpCompare__tabs,
 .pdpCompare__tabsProducts-wrapper {
   display: none;
-
   @media screen and (max-width: $large_desk) {
     display: block;
   }
 }
 
 .pdpCompare__tabsProducts-wrapper {
-  padding: 0 14px 60px;
+  padding: 0 16px 16px;
   background-color: $color-grey;
+  border-radius: 12px;
 
   [data-tab] {
     display: none;
@@ -4935,7 +4933,8 @@ h2.pdpCopy__header-price ,
   }
 
   @media screen and (max-width: $tablet) {
-    padding: 0 16px 80px;
+    padding: 0 16px 64px;
+    margin-top:1rem;
   }
 }
 
@@ -4961,7 +4960,7 @@ h2.pdpCopy__header-price ,
 .collectionModule__contentLink {
   width: 100%;
   max-width: 320px;
-  padding: 13px;
+  padding: 16px;
   display: block;
   text-align: center;
   border-radius: 12px;
@@ -4969,9 +4968,10 @@ h2.pdpCopy__header-price ,
   font-size: 18px;
 
   @media screen and (max-width: $tablet) {
-    max-width: 167px;
+    max-width: none;
     font-size: 16px;
     line-height: 20px;
+    padding: 16px 62px;
   }
 }
 
@@ -5459,34 +5459,15 @@ h2.pdpCopy__header-price ,
   line-height: 20px;
 }
 
-.kl-private-reset-css-Xuajs1 > button {
- height: 24px !important; 
-   border-radius: 0 12px 12px 0 !important;
-  margin-left: 44px !important;
-  padding-top: 11px !important;
-    padding-bottom: 11px  !important;
-  padding-left:  26px !important;
-    padding-right:  26px !important;
-  width: auto !important;
-
-}
-
 .kl-private-reset-css-Xuajs1 > input,
-.kl-private-reset-css-Xuajs1 > .go2323703347 
+.kl-private-reset-css-Xuajs1 > .go2323703347, 
+.kl-private-reset-css-Xuajs1 > .go581579764,
+.kl-private-reset-css-Xuajs1 > .go1867856768,
+.kl-private-reset-css-Xuajs1 > .go1245633538, 
 {
- border: 1px solid #fff !important;
-  border-radius: 12px 0 0 12px !important;
-  margin-right: -2px !important;
-  padding-left: 8px !important;
-  width: 231px !important;
-}
-
-
-.kl-private-reset-css-Xuajs1 > .go581579764 {
- width: 100% !important;
   border-radius: 12px !important;
-   margin-left: 0 !important;
 }
+
 
 // Gift wrapping
 
@@ -5501,7 +5482,8 @@ h2.pdpCopy__header-price ,
   border-bottom: 1px solid #DBDBDB;
 
   @media screen and (max-width: $tablet) {
-    padding: 20px 0;
+    padding: 8px 0;
+    margin: 8px 0;
   }
 
   span {
@@ -5843,10 +5825,12 @@ h2.pdpCopy__header-price ,
   font-weight: normal;
   font-size: 24px;
   line-height: 120%;
+margin-left: 10px;
 
   @media screen and (max-width: $tablet) {
     margin-top: 8px;
     font-size: 16px;
+    margin-left: 0;
   }
 }
 

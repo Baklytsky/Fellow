@@ -1,6 +1,5 @@
-{%- comment -%}
-  {% include 'pdp-badges' %}
-{%- endcomment -%}
+
+{% if product.title contains "Ode Brew Grinder" or product.title contains "Stagg EKG Electric Kettle" %}
 
 {%- if product.metafields.custom_fields["product_badges"] != blank -%}
   <div class="pdpBadges">
@@ -21,4 +20,17 @@
     {%- endfor -%}
   </div>
 {%- endif -%}
+
+{% endif %}
+
+{% unless product.title contains "Ode Brew Grinder" or product.title contains "Stagg EKG Electric Kettle" or product.title contains "The Greatest Hits Kit" %}
+<div class="pdpBadges">
+      <div class="pdpBadges-item f jcc aic">
+        <div class="pdpBadges-item-content f aic">
+         <img src="https://cdn.shopify.com/s/files/1/0057/6235/1219/t/9/assets/9b49888a9b92--FP-icon-Bundle-dollar-black-c19213.svg?v=1635265072" alt="sale" typeof="foaf:Image">
+            <h4 class="pdpBadges-item-content-title">Black Friday came early - Spend $200+ get 20% off!</h4>
+        </div>
+      </div>
+  </div>
+{% endunless %}
 

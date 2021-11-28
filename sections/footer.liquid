@@ -13,16 +13,12 @@
   <div class='footer__inner'>
     <div class='row'>
       <div class='footerInner__Left'>
-        <div class='f fdc'>
+        <div class='f fdc ais'>
           <a class="logo-link" href="{{ routes.root_url }}" aria-label="Open Home page" title="{{ shop.name }}" role="button">
             {% include 'fellow-logo-white' %}
           </a>
-          {% if section.settings.show_newsletter %}
-            {% include 'newsletter-snippet' %}
-          {% endif %}
-        </div>
-
-        {%- if show_icons -%}
+          
+          {%- if show_icons -%}
           <ul class="footer__icons">
             {%- assign socials = "Instagram Facebook Twitter Pinterest YouTube LinkedIn" | split: ' ' -%}
 
@@ -42,6 +38,11 @@
             {%- endfor -%}
           </ul>
         {%- endif -%}
+        </div>
+
+       {% if section.settings.show_newsletter %}
+            {% include 'newsletter-snippet' %}
+          {% endif %}
       </div>
 
       {% if linklists[footer_menu].links.size > 0 %}
@@ -66,6 +67,18 @@
       {% endif %}
 
     </div>
+    
+     {%- if show_footer_payment_icon -%}
+    <div class='footer__payment-icons'>
+      <ul>
+        {%- for type in shop.enabled_payment_types -%}
+          <li>
+            {{ type | payment_type_svg_tag: class: 'img-grayscale' }}
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  {%- endif -%}
 
     <div class='row'>
       <div class='col'>
@@ -86,17 +99,6 @@
     </div>
   </div>
 
-  {%- if show_footer_payment_icon -%}
-    <div class='footer__payment-icons'>
-      <ul>
-        {%- for type in shop.enabled_payment_types -%}
-          <li>
-            {{ type | payment_type_svg_tag: class: 'img-grayscale' }}
-          </li>
-        {%- endfor -%}
-      </ul>
-    </div>
-  {%- endif -%}
 
 </footer>
 
