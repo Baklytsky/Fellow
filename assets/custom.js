@@ -639,7 +639,6 @@ theme.pdpMain = function () {
   
 
   theme.variantChange = function (variantId, changeMediaContent) {
-    console.log(variantId)
     function changeMedia() {
       var ajaxUrl = window.location.protocol + '//' + window.location.host + window.location.pathname + '?variant=' + variantId + '&view=ajax-media',
           $productMedia = $productMedia = $(document).find('.pdpMain__Media'),
@@ -1361,7 +1360,7 @@ theme.cartDrawer = function () {
 
     $(document).on('click.removeItemInCart', '.js-remove-item-trigger', function (e) {
       e.preventDefault();
-      if (isGWP) {localStorage.setItem('removeGWP', isGWP);}
+      if (isGWP) {localStorage.setItem(isGWP, 'true');}
       cartItemRemoveBtn.trigger('click');
       theme.closeItemRemovePopup();
     });
@@ -1374,7 +1373,7 @@ theme.cartDrawer = function () {
   $(document).on('click.openItemRemovePopup', '[data-action="open-item-remove-popup"]', function (e) {
     e.preventDefault();
     var cartItemRemoveBtn = $(this).parents('.cart-drawer__item').find('.js-remove-item'),
-        isGWP = !!(($(this).attr('data-gift-product')));
+        isGWP = $(this).attr('data-gift-product');
     $(this).attr('aria-expanded', 'true');
     theme.openItemRemovePopup(cartItemRemoveBtn, isGWP);
   });
@@ -1504,13 +1503,15 @@ theme.cartDrawer = function () {
   });
 }
 
-theme.addCustomProduct = function (url, id, quantity, openCart) {
+theme.addCustomProduct = function (url, id, quantity, openCart, property) {
+  var properties = (property) ? property : {};
   $.ajax({
     type: 'POST',
     url: url,
     data: {
       id: id,
       quantity: quantity,
+      properties: properties,
     },
     dataType: 'json',
     success: function () {
@@ -1520,10 +1521,12 @@ theme.addCustomProduct = function (url, id, quantity, openCart) {
   })
 }
 
-theme.checkGwp = function (cart) {
+theme.checkGwp = function (cart, propertyToCheck) {
   let hasGwp = false;
   cart.items.forEach(function (element) {
-    if (element.product_type === 'Gift product') { hasGwp = true }
+    if (element.product_type === 'Gift product' && element.properties.hasOwnProperty(propertyToCheck)) {
+      hasGwp = true
+    }
   });
   return hasGwp;
 }

@@ -17623,7 +17623,7 @@ body.is-masthead--empty main {
 }
 
 .cart-drawer__header {
-  padding: 16px 20px;
+  padding: 16px 20px 25px;
 }
 
 @media screen and (max-width: 992px) {
@@ -17920,14 +17920,14 @@ body.is-masthead--empty main {
   border-radius: 6px;
   position: relative;
   width: 100%;
-  overflow: hidden;
+  /*overflow: hidden;*/
 }
 
 .free-shipping__meter__progress {
   background: #fff;
   height: 100%;
   transition: width .25s ease;
-  border-radius: 6px 0 0 6px;
+  border-radius: 6px;
 }
 
 .remove-item__popup {
