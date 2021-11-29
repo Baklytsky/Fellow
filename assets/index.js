@@ -10299,16 +10299,19 @@
           if (firstGwpEnabled || secondGwpEnabled) {
             e.cartOpen && function(e) {
               if (firstGwpEnabled && secondGwpEnabled) {
-                let firstGwpPosition = (100 * firstGwpThreshold) / summaryGwpThreshold,
-                    gwpPoint = document.createElement('span'),
-                    gwpPointText = document.createElement('span');
-                gwpPointText.classList.add("gwp-point-text");
-                gwpPoint.classList.add("gwp-point");
-                gwpPointText.innerHTML = '$' + firstGwpThreshold + ' gift';
-                gwpPointText.style.left = firstGwpPosition + '%';
-                gwpPoint.style.left = firstGwpPosition + '%';
-                progressBar.append(gwpPoint);
-                progressBar.append(gwpPointText);
+                console.log(!progressBar.querySelector('.gwp-point-text'))
+                if (!progressBar.querySelector('.gwp-point-text')) {
+                  let firstGwpPosition = (100 * firstGwpThreshold) / summaryGwpThreshold,
+                      gwpPoint = document.createElement('span'),
+                      gwpPointText = document.createElement('span');
+                  gwpPointText.classList.add("gwp-point-text");
+                  gwpPoint.classList.add("gwp-point");
+                  gwpPointText.innerHTML = '$' + firstGwpThreshold + ' gift';
+                  gwpPointText.style.left = firstGwpPosition + '%';
+                  gwpPoint.style.left = firstGwpPosition + '%';
+                  progressBar.append(gwpPoint);
+                  progressBar.append(gwpPointText);
+                }
                 theme.disableScroll();
                 if (t.classList.add("is-active"), a.innerHTML = h, setTimeout((function() {
                   t.classList.add("is-visible"), t.tabIndex = 0, s.tabIndex = 0, t.setAttribute("aria-expanded", "true"), document.getElementById("root").tabIndex = -1, setTimeout(m(e), 10), Dr.mount()
@@ -10420,7 +10423,7 @@
             if (t.cart.total_price < gwpThreshold) {
               t.cart.items.forEach(function (element) {
                 if (element.product_type === 'Gift product' && element.properties.hasOwnProperty(propertyToCheck)) {
-                  updateCartItemQuantity(element.id, 0, element.key)
+                  theme.addCustomProduct('/cart/change.js', element.id, 0, true)
                 }
               });
             }
@@ -10443,7 +10446,7 @@
             if (t.cart.total_price < secondGwpThreshold) {
               t.cart.items.forEach(function (element) {
                 if (element.product_type === 'Gift product' && element.properties.hasOwnProperty(secondPropertyToCheck)) {
-                  updateCartItemQuantity(element.id, 0, element.key)
+                  theme.addCustomProduct('/cart/change.js', element.id, 0, true)
                 }
               });
             }

@@ -1408,7 +1408,7 @@ theme.cartDrawer = function () {
       dataType: 'json',
       success: function() {
         // CartDrawer.emit("cart:updating");
-        UpdateCart('', '', false)
+        UpdateCart('', '', true)
       },
       error: function (error) {
         if (error.status == 422) {
