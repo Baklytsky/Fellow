@@ -17623,12 +17623,12 @@ body.is-masthead--empty main {
 }
 
 .cart-drawer__header {
-  padding: 16px 20px;
+  padding: 16px 20px 25px;
 }
 
 @media screen and (max-width: 992px) {
   .cart-drawer header {
-    padding: 16px;
+    padding: 16px 16px 25px;
   }
 }
 
@@ -17654,6 +17654,13 @@ body.is-masthead--empty main {
 .cart-drawer .outer {
   padding-left: 1.5rem;
   padding-right: 1.5rem
+}
+
+.cart-drawer__content-wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
 }
 
 .cart-drawer__items-outer {
@@ -17741,6 +17748,10 @@ body.is-masthead--empty main {
   font-size: 20px;
   line-height: 120%;
   font-weight: 400;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .cart-quantity {
@@ -17843,16 +17854,16 @@ body.is-masthead--empty main {
   font-size: 20px;
   line-height: 120%;
 }
-    
-     @media screen and (max-width: 992px) {
-      .cart-footer__total {
-  width: 50%;
-  flex-shrink: 0;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 120%;
-} 
-     }
+
+@media screen and (max-width: 992px) {
+  .cart-footer__total {
+    width: 50%;
+    flex-shrink: 0;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 120%;
+  }
+}
 
 .cart-footer__total-item {
   margin: 4px 0;
@@ -17905,7 +17916,7 @@ body.is-masthead--empty main {
 
 
 .free-shipping {
-  padding: 0 40px;
+  padding: 0 10px;
 }
 
 .free-shipping--unmet,
@@ -17920,14 +17931,14 @@ body.is-masthead--empty main {
   border-radius: 6px;
   position: relative;
   width: 100%;
-  overflow: hidden;
+  /*overflow: hidden;*/
 }
 
 .free-shipping__meter__progress {
   background: #fff;
   height: 100%;
   transition: width .25s ease;
-  border-radius: 6px 0 0 6px;
+  border-radius: 6px;
 }
 
 .remove-item__popup {
@@ -18003,7 +18014,7 @@ body.is-masthead--empty main {
 }
 
 .cart-recommended__content {
-  padding: 12px 0 2px 22px;
+  padding: 12px 0 7px 22px;
   display: flex;
   width: 100%;
   overflow-x: auto;
@@ -18060,6 +18071,7 @@ body.is-masthead--empty main {
 
   .cart-drawer__items-outer {
     padding: 10px 16px 16px;
+    overflow: unset;
   }
 
   .cart-drawer__empty {
@@ -18080,7 +18092,7 @@ body.is-masthead--empty main {
   }
 
   .free-shipping {
-    padding: 0 32px;
+    padding: 0 10px;
   }
 
   .cart-drawer__footer-action {

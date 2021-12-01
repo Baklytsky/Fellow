@@ -164,6 +164,16 @@
         "type": "product",
         "id": "gwp_product",
         "label": "GWP Product"
+      },
+      {
+        "type": "number",
+        "id": "second_gwp_threshold",
+        "label": "Second GWP threshold"
+      },
+      {
+        "type": "product",
+        "id": "second_gwp_product",
+        "label": "Second GWP Product"
       }
     ]
   },

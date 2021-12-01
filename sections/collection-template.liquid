@@ -204,24 +204,28 @@
 
         <div class="collection__products-type">
           {% comment %}
-           {%- for collection_product_type in uniq_collection_product_types_array -%}
-            {%- if collection_product_type != blank -%}
-              {%- assign collection_product_type_handleize = collection_product_type | handleize -%}
-              <h3 class="collection__products-type-heading">{{ collection_product_type }}</h3>
-              <div class="subcollection__products one-third">
-                {% for product in collection.products %}
-                  {%- assign product_type_handleize = product.type | handleize -%}
-                  {%- if product_type_handleize == collection_product_type_handleize -%}
-                    {% include 'product-card', product_image: product.images[product_image_index] %}
-                  {%- endif -%}
-                {%- endfor -%}
-              </div>
-            {%- endif -%}
-          {%- endfor -%}
-   {% endcomment %}
+            {%- for collection_product_type in uniq_collection_product_types_array -%}
+              {%- if collection_product_type != blank -%}
+                {%- assign collection_product_type_handleize = collection_product_type | handleize -%}
+                <h3 class="collection__products-type-heading">{{ collection_product_type }}</h3>
+                <div class="subcollection__products one-third">
+                  {% for product in collection.products %}
+                    {%- assign product_type_handleize = product.type | handleize -%}
+                    {%- if product_type_handleize == collection_product_type_handleize -%}
+                      {% include 'product-card', product_image: product.images[product_image_index] %}
+                    {%- endif -%}
+                  {%- endfor -%}
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          {% endcomment %}
           <div class="subcollection__products one-third">
             {% for product in collection.products %}
+              {%- assign gift_product_handleize = 'Gift product' | handleize -%}
+              {%- assign product_type_handleize = product.type | handleize -%}
+              {%- unless product_type_handleize == gift_product_handleize -%}
                 {% include 'product-card', product_image: product.images[product_image_index] %}
+              {%- endunless -%}
             {%- endfor -%}
           </div>
         </div>

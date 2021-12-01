@@ -42,9 +42,13 @@
         gwpSettings: {
           gwpEnable: "{{ settings.enable_gwp }}",
           gwpThreshold: "{% if settings.gwp_threshold > 0 %}{{ settings.gwp_threshold }}{% else %}0{% endif %}",
+          secondGwpThreshold: "{% if settings.second_gwp_threshold > 0 %}{{ settings.second_gwp_threshold }}{% else %}0{% endif %}",
           gwpProductAvailable : "{{ all_products[settings.gwp_product].available }}",
+          secondGwpProductAvailable : "{{ all_products[settings.second_gwp_product].available }}",
           gwpProductId: "{{ all_products[settings.gwp_product].selected_or_first_available_variant.id }}",
-          gwpProductType: "{{ all_products[settings.gwp_product].type }}"
+          secondGwpProductId: "{{ all_products[settings.second_gwp_product].selected_or_first_available_variant.id }}",
+          gwpProductType: "{{ all_products[settings.gwp_product].type }}",
+          secondGwpProductType: "{{ all_products[settings.second_gwp_product].type }}"
         },
         personalization: {
           perProductAvailable: "{{ all_products[settings.personalization_product].available }}",
