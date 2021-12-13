@@ -1,9 +1,17 @@
 {%- assign cart_has_canal = false -%}
 {% for item in cart.items %}  
-{% if item.sku contains 'CANAL' %}
+{% if item.product.type contains 'Coffee' %}
 {% assign cart_has_canal = true %}
 {% endif %}
 {% endfor %}
+
+{%- assign coffee_pdp = false -%}
+{% if request.path contains "/products/" %}
+{%- assign slug = request.path | remove_first: '/products/' -%}
+{% if all_products[slug].type contains "Coffee" %}
+{% assign coffee_pdp = true %}
+{% endif %}
+{% endif %}
 
 {% comment %} To-do: Add ARIA Live updates for items added/removed from cart. -ae102220 {% endcomment %}
 <section class='cart-drawer-outer fix fill x z10' aria-expanded='false' tabindex='-1' data-component='cartDrawer'>
@@ -57,7 +65,7 @@
     <div class="cart-drawer__content-wrapper">
       <div class='cart-drawer__items-outer'>
         <div class='cart-drawer__items-inner js-cart-drawer-items'>
-          <p class="eyebrow gwp-nostack-text is-hidden">Stacking promos are not allowed.<br> Manually remove any free gifts from your cart to use a discount code.</p>
+         <p class="eyebrow gwp-nostack-text is-hidden">Stacking promos is not allowed.<br> Manually remove any free gifts from your cart to use a discount code.</p>
           <div class='js-items x y'>
             <div class='abs fill'>
               <svg viewBox="0 0 100 86" class='loader abs fill mxa cg'>
@@ -80,7 +88,7 @@
           related schema available in assets/cart-free-product-schema.js
         {% endcomment %}
 
-        {%- if settings.enable_gift_wrapping and settings.gift_box_product and cart_has_canal == false -%}
+        {%- if settings.enable_gift_wrapping and settings.gift_box_product and cart_has_canal == false and coffee_pdp == false -%}
           <div class="cart-drawer__footer-gift-wrapping">
             {% section 'cart-gift-wrapping' %}
           </div>

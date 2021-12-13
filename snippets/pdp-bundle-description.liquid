@@ -2,7 +2,7 @@
 {%- assign bundle_description_items = product.metafields.custom_fields["bundle_description_items"] -%}
 
 {%- if bundle_description_items != blank -%}
-  <div class="bundleDescription">
+  <div class="bundleDescription" style="margin-top:16px;">
     {%- if bundle_description_heading != blank -%}
       <h3 class="bundleDescription__Heading">{{ bundle_description_heading }}</h3>
     {%- endif -%}

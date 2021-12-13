@@ -18,7 +18,7 @@
     "gift_wrapping_message": "Is this a gift?",
     "gift_wrapping_result_message": "Your order will be sent in a gift box",
     "gift_wrapping_heading": "Gift Box + Gift Note",
-    "enable_gwp": true,
+    "enable_gwp": false,
     "gwp_threshold": 150,
     "gwp_product": "free-gift-carter-move-mug-tier-1",
     "second_gwp_threshold": 200,
@@ -102,9 +102,9 @@
             "type": "sub_menu",
             "settings": {
               "target": "featured",
-              "image_1": "shopify:\/\/shop_images\/Brew-Bar-Hero-Module-Image.jpg",
-              "title_1": "Black Friday Sale",
-              "url_1": "shopify:\/\/collections\/black-friday",
+              "image_1": "shopify:\/\/shop_images\/Fellow_White_Ode2270.jpg",
+              "title_1": "Pour-Over Gifts",
+              "url_1": "shopify:\/\/collections\/pour-over",
               "image_2": "shopify:\/\/shop_images\/HP_LargeModule_Set.jpg",
               "title_2": "Gifts For Brewing Beginners",
               "url_2": "shopify:\/\/collections\/gifts-for-brewing-beginners",
@@ -134,12 +134,11 @@
             "type": "sub_menu",
             "settings": {
               "target": "grind+brew",
-              "image_1": "shopify:\/\/shop_images\/Nav-2up-AllGrindBrew.jpg",
+              "image_1": "shopify:\/\/shop_images\/Nav-single-GrindBrew_1.jpg",
               "title_1": "All Grind + Brew",
               "url_1": "shopify:\/\/collections\/grind-brew",
-              "image_2": "shopify:\/\/shop_images\/112421_Atmos_Navigation-2Up.jpg",
-              "title_2": "Atmos Vacuum Canister",
-              "url_2": "shopify:\/\/products\/atmos-vacuum-canister",
+              "title_2": "",
+              "url_2": "",
               "title_3": "",
               "url_3": "",
               "title_4": "",
@@ -215,8 +214,8 @@
           "menu_right": "new-right-menu",
           "show_search": false,
           "show_announcement": true,
-          "announcement_text": "Cyber Weekend: 15% off orders up to $200, 20% off orders $200+ ⚡️",
-          "announcement_link": "shopify:\/\/collections\/black-friday",
+          "announcement_text": "Try Fellow Drops — Gear Patrol's Top 10 Best New Food & Drink Products of 2021 🏆",
+          "announcement_link": "https:\/\/drops.fellowproducts.com\/?utm_source=homepage&utm_medium=banner&utm_campaign=fellowhomepage",
           "enable_timer": false,
           "end_date": "Sep 30, 2021 07:30:00 GMT-08:00"
         }
@@ -254,16 +253,16 @@
             "type": "splitSlide",
             "settings": {
               "splitSlide__layout": "right",
-              "heroSlide": "shopify:\/\/shop_images\/11-25-BCFM-Black-Friday-Hero-Module-v2.gif",
+              "heroSlide": "shopify:\/\/shop_images\/HeroImage_1_Option_1.jpg",
               "desktopAlignment": "center",
               "mobileAlignment": "center",
-              "heroSlide__header": "A One Time (Very Big) Deal",
-              "heroSlide__subheader": "This weekend only: an exclusive holiday bundle. Build a dream brew bar or cover your gift list for one unbeatable price.",
-              "subSlide__bgColor": "#f2edda",
-              "subSlide__textColor": "#231f20",
-              "heroSlide__ctaURL": "shopify:\/\/products\/the-greatest-hits-kit",
-              "heroSlide__ctaCopy": "Click To Save $118",
-              "heroSlide__ctaColor": "black",
+              "heroSlide__header": "Last chance for holiday delivery!",
+              "heroSlide__subheader": "Shop gifts for brewing newbies and get them shipped before our holiday cutoff.",
+              "subSlide__bgColor": "#7c2918",
+              "subSlide__textColor": "#FFFFFF",
+              "heroSlide__ctaURL": "shopify:\/\/collections\/gifts-for-brewing-beginners",
+              "heroSlide__ctaCopy": "Gifts for Beginners",
+              "heroSlide__ctaColor": "white",
               "heroSlide__ctaSubtext": ""
             }
           },
@@ -284,11 +283,49 @@
               "heroSlide__ctaColor": "black",
               "heroSlide__ctaSubtext": ""
             }
+          },
+          "58ee7397-6079-412a-9acd-d453a0cf281c": {
+            "type": "splitSlide",
+            "disabled": true,
+            "settings": {
+              "splitSlide__layout": "right",
+              "heroSlide": "shopify:\/\/shop_images\/11-30-BCFM-HC-5-Hero-Module-v1.gif",
+              "desktopAlignment": "center",
+              "mobileAlignment": "center",
+              "heroSlide__header": "A Free Pop of Carter",
+              "heroSlide__subheader": "Get a free 8 oz Carter Move Mug with orders $150+ and 2 free with orders $200+ (Up to $55 in value).",
+              "subSlide__bgColor": "#2b4b35",
+              "subSlide__textColor": "#FFFFFF",
+              "heroSlide__ctaURL": "shopify:\/\/collections\/bestsellers",
+              "heroSlide__ctaCopy": "Fill Your Cart",
+              "heroSlide__ctaColor": "white",
+              "heroSlide__ctaSubtext": ""
+            }
+          },
+          "3e0796bc-698b-4618-80b6-261185f9fb1a": {
+            "type": "splitSlide",
+            "disabled": true,
+            "settings": {
+              "splitSlide__layout": "right",
+              "heroSlide": "shopify:\/\/shop_images\/12-03-BCFM-HC-5-Hero-Module-v2_eeaaaedd-23dd-4cfc-a59c-c1db97585e3c.png",
+              "desktopAlignment": "center",
+              "mobileAlignment": "center",
+              "heroSlide__header": "Our mug machine made too many",
+              "heroSlide__subheader": "I’m typing this from a pile of mugs. Get free Carter Move Mugs with orders over $150. You get stocking stuffers, and I get my desk back.",
+              "subSlide__bgColor": "#2b4b35",
+              "subSlide__textColor": "#FFFFFF",
+              "heroSlide__ctaURL": "shopify:\/\/collections\/bestsellers",
+              "heroSlide__ctaCopy": "Shop. Please.",
+              "heroSlide__ctaColor": "white",
+              "heroSlide__ctaSubtext": ""
+            }
           }
         },
         "block_order": [
           "e6275e05-4fc2-4478-85db-37e4aceedf86",
-          "c15c0d5c-f86c-436e-95b6-2f10cb6c8b20"
+          "c15c0d5c-f86c-436e-95b6-2f10cb6c8b20",
+          "58ee7397-6079-412a-9acd-d453a0cf281c",
+          "3e0796bc-698b-4618-80b6-261185f9fb1a"
         ],
         "settings": {
           "addMargin": false
@@ -314,7 +351,7 @@
         "type": "logo-text",
         "settings": {
           "enable_section": true,
-          "text": "15% off orders up to $200, 20% off orders $200 or more  👀"
+          "text": "Best chance to order for Christmas: 12\/13 🎁"
         }
       },
       "162997622949d3f8ee": {
@@ -322,6 +359,7 @@
         "blocks": {
           "74896794-3a9a-4ead-a9f5-c8a78fc6788e": {
             "type": "collection",
+            "disabled": true,
             "settings": {
               "tab_text": "Cyber Weekend Deals",
               "collection": "black-friday",
@@ -344,6 +382,15 @@
             "settings": {
               "tab_text": "Matte White",
               "collection": "matte-white",
+              "button_text": "",
+              "button_url": ""
+            }
+          },
+          "bfeb2272-7a44-421f-ac0c-ab8e740b0fe8": {
+            "type": "collection",
+            "settings": {
+              "tab_text": "Kits + Bundles",
+              "collection": "coffee-products-kits-bundles",
               "button_text": "",
               "button_url": ""
             }
@@ -410,6 +457,7 @@
           "74896794-3a9a-4ead-a9f5-c8a78fc6788e",
           "1c8f9541-a475-428c-9638-4b46c17cf01e",
           "7acc7b63-cc70-4ca0-83e1-ffa6c28c031a",
+          "bfeb2272-7a44-421f-ac0c-ab8e740b0fe8",
           "61c6e91f-6505-42c0-866f-25296dbe3d4e",
           "34a21fe6-0cfe-4b56-85f5-42725eb153e6",
           "a739270d-13fd-4aaf-9bd0-c54e753ab0a7",
@@ -428,14 +476,14 @@
         "type": "hp-iwt",
         "settings": {
           "enable_section": true,
-          "image": "shopify:\/\/shop_images\/roduct_Feature_Carter-Move-Mug.jpg",
+          "image": "shopify:\/\/shop_images\/Product_Feature_Super-Fancy-Gifts-Brew-Bar.jpg",
           "layout": "left",
-          "header": "Someone's favorite color is here.",
-          "description": "<p>The to-go cup for effortlessly great coffee, the hardest part is choosing a color.<\/p>",
+          "header": "Make their year",
+          "description": "<p>Because it’s the things they’ll use everyday that are worth splashing out on.<\/p>",
           "bg_color": "",
           "text_color": "#000000",
-          "cta_url": "shopify:\/\/collections\/serve",
-          "cta_copy": "Shop Carter",
+          "cta_url": "shopify:\/\/collections\/bestsellers",
+          "cta_copy": "Shop Best Sellers",
           "cta_color": "btn--dark"
         }
       },
@@ -546,8 +594,8 @@
           "94f80824-48d0-4beb-987b-ba5b194f019b": {
             "type": "block",
             "settings": {
-              "svg_icon": "<svg xmlns=\"http:\/\/www.w3.org\/2000\/svg\" width=\"14\" height=\"25\" viewbox=\"0 0 14 25\" fill=\"none\">\n<path d=\"M7.36111 10.9722C4.20833 10.1528 3.19444 9.30556 3.19444 7.98611C3.19444 6.47222 4.59722 5.41667 6.94444 5.41667C8.91667 5.41667 9.90278 6.16667 10.2639 7.36111C10.4306 7.91667 10.8889 8.33333 11.4722 8.33333H11.8889C12.8056 8.33333 13.4583 7.43056 13.1389 6.56944C12.5556 4.93056 11.1944 3.56944 9.02778 3.04167V2.08333C9.02778 0.930556 8.09722 0 6.94444 0C5.79167 0 4.86111 0.930556 4.86111 2.08333V3C2.16667 3.58333 0 5.33333 0 8.01389C0 11.2222 2.65278 12.8194 6.52778 13.75C10 14.5833 10.6944 15.8056 10.6944 17.0972C10.6944 18.0556 10.0139 19.5833 6.94444 19.5833C4.65278 19.5833 3.47222 18.7639 3.01389 17.5972C2.80556 17.0556 2.33333 16.6667 1.76389 16.6667H1.375C0.444444 16.6667 -0.208333 17.6111 0.138889 18.4722C0.930555 20.4028 2.77778 21.5417 4.86111 21.9861V22.9167C4.86111 24.0694 5.79167 25 6.94444 25C8.09722 25 9.02778 24.0694 9.02778 22.9167V22.0139C11.7361 21.5 13.8889 19.9306 13.8889 17.0833C13.8889 13.1389 10.5139 11.7917 7.36111 10.9722Z\" fill=\"black\"><\/path>\n<\/svg>",
-              "title": "Pay in interest-free installments"
+              "svg_icon": "<svg xmlns=\"http:\/\/www.w3.org\/2000\/svg\" width=\"31\" height=\"30\" viewbox=\"0 0 31 30\" fill=\"none\">\n<path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M23.0875 7.8125H25.8125C27.2 7.8125 28.3125 8.925 28.3125 10.3125V16.8181V19.318V24.0625C28.3125 25.45 27.2 26.5625 25.8125 26.5625H5.8125C4.425 26.5625 3.3125 25.45 3.3125 24.0625L3.31681 19.318H3.3125V16.8181H3.31909L3.325 10.3125C3.325 8.925 4.425 7.8125 5.8125 7.8125H8.5375C8.4 7.425 8.3125 7 8.3125 6.5625C8.3125 4.4875 9.9875 2.8125 12.0625 2.8125C13.375 2.8125 14.5125 3.4875 15.1875 4.4875L15.8125 5.3375L16.4375 4.5C17.1125 3.4875 18.25 2.8125 19.5625 2.8125C21.6375 2.8125 23.3125 4.4875 23.3125 6.5625C23.3125 7 23.225 7.425 23.0875 7.8125ZM5.8125 19.318V24.0625H14.5627V19.318H5.8125ZM17.0626 24.0625H25.8125V19.318H17.0626V24.0625ZM25.8125 16.8181V10.3125H19.4625L22.0625 13.85L20.0375 15.3125L17.0626 11.2638L17.0626 16.8181H25.8125ZM14.5627 11.2634L14.5627 16.8181H5.8125V10.3125H12.1625L9.5625 13.85L11.5875 15.3125L14.5627 11.2634ZM20.8125 6.5625C20.8125 5.875 20.25 5.3125 19.5625 5.3125C18.875 5.3125 18.3125 5.875 18.3125 6.5625C18.3125 7.25 18.875 7.8125 19.5625 7.8125C20.25 7.8125 20.8125 7.25 20.8125 6.5625ZM13.3125 6.5625C13.3125 5.875 12.75 5.3125 12.0625 5.3125C11.375 5.3125 10.8125 5.875 10.8125 6.5625C10.8125 7.25 11.375 7.8125 12.0625 7.8125C12.75 7.8125 13.3125 7.25 13.3125 6.5625Z\" fill=\"black\"><\/path>\n<\/svg>",
+              "title": "Order by 12\/13 to get it by 12\/24"
             }
           }
         },
@@ -589,14 +637,33 @@
         "type": "hp-iwt",
         "settings": {
           "enable_section": true,
-          "image": "shopify:\/\/shop_images\/Product_Feature_Super-Fancy-Gifts-Kettles-Ode.jpg",
+          "image": "shopify:\/\/shop_images\/ModuleImage_1_Module_1.jpg",
           "layout": "right",
-          "header": "Shop Cyber Weekend Deals",
-          "description": "<p>Because it’s the things they’ll use everyday that are worth splashing out on.<\/p>",
+          "header": "Enough to share",
+          "description": "<p>The Social Pour-Over Kit will turn their home into a brewing open house.<\/p>",
           "bg_color": "",
           "text_color": "",
-          "cta_url": "shopify:\/\/collections\/black-friday",
-          "cta_copy": "Shop Cyber Weekend",
+          "cta_url": "shopify:\/\/collections\/coffee-products-kits-bundles",
+          "cta_copy": "Shop Kits + Bundles",
+          "cta_color": "btn--dark"
+        }
+      },
+      "page-template": {
+        "type": "page-template",
+        "settings": {}
+      },
+      "16391832269c232690": {
+        "type": "hp-iwt",
+        "settings": {
+          "enable_section": true,
+          "image": "shopify:\/\/shop_images\/ModuleImage_1_Fellow-Drops.jpg",
+          "layout": "left",
+          "header": "The award-winning way to get your coffee",
+          "description": "<p>Named one of Gear Patrol’s Top 10 Best New Food & Drink Products of 2021, Fellow Drops is the coffee program loved by coffee pros.<\/p>",
+          "bg_color": "",
+          "text_color": "",
+          "cta_url": "https:\/\/drops.fellowproducts.com\/",
+          "cta_copy": "Join The Fun",
           "cta_color": "btn--dark"
         }
       }
@@ -605,6 +672,7 @@
       "1565155576930",
       "1629968785d9d2e1c7",
       "162997622949d3f8ee",
+      "16391832269c232690",
       "1636101715cd2df3c8",
       "1630052841314f69dd",
       "163005286553dd2458",
