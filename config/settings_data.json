@@ -253,15 +253,15 @@
             "type": "splitSlide",
             "settings": {
               "splitSlide__layout": "right",
-              "heroSlide": "shopify:\/\/shop_images\/HeroImage_1_Option_1.jpg",
+              "heroSlide": "shopify:\/\/shop_images\/HeroImage_2_Option_1.jpg",
               "desktopAlignment": "center",
               "mobileAlignment": "center",
-              "heroSlide__header": "Last chance for holiday delivery!",
-              "heroSlide__subheader": "Shop gifts for brewing newbies and get them shipped before our holiday cutoff.",
+              "heroSlide__header": "Last chance to raise the (brew) bar",
+              "heroSlide__subheader": "Choose Next Day Air Saver Shipping for holiday gifts to arrive by December 24.",
               "subSlide__bgColor": "#7c2918",
               "subSlide__textColor": "#FFFFFF",
-              "heroSlide__ctaURL": "shopify:\/\/collections\/gifts-for-brewing-beginners",
-              "heroSlide__ctaCopy": "Gifts for Beginners",
+              "heroSlide__ctaURL": "shopify:\/\/collections\/coffee-products-kits-bundles",
+              "heroSlide__ctaCopy": "Shop Kits + Bundles",
               "heroSlide__ctaColor": "white",
               "heroSlide__ctaSubtext": ""
             }
@@ -351,7 +351,7 @@
         "type": "logo-text",
         "settings": {
           "enable_section": true,
-          "text": "Best chance to order for Christmas: 12\/13 🎁"
+          "text": "We also make digital gift cards 👀"
         }
       },
       "162997622949d3f8ee": {
@@ -614,14 +614,14 @@
         "type": "hp-iwt",
         "settings": {
           "enable_section": true,
-          "image": "shopify:\/\/shop_images\/HP-FellowDrops-Product-Feature-2.jpg",
+          "image": "shopify:\/\/shop_images\/ModuleImage_1_Fellow-Drops.jpg",
           "layout": "left",
-          "header": "Text-to-order coffee, curated by Fellow.",
-          "description": "",
+          "header": "The award-winning way to get your coffee",
+          "description": "<p>Named one of Gear Patrol’s Top 10 Best New Food & Drink Products of 2021, Fellow Drops is the coffee program loved by coffee pros.<\/p>",
           "bg_color": "#ffffff",
           "text_color": "",
           "cta_url": "https:\/\/drops.fellowproducts.com",
-          "cta_copy": "Join Fellow Drops",
+          "cta_copy": "Join The Fun",
           "cta_color": "btn--dark"
         }
       },
@@ -656,14 +656,14 @@
         "type": "hp-iwt",
         "settings": {
           "enable_section": true,
-          "image": "shopify:\/\/shop_images\/ModuleImage_1_Fellow-Drops.jpg",
+          "image": "shopify:\/\/shop_images\/FellowGiftCard-Animation.gif",
           "layout": "left",
-          "header": "The award-winning way to get your coffee",
-          "description": "<p>Named one of Gear Patrol’s Top 10 Best New Food & Drink Products of 2021, Fellow Drops is the coffee program loved by coffee pros.<\/p>",
+          "header": "The best email they’ll receive  all year...",
+          "description": "<p>Let them choose their own brewing gear  with a digital gift card that never expires. <\/p>",
           "bg_color": "",
           "text_color": "",
-          "cta_url": "https:\/\/drops.fellowproducts.com\/",
-          "cta_copy": "Join The Fun",
+          "cta_url": "shopify:\/\/products\/digital-gift-card",
+          "cta_copy": "Send Fellowbucks",
           "cta_color": "btn--dark"
         }
       }
