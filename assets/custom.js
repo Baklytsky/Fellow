@@ -1546,6 +1546,103 @@ theme.checkGwpOnLoad = function (element) {
   })
 }
 
+theme.searchBar = function () {
+  $(document).off('click.searchBarToggle');
+  $(document).off('mousedown.searchBarClose');
+  $(document).off('input.onInput');
+  $(document).off('click.resetSearch');
+
+
+  var $searchBar = $('.headerSearch');
+  var $searchBarToggle = $('[data-action="toggle-search"]');
+
+  function toggleSearch () {
+    if ($searchBar.attr('aria-hidden') === 'false') {
+      closeSearch();
+    } else {
+      openSearch();
+    }
+  }
+
+  function closeSearch () {
+    $searchBar.attr('aria-hidden', 'true');
+    $searchBar.removeClass('loading');
+    // theme.enableScroll();
+  }
+
+  function openSearch () {
+    $searchBar.attr('aria-hidden', 'false');
+    // theme.disableScroll();
+
+    setTimeout(function () {
+      $searchBar.find('.headerSearch__input').focus();
+    }, 100);
+
+  }
+
+  function onInput (event) {
+    var _this = $(event.target);
+    var value = _this.val().trim();
+    var queryKey = value.replace(" ", "-").toLowerCase();
+    var $searchResultWrapper = $('.headerSearch__resultsContent');
+
+    $searchBar.addClass('loading');
+    $('.headerSearch__results').attr('aria-hidden', 'false');
+    $searchResultWrapper.empty();
+
+    if (queryKey.length ) {
+      fetch(`/search/suggest.json?q=${queryKey}&resources[type]=product&resources[limit]=3&resources[options][fields]=title`)
+        .then((response) => response.json())
+        .then((suggestions) => {
+          const productSuggestions = suggestions.resources.results.products;
+
+          if (productSuggestions.length > 0) {
+            $('.headerSearch__resultsText .successSearch').show();
+            $('.headerSearch__resultsText .emptySearch').hide();
+            productSuggestions.forEach(function (product) {
+              if (product.type !== "Gift product") {
+                var productItem = `<li class="headerSearch__item"><a href="${product.url}">${product.title}</a></li>`
+                $searchResultWrapper.append(productItem);
+              }
+            })
+          } else {
+            $('.headerSearch__resultsText .successSearch').hide();
+            $('.headerSearch__resultsText .emptySearch').show();
+          }
+          $searchBar.removeClass('loading');
+        })
+        .catch((error) => {
+          closeSearch();
+          $searchBar.removeClass('loading');
+          $('.headerSearch__results').attr('aria-hidden', 'true');
+        });
+    } else {
+      $('.headerSearch__results').attr('aria-hidden', 'true');
+    }
+
+  }
+
+  $(document).on('click.searchBarToggle', '[data-action="toggle-search"]', function (event) {
+    event.preventDefault();
+    toggleSearch();
+  });
+
+  $(document).on('input.onInput', '.headerSearch__input[type="search"]', $.debounce(250, function (event) {
+    onInput(event);
+  }))
+
+  $(document).on('click.resetSearch', '.headerSearch__resetLabel', function (event) {
+    onInput(event);
+  });
+
+  $(document).on('mousedown.searchBarClose', function (e) {
+    if (!$searchBar.is(e.target) && $searchBar.has(e.target).length === 0 && $searchBarToggle.has(e.target).length === 0) {
+      closeSearch();
+    }
+  })
+
+}
+
 $(document).ready(function () {
   theme.header()
 
@@ -1985,6 +2082,10 @@ theme.GLOBAL = function () {
 
   if ($('.cart-drawer').length) {
     theme.cartDrawer()
+  }
+
+  if ($('.headerSearch').length) {
+    theme.searchBar();
   }
 
   // PICO app mega hack to bypass on mobile

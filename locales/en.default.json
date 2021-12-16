@@ -317,5 +317,10 @@
     "sold_out": "Sold Out",
     "description": "Description",
     "view_on_instagram": "View on Instagram"
+  },
+  "header_search": {
+    "input_placeholder": "Search",
+    "search__text": "Are you looking for...",
+    "search_empty_text": "No results could be found"
   }
 }

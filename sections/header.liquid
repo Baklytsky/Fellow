@@ -105,7 +105,8 @@
               <li class="rightMenu__search">
                 <a aria-label="open search"
                    role="button"
-                   href="/search">
+                   href="/search"
+                   data-action="toggle-search">
                   <p>{{ 'general.search.submit' | t }}</p>
 
                   {%- render 'icon' with 'search' -%}
@@ -204,6 +205,35 @@
         </div>
       </div>
     {%- endif -%}
+
+
+    {%- if show_search -%}
+      <div id="header-search" class="headerSearch" aria-hidden="false">
+
+        <form action="{{ routes.search_url }}" name="GET" role="search" class="headerSearch__form">
+
+          <input type="search" class="headerSearch__input" name="q" autocomplete="off" autocorrect="off" autocapitalize="off" aria-label="{{ 'header_search.input_placeholder' | t }}" placeholder="{{ 'header_search.input_placeholder' | t }}" autofocus>
+          <label for="search-reset" class="headerSearch__resetLabel" style="display: block;">
+            <input type="reset" id="search-reset" tabindex="-1" value="reset" style="display: none;">
+            {% render 'icon' with 'x' %}
+          </label>
+          <input type="hidden" name="type" value="product">
+        </form>
+        <div class="headerSearch__results" aria-hidden="true">
+          <div class="headerSearch__resultsHeader">
+            <p class="headerSearch__resultsText">
+              <span class="successSearch">{{ 'header_search.search__text' | t }}</span>
+              <span class="emptySearch" >{{ 'header_search.search_empty_text' | t }}</span>
+            </p>
+            <div class="headerSearch__results__loadingState">
+              {% render 'icon' with 'spinner' %}
+            </div>
+          </div>
+
+          <ul class="headerSearch__resultsContent"></ul>
+        </div>
+      </div>
+    {%- endif -%}
   </div>
 
   <div class="newHeader__openedBlock">
@@ -242,7 +272,8 @@
             <li class="mobileMenu__item">
               <a class="mobileMenu__link" aria-label="open search"
                  role="button"
-                 href="/search">
+                 href="/search"
+                 data-action="toggle-search">
                 <p>{{ 'general.search.submit' | t }}</p>
 
                 {%- render 'icon' with 'search' -%}
