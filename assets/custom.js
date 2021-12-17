@@ -59,9 +59,10 @@ theme.header = function () {
 
   $(document).on('click', "a", function (e) {
       closeOpenedBlock();
-  if($burger.hasClass('active')){
-      burgerFunction();
-    }
+
+   // if($burger.hasClass('active')){
+   //    burgerFunction();
+   //  }
   })
 
   $(document).on('mouseover', '.newHeader__MainLink', function () {
@@ -1553,8 +1554,13 @@ theme.searchBar = function () {
   $(document).off('click.resetSearch');
 
 
-  var $searchBar = $('.headerSearch');
-  var $searchBarToggle = $('[data-action="toggle-search"]');
+  var $searchBar = $('.headerSearch'),
+      $searchBarToggle = $('[data-action="toggle-search"]'),
+      $searchResultWrapper = $('.headerSearch__results'),
+      $popularSearches = $('.headerSearch__popularSearches'),
+      $searchResultContent = $('.headerSearch__resultsContent'),
+      $searchPopular = $searchBar.find('.search__popular'),
+      $resetBtn = $('.headerSearch__resetLabel');
 
   function toggleSearch () {
     if ($searchBar.attr('aria-hidden') === 'false') {
@@ -1573,59 +1579,56 @@ theme.searchBar = function () {
   function openSearch () {
     $searchBar.attr('aria-hidden', 'false');
     theme.disableScroll();
+    inputFocus();
+  }
 
+  function inputFocus () {
     setTimeout(function () {
       $searchBar.find('.headerSearch__input').focus();
     }, 100);
-
   }
 
   function onInput (event) {
-    var _this = $(event.target);
-    var value = _this.val().trim();
-    var queryKey = value.replace(" ", "-").toLowerCase();
-    var $searchResultWrapper = $('.headerSearch__resultsContent');
-    var $resetBtn = $('.headerSearch__resetLabel');
+    var _this = $(event.target),
+        value = _this.val().trim(),
+        queryKey = value.replace(" ", "-").toLowerCase();
 
     $searchBar.addClass('loading');
-    $('.headerSearch__results').attr('aria-hidden', 'false');
-    $searchResultWrapper.empty();
+    $searchResultWrapper.attr('aria-hidden', 'false');
+    $searchResultContent.empty();
 
-    if (queryKey.length ) {
+    if (queryKey.length) {
       $resetBtn.show();
-      $('.search__popular').hide();
+      $searchPopular.hide();
       fetch(`/search/suggest.json?q=${queryKey}&resources[type]=product&resources[options][fields]=title`)
         .then((response) => response.json())
         .then((suggestions) => {
           const productSuggestions = suggestions.resources.results.products;
 
           if (productSuggestions.length > 0) {
-            $('.headerSearch__popularSearches').hide();
-            $('.headerSearch__resultsText .successSearch').show();
-            $('.headerSearch__resultsText .emptySearch').hide();
+            $popularSearches.hide();
             productSuggestions.forEach(function (product) {
               if (product.type !== "Gift product") {
                 var productItem = `<li class="headerSearch__item"><a href="${product.url}">${product.title}</a></li>`
-                $searchResultWrapper.append(productItem);
+                $searchResultContent.append(productItem);
               }
             })
           } else {
-            $('.headerSearch__popularSearches').show();
-            $('.headerSearch__resultsText .successSearch').hide();
-            $('.headerSearch__resultsText .emptySearch').show();
+            $popularSearches.show();
           }
+
           $searchBar.removeClass('loading');
         })
         .catch((error) => {
           closeSearch();
           $searchBar.removeClass('loading');
-          $('.headerSearch__results').attr('aria-hidden', 'true');
+          $searchResultWrapper.attr('aria-hidden', 'true');
         });
     } else {
       $searchBar.removeClass('loading');
-      $('.headerSearch__popularSearches').show();
+      $popularSearches.show();
       $resetBtn.hide();
-      $('.search__popular').show();
+      $searchPopular.show();
     }
 
   }
@@ -1639,11 +1642,13 @@ theme.searchBar = function () {
     onInput(event);
   }))
 
-  $(document).on('click.resetSearch', '.headerSearch__resetLabel', function (event) {
-    $('.headerSearch__results').attr('aria-hidden', 'true');
-    $('.headerSearch__popularSearches').show();
-    $('.headerSearch__resultsContent').empty();
-    // $('.search__popular').show();
+  $(document).on('click.resetSearch', '.headerSearch__resetLabel', function () {
+    $searchResultWrapper.attr('aria-hidden', 'true');
+    $popularSearches.show();
+    $searchResultContent.empty();
+    $searchPopular.show();
+    $resetBtn.hide();
+    inputFocus();
   });
 
   $(document).on('mousedown.searchBarClose', function (e) {

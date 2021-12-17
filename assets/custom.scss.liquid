@@ -175,6 +175,8 @@ button {
   .newHeader__mainMenu {
     box-shadow: 0 0 4px 5px rgba(0, 0, 0, 0.1);
     background-color: $color-white;
+    position: relative;
+    z-index: 3;
   }
 
   .newHeader__mainMenuContainer {
@@ -5909,7 +5911,7 @@ input[type="search"]::-webkit-search-results-decoration {
   width: 100%;
   visibility: hidden;
   opacity: 0;
-  transform: translateY(-25px);
+  transform: translateY(-100px);
   transition: transform .15s ease-in-out,opacity .15s ease-in-out,visibility .15s ease-in-out;
   z-index: -1;
   max-height: calc(100vh - var(--header-height));
@@ -5924,6 +5926,7 @@ input[type="search"]::-webkit-search-results-decoration {
   @media screen and (max-width: $tablet) {
     height: calc(100vh - var(--header-height));
     padding: 24px 0;
+    z-index: 2;
   }
 }
 
@@ -6077,7 +6080,7 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .search__popular--hide-desktop {
   @media screen and (min-width: $tablet) {
-    display: none;
+    display: none!important;
   }
 }
 
