@@ -1567,12 +1567,12 @@ theme.searchBar = function () {
   function closeSearch () {
     $searchBar.attr('aria-hidden', 'true');
     $searchBar.removeClass('loading');
-    // theme.enableScroll();
+    theme.enableScroll();
   }
 
   function openSearch () {
     $searchBar.attr('aria-hidden', 'false');
-    // theme.disableScroll();
+    theme.disableScroll();
 
     setTimeout(function () {
       $searchBar.find('.headerSearch__input').focus();
@@ -1585,18 +1585,22 @@ theme.searchBar = function () {
     var value = _this.val().trim();
     var queryKey = value.replace(" ", "-").toLowerCase();
     var $searchResultWrapper = $('.headerSearch__resultsContent');
+    var $resetBtn = $('.headerSearch__resetLabel');
 
     $searchBar.addClass('loading');
     $('.headerSearch__results').attr('aria-hidden', 'false');
     $searchResultWrapper.empty();
 
     if (queryKey.length ) {
-      fetch(`/search/suggest.json?q=${queryKey}&resources[type]=product&resources[limit]=3&resources[options][fields]=title`)
+      $resetBtn.show();
+      $('.search__popular').hide();
+      fetch(`/search/suggest.json?q=${queryKey}&resources[type]=product&resources[options][fields]=title`)
         .then((response) => response.json())
         .then((suggestions) => {
           const productSuggestions = suggestions.resources.results.products;
 
           if (productSuggestions.length > 0) {
+            $('.headerSearch__popularSearches').hide();
             $('.headerSearch__resultsText .successSearch').show();
             $('.headerSearch__resultsText .emptySearch').hide();
             productSuggestions.forEach(function (product) {
@@ -1606,6 +1610,7 @@ theme.searchBar = function () {
               }
             })
           } else {
+            $('.headerSearch__popularSearches').show();
             $('.headerSearch__resultsText .successSearch').hide();
             $('.headerSearch__resultsText .emptySearch').show();
           }
@@ -1617,7 +1622,10 @@ theme.searchBar = function () {
           $('.headerSearch__results').attr('aria-hidden', 'true');
         });
     } else {
-      $('.headerSearch__results').attr('aria-hidden', 'true');
+      $searchBar.removeClass('loading');
+      $('.headerSearch__popularSearches').show();
+      $resetBtn.hide();
+      $('.search__popular').show();
     }
 
   }
@@ -1632,7 +1640,10 @@ theme.searchBar = function () {
   }))
 
   $(document).on('click.resetSearch', '.headerSearch__resetLabel', function (event) {
-    onInput(event);
+    $('.headerSearch__results').attr('aria-hidden', 'true');
+    $('.headerSearch__popularSearches').show();
+    $('.headerSearch__resultsContent').empty();
+    // $('.search__popular').show();
   });
 
   $(document).on('mousedown.searchBarClose', function (e) {

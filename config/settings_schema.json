@@ -197,5 +197,149 @@
         "info": "Will be scaled down to 32 x 32px"
       }
     ]
+  },
+  {
+    "name": "Predictive search",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable_search",
+        "label": "Enable search"
+      },
+      {
+        "type": "text",
+        "id": "search_heading",
+        "label": "Heading"
+      },
+      {
+        "type": "header",
+        "content": "Popular searches"
+      },
+      {
+        "type": "text",
+        "id": "popular_searches_text_1",
+        "label": "Text 1"
+      },
+      {
+        "type": "url",
+        "id": "popular_searches_url_1",
+        "label": "Url 1"
+      },
+      {
+        "type": "text",
+        "id": "popular_searches_text_2",
+        "label": "Text 2"
+      },
+      {
+        "type": "url",
+        "id": "popular_searches_url_2",
+        "label": "Url 2"
+      },
+      {
+        "type": "text",
+        "id": "popular_searches_text_3",
+        "label": "Text 3"
+      },
+      {
+        "type": "url",
+        "id": "popular_searches_url_3",
+        "label": "Url 3"
+      },
+      {
+        "type": "header",
+        "content": "Popular section"
+      },
+      {
+        "type": "checkbox",
+        "id": "popular_section_enable",
+        "label": "Show section"
+      },
+      {
+        "type": "checkbox",
+        "id": "popular_section_hide_desktop",
+        "label": "Hide from desktop"
+      },
+      {
+        "type": "text",
+        "id": "popular_section_heading",
+        "label": "Heading"
+      },
+      {
+        "type": "header",
+        "content": "Block 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "popular_section_image_1",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "popular_section_title_1",
+        "label": "Title"
+      },
+      {
+        "type": "url",
+        "id": "popular_section_url_1",
+        "label": "Url"
+      },
+      {
+        "type": "header",
+        "content": "Block 2"
+      },
+      {
+        "type": "image_picker",
+        "id": "popular_section_image_2",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "popular_section_title_2",
+        "label": "Title"
+      },
+      {
+        "type": "url",
+        "id": "popular_section_url_2",
+        "label": "Url"
+      },
+      {
+        "type": "header",
+        "content": "Block 3"
+      },
+      {
+        "type": "image_picker",
+        "id": "popular_section_image_3",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "popular_section_title_3",
+        "label": "Title"
+      },
+      {
+        "type": "url",
+        "id": "popular_section_url_3",
+        "label": "Url"
+      },
+      {
+        "type": "header",
+        "content": "Block 4"
+      },
+      {
+        "type": "image_picker",
+        "id": "popular_section_image_4",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "popular_section_title_4",
+        "label": "Title"
+      },
+      {
+        "type": "url",
+        "id": "popular_section_url_4",
+        "label": "Url"
+      }
+    ]
   }
 ]
