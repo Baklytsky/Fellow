@@ -1,0 +1,158 @@
+{%- assign show_best_sellers = section.settings.show_best_sellers -%}
+{%- assign best_sellers_heading = section.settings.best_sellers_heading -%}
+{%- assign best_sellers_collection = collections[section.settings.best_sellers_collection] -%}
+
+
+<section class="searchMain">
+  <form action="{{ routes.search_url }}" name="GET" role="search" class="searchForm searchForm--main">
+    <input type="search" class="searchForm__input searchForm__input--main" name="q" value="{{ search.terms | escape }}" autocomplete="off" autocorrect="off" autocapitalize="off" aria-label="{{ 'header_search.input_placeholder' | t }}" placeholder="{{ 'header_search.input_placeholder' | t }}" autofocus>
+    <label for="search-reset" class="searchForm__resetLabel" {% unless search.performed %}style="display: none" {% endunless %}>
+      <input type="reset" id="search-reset" tabindex="-1" value="reset" style="display: none;">
+      {% render 'icon' with 'x' %}
+    </label>
+    <input type="hidden" name="type" value="product">
+  </form>
+
+
+  <div class="searchMain__empty" {% if search.results.size > 0 or search.performed == false %}style="display: none" {% endif %}>
+    <div class="searchMain__searchSize">{{ 'general.search.count_results' | t: results_count: search.results_count }}</div>
+    <h1 class="searchMain__resultHeading"> {{ 'general.search.no_results' | t }}</h1>
+  </div>
+
+
+  <div class="searchMain__content" {% if search.results.size == 0 or search.performed == false %}style="display: none" {% endif %}>
+    {%- if search.performed and search.results.size > 0 -%}
+      <div class="searchMain__filters">
+
+      </div>
+      <div class="searchMain__contentInner">
+        <div class="searchMain__searchSize">{{ 'general.search.count_results' | t: results_count: search.results_count }}</div>
+
+        <div class="searchMain__grid">
+          {%- if search.performed and search.results.size > 0 -%}
+            {%- if search.types contains 'product' -%}
+              {%- for product in search.results -%}
+                <div class="searchMain__gridItem">
+                  {% include 'product-card' %}
+                </div>
+              {%- endfor -%}
+            {%- endif -%}
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+
+
+   {%- if settings.popular_section_enable -%}
+     <div class="search__popular--mainWrapper" {% if search.results.size > 0 %}style="display: none" {% endif %}>
+       {% render 'search-grid-popular', class_name: 'search__popular--main' %}
+     </div>
+  {%- endif -%}
+
+  {%- if show_best_sellers -%}
+    <div class="searchBestSellers" {% if search.results.size > 0 %}style="display: none" {% endif %}>
+      {% if best_sellers_heading != blank %}
+        <h4 class="searchBestSellers__heading">{{ best_sellers_heading }}</h4>
+      {% endif %}
+
+      {%- if best_sellers_collection != blank and best_sellers_collection.products_count > 0 -%}
+        <div class="searchBestSellers__content">
+          {% for product in best_sellers_collection.products limit: 4 %}
+            <div class="searchBestSellers__item">
+              {% include 'product-card' %}
+            </div>
+          {% endfor %}
+        </div>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+
+  {% if search.performed %}
+    {%- comment -%}
+      <ul>
+        {% for item in search.results %}
+          <li>
+            {% if item.featured_image %}
+              <a href="{{ item.url | within: collection }}" title="{{ item.title | escape }}">
+                {{ item.featured_image.src | img_url: '240x240' | img_tag: item.featured_image.alt }}
+              </a>
+            {% endif %}
+
+            <h5>{{ item.title | link_to: item.url }}</h5>
+
+            {% if item.object_type == 'product' %}
+              <p>
+                {% if item.compare_at_price > item.price %}
+                  {% if item.price_varies %}
+                    {% assign sale_price = item.price | money %}
+                    {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
+                  {% else %}
+                    {{ 'products.product.on_sale' | t }}
+                    <span itemprop="price">{{ item.price | money }}</span>
+                  {% endif %}
+                  <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
+                  <s>{{ item.compare_at_price | money }}</s>
+                {% else %}
+                  {% if item.price_varies %}
+                    {% assign price = item.price | money %}
+                    <span itemprop="price">{{ 'products.product.from_text_html' | t: price: price }}</span>
+                  {% else %}
+                    <span itemprop="price">{{ item.price | money }}</span>
+                  {% endif %}
+                {% endif %}
+                {% unless item.available %}
+                  {{ 'products.product.sold_out' | t }}
+                {% endunless %}
+              </p>
+            {% else %}
+              <p>{{ item.content | strip_html | truncatewords: 50 }}</p>
+            {% endif %}
+
+          </li>
+        {% endfor %}
+      </ul>
+    {%- endcomment -%}
+
+
+
+    {%- comment -%}
+      {% if paginate.pages > 1 %}
+        {% include 'pagination' %}
+      {% endif %}
+    {%- endcomment -%}
+
+  {% endif %}
+
+
+
+</section>
+
+
+{% schema %}
+{
+  "name": "Search template",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Best sellers"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_best_sellers",
+      "label": "Show section"
+    },
+    {
+      "type": "text",
+      "id": "best_sellers_heading",
+      "label": "Heading"
+    },
+    {
+      "type": "collection",
+      "id": "best_sellers_collection",
+      "label": "Collection"
+    }
+  ]
+}
+{% endschema %}

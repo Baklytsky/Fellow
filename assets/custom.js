@@ -1602,7 +1602,7 @@ theme.searchBar = function () {
     if (queryKey.length) {
       $resetBtn.show();
       $searchPopular.hide();
-      fetch(`/search/suggest.json?q=${queryKey}&resources[type]=product&resources[options][fields]=title`)
+      fetch(`/search/suggest.json?q=${queryKey}&resources[type]=product`)
         .then((response) => response.json())
         .then((suggestions) => {
           const productSuggestions = suggestions.resources.results.products;
@@ -1666,6 +1666,37 @@ theme.searchBar = function () {
       closeSearch();
     }
   })
+
+}
+
+theme.searchPage = function () {
+  var urlSearchParams = new URLSearchParams(window.location.search);
+  var params = Object.fromEntries(urlSearchParams.entries());
+  var queryKey = params.q
+
+
+  if (queryKey.length) {
+
+    fetch(`/search/suggest.json?q=${queryKey}&resources[type]=product`)
+        .then((response) => response.json())
+        .then((suggestions) => {
+          const productSuggestions = suggestions.resources.results.products;
+
+          if (productSuggestions.length > 0) {
+            productSuggestions.forEach(function (product) {
+
+                console.log(product.title);
+
+            })
+          }
+        })
+        .catch((error) => {
+
+        });
+  } else {
+
+  }
+
 
 }
 
@@ -2112,6 +2143,10 @@ theme.GLOBAL = function () {
 
   if ($('.headerSearch').length) {
     theme.searchBar();
+  }
+
+  if ($('.searchMain').length) {
+    theme.searchPage();
   }
 
   // PICO app mega hack to bypass on mobile

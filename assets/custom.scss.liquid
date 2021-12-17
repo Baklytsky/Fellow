@@ -5937,7 +5937,7 @@ input[type="search"]::-webkit-search-results-decoration {
   transform: translateY(0);
 }
 
-.headerSearch__form {
+.searchForm {
   border-radius: 5px;
   border: 1px solid #C2C2C2;
   position: relative;
@@ -5947,20 +5947,19 @@ input[type="search"]::-webkit-search-results-decoration {
   }
 }
 
-.headerSearch__input {
+.searchForm__input {
   width: 100%;
   padding: 16px 50px 14px 20px;
   font-size: 16px;
   line-height: 130%;
 }
 
-.headerSearch__resetLabel {
+.searchForm__resetLabel {
   position: absolute;
   top: 2px;
   right: 20px;
   padding: 10px;
   cursor: pointer;
-  display: none;
 
   @media screen and (max-width: $tablet) {
     top: 2px;
@@ -5977,6 +5976,10 @@ input[type="search"]::-webkit-search-results-decoration {
       height: 16px;
     }
   }
+}
+
+.headerSearch__resetLabel {
+  display: none;
 }
 
 @keyframes rotator {
@@ -6027,8 +6030,7 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 .headerSearch__resultsText,
-.headerSearch__emptyResults,
-.search__popularHeading {
+.headerSearch__emptyResults {
   font-weight: bold;
   font-size: 16px;
   line-height: 120%;
@@ -6039,8 +6041,18 @@ input[type="search"]::-webkit-search-results-decoration {
   margin: 0;
 }
 
-.search__popularHeading {
-  margin: 16px 0 16px 8px;
+.search__popularHeading,
+.searchBestSellers__heading {
+  margin: 16px 0 8px;
+  font-weight: 500;
+  font-size: 38px;
+  line-height: 100%;
+
+  @media screen and (max-width: $tablet) {
+    font-size: 16px;
+    line-height: 120%;
+    font-weight: bold;
+  }
 }
 
 .headerSearch__results {
@@ -6079,11 +6091,9 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .search__popular {
   padding: 24px 0 0;
-  width: calc(100% + 16px);
-  margin-left: -8px;
 }
 
-.search__popular--hide-desktop {
+.search__popular--header.search__popular--hide-desktop {
   @media screen and (min-width: $tablet) {
     display: none!important;
   }
@@ -6115,14 +6125,19 @@ input[type="search"]::-webkit-search-results-decoration {
   left: 0;
 }
 
-.search__popularGrid {
+.search__popularGrid,
+.searchBestSellers__content {
   display: flex;
   flex-wrap: wrap;
+  width: calc(100% + 16px);
+  margin-left: -8px;
 }
 
-.search__popularItem {
+.search__popularItem ,
+.searchBestSellers__item {
   width: 25%;
   padding: 8px;
+  flex-shrink: 0;
 
   @media screen and (max-width: $mobile) {
     width: 50%;
@@ -6132,4 +6147,67 @@ input[type="search"]::-webkit-search-results-decoration {
 .search__popularItemHeading {
   margin: 15px 0;
   text-align: center;
+}
+
+.searchMain {
+  padding: 65px 30px;
+}
+
+.searchForm--main {
+  max-width: 1150px;
+  margin: 0 auto;
+}
+
+.searchMain__searchSize {
+  font-size: 14px;
+  line-height: 120%;
+  margin-bottom: 24px;
+}
+
+.searchMain__resultHeading {
+  font-weight: 500;
+  font-size: 48px;
+  line-height: 100%;
+  margin: 0;
+}
+
+.searchMain__empty {
+  padding: 40px 0 60px;
+  border-bottom: 1px solid #c2c2c2;
+  text-align: center;
+}
+
+.searchBestSellers {
+  margin-top: 40px;
+}
+
+.searchBestSellers__content {
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.searchMain__grid {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.searchMain__gridItem {
+  width: calc(100% / 3 - 12px);
+  flex-shrink: 0;
+  padding: 12px 0;
+}
+
+.searchMain__content {
+  padding: 40px 0;
+
+  .searchMain__searchSize {
+    margin-bottom: 12px;
+  }
 }
