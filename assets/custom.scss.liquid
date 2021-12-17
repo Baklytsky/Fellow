@@ -6027,11 +6027,16 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 .headerSearch__resultsText,
+.headerSearch__emptyResults,
 .search__popularHeading {
   font-weight: bold;
   font-size: 16px;
   line-height: 120%;
   margin: 0 0 24px;
+}
+
+.headerSearch__emptyResults {
+  margin: 0;
 }
 
 .search__popularHeading {
@@ -6095,6 +6100,10 @@ input[type="search"]::-webkit-search-results-decoration {
   @media screen and (max-width: $mobile) {
     padding-bottom: 108%;
   }
+}
+
+.headerSearch__emptyResults {
+  display: none;
 }
 
 .search__popularImage {

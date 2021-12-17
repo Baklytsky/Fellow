@@ -1560,6 +1560,8 @@ theme.searchBar = function () {
       $popularSearches = $('.headerSearch__popularSearches'),
       $searchResultContent = $('.headerSearch__resultsContent'),
       $searchPopular = $searchBar.find('.search__popular'),
+      $searchEmpty = $('.headerSearch__emptyResults'),
+      $resultsWrapper = $('.headerSearch__resultsHeader'),
       $resetBtn = $('.headerSearch__resetLabel');
 
   function toggleSearch () {
@@ -1606,15 +1608,21 @@ theme.searchBar = function () {
           const productSuggestions = suggestions.resources.results.products;
 
           if (productSuggestions.length > 0) {
-            $popularSearches.hide();
             productSuggestions.forEach(function (product) {
               if (product.type !== "Gift product") {
                 var productItem = `<li class="headerSearch__item"><a href="${product.url}">${product.title}</a></li>`
                 $searchResultContent.append(productItem);
               }
             })
+            $popularSearches.hide();
+            $searchEmpty.hide();
+            $resultsWrapper.show();
+            $searchPopular.hide();
           } else {
+            $searchPopular.show();
             $popularSearches.show();
+            $resultsWrapper.hide();
+            $searchEmpty.show();
           }
 
           $searchBar.removeClass('loading');
@@ -1648,6 +1656,8 @@ theme.searchBar = function () {
     $searchResultContent.empty();
     $searchPopular.show();
     $resetBtn.hide();
+    $searchEmpty.hide();
+    $resultsWrapper.show();
     inputFocus();
   });
 

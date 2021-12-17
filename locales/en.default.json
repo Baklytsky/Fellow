@@ -320,6 +320,6 @@
   },
   "header_search": {
     "input_placeholder": "Search",
-    "search_empty_text": "No results could be found"
+    "search_empty_text": "Sorry, no results"
   }
 }

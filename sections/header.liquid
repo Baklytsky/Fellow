@@ -219,6 +219,7 @@
           <input type="hidden" name="type" value="product">
         </form>
         <div class="headerSearch__results">
+          <div class="headerSearch__emptyResults">{{ 'header_search.search_empty_text' | t }}</div>
           <div class="headerSearch__resultsHeader">
             {%- if settings.search_heading != blank -%}
               <p class="headerSearch__resultsText">
