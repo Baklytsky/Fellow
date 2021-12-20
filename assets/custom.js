@@ -1672,27 +1672,25 @@ theme.searchBar = function () {
 theme.searchPage = function () {
   var urlSearchParams = new URLSearchParams(window.location.search);
   var params = Object.fromEntries(urlSearchParams.entries());
-  var queryKey = params.q
+  var queryKey = params.q;
+  var $resultsBlock = $('.searchMain__grid');
+  var sourceResults = document.getElementById("SearchPageResultsRender").innerHTML;
+  var templateResults = Handlebars.compile(sourceResults);
 
 
   if (queryKey.length) {
-
-    fetch(`/search/suggest.json?q=${queryKey}&resources[type]=product`)
-        .then((response) => response.json())
-        .then((suggestions) => {
-          const productSuggestions = suggestions.resources.results.products;
-
-          if (productSuggestions.length > 0) {
-            productSuggestions.forEach(function (product) {
-
-                console.log(product.title);
-
-            })
-          }
+    fetch(`/search?q=${queryKey}&view=ajax`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        // $resultsBlock.empty();
+        $resultsBlock.append(templateResults(data));
+        $('.productCard').each(function () {
+          theme.updateSwatches($(this)[0])
         })
-        .catch((error) => {
-
-        });
+        var api = new Yotpo.API(yotpo);
+        api.refreshWidgets();
+      })
   } else {
 
   }

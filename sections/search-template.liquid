@@ -33,7 +33,10 @@
             {%- if search.types contains 'product' -%}
               {%- for product in search.results -%}
                 <div class="searchMain__gridItem">
-                  {% include 'product-card' %}
+                  {%- comment -%}
+                    {% include 'product-card' %}
+                  {%- endcomment -%}
+
                 </div>
               {%- endfor -%}
             {%- endif -%}
@@ -125,9 +128,133 @@
 
   {% endif %}
 
-
-
 </section>
+
+
+
+<script id="SearchPageResultsRender" type="text/template">
+  {% raw %}
+    {{#each data }}
+      <div class="searchMain__gridItem asdasd">
+        <div class='productCard productCard--{{ title_handleize }}' data-component='productCard'>
+          <div class='productCard__content y' data-image-url="{{ featured_image.image_url }}">
+
+            <div role='img' aria-label='Image of {{ title }}' class='productCard__img rel z0'>
+              {{#if badge_text }}
+                <span class="productCard__badge abs z3 xsmall cb bg-xlightgrey">{{ badge_text }}</span>
+              {{/if }}
+
+              <div class='productCard__img-container default'>
+                <img src="{{ featured_image.image_url }}" alt="{{ featured_image.alt }}" class="productCard__image image image-abs-cover">
+              </div>
+
+              {{#each variants }}
+                <div role='img' class='productCard__img-container variant js-variant-image'
+                   {{#if cariantcolor }}
+                    data-color='{{ data_color }}'
+                   {{/if }}
+                   data-variant-url='{{ url }}'
+                   data-variant-id='{{ id }}'
+                   aria-label='{{ title }}'>
+
+                  <img src="{{ image_url }}" alt="{{ alt }}" class="productCard__image image image-abs-cover">
+                </div>
+              {{/each }}
+
+              <div class="productCardImg__QuickView">
+                <button class="productCardImg__QuickViewButton js-product-view" data-quick-view="{{ url_quickView }}?view=quick-view" type="button">+ Quick Add</button>
+              </div>
+
+              <a class='productCardImg__ProductLink abs fill z2 js-product-link' href='{{ url }}' title="{{ title }}" aria-label='{{ title }}'>
+                {{#if alt_image }}
+                  <img src="{{ alt_image.url }}"
+                     alt="{{ alt_image.alt }}"
+                     class="productCardImg__AlternativeImage image-abs-cover"
+                     role='img'
+                     loading='lazy'>
+                {{/if }}
+              </a>
+            </div>
+
+            <div class='productCard__details rel'>
+              <h3 class='productCard__title js-product-card-title'>{{ title }}</h3>
+              <div class="productCard__price js-product-card-price">
+                <p class='{{ product_price_label_classes }}'>{{ product_price_label }}</p>
+                <div class="ar productCard__price-wrapper">
+                  <h3>{{ price }}</h3>
+                </div>
+              </div>
+              <a href='{{ url }}' class='abs fill z2 js-product-link' aria-label='{{ title }}'></a>
+            </div>
+
+          <div class="productCard_ratings f fdr aie mb05"
+            {{#if hide_reviews }}
+              style="display: none"
+            {{/if }}>
+
+            <div class="yotpo bottomLine" style="display:inline-block;" data-product-id="{{ id }}"></div>
+            <span class="productCard__reviewNum">({{ reviews_count }})</span>
+          </div>
+
+
+        <form class='productCard__variants rel'>
+          <div class='productCard__options'>
+
+            {{#each options }}
+              <div class='radio-group f aic' data-option-{{ option_name }}>
+                {{#each values }}
+                  {{#each variants }}
+                    <label class='radio f aic rel js-color-update' for='{{ title_handleize }}-{{ option_name }}__{{ value_handleize }}'
+                             {{#if data_color_or_material }}
+                              data-color='{{ value_handleize }}'
+                             {{/if }}>
+                      <span class='u-sr-only'>Label for {{ title }} {{ option_name }}</span>
+                      <input
+                        type='radio'
+                        id='{{ title_handleize }}-{{ option_name }}__{{ value_handleize }}'
+                        data-value-handle='{{ value_handleize }}'
+
+                        {{#if data_color }}
+                          data-color='{{ value_handleize }}'
+                          class="checked"
+                        {{/if }}
+
+                        {{#if data_material }}
+                          data-material='{{ value_handleize }}'
+                        {{/if }}
+
+                        value='{{ value }}'
+                        data-option-selector>
+                      <div class="radio__title js-productCard-option js-color-update {{ data_color }}"
+                           {{#if data_color }}
+                           data-color='{{ value_handleize }}'
+                           {{/if }}
+                          {{#if data_material }}
+                            data-material='{{ value_handleize }}'
+                          {{/if }}
+
+                      data-variant-url='{{ variant_url }}'
+                      data-variant-id='{{ variant_id }}'>
+                    </div>
+                  </label>
+                {{/each }}
+              {{/each }}
+              </div>
+            {{/each }}
+          </div>
+
+          </div>
+        </form>
+
+
+
+
+          </div>
+        </div>
+      </div>
+    {{/each }}
+  {% endraw %}
+</script>
 
 
 {% schema %}
