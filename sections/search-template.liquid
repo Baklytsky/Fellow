@@ -18,12 +18,18 @@
       {% endif %}
 
       {%- if best_sellers_collection != blank and best_sellers_collection.products_count > 0 -%}
-        <div class="searchBestSellers__content">
-          {% for product in best_sellers_collection.products limit: 4 %}
-            <div class="searchBestSellers__item">
-              {% include 'product-card' %}
-            </div>
-          {% endfor %}
+        <div class="relatedProducts__row-wrapper rel">
+          <div class='f jcs fdr one-fourth relatedProducts__row'>
+            {% for product in best_sellers_collection.products limit: 4 %}
+              <div class="relatedProducts__item">
+                {%
+                  include 'product-card' with
+                  cx: 'y',
+                  product: product
+                %}
+              </div>
+            {% endfor %}
+          </div>
         </div>
       {%- endif -%}
     </div>
