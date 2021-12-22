@@ -48,9 +48,8 @@
   </form>
 
   <div class="searchMain__searchSize hidden-lg-up">{{ 'general.search.count_results' | t: results_count: search.results_count }}</div>
-
-  {%- if search.performed -%}
-    <div class="searchMain__inner">
+  <div class="searchMain__inner">
+    {%- if search.performed -%}
       {%- if search.results.size > 0 -%}
         {%- if search.types contains 'product' -%}
           <div class="collectionContainer searchMain__content">
@@ -221,7 +220,6 @@
               <div class="collection__products-filter-results"></div>
               <div class="searchMain__searchSize hidden-md-down">{{ 'general.search.count_results' | t: results_count: search.results_count }}</div>
 
-
               <div class="collection__products-results">
                 <div class="subcollection__products one-third">
                   {%- if search.types contains 'product' -%}
@@ -252,18 +250,17 @@
         {% endif %}
 
       {% endif %}
-    </div>
 
-  {%- else -%}
-    {% if popular_section != blank %}
-      {{ popular_section }}
-    {% endif %}
+    {%- else -%}
+      {% if popular_section != blank %}
+        {{ popular_section }}
+      {% endif %}
 
-    {% if best_sellers_section != blank %}
-      {{ best_sellers_section }}
-    {% endif %}
-  {%- endif -%}
-
+      {% if best_sellers_section != blank %}
+        {{ best_sellers_section }}
+      {% endif %}
+    {%- endif -%}
+  </div>
 </section>
 
 

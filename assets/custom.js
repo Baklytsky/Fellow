@@ -1744,7 +1744,7 @@ theme.searchPage = function () {
         var queryKey = value.replace(" ", "-").toLowerCase();
         var url = '/search?q=' + queryKey + '&options%5Bprefix%5D=last&type=product';
 
-        window.history.pushState('', '', url);
+        window.history.pushState({}, null, url);
       }
     });
   });
