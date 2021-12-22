@@ -5972,8 +5972,8 @@ input[type="search"]::-webkit-search-results-decoration {
     stroke-width: 1;
 
     @media screen and (max-width: $tablet) {
-      width: 16px;
-      height: 16px;
+      width: 12px;
+      height: 12px;
     }
   }
 }
@@ -6151,9 +6151,13 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .searchMain {
   padding: 65px 30px;
+
+  @media screen and (max-width: $tablet) {
+    padding: 30px 16px;
+  }
 }
 
-.searchForm--main {
+.searchFormMain {
   max-width: 1150px;
   margin: 0 auto;
 }
@@ -6162,6 +6166,10 @@ input[type="search"]::-webkit-search-results-decoration {
   font-size: 14px;
   line-height: 120%;
   margin-bottom: 24px;
+
+  @media screen and (max-width: $tablet) {
+    margin: 25px 0 0;
+  }
 }
 
 .searchMain__resultHeading {
@@ -6169,12 +6177,20 @@ input[type="search"]::-webkit-search-results-decoration {
   font-size: 48px;
   line-height: 100%;
   margin: 0;
+
+  @media screen and (max-width: $tablet) {
+    font-size: 33px;
+  }
 }
 
 .searchMain__empty {
   padding: 40px 0 60px;
   border-bottom: 1px solid #c2c2c2;
   text-align: center;
+
+  @media screen and (max-width: $tablet) {
+    padding: 25px 0;
+  }
 }
 
 .searchBestSellers {
@@ -6183,7 +6199,7 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .searchBestSellers__content {
   flex-wrap: nowrap;
-  overflow-x: scroll;
+  overflow-x: auto;
   -ms-overflow-style: none;
   scrollbar-width: none;
 
@@ -6198,14 +6214,40 @@ input[type="search"]::-webkit-search-results-decoration {
   flex-wrap: wrap;
 }
 
+@keyframes animation-loading-line {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
 .searchMain__gridItem {
   width: calc(100% / 3 - 12px);
   flex-shrink: 0;
   padding: 12px 0;
+
+  &.searchMain__gridItem--Loading {
+    .bg-animation {
+      background-color: #f2f2f2;
+      background-image: linear-gradient(90deg, #f2f2f2, #f6f6f6, #f2f2f2 );
+      background-size: 200px 100%;
+      background-repeat: no-repeat;
+      border-radius: 4px;
+      animation: animation-loading-line 1.2s ease-in-out infinite;
+    }
+
+     .productCard__details {
+       margin-top: 10px;
+       height: 50px;
+     }
+  }
 }
 
 .searchMain__content {
-  padding: 40px 0;
+  display: flex;
+  padding: 0;
 
   .searchMain__searchSize {
     margin-bottom: 12px;

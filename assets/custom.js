@@ -1187,7 +1187,7 @@ theme.pdpQuickView = function () {
   setTimeout(theme.qvChangeSlide, 0);
 }
 
-theme.collection = function () {
+theme.collectionAndSearch = function (isSearchPage) {
   // Remove all $(document) Events
   $(document).off('click.dropdownFilters')
   $(document).off('click.deleteFilterResult')
@@ -1271,6 +1271,16 @@ theme.collection = function () {
           url = window.location.protocol + '//' + window.location.host + window.location.pathname + '?view=ajax&' + formData,
           $noResultsMessage = `<h3 class="collection__products-no-results">No results</h3>`;
 
+        if (isSearchPage) {
+          var urlSearchParams = new URLSearchParams(window.location.search);
+          var params = Object.fromEntries(urlSearchParams.entries());
+          var queryKey = params.q;
+
+          if (queryKey.length) {
+            url = window.location.protocol + '//' + window.location.host + window.location.pathname + '?q=' + queryKey + '&options%5Bprefix%5D=last&resources[options][unavailable_products]=hide&' + formData;
+          }
+        }
+
       $filterFormInput.attr('disabled', 'true');
       filterResultsBlock()
 
@@ -1327,12 +1337,20 @@ theme.collection = function () {
 
     $(document).on('click.mobileClearAll', '[data-clear-filter]', function () {
       let $collectionContainer = $(document).find('.collectionContainer');
+      let url = $(this).data('clear-filter');
+      if (isSearchPage) {
+        url = window.location.href;
+      }
+
       $.ajax({
-        url: $(this).data('clear-filter'),
+        url: url,
         method: 'GET',
         success: function (data) {
           let $collectionNewContainer = $(data).find('.collectionContainer').html();
-          $collectionContainer.html($collectionNewContainer)
+          $collectionContainer.html($collectionNewContainer);
+          if (typeof window.yotpo !== "undefined") {
+            window.yotpo.initWidgets();
+          }
           $('.productCard').each(function () {
             theme.updateSwatches($(this)[0])
           })
@@ -1552,9 +1570,11 @@ theme.searchBar = function () {
   $(document).off('mousedown.searchBarClose');
   $(document).off('input.onInput');
   $(document).off('click.resetSearch');
+  $(document).off('submit.headerSearchForm');
 
 
   var $searchBar = $('.headerSearch'),
+      $searchInput = $('.headerSearch__input'),
       $searchBarToggle = $('[data-action="toggle-search"]'),
       $searchResultWrapper = $('.headerSearch__results'),
       $popularSearches = $('.headerSearch__popularSearches'),
@@ -1641,6 +1661,16 @@ theme.searchBar = function () {
 
   }
 
+  $(document).on('submit.headerSearchForm', '.headerSearch__form', function (event) {
+    event.preventDefault();
+    var value = $searchInput.val().trim(),
+        queryKey = value.replace(" ", "-").toLowerCase();
+
+    var urlToRedirect = '/search?q=' + queryKey + '&options%5Bprefix%5D=last&type=product';
+    window.location.href = urlToRedirect;
+
+  });
+
   $(document).on('click.searchBarToggle', '[data-action="toggle-search"]', function (event) {
     event.preventDefault();
     toggleSearch();
@@ -1670,31 +1700,54 @@ theme.searchBar = function () {
 }
 
 theme.searchPage = function () {
-  var urlSearchParams = new URLSearchParams(window.location.search);
-  var params = Object.fromEntries(urlSearchParams.entries());
-  var queryKey = params.q;
-  var $resultsBlock = $('.searchMain__grid');
-  var sourceResults = document.getElementById("SearchPageResultsRender").innerHTML;
-  var templateResults = Handlebars.compile(sourceResults);
+  $(document).off('click.resetMainSearchInput');
+  $(document).off('input.onInputMain');
+  $(document).off('submit.mainSearchForm');
 
+  var $searchInput = $('.searchForm__inputMain');
+  var $searchInputReset = $('.searchForm__mainResetLabel');
 
-  if (queryKey.length) {
-    fetch(`/search?q=${queryKey}&view=ajax`)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        // $resultsBlock.empty();
-        $resultsBlock.append(templateResults(data));
+  $(document).on('click.resetMainSearchInput', '.searchForm__mainResetLabel',  function () {
+    $searchInput.removeAttr('value');
+    $(this).hide();
+  })
+
+  $(document).on('input.onInputMain', '.searchForm__inputMain[type="search"]', $.debounce(250, function () {
+    var value = $(this).val().trim(),
+        queryKey = value.replace(" ", "-").toLowerCase();
+
+    (queryKey.length) ? $searchInputReset.show() : $searchInputReset.hide();
+  }))
+
+  $(document).on('submit.mainSearchForm', '.searchFormMain', function (event) {
+    event.preventDefault();
+    var value = $searchInput.val().trim();
+    var queryKey = value.replace(" ", "-").toLowerCase();
+
+    var url = '/search?q=' + queryKey + '&options%5Bprefix%5D=last&type=product';
+    let $collectionContainer = $(document).find('.searchMain__inner');
+
+    $.ajax({
+      url: url,
+      method: 'GET',
+      success: function (data) {
+        let $collectionNewContainer = $(data).find('.searchMain__inner').html();
+        $collectionContainer.html($collectionNewContainer);
+
+        if (typeof window.yotpo !== "undefined") {
+          window.yotpo.initWidgets();
+        }
         $('.productCard').each(function () {
           theme.updateSwatches($(this)[0])
         })
-        var api = new Yotpo.API(yotpo);
-        api.refreshWidgets();
-      })
-  } else {
+        var value = $searchInput.val().trim();
+        var queryKey = value.replace(" ", "-").toLowerCase();
+        var url = '/search?q=' + queryKey + '&options%5Bprefix%5D=last&type=product';
 
-  }
-
+        window.history.pushState('', '', url);
+      }
+    });
+  });
 
 }
 
@@ -2127,8 +2180,12 @@ theme.GLOBAL = function () {
     theme.slickSlider()
   }
 
-  if ($('.collection').length) {
-    theme.collection()
+  if ($('.collection').length || $('.searchMain').length) {
+    if ($('.searchMain').length) {
+      var isSearchPage = true;
+    }
+
+    theme.collectionAndSearch(isSearchPage);
   }
 
   if ($('.pdpMain').length) {

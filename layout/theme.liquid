@@ -150,7 +150,6 @@
     {{ 'jquery-1.11.0.min.js' | asset_url | script_tag }}
     {{ 'jquery.ba-throttle-debounce.min.js' | asset_url | script_tag }}
     {{ 'custom-additional-vendor.js' | asset_url | script_tag }}
-    {{ 'handlebars.min-v4.7.7.js' | asset_url | script_tag }}
 
  {%- if request.path contains 'carter-move-mug' or request.path contains 'carter-everywhere-mug' -%}
     {{ 'player-event.js' | asset_url | script_tag }}
