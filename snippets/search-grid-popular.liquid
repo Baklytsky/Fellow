@@ -10,8 +10,13 @@
       {%- assign popular_section_url = settings[popular_section_url_handle] -%}
       {%- assign popular_section_image_handle = 'popular_section_image_' | append: forloop.index -%}
       {%- assign popular_section_image = settings[popular_section_image_handle] -%}
-
-      <a href="{{ popular_section_url }}" class="search__popularItem">
+  
+      {%- if popular_section_url != blank -%}
+        <a href="{{ popular_section_url }}" class="search__popularItem">
+      {%- else -%}
+          <div class="search__popularItem">
+      {%- endif -%}
+      
         {%- if popular_section_image != blank -%}
           <div class="AspectRatio search__popularImageWrapper"
                style="--aspect-ratio: {{ popular_section_image.aspect_ratio }};">
@@ -29,7 +34,12 @@
         {%- if popular_section_heading != blank -%}
           <h5 class="search__popularItemHeading">{{ popular_section_heading }}</h5>
         {%- endif -%}
-      </a>
+        
+        {%- if popular_section_url != blank -%}
+            </a>
+        {%- else -%}
+            </div>
+        {%- endif -%}
 
     {% endfor %}
   </div>

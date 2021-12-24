@@ -5021,7 +5021,7 @@ h2.pdpCopy__header-price ,
 
   @media screen and (max-width: $tablet) {
     width: 100%;
-    padding: 24px 0 16px;
+    padding: 24px 0 0;
   }
 }
 
@@ -5074,7 +5074,7 @@ h2.pdpCopy__header-price ,
 }
 
 .collectionFilters {
-  margin: 110px 0 64px;
+  margin: 60px 0 64px;
   padding-right: 32px;
   width: 25%;
   min-width: 242px;
@@ -5348,6 +5348,12 @@ h2.pdpCopy__header-price ,
       padding-bottom: 6px;
       border-bottom: 1px solid #ABABAB;
     }
+  }
+}
+
+@media screen and (max-width: $tablet) {
+  .dropdownHeader {
+    border-top: 1px solid #ABABAB;
   }
 }
 
@@ -5904,7 +5910,7 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .headerSearch {
   background-color: $color-white;
-  padding: 40px 8vw;
+  padding: 40px 10vw;
   position: absolute;
   top: 100%;
   left: 0;
@@ -5925,7 +5931,7 @@ input[type="search"]::-webkit-search-results-decoration {
 
   @media screen and (max-width: $tablet) {
     height: calc(100vh - var(--header-height));
-    padding: 24px 0;
+    padding: 24px 0 90px;
     z-index: 2;
   }
 }
@@ -5972,8 +5978,8 @@ input[type="search"]::-webkit-search-results-decoration {
     stroke-width: 1;
 
     @media screen and (max-width: $tablet) {
-      width: 12px;
-      height: 12px;
+      width: 14px;
+      height: 14px;
     }
   }
 }
@@ -6035,6 +6041,11 @@ input[type="search"]::-webkit-search-results-decoration {
   font-size: 16px;
   line-height: 120%;
   margin: 0 0 24px;
+  color: #232323;
+
+  @media screen and (max-width: $tablet) {
+    margin: 0 0 16px;
+  }
 }
 
 .headerSearch__emptyResults {
@@ -6047,18 +6058,21 @@ input[type="search"]::-webkit-search-results-decoration {
   font-weight: 500;
   font-size: 38px;
   line-height: 100%;
+  color: #232323;
 
   @media screen and (max-width: $tablet) {
     font-size: 16px;
     line-height: 120%;
     font-weight: bold;
+    margin: 16px 0;
+    font-family: $font-base;
   }
 }
 
 .headerSearch__results {
   padding: 30px 20px;
   transition: all .4s linear;
-  border: 1px solid #c2c2c2;
+  border: 1px solid #ABABAB;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   border-top: none;
@@ -6069,7 +6083,7 @@ input[type="search"]::-webkit-search-results-decoration {
     margin: 24px 0 0;
     padding: 24px 16px 0;
     border: none;
-    border-top: 1px solid #c2c2c2;
+    border-top: 1px solid #DBDBDB;
     border-radius: 0;
   }
 }
@@ -6091,6 +6105,10 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .search__popular {
   padding: 24px 0 0;
+
+  @media screen and (max-width: $tablet) {
+    padding: 14px 0 0;
+  }
 }
 
 .search__popular--header.search__popular--hide-desktop {
@@ -6114,6 +6132,10 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .headerSearch__emptyResults {
   display: none;
+
+  @media screen and (max-width: $mobile) {
+    text-align: center;
+  }
 }
 
 .search__popularImage {
@@ -6154,13 +6176,16 @@ input[type="search"]::-webkit-search-results-decoration {
 .search__popularItemHeading {
   margin: 15px 0;
   text-align: center;
+  font-family: $font-base;
+  font-weight: normal;
+  font-size: 16px;
 }
 
 .searchMain {
-  padding: 65px 30px;
+  padding: 65px 30px 25px;
 
   @media screen and (max-width: $tablet) {
-    padding: 30px 16px;
+    padding: 30px 16px 10px;
   }
 }
 
@@ -6175,7 +6200,7 @@ input[type="search"]::-webkit-search-results-decoration {
   margin-bottom: 24px;
 
   @media screen and (max-width: $tablet) {
-    margin: 25px 0 0;
+    margin: 25px 0 10px;
   }
 }
 
@@ -6192,7 +6217,7 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .searchMain__empty {
   padding: 40px 0 60px;
-  border-bottom: 1px solid #c2c2c2;
+  border-bottom: 1px solid #ABABAB;
   text-align: center;
 
   @media screen and (max-width: $tablet) {
@@ -6261,6 +6286,15 @@ input[type="search"]::-webkit-search-results-decoration {
   }
 }
 
+.filter-group:only-child {
+  @media screen and (max-width: $tablet) {
+    .dropdownHeader {
+      border-top: 0;
+      margin-top: 0;
+    }
+  }
+}
+
 .searchMain__content {
   display: flex;
   padding: 0;
@@ -6283,5 +6317,17 @@ input[type="search"]::-webkit-search-results-decoration {
 
   .searchMain__searchSize {
     margin-bottom: 12px;
+  }
+}
+
+.searchForm {
+  @media screen and (min-width: $tablet) {
+    border-color: #ABABAB;
+  }
+}
+
+.search__popular--main {
+  @media screen and (min-width: $tablet) {
+    padding-top: 44px;
   }
 }

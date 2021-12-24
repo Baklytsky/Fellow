@@ -225,21 +225,21 @@
               <p class="headerSearch__resultsText">
                 {{ settings.search_heading }}
               </p>
-              <div class="headerSearch__popularSearches">
-                {%- if settings.popular_searches_text_1 != blank  and settings.popular_searches_url_1 != blank -%}
-                  <a href="{{ settings.popular_searches_url_1 }}" class="headerSearch__item">{{ settings.popular_searches_text_1 }}</a>
-                {%- endif -%}
-
-                {%- if settings.popular_searches_text_2 != blank  and settings.popular_searches_url_2 != blank -%}
-                  <a href="{{ settings.popular_searches_url_2 }}" class="headerSearch__item">{{ settings.popular_searches_text_2 }}</a>
-                {%- endif -%}
-
-                {%- if settings.popular_searches_text_3 != blank  and settings.popular_searches_url_3 != blank -%}
-                  <a href="{{ settings.popular_searches_url_3 }}" class="headerSearch__item">{{ settings.popular_searches_text_3 }}</a>
-                {%- endif -%}
-              </div>
-
             {%- endif -%}
+            
+            <div class="headerSearch__popularSearches">
+              {%- if settings.popular_searches_text_1 != blank  and settings.popular_searches_url_1 != blank -%}
+                <a href="{{ settings.popular_searches_url_1 }}" class="headerSearch__item">{{ settings.popular_searches_text_1 }}</a>
+              {%- endif -%}
+
+              {%- if settings.popular_searches_text_2 != blank  and settings.popular_searches_url_2 != blank -%}
+                <a href="{{ settings.popular_searches_url_2 }}" class="headerSearch__item">{{ settings.popular_searches_text_2 }}</a>
+              {%- endif -%}
+
+              {%- if settings.popular_searches_text_3 != blank  and settings.popular_searches_url_3 != blank -%}
+                <a href="{{ settings.popular_searches_url_3 }}" class="headerSearch__item">{{ settings.popular_searches_text_3 }}</a>
+              {%- endif -%}
+            </div>
           </div>
 
           <div class="headerSearch__results__loadingState">

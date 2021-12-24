@@ -1706,10 +1706,52 @@ theme.searchPage = function () {
 
   var $searchInput = $('.searchForm__inputMain');
   var $searchInputReset = $('.searchForm__mainResetLabel');
+  var $searchForm = $('.searchFormMain');
+
+  // function formSubmit () {
+  //   var value = $searchInput.val().trim();
+  //   var queryKey = value.replace(" ", "-").toLowerCase();
+  //   var url = '/search?q=' + queryKey + '&options%5Bprefix%5D=last&type=product';
+  //   let $searchContainer = $(document).find('.searchMain__inner');
+  //
+  //   $.ajax({
+  //     url: url,
+  //     method: 'GET',
+  //     success: function (data) {
+  //       let $searchNewContainer = $(data).find('.searchMain__inner').html();
+  //       $searchContainer.html($searchNewContainer);
+  //
+  //       if (typeof window.yotpo !== "undefined") {
+  //         window.yotpo.initWidgets();
+  //       }
+  //       $('.productCard').each(function () {
+  //         theme.updateSwatches($(this)[0])
+  //       })
+  //       var value = $searchInput.val().trim();
+  //       var queryKey = value.replace(" ", "-").toLowerCase();
+  //       var url = '/search?q=' + queryKey + '&options%5Bprefix%5D=last&type=product';
+  //       window.history.pushState({}, null, url);
+  //
+  //       var resultCount = $(document).find('[data-result-count]').attr('data-result-count');
+  //       var searchTerms = $(document).find('[data-terms]').attr('data-terms');
+  //
+  //       document.title = `Search: ${resultCount} results found for "${searchTerms}" – Fellow`;
+  //     }
+  //   });
+  // }
+
+  function getUrlRequest () {
+    var value = $searchInput.val().trim();
+    var queryKey = value.replace(" ", "-").toLowerCase();
+    var url = '/search?q=' + queryKey + '&options%5Bprefix%5D=last&type=product';
+
+    window.location.href = url;
+  }
 
   $(document).on('click.resetMainSearchInput', '.searchForm__mainResetLabel',  function () {
     $searchInput.removeAttr('value');
     $(this).hide();
+    getUrlRequest()
   })
 
   $(document).on('input.onInputMain', '.searchForm__inputMain[type="search"]', $.debounce(250, function () {
@@ -1721,32 +1763,7 @@ theme.searchPage = function () {
 
   $(document).on('submit.mainSearchForm', '.searchFormMain', function (event) {
     event.preventDefault();
-    var value = $searchInput.val().trim();
-    var queryKey = value.replace(" ", "-").toLowerCase();
-
-    var url = '/search?q=' + queryKey + '&options%5Bprefix%5D=last&type=product';
-    let $collectionContainer = $(document).find('.searchMain__inner');
-
-    $.ajax({
-      url: url,
-      method: 'GET',
-      success: function (data) {
-        let $collectionNewContainer = $(data).find('.searchMain__inner').html();
-        $collectionContainer.html($collectionNewContainer);
-
-        if (typeof window.yotpo !== "undefined") {
-          window.yotpo.initWidgets();
-        }
-        $('.productCard').each(function () {
-          theme.updateSwatches($(this)[0])
-        })
-        var value = $searchInput.val().trim();
-        var queryKey = value.replace(" ", "-").toLowerCase();
-        var url = '/search?q=' + queryKey + '&options%5Bprefix%5D=last&type=product';
-
-        window.history.pushState({}, null, url);
-      }
-    });
+    getUrlRequest()
   });
 
 }
