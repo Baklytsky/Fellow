@@ -1740,6 +1740,13 @@ theme.searchPage = function () {
   //   });
   // }
 
+  function changeDocumentTitle () {
+    var resultCount = $(document).find('[data-result-count]').attr('data-result-count');
+    var searchTerms = $(document).find('[data-terms]').attr('data-terms');
+    document.title = `Search: ${resultCount} results found for "${searchTerms}" – Fellow`;
+  }
+  changeDocumentTitle();
+
   function getUrlRequest () {
     var value = $searchInput.val().trim();
     var queryKey = value.replace(" ", "-").toLowerCase();
@@ -1751,7 +1758,7 @@ theme.searchPage = function () {
   $(document).on('click.resetMainSearchInput', '.searchForm__mainResetLabel',  function () {
     $searchInput.removeAttr('value');
     $(this).hide();
-    getUrlRequest()
+    getUrlRequest();
   })
 
   $(document).on('input.onInputMain', '.searchForm__inputMain[type="search"]', $.debounce(250, function () {
