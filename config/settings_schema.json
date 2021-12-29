@@ -8,45 +8,6 @@
     "theme_support_url": "https:\/\/wearemage.com"
   },
   {
-    "name": "Social media",
-    "settings": [
-      {
-        "type": "header",
-        "content": "Social links"
-      },
-      {
-        "type": "url",
-        "id": "social_instagram_link",
-        "label": "Instagram link"
-      },
-      {
-        "type": "url",
-        "id": "social_facebook_link",
-        "label": "Facebook link"
-      },
-      {
-        "type": "url",
-        "id": "social_twitter_link",
-        "label": "Twitter link"
-      },
-      {
-        "type": "url",
-        "id": "social_youtube_link",
-        "label": "Youtube link"
-      },
-      {
-        "type": "url",
-        "id": "social_pinterest_link",
-        "label": "Pinterest link"
-      },
-      {
-        "type": "url",
-        "id": "social_linkedin_link",
-        "label": "LinkedIn link"
-      }
-    ]
-  },
-  {
     "name": "Cart",
     "settings": [
       {
@@ -188,17 +149,6 @@
     ]
   },
   {
-    "name": "Favicon",
-    "settings": [
-      {
-        "type": "image_picker",
-        "id": "favicon",
-        "label": "Favicon image",
-        "info": "Will be scaled down to 32 x 32px"
-      }
-    ]
-  },
-  {
     "name": "Predictive search",
     "settings": [
       {
@@ -208,46 +158,13 @@
       },
       {
         "type": "text",
-        "id": "search_heading",
-        "label": "Heading"
+        "id": "search_no_result_text",
+        "label": "No results description"
       },
       {
         "type": "header",
-        "content": "Popular searches"
-      },
-      {
-        "type": "text",
-        "id": "popular_searches_text_1",
-        "label": "Text 1"
-      },
-      {
-        "type": "url",
-        "id": "popular_searches_url_1",
-        "label": "Url 1"
-      },
-      {
-        "type": "text",
-        "id": "popular_searches_text_2",
-        "label": "Text 2"
-      },
-      {
-        "type": "url",
-        "id": "popular_searches_url_2",
-        "label": "Url 2"
-      },
-      {
-        "type": "text",
-        "id": "popular_searches_text_3",
-        "label": "Text 3"
-      },
-      {
-        "type": "url",
-        "id": "popular_searches_url_3",
-        "label": "Url 3"
-      },
-      {
-        "type": "header",
-        "content": "Popular section"
+        "content": "Popular Collections",
+        "info": "Use the settings below for editing the Popular Collections section"
       },
       {
         "type": "checkbox",
@@ -281,7 +198,7 @@
       {
         "type": "url",
         "id": "popular_section_url_1",
-        "label": "Url"
+        "label": "Link"
       },
       {
         "type": "header",
@@ -300,7 +217,7 @@
       {
         "type": "url",
         "id": "popular_section_url_2",
-        "label": "Url"
+        "label": "Link"
       },
       {
         "type": "header",
@@ -319,7 +236,7 @@
       {
         "type": "url",
         "id": "popular_section_url_3",
-        "label": "Url"
+        "label": "Link"
       },
       {
         "type": "header",
@@ -338,7 +255,102 @@
       {
         "type": "url",
         "id": "popular_section_url_4",
-        "label": "Url"
+        "label": "Link"
+      },
+      {
+        "type": "header",
+        "content": "Best sellers",
+        "info": "Use the settings below for editing the Best sellers section"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_best_sellers",
+        "label": "Show section"
+      },
+      {
+        "type": "text",
+        "id": "best_sellers_heading",
+        "label": "Heading"
+      },
+      {
+        "type": "collection",
+        "id": "best_sellers_collection",
+        "label": "Collection"
+      },
+      {
+        "type": "header",
+        "content": "Popular results",
+        "info": "Use the settings below for editing Popular Results in the Search bar"
+      },
+      {
+        "type": "text",
+        "id": "search_heading",
+        "label": "Heading"
+      },
+      {
+        "type": "product",
+        "id": "popular_searches_product_1",
+        "label": "Product 1"
+      },
+      {
+        "type": "product",
+        "id": "popular_searches_product_2",
+        "label": "Product 2"
+      },
+      {
+        "type": "product",
+        "id": "popular_searches_product_3",
+        "label": "Product 3"
+      }
+    ]
+  },
+  {
+    "name": "Social media",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Social links"
+      },
+      {
+        "type": "url",
+        "id": "social_instagram_link",
+        "label": "Instagram link"
+      },
+      {
+        "type": "url",
+        "id": "social_facebook_link",
+        "label": "Facebook link"
+      },
+      {
+        "type": "url",
+        "id": "social_twitter_link",
+        "label": "Twitter link"
+      },
+      {
+        "type": "url",
+        "id": "social_youtube_link",
+        "label": "Youtube link"
+      },
+      {
+        "type": "url",
+        "id": "social_pinterest_link",
+        "label": "Pinterest link"
+      },
+      {
+        "type": "url",
+        "id": "social_linkedin_link",
+        "label": "LinkedIn link"
+      }
+    ]
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon image",
+        "info": "Will be scaled down to 32 x 32px"
       }
     ]
   }

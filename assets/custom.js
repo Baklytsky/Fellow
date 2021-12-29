@@ -66,6 +66,8 @@ theme.header = function () {
   })
 
   $(document).on('mouseover', '.newHeader__MainLink', function () {
+    theme.closeSearch();
+
     if ($(this).attr('data-target')) {
       let target = $(this).attr('data-target'),
           findDataId = $(`[data-id=${target}]`);
@@ -1586,21 +1588,21 @@ theme.searchBar = function () {
 
   function toggleSearch () {
     if ($searchBar.attr('aria-hidden') === 'false') {
-      closeSearch();
+      theme.closeSearch();
     } else {
       openSearch();
     }
   }
 
-  function closeSearch () {
+  theme.closeSearch = function () {
     $searchBar.attr('aria-hidden', 'true');
     $searchBar.removeClass('loading');
-    theme.enableScroll();
+    // theme.enableScroll();
   }
 
   function openSearch () {
     $searchBar.attr('aria-hidden', 'false');
-    theme.disableScroll();
+    // theme.disableScroll();
     inputFocus();
   }
 
@@ -1648,7 +1650,7 @@ theme.searchBar = function () {
           $searchBar.removeClass('loading');
         })
         .catch((error) => {
-          closeSearch();
+          theme.closeSearch();
           $searchBar.removeClass('loading');
           $searchResultWrapper.attr('aria-hidden', 'true');
         });
@@ -1693,7 +1695,7 @@ theme.searchBar = function () {
 
   $(document).on('mousedown.searchBarClose', function (e) {
     if (!$searchBar.is(e.target) && $searchBar.has(e.target).length === 0 && $searchBarToggle.has(e.target).length === 0) {
-      closeSearch();
+      theme.closeSearch();
     }
   })
 

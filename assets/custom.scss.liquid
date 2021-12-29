@@ -2973,17 +2973,19 @@ h2.pdpCopy__header-price ,
 
   .dropdownContent--animate-block {
     opacity: 0;
-    -webkit-transition: opacity .5s cubic-bezier(.215,.61,.355,1),visibility .5s cubic-bezier(.215,.61,.355,1);
-    -o-transition: opacity .5s cubic-bezier(.215,.61,.355,1),visibility .5s cubic-bezier(.215,.61,.355,1);
-    transition: opacity .5s cubic-bezier(.215,.61,.355,1),visibility .5s cubic-bezier(.215,.61,.355,1);
+    -webkit-transition: opacity .3s cubic-bezier(.215,.61,.355,1),visibility .3s cubic-bezier(.215,.61,.355,1);
+    -o-transition: opacity .3s cubic-bezier(.215,.61,.355,1),visibility .3s cubic-bezier(.215,.61,.355,1);
+    transition: opacity .3s cubic-bezier(.215,.61,.355,1),visibility .3s cubic-bezier(.215,.61,.355,1);
     visibility: hidden;
   }
 
   .dropdownContent--animate-block-visible {
     opacity: 1;
+    /*
     -webkit-transition: opacity .8s cubic-bezier(.215,.61,.355,1) .4s,visibility .8s cubic-bezier(.215,.61,.355,1) .4s;
     -o-transition: opacity .8s cubic-bezier(.215,.61,.355,1) .4s,visibility .8s cubic-bezier(.215,.61,.355,1) .4s;
     transition: opacity .8s cubic-bezier(.215,.61,.355,1) .4s,visibility .8s cubic-bezier(.215,.61,.355,1) .4s;
+     */
     visibility: visible;
 
     p {
@@ -5439,6 +5441,7 @@ h2.pdpCopy__header-price ,
     height: 2px;
     background: #000;
     outline: none;
+    margin-top: 10px;
 
     &::-webkit-slider-thumb {
       -webkit-appearance: none;

@@ -219,7 +219,9 @@
           <input type="hidden" name="type" value="product">
         </form>
         <div class="headerSearch__results">
-          <div class="headerSearch__emptyResults">{{ 'header_search.search_empty_text' | t }}</div>
+          <div class="headerSearch__emptyResults">
+            {{ settings.search_no_result_text | default: 'Sorry, no results' }}
+          </div>
           <div class="headerSearch__resultsHeader">
             {%- if settings.search_heading != blank -%}
               <p class="headerSearch__resultsText">
@@ -228,17 +230,12 @@
             {%- endif -%}
             
             <div class="headerSearch__popularSearches">
-              {%- if settings.popular_searches_text_1 != blank  and settings.popular_searches_url_1 != blank -%}
-                <a href="{{ settings.popular_searches_url_1 }}" class="headerSearch__item">{{ settings.popular_searches_text_1 }}</a>
-              {%- endif -%}
-
-              {%- if settings.popular_searches_text_2 != blank  and settings.popular_searches_url_2 != blank -%}
-                <a href="{{ settings.popular_searches_url_2 }}" class="headerSearch__item">{{ settings.popular_searches_text_2 }}</a>
-              {%- endif -%}
-
-              {%- if settings.popular_searches_text_3 != blank  and settings.popular_searches_url_3 != blank -%}
-                <a href="{{ settings.popular_searches_url_3 }}" class="headerSearch__item">{{ settings.popular_searches_text_3 }}</a>
-              {%- endif -%}
+              {% for i in (1..3) %}
+                {%- assign popular_searches = 'popular_searches_product_' | append: forloop.index -%}
+                {%- assign popular_searches_products = all_products[settings[popular_searches]] -%}
+    
+                <a href="{{ popular_searches_products.url }}" class="headerSearch__item">{{ popular_searches_products.title }}</a>
+              {% endfor %}
             </div>
           </div>
 

@@ -1,6 +1,6 @@
-{%- assign show_best_sellers = section.settings.show_best_sellers -%}
-{%- assign best_sellers_heading = section.settings.best_sellers_heading -%}
-{%- assign best_sellers_collection = collections[section.settings.best_sellers_collection] -%}
+{%- assign show_best_sellers = settings.show_best_sellers -%}
+{%- assign best_sellers_heading = settings.best_sellers_heading -%}
+{%- assign best_sellers_collection = collections[settings.best_sellers_collection] -%}
 
 
 <section class="searchMain">
@@ -246,7 +246,7 @@
       {%- else -%}
         <div class="searchMain__empty">
           <div class="searchMain__searchSize hidden-md-down">{{ 'general.search.count_results' | t: results_count: search.results_count }}</div>
-          <h1 class="searchMain__resultHeading"> {{ 'general.search.no_results' | t }}</h1>
+          <h1 class="searchMain__resultHeading">{{ settings.search_no_result_text | default: 'Sorry, no results' }}</h1>
         </div>
         
         {% if popular_section != blank %}
@@ -275,26 +275,6 @@
 {% schema %}
 {
   "name": "Search template",
-  "settings": [
-    {
-      "type": "header",
-      "content": "Best sellers"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_best_sellers",
-      "label": "Show section"
-    },
-    {
-      "type": "text",
-      "id": "best_sellers_heading",
-      "label": "Heading"
-    },
-    {
-      "type": "collection",
-      "id": "best_sellers_collection",
-      "label": "Collection"
-    }
-  ]
+  "settings": []
 }
 {% endschema %}
