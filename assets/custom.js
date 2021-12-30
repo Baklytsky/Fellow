@@ -1191,7 +1191,7 @@ theme.pdpQuickView = function () {
 
 theme.collectionAndSearch = function (isSearchPage) {
   // Remove all $(document) Events
-  $(document).off('click.dropdownFilters')
+  $(document).off('keypress.dropdownFilters click.dropdownFilters')
   $(document).off('click.deleteFilterResult')
   $(document).off('click.mobileFilterBar')
   $(document).off('click.mobileClearAll')
@@ -1202,7 +1202,7 @@ theme.collectionAndSearch = function (isSearchPage) {
   if ($('.collectionFilters').length) {
 
     if ($('[data-dropdown-filter]').length) {
-      $(document).on('click.dropdownFilters', '[data-dropdown-filter]', function () {
+      $(document).on('keypress.dropdownFilters click.dropdownFilters', '[data-dropdown-filter]', function () {
         if (window.innerWidth > 992) {
           let $dropdownList = $(this).parent().find('[data-dropdown-list]');
           if ($dropdownList.length) {
@@ -1682,7 +1682,7 @@ theme.searchBar = function () {
     onInput(event);
   }))
 
-  $(document).on('click.resetSearch', '.headerSearch__resetLabel', function () {
+  $(document).on('click.resetSearch', '.headerSearch__resetLabel, #header-search-reset', function () {
     $searchResultWrapper.attr('aria-hidden', 'true');
     $popularSearches.show();
     $searchResultContent.empty();
@@ -1757,7 +1757,7 @@ theme.searchPage = function () {
     window.location.href = url;
   }
 
-  $(document).on('click.resetMainSearchInput', '.searchForm__mainResetLabel',  function () {
+  $(document).on('click.resetMainSearchInput', '.searchForm__mainResetLabel, #search-reset',  function () {
     $searchInput.removeAttr('value');
     $(this).hide();
     getUrlRequest();

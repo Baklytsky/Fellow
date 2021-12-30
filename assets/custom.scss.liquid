@@ -5080,6 +5080,10 @@ h2.pdpCopy__header-price ,
   padding-right: 32px;
   width: 25%;
   min-width: 242px;
+  
+  &:focus {
+    border: 2px solid red;
+  }
 
   @media screen and (max-width: $tablet) {
     width: 100%;
@@ -5947,8 +5951,6 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 .searchForm {
-  border-radius: 5px;
-  border: 1px solid #C2C2C2;
   position: relative;
 
   @media screen and (max-width: $tablet) {
@@ -5961,9 +5963,12 @@ input[type="search"]::-webkit-search-results-decoration {
   padding: 16px 50px 14px 20px;
   font-size: 16px;
   line-height: 130%;
+  border-radius: 5px;
+  border: 1px solid #C2C2C2;
 
   &:focus {
-    outline: 1px solid #000;
+    border: 1px solid #000;
+    border-radius: 5px;
   }
 }
 
@@ -5985,8 +5990,7 @@ input[type="search"]::-webkit-search-results-decoration {
   cursor: pointer;
 
   @media screen and (max-width: $tablet) {
-    top: 2px;
-    right: 10px;
+    top: 3px;
   }
 
   svg {
@@ -6006,6 +6010,10 @@ input[type="search"]::-webkit-search-results-decoration {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  @media screen and (max-width: $tablet) {
+    transform: translateY(-66%);
+  }
   
   &:focus {
     outline: 2px solid blue;
@@ -6360,7 +6368,7 @@ input[type="search"]::-webkit-search-results-decoration {
   }
 }
 
-.searchForm {
+.searchForm__Input {
   @media screen and (min-width: $tablet) {
     border-color: #ABABAB;
   }

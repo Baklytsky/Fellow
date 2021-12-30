@@ -75,7 +75,7 @@
                   <button type="button" data-mobile-filter="sort">Sort By {% render 'icon' with 'dropdown' %}</button>
                 </div>
                 <div class="filter-group-wrapper filter-group-sort dropdown" data-mobile-dropdown="sort">
-                  <div class="dropdownHeader" data-dropdown-filter>
+                  <div role="button" class="dropdownHeader" data-dropdown-filter tabindex="0">
                     <h3 class="dropdownHeader-title">
                       Sort by
                     </h3>
@@ -140,7 +140,7 @@
                     {% endcomment %}
                     
                     <div class="filter-group dropdown {% if filter.label == 'Price' %} filter-group-price {% endif %}">
-                      <div class="dropdownHeader" data-dropdown-filter>
+                      <div role="button" class="dropdownHeader" data-dropdown-filter role="button" tabindex="0">
                         <h3 class="dropdownHeader-title">
                           {{ filter_title }}
                         </h3>
