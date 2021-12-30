@@ -105,8 +105,11 @@
               <li class="rightMenu__search">
                 <a aria-label="open search"
                    role="button"
+                   id="search-bar-button"
                    href="/search"
-                   data-action="toggle-search">
+                   data-action="toggle-search"
+                   aria-expanded="false"
+                   aria-haspopup="true">
                   <p>{{ 'general.search.submit' | t }}</p>
 
                   {%- render 'icon' with 'search' -%}
@@ -207,15 +210,22 @@
     {%- endif -%}
 
     {%- if show_search -%}
-      <div id="header-search" class="headerSearch" aria-hidden="true">
+      <div id="header-search" class="headerSearch" aria-hidden="true" aria-labelledby="search-bar-button">
 
         <form action="{{ routes.search_url }}" name="GET" role="search" class="searchForm headerSearch__form">
-
-          <input type="search" class="searchForm__input headerSearch__input" name="q" autocomplete="off" autocorrect="off" autocapitalize="off" aria-label="{{ 'header_search.input_placeholder' | t }}" placeholder="{{ 'header_search.input_placeholder' | t }}" autofocus>
-          <label for="main-search-reset" class="searchForm__resetLabel headerSearch__resetLabel">
-            <input type="reset" id="main-search-reset" tabindex="-1" value="reset" style="display: none;">
+          <label for='header-search-input'>
+            <span class='visually-hidden'>Search</span>
+          </label>
+          <input type="search" id="header-search-input" class="searchForm__input headerSearch__input" name="q" autocomplete="off" autocorrect="off" autocapitalize="off" aria-label="{{ 'header_search.input_placeholder' | t }}" placeholder="{{ 'header_search.input_placeholder' | t }}" autofocus>
+          <input type="reset" id="header-search-reset" value="reset" class="searchForm__resetInput">
+          <label for="header-search-reset" class="searchForm__resetLabel headerSearch__resetLabel">
+            <span class='visually-hidden'>Search Reset</span>
             {% render 'icon' with 'x' %}
           </label>
+          <button type='submit' class="searchForm__Submit">
+            {% render 'icon' with 'arrow-next' %}
+            <span class='visually-hidden'>Submit Search</span>
+          </button>
           <input type="hidden" name="type" value="product">
         </form>
         <div class="headerSearch__results">
@@ -286,10 +296,14 @@
 
           {%- if show_search != false -%}
             <li class="mobileMenu__item">
-              <a class="mobileMenu__link" aria-label="open search"
+              <a class="mobileMenu__link"
+                 aria-label="Open search"
                  role="button"
                  href="/search"
-                 data-action="toggle-search">
+                 data-action="toggle-search"
+                 aria-expanded="false"
+                 aria-haspopup="true"
+              >
                 <p>{{ 'general.search.submit' | t }}</p>
 
                 {%- render 'icon' with 'search' -%}

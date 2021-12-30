@@ -5961,12 +5961,26 @@ input[type="search"]::-webkit-search-results-decoration {
   padding: 16px 50px 14px 20px;
   font-size: 16px;
   line-height: 130%;
+
+  &:focus {
+    outline: 1px solid #000;
+  }
+}
+
+.searchForm__resetInput {
+  font-size: 0;
+  height: 0;
+  padding: 0;
+  
+  &:focus + label {
+    outline: 2px solid blue;
+  }
 }
 
 .searchForm__resetLabel {
   position: absolute;
   top: 2px;
-  right: 20px;
+  right: 30px;
   padding: 10px;
   cursor: pointer;
 
@@ -5976,14 +5990,31 @@ input[type="search"]::-webkit-search-results-decoration {
   }
 
   svg {
+    width: 13px;
+    height: 13px;
+    stroke-width: 1;
+  }
+}
+
+.searchForm__Submit {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+  &:focus {
+    outline: 2px solid blue;
+  }
+  
+  svg {
     width: 16px;
     height: 16px;
-    stroke-width: 1;
-
-    @media screen and (max-width: $tablet) {
-      width: 14px;
-      height: 14px;
-    }
+    vertical-align: middle;
   }
 }
 

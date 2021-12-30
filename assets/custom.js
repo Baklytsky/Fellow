@@ -1596,13 +1596,13 @@ theme.searchBar = function () {
 
   theme.closeSearch = function () {
     $searchBar.attr('aria-hidden', 'true');
+    $searchBarToggle.attr('aria-expanded', 'false');
     $searchBar.removeClass('loading');
-    // theme.enableScroll();
   }
 
   function openSearch () {
     $searchBar.attr('aria-hidden', 'false');
-    // theme.disableScroll();
+    $searchBarToggle.attr('aria-expanded', 'true');
     inputFocus();
   }
 
