@@ -259,8 +259,8 @@
       },
       {
         "type": "header",
-        "content": "Best sellers",
-        "info": "Use the settings below for editing the Best sellers section"
+        "content": "Best Sellers",
+        "info": "Use the settings below for editing the Best Sellers section"
       },
       {
         "type": "checkbox",
@@ -279,7 +279,7 @@
       },
       {
         "type": "header",
-        "content": "Popular results",
+        "content": "Popular Results",
         "info": "Use the settings below for editing Popular Results in the Search bar"
       },
       {
