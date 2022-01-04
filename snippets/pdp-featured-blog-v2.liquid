@@ -1,5 +1,5 @@
 {%- if product.metafields.custom_fields["show_featured_blog_section"] == 1 -%}
-  {%- assign articles = product.metafields.custom_fields["featured_articles"] | default: false -%}
+  {%- assign articles_array = product.metafields.custom_fields["featured_articles"] | default: false -%}
   {%- assign heading = product.metafields.custom_fields["featured_blog_heading"] | default: blog.title -%}
   {%- assign description = product.metafields.custom_fields["featured_blog_description"] | default: false -%}
   {%- assign cta_title = product.metafields.custom_fields["feature_blog_cta_copy"] | default: false -%}
@@ -24,7 +24,7 @@
     {% endunless %}
   {% endif %}
 
-  {%- if articles or description or cta_title -%}
+  {%- if articles_array or description or cta_title -%}
 
     {%- capture 'slick-config' -%}
       {
@@ -74,14 +74,13 @@
             </div>
           {%- endif -%}
 
-          {%- if articles -%}
-            {% assign article_refs = product.metafields.custom_fields["featured_articles"] | split: "|" %}
+          {%- if articles_array -%}
+            {% assign article_refs = articles_array | split: "|" %}
 
             <div class="BlogSection__ArticleWrapper jsSlickSlider">
               {%- for article_handle in article_refs -%}
-                {% assign article_blog_handle = article_handle | split: "." %}
-                {% for article in blogs[article_blog_handle[0]].articles %}
-                  {% if article.handle contains article_blog_handle[1] %}
+                {% assign article_blog_handle = article_handle | replace: ".", "/" %}
+                {%- assign article = articles[article_blog_handle] -%}
                     <div>
                       <div class="BlogSection__Article">
                         {%- if article.image != blank -%}
@@ -117,9 +116,6 @@
                         </div>
                       </div>
                     </div>
-                    {% break %}
-                  {% endif %}
-                {% endfor %}
 
               {%- endfor -%}
             </div>
