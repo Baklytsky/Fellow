@@ -16,7 +16,7 @@ theme.openModal = function () {
 theme.closeModal = function (clean) {
   $('#modal').attr('aria-hidden', 'true').fadeOut();
   $('#modalContent').fadeOut().html('').text('');
-  $('#emptyModal').show(800);
+  $('#emptyQvModal').show(800);
   theme.enableScroll();
   $(document).off('mousedown.QvClose')
 }
@@ -305,7 +305,7 @@ theme.quickView = function (URL, innerContainer) {
         theme.pdpQuickView();
       }
       theme.qvChangeColorGroupName();
-      $('#emptyModal').hide();
+      $('#emptyQvModal').hide();
       innerContainer.fadeIn(1000);
     }
   });

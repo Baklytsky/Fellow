@@ -10379,7 +10379,7 @@
                 var n = Q(9900 - e.total_price),
                     r = (e.total_price / 100).toFixed(2);
                 d.style.width = "".concat(r, "%"), p.innerHTML = n, v.innerHTML = `You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from free US shipping`
-              } else y.innerHTML = 'Congrats! You get Free US Shipping!', y.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.innerHTML = 'Shipping: Free', freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
+              } else y.innerHTML = 'Congrats! You get Free US Shipping!', y.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.innerHTML = `Shipping: <span style="font-weight: 600;">Free</span>`, freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
               Dr.emit("nav:toggle", {
                 navDrawerOpen: !1,
                 whichNavDrawer: void 0,
@@ -10554,7 +10554,7 @@
               var r = Q(9900 - n.total_price),
                   i = (n.total_price / 100).toFixed(2);
               d.style.width = "".concat(i, "%"), p.innerHTML = r, v.innerHTML = `You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from free US shipping`
-            } else y.innerHTML = 'Congrats! You get free US Shipping!', y.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.innerHTML = 'Shipping: Free', freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
+            } else y.innerHTML = 'Congrats! You get free US Shipping!', y.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.innerHTML = `Shipping: <span style="font-weight: 600;">Free</span>`, freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
           }
           u.forEach((function(t) {
             t.innerHTML = e.getState().cart.item_count

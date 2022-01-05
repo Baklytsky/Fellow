@@ -23,7 +23,7 @@
         {%- if item contains 'Limited Edition:' -%}
           {%- assign option_value = item | split: 'Limited Edition:' | last | strip -%}
         {%- endif -%}
-        <div class="radio-group bundle-radio-group f aic" data-option-{{ option_name | handleize }}>
+        <div class="radio-group bundle-radio-group f" data-option-{{ option_name | handleize }}>
           <label class="bundle-radio" for="{{ option_value | handleize | append: '-' | append: uniq_id  }}">
             <span class="u-sr-only">{{ option_value }}</span>
             <input id="{{ option_value | handleize | append: '-' | append: uniq_id }}"

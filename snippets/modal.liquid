@@ -3,7 +3,26 @@
   <section class='Modal'>
     <button id="closeModal" aria-label="close modal" type="button">{% include 'icon-close' %}</button>
     <div id='modalContent'></div>
-    <div id="emptyModal">{% include 'fellow-logo' %}</div>
+    {%- comment -%}
+      <div id="emptyModal">{% include 'fellow-logo' %}</div>
+    {%- endcomment -%}
+    <div id="emptyQvModal">
+      <div class="emptyQvModal__Gallery f">
+        <div class="emptyQvModal__GalleryThumbnail skeleton"></div>
+        <div class="emptyQvModal__GalleryImage skeleton"></div>
+      </div>
+      <div class="emptyQvModal__Content f fdc">
+        <div class="emptyQvModal__ContentTitle skeleton"></div>
+        <div class="emptyQvModal__ContentPrice skeleton"></div>
+        <div class="emptyQvModal__ContentDescription skeleton" style="width: 98%"></div>
+        <div class="emptyQvModal__ContentDescription skeleton" style="width: 100%"></div>
+        <div class="emptyQvModal__ContentDescription skeleton" style="width: 90%"></div>
+        <div class="emptyQvModal__ContentDescription skeleton" style="width: 85%"></div>
+        <div class="emptyQvModal__ContentDescription skeleton" style="width: 95%"></div>
+        <div class="emptyQvModal__ContentDescription skeleton" style="width: 78%"></div>
+        <div class="emptyQvModal__ContentDescription skeleton" style="width: 30%"></div>
+      </div>
+    </div>
 
   </section>
 </div>

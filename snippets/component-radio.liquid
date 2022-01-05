@@ -43,12 +43,12 @@
             {{ size_image }}
           </div>
         </div>
-        <span class="size__image-wrapper-span" data-{{ name }}='{{ label }}' style="white-space: nowrap">{{ label }}</span>
+        <span class="size__image-wrapper-span" data-{{ name }}='{{ label }}' style="white-space: break-spaces">{{ label }}</span>
       </div>
     {%- endif -%}
 
     {%- unless has_size_image -%}
-      <span class="size__image-wrapper-span" data-{{ name }}='{{ label }}' style="white-space: nowrap">{{ label }}</span>
+      <span class="size__image-wrapper-span" data-{{ name }}='{{ label }}' style="white-space: break-spaces">{{ label }}</span>
     {%- endunless -%}
   </div>
 </label>

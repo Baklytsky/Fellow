@@ -7,7 +7,7 @@
       {% assign option_name = product_option.name | handleize %}
       {% if option_name == 'color' or option_name == 'material' %}
         {% comment %}Found Color/Swatch, now loop through those{% endcomment %}
-        <div class='radio-group f aic' data-option-{{ option_name }}>
+        <div class='radio-group f' data-option-{{ option_name }}>
           {% for value in product_option.values %}
             {% for variant in product.variants %}
               {% if variant.option1 == value or variant.option2 == value %}
