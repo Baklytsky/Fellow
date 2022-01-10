@@ -1359,9 +1359,17 @@ button {
   animation: loader 1s infinite reverse;
 }
 
-.emptyQvModal__GalleryThumbnail.skeleton {
+.emptyQvModal__GalleryThumbnailWrapper {
   width: 43px;
-  height: 43px;
+  display: flex;
+  flex-direction: column;
+
+}
+
+.emptyQvModal__GalleryThumbnail.skeleton {
+  width: 100%;
+  padding-top: 100%;
+  margin-bottom: 10px;
 }
 
 .emptyQvModal__GalleryImage.skeleton {
@@ -4868,6 +4876,10 @@ h2.pdpCopy__header-price ,
   .size__image-wrapper {
     width: 60px;
     height: 60px;
+  }
+
+  .productCard__badge {
+    display: none;
   }
 }
 

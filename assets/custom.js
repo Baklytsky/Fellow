@@ -307,6 +307,7 @@ theme.quickView = function (URL, innerContainer) {
       theme.qvChangeColorGroupName();
       $('#emptyQvModal').hide();
       innerContainer.fadeIn(1000);
+      theme.qvVariantChange()
     }
   });
 }
@@ -1624,12 +1625,12 @@ theme.GLOBAL = function () {
 
   $(document).on('click.quickViewATC', '#ProductQuickView .js-counter-add', function () {
     qvChangeQTY(1);
-    qvVariantChange ();
+    theme.qvVariantChange ();
   })
 
   $(document).on('click.jsCounterRemove', '#ProductQuickView .js-counter-remove', function () {
     qvChangeQTY(-1);
-    qvVariantChange ();
+    theme.qvVariantChange ();
   })
 
   $(document).on('click.radioGroup', '#ProductQuickView .radio-group label', function () {
@@ -1648,7 +1649,7 @@ theme.GLOBAL = function () {
       if ($(this).attr('data-option-current') == optionName) {
         if(!(isDisabled)){
           $(this).text(optionValue);
-          qvVariantChange();
+          theme.qvVariantChange();
         }
       }
     })
@@ -1692,8 +1693,8 @@ theme.GLOBAL = function () {
   // });
   // ======================================== Neels code ends here ========================================
 
-  
-  function qvVariantChange () {
+
+  theme.qvVariantChange = function () {
     let selectedOption = $('#ProductQuickView .radio-group input:checked');
 
     var currentOptions = $.map(selectedOption, function(element, index) {
