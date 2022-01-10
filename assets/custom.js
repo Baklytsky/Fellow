@@ -1569,6 +1569,7 @@ theme.checkGwpOnLoad = function (element) {
 
 theme.searchBar = function () {
   $(document).off('click.searchBarToggle');
+  $(document).off('mouseover.searchBarOpen');
   $(document).off('mousedown.searchBarClose');
   $(document).off('input.onInput');
   $(document).off('click.resetSearch');
@@ -1596,12 +1597,15 @@ theme.searchBar = function () {
 
   theme.closeSearch = function () {
     $searchBar.attr('aria-hidden', 'true');
+    $searchBar.slideUp();
     $searchBarToggle.attr('aria-expanded', 'false');
     $searchBar.removeClass('loading');
   }
 
   function openSearch () {
+    console.log('open');
     $searchBar.attr('aria-hidden', 'false');
+    $searchBar.slideDown();
     $searchBarToggle.attr('aria-expanded', 'true');
     inputFocus();
   }
@@ -1676,6 +1680,14 @@ theme.searchBar = function () {
   $(document).on('click.searchBarToggle', '[data-action="toggle-search"]', function (event) {
     event.preventDefault();
     toggleSearch();
+  });
+
+  $(document).on('mouseover.searchBarOpen', '#search-bar-button[data-action="toggle-search"]', function (event) {
+    event.preventDefault();
+    openSearch();
+    $('.newHeader__openedBlock[aria-hidden="false"]').slideUp();
+    $('.newHeader__openedBlock[aria-hidden="false"]').attr('aria-hidden', 'true');
+    $('.newHeader__link[data-selected="true"]').attr('data-selected', 'false');
   });
 
   $(document).on('input.onInput', '.headerSearch__input[type="search"]', $.debounce(250, function (event) {

@@ -164,12 +164,32 @@ button {
   }
 
   .rightMenu__search a {
+    position: relative;
     display: flex;
     align-items: center;
+    transition: all 0.2s;
+    
+    
 
     p {
       margin: 0 15px 0 0;
     }
+  }
+
+  .rightMenu__search a:after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    width: 0;
+    height: 1px;
+    transform: translateX(-50%);
+    background: $color-white;
+    transition: all 0.2s ease;
+  }
+
+  .rightMenu__search a[aria-expanded="true"]:after {
+    width: 100%;
   }
 
   .newHeader__mainMenu {
