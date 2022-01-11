@@ -17891,7 +17891,7 @@ body.is-masthead--empty main {
 }
 
 .cart-drawer__empty-heading {
-  font-weight: normal;
+  font-weight: 500;
   font-size: 48px;
   line-height: 1;
   margin: 0 0 60px;
@@ -19922,7 +19922,11 @@ h3.productCard__title {
 
 @media screen and (max-width: 991px) {
   .productCard__img {
-    padding-top: 130%;
+    padding-top: 115%;
+  }
+
+  .productCard__img img {
+    object-position: bottom;
   }
 
   .productCard__recommended .productCard__img {
