@@ -1677,7 +1677,7 @@ theme.searchBar = function () {
 
   });
 
-  $(document).on('click.searchBarToggle', '[data-action="toggle-search"]', function (event) {
+  $(document).on('click.searchBarToggle', '.mobileMenu__link[data-action="toggle-search"]', function (event) {
     event.preventDefault();
     toggleSearch();
   });
