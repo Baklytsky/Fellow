@@ -5872,6 +5872,32 @@ h2.pdpCopy__header-price ,
       margin-right: 13px;
     }
   }
+  
+  [data-option-size] .bundle-radio.unavailable {
+    position: relative;
+    opacity: 0.5;
+    pointer-events: none;
+    text-decoration: line-through;
+  }
+
+  [data-option-color] .bundle-radio.unavailable {
+    position: relative;
+    opacity: 0.5;
+    pointer-events: none;
+
+    &:after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 2px;
+      background-color: #c2c2c2;
+      display: block;
+      transform: translate(-50%, -50%) rotate(-45deg);
+      z-index: 2;
+    }
+  }
 }
 
 .bundle-product__radio-group,

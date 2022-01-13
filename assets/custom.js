@@ -885,27 +885,20 @@ theme.pdpMain = function () {
     $(document).off('click.addBundleMix')
     
     function fadeOutOfStockVariants(selectedVariant, $bundleWrapper) {
-      let selectedVariantTitle = selectedVariant.attr('data-variant-options-title'),
-          $bundleVariants = $bundleWrapper.find('.js-bundle-variant option');
+      const selectedVariantTitle = selectedVariant.attr('data-variant-options-title'),
+            $bundleVariants = $bundleWrapper.find('.js-bundle-variant option');
+      $bundleWrapper.find('.bundle-radio').removeClass('unavailable');
       if (selectedVariantTitle.includes('/')) {
-        let selectedSizeTitle = selectedVariantTitle.split('/')[1],
-            availableColors = $bundleVariants.map(function () {
+        const selectedSizeTitle = selectedVariantTitle.split('/')[1],
+            unavailableColors = $bundleVariants.map(function () {
               if ($(this).attr('data-variant-options-title').includes(selectedSizeTitle) && $(this).is('[disabled]')) return $(this).attr('data-variant-options-title').split('/')[0]
             })
-        if (availableColors.length) availableColors.each((i, color) => $bundleWrapper.find('input[value="'+ color +'"]').parent()
-            .css({
-              "opacity": "0.2",
-              "pointer-events": "none"
-            }))
+        if (unavailableColors.length) unavailableColors.each((i, color) => $bundleWrapper.find('input[value="'+ color +'"]').parent().addClass('unavailable'))
       } else {
-        let availableVariants = $bundleVariants.map(function () {
+        const unavailableVariants = $bundleVariants.map(function () {
           if ($(this).is('[disabled]')) return $(this).attr('data-variant-options-title')
         })
-        if (availableVariants.length) availableVariants.each((i, variant) => $bundleWrapper.find('input[value="'+ variant +'"]').parent()
-            .css({
-              "opacity": "0.2",
-              "pointer-events": "none"
-            }))
+        if (unavailableVariants.length) unavailableVariants.each((i, variant) => $bundleWrapper.find('input[value="'+ variant +'"]').parent().addClass('unavailable'))
       }
     }
 
@@ -916,16 +909,11 @@ theme.pdpMain = function () {
       selectedVariant.parent().attr('value', selectedVariant.val())
       if (selectedVariantPrice > bundleVariantMinPrice) {
         checkedInputs.each(function() {
-          let optionLabel = $(this).parents('.bundle-product__option-group').find('[data-option-label]');
-          if (optionLabel.attr('data-option-label') === 'Color') {
-            $(this).parents('.bundle-product__option-group').find('.option-title-value').text($(this).attr('title') + ' (+$' + (selectedVariantPrice - bundleVariantMinPrice) + ')')
-          } else {
-            $(this).parents('.bundle-product__option-group').find('.option-title-value').text($(this).attr('title'))
-          }
+          $(this).parents('.bundle-product__option-group').find('.option-title-value').html(`${$(this).attr('title')} <strong>(+$${selectedVariantPrice - bundleVariantMinPrice})</strong>`)
         })
       } else {
         checkedInputs.each(function() {
-          $(this).parents('.bundle-product__option-group').find('.option-title-value').text($(this).attr('title'))
+          $(this).parents('.bundle-product__option-group').find('.option-title-value').html(`${$(this).attr('title')}`)
         })
       }
     }
