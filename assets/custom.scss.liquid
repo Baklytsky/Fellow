@@ -6144,7 +6144,8 @@ input[type="search"]::-webkit-search-results-decoration {
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   border-top: none;
-  margin-top: -5px;
+  margin: -5px auto 0;
+  max-width: 1440px;
   position: relative;
 
   @media screen and (max-width: $tablet) {
@@ -6250,7 +6251,7 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 .searchMain {
-  padding: 65px 0 25px;
+  padding: 65px 30px 25px;
 
   @media screen and (max-width: $tablet) {
     padding: 30px 16px 10px;
@@ -6260,10 +6261,6 @@ input[type="search"]::-webkit-search-results-decoration {
 .searchFormMain {
   max-width: 1150px;
   margin: 0 auto;
-
-  @media screen and (min-width: $tablet) and (max-width: 1200px) {
-    margin: 0 32px;
-  }
 }
 
 .searchMain__searchSize {
@@ -6274,6 +6271,13 @@ input[type="search"]::-webkit-search-results-decoration {
   @media screen and (max-width: $tablet) {
     margin: 25px 0 10px;
   }
+}
+
+.search__popular--mainWrapper,
+.searchForm,
+.searchBestSellers {
+  max-width: 1440px;
+  margin: 0 auto;
 }
 
 .searchMain__resultHeading {
@@ -6369,10 +6373,7 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .searchMain__content {
   display: flex;
-
-  @media screen and (max-width: $tablet) {
-    padding: 0;
-  }
+  padding: 0;
 
   .collection__products {
     @media screen and (min-width: $tablet) {
