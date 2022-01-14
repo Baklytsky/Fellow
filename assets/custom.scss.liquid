@@ -6250,7 +6250,7 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 .searchMain {
-  padding: 65px 30px 25px;
+  padding: 65px 0 25px;
 
   @media screen and (max-width: $tablet) {
     padding: 30px 16px 10px;
@@ -6260,6 +6260,10 @@ input[type="search"]::-webkit-search-results-decoration {
 .searchFormMain {
   max-width: 1150px;
   margin: 0 auto;
+
+  @media screen and (min-width: $tablet) and (max-width: 1200px) {
+    margin: 0 32px;
+  }
 }
 
 .searchMain__searchSize {
