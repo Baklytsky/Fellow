@@ -6,13 +6,13 @@
   {%- if blocks.size > 0 or heading -%}
     <section class="FeaturedCollections">
       {%- if heading -%}
-        <h3 class="FeaturedCollections__Heading m0">{{ heading }}</h3>
+        <h2 class="FeaturedCollections__Heading m0">{{ heading }}</h2>
       {%- endif -%}
 
       {%- if blocks.size > 0 -%}
         <div class="FeaturedCollections__TabsWrapper">
           <div class="FeaturedCollections__TabsHeader">
-            <ul class="FeaturedCollections__TabsList">
+            <ul class="FeaturedCollections__TabsList" role="tablist">
               {%- for block in blocks -%}
                 {%- assign collection = collections[block.settings.collection] -%}
 
@@ -27,8 +27,9 @@
                     {%- assign first_button_link = button_url -%}
                   {%- endif -%}
 
-                  <li>
-                    <button class="FeaturedCollections__TabButton"
+                  <li role="none">
+                    <button id="tab-{{ forloop.index }}"
+                            class="FeaturedCollections__TabButton"
                             type="button"
                             data-action="toggle-tab"
                             data-link-title="{{ button_text }}"

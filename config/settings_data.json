@@ -214,7 +214,7 @@
           "menu_right": "new-right-menu",
           "show_search": false,
           "show_announcement": true,
-          "announcement_text": "Try Fellow Drops — Gear Patrol's Top 10 Best New Food & Drink Products of 2021 🏆",
+          "announcement_text": "The Year of Meticulously Curated Beans 👀 Join Fellow Drops for free!",
           "announcement_link": "https:\/\/drops.fellowproducts.com\/?utm_source=homepage&utm_medium=banner&utm_campaign=fellowhomepage",
           "enable_timer": false,
           "end_date": "Sep 30, 2021 07:30:00 GMT-08:00"
@@ -307,16 +307,16 @@
             "type": "splitSlide",
             "settings": {
               "splitSlide__layout": "right",
-              "heroSlide": "shopify:\/\/shop_images\/HeroImage_3_Option_1.jpg",
+              "heroSlide": "shopify:\/\/shop_images\/Hero_Module_Image.png",
               "desktopAlignment": "center",
               "mobileAlignment": "center",
-              "heroSlide__header": "Always in style",
-              "heroSlide__subheader": "Make 2022 the year of no bad mornings.",
-              "subSlide__bgColor": "#000000",
-              "subSlide__textColor": "#FFFFFF",
-              "heroSlide__ctaURL": "shopify:\/\/collections\/bestsellers",
-              "heroSlide__ctaCopy": "Shop Best Sellers",
-              "heroSlide__ctaColor": "white",
+              "heroSlide__header": "No Bad Mornings in 2022",
+              "heroSlide__subheader": "You can’t control everything in life, but you can control your countertop.",
+              "subSlide__bgColor": "#f7f2e8",
+              "subSlide__textColor": "#231f20",
+              "heroSlide__ctaURL": "shopify:\/\/collections\/coffee-products-kits-bundles",
+              "heroSlide__ctaCopy": "Shop Brewing Kits",
+              "heroSlide__ctaColor": "black",
               "heroSlide__ctaSubtext": ""
             }
           }
@@ -467,13 +467,14 @@
         ],
         "settings": {
           "enable_section": true,
-          "heading": "Create your perfect coffee corner",
+          "heading": "Cue the countertop makeover montage.",
           "limit": 4,
           "show_view_all": true
         }
       },
       "1630052841314f69dd": {
         "type": "hp-iwt",
+        "disabled": true,
         "settings": {
           "enable_section": true,
           "image": "shopify:\/\/shop_images\/Product_Feature_Super-Fancy-Gifts-Brew-Bar.jpg",
@@ -511,7 +512,7 @@
               "product": "ode-brew-grinder",
               "image": "shopify:\/\/shop_images\/ReviewsModule_Ode.jpg",
               "header": "Perfect at home drip grinder",
-              "description": "<p>“Not sure what I can say that hasn’t been said. It’s relatively quite and very efficient. I love the profile and the way it looks. But most of all makes a damn good cup of coffee.” <\/p>",
+              "description": "<p>“Not sure what I can say that hasn’t been said. It’s relatively quiet and very efficient. I love the profile and the way it looks. But most of all makes a damn good cup of coffee.” <\/p>",
               "link_text": "",
               "link_url": ""
             }
@@ -561,17 +562,46 @@
       },
       "163041601834c99057": {
         "type": "featured-blog-v2",
-        "disabled": true,
+        "blocks": {
+          "243f1fe7-12cb-4b51-b5ac-6897c8af25d9": {
+            "type": "article",
+            "settings": {
+              "article": "learn\/which-carter-are-you"
+            }
+          },
+          "b89badb0-2f13-4dfd-b834-29780dfc72cd": {
+            "type": "article",
+            "settings": {
+              "article": "learn\/how-to-play-wormy-on-your-electric-kettle"
+            }
+          },
+          "3b78c804-955a-454f-b8d7-af7b4271d9a4": {
+            "type": "article",
+            "settings": {
+              "article": "learn\/how-to-brew-iced-coffee-at-home"
+            }
+          },
+          "8034bca3-6535-40a1-83ce-613a916266d4": {
+            "type": "article",
+            "settings": {
+              "article": "brew-guides\/the-classic-clara-french-press-recipe"
+            }
+          }
+        },
+        "block_order": [
+          "243f1fe7-12cb-4b51-b5ac-6897c8af25d9",
+          "b89badb0-2f13-4dfd-b834-29780dfc72cd",
+          "3b78c804-955a-454f-b8d7-af7b4271d9a4",
+          "8034bca3-6535-40a1-83ce-613a916266d4"
+        ],
         "settings": {
-          "enable_section": true,
           "heading": "Commence Your Coffee Quest Here",
           "description": "<p>We want to share our insider knowledge to make “specialty coffee” a language you can speak.<\/p>",
           "cta_title": "Fellow Blog",
+          "cta_url": "shopify:\/\/blogs\/learn",
           "cta_color": "btn--light",
           "bg_color": "#000000",
-          "text_color": "#ffffff",
-          "blog": "learn",
-          "limit": 3
+          "text_color": "#ffffff"
         }
       },
       "product-bar": {
@@ -588,7 +618,7 @@
             "type": "block",
             "settings": {
               "svg_icon": "<svg xmlns=\"http:\/\/www.w3.org\/2000\/svg\" width=\"31\" height=\"30\" viewbox=\"0 0 31 30\" fill=\"none\">\n<path d=\"M29.25 15L26.2 11.5125L26.625 6.9L22.1125 5.875L19.75 1.875L15.5 3.7L11.25 1.875L8.8875 5.8625L4.375 6.875L4.8 11.5L1.75 15L4.8 18.4875L4.375 23.1125L8.8875 24.1375L11.25 28.125L15.5 26.2875L19.75 28.1125L22.1125 24.125L26.625 23.1L26.2 18.4875L29.25 15ZM12.225 20.0125L9.25 17.0125C8.7625 16.525 8.7625 15.7375 9.25 15.25L9.3375 15.1625C9.825 14.675 10.625 14.675 11.1125 15.1625L13.125 17.1875L19.5625 10.7375C20.05 10.25 20.85 10.25 21.3375 10.7375L21.425 10.825C21.9125 11.3125 21.9125 12.1 21.425 12.5875L14.025 20.0125C13.5125 20.5 12.725 20.5 12.225 20.0125Z\" fill=\"black\"><\/path>\n<\/svg>",
-              "title": "Extended holiday returns available"
+              "title": "Explore our curated coffee"
             }
           },
           "94f80824-48d0-4beb-987b-ba5b194f019b": {
@@ -614,14 +644,14 @@
         "type": "hp-iwt",
         "settings": {
           "enable_section": true,
-          "image": "shopify:\/\/shop_images\/ModuleImage_1_Fellow-Drops.jpg",
+          "image": "shopify:\/\/shop_images\/Product_Feature_Module-Drops.jpg",
           "layout": "left",
-          "header": "The award-winning way to get your coffee",
-          "description": "<p>Named one of Gear Patrol’s Top 10 Best New Food & Drink Products of 2021, Fellow Drops is the coffee program loved by coffee pros.<\/p>",
+          "header": "Take it one week at a time",
+          "description": "<p>Join Fellow Drops: no-commitment coffee recommendations from people who drink way too much of it.<\/p>",
           "bg_color": "#ffffff",
           "text_color": "",
           "cta_url": "https:\/\/drops.fellowproducts.com",
-          "cta_copy": "Join The Fun",
+          "cta_copy": "Sign Up For Free",
           "cta_color": "btn--dark"
         }
       },
@@ -635,6 +665,7 @@
       },
       "1636101715cd2df3c8": {
         "type": "hp-iwt",
+        "disabled": true,
         "settings": {
           "enable_section": true,
           "image": "shopify:\/\/shop_images\/roduct_Feature_Carter-Move-Mug.jpg",
@@ -656,14 +687,14 @@
         "type": "hp-iwt",
         "settings": {
           "enable_section": true,
-          "image": "shopify:\/\/shop_images\/Gift-Card_Option-2_3b6a5e4b-5313-497e-8bc9-9478362e0825.gif",
-          "layout": "left",
-          "header": "Need it last minute?",
-          "description": "<p>You’re in luck with Fellowbucks. Just tell them to refresh their inbox. <\/p>",
+          "image": "shopify:\/\/shop_images\/Product_Feature_Module-XF-Set.jpg",
+          "layout": "right",
+          "header": "The Slow Pour Quickstart Kit",
+          "description": "<p>New to coffee brewing? Our beginner kits provide no fuss, no guesswork pour-over at home.<\/p>",
           "bg_color": "",
           "text_color": "",
-          "cta_url": "shopify:\/\/products\/digital-gift-card",
-          "cta_copy": "Send A Digital Gift Card",
+          "cta_url": "shopify:\/\/products\/stagg-xf-pour-over-set",
+          "cta_copy": "Start Brewing",
           "cta_color": "btn--dark"
         }
       }
