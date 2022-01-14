@@ -6365,7 +6365,11 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .searchMain__content {
   display: flex;
-  padding: 0;
+ /* padding: 0;*/
+
+  @media screen and (max-width: $desk) {
+    padding: 0;
+  }
 
   .collection__products {
     @media screen and (min-width: $tablet) {
