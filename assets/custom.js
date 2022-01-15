@@ -883,7 +883,7 @@ theme.pdpMain = function () {
   function pdpBundleMix() {
     $(document).off('click.bundleRadio')
     $(document).off('click.addBundleMix')
-    
+
     function fadeOutOfStockVariants(selectedVariant, $bundleWrapper) {
       const selectedVariantTitle = selectedVariant.attr('data-variant-options-title'),
             $bundleVariants = $bundleWrapper.find('.js-bundle-variant option');
@@ -903,19 +903,14 @@ theme.pdpMain = function () {
     }
 
     function checkBundleVariantTitle(selectedVariant, checkedInputs) {
-      let bundleVariantMinPrice = Number(selectedVariant.attr('data-bundle-variant-min-price')),
-          selectedVariantPrice = Number(selectedVariant.attr('data-variant-origin-price'));
+      const priceDifference = Number(selectedVariant.attr('data-bundle-price-difference'));
       selectedVariant.attr('selected', 'selected')
       selectedVariant.parent().attr('value', selectedVariant.val())
-      if (selectedVariantPrice > bundleVariantMinPrice) {
-        checkedInputs.each(function() {
-          $(this).parents('.bundle-product__option-group').find('.option-title-value').html(`${$(this).attr('title')} <strong>(+$${selectedVariantPrice - bundleVariantMinPrice})</strong>`)
-        })
-      } else {
-        checkedInputs.each(function() {
-          $(this).parents('.bundle-product__option-group').find('.option-title-value').html(`${$(this).attr('title')}`)
-        })
-      }
+      checkedInputs.each(function() {
+        $(this).parents('.bundle-product__option-group').find('.option-title-value').html(`${$(this).attr('title')}`)
+      })
+      let optionTitle = (priceDifference > 0) ? `${$(checkedInputs.get(0)).attr('title')} <strong>(+$${priceDifference})</strong>` : `${$(checkedInputs.get(0)).attr('title')}`;
+      $(checkedInputs.get(0)).parents('.bundle-product__option-group').find('.option-title-value').html(optionTitle)
     }
 
     $(document).find('.bundle-product').each(function () {
@@ -953,6 +948,14 @@ theme.pdpMain = function () {
       $selectedImage.css('visibility','visible')
     }
 
+    function checkBundleMixPrice() {
+      let priceDiffSum = 0,
+          selectedMixVariants = $(document).find('.bundle-product .js-bundle-variant option[selected]'),
+          priceDiffArray = selectedMixVariants.map((i, variant) => {return Number(variant.dataset.bundlePriceDifference)});
+      priceDiffArray.each((i, priceDiff) => priceDiffSum += priceDiff || 0);
+    }
+    checkBundleMixPrice()
+
     $(document).on('click.bundleRadio', '.bundle-radio', function () {
       let $bundleWrapper = $(this).parents('.bundle-product'),
           selectedOptions = '',
@@ -971,6 +974,7 @@ theme.pdpMain = function () {
       } else {
         checkBundleMixAvailable(true)
       }
+      checkBundleMixPrice()
     })
 
     $(document).on('click.addBundleMix', '#pdp-bundle-atc', function (e) {

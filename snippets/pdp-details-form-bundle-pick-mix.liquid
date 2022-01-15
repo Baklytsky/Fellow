@@ -148,19 +148,14 @@
                     {%- endif -%}
                   {%- endfor -%}
 
-                  {%- comment -%}
-                  <script>
-                    console.log({{ variant | json }})
-                  </script>
-                  {%- endcomment -%}
-
+                  {%- assign bundle_price_difference = variant.price | minus: bundle_variants_min_price -%}
 
                   <option value='{{ variant.id }}'
                           data-variant-options-title='{{ options }}'
                           data-variant-uniq_id='{{ variant.id | append: '-' | append: uniq_id }}'
                           data-variant-price='{{ variant.price | money | remove: ".00" }}'
                           data-variant-origin-price='{{ variant.price | times: 0.01 }}'
-                          data-bundle-variant-min-price='{{ bundle_variants_min_price | times: 0.01 }}'
+                          data-bundle-price-difference='{{ bundle_price_difference | times: 0.01 }}'
                           data-variant-inventory-quantity='{{ variant.inventory_quantity }}'
                           data-variant-inventory-policy='{{ variant.inventory_policy }}'
                           data-variant-inventory-management='{{ variant.inventory_management }}'

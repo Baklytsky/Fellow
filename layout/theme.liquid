@@ -59,6 +59,7 @@
           giftWrappingAvailable: "{{ all_products[settings.gift_box_product].available }}",
           giftWrappingProductID: "{{ all_products[settings.gift_box_product].selected_or_first_available_variant.id  }}"
         },
+        {% if template.name == 'product' %}product: {{ product | json }},{% endif %}
         moneyFormat: "{{ shop.money_format }}"
       }
     </script>
