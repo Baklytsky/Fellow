@@ -86,22 +86,22 @@
       Product is available and on sale
     {% endcomment %}
     {% comment %} <strong> tag added to satisfy compliance concern -ae 03.23.21 {% endcomment %}
-      <span class="inline-block strike card__price--regular pdpCopy__header-price">{{ current_variant.compare_at_price | money_without_trailing_zeros }}</span>
+      <span class="inline-block strike card__price--regular pdpCopy__header-price" data-compare-at-price><span>{{ current_variant.compare_at_price | money_without_trailing_zeros }}</span></span>
       <span class="visually-hidden">{{ 'products.current_variant.regular_price' | t }}</span>
-      <h2 class="inline-block card__price--sale pdpCopy__header-price">
+      <h2 class="inline-block card__price--sale pdpCopy__header-price" data-product-price>
         {{ current_variant.price | money_without_trailing_zeros }}
       </h2>
       {% else %}
         {% comment %}
           Product is available and not on sale
         {% endcomment %}
-        <h2 data-selected-var-price class="pdpCopy__header-price">{{ current_variant.price | money | remove: '.00' }}</h2>
+        <h2 data-selected-var-price class="pdpCopy__header-price" data-product-price>{{ current_variant.price | money | remove: '.00' }}</h2>
       {% endif %}
       {% else %}
         {% comment %}
           Sold Out
         {% endcomment %}
-        <h2 class='strike pdpCopy__header-price'>{{ current_variant.price | money_without_trailing_zeros }}</h2>
+        <h2 class='strike pdpCopy__header-price' data-product-price>{{ current_variant.price | money_without_trailing_zeros }}</h2>
       {% endif %}
   </div>
 </div>

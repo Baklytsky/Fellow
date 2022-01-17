@@ -27,25 +27,25 @@
         <div class="pdpCopy__price hide-mobile f aic">
           {% if product.available %}
           {% if product.compare_at_price > product.price %}
-            <span class="inline-block strike card__price--regular ml1 pdpCopy__header-price pdpCopy__header-price-small rel">
-              {{ current_variant.compare_at_price | money_without_trailing_zeros }}
+            <span class="inline-block strike card__price--regular ml1 pdpCopy__header-price pdpCopy__header-price-small rel" data-compare-at-price>
+              <span>{{ current_variant.compare_at_price | money_without_trailing_zeros }}</span>
               <div class="price-round-arrow">{% render 'icon' with 'round-arrow' %}</div>
             </span>
             <span class="visually-hidden">{{ 'products.current_variant.regular_price' | t }}</span>
-            <h2 class="inline-block card__price--sale ml1 pdpCopy__header-price">
+            <h2 class="inline-block card__price--sale ml1 pdpCopy__header-price" data-product-price>
               {{ current_variant.price | money_without_trailing_zeros }}
             </h2>
             {% else %}
               {% comment %}
                 Product is available and not on sale
               {% endcomment %}
-              <h2 data-selected-var-price class="ml1 pdpCopy__header-price">{{ current_variant.price | money | remove: '.00' }}</h2>
+              <h2 data-selected-var-price class="ml1 pdpCopy__header-price" data-product-price>{{ current_variant.price | money | remove: '.00' }}</h2>
             {% endif %}
             {% else %}
               {% comment %}
                 Sold Out
               {% endcomment %}
-              <h2 class='strike'>{{ current_variant.price | money_without_trailing_zeros }}</h2>
+              <h2 class='strike' data-product-price>{{ current_variant.price | money_without_trailing_zeros }}</h2>
             {% endif %}
         </div>
       </div>
@@ -59,25 +59,25 @@
       <div class="pdpCopy__price hide-desktop">
         {% if product.available %}
         {% if product.compare_at_price > product.price %}
-          <span class="inline-block strike card__price--regular ml1 pdpCopy__header-price pdpCopy__header-price-small rel">
-              {{ current_variant.compare_at_price | money_without_trailing_zeros }}
+          <span class="inline-block strike card__price--regular ml1 pdpCopy__header-price pdpCopy__header-price-small rel" data-compare-at-price>
+              <span>{{ current_variant.compare_at_price | money_without_trailing_zeros }}</span>
               <div class="price-round-arrow">{% render 'icon' with 'round-arrow' %}</div>
             </span>
           <span class="visually-hidden">{{ 'products.current_variant.regular_price' | t }}</span>
-          <h2 class="inline-block card__price--sale ml1 pdpCopy__header-price">
+          <h2 class="inline-block card__price--sale ml1 pdpCopy__header-price" data-product-price>
             {{ current_variant.price | money_without_trailing_zeros }}
           </h2>
           {% else %}
             {% comment %}
               Product is available and not on sale
             {% endcomment %}
-            <h2 data-selected-var-price class="ml1 pdpCopy__header-price">{{ current_variant.price | money | remove: '.00' }}</h2>
+            <h2 data-selected-var-price class="ml1 pdpCopy__header-price" data-product-price>{{ current_variant.price | money | remove: '.00' }}</h2>
           {% endif %}
           {% else %}
             {% comment %}
               Sold Out
             {% endcomment %}
-            <h2 class='strike'>{{ current_variant.price | money_without_trailing_zeros }}</h2>
+            <h2 class='strike' data-product-price>{{ current_variant.price | money_without_trailing_zeros }}</h2>
           {% endif %}
       </div>
     </div>

@@ -18040,6 +18040,10 @@ body.is-masthead--empty main {
   border: 3px solid #ffffff;
 }
 
+.cart-recommended .productCard__variants .productCard__options {
+  margin-left: -2px;
+}
+
 @media screen and (max-width: 992px) {
 
   /*.cart-drawer__items-inner {*/

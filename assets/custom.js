@@ -953,6 +953,14 @@ theme.pdpMain = function () {
           selectedMixVariants = $(document).find('.bundle-product .js-bundle-variant option[selected]'),
           priceDiffArray = selectedMixVariants.map((i, variant) => {return Number(variant.dataset.bundlePriceDifference)});
       priceDiffArray.each((i, priceDiff) => priceDiffSum += priceDiff || 0);
+
+      const newCompareAtPrice = (window.theme.product.compare_at_price * 0.01) + priceDiffSum,
+            newPrice = (window.theme.product.price * 0.01) + priceDiffSum,
+            priceInner = $('[data-product-price]'),
+            compareAtPriceInner = $('[data-compare-at-price] span');
+
+      priceInner.each((i, element) => $(element).text('$' + newPrice))
+      compareAtPriceInner.each((i, element) => $(element).text('$' + newCompareAtPrice))
     }
     checkBundleMixPrice()
 
