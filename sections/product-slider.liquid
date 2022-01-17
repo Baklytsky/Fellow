@@ -16,6 +16,7 @@
       "breakpoint": 992,
       "settings": {
       "arrows": false,
+      "infinite": false,
       "dots": {{ show_dots }}
       }
       }
@@ -57,9 +58,7 @@
                   <div class="ProductInfoSlider__Content">
                     {%- if product != blank -%}
                       <div class="ProductInfoSlider__ProductInfo">
-<div class="yotpo bottomLine"
-  data-product-id="{{ product.id }}">
-</div>
+                        <div class="yotpo bottomLine" tabindex="0" data-product-id="{{ product.id }}"></div>
                         <h4 class="ProductInfoSlider__ProductTitle mt05">{{ product.title }}</h4>
                       </div>
                     {%- endif -%}

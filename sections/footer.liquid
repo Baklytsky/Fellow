@@ -89,7 +89,7 @@
             <ul class="footerColophon__BottomMenu">
               {% for link in linklists[footer_menu_bottom].links %}
                 <li class="footerColophon__BottomItem">
-                  <a class="footerColophon__BottomLink" href="{{ link.url }}" role="menu" aria-label="Menu link" title="Open {{ link.title }}">{{ link.title }}</a>
+                  <a class="footerColophon__BottomLink" href="{{ link.url }}" role="link" aria-label="Menu link" title="Open {{ link.title }}">{{ link.title }}</a>
                 </li>
               {%- endfor -%}
             </ul>

@@ -43,7 +43,7 @@
                   <span class='option-title option-group-title block'><strong>{{ group }} : </strong><span class="option-group-title-value"></span></span>
                 </label>
               {% endif %}
-              <div class='radio-group f aic' data-option-{{ option.name | handleize }}>
+              <div class='radio-group f' data-option-{{ option.name | handleize }}>
                 {% for value in option.values %}
                   {% include 'assign_option_label', option: option, value: value %}
                   {% if option_value_group == group %}

@@ -59,7 +59,7 @@
                     {% for option in product.options_with_values %}
                       <div class='py05'>
                         <label>{{ option.name }}</label>
-                        <div class='radio-group f aic' data-option-radio data-index={{ forloop.index0 }}>
+                        <div class='radio-group f' data-option-radio data-index={{ forloop.index0 }}>
                           {% for value in option.values %}
                             {%
                               include 'component-radio' with
