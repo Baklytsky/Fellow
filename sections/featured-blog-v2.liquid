@@ -1,16 +1,13 @@
-{%- if section.settings.enable_section -%}
-  {%- assign blog = blogs[section.settings.blog] | default: false -%}
-  {%- assign heading = section.settings.heading | default: blog.title -%}
+  {%- assign heading = section.settings.heading -%}
   {%- assign description = section.settings.description | default: false -%}
   {%- assign cta_title = section.settings.cta_title | default: false -%}
-  {%- assign cta_url = section.settings.cta_url | default: blog.url -%}
+  {%- assign cta_url = section.settings.cta_url | default: false -%}
 
-  {%- assign limit = section.settings.limit -%}
   {%- assign bg_color = section.settings.bg_color -%}
   {%- assign text_color = section.settings.text_color -%}
   {%- assign cta_color = section.settings.cta_color -%}
 
-  {%- if blog or description or cta_title -%}
+  {%- if section.blocks.size > 0 or description or cta_title -%}
 
     {%- capture 'slick-config' -%}
       {
@@ -46,7 +43,7 @@
                 </div>
               {%- endif -%}
 
-              {%- if cta_title -%}
+              {%- if cta_title and cta_url -%}
                 <div class="BlogSection__InfoButton">
                   <a class="btn btn--lg {{ cta_color }}"
                      href="{{ cta_url }}"
@@ -60,48 +57,47 @@
             </div>
           {%- endif -%}
 
-          {%- if blog -%}
-            {%- if blog.articles_count < limit -%}
-              {%- assign limit = blog.articles_count -%}
-            {%- endif -%}
-
+          {%- if section.blocks.size > 0 -%}
             <div class="BlogSection__ArticleWrapper jsSlickSlider">
-              {%- for article in blog.articles limit: limit -%}
-                <div>
-                  <div class="BlogSection__Article">
-                    {%- if article.image != blank -%}
-                      <a class="BlogSectionArticle__ImageWrapper AspectRatio AspectRatio--square"
-                         href="{{ article.url }}"
-                         aria-label="Image link"
-                         aria-hidden="true"
-                         role="button"
-                         title="{{ article.title }}">
-                        <img class="BlogSectionArticle__Image"
-                             src='{{ article | img_url: "100x" }}'
-                             loading="lazy"
-                             srcset='{{ article | img_url: "450x" }} 450w,
-                                   {{ article | img_url: "560x" }} 560w,
-                                   {{ article | img_url: "650x" }} 650w,
-                                   {{ article | img_url: "900x" }} 900w'
-                             role="img"
-                             alt="{{ article.image.alt | default: article.title | escape }}">
-                      </a>
-                    {%- endif -%}
-                    <div class="BlogSectionArticle__Content">
-                      <a href="{{ article.url }}" aria-label="{{ article.title }}">
-                        <h3 class="BlogSectionArticle__Heading">{{ article.title }}</h3>
-                      </a>
+              {%- for block in section.blocks -%}
+                {%- assign article = articles[block.settings.article] -%}
+                {%- if article != blank -%}
+                  <div>
+                    <div class="BlogSection__Article">
+                      {%- if article.image != blank -%}
+                        <a class="BlogSectionArticle__ImageWrapper AspectRatio AspectRatio--square"
+                           href="{{ article.url }}"
+                           aria-label="Image link"
+                           aria-hidden="true"
+                           role="button"
+                           title="{{ article.title }}">
+                          <img class="BlogSectionArticle__Image"
+                               src='{{ article | img_url: "100x" }}'
+                               loading="lazy"
+                               srcset='{{ article | img_url: "450x" }} 450w,
+                                     {{ article | img_url: "560x" }} 560w,
+                                     {{ article | img_url: "650x" }} 650w,
+                                     {{ article | img_url: "900x" }} 900w'
+                               role="img"
+                               alt="{{ article.image.alt | default: article.title | escape }}">
+                        </a>
+                      {%- endif -%}
+                      <div class="BlogSectionArticle__Content">
+                        <a href="{{ article.url }}" aria-label="{{ article.title }}">
+                          <h3 class="BlogSectionArticle__Heading">{{ article.title }}</h3>
+                        </a>
 
-                      <a class="BlogSectionArticle__Button btn btn--lg {{ cta_color }}"
-                         href="{{ article.url }}"
-                         aria-label="{{ 'blogs.article.read_more' | t }}"
-                         role="button"
-                         title="{{ article.title }}">
-                        {{ 'blogs.article.read_more' | t }}
-                      </a>
+                        <a class="BlogSectionArticle__Button btn btn--lg {{ cta_color }}"
+                           href="{{ article.url }}"
+                           aria-label="{{ 'blogs.article.read_more' | t }}"
+                           role="button"
+                           title="{{ article.title }}">
+                          {{ 'blogs.article.read_more' | t }}
+                        </a>
+                      </div>
                     </div>
                   </div>
-                </div>
+                {%- endif -%}
               {%- endfor -%}
             </div>
 
@@ -111,7 +107,6 @@
     </section>
 
   {%- endif -%}
-{%- endif -%}
 
 {% schema %}
   {
@@ -121,12 +116,6 @@
       "fr": "Articles de blog v2"
     },
     "settings": [
-      {
-        "type": "checkbox",
-        "id": "enable_section",
-        "label": "Enable section",
-        "default": true
-      },
       {
         "type": "text",
         "id": "heading",
@@ -148,6 +137,11 @@
         "id": "cta_title",
         "label": "CTA Copy",
         "default": "Fellow Blog"
+      },
+      {
+        "type": "url",
+        "id": "cta_url",
+        "label": "CTA url"
       },
       {
         "type": "radio",
@@ -176,28 +170,19 @@
         "id": "text_color",
         "label": "Text color",
         "default": "#ffffff"
-      },
+      }
+    ],
+    "blocks": [
       {
-        "id": "blog",
-        "type": "blog",
-        "label": {
-          "en": "Blog",
-          "de": "Blog",
-          "fr": "Blog"
-        }
-      },
-      {
-        "type": "range",
-        "id": "limit",
-        "label": {
-          "en": "Posts",
-          "de": "Posts",
-          "fr": "Articles"
-        },
-        "min": 1,
-        "max": 10,
-        "step": 1,
-        "default": 3
+        "type": "article",
+        "name": "article",
+        "settings": [
+          {
+            "type": "article",
+            "id": "article",
+            "label": "Article"
+          }
+        ]
       }
     ],
     "presets": [

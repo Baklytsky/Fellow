@@ -29,21 +29,22 @@
               <h3 class="bundle-product__description-title">
                 <a href="{{ bundle_product.url }}">{{ bundle_product.title }}</a>
               </h3>
-              {%- assign bandle_variant_option1 = '' -%}
-              {%- assign bandle_variant_option2 = '' -%}
-              {%- assign bandle_variant_option3 = '' -%}
-              {%- assign bandle_option_name_1 = '' -%}
-              {%- assign bandle_option_name_2 = '' -%}
-              {%- assign bandle_option_name_3 = '' -%}
+              {%- assign bundle_variant_option1 = '' -%}
+              {%- assign bundle_variant_option2 = '' -%}
+              {%- assign bundle_variant_option3 = '' -%}
+              {%- assign bundle_option_name_1 = '' -%}
+              {%- assign bundle_option_name_2 = '' -%}
+              {%- assign bundle_option_name_3 = '' -%}
+              {%- assign bundle_variants_min_price = '' -%}
 
               {%- for option in bundle_product.options_with_values -%}
                 {%- case forloop.index -%}
                 {%- when 1 -%}
-                {%- assign bandle_option_name_1 = option.name -%}
+                {%- assign bundle_option_name_1 = option.name -%}
                 {%- when 2 -%}
-                {%- assign bandle_option_name_2 = option.name -%}
+                {%- assign bundle_option_name_2 = option.name -%}
                 {%- when 3 -%}
-                {%- assign bandle_option_name_3 = option.name -%}
+                {%- assign bundle_option_name_3 = option.name -%}
                 {%- endcase -%}
               {%- endfor -%}
 
@@ -57,9 +58,29 @@
                     {%- assign bundle_variant_id_num = bundle_variant_id | plus: 0 -%}
                     {%- if bundle_variant_id_num == variant.id -%}
                       {%- assign show_variant = true -%}
+
+                      {%- comment -%}
+                          Get min price of bundle product variants
+                      {%- endcomment -%}
+
+                      {%- if forloop.first -%}
+                        {%- assign bundle_variants_min_price = variant.price -%}
+                      {%- else -%}
+                        {%- if bundle_variants_min_price > variant.price -%}
+                          {%- assign bundle_variants_min_price = variant.price -%}
+                        {%- endif -%}
+                      {%- endif -%}
+
                       {%- break -%}
                     {%- endif -%}
                   {%- endfor -%}
+                {%- else -%}
+
+                  {%- comment -%}
+                    Get min price of bundle product variants
+                  {%- endcomment -%}
+
+                  {%- assign bundle_variants_min_price = bundle_product.price_min -%}
                 {%- endif -%}
 
                 {%- if show_variant -%}
@@ -67,40 +88,40 @@
                     {%- assign option_key = "option" | append: i -%}
                     {%- case i -%}
                     {%- when 1 -%}
-                    {%- assign bandle_variant_option1 = bandle_variant_option1 | append: variant[option_key] | append: '|#|' -%}
+                    {%- assign bundle_variant_option1 = bundle_variant_option1 | append: variant[option_key] | append: '|#|' -%}
                     {%- when 2 -%}
-                    {%- assign bandle_variant_option2 = bandle_variant_option2 | append: variant[option_key] | append: '|#|' -%}
+                    {%- assign bundle_variant_option2 = bundle_variant_option2 | append: variant[option_key] | append: '|#|' -%}
                     {%- when 3 -%}
-                    {%- assign bandle_variant_option3 = bandle_variant_option3 | append: variant[option_key] | append: '|#|' -%}
+                    {%- assign bundle_variant_option3 = bundle_variant_option3 | append: variant[option_key] | append: '|#|' -%}
                     {%- endcase -%}
                   {%- endfor -%}
                 {%- endif -%}
               {%- endfor -%}
 
-              {%- assign bandle_variant_options1_arr = bandle_variant_option1 | split: '|#|' | uniq -%}
-              {%- assign bandle_variant_options2_arr = bandle_variant_option2 | split: '|#|' | uniq -%}
-              {%- assign bandle_variant_options3_arr = bandle_variant_option3 | split: '|#|' | uniq -%}
+              {%- assign bundle_variant_options1_arr = bundle_variant_option1 | split: '|#|' | uniq -%}
+              {%- assign bundle_variant_options2_arr = bundle_variant_option2 | split: '|#|' | uniq -%}
+              {%- assign bundle_variant_options3_arr = bundle_variant_option3 | split: '|#|' | uniq -%}
 
               <div class="bundle-product__option-wrapper f fdc">
-                {%- if bandle_option_name_1 != blank -%}
+                {%- if bundle_option_name_1 != blank -%}
                   {% include 'product-options-bundle' with
                     bundle_product: bundle_product,
-                    options_array: bandle_variant_options1_arr,
-                    option_name: bandle_option_name_1 %}
+                    options_array: bundle_variant_options1_arr,
+                    option_name: bundle_option_name_1 %}
                 {%- endif -%}
 
-                {%- if bandle_option_name_2 != blank -%}
+                {%- if bundle_option_name_2 != blank -%}
                   {% include 'product-options-bundle' with
                     bundle_product: bundle_product,
-                    options_array: bandle_variant_options2_arr,
-                    option_name: bandle_option_name_2 %}
+                    options_array: bundle_variant_options2_arr,
+                    option_name: bundle_option_name_2 %}
                 {%- endif -%}
 
-                {%- if bandle_option_name_3 != blank -%}
+                {%- if bundle_option_name_3 != blank -%}
                   {% include 'product-options-bundle' with
                     bundle_product: bundle_product,
-                    options_array: bandle_variant_options3_arr,
-                    option_name: bandle_option_name_3 %}
+                    options_array: bundle_variant_options3_arr,
+                    option_name: bundle_option_name_3 %}
                 {%- endif -%}
               </div>
 
@@ -127,15 +148,19 @@
                     {%- endif -%}
                   {%- endfor -%}
 
+                  {%- assign bundle_price_difference = variant.price | minus: bundle_variants_min_price -%}
+
                   <option value='{{ variant.id }}'
-                        data-variant-options='{{ options }}'
-                        data-variant-uniq_id='{{ variant.id | append: '-' | append: uniq_id }}'
-                        data-variant-price='{{ variant.price | money | remove: ".00" }}'
-                        data-variant-inventory-quantity='{{ variant.inventory_quantity }}'
-                        data-variant-inventory-policy='{{ variant.inventory_policy }}'
-                        data-variant-inventory-management='{{ variant.inventory_management }}'
-                        {% unless variant.available %}disabled="disabled"{% endunless %}
-                        {% if forloop.first %}selected{% endif %}>
+                          data-variant-options-title='{{ options }}'
+                          data-variant-uniq_id='{{ variant.id | append: '-' | append: uniq_id }}'
+                          data-variant-price='{{ variant.price | money | remove: ".00" }}'
+                          data-variant-origin-price='{{ variant.price | times: 0.01 }}'
+                          data-bundle-price-difference='{{ bundle_price_difference | times: 0.01 }}'
+                          data-variant-inventory-quantity='{{ variant.inventory_quantity }}'
+                          data-variant-inventory-policy='{{ variant.inventory_policy }}'
+                          data-variant-inventory-management='{{ variant.inventory_management }}'
+                          {% unless variant.available %}disabled="disabled"{% endunless %}
+                          {% if forloop.first %}selected{% endif %}>
                   {{ variant.title }}
                 </option>
                 {%- endfor -%}
@@ -197,8 +222,9 @@
     name: 'add',
     type: 'submit',
     href: '#',
-    className: 'js-add-to-cart cart__button',
+    className: 'js-add-to-cart cart__button pick_mix__cart_bttn',
     dataAttr: 'data-atc="true"',
+    bundle_name: product.title,
     disabled: disableVal,
     cta: cta,
   %}

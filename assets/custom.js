@@ -16,7 +16,7 @@ theme.openModal = function () {
 theme.closeModal = function (clean) {
   $('#modal').attr('aria-hidden', 'true').fadeOut();
   $('#modalContent').fadeOut().html('').text('');
-  $('#emptyModal').show(800);
+  $('#emptyQvModal').show(800);
   theme.enableScroll();
   $(document).off('mousedown.QvClose')
 }
@@ -308,8 +308,9 @@ theme.quickView = function (URL, innerContainer) {
         theme.pdpQuickView();
       }
       theme.qvChangeColorGroupName();
-      $('#emptyModal').hide();
+      $('#emptyQvModal').hide();
       innerContainer.fadeIn(1000);
+      theme.qvVariantChange()
     }
   });
 }
@@ -593,7 +594,8 @@ theme.pdpMain = function () {
 
     $(document).on('click', selectors.addBundle, function (e) {
       e.preventDefault();
-      var $availableVariants = $('[data-variant-available="true"]');
+      var $availableVariants = $('[data-variant-available="true"]'),
+          bundle_name = $(this).attr('data-bundle-name') || '';
       let products_data = [];
 
       $availableVariants.each(function () {
@@ -601,7 +603,8 @@ theme.pdpMain = function () {
           quantity: 1,
           id: $(this).attr('id'),
           properties: {
-            bundle: true
+            bundle: true,
+            "_Bundle_Name": bundle_name
           }
         })
       });
@@ -884,18 +887,45 @@ theme.pdpMain = function () {
     $(document).off('click.bundleRadio')
     $(document).off('click.addBundleMix')
 
+    function fadeOutOfStockVariants(selectedVariant, $bundleWrapper) {
+      const selectedVariantTitle = selectedVariant.attr('data-variant-options-title'),
+            $bundleVariants = $bundleWrapper.find('.js-bundle-variant option');
+      $bundleWrapper.find('.bundle-radio').removeClass('unavailable');
+      if (selectedVariantTitle.includes('/')) {
+        const selectedSizeTitle = selectedVariantTitle.split('/')[1],
+            unavailableColors = $bundleVariants.map(function () {
+              if ($(this).attr('data-variant-options-title').includes(selectedSizeTitle) && $(this).is('[disabled]')) return $(this).attr('data-variant-options-title').split('/')[0]
+            })
+        if (unavailableColors.length) unavailableColors.each((i, color) => $bundleWrapper.find('input[value="'+ color +'"]').parent().addClass('unavailable'))
+      } else {
+        const unavailableVariants = $bundleVariants.map(function () {
+          if ($(this).is('[disabled]')) return $(this).attr('data-variant-options-title')
+        })
+        if (unavailableVariants.length) unavailableVariants.each((i, variant) => $bundleWrapper.find('input[value="'+ variant +'"]').parent().addClass('unavailable'))
+      }
+    }
+
+    function checkBundleVariantTitle(selectedVariant, checkedInputs) {
+      const priceDifference = Number(selectedVariant.attr('data-bundle-price-difference'));
+      selectedVariant.attr('selected', 'selected')
+      selectedVariant.parent().attr('value', selectedVariant.val())
+      checkedInputs.each(function() {
+        $(this).parents('.bundle-product__option-group').find('.option-title-value').html(`${$(this).attr('title')}`)
+      })
+      let optionTitle = (priceDifference > 0) ? `${$(checkedInputs.get(0)).attr('title')} <strong>(+$${priceDifference})</strong>` : `${$(checkedInputs.get(0)).attr('title')}`;
+      $(checkedInputs.get(0)).parents('.bundle-product__option-group').find('.option-title-value').html(optionTitle)
+    }
+
     $(document).find('.bundle-product').each(function () {
       let selectedOptions = '',
+          $bundleWrapper = $(this),
           checkedInputs = $(this).find('.bundle-radio-group input:checked'),
           checkedOptions = $(this).find('.bundle-radio-group input:checked').map((i, option) => option.value);
       checkedOptions.each((i, option) => selectedOptions = (i !== checkedOptions.length - 1) ? selectedOptions + option + '/' : selectedOptions + option)
-      checkedInputs.each(function() {
-        $(this).parents('.bundle-product__option-group').find('.option-title-value').text($(this).attr('title'))
-      })
       $(this).find('.js-bundle-variant option').removeAttr('selected')
-      let selectedVariant = $(this).find('[data-variant-options="' + selectedOptions + '"]');
-      selectedVariant.attr('selected', 'selected')
-      selectedVariant.parent().attr('value', selectedVariant.val())
+      let selectedVariant = $(this).find('[data-variant-options-title="' + selectedOptions + '"]');
+      checkBundleVariantTitle(selectedVariant, checkedInputs)
+      fadeOutOfStockVariants(selectedVariant, $bundleWrapper)
     })
 
     function checkBundleMixAvailable(unavailableProduct) {
@@ -915,11 +945,27 @@ theme.pdpMain = function () {
     }
     checkBundleMixAvailable()
 
-    function changeBandleImage(variantUniqID) {
+    function changeBundleImage(variantUniqID) {
       let $selectedImage = $('[data-variant-media="' + variantUniqID + '"]');
       $selectedImage.parent().find('[data-variant-media]:visible').css('visibility','hidden')
       $selectedImage.css('visibility','visible')
     }
+
+    function checkBundleMixPrice() {
+      let priceDiffSum = 0,
+          selectedMixVariants = $(document).find('.bundle-product .js-bundle-variant option[selected]'),
+          priceDiffArray = selectedMixVariants.map((i, variant) => {return Number(variant.dataset.bundlePriceDifference)});
+      priceDiffArray.each((i, priceDiff) => priceDiffSum += priceDiff || 0);
+
+      const newCompareAtPrice = (window.theme.product.compare_at_price * 0.01) + priceDiffSum,
+            newPrice = (window.theme.product.price * 0.01) + priceDiffSum,
+            priceInner = $('[data-product-price]'),
+            compareAtPriceInner = $('[data-compare-at-price] span');
+
+      priceInner.each((i, element) => $(element).text('$' + newPrice))
+      compareAtPriceInner.each((i, element) => $(element).text('$' + newCompareAtPrice))
+    }
+    checkBundleMixPrice()
 
     $(document).on('click.bundleRadio', '.bundle-radio', function () {
       let $bundleWrapper = $(this).parents('.bundle-product'),
@@ -927,24 +973,25 @@ theme.pdpMain = function () {
           checkedInputs = $bundleWrapper.find('.bundle-radio-group input:checked'),
           checkedOptions = $bundleWrapper.find('.bundle-radio-group input:checked').map((i, option) => option.value);
       checkedOptions.each((i, option) => selectedOptions = (i !== checkedOptions.length - 1) ? selectedOptions + option + '/' : selectedOptions + option)
-      checkedInputs.each(function() {
-        $(this).parents('.bundle-product__option-group').find('.option-title-value').text($(this).attr('title'))
-      })
-      let selectedVariant = $bundleWrapper.find('[data-variant-options="' + selectedOptions + '"]');
+      let selectedVariant = $bundleWrapper.find('[data-variant-options-title="' + selectedOptions + '"]');
       $bundleWrapper.find('.js-bundle-variant option').removeAttr('selected')
       selectedVariant.attr('selected', 'selected')
       selectedVariant.parent().attr('value', selectedVariant.val())
+      checkBundleVariantTitle(selectedVariant, checkedInputs)
+      fadeOutOfStockVariants(selectedVariant, $bundleWrapper)
       if (selectedVariant.length) {
-        changeBandleImage(selectedVariant.attr('data-variant-uniq_id'));
+        changeBundleImage(selectedVariant.attr('data-variant-uniq_id'));
         checkBundleMixAvailable()
       } else {
         checkBundleMixAvailable(true)
       }
+      checkBundleMixPrice()
     })
 
     $(document).on('click.addBundleMix', '#pdp-bundle-atc', function (e) {
       e.preventDefault();
       var $selectedBundleOptions = $(this).parents('.pdpForm').find('.js-bundle-variant select'),
+          bundle_name = $(this).attr('data-bundle-name') || '',
           products_data = [],
           products = [];
 
@@ -963,7 +1010,8 @@ theme.pdpMain = function () {
               quantity: cnt,
               id: current,
               properties: {
-                "_bundles": true
+                "_bundles": true,
+                "_Bundle_Name": bundle_name
               }
             })
           }
@@ -978,7 +1026,8 @@ theme.pdpMain = function () {
           quantity: cnt,
           id: current,
           properties: {
-            "_bundles": true
+            "_bundles": true,
+            "_Bundle_Name": bundle_name
           }
         })
       }
@@ -1867,12 +1916,12 @@ theme.GLOBAL = function () {
 
   $(document).on('click.quickViewATC', '#ProductQuickView .js-counter-add', function () {
     qvChangeQTY(1);
-    qvVariantChange ();
+    theme.qvVariantChange ();
   })
 
   $(document).on('click.jsCounterRemove', '#ProductQuickView .js-counter-remove', function () {
     qvChangeQTY(-1);
-    qvVariantChange ();
+    theme.qvVariantChange ();
   })
 
   $(document).on('click.radioGroup', '#ProductQuickView .radio-group label', function () {
@@ -1891,7 +1940,7 @@ theme.GLOBAL = function () {
       if ($(this).attr('data-option-current') == optionName) {
         if(!(isDisabled)){
           $(this).text(optionValue);
-          qvVariantChange();
+          theme.qvVariantChange();
         }
       }
     })
@@ -1935,8 +1984,8 @@ theme.GLOBAL = function () {
   // });
   // ======================================== Neels code ends here ========================================
 
-  
-  function qvVariantChange () {
+
+  theme.qvVariantChange = function () {
     let selectedOption = $('#ProductQuickView .radio-group input:checked');
 
     var currentOptions = $.map(selectedOption, function(element, index) {

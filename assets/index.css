@@ -17850,7 +17850,7 @@ body.is-masthead--empty main {
 .cart-footer__total {
   width: 50%;
   flex-shrink: 0;
-  font-weight: 600;
+  font-weight: 400;
   font-size: 20px;
   line-height: 120%;
 }
@@ -17859,7 +17859,7 @@ body.is-masthead--empty main {
   .cart-footer__total {
     width: 50%;
     flex-shrink: 0;
-    font-weight: 500;
+    font-weight: 400;
     font-size: 16px;
     line-height: 120%;
   }
@@ -17871,6 +17871,10 @@ body.is-masthead--empty main {
 
 .cart-footer__total-item span {
   margin-right: 5px;
+}
+
+.cart-footer__total-item .js-subtotal {
+  font-weight: 600;
 }
 
 .cart-drawer__empty .image {
@@ -17887,7 +17891,7 @@ body.is-masthead--empty main {
 }
 
 .cart-drawer__empty-heading {
-  font-weight: normal;
+  font-weight: 500;
   font-size: 48px;
   line-height: 1;
   margin: 0 0 60px;
@@ -17992,7 +17996,7 @@ body.is-masthead--empty main {
 
 .cart-recommended__header {
   background-color: #FFF9E5;
-  padding: 12px 50px;
+  padding: 19px 50px;
   text-align: center;
   overflow: hidden;
 }
@@ -18034,6 +18038,10 @@ body.is-masthead--empty main {
   background-color: #d5d4d4;
   border-radius: 10px;
   border: 3px solid #ffffff;
+}
+
+.cart-recommended .productCard__variants .productCard__options {
+  margin-left: -2px;
 }
 
 @media screen and (max-width: 992px) {
@@ -18096,7 +18104,7 @@ body.is-masthead--empty main {
   }
 
   .cart-drawer__footer-action {
-    padding: 14px 16px;
+    padding: 24px 16px;
   }
 
   .remove-item__text {
@@ -18697,7 +18705,7 @@ textarea {
   text-align: center;
   font-size: .66rem;
   text-transform: uppercase;
-  letter-spacing: .125em;
+  letter-spacing: normal;
   transition: all var(--slow) var(--ease);
   outline: none !important;
 }
@@ -19917,8 +19925,16 @@ h3.productCard__title {
 }
 
 @media screen and (max-width: 991px) {
+  .productCard__img {
+    padding-top: 115%;
+  }
+
+  .productCard__img img {
+    object-position: bottom;
+  }
+
   .productCard__recommended .productCard__img {
-    padding-top: 82%;
+    padding-top: 100%;
   }
 }
 
@@ -20238,7 +20254,7 @@ h3.productCard__title {
   line-height: 1;
   font-weight: 400;
   text-transform: capitalize;
-  margin: 0;
+  margin: 0 5px 0 0;
   font-family: 'Inter', sans-serif;
 }
 
@@ -20251,7 +20267,7 @@ h3.productCard__title {
   font-size: 14px;
   line-height: 1;
   font-weight: 400;
-  margin-left: 5px;
+  /*margin-left: 5px;*/
 }
 
 .productCard.productCard__recommended .productCardVariants__CountButton {

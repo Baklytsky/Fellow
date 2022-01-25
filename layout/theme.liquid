@@ -59,6 +59,7 @@
           giftWrappingAvailable: "{{ all_products[settings.gift_box_product].available }}",
           giftWrappingProductID: "{{ all_products[settings.gift_box_product].selected_or_first_available_variant.id  }}"
         },
+        {% if template.name == 'product' %}product: {{ product | json }},{% endif %}
         moneyFormat: "{{ shop.money_format }}"
       }
     </script>
@@ -107,10 +108,8 @@
       <link rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&family=Oswald:wght@300;400;700&display=swap" />
     </noscript>
-    
- 
-    
-    {% include 'preconnect' %}
+
+     {% include 'preconnect' %}
 
     {{ 'index.css' | asset_url | stylesheet_tag }}
     {{ 'custom.scss.css' | asset_url | stylesheet_tag }}
@@ -150,7 +149,7 @@
     {{ 'jquery-1.11.0.min.js' | asset_url | script_tag }}
     {{ 'jquery.ba-throttle-debounce.min.js' | asset_url | script_tag }}
     {{ 'custom-additional-vendor.js' | asset_url | script_tag }}
-
+  
  {%- if request.path contains 'carter-move-mug' or request.path contains 'carter-everywhere-mug' -%}
     {{ 'player-event.js' | asset_url | script_tag }}
     {{ 'player-inline.js' | asset_url | script_tag }}

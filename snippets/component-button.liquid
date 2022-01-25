@@ -10,6 +10,7 @@
   {% if name != blank %}name='{{ name }}'{% endif %}
   {% if disabled %}disabled{% endif %}
   {% if dataAttr != blank %}{{ dataAttr }}{% endif %}
+  {% if bundle_name != blank %}data-bundle-name='{{ bundle_name }}'{% endif %}
   {% if tag != 'a' %}type='{{ type | default: 'button' }}'{% endif %}
   class='{{ cx | strip }}'
   role='button'>
