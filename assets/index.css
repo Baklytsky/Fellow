@@ -18705,7 +18705,7 @@ textarea {
   text-align: center;
   font-size: .66rem;
   text-transform: uppercase;
-  letter-spacing: .125em;
+  letter-spacing: normal;
   transition: all var(--slow) var(--ease);
   outline: none !important;
 }

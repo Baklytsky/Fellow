@@ -5,6 +5,13 @@
 {% endif %}
 {% endfor %}
 
+{%- assign cart_has_giftcard = false -%}
+{% for item in cart.items %}
+  {% if item.product.type contains 'Digital Gift Card' %}
+    {% assign cart_has_giftcard = true %}
+  {% endif %}
+{% endfor %}
+
 {%- assign coffee_pdp = false -%}
 {% if request.path contains "/products/" %}
 {%- assign slug = request.path | remove_first: '/products/' -%}
@@ -88,7 +95,7 @@
           related schema available in assets/cart-free-product-schema.js
         {% endcomment %}
 
-        {%- if settings.enable_gift_wrapping and settings.gift_box_product and cart_has_canal == false and coffee_pdp == false -%}
+        {%- if settings.enable_gift_wrapping and settings.gift_box_product and cart_has_canal == false and coffee_pdp == false and cart_has_giftcard == false -%}
           <div class="cart-drawer__footer-gift-wrapping">
             {% section 'cart-gift-wrapping' %}
           </div>
