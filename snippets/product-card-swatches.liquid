@@ -59,7 +59,7 @@
 
   {%- if color_count > 0 -%}
     <div class="productCardVariants__ColorCount">
-      <a class="productCardVariants__CountButton" href="{{ product.url }}" aria-label="Open product page" title="{{ product.title }}" role="button">
+      <a class="productCardVariants__CountButton" href="{{ product.url }}" aria-label="{{ product.title }}" title="{{ product.title }}" role="button">
         {{ color_count }} {{ color_count | pluralize: 'color', 'colors' }}
       </a>
     </div>

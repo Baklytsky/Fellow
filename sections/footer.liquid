@@ -28,7 +28,7 @@
 
               {%- if settings[social_link] != blank and section.settings[icon_link] -%}
                 <li class="footer__icons-item">
-                  <a class="footer__icon-link" href="{{ settings[social_link] | escape }}" target="_blank" aria-label="Icon" aria-labelledby="Icon">
+                  <a class="footer__icon-link" href="{{ settings[social_link] | escape }}" target="_blank" aria-label="Icon">
                     <div class="footer__icon">
                       {%- include 'icons-social' with icon_link -%}
                     </div>
@@ -73,7 +73,7 @@
       <ul>
         {%- for type in shop.enabled_payment_types -%}
           <li>
-            {{ type | payment_type_svg_tag: class: 'img-grayscale' }}
+            {{ type | payment_type_svg_tag: class: 'img-grayscale' | replace: 'aria-labelledby', 'aria-label' }}
           </li>
         {%- endfor -%}
       </ul>
@@ -89,7 +89,7 @@
             <ul class="footerColophon__BottomMenu">
               {% for link in linklists[footer_menu_bottom].links %}
                 <li class="footerColophon__BottomItem">
-                  <a class="footerColophon__BottomLink" href="{{ link.url }}" role="link" aria-label="Menu link" title="Open {{ link.title }}">{{ link.title }}</a>
+                  <a class="footerColophon__BottomLink" href="{{ link.url }}" role="link" aria-label="{{ link.title }}" title="Open {{ link.title }}">{{ link.title }}</a>
                 </li>
               {%- endfor -%}
             </ul>
