@@ -1,0 +1,46 @@
+<div class="search__popular {{ class_name }} {% if settings.popular_section_hide_desktop %}search__popular--hide-desktop{% endif %}">
+  {%- if settings.popular_section_heading != blank -%}
+    <h4 class="search__popularHeading">{{ settings.popular_section_heading }}</h4>
+  {%- endif -%}
+  <div class="search__popularGrid">
+    {% for i in (1..4) %}
+      {%- assign popular_section_heading_handle = 'popular_section_title_' | append: forloop.index -%}
+      {%- assign popular_section_heading = settings[popular_section_heading_handle] -%}
+      {%- assign popular_section_url_handle = 'popular_section_url_' | append: forloop.index -%}
+      {%- assign popular_section_url = settings[popular_section_url_handle] -%}
+      {%- assign popular_section_image_handle = 'popular_section_image_' | append: forloop.index -%}
+      {%- assign popular_section_image = settings[popular_section_image_handle] -%}
+  
+      {%- if popular_section_url != blank -%}
+        <a href="{{ popular_section_url }}" class="search__popularItem">
+      {%- else -%}
+          <div class="search__popularItem">
+      {%- endif -%}
+      
+        {%- if popular_section_image != blank -%}
+          <div class="AspectRatio search__popularImageWrapper"
+               style="--aspect-ratio: {{ popular_section_image.aspect_ratio }};">
+            <img class="search__popularImage"
+                 src='{{ popular_section_image | img_url: "100x" }}'
+                 loading="lazy"
+                 srcset='{{ popular_section_image | img_url: "450x" }} 450w,
+                         {{ popular_section_image | img_url: "560x" }} 560w,
+                         {{ popular_section_image | img_url: "650x" }} 650w,
+                         {{ popular_section_image | img_url: "900x" }} 900w'
+                 alt="{{ popular_section_image.alt | default: popular_section_heading | escape }}">
+          </div>
+        {%- endif -%}
+
+        {%- if popular_section_heading != blank -%}
+          <h5 class="search__popularItemHeading">{{ popular_section_heading }}</h5>
+        {%- endif -%}
+        
+        {%- if popular_section_url != blank -%}
+            </a>
+        {%- else -%}
+            </div>
+        {%- endif -%}
+
+    {% endfor %}
+  </div>
+</div>
