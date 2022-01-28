@@ -1719,7 +1719,7 @@ theme.searchBar = function () {
   $(document).on('submit.headerSearchForm', '.headerSearch__form', function (event) {
     event.preventDefault();
     var value = $searchInput.val().trim(),
-        queryKey = value.replace(" ", "-").toLowerCase();
+        queryKey = value.toLowerCase();
 
     var urlToRedirect = '/search?q=' + queryKey + '&options%5Bprefix%5D=last&type=product';
     window.location.href = urlToRedirect;
@@ -1812,7 +1812,7 @@ theme.searchPage = function () {
 
   function getUrlRequest () {
     var value = $searchInput.val().trim();
-    var queryKey = value.replace(" ", "-").toLowerCase();
+    var queryKey = value.toLowerCase();
     var url = '/search?q=' + queryKey + '&options%5Bprefix%5D=last&type=product';
 
     window.location.href = url;
