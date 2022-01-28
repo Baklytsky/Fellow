@@ -9,7 +9,7 @@
       {% for photo in social_photos %}
         <div class="social-photos__item rel">
             {{ photo['link'] }}
-            <img class="social-photos__item-image x block" src="{{ photo['image'] }}" alt="{{ photo['caption'] | escape }}" role="img">
+            <img class="social-photos__item-image x block" src="{{ photo['image'] }}" alt="{{ photo['caption'] | escape }}">
             <p class="xsmall social-photos__item-body mb0 mt025">
               {{ photo["caption"] }}
             </p>

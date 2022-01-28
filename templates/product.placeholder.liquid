@@ -6,8 +6,8 @@
   {% assign portrait_image = product.metafields.custom_fields.placeholder_portrait_image %}
   {% assign landscape_image = product.metafields.custom_fields.placeholder_landscape_image %}
   <div class="pdp-placeholder__image abs fill z0 placeholder-image--{{ product.id }}" >
-    <img class="x y landscape" src="{{ landscape_image }}" alt="{{ product.title }}" role="img"/>
-    <img class="x portrait" src="{{ portrait_image }}" alt="{{ product.title }}" role="img"/>
+    <img class="x y landscape" src="{{ landscape_image }}" alt="{{ product.title }}"/>
+    <img class="x portrait" src="{{ portrait_image }}" alt="{{ product.title }}"/>
   </div>
 
   <div class="pdp-placeholder__text rel cw z1 pdpMain__details">
@@ -20,8 +20,8 @@
     {% endif %}
 
     {% capture kickstarter_logo %}
-      <img src="{{ 'kickstarter-logo-white.png' | asset_img_url: '300x' }}" title="Kickstarter" alt="Kickstarter" class="kickstarter-logo kickstarter-logo--white" role="img" />
-      <img src="{{ 'kickstarter-logo-black.png' | asset_img_url: '300x' }}" title="Kickstarter" alt="Kickstarter" class="kickstarter-logo kickstarter-logo--black" role="img" />
+      <img src="{{ 'kickstarter-logo-white.png' | asset_img_url: '300x' }}" title="Kickstarter" alt="Kickstarter" class="kickstarter-logo kickstarter-logo--white" />
+      <img src="{{ 'kickstarter-logo-black.png' | asset_img_url: '300x' }}" title="Kickstarter" alt="Kickstarter" class="kickstarter-logo kickstarter-logo--black" />
     {% endcapture %}
 
     {% assign product_tagline = product.metafields.custom_fields.placeholder_tagline | replace: "{kickstarter}", kickstarter_logo %}

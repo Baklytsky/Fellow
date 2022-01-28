@@ -12,7 +12,7 @@
             <ul>
               {% for image in product.images %}
                 <li>
-                  <img class='block x' src='{{ image.src | img_url: '600x' }}' alt='{{ image.alt | escape }}' role="img"/>
+                  <img class='block x' src='{{ image.src | img_url: '600x' }}' alt='{{ image.alt | escape }}'/>
                 </li>
               {% endfor %}
             </ul>

@@ -11,9 +11,9 @@ Uncomment to include
 {% endcomment %}
 
 {% if template contains 'gift_card' %}
-  <div class='f fdc jcb' id='atc-wrapper'>
+  <div class='f fdc jcb' id='atc-sticky-wrapper'>
 {% else %}
-  <div class='f fdr jcb' id='atc-wrapper'>
+  <div class='f fdr jcb' id='atc-sticky-wrapper'>
 {% endif %}
   {% unless template contains 'gift_card' %}
     {% if section.settings.show_quantity_selector and section.settings.quantity_selector_inline %}

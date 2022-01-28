@@ -9,9 +9,9 @@
       {% for item in items %}
         <div class="our-products__item">
           <div class="our-products__image rel">
-            <img class="x block {% if item['secondary_image'] != blank %} primary {% endif %}" src="{{ item['primary_image'] }}" alt='Image of custom product for {{ item["title"] }}' role="img">
+            <img class="x block {% if item['secondary_image'] != blank %} primary {% endif %}" src="{{ item['primary_image'] }}" alt='Image of custom product for {{ item["title"] }}'>
             {% if item['secondary_image'] != blank %}
-              <img class="x y abs secondary fill z1" src="{{ item['secondary_image'] }}" alt='Secondary image of custom product for {{ item["title"] }}' role="img">
+              <img class="x y abs secondary fill z1" src="{{ item['secondary_image'] }}" alt='Secondary image of custom product for {{ item["title"] }}'>
             {% endif %}
           </div>
           <div class="mt1 ac">
