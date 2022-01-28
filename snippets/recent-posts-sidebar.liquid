@@ -1,7 +1,7 @@
 <section class="articleSidebar__recentArticles">
   <h3 class='caps'>Recent Posts</h3>
   {%- for article in blog.articles limit: 3 -%}
-    <a href="{{ article.url }}" aria-label="{{ article.title }}" aria-labelledby="{{ article.title }}">
+    <a href="{{ article.url }}" aria-label="{{ article.title }}">
       <div class="recentArticle__single">
         <div class='eyebrow'>
           {{ article.published_at | time_tag: format: 'month_day_year' }}

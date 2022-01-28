@@ -33,7 +33,7 @@
     <picture class='image fill abs x y is-visible is-loaded'>
       {% if imgMobile %}<source class='x y' media='(max-width: 991px)' srcset='{{ imgMobile }}'>{% endif %}
       <source class='x y' media='(min-width: 992px)' srcset='{{ img }}'>
-      <img alt='{{ copy }}' class='x y' src='{{ img }}' role="img">
+      <img alt='{{ page.title }}' class='x y' src='{{ img }}'>
     </picture>
   {% endif %}
   {% if copy %}

@@ -191,15 +191,19 @@
                           {%- when 'price_range' -%}
                             <div class="filter-group__price-range">
                               {% assign minPrice = search.results | sort: 'price' %}
-                              <div class="filter-group__price-range-from">
-                                <input name="{{ filter.min_value.param_name }}"
-                                       id="Filter-{{ filter.label }}-{{ forloop.index }}"
-                                       value="0"
-                                       type="number"
-                                       placeholder="0"
-                                       min="0"
-                                       max="{{ filter.range_max | money_without_currency | replace: ',', '' }}">
-                              </div>
+                              
+                              {%- comment -%}
+                                <div class="filter-group__price-range-from">
+                                  <input name="{{ filter.min_value.param_name }}"
+                                         id="Filter-{{ filter.label }}-{{ forloop.index }}"
+                                         value="0"
+                                         type="number"
+                                         placeholder="0"
+                                         min="0"
+                                         max="{{ filter.range_max | money_without_currency | replace: ',', '' }}">
+                                </div>
+                              {%- endcomment -%}
+                           
                               <div class="filter-group__price-range-to">
                                 <input name="{{ filter.max_value.param_name }}"
                                        id="Filter-{{ filter.label }}-{{ forloop.index }}"

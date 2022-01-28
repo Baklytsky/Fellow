@@ -12,7 +12,7 @@
       {%- if blocks.size > 0 -%}
         <div class="FeaturedCollections__TabsWrapper">
           <div class="FeaturedCollections__TabsHeader">
-            <ul class="FeaturedCollections__TabsList" role="tablist">
+            <ul class="FeaturedCollections__TabsList">
               {%- for block in blocks -%}
                 {%- assign collection = collections[block.settings.collection] -%}
 
@@ -27,7 +27,7 @@
                     {%- assign first_button_link = button_url -%}
                   {%- endif -%}
 
-                  <li role="none">
+                  <li>
                     <button id="tab-{{ forloop.index }}"
                             class="FeaturedCollections__TabButton"
                             type="button"
@@ -35,9 +35,9 @@
                             data-link-title="{{ button_text }}"
                             data-link-url="{{ button_url }}"
                             aria-controls="tab-{{ collection.id }}"
-                            aria-label="Tab button"
+                            aria-label="{{ tab_text }}"
                             aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
-                            role="tab">
+                            >
                       {{ tab_text }}
                     </button>
                   </li>
@@ -49,7 +49,7 @@
               <a class="FeaturedCollections__CollectionLink"
                  href="{{ first_button_link }}"
                  title="{{ first_button_text }}"
-                 aria-label="Open selected collection"
+                 aria-label="{{ first_button_text }}"
                  role="button">
                 {{ first_button_text }}
               </a>
@@ -78,8 +78,8 @@
                   {% endfor %}
 
                   {%- if collection.products_count  > 3 -%}
-                    <button type="button" class="FeaturedCollections__ScrollPrev">{% render 'icon' with 'arrow-prev' %}</button>
-                    <button type="button" class="FeaturedCollections__ScrollNext">{% render 'icon' with 'arrow-next' %}</button>
+                    <button type="button" class="FeaturedCollections__ScrollPrev" aria-label="Scroll Prev">{% render 'icon' with 'arrow-prev' %}</button>
+                    <button type="button" class="FeaturedCollections__ScrollNext" aria-label="Scroll Next">{% render 'icon' with 'arrow-next' %}</button>
                   {%- endif -%}
                 </div>
               {%- endif -%}

@@ -7,7 +7,6 @@
         src='{{ image | img_url: '1x1' }}'
         loading="lazy"
         class="{{ class_name }}"
-        id ="{{ image.id }}"
         srcset='{{ image | img_url: "600x" }} 600w,
           {{ image | img_url: "1000x" }} 991w,
           {{ image | img_url: "1280x" }} 1280w,

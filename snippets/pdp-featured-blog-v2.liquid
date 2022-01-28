@@ -87,7 +87,6 @@
                           <a class="BlogSectionArticle__ImageWrapper AspectRatio AspectRatio--square"
                              href="{{ article.url }}"
                              aria-label="Image link"
-                             aria-hidden="true"
                              role="button"
                              title="{{ article.title }}">
                             <img class="BlogSectionArticle__Image"
@@ -97,7 +96,6 @@
                                    {{ article | img_url: "560x" }} 560w,
                                    {{ article | img_url: "650x" }} 650w,
                                    {{ article | img_url: "900x" }} 900w'
-                                 role="img"
                                  alt="{{ article.image.alt | default: article.title | escape }}">
                           </a>
                         {%- endif -%}
