@@ -648,7 +648,10 @@ theme.pdpMain = function () {
     function changeMedia() {
       var ajaxUrl = window.location.protocol + '//' + window.location.host + window.location.pathname + '?variant=' + variantId + '&view=ajax-media',
           $productMedia = $productMedia = $(document).find('.pdpMain__Media'),
-          $productUpsell = $(document).find('.upsell-product');
+          $productUpsell = $(document).find('.upsell-product'),
+          $productPrice = $(document).find('.pdpCopy__price.hide-mobile'),
+          $productMobilePrice = $(document).find('.pdpCopy__price.hide-desktop'),
+          $stickyPrice = $(document).find('.pdpStickyBar .pdpCopy__price');
 
       $.ajax({
         url: ajaxUrl,
@@ -658,8 +661,16 @@ theme.pdpMain = function () {
           'X-Requested-With': 'XMLHttpRequest' // This is needed as currently there is a bug in Shopify that assumes this header
         },
         success: function (data) {
-          var $newProductMedia = $(data).find('.pdpMain__Media').html()
+          var $newProductMedia = $(data).find('.pdpMain__Media').html(),
+              $newProductPrice = $(data).find('.pdpCopy__price.hide-mobile').html(),
+              $newProductMobilePrice = $(data).find('.pdpCopy__price.hide-desktop').html(),
+              $newStickyPrice = $(data).find('.pdpStickyBar .pdpCopy__price').html();
+
           $productMedia.html($newProductMedia);
+          $productPrice.html($newProductPrice);
+          $productMobilePrice.html($newProductMobilePrice);
+          $stickyPrice.html($newStickyPrice);
+
           theme.slickSlider()
           pdpGallary()
           pdpThumbnails()
