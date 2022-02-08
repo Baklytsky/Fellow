@@ -15527,7 +15527,7 @@
             bgLazyLoad: !0,
             adaptiveHeight: !0,
             prevNextButtons: !1,
-            autoPlay: 5e3,
+            autoPlay: 7e3,
             on: {
               ready: function() {
                 var t = n.querySelector(".flickity-page-dots"),

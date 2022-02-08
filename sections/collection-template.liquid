@@ -227,7 +227,44 @@
               {%- assign gift_product_handleize = 'Gift product' | handleize -%}
               {%- assign product_type_handleize = product.type | handleize -%}
               {%- unless product_type_handleize == gift_product_handleize -%}
-                {% include 'product-card', product_image: product.images[product_image_index] %}
+
+                {%- assign product_item_order = forloop.index -%}
+                {%- assign color_label = 'color,colour,couleur,colore,farbe,색,色,färg,farve' | split: ',' -%}
+                {%- assign has_multiple_colors = false -%}
+
+                  {%- for option in product.options_with_values -%}
+                    {%- assign downcase_option = option.name | downcase -%}
+                    {%- if color_label contains downcase_option -%}
+                      {%- assign available_colours = option.values | size -%}
+                      {%- if available_colours > 1 -%}
+                        {%- assign has_multiple_colors = true -%}
+                        {% break %}
+                      {%- endif -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+
+                  {%- if has_multiple_colors == true -%}
+                    {%- for option in product.options_with_values -%}
+                      {%- assign downcase_option = option.name | downcase -%}
+
+                      {%- if color_label contains downcase_option -%}
+                        {%- for color_item in option.values -%}
+                          {%- assign downcase_color_item = color_item | downcase -%}
+                          {%- for variant in product.variants -%}
+                            {%- if variant.options contains color_item -%}
+                              {% include 'product-variant-card', product_image: variant.featured_media %}
+                              {% break %}
+                            {%- endif -%}
+                          {%- endfor -%}
+                        {%- endfor -%}
+                      {%- endif -%}
+
+                    {%- endfor -%}
+
+                  {%- else -%}
+                    {% include 'product-card', product_image: product.images[product_image_index] %}
+                  {%- endif -%}
+
               {%- endunless -%}
             {%- endfor -%}
           </div>

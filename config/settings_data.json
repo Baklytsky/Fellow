@@ -1,10 +1,5 @@
 {
   "current": {
-    "social_instagram_link": "https:\/\/www.instagram.com\/fellowproducts",
-    "social_facebook_link": "https:\/\/www.facebook.com\/fellowproducts\/",
-    "social_twitter_link": "",
-    "social_youtube_link": "https:\/\/www.youtube.com\/channel\/UCrtS-B4xQtbNVnyqC4lSSHg",
-    "social_pinterest_link": "",
     "cart_recommended_enable": true,
     "cart_recommended_heading": "Complete Your Coffee Corner",
     "cart_recommended_icon": "<svg width=\"50\" height=\"52\" viewbox=\"0 0 50 52\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M37.8418 40.702C41.4521 35.3625 42.5595 22.5001 31.0001 15.5C17.5 7.32466 4.5 19.4999 4.5 19.4999\" stroke=\"black\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><\/path>\n<path d=\"M43.8696 39.0845L37.3033 42.5193L33.8924 35.9229\" stroke=\"black\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><\/path>\n<\/svg>",
@@ -24,6 +19,35 @@
     "second_gwp_threshold": 200,
     "second_gwp_product": "free-gift-carter-move-mug-tier-2",
     "personalization_product": "personalization-add-on",
+    "enable_search": true,
+    "search_no_result_text": "Sorry, no results",
+    "popular_section_enable": true,
+    "popular_section_hide_desktop": true,
+    "popular_section_heading": "Popular Collections",
+    "popular_section_image_1": "shopify:\/\/shop_images\/Product_Feature_Module-Drops.jpg",
+    "popular_section_title_1": "Our Coffee Collection",
+    "popular_section_url_1": "shopify:\/\/collections\/coffee",
+    "popular_section_image_2": "shopify:\/\/shop_images\/Mask_Group_2.png",
+    "popular_section_title_2": "All Drink + Serve",
+    "popular_section_url_2": "shopify:\/\/collections\/serve",
+    "popular_section_image_3": "shopify:\/\/shop_images\/Mask_Group_3.png",
+    "popular_section_title_3": "All Grind + Brew",
+    "popular_section_url_3": "shopify:\/\/collections\/grind-brew",
+    "popular_section_image_4": "shopify:\/\/shop_images\/Mask_Group_4.png",
+    "popular_section_title_4": "All Kettles",
+    "popular_section_url_4": "shopify:\/\/collections\/kettles",
+    "show_best_sellers": true,
+    "best_sellers_heading": "Shop Best Sellers",
+    "best_sellers_collection": "bestsellers",
+    "search_heading": "Are you looking for...",
+    "popular_searches_product_1": "staggekg",
+    "popular_searches_product_2": "clara-french-press",
+    "popular_searches_product_3": "ode-brew-grinder",
+    "social_instagram_link": "https:\/\/www.instagram.com\/fellowproducts",
+    "social_facebook_link": "https:\/\/www.facebook.com\/fellowproducts\/",
+    "social_twitter_link": "",
+    "social_youtube_link": "https:\/\/www.youtube.com\/channel\/UCrtS-B4xQtbNVnyqC4lSSHg",
+    "social_pinterest_link": "",
     "favicon": "shopify:\/\/shop_images\/favicon.png",
     "checkout_header_image": "",
     "checkout_logo_image": "shopify:\/\/shop_images\/Fellow-Logo-black_b1dd77c0-05ce-4fe0-a402-efa5219057d0.png",
@@ -39,6 +63,12 @@
     "checkout_accent_color": "#197bbd",
     "checkout_button_color": "#197bbd",
     "checkout_error_color": "#e32c2b",
+    "popular_searches_text_1": "Stagg EKG Electric Kettle",
+    "popular_searches_url_1": "shopify:\/\/products\/stagg-ekg-plus",
+    "popular_searches_text_2": "Clara French Press",
+    "popular_searches_url_2": "shopify:\/\/products\/clara-french-press",
+    "popular_searches_text_3": "Ode Brew Grinder",
+    "popular_searches_url_3": "shopify:\/\/products\/ode-brew-grinder",
     "free_shipping_met_msg": "Congrats! You get free US Shipping!",
     "gift_wrapping_result_heading": "Your order will be sent in a gift box",
     "cart_upsell_flavor_text": "Complete Your Coffee Corner",
@@ -213,9 +243,8 @@
           "center_menu": "new-main-menu",
           "menu_left": "new-left-menu-1",
           "menu_right": "new-right-menu",
-          "show_search": false,
           "show_announcement": true,
-          "announcement_text": "What would Fellow drink? Join our list to discover exclusive unique coffees 💡️",
+          "announcement_text": "Limited lots and exclusive drops from the best roasters in the world. Join our coffee list",
           "announcement_link": "https:\/\/drops.fellowproducts.com\/?utm_source=homepage&utm_medium=banner&utm_campaign=fellowhomepage",
           "enable_timer": false,
           "end_date": "Sep 30, 2021 07:30:00 GMT-08:00"
@@ -288,19 +317,36 @@
           },
           "58ee7397-6079-412a-9acd-d453a0cf281c": {
             "type": "splitSlide",
+            "settings": {
+              "splitSlide__layout": "right",
+              "heroSlide": "shopify:\/\/shop_images\/02.05.22_Hero_Module.jpg",
+              "desktopAlignment": "center",
+              "mobileAlignment": "center",
+              "heroSlide__header": "Multiple Degree Holders",
+              "heroSlide__subheader": "Expert brewing kettles that keep the heat with to-the-degree precision.",
+              "subSlide__bgColor": "#a8beb0",
+              "subSlide__textColor": "#231f20",
+              "heroSlide__ctaURL": "shopify:\/\/collections\/bestsellers",
+              "heroSlide__ctaCopy": "Fill Your Cart",
+              "heroSlide__ctaColor": "black",
+              "heroSlide__ctaSubtext": ""
+            }
+          },
+          "1f457594-c59c-4edd-800a-a9f7662f319e": {
+            "type": "splitSlide",
             "disabled": true,
             "settings": {
               "splitSlide__layout": "right",
-              "heroSlide": "shopify:\/\/shop_images\/11-30-BCFM-HC-5-Hero-Module-v1.gif",
+              "heroSlide": "shopify:\/\/shop_images\/Hero_Module_Image_1440x_58a51936-974b-4ebd-b5bb-eba9f9b0f279.png",
               "desktopAlignment": "center",
               "mobileAlignment": "center",
-              "heroSlide__header": "A Free Pop of Carter",
-              "heroSlide__subheader": "Get a free 8 oz Carter Move Mug with orders $150+ and 2 free with orders $200+ (Up to $55 in value).",
-              "subSlide__bgColor": "#2b4b35",
-              "subSlide__textColor": "#FFFFFF",
+              "heroSlide__header": "No Bad Mornings in 2022",
+              "heroSlide__subheader": "You can’t control everything in life, but you can control your countertop.",
+              "subSlide__bgColor": "#f6f2e8",
+              "subSlide__textColor": "#231f20",
               "heroSlide__ctaURL": "shopify:\/\/collections\/bestsellers",
-              "heroSlide__ctaCopy": "Fill Your Cart",
-              "heroSlide__ctaColor": "white",
+              "heroSlide__ctaCopy": "Shop Best Sellers",
+              "heroSlide__ctaColor": "black",
               "heroSlide__ctaSubtext": ""
             }
           },
@@ -326,6 +372,7 @@
           "e6275e05-4fc2-4478-85db-37e4aceedf86",
           "c15c0d5c-f86c-436e-95b6-2f10cb6c8b20",
           "58ee7397-6079-412a-9acd-d453a0cf281c",
+          "1f457594-c59c-4edd-800a-a9f7662f319e",
           "3e0796bc-698b-4618-80b6-261185f9fb1a"
         ],
         "settings": {
@@ -475,17 +522,16 @@
       },
       "1630052841314f69dd": {
         "type": "hp-iwt",
-        "disabled": true,
         "settings": {
           "enable_section": true,
-          "image": "shopify:\/\/shop_images\/Product_Feature_Super-Fancy-Gifts-Brew-Bar.jpg",
-          "layout": "left",
-          "header": "Make their year",
-          "description": "<p>Because it’s the things they’ll use everyday that are worth splashing out on.<\/p>",
+          "image": "shopify:\/\/shop_images\/Rookie_Kit_780x618_Product_Feature_1.jpg",
+          "layout": "right",
+          "header": "The Rookie Kit",
+          "description": "<p>A pour-over intro kit that you’ll still be using when you go pro.<\/p>",
           "bg_color": "",
           "text_color": "#000000",
-          "cta_url": "shopify:\/\/collections\/bestsellers",
-          "cta_copy": "Shop Best Sellers",
+          "cta_url": "shopify:\/\/collections\/coffee-products-kits-bundles",
+          "cta_copy": "Shop Kits + Bundles",
           "cta_color": "btn--dark"
         }
       },
@@ -612,7 +658,7 @@
             "type": "block",
             "settings": {
               "svg_icon": "<svg xmlns=\"http:\/\/www.w3.org\/2000\/svg\" width=\"34\" height=\"24\" viewbox=\"0 0 34 24\" fill=\"none\">\n<path d=\"M28.25 6H24.5V3C24.5 1.35 23.15 0 21.5 0H3.5C1.85 0 0.5 1.35 0.5 3V16.5C0.5 18.15 1.85 19.5 3.5 19.5C3.5 21.99 5.51 24 8 24C10.49 24 12.5 21.99 12.5 19.5H21.5C21.5 21.99 23.51 24 26 24C28.49 24 30.5 21.99 30.5 19.5H32C32.825 19.5 33.5 18.825 33.5 18V13.005C33.5 12.36 33.29 11.73 32.9 11.205L29.45 6.6C29.165 6.225 28.715 6 28.25 6ZM8 21C7.175 21 6.5 20.325 6.5 19.5C6.5 18.675 7.175 18 8 18C8.825 18 9.5 18.675 9.5 19.5C9.5 20.325 8.825 21 8 21ZM28.25 8.25L31.19 12H24.5V8.25H28.25ZM26 21C25.175 21 24.5 20.325 24.5 19.5C24.5 18.675 25.175 18 26 18C26.825 18 27.5 18.675 27.5 19.5C27.5 20.325 26.825 21 26 21Z\" fill=\"black\"><\/path>\n<\/svg>",
-              "title": "Free shipping on US orders over $99"
+              "title": "Free shipping on Domestic US orders over $99"
             }
           },
           "e93b09e2-0adb-42f7-83df-aa097348ae69": {
@@ -626,7 +672,7 @@
             "type": "block",
             "settings": {
               "svg_icon": "<svg xmlns=\"http:\/\/www.w3.org\/2000\/svg\" width=\"31\" height=\"30\" viewbox=\"0 0 31 30\" fill=\"none\">\n<path d=\"M15.5 2.5C8.625 2.5 3 8.125 3 15C3 21.875 8.625 27.5 15.5 27.5C22.375 27.5 28 21.875 28 15C28 8.125 22.375 2.5 15.5 2.5ZM19.9375 19.75L14.8375 16.6125C14.4625 16.3875 14.2375 15.9875 14.2375 15.55V9.6875C14.25 9.175 14.675 8.75 15.1875 8.75C15.7 8.75 16.125 9.175 16.125 9.6875V15.25L20.925 18.1375C21.375 18.4125 21.525 19 21.25 19.45C20.975 19.8875 20.3875 20.025 19.9375 19.75Z\" fill=\"black\"><\/path>\n<\/svg>",
-              "title": "98% of orders ship within 24 hours"
+              "title": "98% of all orders are fulfilled in 24 hours"
             }
           }
         },
@@ -666,17 +712,16 @@
       },
       "1636101715cd2df3c8": {
         "type": "hp-iwt",
-        "disabled": true,
         "settings": {
           "enable_section": true,
-          "image": "shopify:\/\/shop_images\/roduct_Feature_Carter-Move-Mug.jpg",
-          "layout": "right",
-          "header": "Someone's favorite color is here.",
-          "description": "<p>The to-go cup for effortlessly great coffee, the hardest part is choosing a color.<\/p>",
+          "image": "shopify:\/\/shop_images\/Clara_780x618_Product_Feature.jpg",
+          "layout": "left",
+          "header": "No Chill",
+          "description": "<p>The rare French press that keeps your brew warm for multiple cups.<\/p>",
           "bg_color": "",
           "text_color": "",
-          "cta_url": "shopify:\/\/products\/carter-move-mug",
-          "cta_copy": "Shop Carter",
+          "cta_url": "shopify:\/\/products\/clara-french-press",
+          "cta_copy": "Shop Clara",
           "cta_color": "btn--dark"
         }
       },
@@ -688,25 +733,29 @@
         "type": "hp-iwt",
         "settings": {
           "enable_section": true,
-          "image": "shopify:\/\/shop_images\/Large_670x860_Product_Feature_Vertical_2x_V2.gif",
+          "image": "shopify:\/\/shop_images\/Coffee_Marketplace_780x618_Product_Feature_1.jpg",
           "layout": "right",
-          "header": "You’re a natural",
-          "description": "<p>No brewing beginners, just future experts biding their time. Start with our Stagg [X] Pour-Over Set and never look back.<\/p>",
+          "header": "Seasonal Tasting Menu",
+          "description": "<p>We’ve curated a selection of our favorite coffees from some of the best roasters in the world right now.<\/p>",
           "bg_color": "",
           "text_color": "",
-          "cta_url": "shopify:\/\/products\/stagg-x-single-set",
-          "cta_copy": "Shop Now",
+          "cta_url": "shopify:\/\/collections\/coffee",
+          "cta_copy": "Shop Coffee",
           "cta_color": "btn--dark"
         }
+      },
+      "search-template": {
+        "type": "search-template",
+        "settings": {}
       }
     },
     "content_for_index": [
       "1565155576930",
       "1629968785d9d2e1c7",
       "162997622949d3f8ee",
-      "16391832269c232690",
-      "1636101715cd2df3c8",
       "1630052841314f69dd",
+      "1636101715cd2df3c8",
+      "16391832269c232690",
       "163005286553dd2458",
       "16342252676e2388c3",
       "1630069783d5517455",
