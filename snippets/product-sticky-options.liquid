@@ -81,7 +81,7 @@
 
   <div class="pdpCopy__price">
     {% if product.available %}
-    {% if product.compare_at_price > product.price %}
+    {% if current_variant.compare_at_price > current_variant.price %}
     {% comment %}
       Product is available and on sale
     {% endcomment %}
