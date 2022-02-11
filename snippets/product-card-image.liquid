@@ -56,16 +56,15 @@
   <div class="productCardImg__QuickView" {% if product.template_suffix contains 'bundle' %}style="display:none;"{% endif %}>
     <button class="productCardImg__QuickViewButton js-product-view" data-quick-view="{{ url }}?view=quick-view" type="button">{{ 'products.product.quick_view' | t }}</button>
   </div>
-  {%- if product.metafields.custom_fields["product_alternative_image"] != blank -%}
-    <a class='productCardImg__ProductLink abs fill z2 js-product-link' href='{{ product.url }}' title="{{ product.title }}" aria-label='{{ product.title }}'>
+  <a class='productCardImg__ProductLink abs fill z2 js-product-link' href='{{ product.url }}' title="{{ product.title }}">
+    {%- if product.metafields.custom_fields["product_alternative_image"] != blank -%}
       {%- assign alternative_url = product.metafields.custom_fields["product_alternative_image"] -%}
       <img src="{{ alternative_url }}"
            alt="{{ alt }}"
            class="productCardImg__AlternativeImage image-abs-cover"
-           role='img'
            loading='lazy'>
-    </a>
-  {%- endif -%}
+    {%- endif -%}
+  </a>
 </div>
 
 {% assign image_url = blank %}
