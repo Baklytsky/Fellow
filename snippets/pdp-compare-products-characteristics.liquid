@@ -38,10 +38,14 @@
                 {%- if item["compare_product_image"] != blank -%}
                   {%- assign _product_image = item["compare_product_image"] -%}
                 {%- endif -%}
+              
+              {%- if item["compare_product_title"] != blank -%}
+                  {%- assign _product_title = item["compare_product_title"] -%}
+                {%- endif -%}
 
                 <th>
                   <div class="pdpCompare__table-th">
-                    <a href="{{ _product.url }}" target='_blank' class="pdpCompare__table-productTitle">{{ _product.title }}</a>
+                    <a href="{{ _product.url }}" target='_blank' class="pdpCompare__table-productTitle">{{ _product_title }}</a>
                     <div class="pdpCompare__table-productImage rel">
                       {% include 'component-image' with
                         src: _product_image,
@@ -80,20 +84,20 @@
             {%- endfor -%}
             </tbody>
           </table>
-
+        
         <div class="pdpCompare__tabs">
           <ul class="pdpCompare__tabsList">
             {%- for item in product.metafields.custom_fields["compare_products_list"] -%}
               {%- assign _product = all_products[item["compare_product"]] -%}
+              {%- assign _product_title = item["compare_product_title"] -%}
+  
               <li>
                 <button class="pdpCompare__tabButton"
                         type="button"
                         data-action="toggle-tab"
                         aria-controls="tab-{{ _product.id | append: forloop.index }}"
-                        aria-label="Tab button"
-                        {% if forloop.first != blank %} aria-selected="true"{% endif %}
-                        role="tab">
-                  {{ _product.title }}
+                        {% if forloop.first != blank %} aria-selected="true"{% endif %}>
+                  {{ _product_title | default: _product.title }}
                 </button>
               </li>
             {%- endfor -%}
@@ -104,7 +108,8 @@
           {%- for item in product.metafields.custom_fields["compare_products_list"] -%}
           {%- assign _product = all_products[item["compare_product"]] -%}
           {%- assign _product_image = _product.featured_image | img_url: 'master' -%}
-
+          {%- assign _product_title = item["compare_product_title"] -%}
+            
             {%- if _product != blank -%}
               <div id="tab-{{ _product.id | append: forloop.index }}"
                    data-tab="tab-{{ _product.id | append: forloop.index }}"
@@ -123,7 +128,7 @@
                     absolute: true,
                     fill: true %}
                 </div>
-                <a href="{{ _product.url }}" target='_blank' class="pdpCompare__tabsProductsTitle">{{ _product.title }}</a>
+                <h2><a href="{{ _product.url }}" target='_blank' class="pdpCompare__tabsProductsTitle">{{ _product_title }}</a></h2>
                 {%- for i in (1..6) -%}
                   {%- assign key_name = i | append: "_characteristic" -%}
                   {%- assign characteristic_name = product.metafields.custom_fields[key_name] -%}

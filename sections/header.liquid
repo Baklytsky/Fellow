@@ -6,7 +6,7 @@
 {%- assign main_menu = section.settings.center_menu -%}
 {%- assign right_menu = section.settings.menu_right -%}
 {%- assign left_menu = section.settings.menu_left -%}
-{%- assign show_search = section.settings.show_search -%}
+{%- assign show_search = settings.enable_search -%}
 
 {%- assign show_bar = section.settings.show_announcement -%}
 {%- assign text_bar = section.settings.announcement_text -%}
@@ -103,9 +103,12 @@
 
             {%- if show_search != false -%}
               <li class="rightMenu__search">
-                <a aria-label="open search"
-                   role="button"
-                   href="/search">
+                <a role="button"
+                   id="search-bar-button"
+                   href="/search"
+                   data-action="toggle-search"
+                   aria-expanded="false"
+                   aria-haspopup="true">
                   <p>{{ 'general.search.submit' | t }}</p>
 
                   {%- render 'icon' with 'search' -%}
@@ -121,7 +124,7 @@
     {%- if main_menu != blank -%}
       <div id="Menu" class="newHeader__mainMenu">
         <div class="newHeader__mainMenuContainer mainMenu">
-        <button type="button" class="burgerMenu">
+        <button type="button" class="burgerMenu" role="button" aria-label="Open mobile main menu">
           <span></span>
           <span></span>
           <span></span>
@@ -149,7 +152,7 @@
 
         </style>
 
-        <a href="{{ shop.url }}" itemprop="url" class="mainMenu__logoWrapper ">
+        <a href="{{ shop.url }}" itemprop="url" class="mainMenu__logoWrapper" role="link" aria-label="Logo">
           {%- if logo != blank or logo_svg != blank -%}
             {%- if logo_svg != blank -%}
               {{ logo_svg }}
@@ -204,6 +207,58 @@
         </div>
       </div>
     {%- endif -%}
+
+    {%- if show_search -%}
+      <div id="header-search" class="headerSearch" aria-hidden="true" tabindex="-1" aria-labelledby="search-bar-button">
+
+        <form action="{{ routes.search_url }}" name="GET" role="search" class="searchForm headerSearch__form">
+          <label for='header-search-input'>
+            <span class='visually-hidden'>Search</span>
+          </label>
+          <input type="search" id="header-search-input" class="searchForm__input headerSearch__input" name="q" autocomplete="off" autocorrect="off" autocapitalize="off" aria-label="{{ 'header_search.input_placeholder' | t }}" placeholder="{{ 'header_search.input_placeholder' | t }}" autofocus>
+          <input type="reset" id="header-search-reset" value="reset" class="searchForm__resetInput">
+          <label for="header-search-reset" class="searchForm__resetLabel headerSearch__resetLabel">
+            <span class='visually-hidden'>Search Reset</span>
+            {% render 'icon' with 'x' %}
+          </label>
+          <button type='submit' class="searchForm__Submit">
+            {% render 'icon' with 'arrow-next' %}
+            <span class='visually-hidden'>Submit Search</span>
+          </button>
+          <input type="hidden" name="type" value="product">
+        </form>
+        <div class="headerSearch__results">
+          <div class="headerSearch__emptyResults">
+            {{ settings.search_no_result_text | default: 'Sorry, no results' }}
+          </div>
+          <div class="headerSearch__resultsHeader">
+            {%- if settings.search_heading != blank -%}
+              <p class="headerSearch__resultsText">
+                {{ settings.search_heading }}
+              </p>
+            {%- endif -%}
+            
+            <div class="headerSearch__popularSearches">
+              {% for i in (1..3) %}
+                {%- assign popular_searches = 'popular_searches_product_' | append: forloop.index -%}
+                {%- assign popular_searches_products = all_products[settings[popular_searches]] -%}
+    
+                <a href="{{ popular_searches_products.url }}" class="headerSearch__item">{{ popular_searches_products.title }}</a>
+              {% endfor %}
+            </div>
+          </div>
+
+          <div class="headerSearch__results__loadingState">
+            {% render 'icon' with 'spinner' %}
+          </div>
+          <ul class="headerSearch__resultsContent"></ul>
+
+          {%- if settings.popular_section_enable -%}
+            {% render 'search-grid-popular', class_name: 'search__popular--header' %}
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endif -%}
   </div>
 
   <div class="newHeader__openedBlock">
@@ -240,9 +295,13 @@
 
           {%- if show_search != false -%}
             <li class="mobileMenu__item">
-              <a class="mobileMenu__link" aria-label="open search"
+              <a class="mobileMenu__link"
                  role="button"
-                 href="/search">
+                 href="/search"
+                 data-action="toggle-search"
+                 aria-expanded="false"
+                 aria-haspopup="true"
+              >
                 <p>{{ 'general.search.submit' | t }}</p>
 
                 {%- render 'icon' with 'search' -%}
@@ -313,12 +372,6 @@
       "type": "link_list",
       "id": "menu_right",
       "label": "Right menu"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_search",
-      "label": "Show search",
-      "default": false
     },
     {
       "type": "header",

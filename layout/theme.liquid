@@ -32,7 +32,7 @@
       <script src='{{ 'shopify_common.js' | shopify_asset_url }}' defer='defer'></script>
     {% endif %}
 
-    <script>
+     <script>
       window.theme = {
         strings: {
           addToCart: "{{ 'products.product.add_to_cart' | t }}",
@@ -42,30 +42,37 @@
         gwpSettings: {
           gwpEnable: "{{ settings.enable_gwp }}",
           gwpThreshold: "{% if settings.gwp_threshold > 0 %}{{ settings.gwp_threshold }}{% else %}0{% endif %}",
+          secondGwpThreshold: "{% if settings.second_gwp_threshold > 0 %}{{ settings.second_gwp_threshold }}{% else %}0{% endif %}",
           gwpProductAvailable : "{{ all_products[settings.gwp_product].available }}",
+          secondGwpProductAvailable : "{{ all_products[settings.second_gwp_product].available }}",
           gwpProductId: "{{ all_products[settings.gwp_product].selected_or_first_available_variant.id }}",
-          gwpProductType: "{{ all_products[settings.gwp_product].type }}"
+          secondGwpProductId: "{{ all_products[settings.second_gwp_product].selected_or_first_available_variant.id }}",
+          gwpProductType: "{{ all_products[settings.gwp_product].type }}",
+          secondGwpProductType: "{{ all_products[settings.second_gwp_product].type }}"
         },
+        personalization: {
+          perProductAvailable: "{{ all_products[settings.personalization_product].available }}",
+          perProductID: "{{ all_products[settings.personalization_product].selected_or_first_available_variant.id  }}"
+        },
+        giftWrapping: {
+          giftWrappingEnable: "{{ settings.enable_gift_wrapping }}",
+          giftWrappingAvailable: "{{ all_products[settings.gift_box_product].available }}",
+          giftWrappingProductID: "{{ all_products[settings.gift_box_product].selected_or_first_available_variant.id  }}"
+        },
+        {% if template.name == 'product' %}product: {{ product | json }},{% endif %}
         moneyFormat: "{{ shop.money_format }}"
       }
     </script>
+<!-- Smooch / Sunshine Convo Snippet 1/2 --> 
+  {% comment %}
+    <script>
+    !function(o,p,s,e,c){
+        var i,a,h,u=[],d=[];function t(){var t="You must provide a supported major version.";try{if(!c)throw new Error(t);var e,n="https://cdn.smooch.io/",r="smooch";if((e="string"==typeof this.response?JSON.parse(this.response):this.response).url){var o=p.getElementsByTagName("script")[0],s=p.createElement("script");s.async=!0;var i=c.match(/([0-9]+).?([0-9]+)?.?([0-9]+)?/),a=i&&i[1];if(i&&i[3])s.src=n+r+"."+c+".min.js";else{if(!(4<=a&&e["v"+a]))throw new Error(t);s.src=e["v"+a]}o.parentNode.insertBefore(s,o)}}catch(e){e.message===t&&console.error(e)}}o[s]={init:function(){i=arguments;var t={then:function(e){return d.push({type:"t",next:e}),t},catch:function(e){return d.push({type:"c",next:e}),t}};return t},on:function(){u.push(arguments)},render:function(){a=arguments},destroy:function(){h=arguments}},o.__onWebMessengerHostReady__=function(e){if(delete o.__onWebMessengerHostReady__,o[s]=e,i)for(var t=e.init.apply(e,i),n=0;n<d.length;n++){var r=d[n];t="t"===r.type?t.then(r.next):t.catch(r.next)}a&&e.render.apply(e,a),h&&e.destroy.apply(e,h);for(n=0;n<u.length;n++)e.on.apply(e,u[n])};var n=new XMLHttpRequest;n.addEventListener("load",t),n.open("GET","https://"+e+".webloader.smooch.io/",!0),n.responseType="json",n.send()
+    }(window,document,"Smooch","6182f7e81f6e6500e1d1c2d5","5");
+</script>
+{% endcomment %}
+<!-- End Smooch / Sunshine Convo Snippet 1/2 -->
 
-    <!-- begin Convert Experiences code-->
-    <script type="text/javascript">
-    var _conv_page_type = "{% if template == 'index' %}homepage{% else template == "collections" %}collection{% else template == "article" %}article{% else template == "product" %}product{% else template == "cart" %}cart{% else %}other{% endif %}";
-     var _conv_category_id = "";
-     var _conv_category_name = "{{ collection.title }}";
-     var _conv_product_sku = "";
-     var _conv_product_name = "{{ product.title }}";
-     var _conv_product_price = "{{ product.compare_at_price_min | money }}";
-     var _conv_customer_id = "";
-     var _conv_custom_v1 = "{{ tag }}";
-     var _conv_custom_v2 = "{{ order.shipping_address.province }}";
-     var _conv_custom_v3 = "{{ cart.item_count }}";
-     var _conv_custom_v4 = "{{ cart.total_price | money_without_currency }}";
-    </script>
-    <script type="text/javascript" src="//cdn-3.convertexperiments.com/js/1002950-10025167.js"></script>
-    <!-- end Convert Experiences code -->
 
   
     <!-- Google Tag Manager -->
@@ -102,15 +109,27 @@
             href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&family=Oswald:wght@300;400;700&display=swap" />
     </noscript>
 
-    {% include 'preconnect' %}
+     {% include 'preconnect' %}
 
     {{ 'index.css' | asset_url | stylesheet_tag }}
     {{ 'custom.scss.css' | asset_url | stylesheet_tag }}
-
+    
+ {%- if request.path contains 'carter-move-mug' or request.path contains 'carter-everywhere-mug' -%}
+    {{ 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css' | stylesheet_tag }}
+    {{ 'player_customized.css' | asset_url | stylesheet_tag }}
+      {{ 'player-chunk.css' | asset_url | stylesheet_tag }}
+    {{ 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css' | stylesheet_tag }}
+    {{ 'https://admin-fts.threekit.com/app/js/threekit-player-bundle.js' | script_tag }}
+    {%- endif -%}
+    
     {{ content_for_header }}
   </head>
 
   <body>
+{% capture the_snippet_content %}{% render 'socialshopwave-helper' %}{% endcapture %}
+            {% unless the_snippet_content contains 'Liquid error' %}
+              {{ the_snippet_content }}
+            {% endunless %}
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K9G7563"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -130,12 +149,22 @@
     {{ 'jquery-1.11.0.min.js' | asset_url | script_tag }}
     {{ 'jquery.ba-throttle-debounce.min.js' | asset_url | script_tag }}
     {{ 'custom-additional-vendor.js' | asset_url | script_tag }}
+  
+ {%- if request.path contains 'carter-move-mug' or request.path contains 'carter-everywhere-mug' -%}
+    {{ 'player-event.js' | asset_url | script_tag }}
+    {{ 'player-inline.js' | asset_url | script_tag }}
+    {{ 'player-chunk-one.js' | asset_url | script_tag }}
+    {{ 'player-chunk-two.js' | asset_url | script_tag }}
+    {%- endif -%}
+ <!-- Smooch / Sunshine Convo Snippet 2/2 -->   
+{% comment %} {{ 'sunco-chat.js' | asset_url | script_tag }} {% endcomment %}
+ <!-- End Smooch / Sunshine Convo Snippet 2/2 --> 
 
     <script src="{{ 'custom.js' | asset_url }}" defer='defer'></script>
     <script src="{{ 'index.js' | asset_url }}" defer='defer'></script>
     {% comment %} <script src="https://a.klaviyo.com/media/js/onsite/onsite.js"></script> {% endcomment %}
-    <script src="https://cdn.attn.tv/fellow/dtag.js"></script>
-  {% include 'social-head-common' %}</body>
+  
+  </body>
   <script>
 jQuery('a[href^="http"]').not('a[href^="{{ shop.url }}"]').attr('target', '_blank');
 </script>

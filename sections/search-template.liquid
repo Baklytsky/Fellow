@@ -1,0 +1,292 @@
+{%- assign show_best_sellers = settings.show_best_sellers -%}
+{%- assign best_sellers_heading = settings.best_sellers_heading -%}
+{%- assign best_sellers_collection = collections[settings.best_sellers_collection] -%}
+
+
+<section class="searchMain">
+  <form action="{{ routes.search_url }}" name="GET" role="search" class="searchForm searchFormMain">
+    <label for='search-input'>
+      <span class='visually-hidden'>Search</span>
+    </label>
+    <input type="search" id="search-input" class="searchForm__input searchForm__inputMain" name="q" value="{{ search.terms | escape }}"
+           autocomplete="off" autocorrect="off" autocapitalize="off"
+           aria-label="{{ 'header_search.input_placeholder' | t }}"
+           placeholder="{{ 'header_search.input_placeholder' | t }}" autofocus>
+    <input type="reset" id="search-reset" value="reset" class="searchForm__resetInput">
+    <label for="search-reset" class="searchForm__resetLabel searchForm__mainResetLabel"
+           {% unless search.performed %}style="display: none" {% endunless %}>
+      <span class='visually-hidden'>Search Reset</span>
+      {% render 'icon' with 'x' %}
+    </label>
+    <button type='submit' class="searchForm__Submit">
+      {% render 'icon' with 'arrow-next' %}
+      <span class='visually-hidden'>Submit Search</span>
+    </button>
+    <input type="hidden" name="type" value="product">
+  </form>
+  
+  {%- capture popular_section -%}
+    {%- if settings.popular_section_enable -%}
+      <div class="search__popular--mainWrapper">
+        {% render 'search-grid-popular', class_name: 'search__popular--main' %}
+      </div>
+    {%- endif -%}
+  {%- endcapture -%}
+  
+  {%- capture best_sellers_section -%}
+    {%- if show_best_sellers -%}
+      <div class="searchBestSellers">
+        {% if best_sellers_heading != blank %}
+          <h4 class="searchBestSellers__heading">{{ best_sellers_heading }}</h4>
+        {% endif %}
+        
+        {%- if best_sellers_collection != blank and best_sellers_collection.products_count > 0 -%}
+          <div class="relatedProducts__row-wrapper rel">
+            <div class='f jcs fdr one-fourth relatedProducts__row'>
+              {% for product in best_sellers_collection.products limit: 4 %}
+                <div class="relatedProducts__item">
+                  {% include 'product-card' with
+                    cx: 'y',
+                    product: product %}
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  {%- endcapture -%}
+  
+  {%- if search.performed -%}
+    <div class="searchMain__searchSize hidden-lg-up">{{ 'general.search.count_results' | t: results_count: search.results_count }}</div>
+  {%- endif -%}
+  <div class="searchMain__inner">
+    <div data-terms="{{ search.terms }}" data-result-count="{{ search.results_count }}"></div>
+    {%- if search.performed -%}
+      {%- if search.results.size > 0 -%}
+        {%- if search.types contains 'product' -%}
+          <div class="collectionContainer searchMain__content">
+            <div class="collectionFilters">
+              <form id="filter-form" class="filter-form" name="filter">
+                <div class="filter-group-mobile">
+                  <button type="button" data-mobile-filter="custom">Filter
+                    <span></span> {% render 'icon' with 'dropdown' %}</button>
+                  <button type="button" data-clear-filter="{{ routes.search_url }}">Clear all</button>
+                  <button type="button" data-mobile-filter="sort">Sort By {% render 'icon' with 'dropdown' %}</button>
+                </div>
+                <div class="filter-group-wrapper filter-group-sort dropdown" data-mobile-dropdown="sort">
+                  <div role="button" class="dropdownHeader" data-dropdown-filter tabindex="0">
+                    <h3 class="dropdownHeader-title">
+                      Sort by
+                    </h3>
+                    <div class="dropdownHeader-icon">
+                      {% render 'icon' with 'dropdown' %}
+                    </div>
+                  </div>
+                  <div class="dropdownContent" data-dropdown-list>
+                    <ul class="filter-group-sort-by dropdownContent--animate-block">
+                      {% assign sort_by = search.sort_by | default: search.default_sort_by %}
+                      {%- assign order = 100 -%}
+                      
+                      {% for option in search.sort_options %}
+                        
+                        {%- case option.value -%}
+                          {%- when 'relevance' -%}
+                          {%- assign show_sort_filter = true -%}
+                          {%- assign filter_title = 'Relevance' -%}
+                          {%- assign order = 3 -%}
+                        {%- when 'price-ascending' -%}
+                          {%- assign show_sort_filter = true -%}
+                          {%- assign filter_title = 'Price low to high' -%}
+                          {%- assign order = 1 -%}
+                        {%- when 'price-descending' -%}
+                          {%- assign show_sort_filter = true -%}
+                          {%- assign filter_title = 'Price high to low' -%}
+                          {%- assign order = 2 -%}
+                            {%- else -%}
+                          {%- assign show_sort_filter = false -%}
+                        {%- endcase -%}
+                        
+                        {%- if show_sort_filter -%}
+                          <li class="filter-group__list-item">
+                            <label class='filter-group-radio f aic'
+                                   for='Filter-sort-by-{{ option.value }}-{{ forloop.index }}'
+                                   style="order: {{ order }}">
+                              <input id='Filter-sort-by-{{ option.value }}-{{ forloop.index }}'
+                                     type=radio
+                                     name='sort_by'
+                                     class="filter-group-input"
+                                     value='{{ option.value }}'
+                                     title='{{ filter_title }}'
+                                     data-filter-type="sort-by"
+                              />
+                              <span class="filter-group-circle f aic jcc rel"></span>
+                              <span class="filter-group-title">{{ filter_title }}</span>
+                            </label>
+                          </li>
+                        {%- endif -%}
+                      {% endfor %}
+                    </ul>
+                  </div>
+                </div>
+                <div class="filter-group-wrapper filter-group-custom dropdown" data-mobile-dropdown="custom">
+                  {%- for filter in search.filters -%}
+                    {%- assign filter_title = filter.label -%}
+                    
+                    {% comment %}
+                      {%- if filter.label == 'Product type' -%}
+                        {%- assign filter_title = 'Category' -%}
+                      {%- endif -%}
+                    {% endcomment %}
+                    
+                    <div class="filter-group dropdown {% if filter.label == 'Price' %} filter-group-price {% endif %}">
+                      <div role="button" class="dropdownHeader" data-dropdown-filter role="button" tabindex="0">
+                        <h3 class="dropdownHeader-title">
+                          {{ filter_title }}
+                        </h3>
+                        <div class="dropdownHeader-icon">
+                          {% render 'icon' with 'dropdown' %}
+                        </div>
+                      </div>
+                      
+                      <div class="dropdownContent" data-dropdown-list>
+                        <div class="dropdownContent--animate-block">
+                          {%- case filter.type -%}
+                          {%- when 'list' -%}
+                            <ul class="filter-group__list">
+                              {%- for filter_value in filter.values -%}
+                                {%- assign filter_name = filter_value.value | replace: '-', ' '  | capitalize -%}
+                                
+                                {%- if filter_title == 'Color' -%}
+                                  {%- assign color_name = filter_value.value | handleize -%}
+                                  {%- if filter_value.value contains 'Limited Edition:' -%}
+                                    {%- assign color_name = filter_value.value | split: 'Limited Edition:' | last | handleize -%}
+                                  {%- endif -%}
+                                  {%- assign color_title = color_name | replace: '-', ' '  | capitalize -%}
+                                {%- endif -%}
+                                
+                                <li
+                                  class="filter-group__list-item {% if color_name != blank -%}filter-group__list-item-color{%- endif %}">
+                                  <label class='filter-group-radio f aic'
+                                         for='Filter-{{ filter.label }}-{{ forloop.index }}'
+                                    {% if color_name != blank -%} data-color="{{ color_name }}" {%- endif %}>
+                                    <input id='Filter-{{ filter.label }}-{{ forloop.index }}'
+                                           type='radio'
+                                           name='{{ filter_value.param_name }}'
+                                           class="filter-group-input"
+                                           value='{{ filter_value.value }}'
+                                           title='{% if color_name != blank -%}{{ color_title }}{% else %}{{ filter_name }}{%- endif %}'
+                                           data-filter-type="{{ filter_title }}"
+                                      {% if color_name != blank -%} data-color="{{ color_name }}" {%- endif %}
+                                      {% if filter_value.active -%}checked{%- endif %} />
+                                    <span class="filter-group-circle f aic jcc rel"
+                                        {% if color_name != blank -%} data-color="{{ color_name }}" {%- endif %}></span>
+                                    <span
+                                      class="filter-group-title">{% if color_name != blank -%}{{ color_title }}{% else %}{{ filter_name }}{%- endif %}</span>
+                                  </label>
+                                </li>
+                              {%- endfor -%}
+                            </ul>
+                          
+                          {%- when 'price_range' -%}
+                            <div class="filter-group__price-range">
+                              {% assign minPrice = search.results | sort: 'price' %}
+                              
+                              {%- comment -%}
+                                <div class="filter-group__price-range-from">
+                                  <input name="{{ filter.min_value.param_name }}"
+                                         id="Filter-{{ filter.label }}-{{ forloop.index }}"
+                                         value="0"
+                                         type="number"
+                                         placeholder="0"
+                                         min="0"
+                                         max="{{ filter.range_max | money_without_currency | replace: ',', '' }}">
+                                </div>
+                              {%- endcomment -%}
+                           
+                              <div class="filter-group__price-range-to">
+                                <input name="{{ filter.max_value.param_name }}"
+                                       id="Filter-{{ filter.label }}-{{ forloop.index }}"
+                                       value="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                                       type="range"
+                                       placeholder="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                                       min="{{ minPrice[0].price_min | times: 0.01 | round }}"
+                                       max="{{ filter.range_max | money_without_currency | replace: ',', '' }}">
+                                <div class="filter-group__price-range-wrapper f jcb aic">
+                                  <span class="filter-group__price-range-min">
+                                    {{ cart.currency.symbol }}
+                                    <span class="filter-group__price-range-min-value">
+                                      {{ minPrice[0].price_min | times: 0.01 }}0
+                                    </span>
+                                  </span>
+                                  <span class="filter-group__price-range-max">
+                                      {{ cart.currency.symbol }}
+                                    <span class="filter-group__price-range-max-value">
+                                      {{ filter.range_max | money_without_currency | replace: ',', '' }}
+                                    </span>
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          {%- endcase -%}
+                        </div>
+                      </div>
+                    </div>
+                  {%- endfor -%}
+                </div>
+              </form>
+            </div>
+            <div class="collection__products rel">
+              <div class="collection__products-filter-results"></div>
+              <div class="searchMain__searchSize hidden-md-down">{{ 'general.search.count_results' | t: results_count: search.results_count }}</div>
+              
+              <div class="collection__products-results">
+                <div class="subcollection__products one-third">
+                  {%- if search.types contains 'product' -%}
+                    {% paginate search.results by 1000 %}
+                      {%- for product in search.results -%}
+                        {% include 'product-card' %}
+                      {%- endfor -%}
+                    {% endpaginate %}
+                  {%- endif -%}
+                </div>
+              </div>
+            
+            </div>
+          </div>
+        {% endif %}
+      {%- else -%}
+        <div class="searchMain__empty">
+          <div class="searchMain__searchSize hidden-md-down">{{ 'general.search.count_results' | t: results_count: search.results_count }}</div>
+          <h1 class="searchMain__resultHeading">{{ settings.search_no_result_text | default: 'Sorry, no results' }}</h1>
+        </div>
+        
+        {% if popular_section != blank %}
+          {{ popular_section }}
+        {% endif %}
+        
+        {% if best_sellers_section != blank %}
+          {{ best_sellers_section }}
+        {% endif %}
+      
+      {% endif %}
+    
+    {%- else -%}
+      {% if popular_section != blank %}
+        {{ popular_section }}
+      {% endif %}
+      
+      {% if best_sellers_section != blank %}
+        {{ best_sellers_section }}
+      {% endif %}
+    {%- endif -%}
+  </div>
+</section>
+
+
+{% schema %}
+{
+  "name": "Search template",
+  "settings": []
+}
+{% endschema %}

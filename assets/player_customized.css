@@ -1,0 +1,290 @@
+.customized-link {
+  text-align: center;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.customized-link .link {
+  cursor: pointer;
+}
+
+
+.player-app-container {
+  display: none;
+}
+
+.hide-element {
+  display: none;
+}
+
+.show-element-block {
+  display: block;
+}
+
+div.col-lg-12.back-button-container {
+  z-index: 44;
+  padding-left: 33px;
+  padding-right: 33px;
+  padding-top: 20px;
+}
+
+.back-button .icon {
+  font-size: 2em;
+  color: rgb(104,104,104);
+  cursor: pointer;
+}
+
+.MuiTypography-paragraph p{
+ font-size: 0.875rem;
+  font-family:'Inter',sans-serif;
+  line-height: 1.2rem;
+font-weight: 400;
+}
+
+.MuiTypography-paragraph p a{
+font-weight:500;
+  text-decoration:underline;
+}
+
+.MuiTypography-paragraph p a::after{
+content:".";
+font-weight:400;
+}
+
+
+p.MuiTypography-root.MuiTypography-body1 {
+    font-family:'Inter',sans-serif;
+    font-weight: 600;
+    font-size: 0.875rem;
+    line-height: 120%;
+    margin-bottom: 16px;
+}
+
+span.jss9 {
+    font-family:'Inter',sans-serif !important;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+.MuiTypography-h4 .jss5 {
+ font-size: 2.375rem;
+  line-height: 100%;
+}
+
+.MuiGrid-root.jss14.MuiGrid-item {
+ margin-top: 0; 
+}
+
+.MuiPaper-elevation1 {
+ box-shadow:none !important; 
+}
+
+.MuiContainer-maxWidthLg {
+ max-width: 100%; 
+}
+
+.MuiContainer-root {
+ padding:0; 
+}
+
+@media (max-width:1024px){
+  .MuiContainer-maxWidthLg {
+ max-width: 100%; 
+}
+}
+
+@media (min-width:600px){
+.MuiContainer-root {
+ padding-left:0; 
+   padding-right:0; 
+}
+}
+
+.MuiCardContent-root:last-child {
+ margin-bottom: 0; 
+  padding-bottom: 0;
+}
+
+.MuiTab-root span.MuiTab-wrapper {
+ font-family: 'Inter', sans-serif; 
+  text-transform: lowercase;
+  display:block;
+}
+
+.MuiTab-root span.MuiTab-wrapper::first-letter {
+  text-transform: capitalize;
+}
+
+.MuiTab-root {
+ font-family: 'Inter', sans-serif; 
+}
+
+.jss17>.MuiCardContent-root {
+  padding: 0 16px;
+}
+
+.jss11>.MuiCardContent-root {
+  padding: 0 16px;
+}
+
+div.MuiBox-root.jss313 {
+ width: 28px;
+  height: 28px;
+}
+
+button.MuiButtonBase-root.MuiButton-root.MuiButton-outlined {
+ font-style: normal;
+    font-weight: 500;
+    font-size: 1.125rem;
+    padding: 1rem;
+    border: 2px solid #000;
+    margin-top: 0;
+    min-width: 218px;
+    max-width: 218px;
+    line-height: 1.5rem;
+    text-transform: capitalize;
+    width: 100%; 
+  border-radius: 12px;
+    color: #000;
+    text-align: center;
+    text-decoration: none!important;
+    transition: none;    
+      display: inline-block;
+    background-color: #fff;
+ font-family: 'Inter', sans-serif; 
+ 
+}
+
+button.MuiButtonBase-root.MuiButton-root.MuiButton-outlined:hover {
+    color: #fff;
+    background-color: #000;
+}
+
+button#bottom {
+ border-radius: 12px 0 0 12px;
+}
+
+button#top {
+ border-radius: 0;
+}
+
+button#middle {
+ border-radius: 0 12px 12px 0;
+}
+
+button.MuiButtonBase-root.MuiButton-root.MuiButton-outlined.MuiButtonGroup-grouped {
+  font-style: normal;
+    font-weight: 400;
+    font-size: 1.125rem;
+    padding: 8px;
+border: 1px solid #ced4da;
+  margin-top: 0;
+  margin-right: 0;
+    line-height: 100%;
+    min-width: fit-content;
+    width: 100%; 
+    color: #000;
+    text-align: center;
+    text-decoration: none!important;
+    transition: none;    
+      display: inline-block;
+    background-color: transparent;
+ font-family: 'Inter', sans-serif; 
+}
+
+button.MuiButtonBase-root.MuiButton-root.MuiButton-outlined.MuiButtonGroup-grouped:hover {
+  color: #fff;
+    background-color: #000;
+  fill: #fff;
+}
+
+button.MuiButtonBase-root.MuiButton-root.MuiButton-outlined.MuiButtonGroup-grouped > svg:hover {
+ color: #fff;
+  fill: #fff;
+}
+
+p.MuiTypography-root.MuiTypography-body1.MuiTypography-colorTextSecondary {
+ margin-bottom:8px; 
+  font-weight: 600 !important;
+color: #000 !important;
+font-family: 'Inter', sans-serif !important;
+}
+
+input#addTextID {
+ margin-top:-8px;
+  margin-bottom: 4px;
+  
+}
+
+label.MuiFormLabel-root.MuiInputLabel-root.MuiInputLabel-formControl.MuiInputLabel-animated.MuiInputLabel-shrink>input {
+ padding-top: 0; 
+}
+
+
+
+button.MuiButtonBase-root.MuiButton-root.MuiButton-contained{
+ font-style: normal;
+    font-weight: 500;
+    font-size: 1.125rem;
+    padding: 1rem;
+    border: 2px solid #000;
+    margin-top: 0;
+    min-width: 218px;
+    max-width: 218px;
+    line-height: 1.5rem;
+    text-transform: capitalize;
+    width: 100%; 
+  border-radius: 12px;
+    color: #000 !important;
+    text-align: center;
+    text-decoration: none!important;
+    transition: none;    
+      display: inline-block;
+    background-color: #fff !important;
+ font-family: 'Inter', sans-serif; 
+  box-shadow:none;
+}
+
+button.MuiButtonBase-root.MuiButton-root.MuiButton-contained >{
+    color: #000 !important;
+}
+
+div.MuiGrid-root.MuiGrid-container {
+ margin-bottom: 10px; 
+}
+
+
+media only screen and (max-width: 600px) {
+canvas#canvas {
+ display:none; 
+}
+}
+
+label .MuiFormLabel-root .MuiInputLabel-root .MuiInputLabel-formControl .MuiInputLabel-animated .MuiInputLabel-shrink,
+.MuiGrid-root .MuiFormControl-root .MuiInputLabel-animated
+{
+font-weight: 600 !important;
+color: #000 !important;
+font-family: 'Inter', sans-serif !important;
+}
+
+label + .jss103,
+label + .jss106,
+label + .jss109 {
+ margin-top:28px; 
+}
+
+label + jss108 {
+ margin-top:-10px; 
+}
+
+.MuiGrid-spacing-xs-3 > .MuiGrid-item [
+padding-top: 8px;
+}
+
+input#productQuantity {
+ outline:none; 
+}
+
+.threekit .close___1u7ic {
+ z-index:45; 
+}

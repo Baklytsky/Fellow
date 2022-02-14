@@ -1,3 +1,25 @@
+{%- assign cart_has_canal = false -%}
+{% for item in cart.items %}  
+{% if item.product.type contains 'Coffee' %}
+{% assign cart_has_canal = true %}
+{% endif %}
+{% endfor %}
+
+{%- assign cart_has_giftcard = false -%}
+{% for item in cart.items %}
+  {% if item.product.type contains 'Digital Gift Card' %}
+    {% assign cart_has_giftcard = true %}
+  {% endif %}
+{% endfor %}
+
+{%- assign coffee_pdp = false -%}
+{% if request.path contains "/products/" %}
+{%- assign slug = request.path | remove_first: '/products/' -%}
+{% if all_products[slug].type contains "Coffee" %}
+{% assign coffee_pdp = true %}
+{% endif %}
+{% endif %}
+
 {% comment %} To-do: Add ARIA Live updates for items added/removed from cart. -ae102220 {% endcomment %}
 <section class='cart-drawer-outer fix fill x z10' aria-expanded='false' tabindex='-1' data-component='cartDrawer'>
   <div class='cart-drawer-overlay abs fill js-overlay'></div>
@@ -22,7 +44,7 @@
           </div>
           <div class='free-shipping--met js-free-shipping-met-msg
         {% if cart.total_price < settings.gwp_threshold %} is-hidden{% endif %}'>
-            Good news! You get a free gift product.
+            Good news! You get a free {{ settings.gwp_product.title }}.
           </div>
 
           <div class='free-shipping__meter f aic'>
@@ -32,11 +54,11 @@
       {%- else -%}
         <div class="free-shipping js-free-shipping is-hidden">
           <div class='free-shipping--unmet js-free-shipping-unmet-msg
-        {% if cart.total_price > 9900 %} is-hidden{% endif %}'>
+        {% if cart.total_price > 9900 and cart_has_canal %} is-hidden{% endif %}'>
             You're <strong><span class='js-free-shipping-amount-remaining'>$99.00</span></strong> away from free US shipping
           </div>
           <div class='free-shipping--met js-free-shipping-met-msg
-        {% if cart.total_price < 9900 %} is-hidden{% endif %}'>
+        {% if cart.total_price < 9900 and cart_has_canal %} is-hidden{% endif %}'>
             Congrats! You get free US Shipping!
           </div>
 
@@ -47,57 +69,67 @@
       {%- endif -%}
     </header>
 
-    <div class='cart-drawer__items-outer'>
-      <div class='cart-drawer__items-inner js-cart-drawer-items'>
-        <div class='js-items rel x y'>
-          <div class='abs fill'>
-            <svg viewBox="0 0 100 86" class='loader abs fill mxa cg'>
-              <use xlink:href="#logo"></use>
-            </svg>
+    <div class="cart-drawer__content-wrapper">
+      <div class='cart-drawer__items-outer'>
+        <div class='cart-drawer__items-inner js-cart-drawer-items'>
+         <p class="eyebrow gwp-nostack-text is-hidden">Stacking promos is not allowed.<br> Manually remove any free gifts from your cart to use a discount code.</p>
+          <div class='js-items x y'>
+            <div class='abs fill'>
+              <svg viewBox="0 0 100 86" class='loader abs fill mxa cg'>
+                <use xlink:href="#logo"></use>
+              </svg>
+            </div>
           </div>
+          {% include 'cart-drawer-empty' %}
         </div>
-        {% include 'cart-drawer-empty' %}
       </div>
+
+
+      <footer class='cart-drawer__footer js-cart-footer'>
+        {% comment %}
+          Disabled. Recommend removing this and adding functionality to cart upsell
+          -ae 04.20.21
+          {% if settings.enable_free_product %}
+            {% include 'cart-free-product' %}
+          {% endif %}
+          related schema available in assets/cart-free-product-schema.js
+        {% endcomment %}
+
+        {%- if settings.enable_gift_wrapping and settings.gift_box_product and cart_has_canal == false and coffee_pdp == false and cart_has_giftcard == false -%}
+          <div class="cart-drawer__footer-gift-wrapping">
+            {% section 'cart-gift-wrapping' %}
+          </div>
+        {%- endif -%}
+
+        {%- if settings.cart_recommended_enable -%}
+          <div class="cart-drawer__footer-recommended-wrapper">
+            {% section 'cart-recommended' %}
+          </div>
+        {%- endif -%}
+
+        <div class="cart-drawer__footer-action f aic jcb">
+          <section class='cart-footer__total'>
+            <div class='cart-footer__total-item js-shipping-free-text is-hidden'>
+              <span>{{ 'cart.general.shipping_free' | t }}</span>
+            </div>
+            <div class='cart-footer__total-item f aic fw'>
+              <span>{{ 'cart.general.subtotal' | t }}</span>
+              <span class='js-subtotal'></span>
+            </div>
+          </section>
+
+          {%
+            include 'component-button' with
+            tag: 'a',
+            cta: 'Checkout',
+            href: '/checkout',
+            className: 'btn btn--light no-ajax cart-checkout__button'
+          %}
+        </div>
+      </footer>
     </div>
 
-    <footer class='cart-drawer__footer js-cart-footer'>
-      {% comment %}
-      Disabled. Recommend removing this and adding functionality to cart upsell
-      -ae 04.20.21
-      {% if settings.enable_free_product %}
-        {% include 'cart-free-product' %}
-      {% endif %}
-      related schema available in assets/cart-free-product-schema.js
-      {% endcomment %}
-
-      {%- if settings.cart_recommended_enable -%}
-        <div class="cart-drawer__footer-recommended-wrapper">
-          {% section 'cart-recommended' %}
-        </div>
-      {%- endif -%}
-
-      <div class="cart-drawer__footer-action f aic jcb">
-        <section class='cart-footer__total'>
-          <div class='cart-footer__total-item js-shipping-free-text is-hidden'>
-            <span>{{ 'cart.general.shipping_free' | t }}</span>
-          </div>
-          <div class='cart-footer__total-item f aic fw'>
-            <span>{{ 'cart.general.subtotal' | t }}</span>
-            <span class='js-subtotal'></span>
-          </div>
-        </section>
-
-        {%
-          include 'component-button' with
-          tag: 'a',
-          cta: 'Checkout',
-          href: '/checkout',
-          className: 'btn btn--light no-ajax cart-checkout__button'
-        %}
-      </div>
-    </footer>
-
-    <div class="remove-item__popup js-cart-drawer-popup" aria-hidden="true">
+    <div class="remove-item__popup js-cart-drawer-popup" aria-hidden="true" tabindex="-1">
       <div class="remove-item__inner">
         {%- if settings.cart_remove_text != blank -%}
           <p class="remove-item__text">{{ settings.cart_remove_text }}</p>

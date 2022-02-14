@@ -13,16 +13,12 @@
   <div class='footer__inner'>
     <div class='row'>
       <div class='footerInner__Left'>
-        <div class='f fdc'>
+        <div class='f fdc ais'>
           <a class="logo-link" href="{{ routes.root_url }}" aria-label="Open Home page" title="{{ shop.name }}" role="button">
             {% include 'fellow-logo-white' %}
           </a>
-          {% if section.settings.show_newsletter %}
-            {% include 'newsletter-snippet' %}
-          {% endif %}
-        </div>
-
-        {%- if show_icons -%}
+          
+          {%- if show_icons -%}
           <ul class="footer__icons">
             {%- assign socials = "Instagram Facebook Twitter Pinterest YouTube LinkedIn" | split: ' ' -%}
 
@@ -32,7 +28,7 @@
 
               {%- if settings[social_link] != blank and section.settings[icon_link] -%}
                 <li class="footer__icons-item">
-                  <a class="footer__icon-link" href="{{ settings[social_link] | escape }}" target="_blank" aria-label="Icon" aria-labelledby="Icon">
+                  <a class="footer__icon-link" href="{{ settings[social_link] | escape }}" target="_blank" aria-label="Icon">
                     <div class="footer__icon">
                       {%- include 'icons-social' with icon_link -%}
                     </div>
@@ -42,6 +38,11 @@
             {%- endfor -%}
           </ul>
         {%- endif -%}
+        </div>
+
+       {% if section.settings.show_newsletter %}
+            {% include 'newsletter-snippet' %}
+          {% endif %}
       </div>
 
       {% if linklists[footer_menu].links.size > 0 %}
@@ -66,6 +67,18 @@
       {% endif %}
 
     </div>
+    
+     {%- if show_footer_payment_icon -%}
+    <div class='footer__payment-icons'>
+      <ul>
+        {%- for type in shop.enabled_payment_types -%}
+          <li>
+            {{ type | payment_type_svg_tag: class: 'img-grayscale' | replace: 'aria-labelledby', 'aria-label' | remove: 'role="img"' }}
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  {%- endif -%}
 
     <div class='row'>
       <div class='col'>
@@ -76,7 +89,7 @@
             <ul class="footerColophon__BottomMenu">
               {% for link in linklists[footer_menu_bottom].links %}
                 <li class="footerColophon__BottomItem">
-                  <a class="footerColophon__BottomLink" href="{{ link.url }}" role="menu" aria-label="Menu link" title="Open {{ link.title }}">{{ link.title }}</a>
+                  <a class="footerColophon__BottomLink" href="{{ link.url }}" role="link" aria-label="{{ link.title }}" title="Open {{ link.title }}">{{ link.title }}</a>
                 </li>
               {%- endfor -%}
             </ul>
@@ -86,17 +99,6 @@
     </div>
   </div>
 
-  {%- if show_footer_payment_icon -%}
-    <div class='footer__payment-icons'>
-      <ul>
-        {%- for type in shop.enabled_payment_types -%}
-          <li>
-            {{ type | payment_type_svg_tag: class: 'img-grayscale' }}
-          </li>
-        {%- endfor -%}
-      </ul>
-    </div>
-  {%- endif -%}
 
 </footer>
 

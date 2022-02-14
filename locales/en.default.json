@@ -43,7 +43,8 @@
       }
     },
     "search": {
-      "no_results_html": "Your search for \"{{ terms }}\" did not yield any results.",
+      "no_results": "Sorry, no results ",
+      "count_results": "{{ results_count }} Results ",
       "results_for_html": "Your search for \"{{ terms }}\" revealed the following:",
       "title": "Search for products on our site",
       "placeholder": "Search our store",
@@ -310,5 +311,16 @@
   },
   "date_formats": {
     "month_day_year": "%B %d, %Y"
+  },
+  "socialshopwave": {
+    "add_to_cart": "Add To Cart",
+    "adding_to_cart": "Adding...",
+    "sold_out": "Sold Out",
+    "description": "Description",
+    "view_on_instagram": "View on Instagram"
+  },
+  "header_search": {
+    "input_placeholder": "Search",
+    "search_empty_text": "Sorry, no results"
   }
 }

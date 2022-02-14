@@ -8,45 +8,6 @@
     "theme_support_url": "https:\/\/wearemage.com"
   },
   {
-    "name": "Social media",
-    "settings": [
-      {
-        "type": "header",
-        "content": "Social links"
-      },
-      {
-        "type": "url",
-        "id": "social_instagram_link",
-        "label": "Instagram link"
-      },
-      {
-        "type": "url",
-        "id": "social_facebook_link",
-        "label": "Facebook link"
-      },
-      {
-        "type": "url",
-        "id": "social_twitter_link",
-        "label": "Twitter link"
-      },
-      {
-        "type": "url",
-        "id": "social_youtube_link",
-        "label": "Youtube link"
-      },
-      {
-        "type": "url",
-        "id": "social_pinterest_link",
-        "label": "Pinterest link"
-      },
-      {
-        "type": "url",
-        "id": "social_linkedin_link",
-        "label": "LinkedIn link"
-      }
-    ]
-  },
-  {
     "name": "Cart",
     "settings": [
       {
@@ -112,6 +73,41 @@
       },
       {
         "type": "header",
+        "content": "Gift wrapping"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_gift_wrapping",
+        "label": "Enable gift wrapping",
+        "default": true
+      },
+      {
+        "type": "product",
+        "id": "gift_box_product",
+        "label": "Gift box product"
+      },
+      {
+        "type": "textarea",
+        "id": "gift_wrapping_icon",
+        "label": "Icon"
+      },
+      {
+        "type": "text",
+        "id": "gift_wrapping_message",
+        "label": "Gift wrapping message"
+      },
+      {
+        "type": "text",
+        "id": "gift_wrapping_result_message",
+        "label": "Gift wrapping result message"
+      },
+      {
+        "type": "text",
+        "id": "gift_wrapping_heading",
+        "label": "Heading"
+      },
+      {
+        "type": "header",
         "content": "Cart GWP"
       },
       {
@@ -129,6 +125,221 @@
         "type": "product",
         "id": "gwp_product",
         "label": "GWP Product"
+      },
+      {
+        "type": "number",
+        "id": "second_gwp_threshold",
+        "label": "Second GWP threshold"
+      },
+      {
+        "type": "product",
+        "id": "second_gwp_product",
+        "label": "Second GWP Product"
+      }
+    ]
+  },
+  {
+    "name": "Personalization product",
+    "settings": [
+      {
+        "type": "product",
+        "id": "personalization_product",
+        "label": "Personalization product"
+      }
+    ]
+  },
+  {
+    "name": "Predictive search",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable_search",
+        "label": "Enable search"
+      },
+      {
+        "type": "text",
+        "id": "search_no_result_text",
+        "label": "No results description"
+      },
+      {
+        "type": "header",
+        "content": "Popular Collections",
+        "info": "Use the settings below for editing the Popular Collections section"
+      },
+      {
+        "type": "checkbox",
+        "id": "popular_section_enable",
+        "label": "Show section"
+      },
+      {
+        "type": "checkbox",
+        "id": "popular_section_hide_desktop",
+        "label": "Hide from desktop"
+      },
+      {
+        "type": "text",
+        "id": "popular_section_heading",
+        "label": "Heading"
+      },
+      {
+        "type": "header",
+        "content": "Block 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "popular_section_image_1",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "popular_section_title_1",
+        "label": "Title"
+      },
+      {
+        "type": "url",
+        "id": "popular_section_url_1",
+        "label": "Link"
+      },
+      {
+        "type": "header",
+        "content": "Block 2"
+      },
+      {
+        "type": "image_picker",
+        "id": "popular_section_image_2",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "popular_section_title_2",
+        "label": "Title"
+      },
+      {
+        "type": "url",
+        "id": "popular_section_url_2",
+        "label": "Link"
+      },
+      {
+        "type": "header",
+        "content": "Block 3"
+      },
+      {
+        "type": "image_picker",
+        "id": "popular_section_image_3",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "popular_section_title_3",
+        "label": "Title"
+      },
+      {
+        "type": "url",
+        "id": "popular_section_url_3",
+        "label": "Link"
+      },
+      {
+        "type": "header",
+        "content": "Block 4"
+      },
+      {
+        "type": "image_picker",
+        "id": "popular_section_image_4",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "popular_section_title_4",
+        "label": "Title"
+      },
+      {
+        "type": "url",
+        "id": "popular_section_url_4",
+        "label": "Link"
+      },
+      {
+        "type": "header",
+        "content": "Best Sellers",
+        "info": "Use the settings below for editing the Best Sellers section"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_best_sellers",
+        "label": "Show section"
+      },
+      {
+        "type": "text",
+        "id": "best_sellers_heading",
+        "label": "Heading"
+      },
+      {
+        "type": "collection",
+        "id": "best_sellers_collection",
+        "label": "Collection"
+      },
+      {
+        "type": "header",
+        "content": "Popular Results",
+        "info": "Use the settings below for editing Popular Results in the Search bar"
+      },
+      {
+        "type": "text",
+        "id": "search_heading",
+        "label": "Heading"
+      },
+      {
+        "type": "product",
+        "id": "popular_searches_product_1",
+        "label": "Product 1"
+      },
+      {
+        "type": "product",
+        "id": "popular_searches_product_2",
+        "label": "Product 2"
+      },
+      {
+        "type": "product",
+        "id": "popular_searches_product_3",
+        "label": "Product 3"
+      }
+    ]
+  },
+  {
+    "name": "Social media",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Social links"
+      },
+      {
+        "type": "url",
+        "id": "social_instagram_link",
+        "label": "Instagram link"
+      },
+      {
+        "type": "url",
+        "id": "social_facebook_link",
+        "label": "Facebook link"
+      },
+      {
+        "type": "url",
+        "id": "social_twitter_link",
+        "label": "Twitter link"
+      },
+      {
+        "type": "url",
+        "id": "social_youtube_link",
+        "label": "Youtube link"
+      },
+      {
+        "type": "url",
+        "id": "social_pinterest_link",
+        "label": "Pinterest link"
+      },
+      {
+        "type": "url",
+        "id": "social_linkedin_link",
+        "label": "LinkedIn link"
       }
     ]
   },

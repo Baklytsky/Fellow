@@ -1,12 +1,13 @@
+{%- assign reviews_count = product.metafields.yotpo.reviews_count | plus: 0 -%}
 {%- assign color_count = 0 -%}
 
-<form class='productCard__variants rel {% if product.metafields.yotpo.reviews_count == blank %}mt05{% endif %}'>
+<form class='productCard__variants rel {% if reviews_count == 0 %}mt1{% endif %}'>
   <div class='productCard__options'>
     {% for product_option in product.options_with_values %}
       {% assign option_name = product_option.name | handleize %}
       {% if option_name == 'color' or option_name == 'material' %}
         {% comment %}Found Color/Swatch, now loop through those{% endcomment %}
-        <div class='radio-group f aic' data-option-{{ option_name }}>
+        <div class='radio-group f' data-option-{{ option_name }}>
           {% for value in product_option.values %}
             {% for variant in product.variants %}
               {% if variant.option1 == value or variant.option2 == value %}
@@ -51,9 +52,14 @@
     {% endfor %}
   </div>
 
+
+
+
+
+
   {%- if color_count > 0 -%}
     <div class="productCardVariants__ColorCount">
-      <a class="productCardVariants__CountButton" href="{{ product.url }}" aria-label="Open product page" title="{{ product.title }}" role="button">
+      <a class="productCardVariants__CountButton" href="{{ product.url }}" title="{{ product.title }}" role="button">
         {{ color_count }} {{ color_count | pluralize: 'color', 'colors' }}
       </a>
     </div>

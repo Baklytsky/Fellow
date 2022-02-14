@@ -101,18 +101,18 @@
               {%- endif -%}
             {%- endfor -%}
           </div>
-
+{% if product.metafields.custom_fields["image_collection_slides_new"].size > 1 %}
           <button type="button"
                   class="jsPrevSlide"
-                  aria-label="Previous slide" {% if product.metafields.custom_fields["image_collection_slides_new"].size == 1 %} style="display: none" {% endif %}>
+                  aria-label="Previous slide">
             {% render 'icon' with 'arrow-prev' %}
           </button>
           <button type="button"
                   class="jsNextSlide"
-                  aria-label="Next slide" {% if product.metafields.custom_fields["image_collection_slides_new"].size == 1 %} style="display: none" {% endif %}>
+                  aria-label="Next slide">
             {% render 'icon' with 'arrow-next' %}
           </button>
-
+{% endif %}
         </div>
       {%- endif -%}
     </div>

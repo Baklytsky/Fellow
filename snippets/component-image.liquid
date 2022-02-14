@@ -13,10 +13,11 @@
     {% if dataVariant != blank %}data-variant-img='{{ dataVariant }}'{% endif %}
     {% if irishFix %}style='display:none'{% endif %}
 >
-  {% if href != blank %}<a class='x y fill abs z2' target='_blank' href='{{ href }}' aria-label="{{ alt }}" aria-labelledby="{{ alt }}"></a>{% endif %}
+  {% if href != blank %}<a class='x y fill abs z2' target='_blank' href='{{ href }}' aria-label="{{ alt }}"></a>{% endif %}
   <img
     class='block z1 {%if absolute == true%}abs {%else%}rel {%endif%}{%if fill%} x y fill{%else%} x{%endif%}{%if scaleDown%} scale-down{%endif%}'
-    alt='{{ alt }}'
+    alt="{{ alt }}"
+    
     role='img'
     loading='lazy'
   />

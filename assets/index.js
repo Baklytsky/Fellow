@@ -9928,7 +9928,7 @@
       return t.length <= 0
           ? ""
           : t.reduce(function (t, e) {
-            if (e.product_type != 'Gift product') {
+            if (e.product_type !== 'Gift product' && e.product_type !== 'Gift box' && e.sku.indexOf('ENGRAVE') === -1) {
               return (
                   t +
                   ((r = (n = e).product_id),
@@ -9956,7 +9956,8 @@
                           : "https://source.unsplash.com/R9OS29xJb-8/2000x1333"),
                       "\n    <div class='cart-drawer__item' data-component='cartDrawerItem' data-pid="
                           .concat(r, " data-id=")
-                          .concat(i, " >\n      <a href='")
+                          .concat(i, " data-key=")
+                          .concat(n.key, " >\n      <a href='")
                           .concat(c, "' class=\"cart-drawer__itemImage\">\n        <img src='")
                           .concat(h, "' />\n      </a>\n\n      <div class='cart-drawer__itemContent f fdc'>\n        <div class='cart-drawer__itemDetails'>\n          <a href='")
                           .concat(c, "' class='cart-drawer__itemTitle'>")
@@ -9972,7 +9973,7 @@
                               "</button>\n </div>\n    </div>\n"
                           ))
               );
-            } else {
+            } else if (e.sku.indexOf('ENGRAVE') !== -1) {
               return (
                   t +
                   ((r = (n = e).product_id),
@@ -10000,15 +10001,108 @@
                           : "https://source.unsplash.com/R9OS29xJb-8/2000x1333"),
                       "\n    <div class='cart-drawer__item' data-component='cartDrawerItem' data-pid="
                           .concat(r, " data-id=")
-                          .concat(i, " >\n      <div data-free-product='")
+                          .concat(i, " data-key=")
+                          .concat(n.key, " >\n      <div data-per-product='")
+                          .concat('Personalization product', "' class=\"cart-drawer__itemImage\">\n        <img src='")
+                          .concat(h, "' />\n      </div>\n\n      <div class='cart-drawer__itemContent f fdc'>\n        <div class='cart-drawer__itemDetails'>\n          <span data-per-product='")
+                          .concat('Personalization product', "' class='cart-drawer__itemTitle'>")
+                          .concat(o, "</span>\n          <div class='cart-drawer__itemOptions'>")
+                          .concat(f, "</div>\n        </div>\n\n        <div class='f aic jce pt05'>\n          <div style='display: none' class='cart-item__stepper aic f ")
+                          .concat(0 === a ? "is-disabled" : "", "'>\n            <div class='cart-stepper js-remove-single' data-key='" + n.key + "'>-</div>\n            <input type='text' class='cart-quantity js-single-quantity' value='")
+                          .concat(l, "'>\n            <div class='cart-stepper js-add-single' data-key='" + n.key + "'>+</div>\n          </div>\n\n          <div class='cart-item__price'>")
+                          .concat(p, "</div>\n        </div>\n\n")
+                          .concat('\n', "</div>\n    </div>\n"
+                          ))
+              );
+            } else if (e.product_type === 'Gift product') {
+              return (
+                  t +
+                  ((r = (n = e).product_id),
+                      (i = n.variant_id),
+                      (o = n.product_title),
+                      (a = n.line_price),
+                      (p = (n.line_price === n.original_line_price) ? V(Q(a)) : '<span style="text-decoration: line-through; padding-right: 5px;">' + V(Q(n.original_line_price)) + '</span>' + V(Q(a))),
+                      (s = n.options_with_values),
+                      (u = n.image),
+                      (c = n.url),
+                      (l = n.quantity),
+                      (f = U(s)),
+                      (h = u
+                          ? F(
+                              u.replace(
+                                  "." +
+                                  (function (t) {
+                                    var e = t.match(/.+_((?:pico|icon|thumb|small|compact|medium|large|grande)|\d{1,4}x\d{0,4}|x\d{1,4})[_\.@]/);
+                                    return e ? e[1] : null;
+                                  })(u),
+                                  ""
+                              ),
+                              "200x"
+                          )
+                          : "https://source.unsplash.com/R9OS29xJb-8/2000x1333"),
+                      "\n    <div class='cart-drawer__item' data-component='cartDrawerItem' data-pid="
+                          .concat(r, " data-id=")
+                          .concat(i, " data-key=")
+                          .concat(n.key, " >\n      <div data-free-product='")
                           .concat('Free gift', "' class=\"cart-drawer__itemImage\">\n        <img src='")
-                          .concat(h, "' />\n      </div>\n\n      <div class='cart-drawer__itemContent f fdc'>\n        <div class='cart-drawer__itemDetails'>\n          <p data-free-product='")
+                          .concat(h, "' />\n      </div>\n\n      <div class='cart-drawer__itemContent f fdc'>\n        <div class='cart-drawer__itemDetails'>\n          <span data-free-product='")
                           .concat('Free gift', "' class='cart-drawer__itemTitle'>")
-                          .concat(o, "</p>\n          <div class='cart-drawer__itemOptions'>")
+                          .concat(o, "</span>\n          <div class='cart-drawer__itemOptions'>")
                           .concat(f, "</div>\n        </div>\n\n        <div class='f aic jce pt05'>\n          <div style='display: none' class='cart-item__stepper aic f ")
                           .concat(0 === a ? "is-disabled" : "", "'>\n            <div class='cart-stepper js-remove-single' data-key='" + n.key + "'>-</div>\n            <input type='text' class='cart-quantity js-single-quantity' value='")
                           .concat(l, "'>\n            <div class='cart-stepper js-add-single' data-key='" + n.key + "'>+</div>\n          </div>\n\n          <div class='cart-item__price'>")
                           .concat('Free', "</div>\n        </div>\n\n        <button class='button--reset cart-drawer__itemAction js-remove-item' data-key='" + n.key + "' style='display: none'>")
+                          .concat(
+                              '\n  <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentcolor" stroke-width="3" style="display:inline-block;vertical-align:middle;overflow:visible;"><path d="M1.0606601717798212 1.0606601717798212 L14.939339828220179 14.939339828220179"></path><path d="M14.939339828220179 1.0606601717798212 L1.0606601717798212 14.939339828220179"></path></svg>\n',
+                              "</button>\n")
+                          .concat('\n <button type="button" data-action="open-item-remove-popup" data-gift-product="' + Object.keys(n.properties)[0] + '" aria-expanded="false" class="button--reset cart-drawer__itemAction cart-drawer__remove-open"> <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentcolor" stroke-width="3" style="display:inline-block;vertical-align:middle;overflow:visible;"><path d="M1.0606601717798212 1.0606601717798212 L14.939339828220179 14.939339828220179"></path><path d="M14.939339828220179 1.0606601717798212 L1.0606601717798212 14.939339828220179"></path></svg>\n',
+                              "</button>\n </div>\n    </div>\n"
+                          ))
+              );
+            } else if (e.product_type === 'Gift box') {
+              var giftBoxDescriptionBlock = '';
+              if (window.giftNote) {
+                giftBoxDescriptionBlock = `<span style="max-width: 220px" class="pb05">"${window.giftNote}"</span><button type="button" class="cart-gift-wrapping-btn" data-open-gift-note>Edit</button>`;
+              } else {
+                giftBoxDescriptionBlock = `<span style="max-width: 220px" class="pb05">${e.product_description}</span><button type="button" class="cart-gift-wrapping-btn" data-open-gift-note>Edit</button>`;
+              }
+              return (
+                  t +
+                  ((r = (n = e).product_id),
+                      (i = n.variant_id),
+                      (o = n.product_title),
+                      (a = n.line_price),
+                      (p = (n.line_price === n.original_line_price) ? V(Q(a)) : '<span style="text-decoration: line-through; padding-right: 5px;">' + V(Q(n.original_line_price)) + '</span>' + V(Q(a))),
+                      (s = n.options_with_values),
+                      (u = n.image),
+                      (c = n.url),
+                      (l = n.quantity),
+                      (f = U(s)),
+                      (h = u
+                          ? F(
+                              u.replace(
+                                  "." +
+                                  (function (t) {
+                                    var e = t.match(/.+_((?:pico|icon|thumb|small|compact|medium|large|grande)|\d{1,4}x\d{0,4}|x\d{1,4})[_\.@]/);
+                                    return e ? e[1] : null;
+                                  })(u),
+                                  ""
+                              ),
+                              "200x"
+                          )
+                          : "https://source.unsplash.com/R9OS29xJb-8/2000x1333"),
+                      "\n    <div class='cart-drawer__item' data-component='cartDrawerItem' data-pid="
+                          .concat(r, " data-id=")
+                          .concat(i, " data-key=")
+                          .concat(n.key, " >\n      <div data-gift-box-product='")
+                          .concat('Gift box', "' class=\"cart-drawer__itemImage\">\n        <img src='")
+                          .concat(h, "' />\n      </div>\n\n      <div class='cart-drawer__itemContent f fdc'>\n        <div class='cart-drawer__itemDetails'>\n          <span data-gift-box-product='")
+                          .concat('Gift box', "' class='cart-drawer__itemTitle'>")
+                          .concat(o, "</span>\n          <div class='cart-drawer__itemOptions f fdc ais'>")
+                          .concat(giftBoxDescriptionBlock, "</div>\n        </div>\n\n        <div class='f aic jce pt05'>\n          <div style='display:none;' class='cart-item__stepper test aic f ")
+                          .concat(0 === a ? "is-disabled" : "", "'>\n            <div class='cart-stepper js-remove-single' data-key='" + n.key + "'>-</div>\n            <input type='text' class='cart-quantity js-single-quantity' value='")
+                          .concat(l, "'>\n            <div class='cart-stepper js-add-single' data-key='" + n.key + "'>+</div>\n          </div>\n\n          <div class='cart-item__price'>")
+                          .concat(p, "</div>\n        </div>\n\n        <button class='button--reset cart-drawer__itemAction js-remove-item' data-key='" + n.key + "' style='display: none'>")
                           .concat(
                               '\n  <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentcolor" stroke-width="3" style="display:inline-block;vertical-align:middle;overflow:visible;"><path d="M1.0606601717798212 1.0606601717798212 L14.939339828220179 14.939339828220179"></path><path d="M14.939339828220179 1.0606601717798212 L1.0606601717798212 14.939339828220179"></path></svg>\n',
                               "</button>\n")
@@ -10026,24 +10120,106 @@
         window.CartDrawer = e;
         window.Cart = e.getState().cart;
 
-        if (window.theme.gwpSettings.gwpEnable !== 'true' || window.theme.gwpSettings.gwpThreshold <= 0 || window.theme.gwpSettings.gwpProductAvailable !== 'true' || window.theme.gwpSettings.gwpProductType !== 'Gift product' || localStorage.getItem('removeGWP')) {
+        if (window.theme.personalization.perProductAvailable === 'true' ) {
+          var engraveCounter = 0,
+              perProductId = window.theme.personalization.perProductID,
+              perCounter = 0;
+
+          window.Cart.items.forEach(function (element) {
+            if (element.sku.indexOf('-PER') !== -1) {perCounter += element.quantity}
+            if (element.sku.indexOf('ENGRAVE') !== -1) {engraveCounter += element.quantity}
+          });
+
+          if (perCounter > 0 && engraveCounter !== perCounter) {
+            switch (true) {
+              case engraveCounter === 0:
+                theme.addCustomProduct('/cart/add.js', perProductId, perCounter, false);
+                break;
+              case engraveCounter > 0:
+                theme.addCustomProduct('/cart/change.js', perProductId, perCounter, false);
+                break;
+            }
+          }
+
+          if (perCounter === 0 && engraveCounter > 0) {
+            theme.addCustomProduct('/cart/change.js', perProductId, 0, false);
+          }
+        }
+
+        if (window.theme.gwpSettings.gwpEnable !== 'true'
+            || window.theme.gwpSettings.gwpThreshold <= 0
+            || window.theme.gwpSettings.gwpProductAvailable !== 'true'
+            || window.theme.gwpSettings.gwpProductType !== 'Gift product'
+            || localStorage.getItem('_firstGwp')) {
           setTimeout(function () {
             Cart.items.forEach(function (element) {
-              if (element.product_type === 'Gift product') {
+              if (element.product_type === 'Gift product' && element.properties.hasOwnProperty('_firstGwp')) {
                 theme.checkGwpOnLoad(element)
               }
             });
-          }, 500)
+          }, 0)
         }
 
-        if (window.theme.gwpSettings.gwpEnable === 'true' && window.theme.gwpSettings.gwpThreshold > 0 && window.theme.gwpSettings.gwpProductAvailable === 'true' && window.theme.gwpSettings.gwpProductType === 'Gift product' && !localStorage.getItem('removeGWP')) {
-          var gwpThreshold = window.theme.gwpSettings.gwpThreshold * 100,
-              gwpProductId = window.theme.gwpSettings.gwpProductId;
+        if (window.theme.gwpSettings.gwpEnable !== 'true'
+            || window.theme.gwpSettings.secondGwpThreshold <= 0
+            || window.theme.gwpSettings.secondGwpProductAvailable !== 'true'
+            || window.theme.gwpSettings.secondGwpProductType !== 'Gift product'
+            || localStorage.getItem('_secondGwp')) {
+          setTimeout(function () {
+            Cart.items.forEach(function (element) {
+              if (element.product_type === 'Gift product' && element.properties.hasOwnProperty('_secondGwp')) {
+                theme.checkGwpOnLoad(element)
+              }
+            });
+          }, 0)
+        }
 
-          if (Cart.total_price >= gwpThreshold && !theme.checkGwp(Cart)) {
-            theme.gwp(Cart, '/cart/add.js', gwpProductId, 1, false)
+        if (window.theme.gwpSettings.gwpEnable === 'true'
+            && window.theme.gwpSettings.gwpThreshold > 0
+            && window.theme.gwpSettings.gwpProductAvailable === 'true'
+            && window.theme.gwpSettings.gwpProductType === 'Gift product'
+            && !localStorage.getItem('_firstGwp')) {
+          var gwpThreshold = window.theme.gwpSettings.gwpThreshold * 100,
+              gwpProductId = window.theme.gwpSettings.gwpProductId,
+              gwpProperty = {'_firstGwp': true},
+              propertyToCheck = '_firstGwp';
+
+          if (Cart.total_price >= gwpThreshold && !theme.checkGwp(Cart, propertyToCheck)) {
+            theme.addCustomProduct('/cart/add.js', gwpProductId, 1, true, gwpProperty)
           }
         }
+
+        if (window.theme.gwpSettings.gwpEnable === 'true'
+            && window.theme.gwpSettings.secondGwpThreshold > 0
+            && window.theme.gwpSettings.secondGwpProductAvailable === 'true'
+            && window.theme.gwpSettings.secondGwpProductType === 'Gift product'
+            && !localStorage.getItem('_secondGwp')) {
+          var secondGwpThreshold = window.theme.gwpSettings.secondGwpThreshold * 100,
+              secondGwpProductId = window.theme.gwpSettings.secondGwpProductId,
+              secondGwpProperty = {'_secondGwp': true},
+              secondPropertyToCheck = '_secondGwp';
+
+          if (Cart.total_price >= secondGwpThreshold && !theme.checkGwp(Cart, secondPropertyToCheck)) {
+            theme.addCustomProduct('/cart/add.js', secondGwpProductId, 1, true, secondGwpProperty)
+          }
+        }
+
+        if (Cart.attributes['Gift note']) {
+          var giftBoxInCart = false
+          Cart.items.forEach(function (element) {
+            if (element.product_type === 'Gift box') {giftBoxInCart = true}
+          });
+          if (!giftBoxInCart) {
+            var data = {attributes: {'Gift note': ''}}
+            fetch('/cart/update.js', {
+              method: 'POST',
+              headers: {'Content-Type': 'application/json'},
+              body: JSON.stringify(data)
+            }).then(response => {theme.updateGiftWrappingProduct()})
+          }
+        }
+
+        window.giftNote = (Cart.attributes['Gift note']) ? Cart.attributes['Gift note'] : false
 
         var n = t.querySelector(".js-overlay"),
             r = t.querySelector(".js-close"),
@@ -10060,17 +10236,19 @@
             p = t.querySelector(".js-free-shipping-amount-remaining"),
             v = t.querySelector(".js-free-shipping-unmet-msg"),
             y = t.querySelector(".js-free-shipping-met-msg"),
+            progressBar = t.querySelector(".free-shipping__meter"),
             emptyCartText = t.querySelector(".js-empty-cart-text"),
             freeShipping = t.querySelector(".js-free-shipping"),
             freeShippingTotal = t.querySelector(".js-shipping-free-text"),
+            gwpNostackText = t.querySelector(".gwp-nostack-text"),
             m = function (t) {
               var q = (t.total_price === t.original_total_price) ? V(Q(t.total_price)) : '<span style="text-decoration: line-through; padding-right: 5px;">' + V(Q(t.original_total_price)) + '</span>' + V(Q(t.total_price));
               (a.innerHTML = z(t.items)),
                   (i.innerHTML = q),
                   void 0 === t.items
-                      ? (c.classList.add("is-hidden"), a.classList.add("is-hidden"), l.classList.remove("is-hidden"), f.classList.add("is-hidden"), s.classList.add("cart-drawer--empty"), emptyCartText.classList.remove("is-hidden"), freeShipping.classList.add("is-hidden"), localStorage.setItem('removeGWP', 'false') )
+                      ? (c.classList.add("is-hidden"), a.classList.add("is-hidden"), l.classList.remove("is-hidden"), f.classList.add("is-hidden"), s.classList.add("cart-drawer--empty"), emptyCartText.classList.remove("is-hidden"), freeShipping.classList.add("is-hidden"), localStorage.setItem('_firstGwp', 'false'), localStorage.setItem('_secondGwp', 'false') )
                       : 0 === t.items.length
-                          ? (c.classList.add("is-hidden"), a.classList.add("is-hidden"), l.classList.remove("is-hidden"), s.classList.add("cart-drawer--empty"), emptyCartText.classList.remove("is-hidden"), freeShipping.classList.add("is-hidden"), localStorage.removeItem('removeGWP'))
+                          ? (c.classList.add("is-hidden"), a.classList.add("is-hidden"), l.classList.remove("is-hidden"), s.classList.add("cart-drawer--empty"), gwpNostackText.classList.add("is-hidden"), emptyCartText.classList.remove("is-hidden"), freeShipping.classList.add("is-hidden"), localStorage.removeItem('_firstGwp'), localStorage.removeItem('_secondGwp'))
                           : (c.classList.remove("is-hidden"), a.classList.remove("is-hidden"), l.classList.add("is-hidden"), s.classList.remove("cart-drawer--empty"),  emptyCartText.classList.add("is-hidden"), freeShipping.classList.remove("is-hidden"));
             },
             g = function() {
@@ -10091,23 +10269,105 @@
             cartOpen: !1
           })
         })), e.on("cart:toggle", (function(e) {
-          var n = e.cart;
-          if (window.theme.gwpSettings.gwpEnable === 'true' && window.theme.gwpSettings.gwpThreshold > 0 && window.theme.gwpSettings.gwpProductAvailable === 'true' && window.theme.gwpSettings.gwpProductType === 'Gift product' && !localStorage.getItem('removeGWP')) {
+          var n = e.cart,
+              thresholdDifference = window.theme.gwpSettings.gwpThreshold - window.theme.gwpSettings.secondGwpThreshold,
+              summaryGwpThreshold = window.theme.gwpSettings.secondGwpThreshold,
+              firstGwpThreshold = window.theme.gwpSettings.gwpThreshold,
+              firstGwpEnabled = false,
+              secondGwpEnabled = false;
+
+          if (thresholdDifference < 0) {
+            summaryGwpThreshold = window.theme.gwpSettings.secondGwpThreshold;
+            firstGwpThreshold =  window.theme.gwpSettings.gwpThreshold;
+          }
+
+          if (window.theme.gwpSettings.gwpEnable === 'true'
+              && window.theme.gwpSettings.gwpThreshold > 0
+              && window.theme.gwpSettings.gwpProductAvailable === 'true'
+              && window.theme.gwpSettings.gwpProductType === 'Gift product'
+              && !localStorage.getItem('_firstGwp')) {
+            firstGwpEnabled = true;
+          }
+
+          if (window.theme.gwpSettings.gwpEnable === 'true'
+              && window.theme.gwpSettings.secondGwpThreshold > 0
+              && window.theme.gwpSettings.secondGwpProductAvailable === 'true'
+              && window.theme.gwpSettings.secondGwpProductType === 'Gift product'
+              && !localStorage.getItem('_secondGwp')) {
+            secondGwpEnabled = true;
+          }
+
+          if (firstGwpEnabled || secondGwpEnabled) {
             e.cartOpen && function(e) {
-              theme.disableScroll();
-              if (t.classList.add("is-active"), a.innerHTML = h, setTimeout((function() {
-                t.classList.add("is-visible"), t.tabIndex = 0, s.tabIndex = 0, t.setAttribute("aria-expanded", "true"), document.getElementById("root").tabIndex = -1, setTimeout(m(e), 10), Dr.mount()
-              }), 50), e.total_price < (window.theme.gwpSettings.gwpThreshold * 100)) {
-                v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
-                var n = Q((window.theme.gwpSettings.gwpThreshold * 100) - e.total_price),
-                    r = (e.total_price / window.theme.gwpSettings.gwpThreshold).toFixed(2);
-                d.style.width = "".concat(r, "%"), p.innerHTML = n, v.innerHTML = `You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from free free gift`
-              } else y.innerHTML = 'Good news! You get a free gift product.', y.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.innerHTML = 'Good news! You get a free gift product.', freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
-              Dr.emit("nav:toggle", {
-                navDrawerOpen: !1,
-                whichNavDrawer: void 0,
-                navReclick: !1
-              })
+              if (firstGwpEnabled && secondGwpEnabled) {
+                console.log(!progressBar.querySelector('.gwp-point-text'))
+                if (!progressBar.querySelector('.gwp-point-text')) {
+                  let firstGwpPosition = (100 * firstGwpThreshold) / summaryGwpThreshold,
+                      gwpPoint = document.createElement('span'),
+                      gwpPointText = document.createElement('span');
+                  gwpPointText.classList.add("gwp-point-text");
+                  gwpPoint.classList.add("gwp-point");
+                  gwpPointText.innerHTML = 'First Free Mug';
+                  gwpPoint.style.left = firstGwpPosition + '%';
+                  progressBar.append(gwpPoint);
+                  progressBar.append(gwpPointText);
+                }
+                theme.disableScroll();
+                if (t.classList.add("is-active"), a.innerHTML = h, setTimeout((function() {
+                  t.classList.add("is-visible"), t.tabIndex = 0, s.tabIndex = 0, t.setAttribute("aria-expanded", "true"), document.getElementById("root").tabIndex = -1, setTimeout(m(e), 10), Dr.mount()
+                }), 50), e.total_price < (firstGwpThreshold * 100) && e.total_price < (summaryGwpThreshold * 100)) {
+                  v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
+                  var n = Q((firstGwpThreshold * 100) - e.total_price),
+                      r = (e.total_price / summaryGwpThreshold).toFixed(2);
+                  d.style.width = "".concat(r, "%"), p.innerHTML = n, gwpNostackText.classList.add("is-hidden"), v.innerHTML = `You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from a free Carter Move Mug.`
+                } 
+                
+                else if (t.classList.add("is-active"), a.innerHTML = h, setTimeout((function() {
+                  t.classList.add("is-visible"), t.tabIndex = 0, s.tabIndex = 0, t.setAttribute("aria-expanded", "true"), document.getElementById("root").tabIndex = -1, setTimeout(m(e), 10), Dr.mount()
+                }), 50), e.total_price > (firstGwpThreshold * 100) && e.total_price < (summaryGwpThreshold * 100)) {
+                  v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
+                  var n = Q((summaryGwpThreshold * 100) - e.total_price),
+                      r = (e.total_price / summaryGwpThreshold).toFixed(2);
+                  d.style.width = "".concat(r, "%"), p.innerHTML = n, v.innerHTML = `Nice - You've got a free Carter Move Mug.<br>You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from a second one!`, freeShippingTotal.innerHTML = '+ 1 Free Mug', freeShippingTotal.classList.remove("is-hidden"), gwpNostackText.classList.remove("is-hidden");
+                } 
+                
+                else y.innerHTML = 'Good news! You get two Carter Move Mugs on us.', y.classList.remove("is-hidden"), gwpNostackText.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.innerHTML = '+ 2 Free Mugs', freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
+                Dr.emit("nav:toggle", {
+                  navDrawerOpen: !1,
+                  whichNavDrawer: void 0,
+                  navReclick: !1
+                })
+              } else if (firstGwpEnabled) {
+                theme.disableScroll();
+                if (t.classList.add("is-active"), a.innerHTML = h, setTimeout((function() {
+                  t.classList.add("is-visible"), t.tabIndex = 0, s.tabIndex = 0, t.setAttribute("aria-expanded", "true"), document.getElementById("root").tabIndex = -1, setTimeout(m(e), 10), Dr.mount()
+                }), 50), e.total_price < (window.theme.gwpSettings.gwpThreshold * 100)) {
+                  v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
+                  var n = Q((window.theme.gwpSettings.gwpThreshold * 100) - e.total_price),
+                      r = (e.total_price / window.theme.gwpSettings.gwpThreshold).toFixed(2);
+                  d.style.width = "".concat(r, "%"), p.innerHTML = n, v.innerHTML = `You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from a free Carter Move Mug`
+                } else y.innerHTML = 'Good news! You get a free Carter Move Mug.<p class="eyebrow mt0 mb0" style="text-transform:none;font-weight:400">Stacked promos are ineligible.<br>Manually remove the free gift from your cart to use a promo code.</p>', y.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.innerHTML = '+ 1 Free Mug', freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
+                Dr.emit("nav:toggle", {
+                  navDrawerOpen: !1,
+                  whichNavDrawer: void 0,
+                  navReclick: !1
+                })
+              } else if (secondGwpEnabled) {
+                theme.disableScroll();
+                if (t.classList.add("is-active"), a.innerHTML = h, setTimeout((function() {
+                  t.classList.add("is-visible"), t.tabIndex = 0, s.tabIndex = 0, t.setAttribute("aria-expanded", "true"), document.getElementById("root").tabIndex = -1, setTimeout(m(e), 10), Dr.mount()
+                }), 50), e.total_price < (window.theme.gwpSettings.secondGwpThreshold * 100)) {
+                  v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
+                  var n = Q((window.theme.gwpSettings.secondGwpThreshold * 100) - e.total_price),
+                      r = (e.total_price / window.theme.gwpSettings.secondGwpThreshold).toFixed(2);
+                  d.style.width = "".concat(r, "%"), p.innerHTML = n, v.innerHTML = `You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from another free Carter Move Mug <p class='eyebrow mt0 mb0' style='text-transform:none;font-weight:400;'>Stacked promos are ineligible. Manually remove the free gift from your cart to use a promo code.</p>`
+                } else y.innerHTML = 'Good news! You get two Carter Move Mugs on us.<p class="eyebrow mt0 mb0" style="text-transform:none;font-weight:400;">Stacked promos are ineligible. Manually remove free gifts from your cart to use a promo code.</p>', y.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.innerHTML = '+ 2 Free Mugs', freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
+                Dr.emit("nav:toggle", {
+                  navDrawerOpen: !1,
+                  whichNavDrawer: void 0,
+                  navReclick: !1
+                })
+              }
             }(n)
           } else {
             e.cartOpen && function(e) {
@@ -10119,7 +10379,7 @@
                 var n = Q(9900 - e.total_price),
                     r = (e.total_price / 100).toFixed(2);
                 d.style.width = "".concat(r, "%"), p.innerHTML = n, v.innerHTML = `You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from free US shipping`
-              } else y.innerHTML = 'Congrats! You get free US Shipping!', y.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.innerHTML = 'Congrats! You get free US Shipping!', freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
+              } else y.innerHTML = 'Congrats! You get Free US Shipping!', y.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.innerHTML = `Shipping: <span style="font-weight: 600;">Free</span>`, freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
               Dr.emit("nav:toggle", {
                 navDrawerOpen: !1,
                 whichNavDrawer: void 0,
@@ -10130,34 +10390,171 @@
         })), Dr.on("cart:toggle", (function(t) {
           t.cartOpen || g()
         })), e.on("cart:updated", (function(t) {
-          if (window.theme.gwpSettings.gwpEnable === 'true' && window.theme.gwpSettings.gwpThreshold > 0 && window.theme.gwpSettings.gwpProductAvailable === 'true' && window.theme.gwpSettings.gwpProductType === 'Gift product' && !localStorage.getItem('removeGWP')) {
-            var gwpThreshold = window.theme.gwpSettings.gwpThreshold * 100,
-                gwpProductId = window.theme.gwpSettings.gwpProductId;
 
-            if (t.cart.total_price >= gwpThreshold && !theme.checkGwp(t.cart)) {
-              theme.gwp(t.cart, '/cart/add.js', gwpProductId, 1, true)
+          if (window.theme.personalization.perProductAvailable === 'true' ) {
+            var engraveCounter = 0,
+                perProductId = window.theme.personalization.perProductID,
+                perCounter = 0;
+
+            t.cart.items.forEach(function (element) {
+              if (element.sku.indexOf('-PER') !== -1) {perCounter += element.quantity}
+              if (element.sku.indexOf('ENGRAVE') !== -1) {engraveCounter += element.quantity}
+            });
+
+            if (perCounter > 0 && engraveCounter !== perCounter) {
+              switch (true) {
+                case engraveCounter === 0:
+                  theme.addCustomProduct('/cart/add.js', perProductId, perCounter, true);
+                  break;
+                case engraveCounter > 0:
+                  theme.addCustomProduct('/cart/change.js', perProductId, perCounter, true);
+                  break;
+              }
             }
 
-            if (t.cart.total_price < gwpThreshold && theme.checkGwp(t.cart)) {
-              theme.gwp(t.cart, '/cart/change.js', gwpProductId, 0, true)
+            if (perCounter === 0 && engraveCounter > 0) {
+              theme.addCustomProduct('/cart/change.js', perProductId, 0, true);
             }
           }
+
+          if (window.theme.gwpSettings.gwpEnable === 'true'
+              && window.theme.gwpSettings.gwpThreshold > 0
+              && window.theme.gwpSettings.gwpProductAvailable === 'true'
+              && window.theme.gwpSettings.gwpProductType === 'Gift product'
+              && !localStorage.getItem('_firstGwp')) {
+            var gwpThreshold = window.theme.gwpSettings.gwpThreshold * 100,
+                gwpProductId = window.theme.gwpSettings.gwpProductId,
+                gwpProperty = {'_firstGwp': true},
+                propertyToCheck = '_firstGwp';
+
+            if (t.cart.total_price >= gwpThreshold && !theme.checkGwp(t.cart, propertyToCheck)) {
+              theme.addCustomProduct('/cart/add.js', gwpProductId, 1, true, gwpProperty)
+            }
+
+            if (t.cart.total_price < gwpThreshold) {
+              t.cart.items.forEach(function (element) {
+                if (element.product_type === 'Gift product' && element.properties.hasOwnProperty(propertyToCheck)) {
+                  theme.addCustomProduct('/cart/change.js', element.id, 0, true)
+                }
+              });
+            }
+          }
+
+          if (window.theme.gwpSettings.gwpEnable === 'true'
+              && window.theme.gwpSettings.secondGwpThreshold > 0
+              && window.theme.gwpSettings.secondGwpProductAvailable === 'true'
+              && window.theme.gwpSettings.secondGwpProductType === 'Gift product'
+              && !localStorage.getItem('_secondGwp')) {
+            var secondGwpThreshold = window.theme.gwpSettings.secondGwpThreshold * 100,
+                secondGwpProductId = window.theme.gwpSettings.secondGwpProductId,
+                secondGwpProperty = {'_secondGwp': true},
+                secondPropertyToCheck = '_secondGwp';
+
+            if (t.cart.total_price >= secondGwpThreshold && !theme.checkGwp(t.cart, secondPropertyToCheck)) {
+              theme.addCustomProduct('/cart/add.js', secondGwpProductId, 1, true, secondGwpProperty)
+            }
+
+            if (t.cart.total_price < secondGwpThreshold) {
+              t.cart.items.forEach(function (element) {
+                if (element.product_type === 'Gift product' && element.properties.hasOwnProperty(secondPropertyToCheck)) {
+                  theme.addCustomProduct('/cart/change.js', element.id, 0, true)
+                }
+              });
+            }
+          }
+
+          if (t.cart.attributes['Gift note']) {
+            var giftBoxInCart = false
+            t.cart.items.forEach(function (element) {
+              if (element.product_type === 'Gift box') {giftBoxInCart = true}
+            });
+            if (!giftBoxInCart) {
+              var data = {attributes: {'Gift note': ''}}
+              fetch('/cart/update.js', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(data)
+              }).then(response => {theme.updateGiftWrappingProduct()})
+            }
+          }
+
+          window.giftNote = (t.cart.attributes['Gift note']) ? t.cart.attributes['Gift note'] : false
           t.state;
           var n = t.cart;
-          if (window.theme.gwpSettings.gwpEnable === 'true' && window.theme.gwpSettings.gwpThreshold > 0 && window.theme.gwpSettings.gwpProductAvailable === 'true' && window.theme.gwpSettings.gwpProductType === 'Gift product' && !localStorage.getItem('removeGWP')) {
-            if (m(e.getState().cart), b(Dr.getState()), n.total_price < (window.theme.gwpSettings.gwpThreshold * 100)) {
-              v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
-              var r = Q((window.theme.gwpSettings.gwpThreshold * 100) - n.total_price),
-                  i = (n.total_price / window.theme.gwpSettings.gwpThreshold).toFixed(2);
-              d.style.width = "".concat(i, "%"), p.innerHTML = r, v.innerHTML = `You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from free free gift`
-            } else y.innerHTML = 'Good news! You get a free gift product.', y.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.innerHTML = 'Good news! You get a free gift product.', freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
+          if (window.theme.giftWrapping.giftWrappingEnable && window.theme.giftWrapping.giftWrappingAvailable) {
+            theme.updateGiftWrappingProduct()
+          }
+
+          var thresholdDifference = window.theme.gwpSettings.gwpThreshold - window.theme.gwpSettings.secondGwpThreshold,
+              summaryGwpThreshold = window.theme.gwpSettings.gwpThreshold,
+              firstGwpThreshold = window.theme.gwpSettings.gwpThreshold,
+              firstGwpEnabled = false,
+              secondGwpEnabled = false;
+
+          
+          if (thresholdDifference < 0) {
+            summaryGwpThreshold = window.theme.gwpSettings.secondGwpThreshold;
+            firstGwpThreshold =  window.theme.gwpSettings.gwpThreshold;
+          }
+
+          if (window.theme.gwpSettings.gwpEnable === 'true'
+              && window.theme.gwpSettings.gwpThreshold > 0
+              && window.theme.gwpSettings.gwpProductAvailable === 'true'
+              && window.theme.gwpSettings.gwpProductType === 'Gift product'
+              && !localStorage.getItem('_firstGwp')) {
+            firstGwpEnabled = true;
+          }
+
+          if (window.theme.gwpSettings.gwpEnable === 'true'
+              && window.theme.gwpSettings.secondGwpThreshold > 0
+              && window.theme.gwpSettings.secondGwpProductAvailable === 'true'
+              && window.theme.gwpSettings.secondGwpProductType === 'Gift product'
+              && !localStorage.getItem('_secondGwp')) {
+            secondGwpEnabled = true;
+          }
+
+          if (firstGwpEnabled || secondGwpEnabled) {
+            if (firstGwpEnabled && secondGwpEnabled) {
+              if (m(e.getState().cart), b(Dr.getState()), n.total_price < (firstGwpThreshold * 100) && n.total_price < (summaryGwpThreshold * 100)) {
+                v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
+                var r = Q((firstGwpThreshold * 100) - n.total_price),
+                    i = (n.total_price / summaryGwpThreshold).toFixed(2);
+                d.style.width = "".concat(i, "%"), p.innerHTML = r, gwpNostackText.classList.add("is-hidden"), v.innerHTML = `You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from a free Carter Move Mug`
+              } 
+              else if (m(e.getState().cart), b(Dr.getState()), n.total_price > (firstGwpThreshold * 100) && n.total_price < (summaryGwpThreshold * 100)) {
+                v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
+                var r = Q((summaryGwpThreshold * 100) - n.total_price),
+                    i = (n.total_price / summaryGwpThreshold).toFixed(2);
+                d.style.width = "".concat(i, "%"), p.innerHTML = r, v.innerHTML = `Nice - You've got a free Carter Move Mug. You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from a second one`,freeShippingTotal.innerHTML = '+ 1 Free Mug', freeShippingTotal.classList.remove("is-hidden"), gwpNostackText.classList.remove("is-hidden");
+              } else y.innerHTML = 'Good news! You get two Carter Move Mugs on us.', y.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.innerHTML = '+ 2 Free Mugs', gwpNostackText.classList.remove("is-hidden"), freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
+            
+            
+            } 
+            
+            else if (firstGwpEnabled) {
+              if (m(e.getState().cart), b(Dr.getState()), n.total_price < (window.theme.gwpSettings.gwpThreshold * 100)) {
+                v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
+                var r = Q((window.theme.gwpSettings.gwpThreshold * 100) - n.total_price),
+                    i = (n.total_price / window.theme.gwpSettings.gwpThreshold).toFixed(2);
+                d.style.width = "".concat(i, "%"), p.innerHTML = r, v.innerHTML = `You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from a free Carter Move Mug`
+              } else y.innerHTML = 'Good news! You get a free Carter Move Mug.<span></span>', y.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.innerHTML = 'Free Gift Added', freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
+            } 
+            
+            else if (secondGwpEnabled) {
+              if (m(e.getState().cart), b(Dr.getState()), n.total_price < (window.theme.gwpSettings.secondGwpThreshold * 100)) {
+                v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
+                var r = Q((window.theme.gwpSettings.secondGwpThreshold * 100) - n.total_price),
+                    i = (n.total_price / window.theme.gwpSettings.secondGwpThreshold).toFixed(2);
+                d.style.width = "".concat(i, "%"), p.innerHTML = r, v.innerHTML = `You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from a free Carter Move Mug`
+              } else y.innerHTML = 'Good news! You get two Carter Move Mugs on us.', y.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.innerHTML = 'Free Gift Added', freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
+            }
           } else {
             if (m(e.getState().cart), b(Dr.getState()), n.total_price < 9900) {
               v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
               var r = Q(9900 - n.total_price),
                   i = (n.total_price / 100).toFixed(2);
               d.style.width = "".concat(i, "%"), p.innerHTML = r, v.innerHTML = `You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from free US shipping`
-            } else y.innerHTML = 'Congrats! You get free US Shipping!', y.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.innerHTML = 'Congrats! You get free US Shipping!', freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
+            } else y.innerHTML = 'Congrats! You get free US Shipping!', y.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.innerHTML = `Shipping: <span style="font-weight: 600;">Free</span>`, freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
           }
           u.forEach((function(t) {
             t.innerHTML = e.getState().cart.item_count
@@ -10211,10 +10608,13 @@
         }))
       };
 
-  function Y(t, e) {
+  function Y(t, e, key) {
     return K().then((function(n) {
-      for (var r = n.items, i = 0; i < r.length; i++)
-        if (r[i].variant_id === parseInt(t)) return G(i + 1, e)
+      for (var r = n.items, i = 0; i < r.length; i++) {
+        if (r[i].variant_id === parseInt(t) && r[i].key === key) {
+          return G(i + 1, e)
+        }
+      }
     }))
   }
 
@@ -10329,16 +10729,17 @@
             r = t.querySelector(".js-remove-single"),
             i = t.querySelector(".js-add-single"),
             o = t.querySelector(".js-single-quantity").value,
-            a = t.getAttribute("data-id");
+            a = t.getAttribute("data-id"),
+            key = t.getAttribute("data-key");
         n.addEventListener("click", (function(t) {
           t.preventDefault(),
               function(t) {
-                Y(t, 0)
+                Y(t, 0, key)
               }(a)
         })), r.addEventListener("click", (function(t) {
-          t.preventDefault(), Y(a, parseInt(o) - 1)
+          t.preventDefault(), Y(a, parseInt(o) - 1, key)
         })), i.addEventListener("click", (function(t) {
-          t.preventDefault(), Y(a, parseInt(o) + 1)
+          t.preventDefault(), Y(a, parseInt(o) + 1, key)
         }))
       })),
       X = O((function(t, e) {
@@ -15126,7 +15527,7 @@
             bgLazyLoad: !0,
             adaptiveHeight: !0,
             prevNextButtons: !1,
-            autoPlay: 5e3,
+            autoPlay: 7e3,
             on: {
               ready: function() {
                 var t = n.querySelector(".flickity-page-dots"),

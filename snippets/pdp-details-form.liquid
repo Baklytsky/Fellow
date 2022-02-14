@@ -85,6 +85,12 @@ Uncomment to include
         cta: 'Customize your mug',
       %}
     {% endif %}
+    
+      {% if product.tags contains 'customizer' %}
+      <div class="f is-inline">
+        {% include 'component-customize' %}
+      </div>
+    {% endif %}
   </div>
 </div>
 <div class='none' data-pay-btn>

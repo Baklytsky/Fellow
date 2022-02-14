@@ -1,0 +1,31 @@
+.customized-link {
+  text-align: center;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.customized-link .link {
+  cursor: pointer;
+}
+
+.player-app-container {
+  display: none;
+}
+
+.hide-element {
+  display: none;
+}
+
+.show-element-block {
+  display: block;
+}
+
+.back-button-container {
+  padding: 20px !important;
+}
+
+.back-button .icon {
+  font-size: 2em;
+  color: rgb(104,104,104);
+  cursor: pointer;
+}

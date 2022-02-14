@@ -1,0 +1,236 @@
+{%- assign selected_variant = product.selected_or_first_available_variant -%}
+
+<div class="upsell-product">
+  {%- for variant in product.variants -%}
+    {%- if variant.id == selected_variant.id -%}
+      {%- if variant.metafields.my_fields.upsell_product != blank -%}
+        {%- assign product_upsell = variant.metafields.my_fields.upsell_product.value -%}
+        {%- assign product_upsell_variant = variant.metafields.my_fields.upsell_product_variant.value -%}
+        {%- assign has_upsell_variant = false -%}
+        {%- assign uniq_id = 'product_upsell' | append: '-' | append: product_upsell.id -%}
+
+        {%- if product_upsell.available -%}
+
+          {%- for upsell_variant in product_upsell.variants -%}
+            {%- if upsell_variant.id == product_upsell_variant.id -%}
+              {%- assign has_upsell_variant = true -%}
+              {%- break -%}`
+            {%- endif -%}
+          {%- endfor -%}
+
+        <div class="upsell-product__wrapper">
+          <a href="{{ product_upsell.url }}" class="upsell-product__image-wrapper rel">
+            {%- if product_upsell.variants.size > 1 -%}
+              {% for upsell_variant in product_upsell.variants %}
+                {%- assign imageSrc = upsell_variant.image.src | img_url: '300x' -%}
+                  <img src="{{ imageSrc }}"
+                       class='image-abs-cover'
+                       alt='{{ upsell_variant.title }}'
+                       role='img'
+                       loading='lazy'
+                       data-upsell-variant-media='{{ upsell_variant.id | append: '-' | append: uniq_id }}'
+                      {%- if has_upsell_variant %}
+                        {%- if upsell_variant.id == product_upsell_variant.id %} style="visibility: visible" {% endif %}
+                      {% else %}
+                        {%- if forloop.first %} style="visibility: visible" {% endif %}
+                      {% endif %}/>
+              {% endfor %}
+            {%- else -%}
+              <img src="{{ product_upsell.featured_image | img_url: '300x' }}"
+                   class='image-abs-cover'
+                   alt='{{ product_upsell.title }}'
+                   style="visibility: visible"
+                   role='img'
+                   loading='lazy'
+                   data-upsell-variant-media='{{ product_upsell.selected_or_first_available_variant.id | append: '-' | append: uniq_id }}'/>
+            {%- endif -%}
+          </a>
+          <div class="upsell-product__content">
+            <h3 class="upsell-product__content-title">
+              {% if variant.metafields.my_fields.upsell_text != blank %}
+              <a href="{{ product_upsell.url }}">{{ variant.metafields.my_fields.upsell_text }} {{ product_upsell.title }}</a>
+              {% else %}
+              <a href="{{ product_upsell.url }}">Pairs with {{ product_upsell.title }}</a>
+              {% endif %}
+              <span class="upsell-product__content-price">
+                {%- if has_upsell_variant -%}
+                  {{ product_upsell_variant.price | money | remove: ".00" }}
+                {%- else -%}
+                  {{ product_upsell.selected_or_first_available_variant.price | money | remove: ".00" }}
+                {%- endif -%}
+              </span>
+            </h3>
+            {% if product.metafields.custom_fields["product_tagline"] != blank %}
+              <div class="upsell-product__content-description">
+                {{ product_upsell.metafields.custom_fields["product_tagline"] }}
+              </div>
+            {% endif %}
+            <div class="upsell-product__options">
+              {%- assign product_upsell_option1 = '' -%}
+              {%- assign product_upsell_option2 = '' -%}
+              {%- assign product_upsell_option3 = '' -%}
+              {%- assign product_upsell_name_1 = '' -%}
+              {%- assign product_upsell_name_2 = '' -%}
+              {%- assign product_upsell_name_3 = '' -%}
+
+              {%- for option in product_upsell.options_with_values -%}
+                {%- case forloop.index -%}
+                {%- when 1 -%}
+                {%- assign product_upsell_name_1 = option.name -%}
+                {%- when 2 -%}
+                {%- assign product_upsell_name_2 = option.name -%}
+                {%- when 3 -%}
+                {%- assign product_upsell_name_3 = option.name -%}
+                {%- endcase -%}
+              {%- endfor -%}
+
+              {%- for upsell_variant in product_upsell.variants -%}
+                  {%- for i in (1..3) -%}
+                    {%- assign option_key = "option" | append: i -%}
+                    {%- case i -%}
+                    {%- when 1 -%}
+                    {%- assign product_upsell_option1 = product_upsell_option1 | append: upsell_variant[option_key] | append: '|#|' -%}
+                    {%- when 2 -%}
+                    {%- assign product_upsell_option2 = product_upsell_option2 | append: upsell_variant[option_key] | append: '|#|' -%}
+                    {%- when 3 -%}
+                    {%- assign product_upsell_option3 = product_upsell_option3 | append: upsell_variant[option_key] | append: '|#|' -%}
+                    {%- endcase -%}
+                  {%- endfor -%}
+              {%- endfor -%}
+
+              {%- assign product_upsell_options1_arr = product_upsell_option1 | split: '|#|' | uniq -%}
+              {%- assign product_upsell_options2_arr = product_upsell_option2 | split: '|#|' | uniq -%}
+              {%- assign product_upsell_options3_arr = product_upsell_option3 | split: '|#|' | uniq -%}
+
+              <div class="upsell-product__options-wrapper f fdc">
+                {%- if product_upsell_name_1 != blank -%}
+                  {% include 'product-upsell-options' with
+                    bundle_product: product_upsell,
+                    options_array: product_upsell_options1_arr,
+                    option_name: product_upsell_name_1 %}
+                {%- endif -%}
+
+                {%- if product_upsell_name_2 != blank -%}
+                  {% include 'product-upsell-options' with
+                    bundle_product: product_upsell,
+                    options_array: product_upsell_options2_arr,
+                    option_name: product_upsell_name_2 %}
+                {%- endif -%}
+
+                {%- if product_upsell_name_3 != blank -%}
+                  {% include 'product-upsell-options' with
+                    bundle_product: product_upsell,
+                    options_array: product_upsell_options3_arr,
+                    option_name: product_upsell_name_3 %}
+                {%- endif -%}
+              </div>
+
+              {%- capture options -%}
+              {%- assign upsell_variant_available = true -%}
+                {%- for upsell_variant in product_upsell.variants -%}
+
+                  {%- if has_upsell_variant -%}
+                    {%- if upsell_variant.id == product_upsell_variant.id -%}
+                      {%- if upsell_variant.available == false -%}
+                        {%- assign upsell_variant_available = false -%}
+                      {%- endif -%}
+                      {%- assign selec_value = upsell_variant.id -%}
+                    {%- endif -%}
+                  {%- else -%}
+                    {%- if forloop.first -%}
+                      {%- if upsell_variant.available == false -%}
+                        {%- assign upsell_variant_available = false -%}
+                      {%- endif -%}
+                      {%- assign selec_value = upsell_variant.id -%}
+                    {%- endif -%}
+                  {%- endif -%}
+
+                  {%- assign options = '' -%}
+                  {%- assign variant_title_arr = upsell_variant.title | split: '/' -%}
+                  {%- for variant_title in variant_title_arr -%}
+                    {%- assign variant_title_hand = variant_title | handleize -%}
+
+                    {%- if variant_title_hand contains 'limited-edition-' -%}
+                      {%- assign variant_title_hand = variant_title_hand | split: 'limited-edition-' | last -%}
+                    {%- endif -%}
+
+                    {%- if forloop.last -%}
+                      {%- assign options = options | append: variant_title_hand -%}
+                    {%- else -%}
+                      {%- assign options = options | append: variant_title_hand | append: '/' -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+
+                  <option value='{{ upsell_variant.id }}'
+                          data-upsell-variant-options='{{ options }}'
+                          data-variant-uniq_id='{{ upsell_variant.id | append: '-' | append: uniq_id }}'
+                          data-variant-price='{{ upsell_variant.price | money | remove: ".00" }}'
+                          data-variant-inventory-quantity='{{ upsell_variant.inventory_quantity }}'
+                          data-variant-inventory-policy='{{ upsell_variant.inventory_policy }}'
+                          data-variant-inventory-management='{{ upsell_variant.inventory_management }}'
+                          {% unless upsell_variant.available %}disabled{% endunless %}
+                          {%- if has_upsell_variant -%}
+                            {%- if upsell_variant.id == product_upsell_variant.id -%}
+                              selected
+                            {%- endif -%}
+                          {%- else -%}
+                            {%- if forloop.first -%}
+                              selected
+                            {%- endif -%}
+                          {%- endif -%}>
+                    {{ upsell_variant.title }}
+                  </option>
+                {%- endfor -%}
+              {%- endcapture -%}
+
+              {%- capture selectTitle -%}Options for {{ product_upsell.title }}{%- endcapture -%}
+              {%- assign selectName = 'product_upsell-' | append: forloop.index -%}
+
+              {% include 'component-select' with
+                name: selectName,
+                options: options,
+                selectTitle: selectTitle,
+                className: 'js-product-upsell-variant is-hidden',
+                value: selec_value,
+                placeholder: false,
+                required: true,
+                ariaHidden: true,
+                attributes: 'data-option-main' %}
+
+              {%- capture cta -%}
+                {% if upsell_variant_available %}
+                  <span data-atc-copy class="js-atc-copy">
+                    {% if product_upsell.tags contains 'preorder' %}
+                      Preorder
+                    {% else %}
+                      Add to Cart
+                    {% endif %}
+                  </span>
+
+                  {%- assign disableVal = false -%}
+                {% else %}
+                  {% if product_upsell.tags contains 'discontinued' %}
+                    Discontinued
+                  {% else %}
+                    Out of Stock
+                  {% endif %}
+                  {%- assign disableVal = true -%}
+                {% endif %}
+              {%- endcapture -%}
+
+              <button type="button"
+                      id="pdp-product-upsell-atc"
+                      class="js-upsell-add-to-cart"
+                      {% if disableVal %}disabled{% endif %}>
+                {{ cta }}
+              </button>
+            </div>
+            <div id="PdpUpsellErrorMessage">error</div>
+          </div>
+        </div>
+        {%- endif -%}
+
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+</div>

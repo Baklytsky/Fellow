@@ -1,0 +1,106 @@
+{% if product.metafields.custom_fields["product_tagline"] != blank %}
+  {% assign tagline = product.metafields.custom_fields["product_tagline"] %}
+{% endif %}
+{% capture dataProductForm %}
+  { "money_format": {{ shop.money_format | json }}, "button": {{ 'products.product.add_to_cart' | t | json}} }
+{% endcapture %}
+
+<section class='pdpMain__details pdpMain-bundle__details z2 rel'>
+
+  <div class='pdpStickyBar'>
+    <div class="pdpStickyBar__wrapper">
+      <div class='pdpCopy__header'>
+        <div class=' f jcb aic'>
+          <h1 class='pdpCopy__header-title'>{{ product.title }}</h1>
+          <h2 data-selected-var-price class="ml1 visually-hidden">{{ current_variant.price | money | remove: '.00' }}</h2>
+        </div>
+      </div>
+      {% include 'pdp-details-sticky-form' %}
+    </div>
+  </div>
+
+  {% form 'product', product, data-product-form: dataProductForm, class: 'shopify-product-form pdpForm' %}
+    <div class='pdpCopy__header'>
+      <div class=' f jcb aic'>
+        <h1 class='pdpCopy__header-title'>{{ product.title }}</h1>
+        <h2 data-selected-var-price class="ml1 visually-hidden">{{ current_variant.price | money | remove: '.00' }}</h2>
+        <div class="pdpCopy__price hide-mobile f aic">
+          {% if product.available %}
+          {% if product.compare_at_price > product.price %}
+            <span class="inline-block strike card__price--regular ml1 pdpCopy__header-price pdpCopy__header-price-small rel" data-compare-at-price>
+              <span>{{ current_variant.compare_at_price | money_without_trailing_zeros }}</span>
+              <div class="price-round-arrow">{% render 'icon' with 'round-arrow' %}</div>
+            </span>
+            <span class="visually-hidden">{{ 'products.current_variant.regular_price' | t }}</span>
+            <h2 class="inline-block card__price--sale ml1 pdpCopy__header-price" data-product-price>
+              {{ current_variant.price | money_without_trailing_zeros }}
+            </h2>
+            {% else %}
+              {% comment %}
+                Product is available and not on sale
+              {% endcomment %}
+              <h2 data-selected-var-price class="ml1 pdpCopy__header-price" data-product-price>{{ current_variant.price | money | remove: '.00' }}</h2>
+            {% endif %}
+            {% else %}
+              {% comment %}
+                Sold Out
+              {% endcomment %}
+              <h2 class='strike' data-product-price>{{ current_variant.price | money_without_trailing_zeros }}</h2>
+            {% endif %}
+        </div>
+      </div>
+      {% if tagline != blank %}<div class='pdp__tagline'>{{ tagline }}</div>{% endif %}
+      <div class="pdp__reviews mb1 mt1">
+        {%- assign reviews_count = product.metafields.yotpo.reviews_count | plus: 0 -%}
+        {%- if reviews_count > 0 -%}
+          {% include 'yotpo-star-rating-widget' %}
+        {%- endif -%}
+      </div>
+      <div class="pdpCopy__price hide-desktop">
+        {% if product.available %}
+        {% if product.compare_at_price > product.price %}
+          <span class="inline-block strike card__price--regular ml1 pdpCopy__header-price pdpCopy__header-price-small rel" data-compare-at-price>
+              <span>{{ current_variant.compare_at_price | money_without_trailing_zeros }}</span>
+              <div class="price-round-arrow">{% render 'icon' with 'round-arrow' %}</div>
+            </span>
+          <span class="visually-hidden">{{ 'products.current_variant.regular_price' | t }}</span>
+          <h2 class="inline-block card__price--sale ml1 pdpCopy__header-price" data-product-price>
+            {{ current_variant.price | money_without_trailing_zeros }}
+          </h2>
+          {% else %}
+            {% comment %}
+              Product is available and not on sale
+            {% endcomment %}
+            <h2 data-selected-var-price class="ml1 pdpCopy__header-price" data-product-price>{{ current_variant.price | money | remove: '.00' }}</h2>
+          {% endif %}
+          {% else %}
+            {% comment %}
+              Sold Out
+            {% endcomment %}
+            <h2 class='strike' data-product-price>{{ current_variant.price | money_without_trailing_zeros }}</h2>
+          {% endif %}
+      </div>
+    </div>
+
+    {%- if product.metafields.custom_fields["bundle_product"] != blank -%}
+      {% include 'pdp-details-form-bundle-pick-mix' %}
+    {%- else -%}
+      {% include 'pdp-details-form-bundle' %}
+    {%- endif -%}
+ {% if product.price_max >= 50 %}
+  <div class="pdpBadges">
+      <div class="pdpBadges-item f {% if item["product_badge_learn_more_link"] != blank %}jcb{% else %}jcc{% endif %} aic">
+        <div class="pdpBadges-item-content f aic">
+              {% comment %} Shop Pay Snippet {% endcomment %}
+      <div data-shop-pay class="shop-pay">
+        {{ form | payment_terms }}
+      </div>
+        </div>
+      </div>
+  </div>
+{% endif %}
+  {% endform %}
+
+    {% include 'pdp-badges' %}
+    {% include 'pdp-info' %}
+</section>

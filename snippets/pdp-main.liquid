@@ -2,8 +2,8 @@
 {% if product.metafields.custom_fields["desktop_masthead_image"] or product.metafields.custom_fields["mobile_masthead_image"] != blank %}
   {%- assign masthead_exists = true -%}
 {% endif %}
-<section class='full pdpMain__container' data-component='pdpMain'>
-  <div class='pdpMain row no-gutters'>
+<section class='full pdpMain__container product-main-section' data-component='pdpMain'>
+  <div class='pdpMain row no-gutters'> 
     <div class='pdpMain__Media order-lg-1 rel x'>
       {% include 'pdb-image-thumbnails.liquid' %}
       {%- comment -%}

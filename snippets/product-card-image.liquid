@@ -1,6 +1,6 @@
 {% assign badge_text = product.metafields.custom_fields.card_badge %}
 
-<div role='img' aria-label='Image of {{ product.title }}' class='productCard__img rel z0{% unless transparent_image == true %} productCard__img--solid{% endunless %}'>
+<div aria-label='Image of {{ product.title }}' class='productCard__img rel z0{% unless transparent_image == true %} productCard__img--solid{% endunless %}'>
 
   {% if badge_text and badge_text != blank %}
     <span class="productCard__badge abs z3 xsmall cb bg-xlightgrey">{{ badge_text }}</span>
@@ -29,7 +29,7 @@
           {% for variant in product.variants %}
             {% if variant.option1 == value or variant.option2 == value %}
               {% assign variantImg = variant | img_url: '500x' %}
-              <div role='img' class='productCard__img-container variant js-variant-image'
+              <div class='productCard__img-container variant js-variant-image'
                 {% if option_name == 'color' or option_name == 'material' %}data-color='{{ value | handleize }}'{% endif %}
                 data-variant-url='{{ variant.url }}'
                 data-variant-id='{{ variant.id }}'
@@ -53,16 +53,15 @@
       {% endif %}
     {% endfor %}
   {% endif %}
-  <div class="productCardImg__QuickView">
+  <div class="productCardImg__QuickView" {% if product.template_suffix contains 'bundle' %}style="display:none;"{% endif %}>
     <button class="productCardImg__QuickViewButton js-product-view" data-quick-view="{{ url }}?view=quick-view" type="button">{{ 'products.product.quick_view' | t }}</button>
   </div>
-  <a class='productCardImg__ProductLink abs fill z2 js-product-link' href='{{ url }}' title="{{ product.title }}" aria-label='{{ product.title }}'>
+  <a class='productCardImg__ProductLink abs fill z2 js-product-link' href='{{ product.url }}' title="{{ product.title }}">
     {%- if product.metafields.custom_fields["product_alternative_image"] != blank -%}
       {%- assign alternative_url = product.metafields.custom_fields["product_alternative_image"] -%}
       <img src="{{ alternative_url }}"
            alt="{{ alt }}"
            class="productCardImg__AlternativeImage image-abs-cover"
-           role='img'
            loading='lazy'>
     {%- endif -%}
   </a>

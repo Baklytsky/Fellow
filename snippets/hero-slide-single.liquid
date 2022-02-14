@@ -42,7 +42,7 @@
   <img
     src='{{ block.settings.heroSlide | img_url: "400x" }}'
     srcset='{{ block.settings.heroSlide | img_url: "400x" }} 400w, {{ block.settings.heroSlide | img_url: "500x" }} 500w, {{ block.settings.heroSlide | img_url: "600x" }} 600w, {{ block.settings.heroSlide | img_url: "1000x" }} 991w, {{ block.settings.heroSlide | img_url: "1280x" }} 1280w, {{ block.settings.heroSlide | img_url: "1440x" }} 1400w'
-    alt='{{ block.settings.heroSlide__header }}' role="img"
+    alt='{{ block.settings.heroSlide__header }}'
   >
   {% if block.settings.heroSlide__header != blank %}
     <div class='hero__text fill z5'>

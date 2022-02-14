@@ -1,11 +1,4 @@
-{%- assign gift_product_type = 'Gift product' | handleize -%}
-{%- assign product_type_handleize = product.type | handleize -%}
-{%- if product_type_handleize == gift_product_type -%}
-  <script>
-    window.location.href = '/'
-  </script>
-{%- endif -%}
-<div class="pdpTemplate">
+
   <script text="text/javascript">
     var _learnq = _learnq || [];
 
@@ -34,6 +27,18 @@
       }
     }]);
   </script>
+<div class="pdpTemplate">
   {% section 'product-bar' %}
   {% section 'product-template' %}
 </div>
+
+<script>
+  var json_product = {{ product | json }};
+</script>
+
+
+<script type="text/javascript">
+document.querySelector("#kl_elec_wrnty").addEventListener('click',function (){
+        var _klOnsite = window._klOnsite || []  
+        _klOnsite.openForm('XDf9kc', () => console.log("you triggered the form!"))
+    });</script>

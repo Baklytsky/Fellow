@@ -54,7 +54,7 @@
             {% endif %}
         </div>
       </div>
-      {% if tagline != blank %}<div class='pdp__tagline hide-mobile'>{{ tagline | capitalize }}</div>{% endif %}
+      {% if tagline != blank %}<div class='pdp__tagline hide-mobile'>{{ tagline }}</div>{% endif %}
       <div class="pdp__reviews mb1 mt1">
         {%- assign reviews_count = product.metafields.yotpo.reviews_count | plus: 0 -%}
         {%- if reviews_count > 0 -%}
@@ -87,13 +87,23 @@
           {% endif %}
       </div>
     </div>
+    {% include 'pdp-bundle-description' %}
     {% include 'pdp-details-form' %}
-    {% comment %} Shop Pay Snippet {% endcomment %}
-    <div data-shop-pay class='shop-pay mb15'>
-      {{ form | payment_terms }}
-    </div>
+   {% if product.price_max >= 50 %}
+  <div class="pdpBadges">
+      <div class="pdpBadges-item f {% if item["product_badge_learn_more_link"] != blank %}jcb{% else %}jcc{% endif %} aic">
+        <div class="pdpBadges-item-content f aic">
+              {% comment %} Shop Pay Snippet {% endcomment %}
+      <div data-shop-pay class="shop-pay">
+        {{ form | payment_terms }}
+      </div>
+        </div>
+      </div>
+  </div>
+{% endif %}
   {% endform %}
 
     {% include 'pdp-badges' %}
     {% include 'pdp-info' %}
+    {% include 'pdp-product-upsell' %}
 </section>
