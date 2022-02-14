@@ -1465,7 +1465,8 @@ theme.cartDrawer = function () {
 
   $(document).on('click.addRecommendedProduct', '[data-action="add-to-cart-recommended"]', function (e) {
     e.preventDefault();
-    let id = $(this).attr('data-variant-id');
+
+    let id = $(this).attr('data-variant-id').split('cart-')[1];
     let data = {
       id: id,
       quantity: 1

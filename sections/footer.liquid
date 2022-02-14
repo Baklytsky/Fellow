@@ -73,7 +73,7 @@
       <ul>
         {%- for type in shop.enabled_payment_types -%}
           <li>
-            {{ type | payment_type_svg_tag: class: 'img-grayscale' | replace: 'aria-labelledby', 'aria-label' }}
+            {{ type | payment_type_svg_tag: class: 'img-grayscale' | replace: 'aria-labelledby', 'aria-label' | remove: 'role="img"' }}
           </li>
         {%- endfor -%}
       </ul>

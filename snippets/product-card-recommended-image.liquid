@@ -2,7 +2,7 @@
   {% assign badge_text = product.metafields.custom_fields.card_badge %}
 {%- endcomment -%}
 
-<div role='img' aria-label='Image of {{ product.title }}' class='productCard__img rel z0{% unless transparent_image == true %} productCard__img--solid{% endunless %}'>
+<div aria-label='Image of {{ product.title }}' class='productCard__img rel z0{% unless transparent_image == true %} productCard__img--solid{% endunless %}'>
 
   {% if badge_text and badge_text != blank %}
     <span class="productCard__badge abs z3 xsmall cb bg-xlightgrey">{{ badge_text }}</span>
@@ -31,10 +31,10 @@
           {% for variant in product.variants %}
             {% if variant.option1 == value or variant.option2 == value %}
               {% assign variantImg = variant | img_url: '500x' %}
-              <div role='img' class='productCard__img-container variant js-variant-image'
+              <div class='productCard__img-container variant js-variant-image'
                 {% if option_name == 'color' or option_name == 'material' %}data-color='{{ value | handleize }}'{% endif %}
                 data-variant-url='{{ variant.url }}'
-                data-variant-id='{{ variant.id }}'
+                data-variant-id='cart-{{ variant.id }}'
                 aria-label='{{ variant.title }}'>
                 <img src="{{ variantImg }}" alt="{{ alt }}" class="productCard__image image image-abs-cover">
                 {%- comment -%}

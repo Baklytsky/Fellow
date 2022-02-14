@@ -86,19 +86,18 @@
           </table>
         
         <div class="pdpCompare__tabs">
-          <ul class="pdpCompare__tabsList" role="tablist">
+          <ul class="pdpCompare__tabsList">
             {%- for item in product.metafields.custom_fields["compare_products_list"] -%}
               {%- assign _product = all_products[item["compare_product"]] -%}
               {%- assign _product_title = item["compare_product_title"] -%}
   
-              <li role="tab">
+              <li>
                 <button class="pdpCompare__tabButton"
                         type="button"
                         data-action="toggle-tab"
                         aria-controls="tab-{{ _product.id | append: forloop.index }}"
-                        aria-label="Tab button"
                         {% if forloop.first != blank %} aria-selected="true"{% endif %}>
-                  {{ _product_title }}
+                  {{ _product_title | default: _product.title }}
                 </button>
               </li>
             {%- endfor -%}
