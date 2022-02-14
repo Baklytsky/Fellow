@@ -1669,7 +1669,7 @@ theme.searchBar = function () {
   function onInput (event) {
     var _this = $(event.target),
         value = _this.val().trim(),
-        queryKey = value.toLowerCase();
+        queryKey = value.replace(" ", "-").toLowerCase();
 
     $searchBar.addClass('loading');
     $searchResultWrapper.attr('aria-hidden', 'false');

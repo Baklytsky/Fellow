@@ -87,10 +87,18 @@
     {%- else -%}
       {% include 'pdp-details-form-bundle' %}
     {%- endif -%}
-  {% comment %} Shop Pay Snippet {% endcomment %}
-  <div data-shop-pay class="shop-pay mb1">
+ {% if product.price_max >= 50 %}
+  <div class="pdpBadges">
+      <div class="pdpBadges-item f {% if item["product_badge_learn_more_link"] != blank %}jcb{% else %}jcc{% endif %} aic">
+        <div class="pdpBadges-item-content f aic">
+              {% comment %} Shop Pay Snippet {% endcomment %}
+      <div data-shop-pay class="shop-pay">
         {{ form | payment_terms }}
       </div>
+        </div>
+      </div>
+  </div>
+{% endif %}
   {% endform %}
 
     {% include 'pdp-badges' %}
