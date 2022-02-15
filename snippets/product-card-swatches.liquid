@@ -37,6 +37,7 @@
                     {% if option_name == 'material' %}data-material='{{ value | handleize }}'{% endif %}
                     data-variant-url='{{ variant.url }}'
                     data-variant-id='{{ variant.id }}'
+                    data-variant-price='{{ variant.price }}'
                     {% if color_swatch_image != blank %}style="background: url({{ color_swatch_image | img_url: '64x64' }}) no-repeat center center / cover; color: transparent; border-color: white"{% endif %}>
                   </div>
                   {% comment %}
