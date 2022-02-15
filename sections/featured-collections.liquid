@@ -60,7 +60,6 @@
           <div class="FeaturedCollections__ProductsWrapper rel">
             {%- for block in blocks -%}
               {%- assign limit = section.settings.limit -%}
-
               {%- assign collection = collections[block.settings.collection] -%}
               {%- if collection.products_count > 0 -%}
                 <div id="tab-{{ collection.id }}"
@@ -73,7 +72,7 @@
 
                   {% for product in collection.products limit: limit %}
                     <div class="FeaturedCollections__Product">
-                      {% include 'product-card', cx: 'y', product_image: product.images[product_image_index] %}
+                      {% include 'product-card', cx: 'y', product_image: product.images[product_image_index], block_id: block.id %}
                     </div>
                   {% endfor %}
 
