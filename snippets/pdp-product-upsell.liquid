@@ -47,7 +47,11 @@
           </a>
           <div class="upsell-product__content">
             <h3 class="upsell-product__content-title">
+              {% if variant.metafields.my_fields.upsell_text != blank %}
+              <a href="{{ product_upsell.url }}">{{ variant.metafields.my_fields.upsell_text }} {{ product_upsell.title }}</a>
+              {% else %}
               <a href="{{ product_upsell.url }}">Pairs with {{ product_upsell.title }}</a>
+              {% endif %}
               <span class="upsell-product__content-price">
                 {%- if has_upsell_variant -%}
                   {{ product_upsell_variant.price | money | remove: ".00" }}
@@ -221,7 +225,7 @@
                 {{ cta }}
               </button>
             </div>
-            <div id="PdpUpsellErrorMessage">aefgdsfbdb</div>
+            <div id="PdpUpsellErrorMessage">error</div>
           </div>
         </div>
         {%- endif -%}

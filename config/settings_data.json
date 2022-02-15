@@ -40,7 +40,7 @@
     "best_sellers_heading": "Shop Best Sellers",
     "best_sellers_collection": "bestsellers",
     "search_heading": "Are you looking for...",
-    "popular_searches_product_1": "staggekg",
+    "popular_searches_product_1": "stagg-ekg-electic-pour-over-kettle",
     "popular_searches_product_2": "clara-french-press",
     "popular_searches_product_3": "ode-brew-grinder",
     "social_instagram_link": "https:\/\/www.instagram.com\/fellowproducts",
@@ -399,7 +399,8 @@
         "type": "logo-text",
         "settings": {
           "enable_section": true,
-          "text": "This way to a brighter, less boring morning"
+          "text": "This way to a brighter, less boring morning",
+          "icon": "shopify:\/\/shop_images\/Fellow-altIcon-black.png"
         }
       },
       "162997622949d3f8ee": {

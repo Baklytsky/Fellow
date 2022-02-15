@@ -22802,11 +22802,13 @@ input[name=product_search_field] {
 .pdpCopy__copy {
   padding-bottom: .875rem
 }
-
+    
 .shop-pay {
-  font-size: .75rem
+  font-size: 14px;
+  font-weight: 500;
 }
-
+        
+    
 .pdpMain__images {
   display: block;
   position: absolute;
