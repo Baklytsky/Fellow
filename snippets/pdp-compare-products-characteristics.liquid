@@ -30,7 +30,7 @@
         <table class="pdpCompare__table {{ table_style_class }}">
             <thead>
             <tr>
-              <th></th>
+              <th style="visibility:hidden;">Characteristics</th>
               {%- for item in product.metafields.custom_fields["compare_products_list"] -%}
                 {%- assign _product = all_products[item["compare_product"]] -%}
                 {%- assign _product_image = _product.featured_image | img_url: 'master' -%}
