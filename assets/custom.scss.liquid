@@ -6659,12 +6659,22 @@ ul.pdp_details__feature_list > li {
       display: none;
     }
 
+    button, a {
+      outline: none !important;
+    }
+
     .yotpo-nav-content {
       .yotpo-review.yotpo-regular-box {
+        position: relative;
+        min-height: 288px;
         margin: 0;
         padding: 40px 0;
         border-top: 0;
         border-bottom: 1px solid #ABABAB;
+
+        @media screen and (max-width: 1199px) {
+          min-height: unset;
+        }
       }
 
       .yotpo-icon-profile,
@@ -6697,6 +6707,10 @@ ul.pdp_details__feature_list > li {
         margin: 24px 0 0;
         max-width: 875px;
 
+        @media screen and (max-width: 1199px) {
+          max-width: 100%;
+        }
+
         .content-title {
           margin: 0 0 8px;
           font-family: $font-header;
@@ -6712,6 +6726,25 @@ ul.pdp_details__feature_list > li {
           font-size: 16px;
           line-height: 130%;
           color: $color-black;
+        }
+
+        .yotpo-review-media-wrapper-desktop,
+        .yotpo-review-media-wrapper-mobile,
+        .media-review {
+          width: 208px !important;
+          height: 208px !important;
+          margin: 0 !important;
+          position: absolute;
+          top: 20px;
+          right: 0;
+
+          @media screen and (max-width: 1199px) {
+            width: 177px !important;
+            height: 177px !important;
+            position: static;
+            top: unset;
+            right: unset;
+          }
         }
       }
 
@@ -6829,6 +6862,7 @@ ul.pdp_details__feature_list > li {
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
+          outline: none;
         }
       }
 
