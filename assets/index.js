@@ -14605,6 +14605,7 @@
         var colorSelectors = node.querySelectorAll('.js-color-update');
         var productLinks = node.querySelectorAll('.js-product-link');
         var productView = node.querySelectorAll('.js-product-view');
+        var productPrice = node.querySelector('.productCard__price-wrapper');
         var variantImages = node.querySelectorAll('.js-variant-image');
         var currentSelected = null;
         var currentId = null;
@@ -14631,19 +14632,36 @@
 
 
           item.addEventListener('click', function () {
-            // If moused-over item isn't currently selected, find what is and removed checked.
+
             if (item !== currentSelected) {
               if (item.querySelector('input')) {
                 if (currentSelected) {
                   currentSelected.querySelector('input').removeAttribute('checked');
                   currentSelected.querySelector('input').removeAttribute('class');
-                } // Set mouse-over to checked
+                }
 
                 item.querySelector('input').setAttribute('checked', 'checked');
                 item.querySelector('input').setAttribute('class', 'active');
-                currentSelected = item; // update productCard link
+                currentSelected = item;
 
-                var currentLink = currentSelected.querySelector('.js-productCard-option').getAttribute('data-variant-url');
+                // update productCard link
+
+                let currentLink = currentSelected.querySelector('.js-productCard-option').getAttribute('data-variant-url');
+
+                // update variant details
+
+                if (!node.classList.contains('productCard__recommended')) {
+                  fetch(`${currentLink}&section_id=product-template`, {
+                    "method": "GET"
+                  }).then(response => {
+                    return response.text();
+                  }).then(data => {
+                    const html = new DOMParser().parseFromString(data, 'text/html');
+                    const currentDetails = html.querySelector('.pdpMain__details');
+                    const currentPrice = currentDetails.querySelector('.pdpCopy__price.hide-mobile');
+                    productPrice.innerHTML = currentPrice.innerHTML
+                  })
+                }
 
                 productLinks.forEach(function (link) {
                   link.setAttribute('href', currentLink);
@@ -14671,22 +14689,7 @@
 
             }
           });
-        }); // Switches off variant image after hover.
-
-        // node.addEventListener('mouseleave', function () {
-        //   colorSelectors.forEach(function (item, i) {
-        //     if (currentSelected) {
-        //       currentSelected.querySelector('input').removeAttribute('checked');
-        //     }
-        //
-        //     currentSelected = null;
-        //   });
-        //   variantImages.forEach(function (image) {
-        //     if (image.classList.contains('is-visible')) {
-        //       image.classList.remove('is-visible');
-        //     }
-        //   });
-        // });
+        });
 
         return function (node) {};
       }));

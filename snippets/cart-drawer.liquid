@@ -1,6 +1,6 @@
 {%- assign cart_has_canal = false -%}
 {% for item in cart.items %}  
-{% if item.product.type contains 'Coffee' %}
+{% if item.product.type == 'Coffee' %}
 {% assign cart_has_canal = true %}
 {% endif %}
 {% endfor %}

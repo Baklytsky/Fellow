@@ -27,7 +27,7 @@
         <h2 data-selected-var-price class="ml1 visually-hidden">{{ current_variant.price | money | remove: '.00' }}</h2>
         <div class="pdpCopy__price hide-mobile f aic">
           {% if product.available %}
-          {% if product.compare_at_price > product.price %}
+          {% if current_variant.compare_at_price > current_variant.price %}
           {% comment %}
             Product is available and on sale
           {% endcomment %}
@@ -63,7 +63,7 @@
       </div>
       <div class="pdpCopy__price hide-desktop">
         {% if product.available %}
-        {% if product.compare_at_price > product.price %}
+        {% if current_variant.compare_at_price > current_variant.price %}
         {% comment %}
           Product is available and on sale
         {% endcomment %}
