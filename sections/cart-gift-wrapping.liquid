@@ -44,7 +44,7 @@
        {%- unless gift_box_in_cart -%}
          <div class="cart-drawer__item">
            <div class="cart-drawer__itemImage">
-             <img src="{{ gift_wrapping_product.featured_image | img_url: '200x' }}">
+             <img src="{{ gift_wrapping_product.featured_image | img_url: '200x' }}" alt="{{ gift_wrapping_product.featured_image.alt }}">
            </div>
 
            <div class="cart-drawer__itemContent f">
