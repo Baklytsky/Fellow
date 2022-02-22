@@ -250,16 +250,16 @@ theme.addProduct = function () {
 }
 
 theme.toggleTab = function ($this) {
-  // Required button element: aria-selected='true/false'; aria-controls='TAB_ID'; data-action='toggle-tab'
-  // Required tab element: aria-selected='true/false'; data-tab='TAB_ID'
+  // Required button element: data-selected='true/false'; aria-controls='TAB_ID'; data-action='toggle-tab'
+  // Required tab element: data-selected='true/false'; data-tab='TAB_ID'
 
-  if ($this.attr('aria-selected') !== 'true') {
-    $('[data-action="toggle-tab"]').attr('aria-selected', 'false');
-    $this.attr('aria-selected', 'true');
+  if ($this.attr('data-selected') !== 'true') {
+    $('[data-action="toggle-tab"]').attr('data-selected', 'false');
+    $this.attr('data-selected', 'true');
 
-    $('[data-tab]').attr('aria-selected', 'false').each(function () {
+    $('[data-tab]').attr('data-selected', 'false').each(function () {
       if ($(this).attr('data-tab') == $this.attr('aria-controls')) {
-        $(this).attr('aria-selected', 'true');
+        $(this).attr('data-selected', 'true');
         return false;
       }
     })

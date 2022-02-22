@@ -35,8 +35,7 @@
                             data-link-title="{{ button_text }}"
                             data-link-url="{{ button_url }}"
                             aria-controls="tab-{{ collection.id }}"
-                            aria-label="{{ tab_text }}"
-                            aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+                            data-selected="{% if forloop.first %}true{% else %}false{% endif %}"
                             >
                       {{ tab_text }}
                     </button>
@@ -65,7 +64,7 @@
                 <div id="tab-{{ collection.id }}"
                      class="FeaturedCollections__ProductsTabs"
                      data-tab="tab-{{ collection.id }}"
-                     aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">
+                     data-selected="{% if forloop.first %}true{% else %}false{% endif %}">
                   {%- if limit > collection.products_count -%}
                     {%- assign limit = collection.products_count -%}
                   {%- endif -%}

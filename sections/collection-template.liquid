@@ -163,6 +163,7 @@
                       {%- endcomment -%}
                      
                       <div class="filter-group__price-range-to">
+                        <label for="{{ filter.max_value.param_name }}" class="visually-hidden">Price</label>
                         <input name="{{ filter.max_value.param_name }}"
                                id="Filter-{{ filter.label }}-{{ forloop.index }}"
                                value="{{ filter.range_max | money_without_currency | replace: ',', '' }}"

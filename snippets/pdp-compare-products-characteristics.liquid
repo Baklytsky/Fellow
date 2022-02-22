@@ -96,7 +96,7 @@
                         type="button"
                         data-action="toggle-tab"
                         aria-controls="tab-{{ _product.id | append: forloop.index }}"
-                        {% if forloop.first != blank %} aria-selected="true"{% endif %}>
+                        {% if forloop.first != blank %} data-selected="true"{% endif %}>
                   {{ _product_title | default: _product.title }}
                 </button>
               </li>
@@ -113,7 +113,7 @@
             {%- if _product != blank -%}
               <div id="tab-{{ _product.id | append: forloop.index }}"
                    data-tab="tab-{{ _product.id | append: forloop.index }}"
-                   {% if forloop.first != blank %} aria-selected="true"{% endif %}>
+                   {% if forloop.first != blank %} data-selected="true"{% endif %}>
 
                 {%- if item["compare_product_image"] != blank -%}
                   {%- assign _product_image = item["compare_product_image"] -%}
