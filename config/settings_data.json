@@ -40,7 +40,7 @@
     "best_sellers_heading": "Shop Best Sellers",
     "best_sellers_collection": "bestsellers",
     "search_heading": "Are you looking for...",
-    "popular_searches_product_1": "stagg-ekg-electic-pour-over-kettle",
+    "popular_searches_product_1": "stagg-ekg-electric-pour-over-kettle",
     "popular_searches_product_2": "clara-french-press",
     "popular_searches_product_3": "ode-brew-grinder",
     "social_instagram_link": "https:\/\/www.instagram.com\/fellowproducts",
@@ -705,11 +705,13 @@
       },
       "cart-recommended": {
         "type": "cart-recommended",
-        "settings": {}
+        "settings": {
+        }
       },
       "cart-gift-wrapping": {
         "type": "cart-gift-wrapping",
-        "settings": {}
+        "settings": {
+        }
       },
       "1636101715cd2df3c8": {
         "type": "hp-iwt",
@@ -728,7 +730,8 @@
       },
       "page-template": {
         "type": "page-template",
-        "settings": {}
+        "settings": {
+        }
       },
       "16391832269c232690": {
         "type": "hp-iwt",
@@ -747,7 +750,8 @@
       },
       "search-template": {
         "type": "search-template",
-        "settings": {}
+        "settings": {
+        }
       }
     },
     "content_for_index": [
@@ -769,7 +773,8 @@
       "sections": {
         "featured-product": {
           "type": "featured-product",
-          "settings": {}
+          "settings": {
+          }
         }
       },
       "content_for_index": [
