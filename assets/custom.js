@@ -556,8 +556,8 @@ theme.pdpMain = function () {
 
     $(document).on('click.pdpStickySize', '[data-open-size-group]', function (e) {
       var $optionGroupSize = $('.option-groups-size');
-      $(this).toggleClass('group-open')
-      $optionGroupSize.slideToggle()
+      $(this).toggleClass('group-open').parent().toggleClass('is-open')
+      $optionGroupSize.stop().slideToggle()
     })
 
     $(document).on('click.pdpStickyCloseSize', function (e) {
@@ -565,7 +565,7 @@ theme.pdpMain = function () {
           $hideElement = $('.option-groups-size');
       if (!$container.is(e.target) && $container.has(e.target).length === 0 && $hideElement.is(':visible')) {
         $hideElement.slideUp();
-        $('[data-open-size-group]').removeClass('group-open')
+        $('[data-open-size-group]').removeClass('group-open').parent().removeClass('is-open')
       }
     })
   }
