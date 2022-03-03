@@ -16003,6 +16003,16 @@ main#root .pdp-reviews .yotpo.bottomLine .standalone-bottomline .rating-star:las
 [data-material=matte-black-maple]:after {
   color: #edc890
 }
+    
+    [data-color=matte-white-maple],
+[data-material=matte-white-maple] {
+  color: var(--white)
+}
+
+[data-color=matte-white-maple]:after,
+[data-material=matte-white-maple]:after {
+  color: #edc890
+}
 
 [data-color=warm-pink-maple],
 [data-material=warm-pink-maple] {
