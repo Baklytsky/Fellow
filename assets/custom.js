@@ -544,9 +544,14 @@ theme.pdpMain = function () {
       }
     })
 
+    
     $(document).on('click.pdpSelectSize', '[data-option-size] .radio', function () {
       var $attrToRemove = $('[data-disabled-size="true"]')
       $attrToRemove.map((index, element) => $(element).removeAttr('data-disabled-size'))
+     
+      if($(this).is('label')) {
+        $('.pdpStickyBar [data-open-size-group]').prev('strong').text($(this).find('span:last-child').text())     
+      }
     })
 
     $(document).on('click.pdpStickyOptions', '[data-copy-for]', function (e) {
@@ -718,7 +723,7 @@ theme.pdpMain = function () {
         var sizehandle = $(this).data('value-handle');
         $('#' + sizehandle).removeAttr('disabled','disabled'); 
         $('div[data-size^="' + sizehandle + '"]').css('opacity','');
-        $('span[data-size^="' + sizevar + '"]').css('text-decoration','');
+        $('div[data-size^="' + sizehandle + '"]').css('text-decoration','');
       });
 
       // Enable all quantities and return to default styling now that a new variant option has been selected
@@ -727,7 +732,7 @@ theme.pdpMain = function () {
         var quantityhandle = $(this).data('value-handle');
         $('#' + quantityhandle).removeAttr('disabled','disabled');
         $('div[data-quantity^="' + quantityhandle + '"]').css('color','');
-        $('span[data-quantity^="' + quantityvar + '"]').css('text-decoration','');
+        $('div[data-quantity^="' + quantityhandle + '"]').css('text-decoration','');
       });
 
       // Add all colors to the all_colors array list
@@ -847,7 +852,7 @@ theme.pdpMain = function () {
             if (all_quantities.indexOf(quantityvar) > -1) {
               $('#' + quantityhandle).attr('disabled','disabled'); 
               $('div[data-quantity^="' + quantityhandle + '"]').css('color','#ABABAB');
-              $('span[data-quantity^="' + quantityvar + '"]').css('text-decoration','line-through');
+              $('div[data-quantity^="' + quantityhandle + '"]').css('text-decoration','line-through');
             }
           });
         }
@@ -862,7 +867,7 @@ theme.pdpMain = function () {
           if (all_sizes.indexOf(sizevar) > -1) {
             $('#' + sizehandle).attr('disabled','disabled');
             $('div[data-size^="' + sizehandle + '"]').css('opacity','0.5');
-            $('span[data-size^="' + sizevar + '"]').css('text-decoration','line-through');
+            $('div[data-size^="' + sizehandle + '"]').css('text-decoration','line-through');
           }
         });
       }

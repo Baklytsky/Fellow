@@ -3302,7 +3302,21 @@ h2.pdpCopy__header-price ,
   }
 
   .pdp__options {
-    padding-right: 64px;
+    padding: 0 64px 0 32px;
+    flex: 1 1 0;
+
+    @media screen and (max-width: $widescreen) {
+      padding-right: 32px;
+    }
+  }
+
+  .radio-group {
+    flex-flow: row wrap;
+
+    .radio {
+      margin-top: 4px;
+      margin-bottom: 4px;
+    }
   }
 
   #pdp-sticky-atc {
@@ -3322,7 +3336,7 @@ h2.pdpCopy__header-price ,
 
   [data-option-color] .radio {
     &:not(:last-child) {
-      margin-right: 20px;
+      margin-right: 16px;
     }
   }
 
@@ -3364,7 +3378,7 @@ h2.pdpCopy__header-price ,
 
 .pdp__sticky-options {
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
   align-items: center;
 
   .pdp__sticky-options-label {
@@ -3394,7 +3408,12 @@ h2.pdpCopy__header-price ,
   }
 
 
-  .pdp__sticky-options-label[data-option-label="Size"] .option-title strong { font-weight: 400; }
+  .pdp__sticky-options-label[data-option-label="Size"] .option-title strong { 
+    overflow: hidden;
+    font-weight: 400;
+    text-overflow: ellipsis; 
+    white-space: nowrap;
+  }
 
   .pdp__sticky-options-item {
     display: flex;

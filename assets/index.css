@@ -18603,7 +18603,7 @@ textarea {
 
 .radio-group[data-option-color] label:not(:last-child) .radio__title,
 .radio-group[data-option-material] label:not(:last-child) .radio__title {
-  margin-right: 20px
+  margin-right: 16px
 }
 
 .radio-group[data-option-color] .radio__title,

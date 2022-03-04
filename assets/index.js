@@ -14808,7 +14808,7 @@
               p = d.tags.includes("preorder"),
               v = d.tags.includes("discontinued"),
               y = "";
-          y = v ? "Discontinued" : "Out of Stock";
+          y = v ? "Discontinued" : "Out of Stock | Notify Me";
           var m = "";
 
           function g() {
