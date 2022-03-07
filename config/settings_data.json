@@ -318,15 +318,15 @@
             "type": "splitSlide",
             "settings": {
               "splitSlide__layout": "right",
-              "heroSlide": "shopify:\/\/shop_images\/02.15.22_Hero_Module.jpg",
+              "heroSlide": "shopify:\/\/shop_images\/Homepage-StaggEKG-Launch.png",
               "desktopAlignment": "center",
               "mobileAlignment": "center",
-              "heroSlide__header": "Pours Well With Others",
-              "heroSlide__subheader": "Precisely tuned and perfectly balanced, Stagg EKG brings out the best in your pour-over.",
+              "heroSlide__header": "Maple Staples",
+              "heroSlide__subheader": "The most essential item in your pour-over routine—now with premium maple accents.",
               "subSlide__bgColor": "#edc890",
               "subSlide__textColor": "#231f20",
               "heroSlide__ctaURL": "shopify:\/\/collections\/kettles",
-              "heroSlide__ctaCopy": "Shop Kettles",
+              "heroSlide__ctaCopy": "Shop New Stagg EKGs",
               "heroSlide__ctaColor": "black",
               "heroSlide__ctaSubtext": ""
             }
@@ -525,14 +525,14 @@
         "type": "hp-iwt",
         "settings": {
           "enable_section": true,
-          "image": "shopify:\/\/shop_images\/Rookie_Kit_780x618_Product_Feature_1.jpg",
+          "image": "shopify:\/\/shop_images\/MapleKettles_module_1.png",
           "layout": "right",
-          "header": "The Rookie Kit",
-          "description": "<p>A pour-over intro kit that you’ll still be using when you go pro.<\/p>",
+          "header": "Lighten Up",
+          "description": "<p>New Stagg EKGs with warm maple accents. Pour-over precision, designed for the home.<\/p>",
           "bg_color": "",
           "text_color": "#000000",
-          "cta_url": "shopify:\/\/collections\/coffee-products-kits-bundles",
-          "cta_copy": "Shop Kits + Bundles",
+          "cta_url": "shopify:\/\/collections\/kettles",
+          "cta_copy": "Pick Your Kettle",
           "cta_color": "btn--dark"
         }
       },
@@ -705,13 +705,11 @@
       },
       "cart-recommended": {
         "type": "cart-recommended",
-        "settings": {
-        }
+        "settings": {}
       },
       "cart-gift-wrapping": {
         "type": "cart-gift-wrapping",
-        "settings": {
-        }
+        "settings": {}
       },
       "1636101715cd2df3c8": {
         "type": "hp-iwt",
@@ -730,8 +728,7 @@
       },
       "page-template": {
         "type": "page-template",
-        "settings": {
-        }
+        "settings": {}
       },
       "16391832269c232690": {
         "type": "hp-iwt",
@@ -750,8 +747,7 @@
       },
       "search-template": {
         "type": "search-template",
-        "settings": {
-        }
+        "settings": {}
       }
     },
     "content_for_index": [
@@ -773,8 +769,7 @@
       "sections": {
         "featured-product": {
           "type": "featured-product",
-          "settings": {
-          }
+          "settings": {}
         }
       },
       "content_for_index": [
