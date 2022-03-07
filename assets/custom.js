@@ -294,6 +294,7 @@ theme.qvChangeSlide = function () {
   let modalVariantId = $('#ProductQuickView #quickAdd').attr('data-add-id'),
       $modalSelectedVariantThumbnail = $('#modalContent').find('[data-variant-img="' + modalVariantId + '"]');
   if ($modalSelectedVariantThumbnail.length) {$modalSelectedVariantThumbnail.trigger('click')}
+
 }
 
 theme.quickView = function (URL, innerContainer) {
@@ -311,6 +312,8 @@ theme.quickView = function (URL, innerContainer) {
       $('#emptyQvModal').hide();
       innerContainer.fadeIn(1000);
       theme.qvVariantChange()
+
+
     }
   });
 }
@@ -321,6 +324,13 @@ theme.handleize = function (str) {
 };
 
 theme.pdpMain = function () {
+
+  var variantId = $(".pdpMain__variant-image").data("variant-media");
+  var id = $('#selectid option[value="'+variantId+'"]').data("variant-preorder");
+  if(id == true){
+    console.log("preorder");
+    $('.js-atc-copy').text("Pre-order");
+  }
 
   function stickyScrolling(options) {
     var $container = options.container || undefined;
@@ -647,11 +657,11 @@ theme.pdpMain = function () {
   theme.variantChange = function (variantId, changeMediaContent) {
     function changeMedia() {
       var ajaxUrl = window.location.protocol + '//' + window.location.host + window.location.pathname + '?variant=' + variantId + '&view=ajax-media',
-          $productMedia = $productMedia = $(document).find('.pdpMain__Media'),
-          $productUpsell = $(document).find('.upsell-product'),
-          $productPrice = $(document).find('.pdpCopy__price.hide-mobile'),
-          $productMobilePrice = $(document).find('.pdpCopy__price.hide-desktop'),
-          $stickyPrice = $(document).find('.pdpStickyBar .pdpCopy__price');
+          $productMedia = $productMedia = $('.pdpMain__Media'),
+          $productUpsell = $('.upsell-product'),
+          $productPrice = $('.pdpForm .pdpCopy__price.hide-mobile'),
+          $productMobilePrice = $('.pdpForm .pdpCopy__price.hide-desktop'),
+          $stickyPrice = $('.pdpStickyBar .pdpCopy__price');
 
       $.ajax({
         url: ajaxUrl,
@@ -662,8 +672,8 @@ theme.pdpMain = function () {
         },
         success: function (data) {
           var $newProductMedia = $(data).find('.pdpMain__Media').html(),
-              $newProductPrice = $(data).find('.pdpCopy__price.hide-mobile').html(),
-              $newProductMobilePrice = $(data).find('.pdpCopy__price.hide-desktop').html(),
+              $newProductPrice = $(data).find('.pdpForm .pdpCopy__price.hide-mobile').html(),
+              $newProductMobilePrice = $(data).find('.pdpForm .pdpCopy__price.hide-desktop').html(),
               $newStickyPrice = $(data).find('.pdpStickyBar .pdpCopy__price').html();
 
           $productMedia.html($newProductMedia);
@@ -683,12 +693,22 @@ theme.pdpMain = function () {
            } else {
              $productUpsell.html('');
            }
+
+
+
         }
       });
     }
 
     if (variantId && changeMediaContent) {
       changeMedia()
+
+      var id = $('#selectid option[value="'+variantId+'"]').data("variant-preorder");
+
+      if(id == true){
+        console.log("preorder");
+        $('.js-atc-copy').text("Pre-order");
+      }
     }
     
         // ======================================== Neels code starts here ========================================
@@ -875,7 +895,7 @@ theme.pdpMain = function () {
       $('.option-group-title-value').html('')
       $('.pdp__options-main [data-option-color] input').each(function () {
         if ($(this).is(':checked')) {
-          $(this).parents('.option-groups__group').find('.option-group-title-value').html(selectedColor)
+          $(this).parents('.option-groups__group').find('.option-group-title-value').html(selectedColor);
         }
       })
     }
@@ -1149,6 +1169,7 @@ theme.pdpQuickView = function () {
   // clicks:
   $(document).off('click.pdpQvSelectSize')
   $(document).off('mousedown.QvClose')
+
 
   $(document).on('mousedown.QvClose', function (e) {
     var $container = $('.Modal');
@@ -1998,6 +2019,8 @@ theme.GLOBAL = function () {
 
 
   theme.qvVariantChange = function () {
+
+
     let selectedOption = $('#ProductQuickView .radio-group input:checked');
 
     var currentOptions = $.map(selectedOption, function(element, index) {
@@ -2231,8 +2254,11 @@ theme.GLOBAL = function () {
 
             $('#ProductQuickView #selectid').val(variants[i].id);
 
+
+
             $($('#ProductQuickView #selectid').find('[value="' + variants[i].id + '"]')).attr('selected', 'selected');
             $('[data-selected-var-price]').text($($('#ProductQuickView #selectid').find('[value="' + variants[i].id + '"]')).attr('data-variant-price'))
+
 
             if ($('.js-counter-quantity').val() < 1) {
               $('.js-counter-quantity').val(1)
@@ -2246,6 +2272,12 @@ theme.GLOBAL = function () {
             } else {
               $($('#ProductQuickView #quickAdd').find('[data-atc-copy]')).text(window.theme.strings.soldOut);
               $('#ProductQuickView #quickAdd').attr('data-add-id', variants[i].id)
+            }
+
+            var id = $('#ProductQuickView #selectid').find('[value="' + variants[i].id + '"]').data('variant-preorder');
+            if(id == true){
+               console.log("preorder");
+               $('#quickAdd .js-atc-copy').text("Pre-order");
             }
           }
         }

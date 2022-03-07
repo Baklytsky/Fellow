@@ -30,7 +30,7 @@
           {% comment %}
             Product is available and not on sale
           {% endcomment %}
-          <h2 data-selected-var-price class="ml1 pdpCopy__header-price">{{ product.price | money | remove: '.00' }}</h2>
+          <h2 class="ml1 pdpCopy__header-price">{{ product.price | money | remove: '.00' }}</h2>
         {% endif %}
       {% else %}
         {% comment %}
