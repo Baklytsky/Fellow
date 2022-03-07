@@ -18757,11 +18757,13 @@ textarea {
 }*/
 
 .radio-group[data-option-quantity] input:checked+.radio__title,
+.radio-group[data-option-burrs] input:checked+.radio__title,
 .pdp__sticky-options-item .radio-group:not([data-option-color]):not([data-option-material]):not([data-option-size]) .radio.checked {
   position: relative;
   color: #000;
 }
 .radio-group[data-option-quantity] input:checked+.radio__title:after,
+.radio-group[data-option-burrs] input:checked+.radio__title:after,
 .pdp__sticky-options-item .radio-group:not([data-option-color]):not([data-option-material]):not([data-option-size]) .radio.checked:after {
   content: '';
   position: absolute;

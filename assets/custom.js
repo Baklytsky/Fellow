@@ -722,8 +722,8 @@ theme.pdpMain = function () {
         var sizevar = $(this).attr('title');
         var sizehandle = $(this).data('value-handle');
         $('#' + sizehandle).removeAttr('disabled','disabled'); 
-        $('div[data-size^="' + sizehandle + '"]').css('opacity','');
         $('div[data-size^="' + sizehandle + '"]').css('text-decoration','');
+        $('div[data-size^="' + sizehandle + '"]').css('color','');
       });
 
       // Enable all quantities and return to default styling now that a new variant option has been selected
@@ -866,8 +866,8 @@ theme.pdpMain = function () {
           // If the size element is found in the all_sizes list we need to disable this element as it is not an available size option
           if (all_sizes.indexOf(sizevar) > -1) {
             $('#' + sizehandle).attr('disabled','disabled');
-            $('div[data-size^="' + sizehandle + '"]').css('opacity','0.5');
             $('div[data-size^="' + sizehandle + '"]').css('text-decoration','line-through');
+            $('div[data-size^="' + sizehandle + '"]').css('color','#ababab');
           }
         });
       }

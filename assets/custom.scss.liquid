@@ -4936,10 +4936,14 @@ h2.pdpCopy__header-price ,
     }
   }
 
+  .option-groups__group .radio-group[data-option-burrs] {
+    overflow: visible;
+  }
+
   .option-groups__group .radio-group[data-option-size] {
     width: 100%;
     flex-wrap: nowrap;
-    margin-left: -15px;
+    margin-left: -5px;
     margin-top: -0.25rem;
 
     .radio__label-size-image {
@@ -4964,12 +4968,16 @@ h2.pdpCopy__header-price ,
   }
 
   .size__image-wrapper {
-    width: 60px;
+    width: 100%;
     height: 60px;
   }
 
   .productCard__badge {
     display: none;
+  }
+
+  .radio-group:not([data-option-color]):not([data-option-material]) label {
+    padding-left: .4em;
   }
 }
 
