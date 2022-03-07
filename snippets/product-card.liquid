@@ -48,7 +48,7 @@
     %}
     {% include 'product-card-details', large_title: large_title %}
     {% if product.options and hide_variants != true %}
-      {% include 'product-card-swatches' %}
+      {% include 'product-card-swatches', block_id: block_id %}
     {% endif %}
     {% if bottom_content != blank %}
       {{ bottom_content }}
