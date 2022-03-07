@@ -75,6 +75,7 @@
       PR: multi-line <option> tag introduces whitespace that breaks updateSelection() in options.js for variant titles >1 word
       the option tag is one-lined to avoid adding whitespace which breaks updateSelection() in options.js
     {% endcomment %}
+  	{% assign preorder_variant_id = product.metafields.custom_fields["pre-order_variant_id"] | plus:0 %}
     {% for variant in product.variants %}
       <option
         value='{{ variant.id }}'
@@ -82,7 +83,8 @@
         data-variant-price='{{ variant.price | money | remove: ".00" }}'
         data-variant-inventory-quantity='{{ variant.inventory_quantity }}'
         data-variant-inventory-policy='{{ variant.inventory_policy }}'
-        data-variant-inventory-management='{{ variant.inventory_management }}'>{{ variant.title }}</option>
+        data-variant-inventory-management='{{ variant.inventory_management }}'
+        {% if preorder_variant_id == variant.id %}data-variant-preorder='true'{% endif %}>{{ variant.title }}</option>
     {% endfor %}
   {%- endcapture -%}
   {%- capture selectTitle -%}Options for {{ product.title }}{%- endcapture -%}

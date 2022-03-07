@@ -23382,3 +23382,13 @@ html {
 [data-material=stone-blue-maple]:after {
   color: #edc890
 }
+    
+        [data-color=matte-white-maple],
+[data-material=matte-white-maple] {
+  color: #FFFFFF
+}
+
+[data-color=matte-white-maple]:after,
+[data-material=matte-white-maple]:after {
+  color: #edc890
+}
