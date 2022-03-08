@@ -40,7 +40,7 @@
     "best_sellers_heading": "Shop Best Sellers",
     "best_sellers_collection": "bestsellers",
     "search_heading": "Are you looking for...",
-    "popular_searches_product_1": "stagg-ekg-electic-pour-over-kettle",
+    "popular_searches_product_1": "stagg-ekg-electric-pour-over-kettle",
     "popular_searches_product_2": "clara-french-press",
     "popular_searches_product_3": "ode-brew-grinder",
     "social_instagram_link": "https:\/\/www.instagram.com\/fellowproducts",
@@ -705,30 +705,33 @@
       },
       "cart-recommended": {
         "type": "cart-recommended",
-        "settings": {}
+        "settings": {
+        }
       },
       "cart-gift-wrapping": {
         "type": "cart-gift-wrapping",
-        "settings": {}
+        "settings": {
+        }
       },
       "1636101715cd2df3c8": {
         "type": "hp-iwt",
         "settings": {
           "enable_section": true,
-          "image": "shopify:\/\/shop_images\/Clara_780x618_Product_Feature.jpg",
+          "image": "shopify:\/\/shop_images\/Carter_780x618_Product_Feature.jpg",
           "layout": "left",
-          "header": "No Chill",
-          "description": "<p>The rare French press that keeps your brew warm for multiple cups.<\/p>",
+          "header": "Designed for coffee, built for double-takes.",
+          "description": "<p>The answer to: “Where did you get that mug?” It’s right here.<\/p>",
           "bg_color": "",
           "text_color": "",
-          "cta_url": "shopify:\/\/products\/clara-french-press",
-          "cta_copy": "Shop Clara",
+          "cta_url": "shopify:\/\/collections\/serve",
+          "cta_copy": "Shop Drink + Serve",
           "cta_color": "btn--dark"
         }
       },
       "page-template": {
         "type": "page-template",
-        "settings": {}
+        "settings": {
+        }
       },
       "16391832269c232690": {
         "type": "hp-iwt",
@@ -747,7 +750,8 @@
       },
       "search-template": {
         "type": "search-template",
-        "settings": {}
+        "settings": {
+        }
       }
     },
     "content_for_index": [
@@ -769,7 +773,8 @@
       "sections": {
         "featured-product": {
           "type": "featured-product",
-          "settings": {}
+          "settings": {
+          }
         }
       },
       "content_for_index": [
