@@ -60,6 +60,7 @@ $mobile: 768px;
 $tablet: 992px;
 $desk: 1140px;
 $large_desk: 1200px;
+$larger_desk: 1300px;
 $widescreen: 1440px;
 
 body {
@@ -213,6 +214,10 @@ button {
     padding: 17px 33px;
     align-items: center;
     font-weight: 500;
+
+    @media screen and (min-width: $large_desk + 1px) and (max-width: $larger_desk) {
+      padding: 19px 33px;
+    }
 
     @media screen and (max-width: $tablet) {
       padding: 5px 16px;
@@ -2958,7 +2963,7 @@ h2.pdpCopy__header-price ,
   .cart__button,
   .customize-btn {
     max-width: 320px;
-    padding: 13px 20px;
+    padding: 14px 20px;
     margin: 16px 16px 16px 0;
     border-radius: 12px;
     outline: none;
@@ -2967,6 +2972,7 @@ h2.pdpCopy__header-price ,
     font-weight: 500;
     font-size: 18px;
     line-height: 24px;
+    letter-spacing: 0;
     text-transform: capitalize;
     cursor:pointer;
 
@@ -3283,7 +3289,11 @@ h2.pdpCopy__header-price ,
     max-width: 1440px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
+  }
+
+  .pdpCopy__header {
+    padding-top: 16px;
   }
 
   .pdpCopy__header-title {
@@ -3291,10 +3301,16 @@ h2.pdpCopy__header-price ,
     font-size: 26px;
   }
 
+  .pdpCopy__price {
+    padding-top: 12px;
+  }
+
   .pdpCopy__header-price {
+    margin-left: 0;
     font-family: $font-base;
     font-size: 16px;
     line-height: 100%;
+    font-weight: bold;
   }
 
   .card__price--regular {
@@ -3302,7 +3318,7 @@ h2.pdpCopy__header-price ,
   }
 
   .pdp__options {
-    padding: 0 64px 0 32px;
+    padding: 8px 32px;
     flex: 1 1 0;
 
     @media screen and (max-width: $widescreen) {
@@ -3316,15 +3332,11 @@ h2.pdpCopy__header-price ,
     .radio {
       margin-top: 4px;
       margin-bottom: 4px;
-
-      &:last-child {
-        margin-bottom: 0;
-      }
     }
   }
 
   #pdp-sticky-atc {
-    min-width: 218px;
+    min-width: 172px;
     margin: 0;
   }
 
@@ -3342,7 +3354,7 @@ h2.pdpCopy__header-price ,
     &:not(:last-child) {
       margin-right: 16px;
 
-      @media screen and (min-width: 1201px) and (max-width: 1300px) {
+      @media screen and (min-width: $large_desk + 1px) and (max-width: $larger_desk) {
         margin-right: 10px;
       }
     }
@@ -3377,20 +3389,51 @@ h2.pdpCopy__header-price ,
   }
 }
 
+.pdp__options {
+  .radio__title {
+    @media screen and (min-width: $large_desk + 1px) and (max-width: $larger_desk) {
+      white-space: nowrap;
+    }
+  }
+
+  .radio.checked {
+    .radio__title {
+      border-color: #ababab;
+    }
+  }
+
+  .radio-group input:checked + .radio__title {
+    border-color: #ababab;
+  }
+
+  .radio-group input:checked + .radio__title {
+    &:before,
+    &:after {
+      border-color: #fff;
+    }
+  }
+}
+
 .pdpStickyBar__badge {
   .separator {
     padding: 0 14px 0 24px;
-
   }
 }
 
 .pdp__sticky-options {
   display: flex;
+  align-items: flex-start;
   flex-direction: row;
-  align-items: center;
 
   .pdp__sticky-options-label {
     white-space: nowrap;
+    padding-top: 10px;
+  }
+
+  .stickySize {
+    .pdp__sticky-options-label {
+      padding-top: 0;
+    }
   }
 
   .pdp__sticky-options-label[data-option-label="Size"] {
@@ -3424,18 +3467,34 @@ h2.pdpCopy__header-price ,
   }
 
   .pdp__sticky-options-item {
+    position: relative;
     display: flex;
-    align-items: center;
     margin: 0;
 
+    &:first-child {
+      flex: 1 0 auto;
+    }
+
+    &:nth-child(2) {
+      flex: 0 1 auto;
+    }
+
     &:after {
-      content: "|";
-      padding: 0 16px;
+      content: '';
+      margin: 6px 16px;
+      width: 2px;
+      flex: 0 0 2px;
+      height: 28px;
+      background: currentColor;
     }
 
     .option-title {
       padding-right: 16px;
       margin: 0;
+    }
+
+    .option-title strong {
+      font-weight: 500;
     }
 
     .pdp__sticky-dropdown-icon {
@@ -3467,11 +3526,15 @@ h2.pdpCopy__header-price ,
 
   .radio.checked {
     .radio__title {
-      border-color: #000;
-      &:before, &:after {
+      &:before,
+      &:after {
         border-color: #FFF;
       }
     }
+  }
+
+  .option-title {
+    font-size: 16px;
   }
 
   .option-groups {
@@ -3483,7 +3546,7 @@ h2.pdpCopy__header-price ,
   .option-groups-size {
     display: none;
     position: absolute;
-    top: 100%;
+    top: calc(100% - 4px);
     left: 0;
     width: 100%;
     max-width: 127px;
@@ -6604,4 +6667,28 @@ list-style: unset;
 }
 ul.pdp_details__feature_list > li {
   margin: 0 0 16px;
+}
+
+/* PDP Options */
+.radio-group {
+  &:not([data-option-color]):not([data-option-material]):not([data-option-size]) {
+    .radio__title {
+      padding: 13px 16px;
+
+      @media screen and (max-width: $tablet) {
+        height: auto;
+      }
+    }
+  }
+}
+
+.radio-group[data-option-quantity] input:checked+.radio__title:after,
+.radio-group[data-option-burrs] input:checked+.radio__title:after,
+.pdp__sticky-options-item .radio-group:not([data-option-color]):not([data-option-material]):not([data-option-size]) .radio.checked:after {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-color: #c2c2c2;
+  box-shadow: 0 0 0 2px #fff inset;
 }
