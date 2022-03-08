@@ -15618,9 +15618,10 @@ https://flickity.metafizzy.co
 .productCard_ratings .text-s,
 .productCard_ratings .text-l
 {
- display:none; 
+ display:none;
 }
 
+/*
 main#root .yotpo * {
   color: #000;
   font-size: 1rem
@@ -15814,6 +15815,7 @@ main#root .pdp-reviews .yotpo.bottomLine .standalone-bottomline .rating-star {
 main#root .pdp-reviews .yotpo.bottomLine .standalone-bottomline .rating-star:last-child {
   margin-right: 0
 }
+*/
 
 
 :root {
@@ -16365,7 +16367,7 @@ em,
   letter-spacing: normal;
   margin-bottom: .5em
 }
-    
+
     .articleCard__header>.eyebrow {
   font-size: 0.875rem;
   font-weight: 600;
@@ -16374,7 +16376,7 @@ em,
   letter-spacing: normal;
   margin-bottom: 1rem
 }
-    
+
        .articleCard__header>h2.h4 {
   font-size: 1.625rem;
   font-weight: 500;
@@ -16385,8 +16387,8 @@ em,
          margin-top: 1rem;
       margin-bottom: 1rem;
 }
-   
-    
+
+
     .articleCard__excerpt {
       overflow: hidden;
    text-overflow: ellipsis;
@@ -16395,15 +16397,15 @@ em,
    -webkit-box-orient: vertical;
       line-height:1.25rem;
     }
-    
+
     .articleCard__image {
      /*min-height:280px; */
     }
-    
+
     .articleCard {
      /*min-height:552px; */
     }
-    
+
     a.underline {
       text-transform: capitalize;
       font-size: 1rem;
@@ -20072,7 +20074,7 @@ h3.productCard__title {
   align-items: flex-start;
   padding-top: 12px;
 }
-    
+
  .productCard__reviewNum {
   position:relative;
  }
@@ -20105,7 +20107,7 @@ h3.productCard__title {
   margin: 0 3px;
   text-transform: lowercase;
 }
-    
+
 .productCard__strike.eyebrow {
   white-space: nowrap;
   font-style: normal;
@@ -20187,9 +20189,9 @@ h3.productCard__title {
   .productCard__tagline {
     display: none
   }
-  
+
   main#root .yotpo .standalone-bottomline {
-   padding: 8px 0 0; 
+   padding: 8px 0 0;
   }
 
   .productCardVariants__CountButton,
@@ -20208,7 +20210,7 @@ h3.productCard__title {
   }
 
   .productCard__price {
-    padding-top: 8px;
+    padding-top: 3px;
   }
 
   .productCard .productCard__details--small .productCard__price-wrapper h3,
@@ -21877,7 +21879,7 @@ h3.productCard__title {
   font-size: 1.25rem;
 font-family: "PP Right Grotesk",sans-serif;
 }
-    
+
     .pdp-reviews__summary {
   font-weight: 600;
   font-size: 1rem
@@ -23413,5 +23415,15 @@ html {
 
 [data-color=stone-blue-maple]:after,
 [data-material=stone-blue-maple]:after {
+  color: #edc890
+}
+    
+        [data-color=matte-white-maple],
+[data-material=matte-white-maple] {
+  color: #FFFFFF
+}
+
+[data-color=matte-white-maple]:after,
+[data-material=matte-white-maple]:after {
   color: #edc890
 }
