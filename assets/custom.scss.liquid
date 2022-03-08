@@ -3294,6 +3294,7 @@ h2.pdpCopy__header-price ,
 
   .pdpCopy__header {
     padding-top: 16px;
+    padding-bottom: 5px;
   }
 
   .pdpCopy__header-title {
@@ -3318,12 +3319,8 @@ h2.pdpCopy__header-price ,
   }
 
   .pdp__options {
-    padding: 8px 32px;
-    flex: 1 1 0;
-
-    @media screen and (max-width: $widescreen) {
-      padding-right: 32px;
-    }
+    padding: 8px 32px 8px 20px;
+    flex: 1 0 auto;
   }
 
   .radio-group {
@@ -3333,6 +3330,10 @@ h2.pdpCopy__header-price ,
       margin-top: 4px;
       margin-bottom: 4px;
     }
+  }
+
+  #atc-sticky-wrapper {
+    flex: 1 0 auto;
   }
 
   #pdp-sticky-atc {
@@ -3347,6 +3348,10 @@ h2.pdpCopy__header-price ,
   .option-groups .option-groups__group {
     &:not(:last-child) {
       margin-right: 20px;
+
+      @media screen and (min-width: $large_desk + 1px) and (max-width: $larger_desk) {
+        margin-right: 10px;
+      }
     }
   }
 
@@ -3541,17 +3546,23 @@ h2.pdpCopy__header-price ,
     margin: 0;
   }
 
-  .option-groups-size { background-color: #fff; }
+  .option-groups-size {
+    background-color: #fff;
+  }
 
   .option-groups-size {
     display: none;
     position: absolute;
-    top: calc(100% - 4px);
+    top: calc(100% - 2px);
     left: 0;
     width: 100%;
     max-width: 127px;
     border: 1px solid #000;
     border-top: none;
+
+    .radio:last-child {
+      margin-bottom: 0;
+    }
 
     .radio.checked {
       .radio__title {
