@@ -3390,9 +3390,9 @@ h2.pdpCopy__header-price ,
 }
 
 .pdp__options {
-  .radio__title {
+  .radio-group:not([data-option-color]):not([data-option-material]):not([data-option-size]) .radio__title {
     @media screen and (min-width: $large_desk + 1px) and (max-width: $larger_desk) {
-      white-space: nowrap;
+      padding: 13px 14px;
     }
   }
 
