@@ -3496,8 +3496,11 @@ h2.pdpCopy__header-price ,
 
   .pdp__sticky-options-item {
     position: relative;
-    display: flex;
     margin: 0;
+
+    &:not(.hide) {
+      display: flex;
+    }
 
     &:first-child {
       flex: 1 0 auto;
