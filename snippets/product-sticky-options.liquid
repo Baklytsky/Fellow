@@ -1,4 +1,4 @@
-<div class='pdp__options rel f1 f jce'>
+<div class='pdp__options{% if product.handle == "ode-brew-grinder" %} pdp__options--ode-brew-grinder{% endif %} rel f1 f jce'>
   {%- assign product_has_size_option = false -%}
   {%- unless template contains 'bundle' -%}
     <div {% if product.has_only_default_variant or product.variants.size <= 1 %}style='display:none'{% else %} class="pdp__sticky-options" {% endif %}>
