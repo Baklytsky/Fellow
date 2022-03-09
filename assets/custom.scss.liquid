@@ -3500,7 +3500,6 @@ h2.pdpCopy__header-price ,
     transition: border .2s, border-radius .2s;
   }
 
-
   .pdp__sticky-options-label[data-option-label="Size"] .option-title strong {
     overflow: hidden;
     font-weight: 400;
@@ -3512,12 +3511,21 @@ h2.pdpCopy__header-price ,
     position: relative;
     margin: 0;
 
+    @media screen and (min-width: $large_desk + 1px) and (max-width: $larger_desk) {
+      flex: 0;
+    }
+
     &:not(.hide) {
       display: flex;
     }
 
     &:first-child {
-      flex: 1 0 auto;
+      flex: 1 1 auto;
+
+      @media screen and (min-width: $large_desk + 1px) and (max-width: $larger_desk) {
+        flex-basis: 180px;
+        justify-content: flex-end;
+      }
     }
 
     &:nth-child(2) {
@@ -3635,6 +3643,19 @@ h2.pdpCopy__header-price ,
 
   .radio-group-size {
     margin: 0 !important;
+  }
+}
+
+.pdp__sticky-options-item {
+  .radio-group {
+    &[data-option-quantity]:not(.radio-group-size) {
+      .radio {
+        @media screen and (min-width: $large_desk + 1px) and (max-width: $larger_desk) {
+          flex: 0 1 85px;
+          white-space: nowrap;
+        }
+      }
+    }
   }
 }
 
