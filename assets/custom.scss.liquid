@@ -6967,9 +6967,13 @@ ul.pdp_details__feature_list > li {
             line-height: 130% !important;
             color: $color-black !important;
             position: relative;
+            display: flex;
+            align-items: center;
           }
 
-          .selected-bold.selected[data-selected-key="Select"] {
+          .selected-bold.selected[data-selected-key="Select"],
+          .selected-bold.selected[data-selected-key="most_helpful"],
+          .selected-bold.selected[data-selected-key="least_helpful"] {
             font-size: 0;
 
             &:before {
@@ -6982,6 +6986,16 @@ ul.pdp_details__feature_list > li {
               color: $color-black;
               font-size: 16px;
             }
+          }
+
+          .selected-bold.selected[data-selected-key="Select"]:before {
+            content: 'Sort By';
+          }
+          .selected-bold.selected[data-selected-key="most_helpful"]:before {
+            content: 'Highest Rated';
+          }
+          .selected-bold.selected[data-selected-key="least_helpful"]:before {
+            content: 'Lowest Rated';
           }
         }
 
