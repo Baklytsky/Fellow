@@ -2942,6 +2942,12 @@ h2.pdpCopy__header-price ,
         margin: 0 10px 0 0;
         font-size: 20px;
       }
+
+      .yotpo-icon.yotpo-icon-half-star {
+        margin: 0;
+        font-size: 20px;
+      }
+
       .yotpo-bottomline.pull-left {
         display: flex;
         align-items: center;
@@ -6636,6 +6642,11 @@ ul.pdp_details__feature_list > li {
         font-size: 20px;
       }
 
+      .yotpo-stars .yotpo-icon.yotpo-icon-half-star {
+        margin: 0;
+        font-size: 20px;
+      }
+
       .text-m {
         margin: 0 0 0 20px;
         font-weight: 600;
@@ -6672,6 +6683,9 @@ ul.pdp_details__feature_list > li {
         padding: 40px 0;
         border-top: 0;
         border-bottom: 1px solid #ABABAB;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
 
         @media screen and (max-width: 1199px) {
           min-height: unset;
@@ -6867,6 +6881,29 @@ ul.pdp_details__feature_list > li {
         }
         [sort-name="highest_rating"], [sort-name="lowest_rating"] {
           display: none !important;
+        }
+
+        [sort-name="most_helpful"] a,
+        [sort-name="least_helpful"] a {
+          display: flex;
+          align-items: center;
+          font-size: 0;
+
+          &:before {
+            font-size: 12px;
+          }
+        }
+
+        [sort-name="most_helpful"] a {
+          &:before {
+            content: 'Highest Rated';
+          }
+        }
+
+        [sort-name="least_helpful"] a {
+          &:before {
+            content: 'Lowest Rated';
+          }
         }
       }
 
