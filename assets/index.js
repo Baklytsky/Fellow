@@ -10635,12 +10635,6 @@
     }).then((function(t) {
       return t.json()
     })).then((function(t) {
-      for (var r = t.items, i = 0; i < r.length; i++) {
-        if (r[i].discounted_price === r[i].price && r[i].properties._bundles) {
-          delete r[i].properties._bundles;
-          delete r[i].properties._Bundle_Name;
-        }
-      }
       return Dr.hydrate({
         cart: t
       }), Dr.emit("cart:updated", {
@@ -10659,7 +10653,6 @@
   }
 
   function J(t, e, openCart) {
-    console.log(1111)
     var n = arguments.length > 3 && void 0 !== arguments[3] ? arguments[3] : null;
 
     theme.updateCartRecommendedProducts();
