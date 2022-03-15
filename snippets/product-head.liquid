@@ -6,7 +6,9 @@
   <meta itemprop="brand" content="{{ product.vendor }}">
   <meta itemprop="image" content="{{ featured_image | img_url: '600x600' }}">
   <meta itemprop="description" content="{{ product.description | strip_html | escape }}">
-
+{% if product.title contains "Personalized" or product.title contains "Personalization" %}
+  <meta name="robots" content="noindex">
+  {% endif %}
   <script type="application/ld+json">
     {
       "@context": "http://schema.org/",

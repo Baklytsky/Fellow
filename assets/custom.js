@@ -554,9 +554,14 @@ theme.pdpMain = function () {
       }
     })
 
+    
     $(document).on('click.pdpSelectSize', '[data-option-size] .radio', function () {
       var $attrToRemove = $('[data-disabled-size="true"]')
       $attrToRemove.map((index, element) => $(element).removeAttr('data-disabled-size'))
+     
+      if($(this).is('label')) {
+        $('.pdpStickyBar [data-open-size-group]').prev('strong').text($(this).find('span:last-child').text())     
+      }
     })
 
     $(document).on('click.pdpStickyOptions', '[data-copy-for]', function (e) {
@@ -566,8 +571,8 @@ theme.pdpMain = function () {
 
     $(document).on('click.pdpStickySize', '[data-open-size-group]', function (e) {
       var $optionGroupSize = $('.option-groups-size');
-      $(this).toggleClass('group-open')
-      $optionGroupSize.slideToggle()
+      $(this).toggleClass('group-open').parent().toggleClass('is-open')
+      $optionGroupSize.stop().slideToggle()
     })
 
     $(document).on('click.pdpStickyCloseSize', function (e) {
@@ -575,7 +580,7 @@ theme.pdpMain = function () {
           $hideElement = $('.option-groups-size');
       if (!$container.is(e.target) && $container.has(e.target).length === 0 && $hideElement.is(':visible')) {
         $hideElement.slideUp();
-        $('[data-open-size-group]').removeClass('group-open')
+        $('[data-open-size-group]').removeClass('group-open').parent().removeClass('is-open')
       }
     })
   }
@@ -737,8 +742,8 @@ theme.pdpMain = function () {
         var sizevar = $(this).attr('title');
         var sizehandle = $(this).data('value-handle');
         $('#' + sizehandle).removeAttr('disabled','disabled'); 
-        $('div[data-size^="' + sizehandle + '"]').css('opacity','');
-        $('span[data-size^="' + sizevar + '"]').css('text-decoration','');
+        $('div[data-size^="' + sizehandle + '"]').css('text-decoration','');
+        $('div[data-size^="' + sizehandle + '"]').css('color','');
       });
 
       // Enable all quantities and return to default styling now that a new variant option has been selected
@@ -747,7 +752,7 @@ theme.pdpMain = function () {
         var quantityhandle = $(this).data('value-handle');
         $('#' + quantityhandle).removeAttr('disabled','disabled');
         $('div[data-quantity^="' + quantityhandle + '"]').css('color','');
-        $('span[data-quantity^="' + quantityvar + '"]').css('text-decoration','');
+        $('div[data-quantity^="' + quantityhandle + '"]').css('text-decoration','');
       });
 
       // Add all colors to the all_colors array list
@@ -867,7 +872,7 @@ theme.pdpMain = function () {
             if (all_quantities.indexOf(quantityvar) > -1) {
               $('#' + quantityhandle).attr('disabled','disabled'); 
               $('div[data-quantity^="' + quantityhandle + '"]').css('color','#ABABAB');
-              $('span[data-quantity^="' + quantityvar + '"]').css('text-decoration','line-through');
+              $('div[data-quantity^="' + quantityhandle + '"]').css('text-decoration','line-through');
             }
           });
         }
@@ -881,8 +886,8 @@ theme.pdpMain = function () {
           // If the size element is found in the all_sizes list we need to disable this element as it is not an available size option
           if (all_sizes.indexOf(sizevar) > -1) {
             $('#' + sizehandle).attr('disabled','disabled');
-            $('div[data-size^="' + sizehandle + '"]').css('opacity','0.5');
-            $('span[data-size^="' + sizevar + '"]').css('text-decoration','line-through');
+            $('div[data-size^="' + sizehandle + '"]').css('text-decoration','line-through');
+            $('div[data-size^="' + sizehandle + '"]').css('color','#ababab');
           }
         });
       }
