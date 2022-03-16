@@ -316,20 +316,19 @@
           },
           "58ee7397-6079-412a-9acd-d453a0cf281c": {
             "type": "splitSlide",
-            "disabled": true,
             "settings": {
               "splitSlide__layout": "right",
-              "heroSlide": "shopify:\/\/shop_images\/Manhattan_Hero_HomePage_edit_copy.jpg",
+              "heroSlide": "shopify:\/\/shop_images\/Hero_Module_Ode_Burr.png",
               "desktopAlignment": "center",
               "mobileAlignment": "center",
-              "heroSlide__header": "Fresh + Limited",
-              "heroSlide__subheader": "Spend $200 and we’ll send you our latest coffee obsession - Diego Bermudez by Manhattan Coffee Roasters, flown in from the Netherlands.",
-              "subSlide__bgColor": "#edc890",
-              "subSlide__textColor": "#231f20",
-              "heroSlide__ctaURL": "shopify:\/\/collections\/bestsellers",
+              "heroSlide__header": "The Gold Standard",
+              "heroSlide__subheader": "A premium upgrade for Ode. Now available  with SSP MP Brew Burrs preinstalled.",
+              "subSlide__bgColor": "#000000",
+              "subSlide__textColor": "#FFFFFF",
+              "heroSlide__ctaURL": "shopify:\/\/products\/ode-brew-grinder",
               "heroSlide__ctaCopy": "Shop Now",
-              "heroSlide__ctaColor": "black",
-              "heroSlide__ctaSubtext": ""
+              "heroSlide__ctaColor": "white",
+              "heroSlide__ctaSubtext": "Plus, spend $200 and we’ll give you a bag of Diego Bermudez by Manhattan Coffee Roasters, flown in from the Netherlands."
             }
           },
           "1f457594-c59c-4edd-800a-a9f7662f319e": {
@@ -367,21 +366,6 @@
               "heroSlide__ctaColor": "black",
               "heroSlide__ctaSubtext": ""
             }
-          },
-          "f6188a5d-befc-4be6-8679-7ba38ba60b9e": {
-            "type": "heroSlide",
-            "settings": {
-              "heroSlide": "shopify:\/\/shop_images\/Hero_Module_Ode_Burr.png",
-              "desktopAlignment": "center",
-              "mobileAlignment": "center",
-              "heroSlide__header": "Testing",
-              "heroSlide__subheader": "Csss",
-              "heroSlide__textAlignment": "center",
-              "heroSlide__color": "cw",
-              "heroSlide__ctaURL": "",
-              "heroSlide__ctaCopy": "",
-              "heroSlide__ctaColor": "black"
-            }
           }
         },
         "block_order": [
@@ -389,8 +373,7 @@
           "c15c0d5c-f86c-436e-95b6-2f10cb6c8b20",
           "58ee7397-6079-412a-9acd-d453a0cf281c",
           "1f457594-c59c-4edd-800a-a9f7662f319e",
-          "3e0796bc-698b-4618-80b6-261185f9fb1a",
-          "f6188a5d-befc-4be6-8679-7ba38ba60b9e"
+          "3e0796bc-698b-4618-80b6-261185f9fb1a"
         ],
         "settings": {
           "addMargin": false
