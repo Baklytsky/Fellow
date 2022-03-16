@@ -24,7 +24,7 @@
           {%- assign option_value = item | split: 'Limited Edition:' | last | strip -%}
       {%- elsif item contains 'Wooden Accents:' -%}
       	 {%- assign option_value = item | split: 'Wooden Accents:' | last | strip -%}
-      {%- elsif item contains 'Upgraded SSP MP Brew Burrs (+ $186)' -%}
+      {%- elsif item contains 'Upgraded SSP MP Brew Burrs' -%}
       	 {%- assign option_value = item | split: 'Upgraded SSP MP Brew Burrs' | first | strip -%}
         {%- endif -%}
         <div class="radio-group bundle-radio-group f" data-option-{{ option_name | handleize }}>
