@@ -88,7 +88,7 @@
         data-variant-inventory-quantity='{{ variant.inventory_quantity }}'
         data-variant-inventory-policy='{{ variant.inventory_policy }}'
         data-variant-inventory-management='{{ variant.inventory_management }}'
-        {% if hasPreorderTag or variant_preorder and variant.available %}data-variant-preorder='true'{% endif %}>{{ variant.title }}</option>
+        {% if variant.available and hasPreorderTag or variant_preorder and variant.available %}data-variant-preorder='true'{% endif %}>{{ variant.title }}</option>
     {% endfor %}
   {%- endcapture -%}
   {%- capture selectTitle -%}Options for {{ product.title }}{%- endcapture -%}
