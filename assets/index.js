@@ -14560,9 +14560,10 @@
             return t.id === parseInt(r.elements.id.value)
           }))[0];
           r.querySelectorAll("[name*=properties]");
+          let propInputs = r.querySelectorAll("[name*=properties]");
           if (!a.available) throw new Error("Selected item not available. You probably shouldn't have been able to even try to add this to your cart.");
           ! function(t, e) {
-            var n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : null,
+            var n = propInputs ? theme.buildProperties(propInputs) : null,
                 r = "deny" === t.inventory_policy && "shopify" === t.inventory_management ? t.inventory_quantity : null;
             K().then((function(i) {
               var o = ((i.items.filter((function(e) {
@@ -14845,7 +14846,7 @@
               theme.variantChange(a.value, true), theme.selectedOption(r), t.innerHTML = "Unavailable", l.classList.add("is-hidden"), u.classList.remove("is-hidden"), u.setAttribute("disabled", "")
             }))
           }
-          return m = p ? "Preorder" : "Add to Cart", i.forEach((function(t) {
+          return m = p ? "Pre-order" : "Add to Cart", i.forEach((function(t) {
             if ("SELECT" !== t.nodeName) throw new Error("data-option-select should be defined on the individual option selectors");
             var e = parseInt(t.getAttribute("data-index"), 10);
             r.options[e] = t.value, t.addEventListener("change", (function(t) {
@@ -14888,6 +14889,7 @@
                 s.forEach((function(t) {
                   t.innerHTML = o
                 }));
+                theme.variantPreOrderCheck(r.id);
                 for (var p = 0, g = n; p < g.length; p++) {
                   (0, g[p])(r)
                 }

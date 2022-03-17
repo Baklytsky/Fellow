@@ -31,8 +31,8 @@ Uncomment to include
   {%- capture cta -%}
     {% if product.available %}
       <span data-atc-copy class="js-atc-copy">
-        {% if product.tags contains 'preorder' %}
-          Preorder
+        {% if product.selected_variant.metafields.my_fields.preorder %}
+          Pre-Order
         {% else %}
           Add to Cart
         {% endif %}

@@ -323,14 +323,30 @@ theme.handleize = function (str) {
   return str.toLowerCase().replace(/[^\w\u00C0-\u024f]+/g, "-").replace(/^-+|-+$/g, "");
 };
 
+theme.variantPreOrderCheck = function (variantId) {
+  var id = $('#selectid option[value="'+variantId+'"]').data("variant-preorder");
+  if (id == true) {
+    console.log("preorder");
+    $('.js-atc-copy').text("Pre-order");
+    $('.pdpForm').append(`<input type="hidden" data-preorder="true" name="properties[pre-order]" value="true">`)
+  } else {
+    $('.pdpForm [data-preorder]').remove();
+  }
+}
+
+theme.buildProperties = function (inputs) {
+  let props = {};
+  inputs.forEach(function (input, index) {
+    let propName = input.getAttribute("name").match(/\[(.*?)\]/)[1]
+    props[`${propName}`] = input.getAttribute("value");
+  })
+  return props
+}
+
 theme.pdpMain = function () {
 
   var variantId = $(".pdpMain__variant-image").data("variant-media");
-  var id = $('#selectid option[value="'+variantId+'"]').data("variant-preorder");
-  if(id == true){
-    console.log("preorder");
-    $('.js-atc-copy').text("Pre-order");
-  }
+  theme.variantPreOrderCheck(variantId)
 
   function stickyScrolling(options) {
     var $container = options.container || undefined;
@@ -707,13 +723,7 @@ theme.pdpMain = function () {
 
     if (variantId && changeMediaContent) {
       changeMedia()
-
-      var id = $('#selectid option[value="'+variantId+'"]').data("variant-preorder");
-
-      if(id == true){
-        console.log("preorder");
-        $('.js-atc-copy').text("Pre-order");
-      }
+      theme.variantPreOrderCheck(variantId)
     }
     
         // ======================================== Neels code starts here ========================================
@@ -2283,6 +2293,9 @@ theme.GLOBAL = function () {
             if(id == true){
                console.log("preorder");
                $('#quickAdd .js-atc-copy').text("Pre-order");
+               $('#ProductQuickView form').append(`<input type="hidden" data-preorder="true" name="properties[pre-order]" value="true">`)
+            } else {
+              $('#ProductQuickView [data-preorder]').remove();
             }
           }
         }
