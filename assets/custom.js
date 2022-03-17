@@ -1690,7 +1690,6 @@ theme.searchBar = function () {
   }
 
   function openSearch () {
-    console.log('open');
     $searchBar.attr('aria-hidden', 'false');
     $searchBar.slideDown();
     $searchBarToggle.attr('aria-expanded', 'true');
@@ -1706,7 +1705,8 @@ theme.searchBar = function () {
   function onInput (event) {
     var _this = $(event.target),
         value = _this.val().trim(),
-        queryKey = value.toLowerCase();
+        queryKey = value.toLowerCase(),
+        queryKeyReplace = queryKey.replace(/ /ig, '-');
 
     $searchBar.addClass('loading');
     $searchResultWrapper.attr('aria-hidden', 'false');
@@ -1723,8 +1723,19 @@ theme.searchBar = function () {
           if (productSuggestions.length > 0) {
             productSuggestions.forEach(function (product) {
               if (product.type !== "Gift product") {
-                var productItem = `<li class="headerSearch__item"><a href="${product.url}">${product.title}</a></li>`
-                $searchResultContent.append(productItem);
+                const productTags = product.tags
+                let noSearchTags = [];
+
+                // Make array no search terms
+                $.each(productTags,function(index,value){
+                  const nosearchTag = value.toLowerCase().replace(/ /ig, '-').split('nosearch-')[1]
+                  if (nosearchTag) noSearchTags.push(nosearchTag)
+                })
+
+                if (!noSearchTags.includes(queryKeyReplace)) {
+                  var productItem = `<li class="headerSearch__item"><a href="${product.url}">${product.title}</a></li>`
+                  $searchResultContent.append(productItem);
+                }
               }
             })
             $popularSearches.hide();
@@ -1807,39 +1818,6 @@ theme.searchPage = function () {
 
   var $searchInput = $('.searchForm__inputMain');
   var $searchInputReset = $('.searchForm__mainResetLabel');
-  var $searchForm = $('.searchFormMain');
-
-  // function formSubmit () {
-  //   var value = $searchInput.val().trim();
-  //   var queryKey = value.replace(" ", "-").toLowerCase();
-  //   var url = '/search?q=' + queryKey + '&options%5Bprefix%5D=last&type=product';
-  //   let $searchContainer = $(document).find('.searchMain__inner');
-  //
-  //   $.ajax({
-  //     url: url,
-  //     method: 'GET',
-  //     success: function (data) {
-  //       let $searchNewContainer = $(data).find('.searchMain__inner').html();
-  //       $searchContainer.html($searchNewContainer);
-  //
-  //       if (typeof window.yotpo !== "undefined") {
-  //         window.yotpo.initWidgets();
-  //       }
-  //       $('.productCard').each(function () {
-  //         theme.updateSwatches($(this)[0])
-  //       })
-  //       var value = $searchInput.val().trim();
-  //       var queryKey = value.replace(" ", "-").toLowerCase();
-  //       var url = '/search?q=' + queryKey + '&options%5Bprefix%5D=last&type=product';
-  //       window.history.pushState({}, null, url);
-  //
-  //       var resultCount = $(document).find('[data-result-count]').attr('data-result-count');
-  //       var searchTerms = $(document).find('[data-terms]').attr('data-terms');
-  //
-  //       document.title = `Search: ${resultCount} results found for "${searchTerms}" – Fellow`;
-  //     }
-  //   });
-  // }
 
   function changeDocumentTitle () {
     var resultCount = $(document).find('[data-result-count]').attr('data-result-count');

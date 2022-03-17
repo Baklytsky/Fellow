@@ -61,7 +61,6 @@
     <div class="searchMain__searchSize hidden-lg-up">{{ 'general.search.count_results' | t: results_count: search.results_count }}</div>
   {%- endif -%}
   <div class="searchMain__inner">
-    <div data-terms="{{ search.terms }}" data-result-count="{{ search.results_count }}"></div>
     {%- if search.performed -%}
       {%- if search.results.size > 0 -%}
         {%- if search.types contains 'product' -%}
@@ -238,18 +237,42 @@
               </form>
             </div>
             <div class="collection__products rel">
+              
+              {% capture search_content %}
+                {%- if search.types contains 'product' -%}
+                  {% paginate search.results by 1000 %}
+                  {%- assign hidden_items = 0 -%}
+                    {%- for product in search.results -%}
+                      {%- assign nosearch_tags = '' -%}
+                      {%- assign search_terms = search.terms | handleize -%}
+        
+                      {%- for tag in product.tags -%}
+                        {%- if tag contains 'nosearch' -%}
+                          {%- assign nosearch_tag = tag | split: 'nosearch-' -%}
+                          {%- assign nosearch_tag_handleaize = nosearch_tag[1] | handleize -%}
+                          {%- assign nosearch_tags = nosearch_tags | append: nosearch_tag_handleaize | append: '-' -%}
+                        {%- endif -%}
+                      {%- endfor -%}
+        
+                      {%- unless nosearch_tags contains search_terms -%}
+                        {% include 'product-card' %}
+                        {% else %}
+                      {%- assign hidden_items = hidden_items | plus: 1 -%}
+                      {%- endunless -%}
+                    {%- endfor -%}
+                  {% endpaginate %}
+                {%- endif -%}
+              {% endcapture %}
+              
+              {%- assign visible_results = search.results_count | minus: hidden_items -%}
+              
               <div class="collection__products-filter-results"></div>
-              <div class="searchMain__searchSize hidden-md-down">{{ 'general.search.count_results' | t: results_count: search.results_count }}</div>
+              <div class="searchMain__searchSize hidden-md-down">{{ 'general.search.count_results' | t: results_count: visible_results }}</div>
               
               <div class="collection__products-results">
+                <div data-terms="{{ search.terms }}" data-result-count="{{ visible_results }}" class="hide"></div>
                 <div class="subcollection__products one-third">
-                  {%- if search.types contains 'product' -%}
-                    {% paginate search.results by 1000 %}
-                      {%- for product in search.results -%}
-                        {% include 'product-card' %}
-                      {%- endfor -%}
-                    {% endpaginate %}
-                  {%- endif -%}
+                  {{ search_content }}
                 </div>
               </div>
             
