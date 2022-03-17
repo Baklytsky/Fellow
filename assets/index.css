@@ -17667,7 +17667,7 @@ body.is-masthead--empty main {
 
 .cart-drawer__items-outer {
   flex: 1 1 auto;
-  overflow-y: auto;
+  /*overflow-y: auto;*/
   padding: 15px 22px;
 }
 
@@ -17823,6 +17823,9 @@ body.is-masthead--empty main {
   color: #fff;
   width: 100%;
   padding: 16px 32px;
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
 }
 
 .cart-drawer__footer-action .cart-checkout__button {

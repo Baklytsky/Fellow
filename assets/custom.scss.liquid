@@ -4,43 +4,20 @@
 @font-face {
   font-family: 'Inter';
   font-style: normal;
-  font-weight: 400;
-  src: url(https://fonts.gstatic.com/s/inter/v3/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hjp-Ek-_EeA.woff) format('woff');
+  src: url('{{ 'Inter-VariableFont_slnt.ttf' | asset_url }}') format("truetype-variations");
+  font-weight: 300 900;
+  font-display: swap;
 }
 @font-face {
-  font-family: 'Inter';
-  font-style: normal;
+  font-family: 'PP Right Grotesk';
+  src: url('{{ 'PPRightGrotesk-Regular.woff2' | asset_url }}') format('woff2');
   font-weight: 400;
-  src: url('{{ 'Inter-Regular.ttf' | asset_url }}') format('truetype');
+  font-style: normal;
 }
 @font-face {
-  font-family: 'Inter';
-  font-style: normal;
+  font-family: 'PP Right Grotesk';
+  src: url('{{ 'PPRightGrotesk-Medium.woff2' | asset_url }}') format('woff2');
   font-weight: 500;
-  src: url('{{ 'Inter-Medium.ttf' | asset_url }}') format('truetype');
-}
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 700;
-  src: url('{{ 'Inter-Bold.ttf' | asset_url }}') format('truetype');
-}
-@font-face {
-  font-family: 'PP Right Grotesk';
-  src: url('{{ 'PPRightGrotesk-Regular.otf' | asset_url }}') format('opentype');
-  font-weight: 400;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'PP Right Grotesk';
-  src: url('{{ 'PPRightGrotesk-Medium.otf' | asset_url }}') format('opentype');
-  font-weight: 500;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'PP Right Grotesk';
-  src: url('{{ 'PPRightGrotesk-Bold.otf' | asset_url }}') format('opentype');
-  font-weight: 700;
   font-style: normal;
 }
 
@@ -5872,11 +5849,11 @@ h2.pdpCopy__header-price ,
 
 .cart-gift-wrapping-modal {
   position: absolute;
-  top: 60px;
+  top: 0;
   left: 0;
   transform: translateX(100%);
   width: 100%;
-  height: calc(100% - 64px);
+  height: 100%;
   background-color: #fff;
   z-index: 3;
   display: flex;

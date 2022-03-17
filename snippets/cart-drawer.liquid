@@ -24,52 +24,52 @@
 <section class='cart-drawer-outer fix fill x z10' aria-expanded='false' tabindex='-1' data-component='cartDrawer'>
   <div class='cart-drawer-overlay abs fill js-overlay'></div>
   <div id='cart-drawer-content' class='cart-drawer y x f abs top right bottom js-cart-drawer'>
-    <header class='cart-drawer__header f fdc x z2'>
-      <div class="cart-drawer__header-content f aic jcc">
-        {%- render 'icon' with 'cart' -%}
-        <span class='js-cart-count cart-drawer__count'>{{ cart.item_count }}</span>
-
-        <button aria-label="Cart Close" type="button" id="closeCart" class='cart-drawer__close button--reset js-close'>
-          {%- render 'icon', icon: 'arrow-next' -%}
-        </button>
-      </div>
-
-      <p class='cart-drawer__header-text ac js-empty-cart-text'>{{ 'cart.general.empty' | t }}</p>
-
-      {%- if settings.enable_gwp and settings.gwp_threshold > 0 and all_products[settings.gwp_product ].type == 'Gift product' -%}
-        <div class="free-shipping js-free-shipping is-hidden">
-          <div class='free-shipping--unmet js-free-shipping-unmet-msg
-        {% if cart.total_price > settings.gwp_threshold %} is-hidden{% endif %}'>
-            You're <strong><span class='js-free-shipping-amount-remaining'>${{ settings.gwp_threshold }}</span></strong> away from free gift
-          </div>
-          <div class='free-shipping--met js-free-shipping-met-msg
-        {% if cart.total_price < settings.gwp_threshold %} is-hidden{% endif %}'>
-            Good news! You get a free {{ settings.gwp_product.title }}.
-          </div>
-
-          <div class='free-shipping__meter f aic'>
-            <div class='free-shipping__meter__progress js-shipping-progress-bar'></div>
-          </div>
-        </div>
-      {%- else -%}
-        <div class="free-shipping js-free-shipping is-hidden">
-          <div class='free-shipping--unmet js-free-shipping-unmet-msg
-        {% if cart.total_price > 9900 and cart_has_canal %} is-hidden{% endif %}'>
-            You're <strong><span class='js-free-shipping-amount-remaining'>$99.00</span></strong> away from free US shipping
-          </div>
-          <div class='free-shipping--met js-free-shipping-met-msg
-        {% if cart.total_price < 9900 and cart_has_canal %} is-hidden{% endif %}'>
-            Congrats! You get free US Shipping!
-          </div>
-
-          <div class='free-shipping__meter f aic'>
-            <div class='free-shipping__meter__progress js-shipping-progress-bar'></div>
-          </div>
-        </div>
-      {%- endif -%}
-    </header>
 
     <div class="cart-drawer__content-wrapper">
+      <header class='cart-drawer__header f fdc x z2'>
+        <div class="cart-drawer__header-content f aic jcc">
+          {%- render 'icon' with 'cart' -%}
+          <span class='js-cart-count cart-drawer__count'>{{ cart.item_count }}</span>
+
+          <button aria-label="Cart Close" type="button" id="closeCart" class='cart-drawer__close button--reset js-close'>
+            {%- render 'icon', icon: 'arrow-next' -%}
+          </button>
+        </div>
+
+        <p class='cart-drawer__header-text ac js-empty-cart-text'>{{ 'cart.general.empty' | t }}</p>
+
+        {%- if settings.enable_gwp and settings.gwp_threshold > 0 and all_products[settings.gwp_product ].type == 'Gift product' -%}
+          <div class="free-shipping js-free-shipping is-hidden">
+            <div class='free-shipping--unmet js-free-shipping-unmet-msg
+        {% if cart.total_price > settings.gwp_threshold %} is-hidden{% endif %}'>
+              You're <strong><span class='js-free-shipping-amount-remaining'>${{ settings.gwp_threshold }}</span></strong> away from free gift
+            </div>
+            <div class='free-shipping--met js-free-shipping-met-msg
+        {% if cart.total_price < settings.gwp_threshold %} is-hidden{% endif %}'>
+              Good news! You get a free {{ settings.gwp_product.title }}.
+            </div>
+
+            <div class='free-shipping__meter f aic'>
+              <div class='free-shipping__meter__progress js-shipping-progress-bar'></div>
+            </div>
+          </div>
+        {%- else -%}
+          <div class="free-shipping js-free-shipping is-hidden">
+            <div class='free-shipping--unmet js-free-shipping-unmet-msg
+        {% if cart.total_price > 9900 and cart_has_canal %} is-hidden{% endif %}'>
+              You're <strong><span class='js-free-shipping-amount-remaining'>$99.00</span></strong> away from free US shipping
+            </div>
+            <div class='free-shipping--met js-free-shipping-met-msg
+        {% if cart.total_price < 9900 and cart_has_canal %} is-hidden{% endif %}'>
+              Congrats! You get free US Shipping!
+            </div>
+
+            <div class='free-shipping__meter f aic'>
+              <div class='free-shipping__meter__progress js-shipping-progress-bar'></div>
+            </div>
+          </div>
+        {%- endif -%}
+      </header>
       <div class='cart-drawer__items-outer'>
         <div class='cart-drawer__items-inner js-cart-drawer-items'>
          <p class="eyebrow gwp-nostack-text is-hidden">Stacking promos is not allowed.<br> Manually remove any free gifts from your cart to use a discount code.</p>
@@ -83,7 +83,6 @@
           {% include 'cart-drawer-empty' %}
         </div>
       </div>
-
 
       <footer class='cart-drawer__footer js-cart-footer'>
         {% comment %}
@@ -106,27 +105,27 @@
             {% section 'cart-recommended' %}
           </div>
         {%- endif -%}
-
-        <div class="cart-drawer__footer-action f aic jcb">
-          <section class='cart-footer__total'>
-            <div class='cart-footer__total-item js-shipping-free-text is-hidden'>
-              <span>{{ 'cart.general.shipping_free' | t }}</span>
-            </div>
-            <div class='cart-footer__total-item f aic fw'>
-              <span>{{ 'cart.general.subtotal' | t }}</span>
-              <span class='js-subtotal'></span>
-            </div>
-          </section>
-
-          {%
-            include 'component-button' with
-            tag: 'a',
-            cta: 'Checkout',
-            href: '/checkout',
-            className: 'btn btn--light no-ajax cart-checkout__button'
-          %}
-        </div>
       </footer>
+
+      <div class="cart-drawer__footer-action f aic jcb">
+        <section class='cart-footer__total'>
+          <div class='cart-footer__total-item js-shipping-free-text is-hidden'>
+            <span>{{ 'cart.general.shipping_free' | t }}</span>
+          </div>
+          <div class='cart-footer__total-item f aic fw'>
+            <span>{{ 'cart.general.subtotal' | t }}</span>
+            <span class='js-subtotal'></span>
+          </div>
+        </section>
+
+        {%
+          include 'component-button' with
+          tag: 'a',
+          cta: 'Checkout',
+          href: '/checkout',
+          className: 'btn btn--light no-ajax cart-checkout__button'
+        %}
+      </div>
     </div>
 
     <div class="remove-item__popup js-cart-drawer-popup" aria-hidden="true" tabindex="-1">

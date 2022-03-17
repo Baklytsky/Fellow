@@ -9928,7 +9928,7 @@
       return t.length <= 0
           ? ""
           : t.reduce(function (t, e) {
-            if (e.product_type !== 'Gift product' && e.product_type !== 'Gift box' && e.sku.indexOf('ENGRAVE') === -1) {
+            if (e.product_type !== 'Gift product' && e.product_type !== 'Gift box' && e.product_type !== 'Personalization' && e.sku.indexOf('ENGRAVE') === -1) {
               return (
                   t +
                   ((r = (n = e).product_id),
@@ -9963,6 +9963,53 @@
                           .concat(c, "' class='cart-drawer__itemTitle'>")
                           .concat(o, "</a>\n          <div class='cart-drawer__itemOptions'>")
                           .concat(f, "</div>\n        </div>\n\n        <div class='f aic jcb pt05'>\n          <div class='cart-item__stepper aic f ")
+                          .concat(0 === a ? "is-disabled" : "", "'>\n            <div class='cart-stepper js-remove-single' data-key='" + n.key + "'>-</div>\n            <input type='text' class='cart-quantity js-single-quantity' value='")
+                          .concat(l, "'>\n            <div class='cart-stepper js-add-single' data-key='" + n.key + "'>+</div>\n          </div>\n\n          <div class='cart-item__price'>")
+                          .concat(p, "</div>\n        </div>\n\n        <button class='button--reset cart-drawer__itemAction js-remove-item' data-key='" + n.key + "' style='display: none'>")
+                          .concat(
+                              '\n  <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentcolor" stroke-width="3" style="display:inline-block;vertical-align:middle;overflow:visible;"><path d="M1.0606601717798212 1.0606601717798212 L14.939339828220179 14.939339828220179"></path><path d="M14.939339828220179 1.0606601717798212 L1.0606601717798212 14.939339828220179"></path></svg>\n',
+                              "</button>\n")
+                          .concat('\n <button type="button" data-action="open-item-remove-popup" aria-expanded="false" class="button--reset cart-drawer__itemAction cart-drawer__remove-open"> <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentcolor" stroke-width="3" style="display:inline-block;vertical-align:middle;overflow:visible;"><path d="M1.0606601717798212 1.0606601717798212 L14.939339828220179 14.939339828220179"></path><path d="M14.939339828220179 1.0606601717798212 L1.0606601717798212 14.939339828220179"></path></svg>\n',
+                              "</button>\n </div>\n    </div>\n"
+                          ))
+              );
+            } else if (e.product_type === 'Personalization' && e.properties['Personalized Text']) {
+              return (
+                  t +
+                  ((r = (n = e).product_id),
+                      (i = n.variant_id),
+                      (o = n.product_title),
+                      (a = n.line_price),
+                      (p = (n.line_price === n.original_line_price) ? V(Q(a)) : '<span style="text-decoration: line-through; padding-right: 5px;">' + V(Q(n.original_line_price)) + '</span>' + V(Q(a))),
+                      (s = n.options_with_values),
+                      (u = n.image),
+                      (c = n.url),
+                      (l = n.quantity),
+                      (prop = n.properties['Personalized Text']),
+                      (f = U(s)),
+                      (h = u
+                          ? F(
+                              u.replace(
+                                  "." +
+                                  (function (t) {
+                                    var e = t.match(/.+_((?:pico|icon|thumb|small|compact|medium|large|grande)|\d{1,4}x\d{0,4}|x\d{1,4})[_\.@]/);
+                                    return e ? e[1] : null;
+                                  })(u),
+                                  ""
+                              ),
+                              "200x"
+                          )
+                          : "https://source.unsplash.com/R9OS29xJb-8/2000x1333"),
+                      "\n    <div class='cart-drawer__item' data-component='cartDrawerItem' data-pid="
+                          .concat(r, " data-id=")
+                          .concat(i, " data-key=")
+                          .concat(n.key, " >\n      <a href='")
+                          .concat(c, "' class=\"cart-drawer__itemImage\">\n        <img src='")
+                          .concat(h, "' />\n      </a>\n\n      <div class='cart-drawer__itemContent f fdc'>\n        <div class='cart-drawer__itemDetails'>\n          <a href='")
+                          .concat(c, "' class='cart-drawer__itemTitle'>")
+                          .concat(o, "</a>\n          <div class='cart-drawer__itemOptions'>")
+                          .concat(f, "<div class='cart-drawer__personalization'>Personalized Text: ")
+                          .concat(prop, "</div>\n </div>\n        </div>\n\n        <div class='f aic jcb pt05'>\n          <div class='cart-item__stepper aic f ")
                           .concat(0 === a ? "is-disabled" : "", "'>\n            <div class='cart-stepper js-remove-single' data-key='" + n.key + "'>-</div>\n            <input type='text' class='cart-quantity js-single-quantity' value='")
                           .concat(l, "'>\n            <div class='cart-stepper js-add-single' data-key='" + n.key + "'>+</div>\n          </div>\n\n          <div class='cart-item__price'>")
                           .concat(p, "</div>\n        </div>\n\n        <button class='button--reset cart-drawer__itemAction js-remove-item' data-key='" + n.key + "' style='display: none'>")
@@ -10111,7 +10158,7 @@
                           ))
               );
             }
-            var n, r, i, o, a, s, u, c, l, f, h;
+            var n, r, i, o, a, s, u, c, l, f, h, prop;
           }, "");
     console.log("Can't reach cart.js");
   }
