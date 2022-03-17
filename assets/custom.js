@@ -326,9 +326,10 @@ theme.handleize = function (str) {
 theme.variantPreOrderCheck = function (variantId) {
   var id = $('#selectid option[value="'+variantId+'"]').data("variant-preorder");
   if (id == true) {
-    console.log("preorder");
     $('.js-atc-copy').text("Pre-order");
-    $('.pdpForm').append(`<input type="hidden" data-preorder="true" name="properties[pre-order]" value="true">`)
+    if ($(".pdpForm input[name='properties[pre-order]']").length === 0) {
+      $('.pdpForm').append(`<input type="hidden" data-preorder="true" name="properties[pre-order]" value="true">`)
+    }
   } else {
     $('.pdpForm [data-preorder]').remove();
   }
@@ -2291,9 +2292,10 @@ theme.GLOBAL = function () {
 
             var id = $('#ProductQuickView #selectid').find('[value="' + variants[i].id + '"]').data('variant-preorder');
             if(id == true){
-               console.log("preorder");
                $('#quickAdd .js-atc-copy').text("Pre-order");
-               $('#ProductQuickView form').append(`<input type="hidden" data-preorder="true" name="properties[pre-order]" value="true">`)
+              if ($("#ProductQuickView input[name='properties[pre-order]']").length === 0) {
+                $('#ProductQuickView form').append(`<input type="hidden" data-preorder="true" name="properties[pre-order]" value="true">`)
+              }
             } else {
               $('#ProductQuickView [data-preorder]').remove();
             }
