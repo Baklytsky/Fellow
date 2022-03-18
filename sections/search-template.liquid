@@ -250,14 +250,15 @@
                         {%- if tag contains 'nosearch' -%}
                           {%- assign nosearch_tag = tag | split: 'nosearch-' -%}
                           {%- assign nosearch_tag_handleaize = nosearch_tag[1] | handleize -%}
-                          {%- assign nosearch_tags = nosearch_tags | append: nosearch_tag_handleaize | append: '-' -%}
+                          {%- assign nosearch_tags = nosearch_tags | append: '|' | append: nosearch_tag_handleaize -%}
                         {%- endif -%}
                       {%- endfor -%}
-        
-                      {%- unless nosearch_tags contains search_terms -%}
+                      
+                      {%- assign nosearch_tags_arr = nosearch_tags | split: '|' -%}
+                      {%- unless nosearch_tags_arr contains search_terms -%}
                         {% include 'product-card' %}
-                        {% else %}
-                      {%- assign hidden_items = hidden_items | plus: 1 -%}
+                      {% else %}
+                        {%- assign hidden_items = hidden_items | plus: 1 -%}
                       {%- endunless -%}
                     {%- endfor -%}
                   {% endpaginate %}

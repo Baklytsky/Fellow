@@ -1702,6 +1702,20 @@ theme.searchBar = function () {
     }, 100);
   }
 
+  function hidePopularSearch () {
+    $popularSearches.hide();
+    $searchEmpty.hide();
+    $resultsWrapper.show();
+    $searchPopular.hide();
+  }
+
+  function showPopularSearch () {
+    $searchPopular.show();
+    $popularSearches.show();
+    $resultsWrapper.hide();
+    $searchEmpty.show();
+  }
+
   function onInput (event) {
     var _this = $(event.target),
         value = _this.val().trim(),
@@ -1715,16 +1729,19 @@ theme.searchBar = function () {
     if (queryKey.length) {
       $resetBtn.show();
       $searchPopular.hide();
+
+
       fetch(`/search/suggest.json?q=${queryKey}&resources[type]=product`)
         .then((response) => response.json())
         .then((suggestions) => {
           const productSuggestions = suggestions.resources.results.products;
-
+          let hiddenItems = 0;
           if (productSuggestions.length > 0) {
             productSuggestions.forEach(function (product) {
               if (product.type !== "Gift product") {
                 const productTags = product.tags
                 let noSearchTags = [];
+
 
                 // Make array no search terms
                 $.each(productTags,function(index,value){
@@ -1735,18 +1752,19 @@ theme.searchBar = function () {
                 if (!noSearchTags.includes(queryKeyReplace)) {
                   var productItem = `<li class="headerSearch__item"><a href="${product.url}">${product.title}</a></li>`
                   $searchResultContent.append(productItem);
+                } else {
+                  ++hiddenItems
                 }
               }
             })
-            $popularSearches.hide();
-            $searchEmpty.hide();
-            $resultsWrapper.show();
-            $searchPopular.hide();
+
+            if (hiddenItems === productSuggestions.length) {
+              showPopularSearch()
+            } else {
+              hidePopularSearch()
+            }
           } else {
-            $searchPopular.show();
-            $popularSearches.show();
-            $resultsWrapper.hide();
-            $searchEmpty.show();
+            showPopularSearch()
           }
 
           $searchBar.removeClass('loading');
