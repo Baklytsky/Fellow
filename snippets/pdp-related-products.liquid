@@ -12,13 +12,15 @@
           <div class='f jcs fdr one-fourth relatedProducts__row'>
             {% for related_product_handle in related_products_handles limit: 4 %}
               {% assign related_product = all_products[related_product_handle] %}
-              <div class="relatedProducts__item">
-                {%
-                  include 'product-card' with
-                  cx: 'y',
-                  product: related_product
-                %}
-              </div>
+              {%- if related_product != blank -%}
+                <div class="relatedProducts__item">
+                  {%
+                    include 'product-card' with
+                    cx: 'y',
+                    product: related_product
+                  %}
+                </div>
+              {%- endif -%}
             {% endfor %}
           </div>
         </div>

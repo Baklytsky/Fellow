@@ -2942,11 +2942,11 @@ h2.pdpCopy__header-price ,
 
   .pdp__reviews {
     .yotpo-display-wrapper {
-
       .yotpo-icon.yotpo-icon-star, .yotpo-icon-half-star {
         margin: 0 10px 0 0;
         font-size: 20px !important;
       }
+
       .yotpo-bottomline.pull-left {
         display: flex;
         align-items: center;
@@ -6614,6 +6614,12 @@ input[type="search"]::-webkit-search-results-decoration {
   margin: 0 auto;
 }
 
+.searchForm {
+ @media screen and (max-width: $tablet) {
+    margin: 0 16px;
+ }
+}
+
 .searchMain__resultHeading {
   font-weight: 500;
   font-size: 48px;
@@ -6855,6 +6861,11 @@ ul.pdp_details__feature_list > li {
         font-size: 20px;
       }
 
+      .yotpo-stars .yotpo-icon.yotpo-icon-half-star {
+        margin: 0;
+        font-size: 20px;
+      }
+
       .text-m {
         margin: 0 0 0 20px;
         font-weight: 600;
@@ -6891,6 +6902,9 @@ ul.pdp_details__feature_list > li {
         padding: 40px 0;
         border-top: 0;
         border-bottom: 1px solid #ABABAB;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
 
         @media screen and (max-width: 1199px) {
           min-height: unset;
@@ -7087,6 +7101,29 @@ ul.pdp_details__feature_list > li {
         [sort-name="highest_rating"], [sort-name="lowest_rating"] {
           display: none !important;
         }
+
+        [sort-name="most_helpful"] a,
+        [sort-name="least_helpful"] a {
+          display: flex;
+          align-items: center;
+          font-size: 0;
+
+          &:before {
+            font-size: 12px;
+          }
+        }
+
+        [sort-name="most_helpful"] a {
+          &:before {
+            content: 'Highest Rated';
+          }
+        }
+
+        [sort-name="least_helpful"] a {
+          &:before {
+            content: 'Lowest Rated';
+          }
+        }
       }
 
       .yotpo-reviews-header {
@@ -7149,9 +7186,13 @@ ul.pdp_details__feature_list > li {
             line-height: 130% !important;
             color: $color-black !important;
             position: relative;
+            display: flex;
+            align-items: center;
           }
 
-          .selected-bold.selected[data-selected-key="Select"] {
+          .selected-bold.selected[data-selected-key="Select"],
+          .selected-bold.selected[data-selected-key="most_helpful"],
+          .selected-bold.selected[data-selected-key="least_helpful"] {
             font-size: 0;
 
             &:before {
@@ -7164,6 +7205,16 @@ ul.pdp_details__feature_list > li {
               color: $color-black;
               font-size: 16px;
             }
+          }
+
+          .selected-bold.selected[data-selected-key="Select"]:before {
+            content: 'Sort By';
+          }
+          .selected-bold.selected[data-selected-key="most_helpful"]:before {
+            content: 'Highest Rated';
+          }
+          .selected-bold.selected[data-selected-key="least_helpful"]:before {
+            content: 'Lowest Rated';
           }
         }
 

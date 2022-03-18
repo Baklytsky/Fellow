@@ -1,0 +1,79 @@
+{%- assign show_best_sellers = settings.show_best_sellers -%}
+{%- assign best_sellers_heading = settings.best_sellers_heading -%}
+{%- assign best_sellers_collection = collections[settings.best_sellers_collection] -%}
+
+<style>
+div.page.module.get-10-off {
+    background-image: url("https://cdn.shopify.com/s/files/1/0057/6235/1219/files/Fellow_White_Ode2270.jpg?v=1638286909");
+  background-color: #f5f5f5; 
+  min-height: 720px;
+  height: 100%;
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  margin-bottom: 0;
+  }
+  
+@media screen and (max-width: 768px) {
+  div.page.module.get-10-off {
+   background: none; 
+  margin-bottom: 1.5rem;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+</style>
+
+<div class='page module get-10-off' data-component='page' >
+  <div class='x f aic'>
+    <div class='col-lg-8 mxa'>
+      <div class="rte">
+        {{ page.content }}
+      </div>
+    </div>
+  </div>
+</div>
+
+ {%- capture popular_section -%}
+    {%- if settings.popular_section_enable -%}
+      <div class="search__popular--mainWrapper">
+        {% render 'search-grid-popular', class_name: 'search__popular--main' %}
+      </div>
+    {%- endif -%}
+  {%- endcapture -%}
+  
+  {%- capture best_sellers_section -%}
+    {%- if show_best_sellers -%}
+      <div class="searchBestSellers">
+        {% if best_sellers_heading != blank %}
+          <h4 class="searchBestSellers__heading">{{ best_sellers_heading }}</h4>
+        {% endif %}
+        
+        {%- if best_sellers_collection != blank and best_sellers_collection.products_count > 0 -%}
+          <div class="relatedProducts__row-wrapper rel">
+            <div class='f jcs fdr one-fourth relatedProducts__row'>
+              {% for product in best_sellers_collection.products limit: 4 %}
+                <div class="relatedProducts__item">
+                  {% include 'product-card' with
+                    cx: 'y',
+                    product: product %}
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  {%- endcapture -%}
+
+<div class="pl1 pr1">
+{% if popular_section != blank %}
+          {{ popular_section }}
+        {% endif %}
+        
+        {% if best_sellers_section != blank %}
+          {{ best_sellers_section }}
+        {% endif %}
+  
+</div>
