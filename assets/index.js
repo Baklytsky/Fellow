@@ -15522,7 +15522,7 @@
                       var f = l(s, n);
                       S(f.unmount) && r.push(f)
                     } catch (t) {
-                      console.log("🚨 %cpicoapp - " + u[c] + " failed - " + (t.message || t), "color: #E85867"), console.error(t)
+                      //console.log("🚨 %cpicoapp - " + u[c] + " failed - " + (t.message || t), "color: #E85867"), console.error(t)
                     }
                   }
                 }
