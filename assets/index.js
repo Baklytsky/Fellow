@@ -10319,7 +10319,7 @@
                   v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
                   var n = Q((firstGwpThreshold * 100) - e.total_price),
                       r = (e.total_price / summaryGwpThreshold).toFixed(2);
-                  d.style.width = "".concat(r, "%"), p.innerHTML = n, gwpNostackText.classList.add("is-hidden"), v.innerHTML = `You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from a free Carter Move Mug.`
+                  d.style.width = "".concat(r, "%"), p.innerHTML = n, gwpNostackText.classList.add("is-hidden"), v.innerHTML = `You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from a free bag of coffee.`
                 } 
                 
                 else if (t.classList.add("is-active"), a.innerHTML = h, setTimeout((function() {
@@ -10328,7 +10328,7 @@
                   v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
                   var n = Q((summaryGwpThreshold * 100) - e.total_price),
                       r = (e.total_price / summaryGwpThreshold).toFixed(2);
-                  d.style.width = "".concat(r, "%"), p.innerHTML = n, v.innerHTML = `Nice - You've got a free Carter Move Mug.<br>You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from a second one!`, freeShippingTotal.innerHTML = '+ 1 Free Mug', freeShippingTotal.classList.remove("is-hidden"), gwpNostackText.classList.remove("is-hidden");
+                  d.style.width = "".concat(r, "%"), p.innerHTML = n, v.innerHTML = `Nice - You've got a free bag of coffee.<br>You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from a second one!`, freeShippingTotal.innerHTML = '+ Free Coffee', freeShippingTotal.classList.remove("is-hidden"), gwpNostackText.classList.remove("is-hidden");
                 } 
                 
                 else y.innerHTML = 'Good news! You get two Carter Move Mugs on us.', y.classList.remove("is-hidden"), gwpNostackText.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.innerHTML = '+ 2 Free Mugs', freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
@@ -10345,8 +10345,8 @@
                   v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
                   var n = Q((window.theme.gwpSettings.gwpThreshold * 100) - e.total_price),
                       r = (e.total_price / window.theme.gwpSettings.gwpThreshold).toFixed(2);
-                  d.style.width = "".concat(r, "%"), p.innerHTML = n, v.innerHTML = `You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from a free Carter Move Mug`
-                } else y.innerHTML = 'Good news! You get a free Carter Move Mug.<p class="eyebrow mt0 mb0" style="text-transform:none;font-weight:400">Stacked promos are ineligible.<br>Manually remove the free gift from your cart to use a promo code.</p>', y.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.innerHTML = '+ 1 Free Mug', freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
+                  d.style.width = "".concat(r, "%"), p.innerHTML = n, v.innerHTML = `You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from a free bag of coffee.`
+                } else y.innerHTML = 'Good news! You get a free bag of coffee.<p class="eyebrow mt0 mb0" style="text-transform:none;font-weight:400">Stacked promos are ineligible.<br>Manually remove the free gift from your cart to use a promo code.</p>', y.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.innerHTML = '+ Free Coffee', freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
                 Dr.emit("nav:toggle", {
                   navDrawerOpen: !1,
                   whichNavDrawer: void 0,
@@ -10519,13 +10519,13 @@
                 v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
                 var r = Q((firstGwpThreshold * 100) - n.total_price),
                     i = (n.total_price / summaryGwpThreshold).toFixed(2);
-                d.style.width = "".concat(i, "%"), p.innerHTML = r, gwpNostackText.classList.add("is-hidden"), v.innerHTML = `You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from a free Carter Move Mug`
+                d.style.width = "".concat(i, "%"), p.innerHTML = r, gwpNostackText.classList.add("is-hidden"), v.innerHTML = `You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from a a free bag of coffee.`
               } 
               else if (m(e.getState().cart), b(Dr.getState()), n.total_price > (firstGwpThreshold * 100) && n.total_price < (summaryGwpThreshold * 100)) {
                 v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
                 var r = Q((summaryGwpThreshold * 100) - n.total_price),
                     i = (n.total_price / summaryGwpThreshold).toFixed(2);
-                d.style.width = "".concat(i, "%"), p.innerHTML = r, v.innerHTML = `Nice - You've got a free Carter Move Mug. You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from a second one`,freeShippingTotal.innerHTML = '+ 1 Free Mug', freeShippingTotal.classList.remove("is-hidden"), gwpNostackText.classList.remove("is-hidden");
+                d.style.width = "".concat(i, "%"), p.innerHTML = r, v.innerHTML = `Nice - You've got a free Carter Move Mug. You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from a second one`,freeShippingTotal.innerHTML = '+ Free Coffee', freeShippingTotal.classList.remove("is-hidden"), gwpNostackText.classList.remove("is-hidden");
               } else y.innerHTML = 'Good news! You get two Carter Move Mugs on us.', y.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.innerHTML = '+ 2 Free Mugs', gwpNostackText.classList.remove("is-hidden"), freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
             
             
@@ -10536,8 +10536,8 @@
                 v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
                 var r = Q((window.theme.gwpSettings.gwpThreshold * 100) - n.total_price),
                     i = (n.total_price / window.theme.gwpSettings.gwpThreshold).toFixed(2);
-                d.style.width = "".concat(i, "%"), p.innerHTML = r, v.innerHTML = `You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from a free Carter Move Mug`
-              } else y.innerHTML = 'Good news! You get a free Carter Move Mug.<span></span>', y.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.innerHTML = 'Free Gift Added', freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
+                d.style.width = "".concat(i, "%"), p.innerHTML = r, v.innerHTML = `You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from a free bag of coffee.`
+              } else y.innerHTML = 'Good news! You get a free bag of coffee.<span></span>', y.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.innerHTML = 'Free Gift Added', freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
             } 
             
             else if (secondGwpEnabled) {
@@ -10545,7 +10545,7 @@
                 v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
                 var r = Q((window.theme.gwpSettings.secondGwpThreshold * 100) - n.total_price),
                     i = (n.total_price / window.theme.gwpSettings.secondGwpThreshold).toFixed(2);
-                d.style.width = "".concat(i, "%"), p.innerHTML = r, v.innerHTML = `You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from a free Carter Move Mug`
+                d.style.width = "".concat(i, "%"), p.innerHTML = r, v.innerHTML = `You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from a free bag of coffee.`
               } else y.innerHTML = 'Good news! You get two Carter Move Mugs on us.', y.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.innerHTML = 'Free Gift Added', freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
             }
           } else {

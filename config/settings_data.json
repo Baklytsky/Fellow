@@ -151,9 +151,9 @@
               "image_1": "shopify:\/\/shop_images\/Nav-2up-Kettles-All.jpg",
               "title_1": "Shop All Kettles",
               "url_1": "shopify:\/\/collections\/kettles",
-              "image_2": "shopify:\/\/shop_images\/Nav-2up-Kettles-Featured.jpg",
-              "title_2": "Matte Black Bundle",
-              "url_2": "shopify:\/\/products\/matte-black-bundle",
+              "image_2": "shopify:\/\/shop_images\/Rookie_Kit_780x618_Product_Feature_2.jpg",
+              "title_2": "The Rookie Kit",
+              "url_2": "shopify:\/\/products\/rookie-kit",
               "title_3": "",
               "url_3": "",
               "title_4": "",
@@ -222,6 +222,37 @@
               "title_4": "",
               "url_4": ""
             }
+          },
+          "89a2c721-dfe0-4b4d-a289-0aa84be363f8": {
+            "type": "sub_menu",
+            "settings": {
+              "target": "bundle-save",
+              "image_1": "shopify:\/\/shop_images\/Ode-Coffee-Grinder-01-Matte-Black-08.jpg",
+              "title_1": "Shop All Kits + Bundles",
+              "url_1": "shopify:\/\/collections\/coffee-products-kits-bundles",
+              "image_2": "shopify:\/\/shop_images\/Mask_Group_1.png",
+              "title_2": "The Brewing Hero Kit",
+              "url_2": "shopify:\/\/products\/brewing-hero",
+              "title_3": "",
+              "url_3": "",
+              "title_4": "",
+              "url_4": ""
+            }
+          },
+          "ae1f64c0-e3cd-4973-a1f8-951b8ea29882": {
+            "type": "sub_menu",
+            "settings": {
+              "target": "Shop All",
+              "image_1": "shopify:\/\/shop_images\/Brew-Bar-Hero-Module-Image.jpg",
+              "title_1": "Shop All",
+              "url_1": "shopify:\/\/collections\/all-products",
+              "title_2": "",
+              "url_2": "",
+              "title_3": "",
+              "url_3": "",
+              "title_4": "",
+              "url_4": ""
+            }
           }
         },
         "block_order": [
@@ -232,7 +263,9 @@
           "07a7325a-a427-41ba-8978-d7a7838d1890",
           "b24e904e-5612-41ff-a0e9-515e8062e8f4",
           "9d051490-e4a2-42fc-aff7-458f600203d6",
-          "4e4fd786-95a7-414f-8e51-d76b8ad921cb"
+          "4e4fd786-95a7-414f-8e51-d76b8ad921cb",
+          "89a2c721-dfe0-4b4d-a289-0aa84be363f8",
+          "ae1f64c0-e3cd-4973-a1f8-951b8ea29882"
         ],
         "settings": {
           "logo": "shopify:\/\/shop_images\/Fellow-Logo-black.png",
@@ -705,11 +738,13 @@
       },
       "cart-recommended": {
         "type": "cart-recommended",
-        "settings": {}
+        "settings": {
+        }
       },
       "cart-gift-wrapping": {
         "type": "cart-gift-wrapping",
-        "settings": {}
+        "settings": {
+        }
       },
       "1636101715cd2df3c8": {
         "type": "hp-iwt",
@@ -728,7 +763,8 @@
       },
       "page-template": {
         "type": "page-template",
-        "settings": {}
+        "settings": {
+        }
       },
       "16391832269c232690": {
         "type": "hp-iwt",
@@ -747,7 +783,8 @@
       },
       "search-template": {
         "type": "search-template",
-        "settings": {}
+        "settings": {
+        }
       }
     },
     "content_for_index": [
@@ -769,7 +806,8 @@
       "sections": {
         "featured-product": {
           "type": "featured-product",
-          "settings": {}
+          "settings": {
+          }
         }
       },
       "content_for_index": [
