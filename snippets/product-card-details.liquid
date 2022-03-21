@@ -40,7 +40,7 @@
       {% endif %}
     </div>
   </div>
-  <a href='{{ product.url | within: collection }}' class='abs fill z2 js-product-link' aria-label='{{ product.title }}'></a>
+  <a href='{{ product.url }}' class='abs fill z2 js-product-link' aria-label='{{ product.title }}'></a>
 </div>
 
 {%- assign reviews_count = product.metafields.yotpo.reviews_count | plus: 0 -%}
