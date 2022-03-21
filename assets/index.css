@@ -17667,7 +17667,7 @@ body.is-masthead--empty main {
 
 .cart-drawer__items-outer {
   flex: 1 1 auto;
-  overflow-y: auto;
+  /*overflow-y: auto;*/
   padding: 15px 22px;
 }
 

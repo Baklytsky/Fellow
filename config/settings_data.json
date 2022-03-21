@@ -351,17 +351,17 @@
             "type": "splitSlide",
             "settings": {
               "splitSlide__layout": "right",
-              "heroSlide": "shopify:\/\/shop_images\/Hero_Module_Ode_Burr.png",
+              "heroSlide": "shopify:\/\/shop_images\/Manhattan_Hero_HomePage_edit_copy.jpg",
               "desktopAlignment": "center",
               "mobileAlignment": "center",
-              "heroSlide__header": "The Gold Standard",
-              "heroSlide__subheader": "A premium upgrade for Ode. Now available  with SSP MP Brew Burrs preinstalled.",
+              "heroSlide__header": "Fresh + Limited",
+              "heroSlide__subheader": "Spend $200 and we’ll send you our latest coffee obsession - Diego Bermudez by Manhattan Coffee Roasters, flown in from the Netherlands.",
               "subSlide__bgColor": "#000000",
               "subSlide__textColor": "#FFFFFF",
-              "heroSlide__ctaURL": "shopify:\/\/products\/ode-brew-grinder",
+              "heroSlide__ctaURL": "shopify:\/\/collections\/bestsellers",
               "heroSlide__ctaCopy": "Shop Now",
               "heroSlide__ctaColor": "white",
-              "heroSlide__ctaSubtext": "Plus, spend $200 and we’ll give you a bag of Diego Bermudez by Manhattan Coffee Roasters, flown in from the Netherlands."
+              "heroSlide__ctaSubtext": ""
             }
           },
           "1f457594-c59c-4edd-800a-a9f7662f319e": {
@@ -738,13 +738,11 @@
       },
       "cart-recommended": {
         "type": "cart-recommended",
-        "settings": {
-        }
+        "settings": {}
       },
       "cart-gift-wrapping": {
         "type": "cart-gift-wrapping",
-        "settings": {
-        }
+        "settings": {}
       },
       "1636101715cd2df3c8": {
         "type": "hp-iwt",
@@ -763,8 +761,7 @@
       },
       "page-template": {
         "type": "page-template",
-        "settings": {
-        }
+        "settings": {}
       },
       "16391832269c232690": {
         "type": "hp-iwt",
@@ -783,8 +780,7 @@
       },
       "search-template": {
         "type": "search-template",
-        "settings": {
-        }
+        "settings": {}
       }
     },
     "content_for_index": [
@@ -806,8 +802,7 @@
       "sections": {
         "featured-product": {
           "type": "featured-product",
-          "settings": {
-          }
+          "settings": {}
         }
       },
       "content_for_index": [
