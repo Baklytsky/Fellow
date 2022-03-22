@@ -8,6 +8,8 @@
 {%- assign order = 3 -%}
 {%- when 'color' -%}
 {%- assign order = 4 -%}
+{%- when 'burrs' -%}
+{%- assign order = 5 -%}
   {%- else -%}
 {%- assign order = 0 -%}
 {%- endcase -%}
@@ -22,8 +24,10 @@
         {%- assign option_value = item -%}
         {%- if item contains 'Limited Edition:' -%}
           {%- assign option_value = item | split: 'Limited Edition:' | last | strip -%}
-      {%- elsif item contains 'Wooden Accents:' -%}
+        {%- elsif item contains 'Wooden Accents:' -%}
       	 {%- assign option_value = item | split: 'Wooden Accents:' | last | strip -%}
+        {%- elsif item contains 'Upgraded SSP MP Brew Burrs' -%}
+         {%- assign option_value = item | split: '(+ $186)' | first | strip -%}
         {%- endif -%}
         <div class="radio-group bundle-radio-group f" data-option-{{ option_name | handleize }}>
           <label class="bundle-radio" for="{{ option_value | handleize | append: '-' | append: uniq_id  }}">
