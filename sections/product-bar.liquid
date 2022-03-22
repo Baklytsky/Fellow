@@ -21,7 +21,7 @@
     <div class="pdpBar__wrapper f {% if section.blocks < 3 %}jca{% else %}jcb{% endif %} aic">
       {%- for block in section.blocks -%}
         {%- assign svg_icon = block.settings.svg_icon -%}
-        {%- assign title = block.settings.title-%}
+        {%- assign title = block.settings.text-%}
         {%- if svg_icon != blank or title != blank -%}
             <div class="pdpBar__item">
               <div class="pdpBar__item-wrapper f jcc aic">
@@ -29,7 +29,7 @@
                   {{ svg_icon }}
                 {%- endif -%}
                 {%- if title != blank -%}
-                  <p class="pdpBar__item-title m0">{{ title | escape }}</p>
+                  <p class="pdpBar__item-title m0">{{ title }}</p>
                 {%- endif -%}
               </div>
             </div>
@@ -80,9 +80,9 @@
             "label": "Svg icon"
           },
           {
-            "type": "text",
-            "id": "title",
-            "label": "Title"
+            "type": "html",
+            "id": "text",
+            "label": "Text"
           }
         ]
       }
