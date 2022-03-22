@@ -1,4 +1,4 @@
-<div class='pdp__options rel f1 f jce aic'>
+<div class='pdp__options{% if product.handle == "ode-brew-grinder" %} pdp__options--ode-brew-grinder{% endif %} rel f1 f jce'>
   {%- assign product_has_size_option = false -%}
   {%- unless template contains 'bundle' -%}
     <div {% if product.has_only_default_variant or product.variants.size <= 1 %}style='display:none'{% else %} class="pdp__sticky-options" {% endif %}>
@@ -33,9 +33,9 @@
             {%- assign product_has_size_option = true -%}
           {%- endif -%}
 
-          <div class="option-groups {% if option_name_handle != 'size' %}f ais rel{% else %} option-groups-size{% endif %}" {% if product_has_size_option %}data-disabled-size="true"{% endif %}>
+          <div class="option-groups {% if option_name_handle != 'size' %}f aic fw rel{% else %} option-groups-size{% endif %}" {% if product_has_size_option %}data-disabled-size="true"{% endif %}>
             {% for group in option_group_names %}
-              <div class="option-groups__group x">
+              <div class="option-groups__group">
                 {%- comment -%}
                   {% if option_group_names.size > 1 %}
                     <label>
@@ -73,7 +73,7 @@
   {%- endunless -%}
 
   {%- if template contains 'bundle' -%}
-    <div class="pdpStickyBar__badge f aic">
+    <div class="pdpStickyBar__badge f">
       {% include 'pdp-badges' %}
       <span class="separator">|</span>
     </div>

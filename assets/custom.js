@@ -250,16 +250,16 @@ theme.addProduct = function () {
 }
 
 theme.toggleTab = function ($this) {
-  // Required button element: aria-selected='true/false'; aria-controls='TAB_ID'; data-action='toggle-tab'
-  // Required tab element: aria-selected='true/false'; data-tab='TAB_ID'
+  // Required button element: data-selected='true/false'; aria-controls='TAB_ID'; data-action='toggle-tab'
+  // Required tab element: data-selected='true/false'; data-tab='TAB_ID'
 
-  if ($this.attr('aria-selected') !== 'true') {
-    $('[data-action="toggle-tab"]').attr('aria-selected', 'false');
-    $this.attr('aria-selected', 'true');
+  if ($this.attr('data-selected') !== 'true') {
+    $('[data-action="toggle-tab"]').attr('data-selected', 'false');
+    $this.attr('data-selected', 'true');
 
-    $('[data-tab]').attr('aria-selected', 'false').each(function () {
+    $('[data-tab]').attr('data-selected', 'false').each(function () {
       if ($(this).attr('data-tab') == $this.attr('aria-controls')) {
-        $(this).attr('aria-selected', 'true');
+        $(this).attr('data-selected', 'true');
         return false;
       }
     })
@@ -294,6 +294,7 @@ theme.qvChangeSlide = function () {
   let modalVariantId = $('#ProductQuickView #quickAdd').attr('data-add-id'),
       $modalSelectedVariantThumbnail = $('#modalContent').find('[data-variant-img="' + modalVariantId + '"]');
   if ($modalSelectedVariantThumbnail.length) {$modalSelectedVariantThumbnail.trigger('click')}
+
 }
 
 theme.quickView = function (URL, innerContainer) {
@@ -311,6 +312,8 @@ theme.quickView = function (URL, innerContainer) {
       $('#emptyQvModal').hide();
       innerContainer.fadeIn(1000);
       theme.qvVariantChange()
+
+
     }
   });
 }
@@ -320,7 +323,31 @@ theme.handleize = function (str) {
   return str.toLowerCase().replace(/[^\w\u00C0-\u024f]+/g, "-").replace(/^-+|-+$/g, "");
 };
 
+theme.variantPreOrderCheck = function (variantId) {
+  var id = $('#selectid option[value="'+variantId+'"]').data("variant-preorder");
+  if (id == true) {
+    $('.js-atc-copy').text("Pre-order");
+    if ($(".pdpForm input[name='properties[pre-order]']").length === 0) {
+      $('.pdpForm').append(`<input type="hidden" data-preorder="true" name="properties[pre-order]" value="true">`)
+    }
+  } else {
+    $('.pdpForm [data-preorder]').remove();
+  }
+}
+
+theme.buildProperties = function (inputs) {
+  let props = {};
+  inputs.forEach(function (input, index) {
+    let propName = input.getAttribute("name").match(/\[(.*?)\]/)[1]
+    props[`${propName}`] = input.getAttribute("value");
+  })
+  return props
+}
+
 theme.pdpMain = function () {
+
+  var variantId = $(".pdpMain__variant-image").data("variant-media");
+  theme.variantPreOrderCheck(variantId)
 
   function stickyScrolling(options) {
     var $container = options.container || undefined;
@@ -544,9 +571,14 @@ theme.pdpMain = function () {
       }
     })
 
+    
     $(document).on('click.pdpSelectSize', '[data-option-size] .radio', function () {
       var $attrToRemove = $('[data-disabled-size="true"]')
       $attrToRemove.map((index, element) => $(element).removeAttr('data-disabled-size'))
+     
+      if($(this).is('label')) {
+        $('.pdpStickyBar [data-open-size-group]').prev('strong').text($(this).find('span:last-child').text())     
+      }
     })
 
     $(document).on('click.pdpStickyOptions', '[data-copy-for]', function (e) {
@@ -556,8 +588,8 @@ theme.pdpMain = function () {
 
     $(document).on('click.pdpStickySize', '[data-open-size-group]', function (e) {
       var $optionGroupSize = $('.option-groups-size');
-      $(this).toggleClass('group-open')
-      $optionGroupSize.slideToggle()
+      $(this).toggleClass('group-open').parent().toggleClass('is-open')
+      $optionGroupSize.stop().slideToggle()
     })
 
     $(document).on('click.pdpStickyCloseSize', function (e) {
@@ -565,7 +597,7 @@ theme.pdpMain = function () {
           $hideElement = $('.option-groups-size');
       if (!$container.is(e.target) && $container.has(e.target).length === 0 && $hideElement.is(':visible')) {
         $hideElement.slideUp();
-        $('[data-open-size-group]').removeClass('group-open')
+        $('[data-open-size-group]').removeClass('group-open').parent().removeClass('is-open')
       }
     })
   }
@@ -647,11 +679,11 @@ theme.pdpMain = function () {
   theme.variantChange = function (variantId, changeMediaContent) {
     function changeMedia() {
       var ajaxUrl = window.location.protocol + '//' + window.location.host + window.location.pathname + '?variant=' + variantId + '&view=ajax-media',
-          $productMedia = $productMedia = $(document).find('.pdpMain__Media'),
-          $productUpsell = $(document).find('.upsell-product'),
-          $productPrice = $(document).find('.pdpCopy__price.hide-mobile'),
-          $productMobilePrice = $(document).find('.pdpCopy__price.hide-desktop'),
-          $stickyPrice = $(document).find('.pdpStickyBar .pdpCopy__price');
+          $productMedia = $productMedia = $('.pdpMain__Media'),
+          $productUpsell = $('.upsell-product'),
+          $productPrice = $('.pdpForm .pdpCopy__price.hide-mobile'),
+          $productMobilePrice = $('.pdpForm .pdpCopy__price.hide-desktop'),
+          $stickyPrice = $('.pdpStickyBar .pdpCopy__price');
 
       $.ajax({
         url: ajaxUrl,
@@ -662,8 +694,8 @@ theme.pdpMain = function () {
         },
         success: function (data) {
           var $newProductMedia = $(data).find('.pdpMain__Media').html(),
-              $newProductPrice = $(data).find('.pdpCopy__price.hide-mobile').html(),
-              $newProductMobilePrice = $(data).find('.pdpCopy__price.hide-desktop').html(),
+              $newProductPrice = $(data).find('.pdpForm .pdpCopy__price.hide-mobile').html(),
+              $newProductMobilePrice = $(data).find('.pdpForm .pdpCopy__price.hide-desktop').html(),
               $newStickyPrice = $(data).find('.pdpStickyBar .pdpCopy__price').html();
 
           $productMedia.html($newProductMedia);
@@ -683,12 +715,16 @@ theme.pdpMain = function () {
            } else {
              $productUpsell.html('');
            }
+
+
+
         }
       });
     }
 
     if (variantId && changeMediaContent) {
       changeMedia()
+      theme.variantPreOrderCheck(variantId)
     }
     
         // ======================================== Neels code starts here ========================================
@@ -717,8 +753,8 @@ theme.pdpMain = function () {
         var sizevar = $(this).attr('title');
         var sizehandle = $(this).data('value-handle');
         $('#' + sizehandle).removeAttr('disabled','disabled'); 
-        $('div[data-size^="' + sizehandle + '"]').css('opacity','');
-        $('span[data-size^="' + sizevar + '"]').css('text-decoration','');
+        $('div[data-size^="' + sizehandle + '"]').css('text-decoration','');
+        $('div[data-size^="' + sizehandle + '"]').css('color','');
       });
 
       // Enable all quantities and return to default styling now that a new variant option has been selected
@@ -727,7 +763,7 @@ theme.pdpMain = function () {
         var quantityhandle = $(this).data('value-handle');
         $('#' + quantityhandle).removeAttr('disabled','disabled');
         $('div[data-quantity^="' + quantityhandle + '"]').css('color','');
-        $('span[data-quantity^="' + quantityvar + '"]').css('text-decoration','');
+        $('div[data-quantity^="' + quantityhandle + '"]').css('text-decoration','');
       });
 
       // Add all colors to the all_colors array list
@@ -847,7 +883,7 @@ theme.pdpMain = function () {
             if (all_quantities.indexOf(quantityvar) > -1) {
               $('#' + quantityhandle).attr('disabled','disabled'); 
               $('div[data-quantity^="' + quantityhandle + '"]').css('color','#ABABAB');
-              $('span[data-quantity^="' + quantityvar + '"]').css('text-decoration','line-through');
+              $('div[data-quantity^="' + quantityhandle + '"]').css('text-decoration','line-through');
             }
           });
         }
@@ -861,8 +897,8 @@ theme.pdpMain = function () {
           // If the size element is found in the all_sizes list we need to disable this element as it is not an available size option
           if (all_sizes.indexOf(sizevar) > -1) {
             $('#' + sizehandle).attr('disabled','disabled');
-            $('div[data-size^="' + sizehandle + '"]').css('opacity','0.5');
-            $('span[data-size^="' + sizevar + '"]').css('text-decoration','line-through');
+            $('div[data-size^="' + sizehandle + '"]').css('text-decoration','line-through');
+            $('div[data-size^="' + sizehandle + '"]').css('color','#ababab');
           }
         });
       }
@@ -875,7 +911,7 @@ theme.pdpMain = function () {
       $('.option-group-title-value').html('')
       $('.pdp__options-main [data-option-color] input').each(function () {
         if ($(this).is(':checked')) {
-          $(this).parents('.option-groups__group').find('.option-group-title-value').html(selectedColor)
+          $(this).parents('.option-groups__group').find('.option-group-title-value').html(selectedColor);
         }
       })
     }
@@ -1149,6 +1185,7 @@ theme.pdpQuickView = function () {
   // clicks:
   $(document).off('click.pdpQvSelectSize')
   $(document).off('mousedown.QvClose')
+
 
   $(document).on('mousedown.QvClose', function (e) {
     var $container = $('.Modal');
@@ -1664,7 +1701,6 @@ theme.searchBar = function () {
   }
 
   function openSearch () {
-    console.log('open');
     $searchBar.attr('aria-hidden', 'false');
     $searchBar.slideDown();
     $searchBarToggle.attr('aria-expanded', 'true');
@@ -1677,10 +1713,25 @@ theme.searchBar = function () {
     }, 100);
   }
 
+  function hidePopularSearch () {
+    $popularSearches.hide();
+    $searchEmpty.hide();
+    $resultsWrapper.show();
+    $searchPopular.hide();
+  }
+
+  function showPopularSearch () {
+    $searchPopular.show();
+    $popularSearches.show();
+    $resultsWrapper.hide();
+    $searchEmpty.show();
+  }
+
   function onInput (event) {
     var _this = $(event.target),
         value = _this.val().trim(),
-        queryKey = value.toLowerCase();
+        queryKey = value.toLowerCase(),
+        queryKeyReplace = queryKey.replace(/ /ig, '-');
 
     $searchBar.addClass('loading');
     $searchResultWrapper.attr('aria-hidden', 'false');
@@ -1689,27 +1740,42 @@ theme.searchBar = function () {
     if (queryKey.length) {
       $resetBtn.show();
       $searchPopular.hide();
+
+
       fetch(`/search/suggest.json?q=${queryKey}&resources[type]=product`)
         .then((response) => response.json())
         .then((suggestions) => {
           const productSuggestions = suggestions.resources.results.products;
-
+          let hiddenItems = 0;
           if (productSuggestions.length > 0) {
             productSuggestions.forEach(function (product) {
               if (product.type !== "Gift product") {
-                var productItem = `<li class="headerSearch__item"><a href="${product.url}">${product.title}</a></li>`
-                $searchResultContent.append(productItem);
+                const productTags = product.tags
+                let noSearchTags = [];
+
+
+                // Make array no search terms
+                $.each(productTags,function(index,value){
+                  const nosearchTag = value.toLowerCase().replace(/ /ig, '-').split('nosearch-')[1]
+                  if (nosearchTag) noSearchTags.push(nosearchTag)
+                })
+
+                if (!noSearchTags.includes(queryKeyReplace)) {
+                  var productItem = `<li class="headerSearch__item"><a href="${product.url}">${product.title}</a></li>`
+                  $searchResultContent.append(productItem);
+                } else {
+                  ++hiddenItems
+                }
               }
             })
-            $popularSearches.hide();
-            $searchEmpty.hide();
-            $resultsWrapper.show();
-            $searchPopular.hide();
+
+            if (hiddenItems === productSuggestions.length) {
+              showPopularSearch()
+            } else {
+              hidePopularSearch()
+            }
           } else {
-            $searchPopular.show();
-            $popularSearches.show();
-            $resultsWrapper.hide();
-            $searchEmpty.show();
+            showPopularSearch()
           }
 
           $searchBar.removeClass('loading');
@@ -1781,39 +1847,6 @@ theme.searchPage = function () {
 
   var $searchInput = $('.searchForm__inputMain');
   var $searchInputReset = $('.searchForm__mainResetLabel');
-  var $searchForm = $('.searchFormMain');
-
-  // function formSubmit () {
-  //   var value = $searchInput.val().trim();
-  //   var queryKey = value.replace(" ", "-").toLowerCase();
-  //   var url = '/search?q=' + queryKey + '&options%5Bprefix%5D=last&type=product';
-  //   let $searchContainer = $(document).find('.searchMain__inner');
-  //
-  //   $.ajax({
-  //     url: url,
-  //     method: 'GET',
-  //     success: function (data) {
-  //       let $searchNewContainer = $(data).find('.searchMain__inner').html();
-  //       $searchContainer.html($searchNewContainer);
-  //
-  //       if (typeof window.yotpo !== "undefined") {
-  //         window.yotpo.initWidgets();
-  //       }
-  //       $('.productCard').each(function () {
-  //         theme.updateSwatches($(this)[0])
-  //       })
-  //       var value = $searchInput.val().trim();
-  //       var queryKey = value.replace(" ", "-").toLowerCase();
-  //       var url = '/search?q=' + queryKey + '&options%5Bprefix%5D=last&type=product';
-  //       window.history.pushState({}, null, url);
-  //
-  //       var resultCount = $(document).find('[data-result-count]').attr('data-result-count');
-  //       var searchTerms = $(document).find('[data-terms]').attr('data-terms');
-  //
-  //       document.title = `Search: ${resultCount} results found for "${searchTerms}" – Fellow`;
-  //     }
-  //   });
-  // }
 
   function changeDocumentTitle () {
     var resultCount = $(document).find('[data-result-count]').attr('data-result-count');
@@ -1998,6 +2031,8 @@ theme.GLOBAL = function () {
 
 
   theme.qvVariantChange = function () {
+
+
     let selectedOption = $('#ProductQuickView .radio-group input:checked');
 
     var currentOptions = $.map(selectedOption, function(element, index) {
@@ -2231,8 +2266,11 @@ theme.GLOBAL = function () {
 
             $('#ProductQuickView #selectid').val(variants[i].id);
 
+
+
             $($('#ProductQuickView #selectid').find('[value="' + variants[i].id + '"]')).attr('selected', 'selected');
             $('[data-selected-var-price]').text($($('#ProductQuickView #selectid').find('[value="' + variants[i].id + '"]')).attr('data-variant-price'))
+
 
             if ($('.js-counter-quantity').val() < 1) {
               $('.js-counter-quantity').val(1)
@@ -2246,6 +2284,16 @@ theme.GLOBAL = function () {
             } else {
               $($('#ProductQuickView #quickAdd').find('[data-atc-copy]')).text(window.theme.strings.soldOut);
               $('#ProductQuickView #quickAdd').attr('data-add-id', variants[i].id)
+            }
+
+            var id = $('#ProductQuickView #selectid').find('[value="' + variants[i].id + '"]').data('variant-preorder');
+            if(id == true){
+               $('#quickAdd .js-atc-copy').text("Pre-order");
+              if ($("#ProductQuickView input[name='properties[pre-order]']").length === 0) {
+                $('#ProductQuickView form').append(`<input type="hidden" data-preorder="true" name="properties[pre-order]" value="true">`)
+              }
+            } else {
+              $('#ProductQuickView [data-preorder]').remove();
             }
           }
         }

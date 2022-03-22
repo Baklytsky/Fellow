@@ -1,6 +1,8 @@
 {%- assign show_product_bar = section.settings.show_product_bar -%}
 {%- assign product_bar_text_color = section.settings.product_bar_text_color -%}
 {%- assign product_bar_bg_color = section.settings.product_bar_bg_color -%}
+{%- assign index = 0 -%}
+{%- assign limit = 3 -%}
 
 {%- if show_product_bar -%}
   {%- capture 'slick-config' -%}
@@ -21,8 +23,17 @@
     <div class="pdpBar__wrapper f {% if section.blocks < 3 %}jca{% else %}jcb{% endif %} aic">
       {%- for block in section.blocks -%}
         {%- assign svg_icon = block.settings.svg_icon -%}
-        {%- assign title = block.settings.text-%}
+        {%- assign title = block.settings.text -%}
+        {%- assign display_on_bundle = block.settings.display_on_bundle -%}
+
         {%- if svg_icon != blank or title != blank -%}
+          {%- if index < limit -%}
+            {%- if display_on_bundle -%}
+              {%- unless template == 'product.bundle-pick-mix' -%}
+                {%- continue -%}
+              {%- endunless -%}
+            {%- endif -%}
+
             <div class="pdpBar__item">
               <div class="pdpBar__item-wrapper f jcc aic">
                 {%- if svg_icon != blank -%}
@@ -33,6 +44,9 @@
                 {%- endif -%}
               </div>
             </div>
+
+            {%- assign index = index | plus: 1 -%}
+          {%- endif -%}
         {%- endif -%}
       {%- endfor -%}
     </div>
@@ -71,9 +85,8 @@
       {
         "type": "block",
         "name": "block",
-        "limit": 3,
+        "limit": 4,
         "settings": [
-
           {
             "type": "html",
             "id": "svg_icon",
@@ -83,6 +96,12 @@
             "type": "html",
             "id": "text",
             "label": "Text"
+          },
+          {
+            "type": "checkbox",
+            "id": "display_on_bundle",
+            "label": "Display on bundle products",
+            "default": false
           }
         ]
       }

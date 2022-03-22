@@ -253,10 +253,10 @@ div.MuiGrid-root.MuiGrid-container {
 }
 
 
-media only screen and (max-width: 600px) {
-canvas#canvas {
- display:none; 
-}
+@media only screen and (max-width: 600px) {
+  canvas#canvas {
+   display:none;
+  }
 }
 
 label .MuiFormLabel-root .MuiInputLabel-root .MuiInputLabel-formControl .MuiInputLabel-animated .MuiInputLabel-shrink,
@@ -277,8 +277,8 @@ label + jss108 {
  margin-top:-10px; 
 }
 
-.MuiGrid-spacing-xs-3 > .MuiGrid-item [
-padding-top: 8px;
+.MuiGrid-spacing-xs-3 > .MuiGrid-item {
+  padding-top: 8px;
 }
 
 input#productQuantity {

@@ -13,11 +13,11 @@
     "gift_wrapping_message": "Is this a gift?",
     "gift_wrapping_result_message": "Your order will be sent in a gift box",
     "gift_wrapping_heading": "Gift Box + Gift Note",
-    "enable_gwp": false,
-    "gwp_threshold": 150,
-    "gwp_product": "free-gift-carter-move-mug-tier-1",
-    "second_gwp_threshold": 200,
-    "second_gwp_product": "free-gift-carter-move-mug-tier-2",
+    "enable_gwp": true,
+    "gwp_threshold": 200,
+    "gwp_product": "manhattan-coffee-roasters-diego-burmudez",
+    "second_gwp_threshold": 0,
+    "second_gwp_product": "",
     "personalization_product": "personalization-add-on",
     "enable_search": true,
     "search_no_result_text": "Sorry, no results",
@@ -151,9 +151,9 @@
               "image_1": "shopify:\/\/shop_images\/Nav-2up-Kettles-All.jpg",
               "title_1": "Shop All Kettles",
               "url_1": "shopify:\/\/collections\/kettles",
-              "image_2": "shopify:\/\/shop_images\/Nav-2up-Kettles-Featured.jpg",
-              "title_2": "Matte Black Bundle",
-              "url_2": "shopify:\/\/products\/matte-black-bundle",
+              "image_2": "shopify:\/\/shop_images\/Rookie_Kit_780x618_Product_Feature_2.jpg",
+              "title_2": "The Rookie Kit",
+              "url_2": "shopify:\/\/products\/rookie-kit",
               "title_3": "",
               "url_3": "",
               "title_4": "",
@@ -222,6 +222,37 @@
               "title_4": "",
               "url_4": ""
             }
+          },
+          "89a2c721-dfe0-4b4d-a289-0aa84be363f8": {
+            "type": "sub_menu",
+            "settings": {
+              "target": "bundle-save",
+              "image_1": "shopify:\/\/shop_images\/Ode-Coffee-Grinder-01-Matte-Black-08.jpg",
+              "title_1": "Shop All Kits + Bundles",
+              "url_1": "shopify:\/\/collections\/coffee-products-kits-bundles",
+              "image_2": "shopify:\/\/shop_images\/Mask_Group_1.png",
+              "title_2": "The Brewing Hero Kit",
+              "url_2": "shopify:\/\/products\/brewing-hero",
+              "title_3": "",
+              "url_3": "",
+              "title_4": "",
+              "url_4": ""
+            }
+          },
+          "ae1f64c0-e3cd-4973-a1f8-951b8ea29882": {
+            "type": "sub_menu",
+            "settings": {
+              "target": "Shop All",
+              "image_1": "shopify:\/\/shop_images\/Brew-Bar-Hero-Module-Image.jpg",
+              "title_1": "Shop All",
+              "url_1": "shopify:\/\/collections\/all-products",
+              "title_2": "",
+              "url_2": "",
+              "title_3": "",
+              "url_3": "",
+              "title_4": "",
+              "url_4": ""
+            }
           }
         },
         "block_order": [
@@ -232,7 +263,9 @@
           "07a7325a-a427-41ba-8978-d7a7838d1890",
           "b24e904e-5612-41ff-a0e9-515e8062e8f4",
           "9d051490-e4a2-42fc-aff7-458f600203d6",
-          "4e4fd786-95a7-414f-8e51-d76b8ad921cb"
+          "4e4fd786-95a7-414f-8e51-d76b8ad921cb",
+          "89a2c721-dfe0-4b4d-a289-0aa84be363f8",
+          "ae1f64c0-e3cd-4973-a1f8-951b8ea29882"
         ],
         "settings": {
           "logo": "shopify:\/\/shop_images\/Fellow-Logo-black.png",
@@ -319,34 +352,33 @@
             "disabled": true,
             "settings": {
               "splitSlide__layout": "right",
-              "heroSlide": "shopify:\/\/shop_images\/02.15.22_Hero_Module.jpg",
+              "heroSlide": "shopify:\/\/shop_images\/Manhattan_Hero_HomePage_edit_copy.jpg",
               "desktopAlignment": "center",
               "mobileAlignment": "center",
-              "heroSlide__header": "Pours Well With Others",
-              "heroSlide__subheader": "Precisely tuned and perfectly balanced, Stagg EKG brings out the best in your pour-over.",
-              "subSlide__bgColor": "#edc890",
-              "subSlide__textColor": "#231f20",
-              "heroSlide__ctaURL": "shopify:\/\/collections\/kettles",
-              "heroSlide__ctaCopy": "Shop Kettles",
-              "heroSlide__ctaColor": "black",
+              "heroSlide__header": "Fresh + Limited",
+              "heroSlide__subheader": "Spend $200 and we’ll send you our latest coffee obsession - Diego Bermudez by Manhattan Coffee Roasters, flown in from the Netherlands.",
+              "subSlide__bgColor": "#000000",
+              "subSlide__textColor": "#FFFFFF",
+              "heroSlide__ctaURL": "shopify:\/\/collections\/bestsellers",
+              "heroSlide__ctaCopy": "Shop Now",
+              "heroSlide__ctaColor": "white",
               "heroSlide__ctaSubtext": ""
             }
           },
           "1f457594-c59c-4edd-800a-a9f7662f319e": {
             "type": "splitSlide",
-            "disabled": true,
             "settings": {
               "splitSlide__layout": "right",
-              "heroSlide": "shopify:\/\/shop_images\/Hero_Module_Image_1440x_58a51936-974b-4ebd-b5bb-eba9f9b0f279.png",
+              "heroSlide": "shopify:\/\/shop_images\/Hero_Module_Image.jpg",
               "desktopAlignment": "center",
               "mobileAlignment": "center",
-              "heroSlide__header": "No Bad Mornings in 2022",
-              "heroSlide__subheader": "You can’t control everything in life, but you can control your countertop.",
-              "subSlide__bgColor": "#f6f2e8",
-              "subSlide__textColor": "#231f20",
-              "heroSlide__ctaURL": "shopify:\/\/collections\/bestsellers",
-              "heroSlide__ctaCopy": "Shop Best Sellers",
-              "heroSlide__ctaColor": "black",
+              "heroSlide__header": "Blue Steel",
+              "heroSlide__subheader": "Meet the ridiciously good looking new Carter hue. Now available in every size and style.",
+              "subSlide__bgColor": "#2b3c4d",
+              "subSlide__textColor": "#FFFFFF",
+              "heroSlide__ctaURL": "shopify:\/\/collections\/stone-blue",
+              "heroSlide__ctaCopy": "Shop Stone Blue",
+              "heroSlide__ctaColor": "white",
               "heroSlide__ctaSubtext": ""
             }
           },
@@ -367,21 +399,6 @@
               "heroSlide__ctaColor": "black",
               "heroSlide__ctaSubtext": ""
             }
-          },
-          "f6188a5d-befc-4be6-8679-7ba38ba60b9e": {
-            "type": "heroSlide",
-            "settings": {
-              "heroSlide": "shopify:\/\/shop_images\/Hero_Module_Ode_Burr.png",
-              "desktopAlignment": "center",
-              "mobileAlignment": "center",
-              "heroSlide__header": "Testing",
-              "heroSlide__subheader": "Csss",
-              "heroSlide__textAlignment": "center",
-              "heroSlide__color": "cw",
-              "heroSlide__ctaURL": "",
-              "heroSlide__ctaCopy": "",
-              "heroSlide__ctaColor": "black"
-            }
           }
         },
         "block_order": [
@@ -389,8 +406,7 @@
           "c15c0d5c-f86c-436e-95b6-2f10cb6c8b20",
           "58ee7397-6079-412a-9acd-d453a0cf281c",
           "1f457594-c59c-4edd-800a-a9f7662f319e",
-          "3e0796bc-698b-4618-80b6-261185f9fb1a",
-          "f6188a5d-befc-4be6-8679-7ba38ba60b9e"
+          "3e0796bc-698b-4618-80b6-261185f9fb1a"
         ],
         "settings": {
           "addMargin": false
@@ -542,14 +558,14 @@
         "type": "hp-iwt",
         "settings": {
           "enable_section": true,
-          "image": "shopify:\/\/shop_images\/Rookie_Kit_780x618_Product_Feature_1.jpg",
-          "layout": "right",
-          "header": "The Rookie Kit",
-          "description": "<p>A pour-over intro kit that you’ll still be using when you go pro.<\/p>",
+          "image": "shopify:\/\/shop_images\/MapleKettles_module_1.png",
+          "layout": "left",
+          "header": "Lighten Up",
+          "description": "<p>New Stagg EKGs with warm maple accents. Pour-over precision, designed for the home.<\/p>",
           "bg_color": "",
           "text_color": "#000000",
-          "cta_url": "shopify:\/\/collections\/coffee-products-kits-bundles",
-          "cta_copy": "Shop Kits + Bundles",
+          "cta_url": "shopify:\/\/collections\/kettles",
+          "cta_copy": "Pick Your Kettle",
           "cta_color": "btn--dark"
         }
       },
@@ -722,33 +738,30 @@
       },
       "cart-recommended": {
         "type": "cart-recommended",
-        "settings": {
-        }
+        "settings": {}
       },
       "cart-gift-wrapping": {
         "type": "cart-gift-wrapping",
-        "settings": {
-        }
+        "settings": {}
       },
       "1636101715cd2df3c8": {
         "type": "hp-iwt",
         "settings": {
           "enable_section": true,
-          "image": "shopify:\/\/shop_images\/Clara_780x618_Product_Feature.jpg",
-          "layout": "left",
-          "header": "No Chill",
-          "description": "<p>The rare French press that keeps your brew warm for multiple cups.<\/p>",
+          "image": "shopify:\/\/shop_images\/StoneBlue_Product_Feature_Horizontal_2x_4ce2ddbf-48d0-42cd-9154-09799eca7139.jpg",
+          "layout": "right",
+          "header": "Cool Collectables",
+          "description": "<p>Expand your Carter collection with the new hue Stone Blue.<\/p>",
           "bg_color": "",
           "text_color": "",
-          "cta_url": "shopify:\/\/products\/clara-french-press",
-          "cta_copy": "Shop Clara",
+          "cta_url": "shopify:\/\/products\/carter-move-mug",
+          "cta_copy": "Shop Carter",
           "cta_color": "btn--dark"
         }
       },
       "page-template": {
         "type": "page-template",
-        "settings": {
-        }
+        "settings": {}
       },
       "16391832269c232690": {
         "type": "hp-iwt",
@@ -767,16 +780,15 @@
       },
       "search-template": {
         "type": "search-template",
-        "settings": {
-        }
+        "settings": {}
       }
     },
     "content_for_index": [
       "1565155576930",
       "1629968785d9d2e1c7",
       "162997622949d3f8ee",
-      "1630052841314f69dd",
       "1636101715cd2df3c8",
+      "1630052841314f69dd",
       "16391832269c232690",
       "163005286553dd2458",
       "16342252676e2388c3",
@@ -790,8 +802,7 @@
       "sections": {
         "featured-product": {
           "type": "featured-product",
-          "settings": {
-          }
+          "settings": {}
         }
       },
       "content_for_index": [

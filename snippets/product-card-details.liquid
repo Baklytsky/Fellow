@@ -30,7 +30,7 @@
           {% comment %}
             Product is available and not on sale
           {% endcomment %}
-          <h2 data-selected-var-price class="ml1 pdpCopy__header-price">{{ product.price | money | remove: '.00' }}</h2>
+          <h2 class="ml1 pdpCopy__header-price">{{ product.price | money | remove: '.00' }}</h2>
         {% endif %}
       {% else %}
         {% comment %}
@@ -44,10 +44,10 @@
 </div>
 
 {%- assign reviews_count = product.metafields.yotpo.reviews_count | plus: 0 -%}
-<div class="productCard_ratings f fdr aie mb05 {% if product.compare_at_price > product.price %}mt05{% endif %}"
+<div class="productCard_ratings f fdr aie mb05 mt05"
      {% if reviews_count == 0 %}style="display:none;"{% endif %}>
   <div class="yotpo bottomLine" style="display:inline-block;" data-product-id="{{ product.id }}"></div>
   <span class="productCard__reviewNum">({{ reviews_count }})</span>
 </div>
-     
- 
+
+

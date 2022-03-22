@@ -28,11 +28,15 @@ Uncomment to include
       </div>
     {% endif %}
   {% endunless %}
+    {%- assign hasPreorderTag = false -%}
+    {%- if product.tags contains 'preorder' -%}
+      {%- assign hasPreorderTag = true -%}
+    {%- endif -%}
   {%- capture cta -%}
     {% if product.available %}
       <span data-atc-copy class="js-atc-copy">
-        {% if product.tags contains 'preorder' %}
-          Preorder
+        {% if product.selected_variant.metafields.my_fields.preorder or hasPreorderTag %}
+          Pre-Order
         {% else %}
           Add to Cart
         {% endif %}

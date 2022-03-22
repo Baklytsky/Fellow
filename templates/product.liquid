@@ -38,13 +38,17 @@
 
 
 <script type="text/javascript">
-document.querySelector("#kl_elec_wrnty").addEventListener('click',function (){
-        var _klOnsite = window._klOnsite || []  
-        _klOnsite.openForm('XDf9kc', () => console.log("you triggered the form!"))
-    });</script>
+  var klElecWrnty = document.querySelector("#kl_elec_wrnty");
+  if (klElecWrnty) {
+    klElecWrnty.addEventListener('click',function (){
+      var _klOnsite = window._klOnsite || []
+      _klOnsite.openForm('XDf9kc', () => console.log("you triggered the form!"))
+    });
+  }
+</script>
 <script type="text/javascript">
 document.querySelector("#freeShipPopup").addEventListener('click',function (){
-        var _klOnsite = window._klOnsite || []  
+        var _klOnsite = window._klOnsite || []
         _klOnsite.openForm('WP99kU', () => console.log("you triggered the form!"))
-    });</script>
-
+    });
+</script>
