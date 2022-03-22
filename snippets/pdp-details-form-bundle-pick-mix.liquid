@@ -20,6 +20,11 @@
 
         {%- assign uniq_id = bundle_product.id | append: '-' | append: forloop.index -%}
 
+        {%- assign hasPreorderTag = false -%}
+        {%- if bundle_product.tags contains 'preorder' -%}
+          {%- assign hasPreorderTag = true -%}
+        {%- endif -%}
+
         {%- if bundle_product != blank -%}
           <div class="bundle-product">
             <div class="bundle-product__icon-wrapper rel">
@@ -144,9 +149,6 @@
                     {%- elsif variant_title_hand contains 'upgraded-ssp-mp-brew-burrs-' -%}
                       {%- assign variant_title_hand = variant_title_hand | split: 'upgraded-ssp-mp-brew-burrs-' | first -%}
                     {%- endif -%}
-              
-            
-
 
                     {%- if forloop.last -%}
                       {%- assign options = options | append: variant_title_hand -%}
@@ -156,6 +158,7 @@
                   {%- endfor -%}
 
                   {%- assign bundle_price_difference = variant.price | minus: bundle_variants_min_price -%}
+                  {%- assign variant_preorder = variant.metafields.my_fields.preorder -%}
 
                   <option value='{{ variant.id }}'
                           data-variant-options-title='{{ options }}'
@@ -167,6 +170,7 @@
                           data-variant-inventory-policy='{{ variant.inventory_policy }}'
                           data-variant-inventory-management='{{ variant.inventory_management }}'
                           {% unless variant.available %}disabled="disabled"{% endunless %}
+                          {% if hasPreorderTag or variant_preorder %}data-variant-preorder='true'{% endif %}
                           {% if forloop.first %}selected{% endif %}>
                   {{ variant.title }}
                 </option>
