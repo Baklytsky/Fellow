@@ -6134,7 +6134,6 @@ h2.pdpCopy__header-price ,
 // Size selector
 .bundle-product,
 .upsell-product {
-  .radio-group[data-option-burrs],
   .radio-group[data-option-size] {
     &:last-child {
       margin-right: 0;
@@ -6156,7 +6155,6 @@ h2.pdpCopy__header-price ,
       text-transform: uppercase;
       transition: all var(--slow) var(--ease);
       outline: none !important;
-      padding: 12px 16px;
     }
 
     input:checked + .radio__title,
@@ -6170,6 +6168,7 @@ h2.pdpCopy__header-price ,
     }
   }
 }
+
 
 .bundle-product__heading {
   margin: 0 0 23px;
@@ -6853,8 +6852,25 @@ ul.pdp_details__feature_list > li {
   }
 }
 
+.radio-group[data-option-bag-size] input:checked+.radio__title {
+  position: relative;
+  color: #000;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    bottom: -4px;
+    left: -4px;
+    border: 2px solid #E5E5E5;
+    border-radius: 4px;
+  }
+}
+
 .radio-group[data-option-quantity] input:checked+.radio__title:after,
 .radio-group[data-option-burrs] input:checked+.radio__title:after,
+.radio-group[data-option-bag-size] input:checked+.radio__title:after,
 .pdp__sticky-options-item .radio-group:not([data-option-color]):not([data-option-material]):not([data-option-size]) .radio.checked:after {
   top: 0;
   right: 0;
