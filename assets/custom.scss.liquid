@@ -6092,7 +6092,8 @@ h2.pdpCopy__header-price ,
   }
 }
 
-.bundle-product {
+.bundle-product,
+.upsell-product {
   margin-bottom: 25px;
   padding: 24px;
   display: flex;
@@ -6123,52 +6124,15 @@ h2.pdpCopy__header-price ,
       }
     }
   }
+}
 
+.bundle-product {
   .bundle-product__option-group {
     .bundle-radio-group {
       margin-right: 22px;
     }
   }
 }
-
-// Size selector
-.bundle-product,
-.upsell-product {
-  .radio-group[data-option-size] {
-    &:last-child {
-      margin-right: 0;
-    }
-
-    .radio__title {
-      display: flex;
-      padding: 10px 16px !important;
-      width: 100%;
-      justify-content: center;
-      outline: auto;
-      background-color: #e7e8e6 !important;
-      color: #000 !important;
-      cursor: pointer;
-      text-align: center;
-      font-size: 11px !important;
-      line-height: 1;
-      letter-spacing: normal;
-      text-transform: uppercase;
-      transition: all var(--slow) var(--ease);
-      outline: none !important;
-    }
-
-    input:checked + .radio__title,
-    .checked .radio__title {
-      background-color: #000 !important;
-      color: #fff !important;
-
-      &::after {
-        display: none;
-      }
-    }
-  }
-}
-
 
 .bundle-product__heading {
   margin: 0 0 23px;
@@ -6841,7 +6805,7 @@ ul.pdp_details__feature_list > li {
 
 /* PDP Options */
 .radio-group {
-  &:not([data-option-color]):not([data-option-material]):not([data-option-size]) {
+  &:not([data-option-color]):not([data-option-material]) {
     .radio__title {
       padding: 13px 16px;
 
@@ -6852,7 +6816,8 @@ ul.pdp_details__feature_list > li {
   }
 }
 
-.radio-group[data-option-bag-size] input:checked+.radio__title {
+.radio-group[data-option-bag-size] input:checked+.radio__title,
+.radio-group[data-option-size] input:checked+.radio__title {
   position: relative;
   color: #000;
 
@@ -6871,6 +6836,7 @@ ul.pdp_details__feature_list > li {
 .radio-group[data-option-quantity] input:checked+.radio__title:after,
 .radio-group[data-option-burrs] input:checked+.radio__title:after,
 .radio-group[data-option-bag-size] input:checked+.radio__title:after,
+.radio-group[data-option-size] input:checked+.radio__title:after,
 .pdp__sticky-options-item .radio-group:not([data-option-color]):not([data-option-material]):not([data-option-size]) .radio.checked:after {
   top: 0;
   right: 0;
