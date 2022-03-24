@@ -114,12 +114,12 @@
     {{ 'index.css' | asset_url | stylesheet_tag }}
     {{ 'custom.scss.css' | asset_url | stylesheet_tag }}
     
- {%- if request.path contains 'carter-move-mug' or request.path contains 'carter-everywhere-mug' -%}
+ {%- if request.path contains 'carter-move-mug' or request.path contains 'carter-everywhere-mug' or product.handle contains 'carter-move-mug-with-360-sip-lid' -%}
     {{ 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css' | stylesheet_tag }}
     {{ 'player_customized.css' | asset_url | stylesheet_tag }}
       {{ 'player-chunk.css' | asset_url | stylesheet_tag }}
     {{ 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css' | stylesheet_tag }}
-    {{ 'https://admin-fts.threekit.com/app/js/threekit-player-bundle.js' | script_tag }}
+    {{ 'https://preview.threekit.com/app/js/threekit-player-bundle.js' | script_tag }}
     {%- endif -%}
     
     {{ content_for_header }}
@@ -154,7 +154,7 @@ heap.load("2167326671");
     {{ 'jquery.ba-throttle-debounce.min.js' | asset_url | script_tag }}
     {{ 'custom-additional-vendor.js' | asset_url | script_tag }}
   
- {%- if request.path contains 'carter-move-mug' or request.path contains 'carter-everywhere-mug' -%}
+ {%- if request.path contains 'carter-move-mug' or request.path contains 'carter-everywhere-mug' or product.handle contains 'carter-move-mug-with-360-sip-lid' -%}
     {{ 'player-event.js' | asset_url | script_tag }}
     {{ 'player-inline.js' | asset_url | script_tag }}
     {{ 'player-chunk-one.js' | asset_url | script_tag }}
