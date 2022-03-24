@@ -1,0 +1,285 @@
+{%- assign enable_section = section.settings.enable_section -%}
+{%- assign section_bg = section.settings.section_bg -%}
+{%- assign video_mp4 = section.settings.video_mp4 -%}
+{%- assign video_poster = section.settings.video_poster -%}
+{%- assign video_autoplay = section.settings.video_autoplay -%}
+{%- assign video_muted = section.settings.video_muted -%}
+{%- assign show_hide_video = section.settings.show_hide_video -%}
+{%- assign image = section.settings.image -%}
+{%- assign image_tablet = section.settings.image_tablet -%}
+{%- assign image_mobile = section.settings.image_mobile -%}
+{%- assign overlay_opacity = section.settings.overlay_opacity -%}
+{%- assign text_color = section.settings.text_color -%}
+{%- assign content_position = section.settings.content_position -%}
+{%- assign heading = section.settings.heading -%}
+{%- assign text = section.settings.text -%}
+{%- assign link = section.settings.link -%}
+{%- assign button_text = section.settings.button_text -%}
+{%- assign btn_type = section.settings.btn_type -%}
+{%- assign image_class_name = 'landing__hero-image' -%}
+
+{%- if enable_section and image != blank or enable_section and video_mp4 != blank -%}
+  <section id="landing__hero-{{ section.id }}" class="landing__hero landing__hero--{{ content_position }} {% if show_hide_video == 'mobile' %}landing__hero-hide-video-on-mobile{% endif %}" style="background-color: {{ section_bg }}; color: {{ text_color }};">
+    {%- if image_mobile != blank -%}
+      {%- assign image_class_name = 'landing__hero-image desktop-image' -%}
+      <img src='{{ image_mobile | img_url: "600x" }}'
+           class="landing__hero-image-mobile"
+           loading="lazy"
+           srcset='{{ image_mobile | img_url: "600x" }} 600w,
+          {{ image_mobile | img_url: "1000x" }} 991w,
+          {{ image_mobile | img_url: "1280x" }} 1280w,
+          {{ image_mobile | img_url: "1440x" }} 1400w,
+          {{ image_mobile | img_url: "1600x" }} 1600w,
+          {{ image_mobile | img_url: "1980x" }} 1980w'
+           alt='{{ image_mobile.alt | default: 'Fellow' }}'>
+      <noscript>
+        <img class="landing__hero-image-mobile" src="{{ image_mobile | img_url: '1024x' }}"
+             alt="{{ image.alt | default: 'Fellow' }}">
+      </noscript>
+    {%- endif -%}
+    {%- if video_mp4 != blank -%}
+      {%- assign image_class_name = image_class_name | append: ' landing__hero-image-with-video' -%}
+      <div class="pause-button
+        {% unless section.settings.video_autoplay %} hidden {% endunless %}">
+        {% render 'icon' with 'pause-mp4' %}
+      </div>
+      <div class="play-button
+        {% if section.settings.video_autoplay == false or section.settings.video_muted == false %} autoplay-muted {% endif %}
+        {% if section.settings.video_autoplay == true %} autoplay hidden {% endif %}">
+        {% render 'icon' with 'play-btn-mp4' %}
+      </div>
+      <video class="landing__hero-video media-video {% if show_hide_video == 'mobile' %}hide-on-mobile{% endif %}"
+             id="videos" loop {% if section.settings.video_muted %} muted
+             {% endif %}playsinline {% if section.settings.video_autoplay %} autoplay {% endif %}
+             {% if video_poster != blank %} poster="{{ video_poster | img_url: "2048x" }}" {% endif %}>
+        <source src="{{ video_mp4 }}" type="video/mp4">
+      </video>
+      {%- if section.settings.show_mute_button -%}
+        <button class="mute-video {% if section.settings.video_muted == true %}unmute-video{% endif %}">
+          {% render 'icon' with 'mic' %}
+          {% render 'icon' with 'mic-off' %}
+        </button>
+      {%- endif -%}
+    {%- endif -%}
+    {%- unless video_mp4 != blank -%}
+      {%- if image != blank -%}
+        <img src='{{ image | img_url: "600x" }}'
+             class="{{ image_class_name }}"
+             loading="lazy"
+             srcset='{{ image | img_url: "600x" }} 600w,
+            {{ image | img_url: "1000x" }} 991w,
+            {{ image | img_url: "1280x" }} 1280w,
+            {{ image | img_url: "1440x" }} 1400w,
+            {{ image | img_url: "1600x" }} 1600w,
+            {{ image | img_url: "2048x" }} 2048w'
+             alt='{{ image.alt | default: 'Fellow' }}'>
+        <noscript>
+          <img class="{{ image_class_name }}"
+               src="{{ image | img_url: '2048x' }}"
+               alt="{{ image.alt | default: 'Fellow' }}">
+        </noscript>
+      {%- endif -%}
+    {%- endunless -%}
+    {%- if heading != blank or text != blank or link != blank -%}
+      <div class="landing__hero-content-wrapper landing__hero-content-wrapper--{{ content_position }}">
+        <div class="landing__hero-content" style="color: {{ text_color }}">
+          {%- if heading != blank -%}
+            <h3 class="landing__hero-content-heading">{{ heading }}</h3>
+          {%- endif -%}
+          {%- if text != blank -%}
+            <p class="landing__hero-content-text">{{ text }}</p>
+          {%- endif -%}
+          {%- if link != blank and button_text != blank -%}
+            <a href="{{ link }}" class="button rel btn btn--lg landing__hero-content-link {{ btn_type }}" role="button">{{ button_text }}</a>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endif -%}
+  </section>
+
+  {%- if overlay_opacity != blank -%}
+    <style>
+        #landing__hero-{{ section.id }} .landing__hero-image,
+        #landing__hero-{{ section.id }} .landing__hero-image-mobile,
+        #landing__hero-{{ section.id }} .landing__hero-video {
+            opacity: {{ 100 | minus: overlay_opacity | times: 0.01 }};
+        }
+    </style>
+  {%- endif -%}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Hero video",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_section",
+      "label": "Enable section"
+    },
+    {
+      "type": "color",
+      "id": "section_bg",
+      "label": "Section background color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Video settings"
+    },
+    {
+      "type": "text",
+      "id": "video_mp4",
+      "info": "Only .mp4 is required for it to work. You can upload videos [here](https://fellowproducts.com/admin/settings/files) to get the url",
+      "label": "Video file url .mp4"
+    },
+    {
+      "type": "image_picker",
+      "id": "video_poster",
+      "label": "Poster Video"
+    },
+    {
+      "type": "checkbox",
+      "id": "video_autoplay",
+      "label": "Autoplay",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "video_muted",
+      "label": "Muted",
+      "info": "If the video is not muted it will not autoplay. Browsers protect users against audio playing without their consent",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_mute_button",
+      "label": "Show mute button",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "show_hide_video",
+      "options": [
+        { "value": "mobile", "label": "Hide on mobile"},
+        { "value": "show_on_all", "label": "Show on all devices"}
+      ],
+      "default": "show_on_all",
+      "label": "Show/Hide videos on different devices"
+    },
+    {
+      "type": "header",
+      "content": "Image settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Image mobile"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "label": "Overlay opacity",
+      "default": 70
+    },
+    {
+      "type": "header",
+      "content": "Text settings"
+    },
+    {
+      "type": "select",
+      "id": "content_position",
+      "label": "Content position",
+      "options": [
+        {
+          "value": "topLeft",
+          "label": "Top left"
+        },
+        {
+          "value": "topRight",
+          "label": "Top right"
+        },
+        {
+          "value": "topCenter",
+          "label": "Top center"
+        },
+        {
+          "value": "middleLeft",
+          "label": "Middle left"
+        },
+        {
+          "value": "middleRight",
+          "label": "Middle right"
+        },
+        {
+          "value": "middleCenter",
+          "label": "Middle center"
+        },
+        {
+          "value": "bottomLeft",
+          "label": "Bottom left"
+        },
+        {
+          "value": "bottomRight",
+          "label": "Bottom right"
+        },
+        {
+          "value": "bottomCenter",
+          "label": "Bottom center"
+        }
+      ],
+      "default": "middleCenter"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "html",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Button url"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text"
+    },
+    {
+      "type": "select",
+      "id": "btn_type",
+      "options": [
+        { "value": "btn--light", "label": "Button light"},
+        { "value": "btn--dark", "label": "Button dark"}
+      ],
+      "default": "btn--light",
+      "label": "Button style"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero video",
+      "category": "Video"
+    }
+  ]
+}
+{% endschema %}
