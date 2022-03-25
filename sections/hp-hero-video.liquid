@@ -12,6 +12,8 @@
 {%- assign text_color = section.settings.text_color -%}
 {%- assign content_position = section.settings.content_position -%}
 {%- assign heading = section.settings.heading -%}
+{%- assign image_heading = section.settings.image_heading -%}
+{%- assign image_heading_width = section.settings.image_heading_width -%}
 {%- assign text = section.settings.text -%}
 {%- assign link = section.settings.link -%}
 {%- assign button_text = section.settings.button_text -%}
@@ -25,12 +27,7 @@
       <img src='{{ image_mobile | img_url: "600x" }}'
            class="landing__hero-image-mobile"
            loading="lazy"
-           srcset='{{ image_mobile | img_url: "600x" }} 600w,
-          {{ image_mobile | img_url: "1000x" }} 991w,
-          {{ image_mobile | img_url: "1280x" }} 1280w,
-          {{ image_mobile | img_url: "1440x" }} 1400w,
-          {{ image_mobile | img_url: "1600x" }} 1600w,
-          {{ image_mobile | img_url: "1980x" }} 1980w'
+           srcset='{{ image_mobile | img_url: "1000x" }} 600w'
            alt='{{ image_mobile.alt | default: 'Fellow' }}'>
       <noscript>
         <img class="landing__hero-image-mobile" src="{{ image_mobile | img_url: '1024x' }}"
@@ -40,17 +37,15 @@
     {%- if video_mp4 != blank -%}
       {%- assign image_class_name = image_class_name | append: ' landing__hero-image-with-video' -%}
       <div class="pause-button
-        {% unless section.settings.video_autoplay %} hidden {% endunless %}">
+        {% if section.settings.video_autoplay == false or section.settings.video_muted == false %} hidden {% endif %}">
         {% render 'icon' with 'pause-mp4' %}
       </div>
-      <div class="play-button
-        {% if section.settings.video_autoplay == false or section.settings.video_muted == false %} autoplay-muted {% endif %}
-        {% if section.settings.video_autoplay == true %} autoplay hidden {% endif %}">
+      <div class="play-button {% if section.settings.video_autoplay and section.settings.video_muted %} hidden {% endif %}">
         {% render 'icon' with 'play-btn-mp4' %}
       </div>
       <video class="landing__hero-video media-video {% if show_hide_video == 'mobile' %}hide-on-mobile{% endif %}"
              id="videos" loop {% if section.settings.video_muted %} muted
-             {% endif %}playsinline {% if section.settings.video_autoplay %} autoplay {% endif %}
+             {% endif %}playsinline {% if section.settings.video_autoplay and section.settings.video_muted %} autoplay {% endif %}
              {% if video_poster != blank %} poster="{{ video_poster | img_url: "2048x" }}" {% endif %}>
         <source src="{{ video_mp4 }}" type="video/mp4">
       </video>
@@ -83,8 +78,20 @@
     {%- if heading != blank or text != blank or link != blank -%}
       <div class="landing__hero-content-wrapper landing__hero-content-wrapper--{{ content_position }}">
         <div class="landing__hero-content" style="color: {{ text_color }}">
-          {%- if heading != blank -%}
-            <h3 class="landing__hero-content-heading">{{ heading }}</h3>
+          {%- if heading != blank or image_heading != blank -%}
+            <h3 class="landing__hero-content-heading">
+              {%- if image_heading != blank -%}
+                <img src='{{ image_heading | img_url: "1x" }}'
+                     loading="lazy"
+                     srcset='{{ image_heading | img_url: "600x" }} 300w,
+                              {{ image_heading | img_url: "1000x" }} 600w,
+                              {{ image_heading | img_url: "1200x" }} 1000w'
+                     alt='{{ image_heading.alt | default: 'Heading image' }}'
+                     style="max-width: {{ image_heading_width }}%">
+              {%- else -%}
+                {{ heading }}
+              {%- endif -%}
+            </h3>
           {%- endif -%}
           {%- if text != blank -%}
             <p class="landing__hero-content-text">{{ text }}</p>
@@ -187,6 +194,7 @@
       "min": 0,
       "max": 100,
       "step": 10,
+      "unit": "%",
       "label": "Overlay opacity",
       "default": 70
     },
@@ -248,6 +256,22 @@
       "type": "html",
       "id": "heading",
       "label": "Heading"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_heading",
+      "label": "Heading Image",
+      "info": "You can use image instead of text"
+    },
+    {
+      "type": "range",
+      "id": "image_heading_width",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "image heading width",
+      "default": 70
     },
     {
       "type": "textarea",

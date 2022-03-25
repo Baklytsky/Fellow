@@ -7438,6 +7438,8 @@ ul.pdp_details__feature_list > li {
     @media screen and (max-width: $mobile) {
       bottom: 24px;
       right: 24px;
+      visibility: visible;
+      opacity: 1;
     }
   }
 
@@ -7477,6 +7479,8 @@ ul.pdp_details__feature_list > li {
     @media screen and (max-width: $mobile) {
       bottom: 24px;
       right: 74px;
+      visibility: visible;
+      opacity: 1;
     }
 
     .feather-mic-off {
@@ -7572,7 +7576,7 @@ ul.pdp_details__feature_list > li {
 .landing__hero-content {
   position: relative;
   width: 100%;
-  max-width: 630px;
+  max-width: 696px;
   padding: 0 33px;
   text-align: center;
   display: flex;
@@ -7595,6 +7599,11 @@ ul.pdp_details__feature_list > li {
   text-transform: none;
   margin: 0 0 25px 0;
 
+  img {
+    width: 100%;
+    height: auto;
+  }
+
   @media screen and (max-width: $mobile) {
     font-size: 42px;
     line-height: 100%;
@@ -7615,6 +7624,7 @@ ul.pdp_details__feature_list > li {
 
 .landing__hero-content-link {
   margin: 0;
+  font-family: $font-base;
   font-size: 18px;
   line-height: 24px;
 
