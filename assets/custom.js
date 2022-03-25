@@ -335,6 +335,15 @@ theme.variantPreOrderCheck = function (variantId) {
   }
 }
 
+theme.kitPreOrderCheck = function () {
+  var $stickyAtc = $('#pdp-sticky-atc'),
+      $bundleAtc = $('#pdp-bundle-atc');
+  if ($stickyAtc.length && $bundleAtc.length) {
+    if ($bundleAtc.is(':disabled')) $stickyAtc.prop('disabled', true)
+    $stickyAtc.find('.js-atc-copy').text($bundleAtc.find('.js-atc-copy').text())
+  }
+}
+
 theme.buildProperties = function (inputs) {
   let props = {};
   inputs.forEach(function (input, index) {
@@ -616,6 +625,7 @@ theme.pdpMain = function () {
   }
 
   function bundle () {
+    theme.kitPreOrderCheck()
     var selectors = {
       addBundle: '#pdp-bundle-atc',
       cartButton: '.js-cart-drawer-toggle',
@@ -626,7 +636,6 @@ theme.pdpMain = function () {
 
     $(document).on('click', selectors.addBundle, function (e) {
       e.preventDefault();
-      console.log(111)
       var $availableVariants = $('[data-variant-available="true"]'),
           bundle_name = $(this).attr('data-bundle-name') || '';
       let products_data = [];

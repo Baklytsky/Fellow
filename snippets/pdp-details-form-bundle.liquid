@@ -63,7 +63,7 @@ Uncomment to include
                       data-variant-inventory-policy='{{ variant.inventory_policy }}'
                       data-variant-inventory-management='{{ variant.inventory_management }}'
                       data-product-title='{{ _product.title }}'
-                      {% if hasPreorderTag or variant_preorder %}data-variant-preorder='true'{% endif %}>
+                      {% if variant.available and hasPreorderTag or variant.available and variant_preorder %}data-variant-preorder='true'{% endif %}>
                 {{ variant.title }}
               </li>
               {%- assign has_selected_variant_id = true -%}
@@ -90,7 +90,7 @@ Uncomment to include
                   data-variant-inventory-policy='{{ current_bundle_variant.inventory_policy }}'
                   data-variant-inventory-management='{{ current_bundle_variant.inventory_management }}'
                   data-product-title='{{ _product.title }}'
-                  {% if hasPreorderTag or variant_preorder %}data-variant-preorder='true'{% endif %}>
+                  {% if current_bundle_variant.available and hasPreorderTag or current_bundle_variant.available and variant_preorder %}data-variant-preorder='true'{% endif %}>
             {{ current_bundle_variant.title }}
           </li>
         {% endunless %}
