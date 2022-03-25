@@ -957,9 +957,11 @@ theme.pdpMain = function () {
       selectedVariant.attr('selected', 'selected')
       selectedVariant.parent().attr('value', selectedVariant.val())
       checkedInputs.each(function() {
-        $(this).parents('.bundle-product__option-group').find('.option-title-value').html(`${$(this).attr('title')}`)
+        // $(this).parents('.bundle-product__option-group').find('.option-title-value').html(`${$(this).attr('title')}`)
+        $(this).parents('.bundle-product__option-group').find('.option-title-value').html(`${$(this).attr('title').split('(')[0]}`) // Remove the price when changing the variant name
       })
-      let optionTitle = (priceDifference > 0) ? `${$(checkedInputs.get(0)).attr('title')} <strong>(+$${priceDifference})</strong>` : `${$(checkedInputs.get(0)).attr('title')}`;
+      // let optionTitle = (priceDifference > 0) ? `${$(checkedInputs.get(0)).attr('title')} <strong>(+$${priceDifference})</strong>` : `${$(checkedInputs.get(0)).attr('title')}`;
+      let optionTitle = `${$(checkedInputs.get(0)).attr('title')}`; // Remove the price from the color variant
       $(checkedInputs.get(0)).parents('.bundle-product__option-group').find('.option-title-value').html(optionTitle)
     }
 
