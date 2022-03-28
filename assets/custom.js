@@ -580,13 +580,13 @@ theme.pdpMain = function () {
       }
     })
 
-    
+
     $(document).on('click.pdpSelectSize', '[data-option-size] .radio', function () {
       var $attrToRemove = $('[data-disabled-size="true"]')
       $attrToRemove.map((index, element) => $(element).removeAttr('data-disabled-size'))
-     
+
       if($(this).is('label')) {
-        $('.pdpStickyBar [data-open-size-group]').prev('strong').text($(this).find('span:last-child').text())     
+        $('.pdpStickyBar [data-open-size-group]').prev('strong').text($(this).find('span:last-child').text())
       }
     })
 
@@ -684,17 +684,17 @@ theme.pdpMain = function () {
           });
     }
   }
-  
-  
+
+
     // ======================================== Neels code starts here ========================================
   var is_size_selected = false;
-  
+
   $('input[name^="Size"]').click(function(){
     is_size_selected = true;
   });
   // ======================================== Neels code ends here ========================================
 
-  
+
 
   theme.variantChange = function (variantId, changeMediaContent) {
     function changeMedia() {
@@ -746,7 +746,7 @@ theme.pdpMain = function () {
       changeMedia()
       theme.variantPreOrderCheck(variantId)
     }
-    
+
         // ======================================== Neels code starts here ========================================
     var selectedColor = $('.pdp__options-main [data-option-label="Color"] [data-option-current]').text();
     if ($('div[data-index]').length > 2) {
@@ -763,7 +763,7 @@ theme.pdpMain = function () {
           if (colorhandle.includes("limited-edition-")) {
             colorhandle = colorhandle.replace('limited-edition-','');
           }
-          $('#' + colorhandle).removeAttr('disabled','disabled'); 
+          $('#' + colorhandle).removeAttr('disabled','disabled');
           $('div[data-color^="' + colorhandle + '"]').css('opacity','');
       	}
       });
@@ -772,7 +772,7 @@ theme.pdpMain = function () {
       $('input[name^="Size"]').each(function(){
         var sizevar = $(this).attr('title');
         var sizehandle = $(this).data('value-handle');
-        $('#' + sizehandle).removeAttr('disabled','disabled'); 
+        $('#' + sizehandle).removeAttr('disabled','disabled');
         $('div[data-size^="' + sizehandle + '"]').css('text-decoration','');
         $('div[data-size^="' + sizehandle + '"]').css('color','');
       });
@@ -849,8 +849,8 @@ theme.pdpMain = function () {
               }
             }
           }
-        } 
-        // Product only has 2 options of color and size 
+        }
+        // Product only has 2 options of color and size
         else {
           // Check if the color selected by the customer is the current loop index color
           if (color.indexOf(selectedColor) >= 0) {
@@ -861,7 +861,7 @@ theme.pdpMain = function () {
                 all_sizes.splice(index, 1);
               }
             }
-          } 
+          }
           // Check if the size selected by the customer is the current loop index size
           if (size.indexOf(selectedSize) >= 0) {
             // Check if the current variant color exists in the all_colors array and if so, remove it from the array
@@ -901,7 +901,7 @@ theme.pdpMain = function () {
             var quantityhandle = $(this).data('value-handle');
             // If the quantity element is found in the all_quantities list we need to disable this element as it is not an available quantity option
             if (all_quantities.indexOf(quantityvar) > -1) {
-              $('#' + quantityhandle).attr('disabled','disabled'); 
+              $('#' + quantityhandle).attr('disabled','disabled');
               $('div[data-quantity^="' + quantityhandle + '"]').css('color','#ABABAB');
               $('div[data-quantity^="' + quantityhandle + '"]').css('text-decoration','line-through');
             }
@@ -984,9 +984,11 @@ theme.pdpMain = function () {
       selectedVariant.attr('selected', 'selected')
       selectedVariant.parent().attr('value', selectedVariant.val())
       checkedInputs.each(function() {
-        $(this).parents('.bundle-product__option-group').find('.option-title-value').html(`${$(this).attr('title')}`)
+        // $(this).parents('.bundle-product__option-group').find('.option-title-value').html(`${$(this).attr('title')}`)
+        $(this).parents('.bundle-product__option-group').find('.option-title-value').html(`${$(this).attr('title').split('(')[0]}`) // Remove the price when changing the variant name
       })
-      let optionTitle = (priceDifference > 0) ? `${$(checkedInputs.get(0)).attr('title')} <strong>(+$${priceDifference})</strong>` : `${$(checkedInputs.get(0)).attr('title')}`;
+      // let optionTitle = (priceDifference > 0) ? `${$(checkedInputs.get(0)).attr('title')} <strong>(+$${priceDifference})</strong>` : `${$(checkedInputs.get(0)).attr('title')}`;
+      let optionTitle = `${$(checkedInputs.get(0)).attr('title')}`; // Remove the price from the color variant
       $(checkedInputs.get(0)).parents('.bundle-product__option-group').find('.option-title-value').html(optionTitle)
     }
 
@@ -1224,7 +1226,7 @@ theme.pdpMain = function () {
       })
     })
   }
-  
+
   if ($('.pdpBar__wrapper').length) {pdpBar();}
   if ($('.pdpMain__gallery-thumbnails').length) {pdpThumbnails();}
   if ($('.pdpMain__gallery-wrapper').length) {pdpGallary();}
@@ -1258,7 +1260,7 @@ theme.pdpQuickView = function () {
     var $attrToRemove = $('#ProductQuickView [data-disabled-size="true"]')
     $attrToRemove.map((index, element) => $(element).removeAttr('data-disabled-size'))
   })
-  
+
   function modalGallerySlider() {
     let $gallerySlider = $('#ProductQuickView .pdpMain__gallery-wrapper'),
         $thumbnailsSlider = $('#ProductQuickView .pdpMain__gallery-thumbnails');
@@ -2038,7 +2040,7 @@ theme.GLOBAL = function () {
     // Create variable isDisabled if the input field is disabled so that the qvVariantChange function is not called when clicked
     // This is required as even with the HTML disabled attribute the variant is still changed in the quick add popup
     if ($($(this).find('input')).is(':disabled')) {
-      var isDisabled = true;  
+      var isDisabled = true;
     }
 
     $currentOption.each(function () {
@@ -2065,7 +2067,7 @@ theme.GLOBAL = function () {
 
     $('.js-counter-quantity').val(setValue);
   }
-  
+
   theme.qvChangeColorGroupName = function () {
     if ($('#ProductQuickView .option-group-title').length) {
       var QuickViewColor = $('#ProductQuickView .pdp__options-main [data-option-label="Color"] [data-option-current]').text();
@@ -2136,7 +2138,7 @@ theme.GLOBAL = function () {
       };
 
       if (selectedVariant()) {
-        
+
          // ======================================== Neels code starts here ========================================
         // var selectedColor = $('.pdp__options-main [data-option-label="Color"] [data-option-current]').text();
         // var selectedSize = $('.pdp__options-main [data-option-label="Size"] [data-option-current]').text();
@@ -2316,8 +2318,8 @@ theme.GLOBAL = function () {
         //   });
         // }
         // ======================================== Neels code ends here ========================================
-   
-        
+
+
         for (let i = 0; i < variants.length; i++) {
           if (variants[i].option1 == selectedOption1 && variants[i].option2 == selectedOption2 && variants[i].option3 == selectedOption3) {
             if ($('#ProductQuickView #selectid').find('[selected]').length) {

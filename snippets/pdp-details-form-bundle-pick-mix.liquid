@@ -147,8 +147,10 @@
                     {%- elsif variant_title_hand contains 'wooden-accents-' -%}
                       {%- assign variant_title_hand = variant_title_hand | split: 'wooden-accents-' | last -%}
                     {%- elsif variant_title_hand contains 'upgraded-ssp-mp-brew-burrs-' -%}
-                      {%- assign variant_title_hand = variant_title_hand | split: 'upgraded-ssp-mp-brew-burrs-' | first -%}
+                      {% comment %}{%- assign variant_title_hand = variant_title_hand | split: 'upgraded-ssp-mp-brew-burrs-' | first -%}{% endcomment %}
                     {%- endif -%}
+
+
 
                     {%- if forloop.last -%}
                       {%- assign options = options | append: variant_title_hand -%}
