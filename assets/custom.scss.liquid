@@ -7705,3 +7705,188 @@ ul.pdp_details__feature_list > li {
     align-items: flex-start;
   }
 }
+
+//-----------------------Join Fellow Section-----------------------------
+
+.JoinFellow {
+  width: 100%;
+  display: flex;
+}
+
+.JoinFellow__Wrapper {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 33px;
+  display: flex;
+  z-index: 2;
+
+  @media screen and (max-width: $large_desk) {
+    flex-direction: column;
+    padding: 0;
+  }
+}
+
+.JoinFellow__TextBlock {
+  width: 35%;
+  padding: 67px 80px;
+  background-color: #000000;
+  color: #FFFFFF;
+
+  @media screen and (max-width: $large_desk) {
+    width: 100%;
+    padding: 40px 33px;
+    text-align: center;
+  }
+
+  @media screen and (max-width: $tablet) {
+    padding: 40px 16px;
+  }
+}
+
+.JoinFellow__TextBlock-Heading {
+  font-family: $font-header;
+  margin: 0 0 10px 0;
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 100%;
+
+  @media screen and (max-width: $tablet) {
+    font-size: 28px;
+  }
+}
+
+.JoinFellow__TextBlock-Description {
+  margin: 0;
+  font-family: $font-base;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 120%;
+
+  @media screen and (max-width: $tablet) {
+    font-size: 16px;
+  }
+}
+
+.JoinFellow__FormBlock {
+  width: 65%;
+  padding: 0 60px 0 15px;
+  display: flex;
+  align-items: center;
+
+  @media screen and (max-width: $large_desk) {
+    width: 100%;
+    padding: 40px 33px 30px;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  @media screen and (max-width: $tablet) {
+    padding: 40px 16px 30px;
+  }
+}
+
+.JoinFellow__FormBlock-Content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+  padding-left: 15px;
+
+  @media screen and (max-width: $large_desk) {
+    width: 100%;
+    max-width: 800px;
+    padding-left: 0;
+  }
+}
+
+.JoinFellow__FormBlock-LogoDesktop {
+  width: 225px;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+
+  @media screen and (max-width: $large_desk) {
+    display: none;
+  }
+}
+
+.JoinFellow__FormBlock-LogoMobile {
+  display: none;
+  width: 100%;
+  max-width: 475px;
+  margin: 15px auto 0;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+
+  @media screen and (max-width: $large_desk) {
+    display: block;
+  }
+}
+
+.JoinFellow__FormBlock-Heading {
+  margin: 0 0 30px;
+  font-family: $font-header;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 100%;
+
+  @media screen and (max-width: $tablet) {
+    font-size: 16px;
+    margin: 0 0 20px;
+  }
+}
+
+.JoinFellow__FormBlock-Description {
+  max-width: 440px;
+  margin: 30px 0 0;
+  font-family: $font-base;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 20px;
+
+  @media screen and (max-width: $large_desk) {
+    margin: 30px auto 0;
+  }
+
+  @media screen and (max-width: $tablet) {
+    font-size: 12px;
+    margin: 20px 0 0;
+  }
+}
+
+.JoinFellow__FormBlock {
+  form {
+    max-width: 100% !important;
+    .go2973629802 {
+      border-color: #FFFFFF !important;
+      height: 60px !important;
+      @media screen and (max-width: $tablet) {
+        height: 50px !important;
+      }
+    }
+    button.go153674568 {
+      padding: 18px 42px !important;
+      font-size: 20px !important;
+      @media screen and (max-width: $tablet) {
+        padding: 15px 20px !important;
+        font-size: 16px !important;
+      }
+    }
+    [data-testid="form-component"] {
+      padding: 0 !important;
+    }
+    [data-testid="form-component"]:first-child {
+      padding: 0 14px 0 0 !important;
+      @media screen and (max-width: $tablet) {
+        padding: 0 10px 0 0 !important;
+      }
+    }
+  }
+}
