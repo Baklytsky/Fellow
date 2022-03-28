@@ -7399,3 +7399,31 @@ ul.pdp_details__feature_list > li {
     margin-bottom: 8px;
   }
 }
+
+.hero__slider {
+  .hero__slide--split {
+    @media screen and (max-width: $tablet) {
+      flex-flow: row wrap;
+    }
+
+    img {
+      @media screen and (max-width: $tablet) {
+        touch-action: auto;
+      }
+    }
+  }
+
+  .hero__slide--img-wrapper {
+    @media screen and (max-width: $tablet) {
+      order: 1;
+    }
+  }
+
+  .splitSlide__textContainer {
+    @media screen and (max-width: $tablet) {
+      order: 2;
+      flex: 0 0 100%;
+      flex-flow: row wrap;
+    }
+  }
+}
