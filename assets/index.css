@@ -18917,7 +18917,7 @@ textarea {
   margin: 0;
 }
 
-	#PdpErrorMessage,
+  #PdpErrorMessage,
 #PdpUpsellErrorMessage {
   display: none;
   margin-top: 16px;

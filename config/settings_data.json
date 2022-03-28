@@ -13,7 +13,7 @@
     "gift_wrapping_message": "Is this a gift?",
     "gift_wrapping_result_message": "Your order will be sent in a gift box",
     "gift_wrapping_heading": "Gift Box + Gift Note",
-    "enable_gwp": true,
+    "enable_gwp": false,
     "gwp_threshold": 200,
     "gwp_product": "manhattan-coffee-roasters-diego-burmudez",
     "second_gwp_threshold": 0,
@@ -276,7 +276,7 @@
           "menu_left": "new-left-menu-1",
           "menu_right": "new-right-menu",
           "show_announcement": true,
-          "announcement_text": "Limited lots and exclusive drops from the best roasters in the world. Join our coffee list",
+          "announcement_text": "The limited edition collaboration drops tomorrow via text. Sign up now.",
           "announcement_link": "https:\/\/drops.fellowproducts.com\/?utm_source=homepage&utm_medium=banner&utm_campaign=fellowhomepage",
           "enable_timer": false,
           "end_date": "Sep 30, 2021 07:30:00 GMT-08:00"
@@ -787,7 +787,8 @@
       },
       "search-template": {
         "type": "search-template",
-        "settings": {}
+        "settings": {
+        }
       },
       "1648114115d10a8d6a": {
         "type": "hp-hero-video",
@@ -809,7 +810,7 @@
           "image_heading": "shopify:\/\/shop_images\/Frame_36_1.png",
           "image_heading_width": 100,
           "text": "A product company, a roaster, and an astrophotographer walk into an Icelandic bar...",
-          "link": "shopify:\/\/collections\/bestsellers",
+          "link": "shopify:\/\/blogs\/learn\/northern-lights-drop",
           "button_text": "Learn More",
           "btn_type": "btn--light"
         }

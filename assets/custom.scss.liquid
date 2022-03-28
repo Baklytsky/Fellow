@@ -7926,23 +7926,12 @@ ul.pdp_details__feature_list > li {
   Quickview
 \* ------------------------------------------------------------ */
 
-.pdpQuickView__description {
-  .pdp__options .radio-group input:checked+.radio__title {
-    border: 0;
+#ProductQuickView .option-groups__group {
+  .radio-group:not([data-option-color]):not([data-option-material]):not([data-option-size]) {
+    margin-left: -1rem;
   }
-
-  .radio-group:not([data-option-color]):not([data-option-material]) {
-    .radio__title {
-      padding: 0;
-
-      &::after {
-        display: none;
-      }
-    }
-
-    label {
-      margin-top: 0;
-      margin-left: 0;
-    }
+  
+  .radio-group[data-option-burrs] label {
+    padding-left: 0;
   }
 }
