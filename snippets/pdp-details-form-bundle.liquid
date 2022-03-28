@@ -22,6 +22,7 @@ Uncomment to include
 
 {%- assign available_bundle_product = true -%}
 {%- assign available_bundle_variant = true -%}
+{%- assign variantHasPreorder = false -%}
 
 {% if product_bundles_array != blank %}
   {%- assign component_button_id = 'pdp-bundle-atc' -%}
@@ -35,6 +36,12 @@ Uncomment to include
       {% assign _product = all_products[product_handle] %}
 
       {%- if _product != blank -%}
+
+        {%- assign hasPreorderTag = false -%}
+        {%- if _product.tags contains 'preorder' -%}
+          {%- assign hasPreorderTag = true -%}
+        {%- endif -%}
+
         {%- for variant in _product.variants -%}
           {%- assign variant_id = variant.id | times: 1 -%}
           {%- for bundle_variant_id in variant_bundles -%}
@@ -43,6 +50,11 @@ Uncomment to include
               {%- unless variant.available -%}
               {%- assign available_bundle_variant = false -%}
               {%- endunless -%}
+              {%- assign variant_preorder = variant.metafields.my_fields.preorder -%}
+
+              {%- if variant_preorder -%}
+                {%- assign variantHasPreorder = true -%}
+              {%- endif -%}
               <li
                       id='{{ variant.id }}'
                       data-variant-available="{{ variant.available }}"
@@ -50,7 +62,8 @@ Uncomment to include
                       data-variant-inventory-quantity='{{ variant.inventory_quantity }}'
                       data-variant-inventory-policy='{{ variant.inventory_policy }}'
                       data-variant-inventory-management='{{ variant.inventory_management }}'
-                      data-product-title='{{ _product.title }}'>
+                      data-product-title='{{ _product.title }}'
+                      {% if variant.available and hasPreorderTag or variant.available and variant_preorder %}data-variant-preorder='true'{% endif %}>
                 {{ variant.title }}
               </li>
               {%- assign has_selected_variant_id = true -%}
@@ -64,6 +77,11 @@ Uncomment to include
           {%- unless current_bundle_variant.available -%}
           {%- assign available_bundle_variant = false -%}
           {%- endunless -%}
+        {%- assign variant_preorder = current_bundle_variant.metafields.my_fields.preorder -%}
+
+          {%- if variant_preorder -%}
+            {%- assign variantHasPreorder = true -%}
+          {%- endif -%}
           <li
                   id='{{ current_bundle_variant.id }}'
                   data-variant-available="{{ current_bundle_variant.available }}"
@@ -71,7 +89,8 @@ Uncomment to include
                   data-variant-inventory-quantity='{{ current_bundle_variant.inventory_quantity }}'
                   data-variant-inventory-policy='{{ current_bundle_variant.inventory_policy }}'
                   data-variant-inventory-management='{{ current_bundle_variant.inventory_management }}'
-                  data-product-title='{{ _product.title }}'>
+                  data-product-title='{{ _product.title }}'
+                  {% if current_bundle_variant.available and hasPreorderTag or current_bundle_variant.available and variant_preorder %}data-variant-preorder='true'{% endif %}>
             {{ current_bundle_variant.title }}
           </li>
         {% endunless %}
@@ -83,11 +102,7 @@ Uncomment to include
   </ul>
 {% endif %}
 
-{% if template contains 'gift_card' %}
-  <div class='f fdc jcb' id='atc-wrapper'>
-{% else %}
-  <div class='f fdr jcb' id='atc-wrapper'>
-{% endif %}
+<div class='f {% if template contains 'gift_card' %}fdc{% else %}fdr{% endif %} jcb' id='atc-wrapper'>
   {% unless template contains 'gift_card' %}
     {% if section.settings.show_quantity_selector and section.settings.quantity_selector_inline %}
       <div class="f is-inline">
@@ -98,8 +113,8 @@ Uncomment to include
   {%- capture cta -%}
     {% if product.available and available_bundle_variant and available_bundle_product %}
       <span data-atc-copy class="js-atc-copy">
-        {% if product.tags contains 'preorder' %}
-          Preorder
+        {% if hasPreorderTag or variantHasPreorder %}
+          Pre-order
         {% else %}
           Add to Cart
         {% endif %}
@@ -119,7 +134,6 @@ Uncomment to include
       {%- assign disableVal = true -%}
     {% endif %}
   {%- endcapture -%}
-  {% comment %} Add catch for low stock variants {% endcomment %}
   {%
     include 'component-button' with
     tag: 'button',
