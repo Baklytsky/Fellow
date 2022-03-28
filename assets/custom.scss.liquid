@@ -6130,8 +6130,12 @@ h2.pdpCopy__header-price ,
 
 .bundle-product {
   .bundle-product__option-group {
-    .bundle-radio-group {
+    .bundle-radio-group[data-option-color] {
       margin-right: 22px;
+
+      @media screen and (max-width: 992px) {
+        margin-right: 13px;
+      }
     }
   }
 }
@@ -6215,6 +6219,22 @@ h2.pdpCopy__header-price ,
 .bundle-product__radio-group,
 .upsell-product__radio-group {
   flex-wrap: wrap;
+
+  .radio-group[data-option-size] {
+    &,
+    input:checked+.radio__title {
+      &::after {
+        display: block !important;
+        content: '' !important;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        border-color: #c2c2c2;
+        box-shadow: 0 0 0 2px #fff inset;
+      }
+    }
+  }
 }
 
 .upsell-product {
@@ -6222,7 +6242,7 @@ h2.pdpCopy__header-price ,
 }
 
 .upsell-product__wrapper {
-  padding: 16px;
+  padding: 0;
   display: flex;
   background: $color-dim-white;
 }
@@ -6807,7 +6827,7 @@ ul.pdp_details__feature_list > li {
 
 /* PDP Options */
 .radio-group {
-  &:not([data-option-color]):not([data-option-material]) {
+  &:not([data-option-color]):not([data-option-material]):not([data-option-size]) {
     .radio__title {
       padding: 13px 16px;
 
@@ -6838,7 +6858,6 @@ ul.pdp_details__feature_list > li {
 .radio-group[data-option-quantity] input:checked+.radio__title:after,
 .radio-group[data-option-burrs] input:checked+.radio__title:after,
 .radio-group[data-option-bag-size] input:checked+.radio__title:after,
-.radio-group[data-option-size] input:checked+.radio__title:after,
 .pdp__sticky-options-item .radio-group:not([data-option-color]):not([data-option-material]):not([data-option-size]) .radio.checked:after {
   top: 0;
   right: 0;
@@ -6846,6 +6865,22 @@ ul.pdp_details__feature_list > li {
   left: 0;
   border-color: #c2c2c2;
   box-shadow: 0 0 0 2px #fff inset;
+}
+
+.radio-group[data-option-size] input:checked+.radio__title:after {
+  display: none;
+}
+
+[data-disabled-size="true"] .radio-group[data-option-size] {
+  input {
+    &:checked+.radio__title-size-image {
+      color: #ababab !important;
+    }
+
+    &:checked+.radio__title-size-image {
+      color: #000;
+    }
+  }
 }
 
 //Yotpo
@@ -7883,6 +7918,31 @@ ul.pdp_details__feature_list > li {
       @media screen and (max-width: $tablet) {
         padding: 0 10px 0 0 !important;
       }
+    }
+  }
+}
+
+/* ------------------------------------------------------------ *\
+  Quickview
+\* ------------------------------------------------------------ */
+
+.pdpQuickView__description {
+  .pdp__options .radio-group input:checked+.radio__title {
+    border: 0;
+  }
+
+  .radio-group:not([data-option-color]):not([data-option-material]) {
+    .radio__title {
+      padding: 0;
+
+      &::after {
+        display: none;
+      }
+    }
+
+    label {
+      margin-top: 0;
+      margin-left: 0;
     }
   }
 }

@@ -18678,7 +18678,7 @@ textarea {
   border-color: rgba(35, 31, 32, .75)
 }
 
-.radio-group:not([data-option-color]):not([data-option-material]) {
+.radio-group:not([data-option-color]):not([data-option-material]):not([data-option-size]) {
   flex-wrap: wrap;
   margin-top: -1rem;
   margin-left: -1rem
@@ -18692,14 +18692,14 @@ textarea {
 
 .pdp__sticky-options-item .radio-group:not([data-option-color]):not([data-option-material]):not(.radio-group-size) .radio { margin: 8px; }
 
-.radio-group:not([data-option-color]):not([data-option-material]) label {
+.radio-group:not([data-option-color]):not([data-option-material]):not([data-option-size]) label {
   margin-top: 1rem;
   margin-left: 1rem
 }
 
-.radio-group:not([data-option-color]):not([data-option-material]) label.radio__label-size-image {
+.radio-group:not([data-option-color]):not([data-option-material]):not([data-option-size]) label.radio__label-size-image {
   padding-top: 16px;
-  padding-left: 16px
+  padding-left: 16px;
 }
 
 .radio-group:not([data-option-color]):not([data-option-material]) .radio__title {
