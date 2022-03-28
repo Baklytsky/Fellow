@@ -738,11 +738,13 @@
       },
       "cart-recommended": {
         "type": "cart-recommended",
-        "settings": {}
+        "settings": {
+        }
       },
       "cart-gift-wrapping": {
         "type": "cart-gift-wrapping",
-        "settings": {}
+        "settings": {
+        }
       },
       "1636101715cd2df3c8": {
         "type": "hp-iwt",
@@ -761,7 +763,8 @@
       },
       "page-template": {
         "type": "page-template",
-        "settings": {}
+        "settings": {
+        }
       },
       "16391832269c232690": {
         "type": "hp-iwt",
@@ -780,7 +783,8 @@
       },
       "search-template": {
         "type": "search-template",
-        "settings": {}
+        "settings": {
+        }
       }
     },
     "content_for_index": [
@@ -802,7 +806,8 @@
       "sections": {
         "featured-product": {
           "type": "featured-product",
-          "settings": {}
+          "settings": {
+          }
         }
       },
       "content_for_index": [
