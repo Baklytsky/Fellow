@@ -7425,8 +7425,8 @@ ul.pdp_details__feature_list > li {
   .play-button,
   .pause-button {
     position: absolute;
-    bottom: 48px;
-    right: 48px;
+    bottom: 24px;
+    right: 24px;
     width: 38px;
     height: 38px;
     padding: 0;
@@ -7437,7 +7437,10 @@ ul.pdp_details__feature_list > li {
 
     @media screen and (max-width: $mobile) {
       bottom: 24px;
-      right: 24px;
+      right: 50%;
+      width: 30px;
+      height: 30px;
+      transform: translateX(50%);
       visibility: visible;
       opacity: 1;
     }
@@ -7467,8 +7470,8 @@ ul.pdp_details__feature_list > li {
     width: 38px;
     height: 38px;
     position: absolute;
-    bottom: 48px;
-    right: 106px;
+    bottom: 24px;
+    right: 82px;
     z-index: 1;
     color: inherit;
     visibility: hidden;
@@ -7478,7 +7481,11 @@ ul.pdp_details__feature_list > li {
 
     @media screen and (max-width: $mobile) {
       bottom: 24px;
-      right: 74px;
+      right: unset;
+      left: 50%;
+      width: 30px;
+      height: 30px;
+      transform: translateX(-50%);
       visibility: visible;
       opacity: 1;
     }
@@ -7547,6 +7554,17 @@ ul.pdp_details__feature_list > li {
         visibility: hidden;
         opacity: 0;
       }
+    }
+  }
+
+  .landing__hero-show-volume-btn {
+    .mute-video {
+      transform: translateX(-125%);
+    }
+
+    .play-button,
+    .pause-button {
+      transform: translateX(125%);
     }
   }
 }

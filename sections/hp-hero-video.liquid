@@ -21,7 +21,9 @@
 {%- assign image_class_name = 'landing__hero-image' -%}
 
 {%- if enable_section and image != blank or enable_section and video_mp4 != blank -%}
-  <section id="landing__hero-{{ section.id }}" class="landing__hero landing__hero--{{ content_position }} {% if show_hide_video == 'mobile' %}landing__hero-hide-video-on-mobile{% endif %}" style="background-color: {{ section_bg }}; color: {{ text_color }};">
+  <section id="landing__hero-{{ section.id }}"
+           class="landing__hero landing__hero--{{ content_position }} {% if show_hide_video == 'mobile' %}landing__hero-hide-video-on-mobile{% endif %} {% if section.settings.show_mute_button %}landing__hero-show-volume-btn{% endif %}"
+           style="background-color: {{ section_bg }}; color: {{ text_color }};">
     {%- if image_mobile != blank -%}
       {%- assign image_class_name = 'landing__hero-image desktop-image' -%}
       <img src='{{ image_mobile | img_url: "600x" }}'
