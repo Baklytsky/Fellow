@@ -335,6 +335,15 @@ theme.variantPreOrderCheck = function (variantId) {
   }
 }
 
+theme.kitPreOrderCheck = function () {
+  var $stickyAtc = $('#pdp-sticky-atc'),
+      $bundleAtc = $('#pdp-bundle-atc');
+  if ($stickyAtc.length && $bundleAtc.length) {
+    if ($bundleAtc.is(':disabled')) $stickyAtc.prop('disabled', true)
+    $stickyAtc.find('.js-atc-copy').text($bundleAtc.find('.js-atc-copy').text())
+  }
+}
+
 theme.buildProperties = function (inputs) {
   let props = {};
   inputs.forEach(function (input, index) {
@@ -571,13 +580,13 @@ theme.pdpMain = function () {
       }
     })
 
-    
+
     $(document).on('click.pdpSelectSize', '[data-option-size] .radio', function () {
       var $attrToRemove = $('[data-disabled-size="true"]')
       $attrToRemove.map((index, element) => $(element).removeAttr('data-disabled-size'))
-     
+
       if($(this).is('label')) {
-        $('.pdpStickyBar [data-open-size-group]').prev('strong').text($(this).find('span:last-child').text())     
+        $('.pdpStickyBar [data-open-size-group]').prev('strong').text($(this).find('span:last-child').text())
       }
     })
 
@@ -616,6 +625,7 @@ theme.pdpMain = function () {
   }
 
   function bundle () {
+    theme.kitPreOrderCheck()
     var selectors = {
       addBundle: '#pdp-bundle-atc',
       cartButton: '.js-cart-drawer-toggle',
@@ -630,14 +640,24 @@ theme.pdpMain = function () {
           bundle_name = $(this).attr('data-bundle-name') || '';
       let products_data = [];
 
-      $availableVariants.each(function () {
+      $availableVariants.each(function (i, element) {
+        let prop = {
+          "_bundles": true,
+          "_Bundle_Name": bundle_name
+        }
+
+        if ($(element).attr('data-variant-preorder')) {
+          prop = {
+            "_bundles": true,
+            "_Bundle_Name": bundle_name,
+            "pre-order": true
+          }
+        }
+
         products_data.push({
           quantity: 1,
           id: $(this).attr('id'),
-          properties: {
-            bundle: true,
-            "_Bundle_Name": bundle_name
-          }
+          properties: prop
         })
       });
 
@@ -664,17 +684,17 @@ theme.pdpMain = function () {
           });
     }
   }
-  
-  
+
+
     // ======================================== Neels code starts here ========================================
   var is_size_selected = false;
-  
+
   $('input[name^="Size"]').click(function(){
     is_size_selected = true;
   });
   // ======================================== Neels code ends here ========================================
 
-  
+
 
   theme.variantChange = function (variantId, changeMediaContent) {
     function changeMedia() {
@@ -726,7 +746,7 @@ theme.pdpMain = function () {
       changeMedia()
       theme.variantPreOrderCheck(variantId)
     }
-    
+
         // ======================================== Neels code starts here ========================================
     var selectedColor = $('.pdp__options-main [data-option-label="Color"] [data-option-current]').text();
     if ($('div[data-index]').length > 2) {
@@ -743,7 +763,7 @@ theme.pdpMain = function () {
           if (colorhandle.includes("limited-edition-")) {
             colorhandle = colorhandle.replace('limited-edition-','');
           }
-          $('#' + colorhandle).removeAttr('disabled','disabled'); 
+          $('#' + colorhandle).removeAttr('disabled','disabled');
           $('div[data-color^="' + colorhandle + '"]').css('opacity','');
       	}
       });
@@ -752,7 +772,7 @@ theme.pdpMain = function () {
       $('input[name^="Size"]').each(function(){
         var sizevar = $(this).attr('title');
         var sizehandle = $(this).data('value-handle');
-        $('#' + sizehandle).removeAttr('disabled','disabled'); 
+        $('#' + sizehandle).removeAttr('disabled','disabled');
         $('div[data-size^="' + sizehandle + '"]').css('text-decoration','');
         $('div[data-size^="' + sizehandle + '"]').css('color','');
       });
@@ -829,8 +849,8 @@ theme.pdpMain = function () {
               }
             }
           }
-        } 
-        // Product only has 2 options of color and size 
+        }
+        // Product only has 2 options of color and size
         else {
           // Check if the color selected by the customer is the current loop index color
           if (color.indexOf(selectedColor) >= 0) {
@@ -841,7 +861,7 @@ theme.pdpMain = function () {
                 all_sizes.splice(index, 1);
               }
             }
-          } 
+          }
           // Check if the size selected by the customer is the current loop index size
           if (size.indexOf(selectedSize) >= 0) {
             // Check if the current variant color exists in the all_colors array and if so, remove it from the array
@@ -881,7 +901,7 @@ theme.pdpMain = function () {
             var quantityhandle = $(this).data('value-handle');
             // If the quantity element is found in the all_quantities list we need to disable this element as it is not an available quantity option
             if (all_quantities.indexOf(quantityvar) > -1) {
-              $('#' + quantityhandle).attr('disabled','disabled'); 
+              $('#' + quantityhandle).attr('disabled','disabled');
               $('div[data-quantity^="' + quantityhandle + '"]').css('color','#ABABAB');
               $('div[data-quantity^="' + quantityhandle + '"]').css('text-decoration','line-through');
             }
@@ -938,15 +958,22 @@ theme.pdpMain = function () {
       const selectedVariantTitle = selectedVariant.attr('data-variant-options-title'),
             $bundleVariants = $bundleWrapper.find('.js-bundle-variant option');
       $bundleWrapper.find('.bundle-radio').removeClass('unavailable');
-      if (selectedVariantTitle.includes('/')) {
-        const selectedSizeTitle = selectedVariantTitle.split('/')[1],
-            unavailableColors = $bundleVariants.map(function () {
-              if ($(this).attr('data-variant-options-title').includes(selectedSizeTitle) && $(this).is('[disabled]')) return $(this).attr('data-variant-options-title').split('/')[0]
-            })
-        if (unavailableColors.length) unavailableColors.each((i, color) => $bundleWrapper.find('input[value="'+ color +'"]').parent().addClass('unavailable'))
+      if (selectedVariant.length) {
+        if (selectedVariantTitle.includes('/')) {
+          const selectedSizeTitle = selectedVariantTitle.split('/')[1],
+              unavailableColors = $bundleVariants.map(function () {
+                if ($(this).attr('data-variant-options-title').includes(selectedSizeTitle) && $(this).is('[disabled]') && !$(this).attr('data-variant-preorder')) return $(this).attr('data-variant-options-title').split('/')[0]
+              })
+          if (unavailableColors.length) unavailableColors.each((i, color) => $bundleWrapper.find('input[value="'+ color +'"]').parent().addClass('unavailable'))
+        } else {
+          const unavailableVariants = $bundleVariants.map(function () {
+            if ($(this).is('[disabled]') && !$(this).attr('data-variant-preorder')) return $(this).attr('data-variant-options-title')
+          })
+          if (unavailableVariants.length) unavailableVariants.each((i, variant) => $bundleWrapper.find('input[value="'+ variant +'"]').parent().addClass('unavailable'))
+        }
       } else {
         const unavailableVariants = $bundleVariants.map(function () {
-          if ($(this).is('[disabled]')) return $(this).attr('data-variant-options-title')
+          if ($(this).is('[disabled]') && !$(this).attr('data-variant-preorder')) return $(this).attr('data-variant-options-title')
         })
         if (unavailableVariants.length) unavailableVariants.each((i, variant) => $bundleWrapper.find('input[value="'+ variant +'"]').parent().addClass('unavailable'))
       }
@@ -957,9 +984,11 @@ theme.pdpMain = function () {
       selectedVariant.attr('selected', 'selected')
       selectedVariant.parent().attr('value', selectedVariant.val())
       checkedInputs.each(function() {
-        $(this).parents('.bundle-product__option-group').find('.option-title-value').html(`${$(this).attr('title')}`)
+        // $(this).parents('.bundle-product__option-group').find('.option-title-value').html(`${$(this).attr('title')}`)
+        $(this).parents('.bundle-product__option-group').find('.option-title-value').html(`${$(this).attr('title').split('(')[0]}`) // Remove the price when changing the variant name
       })
-      let optionTitle = (priceDifference > 0) ? `${$(checkedInputs.get(0)).attr('title')} <strong>(+$${priceDifference})</strong>` : `${$(checkedInputs.get(0)).attr('title')}`;
+      // let optionTitle = (priceDifference > 0) ? `${$(checkedInputs.get(0)).attr('title')} <strong>(+$${priceDifference})</strong>` : `${$(checkedInputs.get(0)).attr('title')}`;
+      let optionTitle = `${$(checkedInputs.get(0)).attr('title')}`; // Remove the price from the color variant
       $(checkedInputs.get(0)).parents('.bundle-product__option-group').find('.option-title-value').html(optionTitle)
     }
 
@@ -971,6 +1000,7 @@ theme.pdpMain = function () {
       checkedOptions.each((i, option) => selectedOptions = (i !== checkedOptions.length - 1) ? selectedOptions + option + '/' : selectedOptions + option)
       $(this).find('.js-bundle-variant option').removeAttr('selected')
       let selectedVariant = $(this).find('[data-variant-options-title="' + selectedOptions + '"]');
+      (selectedVariant.attr('data-variant-preorder')) ? selectedVariant.parent().attr('data-selected-variant-preorder', true) : selectedVariant.parent().removeAttr('data-selected-variant-preorder');
       checkBundleVariantTitle(selectedVariant, checkedInputs)
       fadeOutOfStockVariants(selectedVariant, $bundleWrapper)
     })
@@ -1014,24 +1044,36 @@ theme.pdpMain = function () {
     }
     checkBundleMixPrice()
 
+    function checkPreorderVariant() {
+      $('.pdpForm .bundle-product select').each((i, select) => {
+        if ($(select).attr('data-selected-variant-preorder')) {
+          $(document).find('#pdp-bundle-atc').removeAttr('disabled').text('Pre-order')
+          $(document).find('#pdp-sticky-atc').removeAttr('disabled').text('Pre-order')
+        }
+      })
+    }
+    checkPreorderVariant()
+
     $(document).on('click.bundleRadio', '.bundle-radio', function () {
       let $bundleWrapper = $(this).parents('.bundle-product'),
           selectedOptions = '',
           checkedInputs = $bundleWrapper.find('.bundle-radio-group input:checked'),
           checkedOptions = $bundleWrapper.find('.bundle-radio-group input:checked').map((i, option) => option.value);
-      checkedOptions.each((i, option) => selectedOptions = (i !== checkedOptions.length - 1) ? selectedOptions + option + '/' : selectedOptions + option)
+      checkedOptions.each((i, option) => selectedOptions = (i !== checkedOptions.length - 1) ? selectedOptions + option + '/' : selectedOptions + option);
       let selectedVariant = $bundleWrapper.find('[data-variant-options-title="' + selectedOptions + '"]');
-      $bundleWrapper.find('.js-bundle-variant option').removeAttr('selected')
-      selectedVariant.attr('selected', 'selected')
-      selectedVariant.parent().attr('value', selectedVariant.val())
-      checkBundleVariantTitle(selectedVariant, checkedInputs)
-      fadeOutOfStockVariants(selectedVariant, $bundleWrapper)
+      $bundleWrapper.find('.js-bundle-variant option').removeAttr('selected');
+      selectedVariant.attr('selected', 'selected');
+      selectedVariant.parent().attr('value', selectedVariant.val());
+      (selectedVariant.attr('data-variant-preorder')) ? selectedVariant.parent().attr('data-selected-variant-preorder', true) : selectedVariant.parent().removeAttr('data-selected-variant-preorder');
+      checkBundleVariantTitle(selectedVariant, checkedInputs);
+      fadeOutOfStockVariants(selectedVariant, $bundleWrapper);
       if (selectedVariant.length) {
         changeBundleImage(selectedVariant.attr('data-variant-uniq_id'));
-        checkBundleMixAvailable()
+        checkBundleMixAvailable();
       } else {
-        checkBundleMixAvailable(true)
+        checkBundleMixAvailable(true);
       }
+      checkPreorderVariant()
       checkBundleMixPrice()
     })
 
@@ -1053,13 +1095,23 @@ theme.pdpMain = function () {
       for (var i = 0; i < products.length; i++) {
         if (products[i] !== current) {
           if (cnt > 0) {
+            let prop = {
+              "_bundles": true,
+              "_Bundle_Name": bundle_name
+            }
+
+            if ($('.pdpForm .js-bundle-variant select[value="' + current + '"]').attr('data-selected-variant-preorder')) {
+              prop = {
+                "_bundles": true,
+                "_Bundle_Name": bundle_name,
+                "pre-order": true
+              }
+            }
+
             products_data.push({
               quantity: cnt,
               id: current,
-              properties: {
-                "_bundles": true,
-                "_Bundle_Name": bundle_name
-              }
+              properties: prop
             })
           }
           current = products[i];
@@ -1069,13 +1121,23 @@ theme.pdpMain = function () {
         }
       }
       if (cnt > 0) {
+        let prop = {
+          "_bundles": true,
+          "_Bundle_Name": bundle_name
+        }
+
+        if ($('.pdpForm .js-bundle-variant select[value="' + current + '"]').attr('data-selected-variant-preorder')) {
+          prop = {
+            "_bundles": true,
+            "_Bundle_Name": bundle_name,
+            "pre-order": true
+          }
+        }
+
         products_data.push({
           quantity: cnt,
           id: current,
-          properties: {
-            "_bundles": true,
-            "_Bundle_Name": bundle_name
-          }
+          properties: prop
         })
       }
 
@@ -1097,7 +1159,7 @@ theme.pdpMain = function () {
     })
   }
 
-  	  theme.pdpUpsellProduct = function() {
+  theme.pdpUpsellProduct = function() {
     $(document).off('click.upsellRadio')
     $(document).off('click.addUpsellProduct')
     var sizeNotSelected = $(document).find('.pdpForm  .pdpDetails__btns[data-disabled-size="true"]'),
@@ -1164,7 +1226,7 @@ theme.pdpMain = function () {
       })
     })
   }
-  
+
   if ($('.pdpBar__wrapper').length) {pdpBar();}
   if ($('.pdpMain__gallery-thumbnails').length) {pdpThumbnails();}
   if ($('.pdpMain__gallery-wrapper').length) {pdpGallary();}
@@ -1198,7 +1260,7 @@ theme.pdpQuickView = function () {
     var $attrToRemove = $('#ProductQuickView [data-disabled-size="true"]')
     $attrToRemove.map((index, element) => $(element).removeAttr('data-disabled-size'))
   })
-  
+
   function modalGallerySlider() {
     let $gallerySlider = $('#ProductQuickView .pdpMain__gallery-wrapper'),
         $thumbnailsSlider = $('#ProductQuickView .pdpMain__gallery-thumbnails');
@@ -1978,7 +2040,7 @@ theme.GLOBAL = function () {
     // Create variable isDisabled if the input field is disabled so that the qvVariantChange function is not called when clicked
     // This is required as even with the HTML disabled attribute the variant is still changed in the quick add popup
     if ($($(this).find('input')).is(':disabled')) {
-      var isDisabled = true;  
+      var isDisabled = true;
     }
 
     $currentOption.each(function () {
@@ -2005,7 +2067,7 @@ theme.GLOBAL = function () {
 
     $('.js-counter-quantity').val(setValue);
   }
-  
+
   theme.qvChangeColorGroupName = function () {
     if ($('#ProductQuickView .option-group-title').length) {
       var QuickViewColor = $('#ProductQuickView .pdp__options-main [data-option-label="Color"] [data-option-current]').text();
@@ -2076,7 +2138,7 @@ theme.GLOBAL = function () {
       };
 
       if (selectedVariant()) {
-        
+
          // ======================================== Neels code starts here ========================================
         // var selectedColor = $('.pdp__options-main [data-option-label="Color"] [data-option-current]').text();
         // var selectedSize = $('.pdp__options-main [data-option-label="Size"] [data-option-current]').text();
@@ -2256,8 +2318,8 @@ theme.GLOBAL = function () {
         //   });
         // }
         // ======================================== Neels code ends here ========================================
-   
-        
+
+
         for (let i = 0; i < variants.length; i++) {
           if (variants[i].option1 == selectedOption1 && variants[i].option2 == selectedOption2 && variants[i].option3 == selectedOption3) {
             if ($('#ProductQuickView #selectid').find('[selected]').length) {
