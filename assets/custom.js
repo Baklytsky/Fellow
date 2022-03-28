@@ -1043,7 +1043,7 @@ theme.pdpMain = function () {
       compareAtPriceInner.each((i, element) => $(element).text('$' + newCompareAtPrice))
     }
     checkBundleMixPrice()
-    
+
     function checkPreorderVariant() {
       $('.pdpForm .bundle-product select').each((i, select) => {
         if ($(select).attr('data-selected-variant-preorder')) {
@@ -2413,13 +2413,50 @@ theme.GLOBAL = function () {
     theme.searchPage();
   }
 
-  // PICO app mega hack to bypass on mobile
-  // var links = document.getElementsByTagName('a');
-  // for(var i = 0; i < links.length; i++) {
-  //   links[i].addEventListener('click', (e) => {
-  //     if (window.innerWidth < 500 && e.currentTarget.hasAttribute('href')){
-  //       window.location.href = e.currentTarget.getAttribute('href');
-  //     }
-  //   });
-  // }
+  /* Video play & pause button */
+
+  $(document).on('click', '.mute-video', function () {
+    let $videos = $(this).parent().find("video.landing__hero-video");
+    if ($videos.length <= 0) return
+    if ($videos.prop('muted')) {
+      $videos.prop('muted', false);
+      $(this).removeClass('unmute-video');
+    } else {
+      $videos.prop('muted', true);
+      $(this).addClass('unmute-video');
+    }
+  });
+
+  $(document).on('click', '.media-video', function () {
+    let $videos = $(this).parent().find(".landing__hero-video");
+    if (this.paused) {
+      $videos.each(function () {$(this)[0].play()})
+      $(this).parent().find(".play-button").fadeOut()
+      if ($(this).parent().find(".pause-button").length) {
+        $(this).parent().find(".pause-button").removeClass('hidden').fadeIn()
+      }
+    } else {
+      $videos.each(function () {$(this)[0].pause()})
+      $(this).parent().find(".play-button").removeClass('hidden').fadeIn()
+      if ($(this).parent().find(".pause-button").length) {
+        $(this).parent().find(".pause-button").fadeOut()
+      }
+    }
+  });
+
+  $(document).on('click', '.play-button', function () {
+    let $videos = $(this).parent().find('.media-video');
+    $videos.each(function () {$(this)[0].play()})
+    $(this).parent().find(".play-button").fadeOut()
+    if ($(this).parent().find(".pause-button").length) {
+      $(this).parent().find(".pause-button").removeClass('hidden').fadeIn()
+    }
+  });
+
+  $(document).on('click', '.pause-button', function () {
+    let $videos = $(this).parent().find('.media-video');
+    $videos.each(function () {$(this)[0].pause()})
+    $(this).parent().find(".play-button").removeClass('hidden').fadeIn()
+    $(this).parent().find(".pause-button").fadeOut()
+  });
 }
