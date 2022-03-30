@@ -14206,7 +14206,7 @@
             }))),
             f = U(l.selectedOptions),
             h = l.image;
-        return "\n    <div class='cart-upsell outer' data-component='cartUpsellItemAdd'>\n      <h3 class='h6 b ac track--narrow caps'>".concat(u, "</h3>\n\n      <div class='cart-drawer__item cart-drawer__item--upsell js-upsell-item-data' data-pid=").concat(r, " data-id=").concat(l.idDecoded, ">\n        <a href='").concat(c, "' class=\"cart-drawer__itemImage mr02\">\n          <img src='").concat(h.src, "' alt='").concat(h.altText, "' />\n        </a>\n\n        <div class='cart-drawer__itemContent f fdc'>\n          <div class='cart-drawer__itemDetails'>\n            <a href='").concat(c, "' class='oswald caps mv0 p'>").concat(a, "</a>\n            <div class='xxsmall sans caps cm mt025 book'>").concat(f, "</div>\n          </div>\n\n          <div class='f fdr aie jcb pt05'>\n            <a href='").concat(c, "' class='aie f xxsmall sans caps book'>More Finishes Available &rarr;</a>\n            <div class='oswald--n4'>").concat(V(l.price), "</div>\n          </div>\n\n          <button class='cart-drawer__itemAction b oswald caps js-upsell-item-add'>Add +</button>\n         </div>\n      </div>\n    </div>\n  ")
+        return "\n    <div class='cart-upsell outer' data-component='cartUpsellItemAdd'>\n      <h3 class='h6 b ac track--narrow caps'>".concat(u, "</h3>\n\n      <div class='cart-drawer__item cart-drawer__item--upsell js-upsell-item-data' data-pid=").concat(r, " data-id=").concat(l.idDecoded, ">\n        <a href='").concat(c, "' class=\"cart-drawer__itemImage mr02\">\n          <img src='").concat(h.src, "' alt='").concat(h.altText, "' />\n        </a>\n\n        <div class='cart-drawer__itemContent f fdc'>\n          <div class='cart-drawer__itemDetails'>\n            <a href='").concat(c, "' class='caps mv0 p'>").concat(a, "</a>\n            <div class='xxsmall sans caps cm mt025 book'>").concat(f, "</div>\n          </div>\n\n          <div class='f fdr aie jcb pt05'>\n            <a href='").concat(c, "' class='aie f xxsmall sans caps book'>More Finishes Available &rarr;</a>\n            <div class=''>").concat(V(l.price), "</div>\n          </div>\n\n          <button class='cart-drawer__itemAction b caps js-upsell-item-add'>Add +</button>\n         </div>\n      </div>\n    </div>\n  ")
       },
       An = O((function(t, e) {
         var n = t.querySelector(".js-upsell"),
@@ -14585,8 +14585,8 @@
                 subscription_success_label: "You're in! We'll let you know when it's back.",
                 footer_content: "",
                 close_label: "Close",
-                additional_styles: "@import url('https://fonts.googleapis.com/css?family=Open+Sans|Oswald:300,400');body.klaviyo-bis-close{ display: flex; align-items: center; justify-content: center;}#klaviyo-bis-modal{ display: flex; }@media only screen and (max-width:991.92px) { #klaviyo-bis-modal { max-width: calc(100% - 4rem); } }#container { margin-top: 0 !important; }.close{ right: 12px; }.modal-title { text-transform: uppercase; font-weight: 400;}.btn { text-transform: uppercase; font-size: 1.25em; font-family: 'Oswald';}",
-                font_family: '"Open Sans", Helvetica, Arial, sans-serif;',
+                additional_styles: "@import url('https://rsms.me/inter/inter.css');body.klaviyo-bis-close{ display: flex; align-items: center; justify-content: center;}#klaviyo-bis-modal{ display: flex; }@media only screen and (max-width:991.92px) { #klaviyo-bis-modal { max-width: calc(100% - 4rem); } }#container { margin-top: 0 !important; }.close{ right: 12px; }.modal-title { text-transform: uppercase; font-weight: 400;}.btn { text-transform: uppercase; font-size: 1.25em; font-family: 'Inter';}",
+                font_family: 'Inter',
                 drop_background_color: "#000",
                 background_color: "#fff",
                 text_color: "#222",

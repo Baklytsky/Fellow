@@ -276,8 +276,8 @@
           "menu_left": "new-left-menu-1",
           "menu_right": "new-right-menu",
           "show_announcement": true,
-          "announcement_text": "The limited edition collaboration drops tomorrow via text. Sign up now.",
-          "announcement_link": "https:\/\/drops.fellowproducts.com\/?utm_source=homepage&utm_medium=banner&utm_campaign=fellowhomepage",
+          "announcement_text": "Buy now, pay later with Afterpay on orders $50 or more.",
+          "announcement_link": "shopify:\/\/collections\/bestsellers",
           "enable_timer": false,
           "end_date": "Sep 30, 2021 07:30:00 GMT-08:00"
         }
@@ -310,7 +310,6 @@
       },
       "1565155576930": {
         "type": "hero-slider",
-        "disabled": true,
         "blocks": {
           "e6275e05-4fc2-4478-85db-37e4aceedf86": {
             "type": "splitSlide",
@@ -370,7 +369,7 @@
             "type": "splitSlide",
             "settings": {
               "splitSlide__layout": "right",
-              "heroSlide": "shopify:\/\/shop_images\/Hero_Module_Image.jpg",
+              "heroSlide": "shopify:\/\/shop_images\/Hero_Module_Image_Sustaining_1.jpg",
               "desktopAlignment": "center",
               "mobileAlignment": "center",
               "heroSlide__header": "Blue Steel",
@@ -752,14 +751,14 @@
         "type": "hp-iwt",
         "settings": {
           "enable_section": true,
-          "image": "shopify:\/\/shop_images\/StoneBlue_Product_Feature_Horizontal_2x_4ce2ddbf-48d0-42cd-9154-09799eca7139.jpg",
+          "image": "shopify:\/\/shop_images\/Module_Northern_Lights__2x_6e343ab0-3904-4edd-8af6-30c4a24ee563.png",
           "layout": "right",
-          "header": "Cool Collectables",
-          "description": "<p>Expand your Carter collection with the new hue Stone Blue.<\/p>",
+          "header": "Northern Lights",
+          "description": "<p>A product company, a roaster, and an astrophotographer walk into an Icelandic bar...<\/p>",
           "bg_color": "",
           "text_color": "",
-          "cta_url": "shopify:\/\/products\/carter-move-mug",
-          "cta_copy": "Shop Carter",
+          "cta_url": "shopify:\/\/blogs\/learn\/northern-lights-drop",
+          "cta_copy": "Learn More",
           "cta_color": "btn--dark"
         }
       },
@@ -788,6 +787,7 @@
       },
       "1648114115d10a8d6a": {
         "type": "hp-hero-video",
+        "disabled": true,
         "settings": {
           "enable_section": true,
           "section_bg": "#000000",
@@ -828,9 +828,9 @@
     },
     "content_for_index": [
       "1648114115d10a8d6a",
-      "1648464189e55630c9",
       "1565155576930",
       "1629968785d9d2e1c7",
+      "1648464189e55630c9",
       "162997622949d3f8ee",
       "1636101715cd2df3c8",
       "1630052841314f69dd",

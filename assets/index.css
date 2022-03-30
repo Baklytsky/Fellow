@@ -17555,13 +17555,15 @@ body.is-masthead--empty main {
 @media screen and (max-width: 991.98px) {
   .footer__payment-icons ul {
     gap: .4rem;
-    grid-template-columns: repeat(6, 38px)
+    grid-template-columns: repeat(6, 38px);
+      justify-content: center;
   }
 
   .footer svg {
     max-width: 120px;
     margin-bottom: 0;
   }
+  
 }
 
 .cart-drawer-outer {
@@ -18736,8 +18738,8 @@ textarea {
 @media screen and (max-width: 991.98px) {
   .radio-group:not([data-option-color]):not([data-option-material]) .radio__title {
     height: 29px;
-    font-size: .75rem;
-    font-weight: 600
+    font-size: 1rem;
+    font-weight: 400
   }
 
   .radio-group:not([data-option-color]):not([data-option-material]) .radio__title-size-image {
@@ -22845,13 +22847,8 @@ input[name=product_search_field] {
 .pdpCopy__copy {
   padding-bottom: .875rem
 }
-
-.shop-pay {
-  font-size: 14px;
-  font-weight: 500;
-}
-
-
+    
+    
 .pdpMain__images {
   display: block;
   position: absolute;
