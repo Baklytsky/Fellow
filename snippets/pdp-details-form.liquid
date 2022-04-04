@@ -50,12 +50,13 @@ Uncomment to include
     {% else %}
       {% if product.tags contains 'discontinued' %}
         Discontinued
-      {% else %}
-        Out of Stock
+    {% else %}
+    Out of Stock
       {% endif %}
       {%- assign disableVal = true -%}
     {% endif %}
-  {%- endcapture -%}
+  {%- endcapture -%}    
+
   {% comment %} Add catch for low stock variants {% endcomment %}
   <div class="pdpDetails__btns" data-disabled-size="{{ product_has_size_option }}">
 
@@ -63,6 +64,7 @@ Uncomment to include
       <button type="button" class="cart__button--select-size" disabled>Select size</button>
     {%- endif -%}
 
+  {% unless product.tags contains 'closed' %}  
     {%
       include 'component-button' with
       tag: 'button',
@@ -75,11 +77,13 @@ Uncomment to include
       disabled: disableVal,
       cta: cta,
     %}
+    {% endunless %}
+    
 
     <div class='is-hidden' data-bis>
       <button class='button cart__button klaviyo-bis-trigger'>Out of Stock | Notify Me</button>
     </div>
-
+   
     {% if product.metafields.custom_fields["enable_customize_button"] == 1 and product.metafields.custom_fields["customize_button_url"] != blank %}
       {%
         include 'component-button' with
@@ -96,4 +100,8 @@ Uncomment to include
       </div>
     {% endif %}
   </div>
-</div>
+    </div>
+ {% if product.tags contains 'closed' %}
+      <div class="klaviyo-form-VBeupD"></div>
+      <div class="klaviyo-form-TQxAiu"></div>
+{% endif %}

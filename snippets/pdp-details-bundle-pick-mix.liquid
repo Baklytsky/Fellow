@@ -96,13 +96,7 @@
           {% endif %}
       </div>
     </div>
-
-    {%- if product.metafields.custom_fields["bundle_product"] != blank -%}
-      {% include 'pdp-details-form-bundle-pick-mix' %}
-    {%- else -%}
-      {% include 'pdp-details-form-bundle' %}
-    {%- endif -%}
- <afterpay-placement 
+  <afterpay-placement 
          data-intro-text="Or"
          data-logo-type="lockup"
          data-show-with="false"
@@ -116,6 +110,12 @@
          data-amount="{{ current_variant.price | money | remove: '.00' }}"
          data-modal-theme="white" class="mb1 mt1 hidden-lg-up">
      </afterpay-placement>
+
+    {%- if product.metafields.custom_fields["bundle_product"] != blank -%}
+      {% include 'pdp-details-form-bundle-pick-mix' %}
+    {%- else -%}
+      {% include 'pdp-details-form-bundle' %}
+    {%- endif -%}
   {% endform %}
 
     {% include 'pdp-badges' %}
