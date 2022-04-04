@@ -152,7 +152,7 @@
 
         </style>
 
-        <a href="{{ shop.url }}" itemprop="url" class="mainMenu__logoWrapper" role="link" aria-label="Logo">
+        <a href="{{ shop.url }}" itemprop="url" class="mainMenu__logoWrapper" aria-label="Logo">
           {%- if logo != blank or logo_svg != blank -%}
             {%- if logo_svg != blank -%}
               {{ logo_svg }}
@@ -182,11 +182,12 @@
 
               <li class="mainMenu__item">
                 {%- if link.links != blank or has_submenu_blocks -%}
-                  <button data-target="{{ main_menu.title | handleize }}__{{ title }}"
-                          data-selected="false"
-                          class="newHeader__link linkBlack newHeader__MainLink">
-                    <a href="{{ link.url }}">{{ link.title }}</a>
-                  </button>
+                  <a data-target="{{ main_menu.title | handleize }}__{{ title }}"
+                     href="{{ link.url }}"
+                     data-selected="false"
+                     class="newHeader__link linkBlack newHeader__MainLink">
+                    {{ link.title }}
+                  </a>
                 {%- else -%}
                   <a class="newHeader__link linkBlack newHeader__MainLink"
                      href="{{ link.url }}">{{ link.title }}</a>
