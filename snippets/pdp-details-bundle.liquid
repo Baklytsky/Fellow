@@ -55,7 +55,20 @@
         </div>
       </div>
       {% if tagline != blank %}<div class='pdp__tagline hide-mobile'>{{ tagline | capitalize }}</div>{% endif %}
-      <div class="pdp__reviews mb1 {% if tagline != blank %}mt1{%endif%}">
+        <afterpay-placement 
+         data-intro-text="Pay in"
+         data-logo-type="badge"
+         data-show-with="true"
+         data-badge-theme="black-on-mint"
+         data-size="sm"
+         data-type="price-paragraph"
+         data-is-eligible="true"
+         data-locale="en_US"
+         data-modal-link-style="circled-info-icon"
+         data-amount="{{ current_variant.price | money | remove: '.00' }}"
+         data-modal-theme="white" class="mb1 mt1 hidden-md-down">
+     </afterpay-placement>
+        <div class="pdp__reviews">
         {%- assign reviews_count = product.metafields.yotpo.reviews_count | plus: 0 -%}
         {%- if reviews_count > 0 -%}
           {% include 'yotpo-star-rating-widget' %}
@@ -89,13 +102,23 @@
             <h2 class='strike'>{{ current_variant.price | money_without_trailing_zeros }}</h2>
           {% endif %}
       </div>
+        <afterpay-placement 
+         data-intro-text="Or"
+         data-logo-type="lockup"
+         data-show-with="false"
+         data-lockup-theme="black"
+         data-size="sm"
+         data-type="price-paragraph"
+         data-is-eligible="true"
+         data-locale="en_US"
+         data-modal-link-style="none"
+         data-show-upper-limit="false"
+         data-amount="{{ current_variant.price | money | remove: '.00' }}"
+         data-modal-theme="white" class="mb1 mt1 hidden-lg-up">
+     </afterpay-placement>
     </div>
     {% include 'pdp-bundle-description' %}
     {% include 'pdp-details-form-bundle' %}
-            {% comment %} Shop Pay Snippet {% endcomment %}
-  <div data-shop-pay class="shop-pay mb1">
-        {{ form | payment_terms }}
-      </div>
   {% endform %}
 
     {% include 'pdp-badges' %}

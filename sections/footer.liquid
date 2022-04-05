@@ -73,9 +73,14 @@
       <ul>
         {%- for type in shop.enabled_payment_types -%}
           <li>
-            {{ type | payment_type_svg_tag: class: 'img-grayscale' | replace: 'aria-labelledby', 'aria-label' | remove: 'role="img"' }}
-          </li>
+            {{ type | payment_type_svg_tag: class: 'icon icon--full-color' | replace: 'aria-labelledby', 'aria-label' | remove: 'role="img"' }}
+          </li> 
         {%- endfor -%}
+        <li>
+
+              <img src="https://cdn.shopify.com/s/files/1/0057/6235/1219/files/afterpay-lockup-blackonmint.svg?v=1648599613"/>
+
+            </li>  
       </ul>
     </div>
   {%- endif -%}
