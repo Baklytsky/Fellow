@@ -697,6 +697,8 @@ theme.pdpMain = function () {
 
 
   theme.variantChange = function (variantId, changeMediaContent) {
+    window.localStorage.setItem('changeVariant', true);
+    window.localStorage.setItem('variantId', variantId);
     function changeMedia() {
       var ajaxUrl = window.location.protocol + '//' + window.location.host + window.location.pathname + '?variant=' + variantId + '&view=ajax-media',
           $productMedia = $productMedia = $('.pdpMain__Media'),
