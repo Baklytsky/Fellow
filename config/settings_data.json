@@ -253,6 +253,21 @@
               "title_4": "",
               "url_4": ""
             }
+          },
+          "53d5318d-237f-4dd8-a68d-dff2daa5f0ce": {
+            "type": "sub_menu",
+            "settings": {
+              "target": "personalize",
+              "image_1": "shopify:\/\/shop_images\/Shop-Personalization.jpg",
+              "title_1": "Shop Personalization",
+              "url_1": "shopify:\/\/collections\/personalization",
+              "title_2": "",
+              "url_2": "",
+              "title_3": "",
+              "url_3": "",
+              "title_4": "",
+              "url_4": ""
+            }
           }
         },
         "block_order": [
@@ -265,7 +280,8 @@
           "9d051490-e4a2-42fc-aff7-458f600203d6",
           "4e4fd786-95a7-414f-8e51-d76b8ad921cb",
           "89a2c721-dfe0-4b4d-a289-0aa84be363f8",
-          "ae1f64c0-e3cd-4973-a1f8-951b8ea29882"
+          "ae1f64c0-e3cd-4973-a1f8-951b8ea29882",
+          "53d5318d-237f-4dd8-a68d-dff2daa5f0ce"
         ],
         "settings": {
           "logo": "shopify:\/\/shop_images\/Fellow-Logo-black.png",
@@ -367,6 +383,7 @@
           },
           "1f457594-c59c-4edd-800a-a9f7662f319e": {
             "type": "splitSlide",
+            "disabled": true,
             "settings": {
               "splitSlide__layout": "right",
               "heroSlide": "shopify:\/\/shop_images\/Hero_Module_Image_Sustaining_1.jpg",
@@ -384,18 +401,17 @@
           },
           "3e0796bc-698b-4618-80b6-261185f9fb1a": {
             "type": "splitSlide",
-            "disabled": true,
             "settings": {
               "splitSlide__layout": "right",
-              "heroSlide": "shopify:\/\/shop_images\/Bundle-Launch-GIF_a97be00c-acf3-4b07-a306-583dbd6fb3b3.gif",
+              "heroSlide": "shopify:\/\/shop_images\/Personalization-Hero-Module-Image.png",
               "desktopAlignment": "center",
               "mobileAlignment": "center",
-              "heroSlide__header": "You Brew You",
-              "heroSlide__subheader": "Introducing four new brewing kits to take you to the next stage in your coffee journey. Choose your own colors and save.",
-              "subSlide__bgColor": "#f5f5f5",
+              "heroSlide__header": "Sip into something more personal",
+              "heroSlide__subheader": "Personalize any style and size Carter. Uncompromised coffee, unquestionably yours.",
+              "subSlide__bgColor": "#f7f2e8",
               "subSlide__textColor": "#231f20",
-              "heroSlide__ctaURL": "shopify:\/\/collections\/coffee-products-kits-bundles",
-              "heroSlide__ctaCopy": "Shop The Kits",
+              "heroSlide__ctaURL": "shopify:\/\/collections\/personalization",
+              "heroSlide__ctaCopy": "Personalize Now",
               "heroSlide__ctaColor": "black",
               "heroSlide__ctaSubtext": ""
             }
@@ -751,14 +767,14 @@
         "type": "hp-iwt",
         "settings": {
           "enable_section": true,
-          "image": "shopify:\/\/shop_images\/Module_Northern_Lights__2x_6e343ab0-3904-4edd-8af6-30c4a24ee563.png",
+          "image": "shopify:\/\/shop_images\/780x618_px.png",
           "layout": "right",
-          "header": "Northern Lights",
-          "description": "<p>A product company, a roaster, and an astrophotographer walk into an Icelandic bar...<\/p>",
+          "header": "Cool Collectables",
+          "description": "<p>Expand your Carter collection with the new hue Stone Blue.<\/p>",
           "bg_color": "",
           "text_color": "",
-          "cta_url": "shopify:\/\/blogs\/learn\/northern-lights-drop",
-          "cta_copy": "Learn More",
+          "cta_url": "shopify:\/\/collections\/serve",
+          "cta_copy": "Shop Carter",
           "cta_color": "btn--dark"
         }
       },

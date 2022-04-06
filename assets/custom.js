@@ -697,13 +697,16 @@ theme.pdpMain = function () {
 
 
   theme.variantChange = function (variantId, changeMediaContent) {
+    window.localStorage.setItem('changeVariant', true);
+    window.localStorage.setItem('variantId', variantId);
     function changeMedia() {
       var ajaxUrl = window.location.protocol + '//' + window.location.host + window.location.pathname + '?variant=' + variantId + '&view=ajax-media',
           $productMedia = $productMedia = $('.pdpMain__Media'),
           $productUpsell = $('.upsell-product'),
           $productPrice = $('.pdpForm .pdpCopy__price.hide-mobile'),
           $productMobilePrice = $('.pdpForm .pdpCopy__price.hide-desktop'),
-          $stickyPrice = $('.pdpStickyBar .pdpCopy__price');
+          $stickyPrice = $('.pdpStickyBar .pdpCopy__price'),
+          $productPersonalize = $('.pdpDetails__personalize');
 
       $.ajax({
         url: ajaxUrl,
@@ -716,12 +719,14 @@ theme.pdpMain = function () {
           var $newProductMedia = $(data).find('.pdpMain__Media').html(),
               $newProductPrice = $(data).find('.pdpForm .pdpCopy__price.hide-mobile').html(),
               $newProductMobilePrice = $(data).find('.pdpForm .pdpCopy__price.hide-desktop').html(),
-              $newStickyPrice = $(data).find('.pdpStickyBar .pdpCopy__price').html();
+              $newStickyPrice = $(data).find('.pdpStickyBar .pdpCopy__price').html(),
+              $newProductPersonalize = $(data).find('.pdpDetails__personalize').html();
 
           $productMedia.html($newProductMedia);
           $productPrice.html($newProductPrice);
           $productMobilePrice.html($newProductMobilePrice);
           $stickyPrice.html($newStickyPrice);
+          if ($productPersonalize.length) $productPersonalize.html($newProductPersonalize);
 
           theme.slickSlider()
           pdpGallary()
