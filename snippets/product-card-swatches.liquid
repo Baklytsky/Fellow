@@ -18,7 +18,7 @@
                   {%- assign color_swatch_name = product.handle | append: '_' | append: color_name | append: '.png' -%}
                   {%- assign color_swatch_image = images[color_swatch_name] -%}
                 {%- endif -%}
-                
+
                 <label class='radio f aic rel js-color-update' for='{{ product.title | handleize }}-{{ option_name }}__{{ value | handleize }}{{ block_id }}' {% if option_name == 'color' or option_name == 'material' %}data-color='{{ value | handleize }}'{% endif %}>
                   <span class='u-sr-only'>Label for {{ product.title }} {{ option_name }}</span>
                   <input

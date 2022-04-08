@@ -9928,7 +9928,7 @@
       return t.length <= 0
           ? ""
           : t.reduce(function (t, e) {
-            if (e.product_type !== 'Gift product' && e.product_type !== 'Gift box' && e.sku.indexOf('ENGRAVE') === -1) {
+            if (e.product_type !== 'Gift product' && e.product_type !== 'Gift box' && e.product_type !== 'Personalization' && e.sku.indexOf('ENGRAVE') === -1) {
               return (
                   t +
                   ((r = (n = e).product_id),
@@ -9963,6 +9963,53 @@
                           .concat(c, "' class='cart-drawer__itemTitle'>")
                           .concat(o, "</a>\n          <div class='cart-drawer__itemOptions'>")
                           .concat(f, "</div>\n        </div>\n\n        <div class='f aic jcb pt05'>\n          <div class='cart-item__stepper aic f ")
+                          .concat(0 === a ? "is-disabled" : "", "'>\n            <div class='cart-stepper js-remove-single' data-key='" + n.key + "'>-</div>\n            <input type='text' class='cart-quantity js-single-quantity' value='")
+                          .concat(l, "'>\n            <div class='cart-stepper js-add-single' data-key='" + n.key + "'>+</div>\n          </div>\n\n          <div class='cart-item__price'>")
+                          .concat(p, "</div>\n        </div>\n\n        <button class='button--reset cart-drawer__itemAction js-remove-item' data-key='" + n.key + "' style='display: none'>")
+                          .concat(
+                              '\n  <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentcolor" stroke-width="3" style="display:inline-block;vertical-align:middle;overflow:visible;"><path d="M1.0606601717798212 1.0606601717798212 L14.939339828220179 14.939339828220179"></path><path d="M14.939339828220179 1.0606601717798212 L1.0606601717798212 14.939339828220179"></path></svg>\n',
+                              "</button>\n")
+                          .concat('\n <button type="button" data-action="open-item-remove-popup" aria-expanded="false" class="button--reset cart-drawer__itemAction cart-drawer__remove-open"> <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentcolor" stroke-width="3" style="display:inline-block;vertical-align:middle;overflow:visible;"><path d="M1.0606601717798212 1.0606601717798212 L14.939339828220179 14.939339828220179"></path><path d="M14.939339828220179 1.0606601717798212 L1.0606601717798212 14.939339828220179"></path></svg>\n',
+                              "</button>\n </div>\n    </div>\n"
+                          ))
+              );
+            } else if (e.product_type === 'Personalization' && e.properties['Personalized Text']) {
+              return (
+                  t +
+                  ((r = (n = e).product_id),
+                      (i = n.variant_id),
+                      (o = n.product_title),
+                      (a = n.line_price),
+                      (p = (n.line_price === n.original_line_price) ? V(Q(a)) : '<span style="text-decoration: line-through; padding-right: 5px;">' + V(Q(n.original_line_price)) + '</span>' + V(Q(a))),
+                      (s = n.options_with_values),
+                      (u = n.image),
+                      (c = n.url),
+                      (l = n.quantity),
+                      (prop = n.properties['Personalized Text']),
+                      (f = U(s)),
+                      (h = u
+                          ? F(
+                              u.replace(
+                                  "." +
+                                  (function (t) {
+                                    var e = t.match(/.+_((?:pico|icon|thumb|small|compact|medium|large|grande)|\d{1,4}x\d{0,4}|x\d{1,4})[_\.@]/);
+                                    return e ? e[1] : null;
+                                  })(u),
+                                  ""
+                              ),
+                              "200x"
+                          )
+                          : "https://source.unsplash.com/R9OS29xJb-8/2000x1333"),
+                      "\n    <div class='cart-drawer__item' data-component='cartDrawerItem' data-pid="
+                          .concat(r, " data-id=")
+                          .concat(i, " data-key=")
+                          .concat(n.key, " >\n      <a href='")
+                          .concat(c, "' class=\"cart-drawer__itemImage\">\n        <img src='")
+                          .concat(h, "' />\n      </a>\n\n      <div class='cart-drawer__itemContent f fdc'>\n        <div class='cart-drawer__itemDetails'>\n          <a href='")
+                          .concat(c, "' class='cart-drawer__itemTitle'>")
+                          .concat(o, "</a>\n          <div class='cart-drawer__itemOptions'>")
+                          .concat(f, "<div class='cart-drawer__personalization'>Personalized Text: ")
+                          .concat(prop, "</div>\n </div>\n        </div>\n\n        <div class='f aic jcb pt05'>\n          <div class='cart-item__stepper aic f ")
                           .concat(0 === a ? "is-disabled" : "", "'>\n            <div class='cart-stepper js-remove-single' data-key='" + n.key + "'>-</div>\n            <input type='text' class='cart-quantity js-single-quantity' value='")
                           .concat(l, "'>\n            <div class='cart-stepper js-add-single' data-key='" + n.key + "'>+</div>\n          </div>\n\n          <div class='cart-item__price'>")
                           .concat(p, "</div>\n        </div>\n\n        <button class='button--reset cart-drawer__itemAction js-remove-item' data-key='" + n.key + "' style='display: none'>")
@@ -10111,7 +10158,7 @@
                           ))
               );
             }
-            var n, r, i, o, a, s, u, c, l, f, h;
+            var n, r, i, o, a, s, u, c, l, f, h, prop;
           }, "");
     console.log("Can't reach cart.js");
   }
@@ -10319,7 +10366,7 @@
                   v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
                   var n = Q((firstGwpThreshold * 100) - e.total_price),
                       r = (e.total_price / summaryGwpThreshold).toFixed(2);
-                  d.style.width = "".concat(r, "%"), p.innerHTML = n, gwpNostackText.classList.add("is-hidden"), v.innerHTML = `You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from a free Carter Move Mug.`
+                  d.style.width = "".concat(r, "%"), p.innerHTML = n, gwpNostackText.classList.add("is-hidden"), v.innerHTML = `You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from a free bag of coffee.`
                 } 
                 
                 else if (t.classList.add("is-active"), a.innerHTML = h, setTimeout((function() {
@@ -10328,7 +10375,7 @@
                   v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
                   var n = Q((summaryGwpThreshold * 100) - e.total_price),
                       r = (e.total_price / summaryGwpThreshold).toFixed(2);
-                  d.style.width = "".concat(r, "%"), p.innerHTML = n, v.innerHTML = `Nice - You've got a free Carter Move Mug.<br>You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from a second one!`, freeShippingTotal.innerHTML = '+ 1 Free Mug', freeShippingTotal.classList.remove("is-hidden"), gwpNostackText.classList.remove("is-hidden");
+                  d.style.width = "".concat(r, "%"), p.innerHTML = n, v.innerHTML = `Nice - You've got a free bag of coffee.<br>You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from a second one!`, freeShippingTotal.innerHTML = '+ Free Coffee', freeShippingTotal.classList.remove("is-hidden"), gwpNostackText.classList.remove("is-hidden");
                 } 
                 
                 else y.innerHTML = 'Good news! You get two Carter Move Mugs on us.', y.classList.remove("is-hidden"), gwpNostackText.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.innerHTML = '+ 2 Free Mugs', freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
@@ -10345,8 +10392,8 @@
                   v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
                   var n = Q((window.theme.gwpSettings.gwpThreshold * 100) - e.total_price),
                       r = (e.total_price / window.theme.gwpSettings.gwpThreshold).toFixed(2);
-                  d.style.width = "".concat(r, "%"), p.innerHTML = n, v.innerHTML = `You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from a free Carter Move Mug`
-                } else y.innerHTML = 'Good news! You get a free Carter Move Mug.<p class="eyebrow mt0 mb0" style="text-transform:none;font-weight:400">Stacked promos are ineligible.<br>Manually remove the free gift from your cart to use a promo code.</p>', y.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.innerHTML = '+ 1 Free Mug', freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
+                  d.style.width = "".concat(r, "%"), p.innerHTML = n, v.innerHTML = `You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from a free bag of coffee.`
+                } else y.innerHTML = 'Good news! You get a free bag of coffee.<p class="eyebrow mt0 mb0" style="text-transform:none;font-weight:400">Stacked promos are ineligible.<br>Manually remove the free gift from your cart to use a promo code.</p>', y.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.innerHTML = '+ Free Coffee', freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
                 Dr.emit("nav:toggle", {
                   navDrawerOpen: !1,
                   whichNavDrawer: void 0,
@@ -10519,13 +10566,13 @@
                 v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
                 var r = Q((firstGwpThreshold * 100) - n.total_price),
                     i = (n.total_price / summaryGwpThreshold).toFixed(2);
-                d.style.width = "".concat(i, "%"), p.innerHTML = r, gwpNostackText.classList.add("is-hidden"), v.innerHTML = `You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from a free Carter Move Mug`
+                d.style.width = "".concat(i, "%"), p.innerHTML = r, gwpNostackText.classList.add("is-hidden"), v.innerHTML = `You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from a a free bag of coffee.`
               } 
               else if (m(e.getState().cart), b(Dr.getState()), n.total_price > (firstGwpThreshold * 100) && n.total_price < (summaryGwpThreshold * 100)) {
                 v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
                 var r = Q((summaryGwpThreshold * 100) - n.total_price),
                     i = (n.total_price / summaryGwpThreshold).toFixed(2);
-                d.style.width = "".concat(i, "%"), p.innerHTML = r, v.innerHTML = `Nice - You've got a free Carter Move Mug. You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from a second one`,freeShippingTotal.innerHTML = '+ 1 Free Mug', freeShippingTotal.classList.remove("is-hidden"), gwpNostackText.classList.remove("is-hidden");
+                d.style.width = "".concat(i, "%"), p.innerHTML = r, v.innerHTML = `Nice - You've got a free Carter Move Mug. You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from a second one`,freeShippingTotal.innerHTML = '+ Free Coffee', freeShippingTotal.classList.remove("is-hidden"), gwpNostackText.classList.remove("is-hidden");
               } else y.innerHTML = 'Good news! You get two Carter Move Mugs on us.', y.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.innerHTML = '+ 2 Free Mugs', gwpNostackText.classList.remove("is-hidden"), freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
             
             
@@ -10536,8 +10583,8 @@
                 v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
                 var r = Q((window.theme.gwpSettings.gwpThreshold * 100) - n.total_price),
                     i = (n.total_price / window.theme.gwpSettings.gwpThreshold).toFixed(2);
-                d.style.width = "".concat(i, "%"), p.innerHTML = r, v.innerHTML = `You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from a free Carter Move Mug`
-              } else y.innerHTML = 'Good news! You get a free Carter Move Mug.<span></span>', y.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.innerHTML = 'Free Gift Added', freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
+                d.style.width = "".concat(i, "%"), p.innerHTML = r, v.innerHTML = `You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from a free bag of coffee.`
+              } else y.innerHTML = 'Good news! You get a free bag of coffee.<span></span>', y.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.innerHTML = 'Free Gift Added', freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
             } 
             
             else if (secondGwpEnabled) {
@@ -10545,7 +10592,7 @@
                 v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
                 var r = Q((window.theme.gwpSettings.secondGwpThreshold * 100) - n.total_price),
                     i = (n.total_price / window.theme.gwpSettings.secondGwpThreshold).toFixed(2);
-                d.style.width = "".concat(i, "%"), p.innerHTML = r, v.innerHTML = `You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from a free Carter Move Mug`
+                d.style.width = "".concat(i, "%"), p.innerHTML = r, v.innerHTML = `You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from a free bag of coffee.`
               } else y.innerHTML = 'Good news! You get two Carter Move Mugs on us.', y.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.innerHTML = 'Free Gift Added', freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
             }
           } else {
@@ -14159,7 +14206,7 @@
             }))),
             f = U(l.selectedOptions),
             h = l.image;
-        return "\n    <div class='cart-upsell outer' data-component='cartUpsellItemAdd'>\n      <h3 class='h6 b ac track--narrow caps'>".concat(u, "</h3>\n\n      <div class='cart-drawer__item cart-drawer__item--upsell js-upsell-item-data' data-pid=").concat(r, " data-id=").concat(l.idDecoded, ">\n        <a href='").concat(c, "' class=\"cart-drawer__itemImage mr02\">\n          <img src='").concat(h.src, "' alt='").concat(h.altText, "' />\n        </a>\n\n        <div class='cart-drawer__itemContent f fdc'>\n          <div class='cart-drawer__itemDetails'>\n            <a href='").concat(c, "' class='oswald caps mv0 p'>").concat(a, "</a>\n            <div class='xxsmall sans caps cm mt025 book'>").concat(f, "</div>\n          </div>\n\n          <div class='f fdr aie jcb pt05'>\n            <a href='").concat(c, "' class='aie f xxsmall sans caps book'>More Finishes Available &rarr;</a>\n            <div class='oswald--n4'>").concat(V(l.price), "</div>\n          </div>\n\n          <button class='cart-drawer__itemAction b oswald caps js-upsell-item-add'>Add +</button>\n         </div>\n      </div>\n    </div>\n  ")
+        return "\n    <div class='cart-upsell outer' data-component='cartUpsellItemAdd'>\n      <h3 class='h6 b ac track--narrow caps'>".concat(u, "</h3>\n\n      <div class='cart-drawer__item cart-drawer__item--upsell js-upsell-item-data' data-pid=").concat(r, " data-id=").concat(l.idDecoded, ">\n        <a href='").concat(c, "' class=\"cart-drawer__itemImage mr02\">\n          <img src='").concat(h.src, "' alt='").concat(h.altText, "' />\n        </a>\n\n        <div class='cart-drawer__itemContent f fdc'>\n          <div class='cart-drawer__itemDetails'>\n            <a href='").concat(c, "' class='caps mv0 p'>").concat(a, "</a>\n            <div class='xxsmall sans caps cm mt025 book'>").concat(f, "</div>\n          </div>\n\n          <div class='f fdr aie jcb pt05'>\n            <a href='").concat(c, "' class='aie f xxsmall sans caps book'>More Finishes Available &rarr;</a>\n            <div class=''>").concat(V(l.price), "</div>\n          </div>\n\n          <button class='cart-drawer__itemAction b caps js-upsell-item-add'>Add +</button>\n         </div>\n      </div>\n    </div>\n  ")
       },
       An = O((function(t, e) {
         var n = t.querySelector(".js-upsell"),
@@ -14538,8 +14585,8 @@
                 subscription_success_label: "You're in! We'll let you know when it's back.",
                 footer_content: "",
                 close_label: "Close",
-                additional_styles: "@import url('https://fonts.googleapis.com/css?family=Open+Sans|Oswald:300,400');body.klaviyo-bis-close{ display: flex; align-items: center; justify-content: center;}#klaviyo-bis-modal{ display: flex; }@media only screen and (max-width:991.92px) { #klaviyo-bis-modal { max-width: calc(100% - 4rem); } }#container { margin-top: 0 !important; }.close{ right: 12px; }.modal-title { text-transform: uppercase; font-weight: 400;}.btn { text-transform: uppercase; font-size: 1.25em; font-family: 'Oswald';}",
-                font_family: '"Open Sans", Helvetica, Arial, sans-serif;',
+                additional_styles: "@import url('https://rsms.me/inter/inter.css');body.klaviyo-bis-close{ display: flex; align-items: center; justify-content: center;}#klaviyo-bis-modal{ display: flex; }@media only screen and (max-width:991.92px) { #klaviyo-bis-modal { max-width: calc(100% - 4rem); } }#container { margin-top: 0 !important; }.close{ right: 12px; }.modal-title { text-transform: uppercase; font-weight: 400;}.btn { text-transform: uppercase; font-size: 1.25em; font-family: 'Inter';}",
+                font_family: 'Inter',
                 drop_background_color: "#000",
                 background_color: "#fff",
                 text_color: "#222",
@@ -14560,9 +14607,10 @@
             return t.id === parseInt(r.elements.id.value)
           }))[0];
           r.querySelectorAll("[name*=properties]");
+          let propInputs = r.querySelectorAll("[name*=properties]");
           if (!a.available) throw new Error("Selected item not available. You probably shouldn't have been able to even try to add this to your cart.");
           ! function(t, e) {
-            var n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : null,
+            var n = propInputs ? theme.buildProperties(propInputs) : null,
                 r = "deny" === t.inventory_policy && "shopify" === t.inventory_management ? t.inventory_quantity : null;
             K().then((function(i) {
               var o = ((i.items.filter((function(e) {
@@ -14808,7 +14856,7 @@
               p = d.tags.includes("preorder"),
               v = d.tags.includes("discontinued"),
               y = "";
-          y = v ? "Discontinued" : "Out of Stock";
+          y = v ? "Discontinued" : "Out of Stock | Notify Me";
           var m = "";
 
           function g() {
@@ -14845,7 +14893,7 @@
               theme.variantChange(a.value, true), theme.selectedOption(r), t.innerHTML = "Unavailable", l.classList.add("is-hidden"), u.classList.remove("is-hidden"), u.setAttribute("disabled", "")
             }))
           }
-          return m = p ? "Preorder" : "Add to Cart", i.forEach((function(t) {
+          return m = p ? "Pre-order" : "Add to Cart", i.forEach((function(t) {
             if ("SELECT" !== t.nodeName) throw new Error("data-option-select should be defined on the individual option selectors");
             var e = parseInt(t.getAttribute("data-index"), 10);
             r.options[e] = t.value, t.addEventListener("change", (function(t) {
@@ -14888,6 +14936,7 @@
                 s.forEach((function(t) {
                   t.innerHTML = o
                 }));
+                theme.variantPreOrderCheck(r.id);
                 for (var p = 0, g = n; p < g.length; p++) {
                   (0, g[p])(r)
                 }
@@ -15473,7 +15522,7 @@
                       var f = l(s, n);
                       S(f.unmount) && r.push(f)
                     } catch (t) {
-                      console.log("🚨 %cpicoapp - " + u[c] + " failed - " + (t.message || t), "color: #E85867"), console.error(t)
+                      //console.log("🚨 %cpicoapp - " + u[c] + " failed - " + (t.message || t), "color: #E85867"), console.error(t)
                     }
                   }
                 }

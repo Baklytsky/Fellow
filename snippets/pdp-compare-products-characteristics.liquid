@@ -134,8 +134,10 @@
                   {%- assign characteristic_name = product.metafields.custom_fields[key_name] -%}
                   {%- assign product_key_name = "product_characteristic_" | append: i -%}
                   {%- assign characteristic_text = item[product_key_name] -%}
-                  <h3 class="pdpCompare__tabsProductsSettings">{{ characteristic_name }}</h3>
-                  <div class="pdpCompare__tabsProductsDescription">{{ characteristic_text }}</div>
+                  {%- if characteristic_name != blank or characteristic_text != blank -%}
+                    <h3 class="pdpCompare__tabsProductsSettings">{{ characteristic_name }}</h3>
+                    <div class="pdpCompare__tabsProductsDescription">{{ characteristic_text }}</div>
+                  {%- endif -%}
                 {%- endfor -%}
               </div>
             {%- endif -%}

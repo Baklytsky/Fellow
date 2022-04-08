@@ -1,3 +1,3 @@
-<div class="customize-btn" data-component="productCustomized" onclick="openPlayer()">
+<div class="customize-btn" data-component="productCustomized" onclick="openPlayer()" {% unless product.selected_variant.available %}style="display: none;" {% endunless %}>
     <span>Personalize Your Mug</span>
 </div>

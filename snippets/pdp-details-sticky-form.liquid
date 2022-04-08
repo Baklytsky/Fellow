@@ -22,11 +22,15 @@ Uncomment to include
       </div>
     {% endif %}
   {% endunless %}
+    {%- assign hasPreorderTag = false -%}
+    {%- if product.tags contains 'preorder' -%}
+      {%- assign hasPreorderTag = true -%}
+    {%- endif -%}
   {%- capture cta -%}
-    {% if product.available %}
+    {% if product.selected_variant.available %}
       <span data-atc-copy class="js-atc-copy">
-        {% if product.tags contains 'preorder' %}
-          Preorder
+        {% if product.selected_variant.metafields.my_fields.preorder or hasPreorderTag %}
+          Pre-Order
         {% else %}
           Add to Cart
         {% endif %}
@@ -38,12 +42,14 @@ Uncomment to include
 
       {%- assign disableVal = false -%}
     {% else %}
+    <span data-atc-copy class="js-atc-copy">
       {% if product.tags contains 'discontinued' %}
         Discontinued
       {% else %}
-        Out of Stock
+        Out Of Stock | Notify Me
       {% endif %}
-      {%- assign disableVal = true -%}
+      {%- assign disableVal = false -%}
+    </span>
     {% endif %}
   {%- endcapture -%}
   {% comment %} Add catch for low stock variants {% endcomment %}

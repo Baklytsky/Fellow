@@ -44,10 +44,10 @@
 </div>
 
 {%- assign reviews_count = product.metafields.yotpo.reviews_count | plus: 0 -%}
-<div class="productCard_ratings f fdr aie mb05 {% if product.compare_at_price > product.price %}mt05{% endif %}"
+<div class="productCard_ratings f fdr aie mb05 mt05"
      {% if reviews_count == 0 %}style="display:none;"{% endif %}>
   <div class="yotpo bottomLine" style="display:inline-block;" data-product-id="{{ product.id }}"></div>
   <span class="productCard__reviewNum">({{ reviews_count }})</span>
 </div>
-     
- 
+
+
