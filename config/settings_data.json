@@ -383,24 +383,24 @@
           },
           "1f457594-c59c-4edd-800a-a9f7662f319e": {
             "type": "splitSlide",
-            "disabled": true,
             "settings": {
               "splitSlide__layout": "right",
-              "heroSlide": "shopify:\/\/shop_images\/Hero_Module_Image_Sustaining_1.jpg",
+              "heroSlide": "shopify:\/\/shop_images\/Ode_Takeover_1_880x654__2x_972afd1e-060d-4004-97b6-d8f85b8a45e6.jpg",
               "desktopAlignment": "center",
               "mobileAlignment": "center",
-              "heroSlide__header": "Blue Steel",
-              "heroSlide__subheader": "Meet the ridiciously good looking new Carter hue. Now available in every size and style.",
-              "subSlide__bgColor": "#2b3c4d",
-              "subSlide__textColor": "#FFFFFF",
-              "heroSlide__ctaURL": "shopify:\/\/collections\/stone-blue",
-              "heroSlide__ctaCopy": "Shop Stone Blue",
-              "heroSlide__ctaColor": "white",
+              "heroSlide__header": "What’s In Your Ode?",
+              "heroSlide__subheader": "Two burr choices, no wrong answers.  Pick the best to suit your needs.",
+              "subSlide__bgColor": "#c1dbd2",
+              "subSlide__textColor": "#231f20",
+              "heroSlide__ctaURL": "shopify:\/\/products\/ode-brew-grinder",
+              "heroSlide__ctaCopy": "Shop Ode Brew Grinder",
+              "heroSlide__ctaColor": "black",
               "heroSlide__ctaSubtext": ""
             }
           },
           "3e0796bc-698b-4618-80b6-261185f9fb1a": {
             "type": "splitSlide",
+            "disabled": true,
             "settings": {
               "splitSlide__layout": "right",
               "heroSlide": "shopify:\/\/shop_images\/Personalization-Hero-Module-Image.png",
@@ -576,11 +576,11 @@
           "enable_section": true,
           "image": "shopify:\/\/shop_images\/MapleKettles_module_1.png",
           "layout": "left",
-          "header": "Lighten Up",
+          "header": "Lighten up",
           "description": "<p>New Stagg EKGs with warm maple accents. Pour-over precision, designed for the home.<\/p>",
           "bg_color": "",
           "text_color": "#000000",
-          "cta_url": "shopify:\/\/collections\/kettles",
+          "cta_url": "shopify:\/\/products\/stagg-ekg-electric-pour-over-kettle",
           "cta_copy": "Pick Your Kettle",
           "cta_color": "btn--dark"
         }
@@ -663,25 +663,25 @@
           "243f1fe7-12cb-4b51-b5ac-6897c8af25d9": {
             "type": "article",
             "settings": {
-              "article": "learn\/which-carter-are-you"
+              "article": "learn\/personalized-carter-ideas"
             }
           },
           "b89badb0-2f13-4dfd-b834-29780dfc72cd": {
             "type": "article",
             "settings": {
-              "article": "learn\/how-to-play-wormy-on-your-electric-kettle"
+              "article": "learn\/northern-lights-drop"
             }
           },
           "3b78c804-955a-454f-b8d7-af7b4271d9a4": {
             "type": "article",
             "settings": {
-              "article": "learn\/how-to-brew-iced-coffee-at-home"
+              "article": "brew-guides\/back-to-brewing-school-pour-over-basics-101"
             }
           },
           "8034bca3-6535-40a1-83ce-613a916266d4": {
             "type": "article",
             "settings": {
-              "article": "brew-guides\/the-classic-clara-french-press-recipe"
+              "article": "learn\/which-carter-are-you"
             }
           }
         },
@@ -767,14 +767,14 @@
         "type": "hp-iwt",
         "settings": {
           "enable_section": true,
-          "image": "shopify:\/\/shop_images\/780x618_px.png",
-          "layout": "right",
-          "header": "Cool Collectables",
-          "description": "<p>Expand your Carter collection with the new hue Stone Blue.<\/p>",
+          "image": "shopify:\/\/shop_images\/Product_Feature_Module_-_Mostly_Filter_Kits_1__2x_cda365cf-bcce-4e01-b788-e236f631a958.png",
+          "layout": "left",
+          "header": "Refill here",
+          "description": "<p>Don’t run out when you’re running out.  Get more filters and a Carter Move Mug  in one convenient kit.<\/p>",
           "bg_color": "",
           "text_color": "",
-          "cta_url": "shopify:\/\/collections\/stone-blue",
-          "cta_copy": "Shop Carter",
+          "cta_url": "shopify:\/\/products\/mostly-filters",
+          "cta_copy": "Shop Mostly Filters",
           "cta_color": "btn--dark"
         }
       },
@@ -788,7 +788,7 @@
           "enable_section": true,
           "image": "shopify:\/\/shop_images\/Coffee_Marketplace_780x618_Product_Feature_1.jpg",
           "layout": "right",
-          "header": "Seasonal Tasting Menu",
+          "header": "Seasonal tasting menu",
           "description": "<p>We’ve curated a selection of our favorite coffees from some of the best roasters in the world right now.<\/p>",
           "bg_color": "",
           "text_color": "",
@@ -840,6 +840,36 @@
           "form_heading": "JOIN FELLOW DROPS:",
           "form_description": "*Free to join. Message and data rates may apply.  Reply STOP to opt-out anytime"
         }
+      },
+      "164970109872b4e7fa": {
+        "type": "hp-iwt",
+        "settings": {
+          "enable_section": true,
+          "image": "shopify:\/\/shop_images\/Homepage-Module_Bundle.gif",
+          "layout": "right",
+          "header": "Freshly bloomed",
+          "description": "<p>Discover colorful new bundles with curated coffee included.<\/p>",
+          "bg_color": "",
+          "text_color": "",
+          "cta_url": "shopify:\/\/collections\/coffee-products-kits-bundles",
+          "cta_copy": "Shop Kits + Bundles",
+          "cta_color": "btn--dark"
+        }
+      },
+      "16497034024471c77e": {
+        "type": "hp-iwt",
+        "settings": {
+          "enable_section": true,
+          "image": "shopify:\/\/shop_images\/Coffee_Marketplace_780x618_Product_Feature_1.jpg",
+          "layout": "left",
+          "header": "Seasonal tasting menu",
+          "description": "<p>We’ve curated a selection of our favorite coffees from some of the best roasters in the world right now.<\/p>",
+          "bg_color": "",
+          "text_color": "",
+          "cta_url": "shopify:\/\/collections\/coffee",
+          "cta_copy": "Shop Coffee",
+          "cta_color": "btn--dark"
+        }
       }
     },
     "content_for_index": [
@@ -849,8 +879,10 @@
       "1648464189e55630c9",
       "162997622949d3f8ee",
       "1636101715cd2df3c8",
+      "164970109872b4e7fa",
       "1630052841314f69dd",
       "16391832269c232690",
+      "16497034024471c77e",
       "163005286553dd2458",
       "16342252676e2388c3",
       "1630069783d5517455",
