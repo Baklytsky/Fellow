@@ -152,7 +152,7 @@
 
         </style>
 
-        <a href="{{ shop.url }}" itemprop="url" class="mainMenu__logoWrapper" role="link" aria-label="Logo">
+        <a href="{{ shop.url }}" itemprop="url" class="mainMenu__logoWrapper" aria-label="Logo">
           {%- if logo != blank or logo_svg != blank -%}
             {%- if logo_svg != blank -%}
               {{ logo_svg }}
@@ -182,9 +182,12 @@
 
               <li class="mainMenu__item">
                 {%- if link.links != blank or has_submenu_blocks -%}
-                  <button data-target="{{ main_menu.title | handleize }}__{{ title }}"
-                          data-selected="false"
-                          class="newHeader__link linkBlack newHeader__MainLink">{{ link.title }}</button>
+                  <a data-target="{{ main_menu.title | handleize }}__{{ title }}"
+                     href="{{ link.url }}"
+                     data-selected="false"
+                     class="newHeader__link linkBlack newHeader__MainLink">
+                    {{ link.title }}
+                  </a>
                 {%- else -%}
                   <a class="newHeader__link linkBlack newHeader__MainLink"
                      href="{{ link.url }}">{{ link.title }}</a>
@@ -281,17 +284,6 @@
     {%- if left_menu !=blank or right_menu != blank or main_menu != blank -%}
       <nav class="mobileMenu__wrapper">
         <ul class="mobileMenu__list">
-          {%- if main_menu != blank -%}
-            {%- render 'mobile-menu', menu: main_menu, section: section -%}
-          {%- endif -%}
-
-          {%- if left_menu != blank -%}
-            {%- render 'mobile-menu', menu: left_menu, section: section -%}
-          {%- endif -%}
-
-          {%- if right_menu != blank -%}
-            {%- render 'mobile-menu', menu: right_menu, section: section -%}
-          {%- endif -%}
 
           {%- if show_search != false -%}
             <li class="mobileMenu__item">
@@ -309,6 +301,17 @@
             </li>
           {%- endif -%}
 
+          {%- if main_menu != blank -%}
+            {%- render 'mobile-menu', menu: main_menu, section: section -%}
+          {%- endif -%}
+
+          {%- if left_menu != blank -%}
+            {%- render 'mobile-menu', menu: left_menu, section: section -%}
+          {%- endif -%}
+
+          {%- if right_menu != blank -%}
+            {%- render 'mobile-menu', menu: right_menu, section: section -%}
+          {%- endif -%}
         </ul>
       </nav>
     {%- endif -%}

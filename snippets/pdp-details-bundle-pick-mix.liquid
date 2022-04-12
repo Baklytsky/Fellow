@@ -50,6 +50,21 @@
         </div>
       </div>
       {% if tagline != blank %}<div class='pdp__tagline'>{{ tagline }}</div>{% endif %}
+     
+       <afterpay-placement 
+         data-intro-text="Pay in"
+         data-logo-type="badge"
+         data-show-with="true"
+         data-badge-theme="black-on-mint"
+         data-size="sm"
+         data-type="price-paragraph"
+         data-is-eligible="true"
+         data-locale="en_US"
+         data-modal-link-style="circled-info-icon"
+         data-amount="{{ current_variant.price | money | remove: '.00' }}"
+         data-modal-theme="white" class="mb1 mt1 hidden-md-down">
+     </afterpay-placement>
+      
       <div class="pdp__reviews mb1 mt1">
         {%- assign reviews_count = product.metafields.yotpo.reviews_count | plus: 0 -%}
         {%- if reviews_count > 0 -%}
@@ -81,24 +96,26 @@
           {% endif %}
       </div>
     </div>
+  <afterpay-placement 
+         data-intro-text="Or"
+         data-logo-type="lockup"
+         data-show-with="false"
+         data-lockup-theme="black"
+         data-size="sm"
+         data-type="price-paragraph"
+         data-is-eligible="true"
+         data-locale="en_US"
+         data-modal-link-style="none"
+         data-show-upper-limit="false"
+         data-amount="{{ current_variant.price | money | remove: '.00' }}"
+         data-modal-theme="white" class="mb1 mt1 hidden-lg-up">
+     </afterpay-placement>
 
     {%- if product.metafields.custom_fields["bundle_product"] != blank -%}
       {% include 'pdp-details-form-bundle-pick-mix' %}
     {%- else -%}
       {% include 'pdp-details-form-bundle' %}
     {%- endif -%}
- {% if product.price_max >= 50 %}
-  <div class="pdpBadges">
-      <div class="pdpBadges-item f {% if item["product_badge_learn_more_link"] != blank %}jcb{% else %}jcc{% endif %} aic">
-        <div class="pdpBadges-item-content f aic">
-              {% comment %} Shop Pay Snippet {% endcomment %}
-      <div data-shop-pay class="shop-pay">
-        {{ form | payment_terms }}
-      </div>
-        </div>
-      </div>
-  </div>
-{% endif %}
   {% endform %}
 
     {% include 'pdp-badges' %}

@@ -50,7 +50,7 @@ textarea {
 }
 
 .text-align-right {
- text-align:right; 
+ text-align:right;
 }
 
 .fill,
@@ -17376,8 +17376,8 @@ body.is-masthead--empty main {
     justify-content: flex-start;
   }
 }
-    
-    
+
+
 
 .footer__col {
   margin-bottom: 25px;
@@ -17385,8 +17385,8 @@ body.is-masthead--empty main {
   padding-right: 30px;
 }
 
-    
-    
+
+
 @media screen and (min-width: 992px) {
   .footer__col {
     margin-left: 30px;
@@ -17555,13 +17555,15 @@ body.is-masthead--empty main {
 @media screen and (max-width: 991.98px) {
   .footer__payment-icons ul {
     gap: .4rem;
-    grid-template-columns: repeat(6, 38px)
+    grid-template-columns: repeat(6, 38px);
+      justify-content: center;
   }
 
   .footer svg {
     max-width: 120px;
     margin-bottom: 0;
   }
+  
 }
 
 .cart-drawer-outer {
@@ -17667,7 +17669,7 @@ body.is-masthead--empty main {
 
 .cart-drawer__items-outer {
   flex: 1 1 auto;
-  overflow-y: auto;
+  /*overflow-y: auto;*/
   padding: 15px 22px;
 }
 
@@ -17795,7 +17797,7 @@ body.is-masthead--empty main {
   text-transform: none;
   font-weight: 400;
 }
-    
+
     .cart-drawer__itemOptions > a {
   font-weight: 500;
       text-decoration: underline;
@@ -18393,8 +18395,8 @@ button.button--ghost:focus {
     color: #fff;
     border-color: transparent
   }
-  
- 
+
+
 }
 
 .btn--clear {
@@ -18605,7 +18607,7 @@ textarea {
 
 .radio-group[data-option-color] label:not(:last-child) .radio__title,
 .radio-group[data-option-material] label:not(:last-child) .radio__title {
-  margin-right: 20px
+  margin-right: 16px
 }
 
 .radio-group[data-option-color] .radio__title,
@@ -18678,20 +18680,28 @@ textarea {
   border-color: rgba(35, 31, 32, .75)
 }
 
-.radio-group:not([data-option-color]):not([data-option-material]) {
+.radio-group:not([data-option-color]):not([data-option-material]):not([data-option-size]) {
   flex-wrap: wrap;
   margin-top: -1rem;
   margin-left: -1rem
 }
 
-.radio-group:not([data-option-color]):not([data-option-material]) label {
-  padding-top: 1rem;
-  padding-left: 1rem
+.pdp__sticky-options-item .radio-group:not([data-option-color]):not([data-option-material]) {
+  margin: 0;
 }
 
-.radio-group:not([data-option-color]):not([data-option-material]) label.radio__label-size-image {
+.pdp__sticky-options-item .radio-group:not([data-option-color]):not([data-option-material]):not(.radio-group-size) { margin: -8px; }
+
+.pdp__sticky-options-item .radio-group:not([data-option-color]):not([data-option-material]):not(.radio-group-size) .radio { margin: 8px; }
+
+.radio-group:not([data-option-color]):not([data-option-material]):not([data-option-size]) label {
+  margin-top: 1rem;
+  margin-left: 1rem
+}
+
+.radio-group:not([data-option-color]):not([data-option-material]):not([data-option-size]) label.radio__label-size-image {
   padding-top: 16px;
-  padding-left: 16px
+  padding-left: 16px;
 }
 
 .radio-group:not([data-option-color]):not([data-option-material]) .radio__title {
@@ -18699,18 +18709,24 @@ textarea {
   padding: 0 1rem;
   width: 100%;
   justify-content: center;
-  height: 31px;
   outline: auto;
-  background-color: #e7e8e6;
-  color: #000;
+  background-color: #f5f5f5;
+  color: #ABABAB;
   cursor: pointer;
-  text-align: center;
-  font-size: .66rem;
-  text-transform: uppercase;
+  text-align: left;
+  font-size: 14px;
+  line-height: 1;
   letter-spacing: normal;
   transition: all var(--slow) var(--ease);
   outline: none !important;
+  padding: 12px 16px;
 }
+
+.radio-group:not([data-option-color]):not([data-option-material]) input:checked + .radio__title,
+.radio-group:not([data-option-color]):not([data-option-material]) .checked .radio__title {
+  color: #000;
+}
+
 
 .radio-group:not([data-option-color]):not([data-option-material]) .radio__title-size-image {
   height: auto;
@@ -18722,8 +18738,8 @@ textarea {
 @media screen and (max-width: 991.98px) {
   .radio-group:not([data-option-color]):not([data-option-material]) .radio__title {
     height: 29px;
-    font-size: .75rem;
-    font-weight: 600
+    font-size: 1rem;
+    font-weight: 400
   }
 
   .radio-group:not([data-option-color]):not([data-option-material]) .radio__title-size-image {
@@ -18738,15 +18754,34 @@ textarea {
   display: none
 }
 
-.radio-group:not([data-option-color]):not([data-option-material]) input:checked+.radio__title {
+/*.radio-group:not([data-option-color]):not([data-option-material]) input:checked+.radio__title {
   outline: 1px solid #000;
   background-color: #000;
   color: #fff
+}*/
+
+.radio-group[data-option-quantity] input:checked+.radio__title,
+.radio-group[data-option-burrs] input:checked+.radio__title,
+.pdp__sticky-options-item .radio-group:not([data-option-color]):not([data-option-material]):not([data-option-size]) .radio.checked {
+  position: relative;
+  color: #000;
+}
+.radio-group[data-option-quantity] input:checked+.radio__title:after,
+.radio-group[data-option-burrs] input:checked+.radio__title:after,
+.pdp__sticky-options-item .radio-group:not([data-option-color]):not([data-option-material]):not([data-option-size]) .radio.checked:after {
+  content: '';
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  bottom: -4px;
+  left: -4px;
+  border: 2px solid #E5E5E5;
+  border-radius: 4px;
 }
 
 [data-disabled-size="true"] .radio-group:not([data-option-color]):not([data-option-material]) input:checked+.radio__title {
   outline: auto;
-  background-color: #e7e8e6;
+  background-color: #F5F5F5;
   color: #000;
 }
 
@@ -18884,7 +18919,7 @@ textarea {
   margin: 0;
 }
 
-	#PdpErrorMessage,
+  #PdpErrorMessage,
 #PdpUpsellErrorMessage {
   display: none;
   margin-top: 16px;
@@ -19850,7 +19885,7 @@ h3.productCard__title {
 .productCard .h4,
 .productCard .drawerItem__title {
   margin-top: 0;
-  margin-bottom: 0
+  margin-bottom: 0;
 }
 
 .productCard .productCard__details h3,
@@ -20287,7 +20322,7 @@ h3.productCard__title {
   padding-top: 8px;
   text-decoration: none;
 }
-    
+
 
 
 .cart-recommended__add-button {
@@ -20531,7 +20566,7 @@ h3.productCard__title {
 
 @media screen and (max-width:991.98px) {
   .hero__slide img {
-    touch-action: none;
+    /*touch-action: none;*/
     height: 375px;
     -o-object-fit: cover;
     object-fit: cover
@@ -20655,7 +20690,7 @@ h3.productCard__title {
   .hero__ctaSubtext {
     margin-top: 1rem;
     margin-bottom: 0;
-    text-align: center
+    text-align: left;
   }
 }
 
@@ -22813,11 +22848,6 @@ input[name=product_search_field] {
   padding-bottom: .875rem
 }
     
-.shop-pay {
-  font-size: 14px;
-  font-weight: 500;
-}
-        
     
 .pdpMain__images {
   display: block;
@@ -23374,7 +23404,7 @@ html {
 [data-material=stone-blue-walnut]:after {
   color: #977459
 }
-    
+
     [data-color=stone-blue-maple],
 [data-material=stone-blue-maple] {
   color: #2B3C4D
@@ -23384,7 +23414,7 @@ html {
 [data-material=stone-blue-maple]:after {
   color: #edc890
 }
-    
+
         [data-color=matte-white-maple],
 [data-material=matte-white-maple] {
   color: #FFFFFF

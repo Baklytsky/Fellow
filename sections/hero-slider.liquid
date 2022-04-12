@@ -1,5 +1,12 @@
+{%- assign _blocks = section.blocks -%}
+{%- assign init_slider = false -%}
+
+{%- if _blocks.size > 1 -%}
+  {%- assign init_slider = true -%}
+{%- endif -%}
+
 <div class='hero__module f fw jcc aic rel z2 x{% if section.settings.addMargin == true %} is-marginBottom{% endif %}' data-component='heroSlider'>
-  <div class='hero__slider x y' data-heroSlider>
+  <div class='hero__slider x y'{% if init_slider %} data-heroSlider{% else %} style="opacity: 1; visibility: visible;"{% endif %}>
     {%- assign aspect_ratio = blank -%}
     {% for block in section.blocks %}
       {% assign header = block.settings.heroSlide__header %}
