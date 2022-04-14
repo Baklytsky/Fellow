@@ -1050,7 +1050,7 @@ button {
   width: 100%;
   height: 100%;
   object-position: center;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .image-abs-contain {
@@ -7988,5 +7988,574 @@ ul.pdp_details__feature_list > li {
   
   .radio-group[data-option-burrs] label {
     padding-left: 0;
+  }
+}
+
+/* ------------------------------------------------------------ *\
+  Coffe Marketplase Page
+\* ------------------------------------------------------------ */
+.cmHeading {
+  margin: 0;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 100%;
+  color: inherit;
+
+  @media screen and (max-width: $tablet) {
+    font-size: 42px;
+  }
+}
+
+.cmDescription {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 120%;
+
+  @media screen and (max-width: $tablet) {
+    font-size: 18px;
+  }
+}
+
+/* -----------Coffe Marketplase Hero Section------------------- */
+
+.cmHero {
+  margin: calc(var(--header-height) + 45px) auto 0;
+  max-width: 1374px;
+
+  @media screen and (max-width: $tablet) {
+    margin: 0 auto;
+  }
+}
+
+.cmHero__wrapper {
+  min-height: 310px;
+  padding: 45px 33px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media screen and (max-width: $tablet) {
+    min-height: unset;
+    padding: 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.cmHero__wrapper--left {
+  justify-content: flex-start;
+
+  @media screen and (max-width: $tablet) {
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.cmHero__wrapper--right {
+  justify-content: flex-end;
+
+  @media screen and (max-width: $tablet) {
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.cmHero__imageWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  @media screen and (max-width: $tablet) {
+    position: relative;
+    top: unset;
+    left: unset;
+    height: 240px;
+  }
+}
+
+.cmHero__contentWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 680px;
+  padding: 40px;
+  text-align: center;
+  z-index: 1;
+
+  @media screen and (max-width: $tablet) {
+    max-width: 100%;
+    padding: 32px 16px;
+  }
+}
+
+.cmHero__contentHeading {
+  margin: 0;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 100%;
+  color: inherit;
+
+  @media screen and (max-width: $tablet) {
+    font-size: 33px;
+  }
+}
+
+.cmHero__contentDescription {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 120%;
+  color: inherit;
+  margin: 8px 0 0;
+
+  @media screen and (max-width: $tablet) {
+    font-size: 16px;
+    line-height: 130%;
+  }
+}
+
+/* -----------Coffe Marketplase Cards Section------------------- */
+
+.cmCards {
+  margin: 0 auto;
+  max-width: 1440px;
+  padding: 40px 33px 14px;
+  color: #000;
+  text-align: center;
+
+  @media screen and (max-width: $tablet) {
+    text-align: left;
+    padding: 36px 0 40px;
+  }
+}
+
+.cmCards__description {
+  max-width: 910px;
+  margin: 24px auto 0;
+
+  @media screen and (max-width: $tablet) {
+    margin: 16px auto 0;
+  }
+}
+
+.cmCards__heading,
+.cmCards__description {
+  @media screen and (max-width: $tablet) {
+    padding: 0 16px;
+  }
+}
+
+.cmCards__listWrapper {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  @media screen and (max-width: $tablet) {
+    overflow-x: scroll;
+  }
+}
+
+.cmCards__list {
+  width: calc(100% + 26px);
+  margin: 40px -13px 0;
+  display: flex;
+  flex-wrap: wrap;
+
+  @media screen and (max-width: $tablet) {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    margin: 32px 8px 0;
+    flex-wrap: nowrap;
+  }
+}
+
+.cmCards__listItem {
+  width: 100%;
+  max-width: calc(100% / 3);
+  padding: 0 13px 26px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media screen and (max-width: $tablet) {
+    width: 79.5vw;
+    padding: 0 4px;
+    max-width: unset;
+    align-items: flex-start;
+  }
+}
+
+.cmCards__listItemImage {
+  width: 100%;
+  padding-top: 54.5%;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  display: block;
+  overflow: hidden;
+
+  @media screen and (max-width: $tablet) {
+    padding-top: 79.5%;
+  }
+}
+
+.cmCards__listItemHeading {
+  margin: 0 0 5px;
+  font-family: $font-base;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 120%;
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.cmCards__listItemDescription {
+  margin: 0;
+  font-size: 16px;
+}
+
+/* -----------Coffe Marketplase Products Section------------------- */
+
+.cmProducts {
+  margin: 0 auto;
+  max-width: 1440px;
+  padding: 40px 33px 16px;
+  color: #000;
+
+  @media screen and (max-width: $tablet) {
+    padding: 40px 16px 24px;
+  }
+}
+
+.cmProducts__description {
+  margin-top: 24px;
+}
+
+.cmProducts__heading,
+.cmProducts__description {
+  max-width: 560px;
+}
+
+.cmProducts__wrapper {
+  width: calc(100% + 24px);
+  margin: 16px -12px 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+}
+
+.cmProducts__card {
+  width: 100%;
+  max-width: 25%;
+  padding: 24px 12px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  @media screen and (max-width: $large_desk) {
+    max-width: 50%;
+  }
+
+  @media screen and (max-width: $mobile) {
+    max-width: 100%;
+    padding: 16px 12px;
+  }
+}
+
+.cmProducts__cardImage {
+  width: 100%;
+  padding-top: 100%;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  overflow: hidden;
+  background-color: #F5F5F5;
+}
+
+.cmProducts__image {
+  width: 100%;
+  padding-top: 170%;
+  height: inherit;
+  flex-grow: 1;
+  border-radius: 12px;
+  overflow: hidden;
+
+  @media screen and (max-width: $mobile) {
+    padding-top: 131%;
+  }
+}
+
+.cmProducts__cardVendor {
+  margin: 0 0 12px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  .cmProducts__cardOptions {
+    font-size: 22px;
+    white-space: nowrap;
+  }
+
+  @media screen and (max-width: $mobile) {
+    margin: 0 0 8px;
+    font-size: 18px;
+  }
+}
+
+.cmProducts__cardTitle {
+  margin: 0 0 12px;
+  height: 68px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* number of lines to show */
+  -webkit-box-orient: vertical;
+
+  a {
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 100%;
+    text-decoration: none;
+
+    @media screen and (max-width: $mobile) {
+      font-size: 28px;
+    }
+  }
+
+  @media screen and (max-width: $mobile) {
+    height: auto;
+    -webkit-line-clamp: 4; /* number of lines to show */
+  }
+}
+
+.cmProducts__cardOptions.cmProducts__cardText {
+  @media screen and (max-width: $mobile) {
+    font-size: 18px;
+  }
+}
+
+.cmProducts__cardText,
+.cmProducts__cardHeading {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 120%;
+}
+
+.cmProducts__cardHeading {
+  font-weight: 600;
+}
+
+.cmProducts__cardNotes {
+  margin-top: 20px;
+
+  .cmProducts__cardNotesItem {
+    &:not(:first-child) {
+      @media screen and (max-width: $mobile) {
+        display: none;
+      }
+    }
+  }
+}
+
+.cmProducts__cardNotesItem {
+  border-top: 1px solid #ABABAB;
+  border-bottom: 1px solid #ABABAB;
+  margin-top: -1px;
+  padding: 12px 0;
+
+  @media screen and (max-width: $mobile) {
+    padding: 8px 0;
+  }
+}
+
+.cmProducts__cardNotesItemTitle {
+  font-family: $font-base;
+  margin: 0 0 4px;
+
+  @media screen and (max-width: $mobile) {
+    margin: 0 0 8px;
+  }
+}
+
+.cmProducts__cardNotesItemText {
+  margin: 0;
+}
+
+.cmProducts__cardBtn {
+  display: none;
+  .button {
+    max-width: 100%;
+    margin: 24px 0 0;
+    padding: 16px;
+    font-family: $font-base;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+    text-align: center;
+    text-transform: capitalize;
+  }
+
+  @media screen and (max-width: $mobile) {
+    display: block;
+  }
+}
+
+/* -----------Coffe Marketplase IWT Section------------------- */
+
+.cmIWT {
+  margin: 0 auto;
+  max-width: 1440px;
+  padding: 40px 33px 25px;
+  color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+
+  @media screen and (max-width: $tablet) {
+    padding: 30px 16px 40px;
+  }
+
+  @media screen and (max-width: $mobile) {
+    padding: 30px 16px 40px;
+    flex-direction: column;
+  }
+}
+
+.cmIWT__image {
+  width: 49%;
+  padding-top: 38%;
+
+  @media screen and (max-width: $mobile) {
+    width: 100%;
+    padding-top: 81%;
+  }
+}
+
+.cmIWT__content {
+  width: 51%;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  @media screen and (max-width: $mobile) {
+    width: 100%;
+    padding: 16px 0 0;
+    align-items: revert;
+    text-align: left;
+  }
+}
+
+.cmIWT__contentDescription {
+  width: 100%;
+  max-width: 560px;
+  margin: 24px 0 0;
+
+  @media screen and (max-width: $tablet) {
+    margin: 16px 0 0;
+  }
+}
+
+.cmIWT__button {
+  margin-top: 24px;
+  font-size: 18px;
+  padding: 16px;
+
+  @media screen and (max-width: $tablet) {
+    margin: 16px 0 0;
+  }
+
+  @media screen and (max-width: $mobile) {
+    max-width: 100%;
+  }
+}
+
+.cmIWT__image--right {
+  flex-direction: row-reverse;
+
+  .cmIWT__content {
+    align-items: flex-end;
+    text-align: right;
+
+    @media screen and (max-width: $tablet) {
+      text-align: left;
+    }
+  }
+}
+
+/* -----------Coffe Marketplase TWB Section------------------- */
+
+.cmTWB__wrapper {
+  margin: 0 auto;
+  max-width: 1440px;
+  padding: 65px 33px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  @media screen and (max-width: $tablet) {
+    padding: 65px 16px;
+  }
+}
+
+.cmTWB__preHeading,
+.cmTWB__heading,
+.cmTWB__description {
+  color: inherit;
+}
+
+.cmTWB__preHeading {
+  margin: 0 0 8px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 120%;
+}
+
+.cmTWB__heading {
+  margin: 0 0 24px;
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 100%;
+}
+
+.cmTWB__description {
+  width: 100%;
+  max-width: 600px;
+  margin: 0;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 120%;
+}
+
+.cmTWB__button {
+  margin: 24px 0 0;
+  font-size: 18px;
+  padding: 16px;
+
+  @media screen and (max-width: $mobile) {
+    max-width: 100%;
+  }
+}
+
+.cmTWB__button.btn--white {
+  color: #000;
+  background-color: #fff;
+  border-color: #fff;
+
+  &:hover {
+    color: #fff;
+    background-color: transparent;
+    border-color: #fff;
   }
 }

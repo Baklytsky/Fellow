@@ -1,0 +1,97 @@
+{%- assign heading = section.settings.heading -%}
+{%- assign description = section.settings.description -%}
+{%- assign cta_text = section.settings.cta_text -%}
+{%- assign cta_link = section.settings.cta_link -%}
+{%- assign image = section.settings.image -%}
+{%- assign image_position = section.settings.image_position -%}
+
+{%- if heading != blank or description != blank or cta_text != blank or image != blank -%}
+  <section class="cmIWT cmIWT__image--{{ image_position }}">
+    {%- if image != blank -%}
+      <div class="cmIWT__image rel">
+        {% render 'image', image: image, class_name: 'image-abs-contain', alt: heading, %}
+      </div>
+    {%- endif -%}
+    {%- if heading != blank or description != blank or cta_text != blank -%}
+      <div class="cmIWT__content">
+        {%- if heading != blank -%}
+          <h2 class="cmIWT__contentHeading m0 cmHeading">
+            {{ heading }}
+          </h2>
+        {%- endif -%}
+        {%- if description != blank -%}
+          <p class="cmIWT__contentDescription cmDescription">
+            {{ description }}
+          </p>
+        {%- endif -%}
+        {%- if cta_text != blank and cta_link != blank -%}
+          <a href="{{ cta_link }}" class="btn btn--lg btn--dark cmIWT__button">
+            {{ cta_text | escape }}
+          </a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Marketplace Image & Text",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Text settings"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA text"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA link"
+    },
+    {
+      "type": "header",
+      "content": "Image settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "image"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image position",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marketplace Image & Text"
+    }
+  ]
+}
+{% endschema %}

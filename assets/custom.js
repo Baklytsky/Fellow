@@ -2418,6 +2418,22 @@ theme.GLOBAL = function () {
     theme.searchPage();
   }
 
+  if ($('.cmProducts__card').length) {
+    $(document).on('click', '[data-marketplace-atc]', function (e) {
+      e.preventDefault();
+      $.ajax({
+        type: 'POST',
+        url: '/cart/add.js',
+        data: $(this).parents('form').serialize(),
+        dataType: 'json',
+        success: function() {
+          CartDrawer.emit("cart:updating");
+          UpdateCart('', '', true)
+        }
+      })
+    })
+  }
+
   /* Video play & pause button */
 
   $(document).on('click', '.mute-video', function () {

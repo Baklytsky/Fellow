@@ -1,0 +1,49 @@
+{% comment %}
+{% render 'marketplace-card', product: , class_name: , order: , uniq_id:  %}
+{% endcomment %}
+
+<div class="cmProducts__card {{ class_name }}" style="order: {{ order }}">
+  <a href="{{ product.url }}" class="cmProducts__cardImage rel">
+    {% render 'image', image: product.featured_image, class_name: 'image-abs-cover', %}
+  </a>
+  <div class="cmProducts__cardVendor">
+    {{ product.vendor }}
+    <span class="cmProducts__cardOptions hide-desktop">
+      {% render 'marketplace-card-options', product: product, show_price: true, show_options: false %}
+    </span>
+  </div>
+  <h4 class="cmProducts__cardTitle">
+    <a href="{{ product.url }}">{{ product.title }}</a>
+  </h4>
+  <span class="cmProducts__cardOptions cmProducts__cardText hide-mobile">
+    {% render 'marketplace-card-options', product: product, show_price: true, show_options: true %}
+  </span>
+  <span class="cmProducts__cardOptions cmProducts__cardText hide-desktop">
+    {% render 'marketplace-card-options', product: product, show_price: false, show_options: true %}
+  </span>
+  <ul class="cmProducts__cardNotes">
+    {%- for i in (1..4) -%}
+      {%- assign note_title_i = 'product_note_' | append: i | append: '_title'-%}
+      {%- assign note_text_i = 'product_note_' | append: i | append: '_text'-%}
+      {%- assign title = product.metafields.my_fields[note_title_i] -%}
+      {%- assign text = product.metafields.my_fields[note_text_i] -%}
+
+      {%- if title != blank and text != blank -%}
+        <li class="cmProducts__cardNotesItem">
+          {%- if title != blank -%}
+            <h4 class="cmProducts__cardNotesItemTitle cmProducts__cardHeading">
+              {{ title }}
+            </h4>
+          {%- endif -%}
+          {%- if text != blank -%}
+            <p class="cmProducts__cardNotesItemText cmProducts__cardText">
+              {{ text }}
+            </p>
+          {%- endif -%}
+        </li>
+      {%- endif -%}
+
+    {%- endfor -%}
+  </ul>
+  {% render 'marketplace-card-form', product: product, %}
+</div>

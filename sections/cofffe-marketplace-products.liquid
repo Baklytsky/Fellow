@@ -1,0 +1,128 @@
+{%- if section.blocks.size > 0 -%}
+  <section class="cmProducts">
+    {%- for block in section.blocks -%}
+      {%- assign heading = block.settings.heading -%}
+      {%- assign description = block.settings.description -%}
+      {%- assign product_list = block.settings.product_list -%}
+
+      {%- if heading != blank -%}
+        <h3 class="cmProducts__heading cmHeading">{{ heading | newline_to_br }}</h3>
+      {%- endif -%}
+      {%- if description != blank -%}
+        <div class="cmProducts__description cmDescription">{{ description | newline_to_br }}</div>
+      {%- endif -%}
+
+      {%- if product_list != blank -%}
+        <div class="cmProducts__wrapper">
+
+          {%- for i in (1..4) -%}
+            {%- assign id = 'lifestyle_image_' | append: i -%}
+            {%- assign order = 'lifestyle_image_order_' | append: i -%}
+            {%- assign lifestyle_image = block.settings[id] -%}
+            {%- assign lifestyle_image_order = block.settings[order] | default: 100 -%}
+
+            {%- if lifestyle_image != blank -%}
+              <div class="cmProducts__card rel" style="order: {{ lifestyle_image_order }}">
+                <div class="cmProducts__image rel">
+                  {% render 'image', image: lifestyle_image, class_name: 'image-abs-cover',  %}
+                </div>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+
+          {%- for product in product_list -%}
+            {%- assign uniq_id = 'marketplaceAdd' | append: product.id | append: '-' | append: forloop.index -%}
+            {% render 'marketplace-card', product: product, order: forloop.index, uniq_id: uniq_id %}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+    {%- endfor -%}
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Marketplace Products",
+  "blocks": [
+    {
+      "type": "product-module",
+      "name": "Product Module",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Text settings"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description"
+        },
+        {
+          "type": "product_list",
+          "id": "product_list",
+          "label": "Products"
+        },
+        {
+          "type": "header",
+          "content": "lifestyle images"
+        },
+        {
+          "type": "image_picker",
+          "id": "lifestyle_image_1",
+          "label": "Lifestyle image (1)"
+        },
+        {
+          "type": "number",
+          "id": "lifestyle_image_order_1",
+          "label": "Lifestyle image order (1)",
+          "default": 100
+        },
+        {
+          "type": "image_picker",
+          "id": "lifestyle_image_2",
+          "label": "Lifestyle image (2)"
+        },
+        {
+          "type": "number",
+          "id": "lifestyle_image_order_2",
+          "label": "Lifestyle image order (2)",
+          "default": 100
+        },
+        {
+          "type": "image_picker",
+          "id": "lifestyle_image_3",
+          "label": "Lifestyle image (3)"
+        },
+        {
+          "type": "number",
+          "id": "lifestyle_image_order_3",
+          "label": "Lifestyle image order (3)",
+          "default": 100
+        },
+        {
+          "type": "image_picker",
+          "id": "lifestyle_image_4",
+          "label": "Lifestyle image (4)"
+        },
+        {
+          "type": "number",
+          "id": "lifestyle_image_order_4",
+          "label": "Lifestyle image order (4)",
+          "default": 100
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marketplace Products"
+    }
+  ]
+}
+{% endschema %}

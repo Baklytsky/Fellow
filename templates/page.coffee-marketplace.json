@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "main": {
+      "type": "coffee-marketplace-hero",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
