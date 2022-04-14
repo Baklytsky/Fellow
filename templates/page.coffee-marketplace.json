@@ -3,10 +3,113 @@
     "main": {
       "type": "coffee-marketplace-hero",
       "settings": {
+        "desktop_image": "shopify:\/\/shop_images\/Rectangle_1653.jpg",
+        "mobile_image": "shopify:\/\/shop_images\/Rectangle_1653_1.jpg",
+        "heading": "Kenyan Spring Coffee",
+        "description": "lorem ipsum\nlorem ipsum\nlorem ipsum",
+        "text_block_position": "center",
+        "text_color": "#000000",
+        "text_block_bg_color": "#ffffff"
+      }
+    },
+    "1649840683b4aca1fd": {
+      "type": "cofffe-marketplace-cards",
+      "blocks": {
+        "980fc03d-bb80-45a7-be3d-e8bed8fb49cd": {
+          "type": "Card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Rectangle_1659.jpg",
+            "heading": "Grower",
+            "description": "Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem.",
+            "link": "shopify:\/\/blogs\/brew-guides"
+          }
+        },
+        "37239fc0-3d35-4c42-8cc3-261e6aeaae47": {
+          "type": "Card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Rectangle_1660.jpg",
+            "heading": "Roaster",
+            "description": "Pellentesque in ipsum id orci porta dapibus.",
+            "link": ""
+          }
+        },
+        "e9b69308-60b2-46e6-a220-1411f94fe034": {
+          "type": "Card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Rectangle_1661.jpg",
+            "heading": "Blur about how Fellow",
+            "description": "Mauris blandit aliquet elit, eget tincidunt.",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "980fc03d-bb80-45a7-be3d-e8bed8fb49cd",
+        "37239fc0-3d35-4c42-8cc3-261e6aeaae47",
+        "e9b69308-60b2-46e6-a220-1411f94fe034"
+      ],
+      "settings": {
+        "heading": "Fellow’s Unique Selection Process",
+        "description": "Hand-picked coffees from some of the best roasters in the world. Meticulously chosen, tasted, and road-tested with Fellow gear by our expert brewing team."
+      }
+    },
+    "16498420281a16a067": {
+      "type": "cofffe-marketplace-products",
+      "blocks": {
+        "df05ea85-22e9-46dc-8bf5-74d3d746e418": {
+          "type": "product-module",
+          "settings": {
+            "heading": "Kenyan Spring Coffee",
+            "description": "Hand-picked coffees from some of the best roasters in the world. Meticulously chosen, tasted, and road-tested with Fellow gear by our expert brewing team.",
+            "product_list": [
+              "colombia-el-progreso-washed",
+              "ethiopia-chelbesa-natural-12oz",
+              "tropical-weather"
+            ],
+            "lifestyle_image_1": "shopify:\/\/shop_images\/image_1.jpg",
+            "lifestyle_image_order_1": 100,
+            "lifestyle_image_order_2": 100,
+            "lifestyle_image_order_3": 100,
+            "lifestyle_image_order_4": 100
+          }
+        }
+      },
+      "block_order": [
+        "df05ea85-22e9-46dc-8bf5-74d3d746e418"
+      ],
+      "settings": {
+      }
+    },
+    "16499352731248f01a": {
+      "type": "cofffe-marketplace-iwt",
+      "settings": {
+        "heading": "Kenyan Spring Coffee",
+        "description": "Hand-picked coffees from some of the best roasters in the world. Meticulously chosen, tasted, and road-tested with Fellow gear by our expert brewing team.",
+        "cta_text": "read more",
+        "cta_link": "shopify:\/\/blogs\/learn\/onyx-x-fellow-brew-master-class-weekend",
+        "image": "shopify:\/\/shop_images\/Image_74b01459-d177-4b9b-b145-fa7dfac3b203.png",
+        "image_position": "left"
+      }
+    },
+    "1649944546d9b124de": {
+      "type": "cofffe-marketplace-twb",
+      "settings": {
+        "bg_color": "#7C2918",
+        "text_color": "#FFFFFF",
+        "pre_heading": "Next Up:",
+        "heading": "Colombian Fall Flavors",
+        "description": "Hand-picked coffees from some of the best roasters in the world. Meticulously chosen, tasted, and road-tested with Fellow gear by our expert brewing team.",
+        "cta_text": "Sign Up for Updates",
+        "cta_link": "#",
+        "cta_style": "white"
       }
     }
   },
   "order": [
-    "main"
+    "main",
+    "1649840683b4aca1fd",
+    "16498420281a16a067",
+    "16499352731248f01a",
+    "1649944546d9b124de"
   ]
 }
