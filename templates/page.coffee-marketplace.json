@@ -13,7 +13,7 @@
       }
     },
     "1649840683b4aca1fd": {
-      "type": "cofffe-marketplace-cards",
+      "type": "coffee-marketplace-cards",
       "blocks": {
         "980fc03d-bb80-45a7-be3d-e8bed8fb49cd": {
           "type": "Card",
@@ -54,7 +54,7 @@
       }
     },
     "16498420281a16a067": {
-      "type": "cofffe-marketplace-products",
+      "type": "coffee-marketplace-products",
       "blocks": {
         "df05ea85-22e9-46dc-8bf5-74d3d746e418": {
           "type": "product-module",
@@ -81,7 +81,7 @@
       }
     },
     "16499352731248f01a": {
-      "type": "cofffe-marketplace-iwt",
+      "type": "coffee-marketplace-iwt",
       "settings": {
         "heading": "Kenyan Spring Coffee",
         "description": "Hand-picked coffees from some of the best roasters in the world. Meticulously chosen, tasted, and road-tested with Fellow gear by our expert brewing team.",
@@ -92,7 +92,7 @@
       }
     },
     "1649944546d9b124de": {
-      "type": "cofffe-marketplace-twb",
+      "type": "coffee-marketplace-twb",
       "settings": {
         "bg_color": "#7C2918",
         "text_color": "#FFFFFF",
