@@ -8203,7 +8203,7 @@ ul.pdp_details__feature_list > li {
   overflow: hidden;
 
   @media screen and (max-width: $tablet) {
-    padding-top: 79.5%;
+    padding-top: 83%;
   }
 }
 
@@ -8222,6 +8222,7 @@ ul.pdp_details__feature_list > li {
 .cmCards__listItemDescription {
   margin: 0;
   font-size: 16px;
+  line-height: 21px;
 }
 
 /* -----------Coffe Marketplase Products Section------------------- */
@@ -8237,8 +8238,17 @@ ul.pdp_details__feature_list > li {
   }
 }
 
+.cmProducts__heading {
+  @media screen and (max-width: $tablet) {
+    font-size: 33px;
+  }
+}
+
 .cmProducts__description {
   margin-top: 24px;
+  @media screen and (max-width: $tablet) {
+    margin-top: 16px;
+  }
 }
 
 .cmProducts__heading,
@@ -8290,7 +8300,7 @@ ul.pdp_details__feature_list > li {
   overflow: hidden;
 
   @media screen and (max-width: $mobile) {
-    padding-top: 131%;
+    padding-top: 128%;
   }
 }
 
@@ -8303,6 +8313,7 @@ ul.pdp_details__feature_list > li {
   justify-content: space-between;
 
   .cmProducts__cardOptions {
+    font-family: $font-header;
     font-size: 22px;
     white-space: nowrap;
   }
