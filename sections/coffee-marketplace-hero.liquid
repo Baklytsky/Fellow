@@ -31,9 +31,9 @@
       {%- if heading != blank or description != blank -%}
         <div class="cmHero__contentWrapper" style="color: {{ text_color }}; background-color: {{ text_block_bg_color }};">
           {%- if heading != blank -%}
-            <h2 class="cmHero__contentHeading">
+            <h1 class="cmHero__contentHeading">
               {{ heading | newline_to_br }}
-            </h2>
+            </h1>
           {%- endif -%}
           {%- if description != blank -%}
             <p class="cmHero__contentDescription">

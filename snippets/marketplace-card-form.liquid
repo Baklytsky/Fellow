@@ -1,5 +1,5 @@
 {% comment %}
-{% render 'marketplace-card-form', product: , %}
+{% render 'marketplace-card-form', product: , uniq_id: , %}
 {% endcomment %}
 
 {% capture dataProductForm %}
@@ -7,8 +7,10 @@
 {% endcapture %}
 
 {% form 'product', product, data-product-form: dataProductForm %}
-  <input class="is-hidden" type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}"/>
-  <input class="is-hidden" min="1" type="number" id="quantity" name="quantity" value="1"/>
+  <label for="{{ uniq_id }}-id" class="is-hidden">id</label>
+  <input class="is-hidden" id="{{ uniq_id }}-id" type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}"/>
+  <label for="{{ uniq_id }}-quantity" class="is-hidden">quantity</label>
+  <input class="is-hidden" min="1" type="number" id="{{ uniq_id }}-quantity" name="quantity" value="1"/>
 
 {%- assign hasPreorderTag = false -%}
   {%- if product.tags contains 'preorder' -%}
@@ -16,7 +18,8 @@
   {%- endif -%}
 
   {%- if product.selected_or_first_available_variant.metafields.my_fields.preorder or hasPreorderTag -%}
-    <input type="hidden" data-preorder="true" name="properties[pre-order]" value="true">
+    <label for="{{ uniq_id }}-pre-order" class="is-hidden">pre-order</label>
+    <input type="hidden" data-preorder="true" id="{{ uniq_id }}-pre-order" name="properties[pre-order]" value="true">
   {%- endif -%}
 
   <div class="cmProducts__cardBtn">

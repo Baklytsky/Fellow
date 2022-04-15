@@ -4,7 +4,7 @@
 {%- if heading != blank or description != blank or section.blocks.size > 0 -%}
   <section class="cmCards">
     {%- if heading != blank -%}
-      <h3 class="cmCards__heading cmHeading">{{ heading }}</h3>
+      <h2 class="cmCards__heading cmHeading">{{ heading }}</h2>
     {%- endif -%}
     {%- if description != blank -%}
       <p class="cmCards__description cmDescription">{{ description }}</p>
@@ -32,13 +32,13 @@
                   {%- endif -%}
                 {%- endif -%}
                 {%- if heading != blank -%}
-                  <h4 class="cmCards__listItemHeading">
+                  <h3 class="cmCards__listItemHeading">
                     {%- if link != blank -%}
                       <a href="{{ link }}">{{ heading | newline_to_br }}</a>
                     {%- else -%}
                       {{ heading | newline_to_br }}
                     {%- endif -%}
-                  </h4>
+                  </h3>
                 {%- endif -%}
                 {%- if description != blank -%}
                   <p class="cmCards__listItemDescription">
