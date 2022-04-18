@@ -19,7 +19,11 @@
             {%- assign id = 'lifestyle_image_' | append: i -%}
             {%- assign order = 'lifestyle_image_order_' | append: i -%}
             {%- assign lifestyle_image = block.settings[id] -%}
-            {%- assign lifestyle_image_order = block.settings[order] | default: 100 -%}
+            {%- assign lifestyle_image_order = block.settings[order] -%}
+
+            {%- if lifestyle_image_order < 1 -%}
+              {%- assign lifestyle_image_order = 100 -%}
+            {%- endif -%}
 
             {%- if lifestyle_image != blank -%}
               <div class="cmProducts__card rel" style="order: {{ lifestyle_image_order }}">
@@ -80,8 +84,7 @@
         {
           "type": "number",
           "id": "lifestyle_image_order_1",
-          "label": "Lifestyle image order (1)",
-          "default": 100
+          "label": "Lifestyle image order (1)"
         },
         {
           "type": "image_picker",
@@ -91,8 +94,7 @@
         {
           "type": "number",
           "id": "lifestyle_image_order_2",
-          "label": "Lifestyle image order (2)",
-          "default": 100
+          "label": "Lifestyle image order (2)"
         },
         {
           "type": "image_picker",
@@ -102,8 +104,7 @@
         {
           "type": "number",
           "id": "lifestyle_image_order_3",
-          "label": "Lifestyle image order (3)",
-          "default": 100
+          "label": "Lifestyle image order (3)"
         },
         {
           "type": "image_picker",
@@ -113,8 +114,7 @@
         {
           "type": "number",
           "id": "lifestyle_image_order_4",
-          "label": "Lifestyle image order (4)",
-          "default": 100
+          "label": "Lifestyle image order (4)"
         }
       ]
     }
