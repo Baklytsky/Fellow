@@ -16,8 +16,8 @@
       {% comment %}
         Product is available and on sale
       {% endcomment %}
-      <span class="ml1 rel strike">{{ product.compare_at_price | money }}</span>
-      <span class="card__price--sale ml1">{{ product.price | money }}</span>
+      <span class="rel strike">{{ product.compare_at_price | money }}</span>
+      <span class="card__price--sale ml05">{{ product.price | money }}</span>
     {% else %}
       {% comment %}
         Product is available and not on sale
