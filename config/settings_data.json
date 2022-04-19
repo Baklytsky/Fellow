@@ -268,6 +268,22 @@
               "title_4": "",
               "url_4": ""
             }
+          },
+          "5eddb719-5b0d-490f-9055-2a74fe76d53a": {
+            "type": "sub_menu",
+            "settings": {
+              "target": "mothers-day-gifts",
+              "image_1": "shopify:\/\/shop_images\/87A3122.jpg",
+              "title_1": "Shop Mom's Favorites",
+              "url_1": "shopify:\/\/collections\/mothers-day",
+              "image_2": "shopify:\/\/shop_images\/ModuleImage_1_Module_2_256x256_eee54b00-a890-440f-99e8-2857174230f7.webp",
+              "title_2": "Starter Kits + Bundles",
+              "url_2": "shopify:\/\/collections\/coffee-products-kits-bundles",
+              "title_3": "",
+              "url_3": "",
+              "title_4": "",
+              "url_4": ""
+            }
           }
         },
         "block_order": [
@@ -281,7 +297,8 @@
           "4e4fd786-95a7-414f-8e51-d76b8ad921cb",
           "89a2c721-dfe0-4b4d-a289-0aa84be363f8",
           "ae1f64c0-e3cd-4973-a1f8-951b8ea29882",
-          "53d5318d-237f-4dd8-a68d-dff2daa5f0ce"
+          "53d5318d-237f-4dd8-a68d-dff2daa5f0ce",
+          "5eddb719-5b0d-490f-9055-2a74fe76d53a"
         ],
         "settings": {
           "logo": "shopify:\/\/shop_images\/Fellow-Logo-black.png",
@@ -292,8 +309,8 @@
           "menu_left": "new-left-menu-1",
           "menu_right": "new-right-menu",
           "show_announcement": true,
-          "announcement_text": "Buy now, pay later with Afterpay on orders $50 or more.",
-          "announcement_link": "shopify:\/\/collections\/bestsellers",
+          "announcement_text": "Shop our Mother’s Day collection 🎁",
+          "announcement_link": "shopify:\/\/collections\/mothers-day",
           "enable_timer": false,
           "end_date": "Sep 30, 2021 07:30:00 GMT-08:00"
         }
@@ -385,15 +402,15 @@
             "type": "splitSlide",
             "settings": {
               "splitSlide__layout": "right",
-              "heroSlide": "shopify:\/\/shop_images\/Ode_Takeover_1_880x654__2x_972afd1e-060d-4004-97b6-d8f85b8a45e6.jpg",
+              "heroSlide": "shopify:\/\/shop_images\/Clara_Takeover_880x654__2x_5f7c6bbd-2518-47e7-b557-91ee86f2b89f.png",
               "desktopAlignment": "center",
               "mobileAlignment": "center",
-              "heroSlide__header": "What’s In Your Ode?",
-              "heroSlide__subheader": "Two burr choices, no wrong answers.  Pick the best to suit your needs.",
-              "subSlide__bgColor": "#c1dbd2",
+              "heroSlide__header": "Hot Off The (French) Press",
+              "heroSlide__subheader": "Clara was just named Best New Product by the Specialty Coffee Association.",
+              "subSlide__bgColor": "#f7f2e8",
               "subSlide__textColor": "#231f20",
-              "heroSlide__ctaURL": "shopify:\/\/products\/ode-brew-grinder",
-              "heroSlide__ctaCopy": "Shop Ode Brew Grinder",
+              "heroSlide__ctaURL": "shopify:\/\/products\/clara-french-press",
+              "heroSlide__ctaCopy": "Shop Clara",
               "heroSlide__ctaColor": "black",
               "heroSlide__ctaSubtext": ""
             }
@@ -574,14 +591,14 @@
         "type": "hp-iwt",
         "settings": {
           "enable_section": true,
-          "image": "shopify:\/\/shop_images\/MapleKettles_module_1.png",
+          "image": "shopify:\/\/shop_images\/87A4253.jpg",
           "layout": "left",
-          "header": "Lighten up",
-          "description": "<p>New Stagg EKGs with warm maple accents. Pour-over precision, designed for the home.<\/p>",
+          "header": "C is for Carter",
+          "description": "<p>The coffee mug for when your hands are full. <\/p>",
           "bg_color": "",
           "text_color": "#000000",
-          "cta_url": "shopify:\/\/products\/stagg-ekg-electric-pour-over-kettle",
-          "cta_copy": "Pick Your Kettle",
+          "cta_url": "shopify:\/\/collections\/serve",
+          "cta_copy": "Shop Drinkware",
           "cta_color": "btn--dark"
         }
       },
@@ -765,12 +782,13 @@
       },
       "1636101715cd2df3c8": {
         "type": "hp-iwt",
+        "disabled": true,
         "settings": {
           "enable_section": true,
           "image": "shopify:\/\/shop_images\/Product_Feature_Module_-_Mostly_Filter_Kits_1__2x_cda365cf-bcce-4e01-b788-e236f631a958.png",
           "layout": "left",
           "header": "Refill here",
-          "description": "<p>Don’t run out when you’re running out.  Get more filters and a Carter Move Mug  in one convenient kit.<\/p>",
+          "description": "<p>Don’t run out when you’re running out. Get more filters and a Carter Move Mug in one convenient kit.<\/p>",
           "bg_color": "",
           "text_color": "",
           "cta_url": "shopify:\/\/products\/mostly-filters",
@@ -858,6 +876,7 @@
       },
       "16497034024471c77e": {
         "type": "hp-iwt",
+        "disabled": true,
         "settings": {
           "enable_section": true,
           "image": "shopify:\/\/shop_images\/Coffee_Marketplace_780x618_Product_Feature_1.jpg",
@@ -878,9 +897,9 @@
       "1629968785d9d2e1c7",
       "1648464189e55630c9",
       "162997622949d3f8ee",
-      "1636101715cd2df3c8",
       "164970109872b4e7fa",
       "1630052841314f69dd",
+      "1636101715cd2df3c8",
       "16391832269c232690",
       "16497034024471c77e",
       "163005286553dd2458",
