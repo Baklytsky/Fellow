@@ -1,8 +1,8 @@
 {% comment %}
-{% render 'marketplace-card', product: , class_name: , order: , uniq_id:  %}
+{% render 'marketplace-card', product: , class_name: , block: , uniq_id:  %}
 {% endcomment %}
 
-<div class="cmProducts__card {{ class_name }}" style="order: {{ order }}">
+<div class="cmProducts__card {{ class_name }}">
   <a href="{{ product.url }}" class="cmProducts__cardImage rel">
     {% render 'image', image: product.featured_image, class_name: 'image-abs-cover', %}
   </a>
@@ -23,21 +23,21 @@
   </span>
   <ul class="cmProducts__cardNotes">
     {%- for i in (1..4) -%}
-      {%- assign note_title_i = 'product_note_' | append: i | append: '_title'-%}
-      {%- assign note_text_i = 'product_note_' | append: i | append: '_text'-%}
-      {%- assign title = product.metafields.my_fields[note_title_i] -%}
-      {%- assign text = product.metafields.my_fields[note_text_i] -%}
+      {%- assign note_title_i = 'title_' | append: i -%}
+      {%- assign note_description_i = 'description_' | append: i -%}
+      {%- assign title = block.settings[note_title_i] -%}
+      {%- assign description = block.settings[note_description_i] -%}
 
-      {%- if title != blank and text != blank -%}
+      {%- if title != blank and description != blank -%}
         <li class="cmProducts__cardNotesItem">
           {%- if title != blank -%}
             <h4 class="cmProducts__cardNotesItemTitle cmProducts__cardHeading">
               {{ title }}
             </h4>
           {%- endif -%}
-          {%- if text != blank -%}
+          {%- if description != blank -%}
             <p class="cmProducts__cardNotesItemText cmProducts__cardText">
-              {{ text }}
+              {{ description }}
             </p>
           {%- endif -%}
         </li>
