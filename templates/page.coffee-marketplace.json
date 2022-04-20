@@ -56,28 +56,116 @@
     "16498420281a16a067": {
       "type": "coffee-marketplace-products",
       "blocks": {
-        "df05ea85-22e9-46dc-8bf5-74d3d746e418": {
-          "type": "product-module",
+        "fcbb17ec-c2dc-4d8b-992b-aa16901fb4bf": {
+          "type": "product",
           "settings": {
-            "heading": "Kenyan Spring Coffee",
-            "description": "Hand-picked coffees from some of the best roasters in the world. Meticulously chosen, tasted, and road-tested with Fellow gear by our expert brewing team.",
-            "product_list": [
-              "colombia-el-progreso-washed",
-              "ethiopia-chelbesa-natural-12oz",
-              "tropical-weather"
-            ],
-            "lifestyle_image_1": "shopify:\/\/shop_images\/image_1.jpg",
-            "lifestyle_image_order_1": 100,
-            "lifestyle_image_order_2": 100,
-            "lifestyle_image_order_3": 100,
-            "lifestyle_image_order_4": 100
+            "product": "colombia-el-progreso-washed",
+            "title_1": "Roaster",
+            "description_1": "Brandywine Roaster from Delaware",
+            "title_2": "Producer",
+            "description_2": "Pablo Emmanuel, Guji Region, Ethiopia",
+            "title_3": "Tasting Notes",
+            "description_3": "Milk Chocolate, Toasted Nut, Sweet Vanilla",
+            "title_4": "You",
+            "description_4": "Lower caffeine level ideal afternon coffee"
+          }
+        },
+        "24b67844-2869-47e9-93c0-77c55aac9ff9": {
+          "type": "product",
+          "settings": {
+            "product": "ethiopia-chelbesa-natural-12oz",
+            "title_1": "Roaster",
+            "description_1": "Brandywine Roaster from Delaware",
+            "title_2": "Producer",
+            "description_2": "Pablo Emmanuel, Guji Region, Ethiopia",
+            "title_3": "Tasting Notes",
+            "description_3": "Milk Chocolate, Toasted Nut, Sweet Vanilla",
+            "title_4": "You",
+            "description_4": "Lower caffeine level ideal afternon coffee"
+          }
+        },
+        "82d439e9-77de-464a-a126-25f3f98339e3": {
+          "type": "product",
+          "settings": {
+            "product": "tropical-weather",
+            "title_1": "Roaster",
+            "description_1": "Brandywine Roaster from Delaware",
+            "title_2": "Producer",
+            "description_2": "Pablo Emmanuel, Guji Region, Ethiopia",
+            "title_3": "Tasting Notes",
+            "description_3": "Milk Chocolate, Toasted Nut, Sweet Vanilla",
+            "title_4": "You",
+            "description_4": "Lower caffeine level ideal afternon coffee"
+          }
+        },
+        "9d06b070-f3ca-4e0d-8757-57636dbf56e5": {
+          "type": "lifestyle-image",
+          "settings": {
+            "lifestyle_image": "shopify:\/\/shop_images\/image_1.jpg"
+          }
+        },
+        "f8fe6aed-480e-4bbf-935e-4e2c4d5b8336": {
+          "type": "product",
+          "settings": {
+            "product": "carter-move-mug",
+            "title_1": "Roaster",
+            "description_1": "Brandywine Roaster from Delaware",
+            "title_2": "Roaster",
+            "description_2": "Brandywine Roaster from Delaware",
+            "title_3": "Roaster",
+            "description_3": "Brandywine Roaster from Delaware",
+            "title_4": "",
+            "description_4": ""
+          }
+        },
+        "7b754bd9-9709-465b-8f19-d5276e124a78": {
+          "type": "product",
+          "settings": {
+            "product": "carter-move-lid",
+            "title_1": "Roaster",
+            "description_1": "Brandywine Roaster from Delaware",
+            "title_2": "Roaster",
+            "description_2": "Brandywine Roaster from Delaware",
+            "title_3": "",
+            "description_3": "",
+            "title_4": "",
+            "description_4": ""
+          }
+        },
+        "aac9a6f9-a2db-4cdd-a433-7174a1f1c13d": {
+          "type": "lifestyle-image",
+          "settings": {
+            "lifestyle_image": "shopify:\/\/shop_images\/Product_Feature_Module_-_Mostly_Filter_Kits_2__2x_9a4caf4f-99b8-4a4b-bdb5-dd8c33cd3264.png"
+          }
+        },
+        "e359671b-5d10-4f24-a29b-dc59697a71d8": {
+          "type": "product",
+          "settings": {
+            "product": "carter-everywhere-mug",
+            "title_1": "Roaster",
+            "description_1": "Brandywine Roaster from Delaware",
+            "title_2": "Roaster",
+            "description_2": "Brandywine Roaster from Delaware",
+            "title_3": "Roaster",
+            "description_3": "Brandywine Roaster from Delaware",
+            "title_4": "Roaster",
+            "description_4": "Brandywine Roaster from Delaware"
           }
         }
       },
       "block_order": [
-        "df05ea85-22e9-46dc-8bf5-74d3d746e418"
+        "fcbb17ec-c2dc-4d8b-992b-aa16901fb4bf",
+        "24b67844-2869-47e9-93c0-77c55aac9ff9",
+        "82d439e9-77de-464a-a126-25f3f98339e3",
+        "9d06b070-f3ca-4e0d-8757-57636dbf56e5",
+        "f8fe6aed-480e-4bbf-935e-4e2c4d5b8336",
+        "7b754bd9-9709-465b-8f19-d5276e124a78",
+        "aac9a6f9-a2db-4cdd-a433-7174a1f1c13d",
+        "e359671b-5d10-4f24-a29b-dc59697a71d8"
       ],
       "settings": {
+        "heading": "Kenyan Spring Coffee",
+        "description": "Hand-picked coffees from some of the best roasters in the world. Meticulously chosen, tasted, and road-tested with Fellow gear by our expert brewing team.Hand-picked coffees from some of the best roasters in the world. Meticulously chosen, tasted, and road-tested with Fellow gear by our expert brewing team."
       }
     },
     "16499352731248f01a": {
@@ -94,13 +182,13 @@
     "1649944546d9b124de": {
       "type": "coffee-marketplace-twb",
       "settings": {
-        "bg_color": "#7C2918",
-        "text_color": "#FFFFFF",
+        "bg_color": "#7c2918",
+        "text_color": "#ffffff",
         "pre_heading": "Next Up:",
         "heading": "Colombian Fall Flavors",
         "description": "Hand-picked coffees from some of the best roasters in the world. Meticulously chosen, tasted, and road-tested with Fellow gear by our expert brewing team.",
         "cta_text": "Sign Up for Updates",
-        "cta_link": "#",
+        "cta_link": "",
         "cta_style": "white"
       }
     }
