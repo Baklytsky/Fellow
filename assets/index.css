@@ -18919,8 +18919,9 @@ textarea {
   margin: 0;
 }
 
-  #PdpErrorMessage,
-#PdpUpsellErrorMessage {
+#PdpErrorMessage,
+#PdpUpsellErrorMessage,
+.PdpErrorMessage {
   display: none;
   margin-top: 16px;
   font-family: "Inter", sans-serif;
@@ -21333,16 +21334,21 @@ h3.productCard__title {
 
 @media screen and (min-width: 1200px) {
   .relatedProducts__row-wrapper {
-    overflow: hidden;
-    width: 100%
+    overflow-x: scroll;
+    width: 100vw
   }
   .relatedProducts__row {
-    width: auto;
-    margin-left: -24px
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    margin-left: -24px;
+    margin-top: -24px;
+    padding: 0 34px;
   }
   .relatedProducts__item {
     padding-left: 24px;
-    width: 25%
+    padding-top: 24px;
+    width: 25vw;
   }
 }
 

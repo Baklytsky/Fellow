@@ -10,7 +10,7 @@
 
         <div class="relatedProducts__row-wrapper rel">
           <div class='f jcs fdr one-fourth relatedProducts__row'>
-            {% for related_product_handle in related_products_handles limit: 4 %}
+            {% for related_product_handle in related_products_handles limit: 6 %}
               {% assign related_product = all_products[related_product_handle] %}
               {%- if related_product != blank -%}
                 <div class="relatedProducts__item">
