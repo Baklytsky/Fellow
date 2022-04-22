@@ -1,6 +1,10 @@
 {%- assign current_variant = product.selected_or_first_available_variant -%}
 {%- assign featured_image = current_variant.featured_image | default: product.featured_image -%}
 
+{%- comment -%}
+  {{ event.extra.checkout_url}}
+{%- endcomment -%}
+
 <div class='gtm-pdp' data-component='product'>
   {% include 'product-head' %}
   {%- comment -%}

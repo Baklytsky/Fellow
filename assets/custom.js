@@ -2519,4 +2519,45 @@ theme.GLOBAL = function () {
     $(this).parent().find(".play-button").removeClass('hidden').fadeIn()
     $(this).parent().find(".pause-button").fadeOut()
   });
+
+  //Klaviyo Cart Builder
+
+  if (window.location.href.indexOf("klaviyo-cart-builder") > 0) {
+    let stringWithParams = window.location.href.split('?klaviyo-cart-builder-start=').pop().split('klaviyo-cart-builder-end')[0],
+        parsedStringWithParams = stringWithParams.split('~~~~'),
+        klaviyoAddData = [];
+
+    $(parsedStringWithParams).each(function (i, paramsString) {
+      if (paramsString.length) {
+        let productParams = paramsString.split('~~');
+        let prop = '';
+        if (productParams[2] && productParams[2].length) {
+          let propString = decodeURIComponent(productParams[2]),
+              parsedPropString = propString.split('[').pop().split(']')[0];
+              prop = eval('(' + parsedPropString + ')');
+        }
+        klaviyoAddData.push({
+          id: productParams[0],
+          quantity: productParams[1],
+          properties: prop
+        })
+      }
+    })
+
+    console.log(klaviyoAddData)
+
+    if (klaviyoAddData.length) {
+      $.ajax({
+        type: 'post',
+        url: '/cart/add.js',
+        data: {items: klaviyoAddData},
+        dataType: 'json',
+        success: function () {
+          UpdateCart('', '', true)
+          // update the URL
+          history.pushState(null, "", '/');
+        }
+      })
+    }
+  }
 }
