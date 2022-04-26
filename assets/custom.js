@@ -2525,39 +2525,64 @@ theme.GLOBAL = function () {
   if (window.location.href.indexOf("klaviyo-cart-builder") > 0) {
     let stringWithParams = window.location.href.split('?klaviyo-cart-builder-start=').pop().split('klaviyo-cart-builder-end')[0],
         parsedStringWithParams = stringWithParams.split('~~~~'),
+        klaviyoProducts = [],
         klaviyoAddData = [];
 
-    $(parsedStringWithParams).each(function (i, paramsString) {
-      if (paramsString.length) {
-        let productParams = paramsString.split('~~');
-        let prop = '';
-        if (productParams[2] && productParams[2].length) {
-          let propString = decodeURIComponent(productParams[2]),
-              parsedPropString = propString.split('[').pop().split(']')[0];
-              prop = eval('(' + parsedPropString + ')');
-        }
-        klaviyoAddData.push({
-          id: productParams[0],
-          quantity: productParams[1],
-          properties: prop
-        })
-      }
-    })
+    // Get cart data
 
-    console.log(klaviyoAddData)
+    let cartData = fetch('/cart.js')
+            .then(response => response.json())
+            .then(data => { return data });
 
-    if (klaviyoAddData.length) {
-      $.ajax({
-        type: 'post',
-        url: '/cart/add.js',
-        data: {items: klaviyoAddData},
-        dataType: 'json',
-        success: function () {
-          UpdateCart('', '', true)
-          // update the URL
-          history.pushState(null, "", '/');
+    cartData.then((cart) => {
+
+      // Get products from klaviyo link
+
+      $(parsedStringWithParams).each(function (i, paramsString) {
+        if (paramsString.length) {
+          let productParams = paramsString.split('~~');
+          let prop = '';
+          if (productParams[2] && productParams[2].length) {
+            let propString = decodeURIComponent(productParams[2]),
+                parsedPropString = propString.split('[').pop().split(']')[0];
+            prop = eval('(' + parsedPropString + ')');
+          }
+          klaviyoProducts.push({
+            id: productParams[0],
+            quantity: productParams[1],
+            properties: prop
+          })
         }
       })
-    }
+
+      // Compare products in the card with the products from klaviyo
+
+      $(klaviyoProducts).each((i, product) => {
+        let productInCart = false;
+        $(cart.items).each((i, lineItem) => {
+          if ((lineItem.id.toString() === product.id.toString()) && (JSON.stringify(lineItem.properties) === JSON.stringify(product.properties))) {
+            productInCart = true;
+          }
+        })
+        if (!productInCart) klaviyoAddData.push(product)
+      })
+      console.log(klaviyoAddData)
+    }).then(() => {
+      if (klaviyoAddData.length) {
+        $.ajax({
+          type: 'post',
+          url: '/cart/add.js',
+          data: {items: klaviyoAddData},
+          dataType: 'json',
+          success: function () {
+            UpdateCart('', '', true)
+            // update the URL
+            history.pushState(null, "", '/');
+          }
+        })
+      } else {
+        history.pushState(null, "", '/');
+      }
+    })
   }
 }
