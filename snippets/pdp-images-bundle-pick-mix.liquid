@@ -104,7 +104,7 @@
           <div class='pdpMain__bundle-image abs x y f aic'
                data-variant-media='{{ product.selected_or_first_available_variant }}' style="visibility: visible">
             {%- if badge_text != blank -%}
-              <span class="productCard__badge abs z3 xsmall cb bg-xlightgrey">{{ badge_text }}</span>
+              <span class="productCard__badge abs z3 xsmall cb bg-xlightgrey" style="display:none;">{{ badge_text }}</span>
             {%- endif -%}
             <img src="{{ product.featured_image | img_url: '900x' }}" class='x' alt='{{ product.title }}' role='img' loading='lazy'/>
           </div>
