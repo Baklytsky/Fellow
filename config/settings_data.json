@@ -253,6 +253,37 @@
               "title_4": "",
               "url_4": ""
             }
+          },
+          "53d5318d-237f-4dd8-a68d-dff2daa5f0ce": {
+            "type": "sub_menu",
+            "settings": {
+              "target": "personalize",
+              "image_1": "shopify:\/\/shop_images\/Shop-Personalization.jpg",
+              "title_1": "Shop Personalization",
+              "url_1": "shopify:\/\/collections\/personalization",
+              "title_2": "",
+              "url_2": "",
+              "title_3": "",
+              "url_3": "",
+              "title_4": "",
+              "url_4": ""
+            }
+          },
+          "5eddb719-5b0d-490f-9055-2a74fe76d53a": {
+            "type": "sub_menu",
+            "settings": {
+              "target": "mothers-day-gifts",
+              "image_1": "shopify:\/\/shop_images\/87A3122.jpg",
+              "title_1": "Shop Mom's Favorites",
+              "url_1": "shopify:\/\/collections\/mothers-day",
+              "image_2": "shopify:\/\/shop_images\/ModuleImage_1_Module_2_256x256_eee54b00-a890-440f-99e8-2857174230f7.webp",
+              "title_2": "Starter Kits + Bundles",
+              "url_2": "shopify:\/\/collections\/coffee-products-kits-bundles",
+              "title_3": "",
+              "url_3": "",
+              "title_4": "",
+              "url_4": ""
+            }
           }
         },
         "block_order": [
@@ -265,7 +296,9 @@
           "9d051490-e4a2-42fc-aff7-458f600203d6",
           "4e4fd786-95a7-414f-8e51-d76b8ad921cb",
           "89a2c721-dfe0-4b4d-a289-0aa84be363f8",
-          "ae1f64c0-e3cd-4973-a1f8-951b8ea29882"
+          "ae1f64c0-e3cd-4973-a1f8-951b8ea29882",
+          "53d5318d-237f-4dd8-a68d-dff2daa5f0ce",
+          "5eddb719-5b0d-490f-9055-2a74fe76d53a"
         ],
         "settings": {
           "logo": "shopify:\/\/shop_images\/Fellow-Logo-black.png",
@@ -276,8 +309,8 @@
           "menu_left": "new-left-menu-1",
           "menu_right": "new-right-menu",
           "show_announcement": true,
-          "announcement_text": "Buy now, pay later with Afterpay on orders $50 or more.",
-          "announcement_link": "shopify:\/\/collections\/bestsellers",
+          "announcement_text": "Shop our Mother’s Day collection 🎁",
+          "announcement_link": "shopify:\/\/collections\/mothers-day",
           "enable_timer": false,
           "end_date": "Sep 30, 2021 07:30:00 GMT-08:00"
         }
@@ -369,16 +402,16 @@
             "type": "splitSlide",
             "settings": {
               "splitSlide__layout": "right",
-              "heroSlide": "shopify:\/\/shop_images\/Hero_Module_Image_Sustaining_1.jpg",
+              "heroSlide": "shopify:\/\/shop_images\/Clara_Takeover_880x654__2x_5f7c6bbd-2518-47e7-b557-91ee86f2b89f.png",
               "desktopAlignment": "center",
               "mobileAlignment": "center",
-              "heroSlide__header": "Blue Steel",
-              "heroSlide__subheader": "Meet the ridiciously good looking new Carter hue. Now available in every size and style.",
-              "subSlide__bgColor": "#2b3c4d",
-              "subSlide__textColor": "#FFFFFF",
-              "heroSlide__ctaURL": "shopify:\/\/collections\/stone-blue",
-              "heroSlide__ctaCopy": "Shop Stone Blue",
-              "heroSlide__ctaColor": "white",
+              "heroSlide__header": "Hot Off The (French) Press",
+              "heroSlide__subheader": "Clara was just named Best New Product by the Specialty Coffee Association.",
+              "subSlide__bgColor": "#f7f2e8",
+              "subSlide__textColor": "#231f20",
+              "heroSlide__ctaURL": "shopify:\/\/products\/clara-french-press",
+              "heroSlide__ctaCopy": "Shop Clara",
+              "heroSlide__ctaColor": "black",
               "heroSlide__ctaSubtext": ""
             }
           },
@@ -387,15 +420,15 @@
             "disabled": true,
             "settings": {
               "splitSlide__layout": "right",
-              "heroSlide": "shopify:\/\/shop_images\/Bundle-Launch-GIF_a97be00c-acf3-4b07-a306-583dbd6fb3b3.gif",
+              "heroSlide": "shopify:\/\/shop_images\/Personalization-Hero-Module-Image.png",
               "desktopAlignment": "center",
               "mobileAlignment": "center",
-              "heroSlide__header": "You Brew You",
-              "heroSlide__subheader": "Introducing four new brewing kits to take you to the next stage in your coffee journey. Choose your own colors and save.",
-              "subSlide__bgColor": "#f5f5f5",
+              "heroSlide__header": "Sip into something more personal",
+              "heroSlide__subheader": "Personalize any style and size Carter. Uncompromised coffee, unquestionably yours.",
+              "subSlide__bgColor": "#f7f2e8",
               "subSlide__textColor": "#231f20",
-              "heroSlide__ctaURL": "shopify:\/\/collections\/coffee-products-kits-bundles",
-              "heroSlide__ctaCopy": "Shop The Kits",
+              "heroSlide__ctaURL": "shopify:\/\/collections\/personalization",
+              "heroSlide__ctaCopy": "Personalize Now",
               "heroSlide__ctaColor": "black",
               "heroSlide__ctaSubtext": ""
             }
@@ -558,14 +591,14 @@
         "type": "hp-iwt",
         "settings": {
           "enable_section": true,
-          "image": "shopify:\/\/shop_images\/MapleKettles_module_1.png",
+          "image": "shopify:\/\/shop_images\/87A4253.jpg",
           "layout": "left",
-          "header": "Lighten Up",
-          "description": "<p>New Stagg EKGs with warm maple accents. Pour-over precision, designed for the home.<\/p>",
+          "header": "C is for Carter",
+          "description": "<p>The coffee mug for when your hands are full. <\/p>",
           "bg_color": "",
           "text_color": "#000000",
-          "cta_url": "shopify:\/\/collections\/kettles",
-          "cta_copy": "Pick Your Kettle",
+          "cta_url": "shopify:\/\/collections\/serve",
+          "cta_copy": "Shop Drinkware",
           "cta_color": "btn--dark"
         }
       },
@@ -647,25 +680,25 @@
           "243f1fe7-12cb-4b51-b5ac-6897c8af25d9": {
             "type": "article",
             "settings": {
-              "article": "learn\/which-carter-are-you"
+              "article": "learn\/personalized-carter-ideas"
             }
           },
           "b89badb0-2f13-4dfd-b834-29780dfc72cd": {
             "type": "article",
             "settings": {
-              "article": "learn\/how-to-play-wormy-on-your-electric-kettle"
+              "article": "learn\/northern-lights-drop"
             }
           },
           "3b78c804-955a-454f-b8d7-af7b4271d9a4": {
             "type": "article",
             "settings": {
-              "article": "learn\/how-to-brew-iced-coffee-at-home"
+              "article": "brew-guides\/back-to-brewing-school-pour-over-basics-101"
             }
           },
           "8034bca3-6535-40a1-83ce-613a916266d4": {
             "type": "article",
             "settings": {
-              "article": "brew-guides\/the-classic-clara-french-press-recipe"
+              "article": "learn\/which-carter-are-you"
             }
           }
         },
@@ -749,16 +782,17 @@
       },
       "1636101715cd2df3c8": {
         "type": "hp-iwt",
+        "disabled": true,
         "settings": {
           "enable_section": true,
-          "image": "shopify:\/\/shop_images\/Module_Northern_Lights__2x_6e343ab0-3904-4edd-8af6-30c4a24ee563.png",
-          "layout": "right",
-          "header": "Northern Lights",
-          "description": "<p>A product company, a roaster, and an astrophotographer walk into an Icelandic bar...<\/p>",
+          "image": "shopify:\/\/shop_images\/Product_Feature_Module_-_Mostly_Filter_Kits_1__2x_cda365cf-bcce-4e01-b788-e236f631a958.png",
+          "layout": "left",
+          "header": "Refill here",
+          "description": "<p>Don’t run out when you’re running out. Get more filters and a Carter Move Mug in one convenient kit.<\/p>",
           "bg_color": "",
           "text_color": "",
-          "cta_url": "shopify:\/\/blogs\/learn\/northern-lights-drop",
-          "cta_copy": "Learn More",
+          "cta_url": "shopify:\/\/products\/mostly-filters",
+          "cta_copy": "Shop Mostly Filters",
           "cta_color": "btn--dark"
         }
       },
@@ -772,7 +806,7 @@
           "enable_section": true,
           "image": "shopify:\/\/shop_images\/Coffee_Marketplace_780x618_Product_Feature_1.jpg",
           "layout": "right",
-          "header": "Seasonal Tasting Menu",
+          "header": "Seasonal tasting menu",
           "description": "<p>We’ve curated a selection of our favorite coffees from some of the best roasters in the world right now.<\/p>",
           "bg_color": "",
           "text_color": "",
@@ -824,6 +858,37 @@
           "form_heading": "JOIN FELLOW DROPS:",
           "form_description": "*Free to join. Message and data rates may apply.  Reply STOP to opt-out anytime"
         }
+      },
+      "164970109872b4e7fa": {
+        "type": "hp-iwt",
+        "settings": {
+          "enable_section": true,
+          "image": "shopify:\/\/shop_images\/Homepage-Module_Bundle.gif",
+          "layout": "right",
+          "header": "Freshly bloomed",
+          "description": "<p>Discover colorful new bundles with curated coffee included.<\/p>",
+          "bg_color": "",
+          "text_color": "",
+          "cta_url": "shopify:\/\/collections\/coffee-products-kits-bundles",
+          "cta_copy": "Shop Kits + Bundles",
+          "cta_color": "btn--dark"
+        }
+      },
+      "16497034024471c77e": {
+        "type": "hp-iwt",
+        "disabled": true,
+        "settings": {
+          "enable_section": true,
+          "image": "shopify:\/\/shop_images\/Coffee_Marketplace_780x618_Product_Feature_1.jpg",
+          "layout": "left",
+          "header": "Seasonal tasting menu",
+          "description": "<p>We’ve curated a selection of our favorite coffees from some of the best roasters in the world right now.<\/p>",
+          "bg_color": "",
+          "text_color": "",
+          "cta_url": "shopify:\/\/collections\/coffee",
+          "cta_copy": "Shop Coffee",
+          "cta_color": "btn--dark"
+        }
       }
     },
     "content_for_index": [
@@ -832,9 +897,11 @@
       "1629968785d9d2e1c7",
       "1648464189e55630c9",
       "162997622949d3f8ee",
-      "1636101715cd2df3c8",
+      "164970109872b4e7fa",
       "1630052841314f69dd",
+      "1636101715cd2df3c8",
       "16391832269c232690",
+      "16497034024471c77e",
       "163005286553dd2458",
       "16342252676e2388c3",
       "1630069783d5517455",
