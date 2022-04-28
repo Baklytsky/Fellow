@@ -2541,7 +2541,7 @@ theme.GLOBAL = function () {
       $(parsedStringWithParams).each(function (i, paramsString) {
         if (paramsString.length) {
           let productParams = paramsString.split('~~');
-          let prop = '';
+          let prop = {};
           if (productParams[2] && productParams[2].length) {
             let propString = decodeURIComponent(productParams[2]),
                 parsedPropString = propString.split('[').pop().split(']')[0];
