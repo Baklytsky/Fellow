@@ -246,8 +246,9 @@
               "image_1": "shopify:\/\/shop_images\/Brew-Bar-Hero-Module-Image.jpg",
               "title_1": "Shop All",
               "url_1": "shopify:\/\/collections\/all-products",
-              "title_2": "",
-              "url_2": "",
+              "image_2": "shopify:\/\/shop_images\/112421_Atmos_Navigation-2Up.jpg",
+              "title_2": "Shop Atmos",
+              "url_2": "shopify:\/\/products\/atmos-vacuum-canister",
               "title_3": "",
               "url_3": "",
               "title_4": "",
@@ -309,8 +310,8 @@
           "menu_left": "new-left-menu-1",
           "menu_right": "new-right-menu",
           "show_announcement": true,
-          "announcement_text": "Shop our Mother’s Day collection 🎁",
-          "announcement_link": "shopify:\/\/collections\/mothers-day",
+          "announcement_text": "Limited Time - Spend $200, Get a free 10 oz bag of coffee. Use code:<u style=\"margin-left:1ch;\">COFFEEPLEASE<\/u>",
+          "announcement_link": "shopify:\/\/collections\/bestsellers",
           "enable_timer": false,
           "end_date": "Sep 30, 2021 07:30:00 GMT-08:00"
         }
@@ -400,6 +401,7 @@
           },
           "1f457594-c59c-4edd-800a-a9f7662f319e": {
             "type": "splitSlide",
+            "disabled": true,
             "settings": {
               "splitSlide__layout": "right",
               "heroSlide": "shopify:\/\/shop_images\/Clara_Takeover_880x654__2x_5f7c6bbd-2518-47e7-b557-91ee86f2b89f.png",
@@ -417,20 +419,19 @@
           },
           "3e0796bc-698b-4618-80b6-261185f9fb1a": {
             "type": "splitSlide",
-            "disabled": true,
             "settings": {
               "splitSlide__layout": "right",
-              "heroSlide": "shopify:\/\/shop_images\/Personalization-Hero-Module-Image.png",
+              "heroSlide": "shopify:\/\/shop_images\/Fellow_Atmos_LindseySheaFinals-1_rt_v01_OT_1.jpg",
               "desktopAlignment": "center",
               "mobileAlignment": "center",
-              "heroSlide__header": "Sip into something more personal",
-              "heroSlide__subheader": "Personalize any style and size Carter. Uncompromised coffee, unquestionably yours.",
-              "subSlide__bgColor": "#f7f2e8",
+              "heroSlide__header": "Our Best Seller Is Back",
+              "heroSlide__subheader": "Shop Atmos Vacuum Canister and get a free 10 oz bag of coffee when you spend $200+ with code: COFFEEPLEASE.",
+              "subSlide__bgColor": "#c1dbd2",
               "subSlide__textColor": "#231f20",
-              "heroSlide__ctaURL": "shopify:\/\/collections\/personalization",
-              "heroSlide__ctaCopy": "Personalize Now",
+              "heroSlide__ctaURL": "shopify:\/\/products\/atmos-vacuum-canister",
+              "heroSlide__ctaCopy": "Shop Atmos",
               "heroSlide__ctaColor": "black",
-              "heroSlide__ctaSubtext": ""
+              "heroSlide__ctaSubtext": "Get a free 10 oz bag of coffee when you spend $200. Make sure to add a coffee product to your cart, then use code COFFEEPLEASE at checkout. <u id=\"kl_promo_terms\" style=\"cursor: pointer;\">Terms<\/u>"
             }
           }
         },
@@ -465,8 +466,8 @@
         "type": "logo-text",
         "settings": {
           "enable_section": true,
-          "text": "This way to a brighter, less boring morning",
-          "icon": "shopify:\/\/shop_images\/Fellow-altIcon-black.png"
+          "text": "Order gifts by 5\/2 for Mother’s Day 🎁",
+          "url": "shopify:\/\/collections\/mothers-day"
         }
       },
       "162997622949d3f8ee": {
@@ -591,14 +592,14 @@
         "type": "hp-iwt",
         "settings": {
           "enable_section": true,
-          "image": "shopify:\/\/shop_images\/87A4253.jpg",
+          "image": "shopify:\/\/shop_images\/87A3122.jpg",
           "layout": "left",
-          "header": "C is for Carter",
-          "description": "<p>The coffee mug for when your hands are full. <\/p>",
+          "header": "Coffee? Not for babies",
+          "description": "<p>But definitely for adults!<\/p>",
           "bg_color": "",
           "text_color": "#000000",
-          "cta_url": "shopify:\/\/collections\/serve",
-          "cta_copy": "Shop Drinkware",
+          "cta_url": "shopify:\/\/collections\/mothers-day",
+          "cta_copy": "Shop Mother's Day",
           "cta_color": "btn--dark"
         }
       },
@@ -741,7 +742,7 @@
             "type": "block",
             "settings": {
               "svg_icon": "<svg xmlns=\"http:\/\/www.w3.org\/2000\/svg\" width=\"34\" height=\"34\" viewbox=\"0 0 31 30\" fill=\"none\">\n<path d=\"M15.5 2.5C8.625 2.5 3 8.125 3 15C3 21.875 8.625 27.5 15.5 27.5C22.375 27.5 28 21.875 28 15C28 8.125 22.375 2.5 15.5 2.5ZM19.9375 19.75L14.8375 16.6125C14.4625 16.3875 14.2375 15.9875 14.2375 15.55V9.6875C14.25 9.175 14.675 8.75 15.1875 8.75C15.7 8.75 16.125 9.175 16.125 9.6875V15.25L20.925 18.1375C21.375 18.4125 21.525 19 21.25 19.45C20.975 19.8875 20.3875 20.025 19.9375 19.75Z\" fill=\"black\"><\/path>\n<\/svg>",
-              "text": "98% of all orders are fulfilled in 24 hours",
+              "text": "Free coffee with orders $200+. <u id=\"kl_promo_terms\" style=\"cursor: pointer;\">Learn More.<\/u>",
               "display_on_bundle": false
             }
           }

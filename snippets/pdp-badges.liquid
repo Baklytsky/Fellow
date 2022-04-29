@@ -1,6 +1,14 @@
+{% if product.compare_at_price > product.price %}
+<div class="pdpBadges">
+      <div class="pdpBadges-item f jcc aic">
+        <div class="pdpBadges-item-content f aic">
+         <img src="https://cdn.shopify.com/s/files/1/0057/6235/1219/t/9/assets/770ab9ffd3b6--FP-icon-Bundle-dollar-black-bb1816.svg?v=1642174960" alt="You save $33 by buying these items together." typeof="foaf:Image">
+            <h4 class="pdpBadges-item-content-title">{% if product.price_max > product.price %}Save up to ${{ product.compare_at_price_max | minus:product.price_max | times:0.01 | floor }} {% elsif product.compare_at_price > product.price %} Save ${{ product.compare_at_price | minus:product.price | times:0.01 | floor }} {% else %} {% endif %}when you buy these items together.</h4>
+        </div>
+      </div>
+  </div>
 
-
-{%- if product.metafields.custom_fields["product_badges"] != blank -%}
+{%- elsif product.metafields.custom_fields["product_badges"] != blank -%}
   <div class="pdpBadges">
     {%- for item in product.metafields.custom_fields["product_badges"] -%}
       <div class="pdpBadges-item f {% if item["product_badge_learn_more_link"] != blank %}jcb{% else %}jcc{% endif %} aic">
@@ -18,8 +26,17 @@
       </div>
     {%- endfor -%}
   </div>
-{%- endif -%}
 
+{% endif %}
+
+<div class="pdpBadges">
+      <div class="pdpBadges-item f jcb aic">
+        <div class="pdpBadges-item-content f aic">
+            <h4 class="pdpBadges-item-content-title">Spend $200, Get a free 10 oz bag of coffee! Code: COFFEEPLEASE</h4>
+</div>
+         <u id="kl_promo_terms" class="pdpBadges-item-link" style="cursor: pointer;">Terms</u>
+      </div>
+  </div>
 
 
 

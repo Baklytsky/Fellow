@@ -47,6 +47,9 @@
               {% endcomment %}
               <h2 class='strike' data-product-price>{{ current_variant.price | money_without_trailing_zeros }}</h2>
             {% endif %}
+         {% if product.compare_at_price > product.price %}
+            <span class="productCard__badge abs z3 xsmall cb" style="top:50px;">{% if product.price_max > product.price %}Save up to ${{ product.compare_at_price_max | minus:product.price_max | times:0.01 | floor }} {% elsif product.compare_at_price > product.price %} Save ${{ product.compare_at_price | minus:product.price | times:0.01 | floor }} {% else %} {% endif %}</span>
+{% endif %}
         </div>
       </div>
       {% if tagline != blank %}<div class='pdp__tagline'>{{ tagline }}</div>{% endif %}
@@ -94,6 +97,9 @@
             {% endcomment %}
             <h2 class='strike' data-product-price>{{ current_variant.price | money_without_trailing_zeros }}</h2>
           {% endif %}
+        {% if product.compare_at_price > product.price %}
+        <span class="productCard__badge abs z3 xsmall cb" style="font-size:12px;margin-left:8px;top:auto;right:auto;"><span>{% if product.price_max > product.price %}Save up to ${{ product.compare_at_price_max | minus:product.price_max | times:0.01 | floor }} {% elsif product.compare_at_price > product.price %} Save ${{ product.compare_at_price | minus:product.price | times:0.01 | floor }} {% else %} {% endif %}</span></span>
+{% endif %}
       </div>
     </div>
   <afterpay-placement 
