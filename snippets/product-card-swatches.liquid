@@ -17,6 +17,12 @@
                   {%- assign color_name = value | handleize -%}
                   {%- assign color_swatch_name = product.handle | append: '_' | append: color_name | append: '.png' -%}
                   {%- assign color_swatch_image = images[color_swatch_name] -%}
+
+                  {%- if value contains 'Limited Edition:' -%}
+                    {%- assign color_name = value | split: 'Limited Edition:' | last | strip -%}
+                    {%- elsif value contains 'Wooden Accents:' -%}
+                    {%- assign color_name = value | split: 'Wooden Accents:' | last | strip -%}
+                  {%- endif -%}
                 {%- endif -%}
 
                 <label class='radio f aic rel js-color-update' for='{{ product.title | handleize }}-{{ option_name }}__{{ value | handleize }}{{ block_id }}' {% if option_name == 'color' or option_name == 'material' %}data-color='{{ value | handleize }}'{% endif %}>
@@ -33,7 +39,7 @@
                     value='{{ value }}'
                     data-option-selector>
                   <div class="radio__title js-productCard-option js-color-update {% if color_swatch_image != blank %}radio__title-bg-image{% endif %}"
-                    {% if option_name == 'color' %}data-color='{{ value | handleize }}'{% endif %}
+                    {% if option_name == 'color' %}data-color='{{ color_name | handleize }}'{% endif %}
                     {% if option_name == 'material' %}data-material='{{ value | handleize }}'{% endif %}
                     data-variant-url='{{ variant.url }}'
                     data-variant-id='{{ variant.id }}'
