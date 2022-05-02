@@ -13,9 +13,9 @@
     "gift_wrapping_message": "Is this a gift?",
     "gift_wrapping_result_message": "Your order will be sent in a gift box",
     "gift_wrapping_heading": "Gift Box + Gift Note",
-    "enable_gwp": false,
+    "enable_gwp": true,
     "gwp_threshold": 200,
-    "gwp_product": "manhattan-coffee-roasters-diego-burmudez",
+    "gwp_product": "s-o-blend",
     "second_gwp_threshold": 0,
     "second_gwp_product": "",
     "personalization_product": "personalization-add-on",
@@ -246,8 +246,9 @@
               "image_1": "shopify:\/\/shop_images\/Brew-Bar-Hero-Module-Image.jpg",
               "title_1": "Shop All",
               "url_1": "shopify:\/\/collections\/all-products",
-              "title_2": "",
-              "url_2": "",
+              "image_2": "shopify:\/\/shop_images\/112421_Atmos_Navigation-2Up.jpg",
+              "title_2": "Shop Atmos",
+              "url_2": "shopify:\/\/products\/atmos-vacuum-canister",
               "title_3": "",
               "url_3": "",
               "title_4": "",
@@ -400,6 +401,7 @@
           },
           "1f457594-c59c-4edd-800a-a9f7662f319e": {
             "type": "splitSlide",
+            "disabled": true,
             "settings": {
               "splitSlide__layout": "right",
               "heroSlide": "shopify:\/\/shop_images\/Clara_Takeover_880x654__2x_5f7c6bbd-2518-47e7-b557-91ee86f2b89f.png",
@@ -417,18 +419,17 @@
           },
           "3e0796bc-698b-4618-80b6-261185f9fb1a": {
             "type": "splitSlide",
-            "disabled": true,
             "settings": {
               "splitSlide__layout": "right",
-              "heroSlide": "shopify:\/\/shop_images\/Personalization-Hero-Module-Image.png",
+              "heroSlide": "shopify:\/\/shop_images\/Fellow_Atmos_LindseySheaFinals-1_rt_v01_OT_1.jpg",
               "desktopAlignment": "center",
               "mobileAlignment": "center",
-              "heroSlide__header": "Sip into something more personal",
-              "heroSlide__subheader": "Personalize any style and size Carter. Uncompromised coffee, unquestionably yours.",
-              "subSlide__bgColor": "#f7f2e8",
+              "heroSlide__header": "Our Best Seller Is Back",
+              "heroSlide__subheader": "Back in stock and ready for your brew bar, treat your beans to a life of luxury with Atmos.",
+              "subSlide__bgColor": "#c1dbd2",
               "subSlide__textColor": "#231f20",
-              "heroSlide__ctaURL": "shopify:\/\/collections\/personalization",
-              "heroSlide__ctaCopy": "Personalize Now",
+              "heroSlide__ctaURL": "shopify:\/\/products\/atmos-vacuum-canister",
+              "heroSlide__ctaCopy": "Shop Atmos",
               "heroSlide__ctaColor": "black",
               "heroSlide__ctaSubtext": ""
             }
@@ -465,8 +466,8 @@
         "type": "logo-text",
         "settings": {
           "enable_section": true,
-          "text": "This way to a brighter, less boring morning",
-          "icon": "shopify:\/\/shop_images\/Fellow-altIcon-black.png"
+          "text": "Order gifts by 5\/2 for Mother’s Day 🎁",
+          "url": "shopify:\/\/collections\/mothers-day"
         }
       },
       "162997622949d3f8ee": {
@@ -591,14 +592,14 @@
         "type": "hp-iwt",
         "settings": {
           "enable_section": true,
-          "image": "shopify:\/\/shop_images\/87A4253.jpg",
+          "image": "shopify:\/\/shop_images\/87A3122.jpg",
           "layout": "left",
-          "header": "C is for Carter",
-          "description": "<p>The coffee mug for when your hands are full. <\/p>",
+          "header": "Coffee? Not for babies",
+          "description": "<p>But definitely for adults!<\/p>",
           "bg_color": "",
           "text_color": "#000000",
-          "cta_url": "shopify:\/\/collections\/serve",
-          "cta_copy": "Shop Drinkware",
+          "cta_url": "shopify:\/\/collections\/mothers-day",
+          "cta_copy": "Shop Mother's Day",
           "cta_color": "btn--dark"
         }
       },

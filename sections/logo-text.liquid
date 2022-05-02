@@ -5,13 +5,13 @@
 
   {%- if icon != blank or text != blank -%}
     <div class='LogoText'>
-      <p class="LogoText__Message">
+      <p class="LogoText__Message"><a href="{{ url }}">
         {{ text }}
         {%- if icon != blank -%}
           <img class="LogoText__Icon" src="{{ icon | img_url: '50x50' }}" alt="{{ icon.alt | default: text }}"
                aria-label="Icon image" aria-hidden="true">
         {%- endif -%}
-      </p>
+        </a></p>
     </div>
   {%- endif -%}
 {%- endif -%}
@@ -32,6 +32,11 @@
         "type": "text",
         "id": "text",
         "label": "Text"
+      },
+{
+        "type": "url",
+        "id": "url",
+        "label": "Link"
       },
       {
         "type": "image_picker",
