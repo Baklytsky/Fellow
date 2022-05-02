@@ -3,10 +3,10 @@
     "main": {
       "type": "coffee-marketplace-hero",
       "settings": {
-        "desktop_image": "shopify:\/\/shop_images\/Rectangle_1653.jpg",
+        "desktop_image": "shopify:\/\/shop_images\/a-field-of-flowers-in-front-of-buildings.jpg",
         "mobile_image": "shopify:\/\/shop_images\/Rectangle_1653_1.jpg",
-        "heading": "Kenyan Spring Coffee",
-        "description": "lorem ipsum\nlorem ipsum\nlorem ipsum",
+        "heading": "Nordic Coffee Trip",
+        "description": "Join us on a tour of Scandinavia's finest coffee roasters, selected with care by our tasting panel.",
         "text_block_position": "center",
         "text_color": "#000000",
         "text_block_bg_color": "#ffffff"
@@ -19,8 +19,8 @@
           "type": "Card",
           "settings": {
             "image": "shopify:\/\/shop_images\/Rectangle_1659.jpg",
-            "heading": "Grower",
-            "description": "Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem.",
+            "heading": "Producer",
+            "description": "This is a happy guy in a field.  Presumably.",
             "link": "shopify:\/\/blogs\/brew-guides"
           }
         },
@@ -29,7 +29,7 @@
           "settings": {
             "image": "shopify:\/\/shop_images\/Rectangle_1660.jpg",
             "heading": "Roaster",
-            "description": "Pellentesque in ipsum id orci porta dapibus.",
+            "description": "Whole Foods roaster",
             "link": ""
           }
         },
@@ -37,8 +37,8 @@
           "type": "Card",
           "settings": {
             "image": "shopify:\/\/shop_images\/Rectangle_1661.jpg",
-            "heading": "Blur about how Fellow",
-            "description": "Mauris blandit aliquet elit, eget tincidunt.",
+            "heading": "Tasting Panel",
+            "description": "We've got taste buds, are you our taste buds?",
             "link": ""
           }
         }
@@ -89,13 +89,13 @@
           "settings": {
             "product": "tropical-weather",
             "title_1": "Roaster",
-            "description_1": "Brandywine Roaster from Delaware",
+            "description_1": "Onyx Coffee Lab",
             "title_2": "Producer",
-            "description_2": "Pablo Emmanuel, Guji Region, Ethiopia",
+            "description_2": "Various",
             "title_3": "Tasting Notes",
             "description_3": "Milk Chocolate, Toasted Nut, Sweet Vanilla",
             "title_4": "You",
-            "description_4": "Lower caffeine level ideal afternon coffee"
+            "description_4": "My first coffee"
           }
         },
         "9d06b070-f3ca-4e0d-8757-57636dbf56e5": {
@@ -104,52 +104,18 @@
             "lifestyle_image": "shopify:\/\/shop_images\/image_1.jpg"
           }
         },
-        "f8fe6aed-480e-4bbf-935e-4e2c4d5b8336": {
+        "55cf4a2a-0d89-4885-af9b-5253020ed6ba": {
           "type": "product",
           "settings": {
-            "product": "carter-move-mug",
-            "title_1": "Roaster",
-            "description_1": "Brandywine Roaster from Delaware",
-            "title_2": "Roaster",
-            "description_2": "Brandywine Roaster from Delaware",
-            "title_3": "Roaster",
-            "description_3": "Brandywine Roaster from Delaware",
-            "title_4": "",
-            "description_4": ""
-          }
-        },
-        "7b754bd9-9709-465b-8f19-d5276e124a78": {
-          "type": "product",
-          "settings": {
-            "product": "carter-move-lid",
-            "title_1": "Roaster",
-            "description_1": "Brandywine Roaster from Delaware",
-            "title_2": "Roaster",
-            "description_2": "Brandywine Roaster from Delaware",
+            "product": "carter-everywhere-lid",
+            "title_1": "",
+            "description_1": "",
+            "title_2": "",
+            "description_2": "",
             "title_3": "",
             "description_3": "",
             "title_4": "",
             "description_4": ""
-          }
-        },
-        "aac9a6f9-a2db-4cdd-a433-7174a1f1c13d": {
-          "type": "lifestyle-image",
-          "settings": {
-            "lifestyle_image": "shopify:\/\/shop_images\/Product_Feature_Module_-_Mostly_Filter_Kits_2__2x_9a4caf4f-99b8-4a4b-bdb5-dd8c33cd3264.png"
-          }
-        },
-        "e359671b-5d10-4f24-a29b-dc59697a71d8": {
-          "type": "product",
-          "settings": {
-            "product": "carter-everywhere-mug",
-            "title_1": "Roaster",
-            "description_1": "Brandywine Roaster from Delaware",
-            "title_2": "Roaster",
-            "description_2": "Brandywine Roaster from Delaware",
-            "title_3": "Roaster",
-            "description_3": "Brandywine Roaster from Delaware",
-            "title_4": "Roaster",
-            "description_4": "Brandywine Roaster from Delaware"
           }
         }
       },
@@ -158,25 +124,11 @@
         "24b67844-2869-47e9-93c0-77c55aac9ff9",
         "82d439e9-77de-464a-a126-25f3f98339e3",
         "9d06b070-f3ca-4e0d-8757-57636dbf56e5",
-        "f8fe6aed-480e-4bbf-935e-4e2c4d5b8336",
-        "7b754bd9-9709-465b-8f19-d5276e124a78",
-        "aac9a6f9-a2db-4cdd-a433-7174a1f1c13d",
-        "e359671b-5d10-4f24-a29b-dc59697a71d8"
+        "55cf4a2a-0d89-4885-af9b-5253020ed6ba"
       ],
       "settings": {
         "heading": "Kenyan Spring Coffee",
-        "description": "Hand-picked coffees from some of the best roasters in the world. Meticulously chosen, tasted, and road-tested with Fellow gear by our expert brewing team.Hand-picked coffees from some of the best roasters in the world. Meticulously chosen, tasted, and road-tested with Fellow gear by our expert brewing team."
-      }
-    },
-    "16499352731248f01a": {
-      "type": "coffee-marketplace-iwt",
-      "settings": {
-        "heading": "Kenyan Spring Coffee",
-        "description": "Hand-picked coffees from some of the best roasters in the world. Meticulously chosen, tasted, and road-tested with Fellow gear by our expert brewing team.",
-        "cta_text": "read more",
-        "cta_link": "shopify:\/\/blogs\/learn\/onyx-x-fellow-brew-master-class-weekend",
-        "image": "shopify:\/\/shop_images\/Image_74b01459-d177-4b9b-b145-fa7dfac3b203.png",
-        "image_position": "left"
+        "description": "This summer the fresh crop of kenyan coffees arrives woop woop"
       }
     },
     "1649944546d9b124de": {
@@ -191,13 +143,93 @@
         "cta_link": "",
         "cta_style": "white"
       }
+    },
+    "16499352731248f01a": {
+      "type": "coffee-marketplace-iwt",
+      "settings": {
+        "heading": "Kenyan Spring Coffee",
+        "description": "Hand-picked coffees from some of the best roasters in the world. Meticulously chosen, tasted, and road-tested with Fellow gear by our expert brewing team.",
+        "cta_text": "read more",
+        "cta_link": "shopify:\/\/blogs\/learn\/onyx-x-fellow-brew-master-class-weekend",
+        "image": "shopify:\/\/shop_images\/Image_74b01459-d177-4b9b-b145-fa7dfac3b203.png",
+        "image_position": "left"
+      }
+    },
+    "1650645747c17529af": {
+      "type": "coffee-marketplace-products",
+      "blocks": {
+        "ce4fc2df-91b3-4c76-b9aa-4a3798da6a3d": {
+          "type": "product",
+          "settings": {
+            "product": "s-o-blend",
+            "title_1": "",
+            "description_1": "",
+            "title_2": "",
+            "description_2": "",
+            "title_3": "",
+            "description_3": "",
+            "title_4": "",
+            "description_4": ""
+          }
+        },
+        "d1e08120-b1a9-456b-8e5d-21eacd408680": {
+          "type": "product",
+          "settings": {
+            "product": "anbessa",
+            "title_1": "Producer",
+            "description_1": "Anbessa",
+            "title_2": "Region",
+            "description_2": "Ethiopia",
+            "title_3": "Process",
+            "description_3": "Natural",
+            "title_4": "Tasted by Eric",
+            "description_4": "Sadness, purell"
+          }
+        }
+      },
+      "block_order": [
+        "ce4fc2df-91b3-4c76-b9aa-4a3798da6a3d",
+        "d1e08120-b1a9-456b-8e5d-21eacd408680"
+      ],
+      "settings": {
+        "heading": "Coava's Finest",
+        "description": "Coava, a specialty roaster in Portland sets the bar for coffee that you can taste if you have covid."
+      }
+    },
+    "16509121575a31edf1": {
+      "type": "coffee-marketplace-products",
+      "blocks": {
+        "a950edcd-b6f7-4244-b580-f992a75c6717": {
+          "type": "product",
+          "settings": {
+            "product": "manhattan-coffee-roasters-diego-burmudez",
+            "title_1": "Roaster",
+            "description_1": "Manhattan",
+            "title_2": "Producer",
+            "description_2": "Bermudez",
+            "title_3": "Fellow's Tasting Notes",
+            "description_3": "Nick T says \"dont buy it\"",
+            "title_4": "For you",
+            "description_4": "Try brewing 8oz at a time so you dont blow your head off"
+          }
+        }
+      },
+      "block_order": [
+        "a950edcd-b6f7-4244-b580-f992a75c6717"
+      ],
+      "settings": {
+        "heading": "Pride Coffees",
+        "description": "Save the world"
+      }
     }
   },
   "order": [
     "main",
     "1649840683b4aca1fd",
     "16498420281a16a067",
+    "1649944546d9b124de",
     "16499352731248f01a",
-    "1649944546d9b124de"
+    "1650645747c17529af",
+    "16509121575a31edf1"
   ]
 }
