@@ -13,9 +13,9 @@
     "gift_wrapping_message": "Is this a gift?",
     "gift_wrapping_result_message": "Your order will be sent in a gift box",
     "gift_wrapping_heading": "Gift Box + Gift Note",
-    "enable_gwp": false,
+    "enable_gwp": true,
     "gwp_threshold": 200,
-    "gwp_product": "manhattan-coffee-roasters-diego-burmudez",
+    "gwp_product": "s-o-blend",
     "second_gwp_threshold": 0,
     "second_gwp_product": "",
     "personalization_product": "personalization-add-on",
@@ -310,8 +310,8 @@
           "menu_left": "new-left-menu-1",
           "menu_right": "new-right-menu",
           "show_announcement": true,
-          "announcement_text": "Limited Time - Spend $200, Get a free 10 oz bag of coffee. Use code:<u style=\"margin-left:1ch;\">COFFEEPLEASE<\/u>",
-          "announcement_link": "shopify:\/\/collections\/bestsellers",
+          "announcement_text": "Shop our Mother’s Day collection 🎁",
+          "announcement_link": "shopify:\/\/collections\/mothers-day",
           "enable_timer": false,
           "end_date": "Sep 30, 2021 07:30:00 GMT-08:00"
         }
@@ -421,17 +421,17 @@
             "type": "splitSlide",
             "settings": {
               "splitSlide__layout": "right",
-              "heroSlide": "shopify:\/\/shop_images\/MothersDay_880x654__2x_9f3364d2-09fd-4c1b-817a-354d4ac12875.png",
+              "heroSlide": "shopify:\/\/shop_images\/Fellow_Atmos_LindseySheaFinals-1_rt_v01_OT_1.jpg",
               "desktopAlignment": "center",
               "mobileAlignment": "center",
-              "heroSlide__header": "Make Her Morning",
-              "heroSlide__subheader": "Beautiful coffee gear to start her day on a bright note.",
+              "heroSlide__header": "Our Best Seller Is Back",
+              "heroSlide__subheader": "Back in stock and ready for your brew bar, treat your beans to a life of luxury with Atmos.",
               "subSlide__bgColor": "#c1dbd2",
               "subSlide__textColor": "#231f20",
-              "heroSlide__ctaURL": "shopify:\/\/collections\/mothers-day",
-              "heroSlide__ctaCopy": "Shop Mother's Day",
+              "heroSlide__ctaURL": "shopify:\/\/products\/atmos-vacuum-canister",
+              "heroSlide__ctaCopy": "Shop Atmos",
               "heroSlide__ctaColor": "black",
-              "heroSlide__ctaSubtext": "Get a free 10 oz bag of coffee when you spend $200. Make sure to add a coffee product to your cart, then use code COFFEEPLEASE at checkout. <u id=\"kl_promo_terms\" style=\"cursor: pointer;\">Terms<\/u>"
+              "heroSlide__ctaSubtext": ""
             }
           }
         },
@@ -592,14 +592,14 @@
         "type": "hp-iwt",
         "settings": {
           "enable_section": true,
-          "image": "shopify:\/\/shop_images\/87A4253.jpg",
+          "image": "shopify:\/\/shop_images\/87A3122.jpg",
           "layout": "left",
-          "header": "C is for Carter",
-          "description": "<p>The coffee mug for when your hands are full. <\/p>",
+          "header": "Coffee? Not for babies",
+          "description": "<p>But definitely for adults!<\/p>",
           "bg_color": "",
           "text_color": "#000000",
-          "cta_url": "shopify:\/\/collections\/earth-day",
-          "cta_copy": "Shop Drinkware",
+          "cta_url": "shopify:\/\/collections\/mothers-day",
+          "cta_copy": "Shop Mother's Day",
           "cta_color": "btn--dark"
         }
       },
