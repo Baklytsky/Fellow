@@ -13,7 +13,7 @@
     "gift_wrapping_message": "Is this a gift?",
     "gift_wrapping_result_message": "Your order will be sent in a gift box",
     "gift_wrapping_heading": "Gift Box + Gift Note",
-    "enable_gwp": true,
+    "enable_gwp": false,
     "gwp_threshold": 200,
     "gwp_product": "s-o-blend",
     "second_gwp_threshold": 0,
@@ -466,8 +466,9 @@
         "type": "logo-text",
         "settings": {
           "enable_section": true,
-          "text": "Order gifts by 5\/2 for Mother’s Day 🎁",
-          "url": "shopify:\/\/collections\/mothers-day"
+          "text": "This way to a brighter, less boring morning",
+          "url": "shopify:\/\/collections\/bestsellers",
+          "icon": "shopify:\/\/shop_images\/Fellow-altIcon-black.png"
         }
       },
       "162997622949d3f8ee": {
