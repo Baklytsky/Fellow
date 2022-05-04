@@ -1,0 +1,50 @@
+{% comment %}
+{% render 'marketplace-card-options', product: , show_price: , show_options: , %}
+{% endcomment %}
+
+{%- if show_price -%}
+  {% if product.available %}
+    {% if product.price_varies %}
+      <span>{{ 'products.product.from_text' | t }}</span>
+    {% endif %}
+  {% else %}
+    <span>{{ 'products.product.sold_out' | t }}</span>
+  {% endif %}
+
+  {% if product.available %}
+    {% if product.compare_at_price > product.price %}
+      {% comment %}
+        Product is available and on sale
+      {% endcomment %}
+      <span class="rel strike">{{ product.compare_at_price | money }}</span>
+      <span class="card__price--sale ml05">{{ product.price | money }}</span>
+    {% else %}
+      {% comment %}
+        Product is available and not on sale
+      {% endcomment %}
+      <span>{{ product.price | money }}</span>
+    {% endif %}
+  {% else %}
+    {% comment %}
+      Sold Out
+    {% endcomment %}
+    <span class='strike'>{{ product.price | money }}</span>
+  {% endif %}
+{%- endif -%}
+
+{%- if show_options -%}
+  {% for product_option in product.options_with_values %}
+    {%- assign option_name = product_option.name | handleize -%}
+    {%- if option_name contains 'size' -%}
+      {% for value in product_option.values %}
+
+        {%- if show_price -%}
+          {{ '/ ' | append: value }}
+        {%- else -%}
+          {%- if forloop.last -%}{{ value }}{%- else -%}{{ value | append: ' /' }}{%- endif -%}
+        {%- endif -%}
+
+      {% endfor %}
+    {%- endif -%}
+  {% endfor %}
+{%- endif -%}

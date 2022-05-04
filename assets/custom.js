@@ -243,7 +243,7 @@ theme.addProduct = function () {
       if (error.status == 422) {
         $('#PdpErrorMessage').text(error.responseJSON.description).fadeIn('slow');
 
-        setTimeout(function () {$('#PdpErrorMessage').fadeOut('slow').text('');}, 3500);
+        setTimeout(function () {$('#PdpErrorMessage').text('').hide();}, 3500);
       }
     }
   })
@@ -1157,7 +1157,7 @@ theme.pdpMain = function () {
         error: function (error) {
           if (error.status === 422) {
             $('#PdpErrorMessage').text(error.responseJSON.description).fadeIn('slow');
-            setTimeout(function () {$('#PdpErrorMessage').fadeOut('slow').text('');}, 5500);
+            setTimeout(function () {$('#PdpErrorMessage').text('').hide();}, 5500);
           }
         }
       })
@@ -2471,6 +2471,28 @@ theme.GLOBAL = function () {
 
   if ($('.searchMain').length) {
     theme.searchPage();
+  }
+
+  if ($('.cmProducts__card').length) {
+    $(document).on('click', '[data-marketplace-atc]', function (e) {
+      e.preventDefault();
+      $.ajax({
+        type: 'POST',
+        url: '/cart/add.js',
+        data: $(this).parents('form').serialize(),
+        dataType: 'json',
+        success: function() {
+          CartDrawer.emit("cart:updating");
+          UpdateCart('', '', true)
+        },
+        error: (error) => {
+          if (error.status === 422) {
+            $(this).parents('form').find('.PdpErrorMessage').text(error.responseJSON.description).fadeIn('slow');
+            setTimeout(() => {$(this).parents('form').find('.PdpErrorMessage').text('').hide();}, 3500);
+          }
+        }
+      })
+    })
   }
 
   /* Video play & pause button */
