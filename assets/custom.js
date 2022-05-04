@@ -2519,4 +2519,8 @@ theme.GLOBAL = function () {
     $(this).parent().find(".play-button").removeClass('hidden').fadeIn()
     $(this).parent().find(".pause-button").fadeOut()
   });
+
+  if ($('form[action^="htpps://www.facebook.com"]').length) {
+    $('form[action^="htpps://www.facebook.com"]').attr('aria-hidden', 'true')
+  }
 }
