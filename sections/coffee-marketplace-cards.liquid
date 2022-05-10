@@ -1,0 +1,110 @@
+{%- assign heading = section.settings.heading -%}
+{%- assign description = section.settings.description -%}
+
+{%- if heading != blank or description != blank or section.blocks.size > 0 -%}
+  <section class="cmCards">
+    {%- if heading != blank -%}
+      <h2 class="cmCards__heading cmHeading">{{ heading }}</h2>
+    {%- endif -%}
+    {%- if description != blank -%}
+      <p class="cmCards__description cmDescription">{{ description }}</p>
+    {%- endif -%}
+    {%- if section.blocks.size > 0 -%}
+      <div class="cmCards__listWrapper">
+        <ul class="cmCards__list">
+          {%- for block in section.blocks -%}
+            {%- assign image = block.settings.image -%}
+            {%- assign heading = block.settings.heading -%}
+            {%- assign description = block.settings.description -%}
+            {%- assign link = block.settings.link -%}
+
+            {%- if image != blank or heading != blank or description != blank -%}
+              <li class="cmCards__listItem">
+                {%- if image != blank -%}
+                  {%- if link != blank -%}
+                    <a href="{{ link }}" class="cmCards__listItemImage rel">
+                      {% render 'image', image: image, class_name: 'image-abs-cover', alt: heading %}
+                    </a>
+                  {%- else -%}
+                    <div class="cmCards__listItemImage rel">
+                      {% render 'image', image: image, class_name: 'image-abs-cover', alt: heading %}
+                    </div>
+                  {%- endif -%}
+                {%- endif -%}
+                {%- if heading != blank -%}
+                  <h3 class="cmCards__listItemHeading">
+                    {%- if link != blank -%}
+                      <a href="{{ link }}">{{ heading | newline_to_br }}</a>
+                    {%- else -%}
+                      {{ heading | newline_to_br }}
+                    {%- endif -%}
+                  </h3>
+                {%- endif -%}
+                {%- if description != blank -%}
+                  <p class="cmCards__listItemDescription">
+                    {{ description | newline_to_br }}
+                  </p>
+                {%- endif -%}
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </div>
+    {%- endif -%}
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Cards Module",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Text"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "Card",
+      "name": "Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cards Module"
+    }
+  ]
+}
+{% endschema %}

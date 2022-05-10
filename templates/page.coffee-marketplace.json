@@ -1,11 +1,352 @@
 {
   "sections": {
-    "main": {
-      "type": "hp-iwt",
-      "settings": {}
+    "1652140849c192a2ee": {
+      "type": "coffee-marketplace-twb",
+      "settings": {
+        "bg_color": "#5884a5",
+        "text_color": "#ffffff",
+        "pre_heading": "",
+        "heading": "Our Coffee Collection",
+        "description": "Meet Fellow’s Coffee Collection: a rotation of our latest coffee obsessions. Our first theme showcases our favorite Nordic-style roasts: the delicate roast profile that has influenced the whole specialty coffee world.",
+        "cta_text": "",
+        "cta_link": "",
+        "cta_style": "white"
+      }
+    },
+    "16498420281a16a067": {
+      "type": "coffee-marketplace-products",
+      "blocks": {
+        "6df423df-ef10-46e2-8fb4-7f83e38becc8": {
+          "type": "product",
+          "settings": {
+            "product": "sandra-milena-mora",
+            "title_1": "Roasted In",
+            "description_1": "{{ block.settings.product.metafields.coffee.attribute_1.value }}",
+            "title_2": "Grown In",
+            "description_2": "{{ block.settings.product.metafields.coffee.attribute_2.value }}",
+            "title_3": "We Tasted",
+            "description_3": "{{ block.settings.product.metafields.coffee.attribute_3.value }}",
+            "title_4": "Why Try It?",
+            "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
+          }
+        },
+        "c4eb5518-aae0-43cc-9b3d-c90ad3854e4c": {
+          "type": "product",
+          "settings": {
+            "product": "caballero-gesha",
+            "title_1": "Roasted In",
+            "description_1": "{{ block.settings.product.metafields.coffee.attribute_1.value }}",
+            "title_2": "Grown In",
+            "description_2": "{{ block.settings.product.metafields.coffee.attribute_2.value }}",
+            "title_3": "We Tasted",
+            "description_3": "{{ block.settings.product.metafields.coffee.attribute_3.value }}",
+            "title_4": "Why Try It?",
+            "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
+          }
+        },
+        "6d60c4f4-c8ad-415d-8978-7511cfdb9ce7": {
+          "type": "product",
+          "settings": {
+            "product": "la-cabras-izuba-natural-burundi",
+            "title_1": "Roasted In",
+            "description_1": "{{ block.settings.product.metafields.coffee.attribute_1.value }}",
+            "title_2": "Grown In",
+            "description_2": "{{ block.settings.product.metafields.coffee.attribute_2.value }}",
+            "title_3": "We Tasted",
+            "description_3": "{{ block.settings.product.metafields.coffee.attribute_3.value }}",
+            "title_4": "Why Try It?",
+            "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
+          }
+        },
+        "1725317a-4a1f-468b-b1b7-daac0a6a2214": {
+          "type": "lifestyle-image",
+          "settings": {
+            "lifestyle_image": "shopify:\/\/shop_images\/Good_Life_Coffee_Ready_1920px-16.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "6df423df-ef10-46e2-8fb4-7f83e38becc8",
+        "c4eb5518-aae0-43cc-9b3d-c90ad3854e4c",
+        "6d60c4f4-c8ad-415d-8978-7511cfdb9ce7",
+        "1725317a-4a1f-468b-b1b7-daac0a6a2214"
+      ],
+      "settings": {
+        "heading": "Nordic Coffees",
+        "description": "Super light roasts with super bright notes. Put your sunglasses on to sip these."
+      }
+    },
+    "1649840683b4aca1fd": {
+      "type": "coffee-marketplace-cards",
+      "blocks": {
+        "980fc03d-bb80-45a7-be3d-e8bed8fb49cd": {
+          "type": "Card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/grower_01_Carousel.jpg",
+            "heading": "Acclaimed Producers",
+            "description": "From Cup of Excellence-winners to experimental and innovative new growers.",
+            "link": "shopify:\/\/blogs\/brew-guides"
+          }
+        },
+        "37239fc0-3d35-4c42-8cc3-261e6aeaae47": {
+          "type": "Card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/roaster_02_Carousel.jpg",
+            "heading": "Cult Roasters",
+            "description": "Enjoy rare access to roasters we love from all over the world.",
+            "link": ""
+          }
+        },
+        "e9b69308-60b2-46e6-a220-1411f94fe034": {
+          "type": "Card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/tastingpanel_03_carousel.jpg",
+            "heading": "Tasting Panel",
+            "description": "Our dedicated panel curates our selection and builds custom recipes for every coffee we share.",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "980fc03d-bb80-45a7-be3d-e8bed8fb49cd",
+        "37239fc0-3d35-4c42-8cc3-261e6aeaae47",
+        "e9b69308-60b2-46e6-a220-1411f94fe034"
+      ],
+      "settings": {
+        "heading": "Fellow’s Unique Selection Process",
+        "description": "Every coffee we select has passed through the hands of so many people at the top of their games: from legendary producers to outstanding roasters to our veteran tasters. The journey ends in your cup."
+      }
+    },
+    "1651794679046cff8f": {
+      "type": "coffee-marketplace-products",
+      "blocks": {
+        "82234441-9666-4067-a098-2191f3dc996a": {
+          "type": "product",
+          "settings": {
+            "product": "monarch",
+            "title_1": "Roasted In",
+            "description_1": "Rogers, Arkansas",
+            "title_2": "Grown In",
+            "description_2": "Colombia and Ethiopia",
+            "title_3": "We Tasted",
+            "description_3": "{{ block.settings.product.metafields.coffee.attribute_3.value }}",
+            "title_4": "Why Try It?",
+            "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
+          }
+        },
+        "a359c70a-02a6-419a-bdcc-e411150e5948": {
+          "type": "product",
+          "settings": {
+            "product": "tropical-weather",
+            "title_1": "Roasted In",
+            "description_1": "{{ block.settings.product.metafields.coffee.attribute_1.value }}",
+            "title_2": "Grown In",
+            "description_2": "{{ block.settings.product.metafields.coffee.attribute_2.value }}",
+            "title_3": "We Tasted",
+            "description_3": "{{ block.settings.product.metafields.coffee.attribute_3.value }}",
+            "title_4": "Why Try It?",
+            "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
+          }
+        },
+        "0941bc53-7cad-4b65-a3f5-fd8dced0572a": {
+          "type": "product",
+          "settings": {
+            "product": "tropical-weather",
+            "title_1": "Roasted In",
+            "description_1": "{{ block.settings.product.metafields.coffee.attribute_1.value }}",
+            "title_2": "Grown In",
+            "description_2": "{{ block.settings.product.metafields.coffee.attribute_2.value }}",
+            "title_3": "We Tasted",
+            "description_3": "{{ block.settings.product.metafields.coffee.attribute_3.value }}",
+            "title_4": "Why Try It?",
+            "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
+          }
+        },
+        "58332356-0353-4d3d-9427-e6c8e41257bb": {
+          "type": "product",
+          "settings": {
+            "product": "tropical-weather",
+            "title_1": "Roasted In",
+            "description_1": "{{ block.settings.product.metafields.coffee.attribute_1.value }}",
+            "title_2": "Grown In",
+            "description_2": "{{ block.settings.product.metafields.coffee.attribute_2.value }}",
+            "title_3": "We Tasted",
+            "description_3": "{{ block.settings.product.metafields.coffee.attribute_3.value }}",
+            "title_4": "Why Try It?",
+            "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
+          }
+        }
+      },
+      "block_order": [
+        "82234441-9666-4067-a098-2191f3dc996a",
+        "a359c70a-02a6-419a-bdcc-e411150e5948",
+        "0941bc53-7cad-4b65-a3f5-fd8dced0572a",
+        "58332356-0353-4d3d-9427-e6c8e41257bb"
+      ],
+      "settings": {
+        "heading": "Roaster Spotlight: Onyx Coffee Lab",
+        "description": "Sourcing the best green coffee, roasting and shipping using solar energy, complete transparency into pricing...Onyx's mantra is \"Never Settle for Good Enough\"."
+      }
+    },
+    "1650645747c17529af": {
+      "type": "coffee-marketplace-products",
+      "blocks": {
+        "6982e6ea-0c0d-449d-8d24-32a4957c3b6d": {
+          "type": "product",
+          "settings": {
+            "product": "panama-carolyn-saraceni-intrinsic-cherry",
+            "title_1": "Roasted In",
+            "description_1": "{{ block.settings.product.metafields.coffee.attribute_1.value }}",
+            "title_2": "Grown In",
+            "description_2": "{{ block.settings.product.metafields.coffee.attribute_2.value }}",
+            "title_3": "We Tasted",
+            "description_3": "{{ block.settings.product.metafields.coffee.attribute_3.value }}",
+            "title_4": "Why Try It?",
+            "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
+          }
+        },
+        "7b0a213d-415f-4371-9680-cae6f7d230ab": {
+          "type": "product",
+          "settings": {
+            "product": "guatelmala-ayarza-natural",
+            "title_1": "Roasted In",
+            "description_1": "{{ block.settings.product.metafields.coffee.attribute_1.value }}",
+            "title_2": "Grown In",
+            "description_2": "{{ block.settings.product.metafields.coffee.attribute_2.value }}",
+            "title_3": "We Tasted",
+            "description_3": "{{ block.settings.product.metafields.coffee.attribute_3.value }}",
+            "title_4": "Why Try It?",
+            "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
+          }
+        },
+        "139fb58b-bf5e-4304-b425-1e1341179336": {
+          "type": "product",
+          "settings": {
+            "product": "colombia-el-progreso-washed",
+            "title_1": "Roasted In",
+            "description_1": "{{ block.settings.product.metafields.coffee.attribute_1.value }}",
+            "title_2": "Grown In",
+            "description_2": "{{ block.settings.product.metafields.coffee.attribute_2.value }}",
+            "title_3": "We Tasted",
+            "description_3": "{{ block.settings.product.metafields.coffee.attribute_3.value }}",
+            "title_4": "Why Try It?",
+            "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
+          }
+        },
+        "9bc02913-d646-4cde-b261-2b4ae4a24550": {
+          "type": "product",
+          "settings": {
+            "product": "ethiopia-chelbesa-natural-12oz",
+            "title_1": "Roasted In",
+            "description_1": "{{ block.settings.product.metafields.coffee.attribute_1.value }}",
+            "title_2": "Grown In",
+            "description_2": "{{ block.settings.product.metafields.coffee.attribute_2.value }}",
+            "title_3": "We Tasted",
+            "description_3": "{{ block.settings.product.metafields.coffee.attribute_3.value }}",
+            "title_4": "Why Try It?",
+            "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
+          }
+        }
+      },
+      "block_order": [
+        "6982e6ea-0c0d-449d-8d24-32a4957c3b6d",
+        "7b0a213d-415f-4371-9680-cae6f7d230ab",
+        "139fb58b-bf5e-4304-b425-1e1341179336",
+        "9bc02913-d646-4cde-b261-2b4ae4a24550"
+      ],
+      "settings": {
+        "heading": "Roaster Spotlight: Brandywine",
+        "description": "What other coffee roaster do you know with an artist on staff? Officially swooning over Brandywine's bag art."
+      }
+    },
+    "16509121575a31edf1": {
+      "type": "coffee-marketplace-products",
+      "blocks": {
+        "19772389-d1f2-424f-bc70-1b00031a3bce": {
+          "type": "lifestyle-image",
+          "settings": {
+            "lifestyle_image": "shopify:\/\/shop_images\/Good_Life_Coffee_Ready_1920px-16.jpg"
+          }
+        },
+        "a98ec9bf-91c5-4ab7-9577-9c2666b5fca2": {
+          "type": "product",
+          "settings": {
+            "product": "tropical-weather",
+            "title_1": "Roasted In",
+            "description_1": "{{ block.settings.product.metafields.coffee.attribute_1.value }}",
+            "title_2": "Grown In",
+            "description_2": "{{ block.settings.product.metafields.coffee.attribute_2.value }}",
+            "title_3": "We Tasted",
+            "description_3": "{{ block.settings.product.metafields.coffee.attribute_3.value }}",
+            "title_4": "Why Try It?",
+            "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
+          }
+        },
+        "747feafe-1638-4ea2-b593-46cb5ce4798f": {
+          "type": "product",
+          "settings": {
+            "product": "tropical-weather",
+            "title_1": "Roasted In",
+            "description_1": "{{ block.settings.product.metafields.coffee.attribute_1.value }}",
+            "title_2": "Grown In",
+            "description_2": "{{ block.settings.product.metafields.coffee.attribute_2.value }}",
+            "title_3": "We Tasted",
+            "description_3": "{{ block.settings.product.metafields.coffee.attribute_3.value }}",
+            "title_4": "Why Try It?",
+            "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
+          }
+        },
+        "e6118971-b255-4911-81c4-0c56bb22dee6": {
+          "type": "lifestyle-image",
+          "settings": {
+            "lifestyle_image": "shopify:\/\/shop_images\/Product-Grid-Lifestyle_03.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "19772389-d1f2-424f-bc70-1b00031a3bce",
+        "a98ec9bf-91c5-4ab7-9577-9c2666b5fca2",
+        "747feafe-1638-4ea2-b593-46cb5ce4798f",
+        "e6118971-b255-4911-81c4-0c56bb22dee6"
+      ],
+      "settings": {
+        "heading": "Roaster Spotlight: Cat & Cloud",
+        "description": "Something about C&C"
+      }
+    },
+    "1649944546d9b124de": {
+      "type": "coffee-marketplace-twb",
+      "settings": {
+        "bg_color": "#c1dbd2",
+        "text_color": "#000000",
+        "pre_heading": "Next Up:",
+        "heading": "The Pride Collection",
+        "description": "Coming in June: hand-selected coffees by the best LGBTQ+ roasters in the world.",
+        "cta_text": "NEED A CTA",
+        "cta_link": "",
+        "cta_style": "dark"
+      }
+    },
+    "16499352731248f01a": {
+      "type": "coffee-marketplace-iwt",
+      "settings": {
+        "heading": "Spoiled for choice?",
+        "description": "Join Fellow Drops: every week we share just one coffee. Get limited lots, rare processes, and exclusive collaborations with the best roasters in the world.",
+        "cta_text": "Learn More",
+        "cta_link": "shopify:\/\/pages\/join-fellow-drops",
+        "image": "shopify:\/\/shop_images\/drops_Image-Text-Module.jpg",
+        "image_position": "left"
+      }
     }
   },
   "order": [
-    "main"
+    "1652140849c192a2ee",
+    "16498420281a16a067",
+    "1649840683b4aca1fd",
+    "1651794679046cff8f",
+    "1650645747c17529af",
+    "16509121575a31edf1",
+    "1649944546d9b124de",
+    "16499352731248f01a"
   ]
 }

@@ -310,8 +310,8 @@
           "menu_left": "new-left-menu-1",
           "menu_right": "new-right-menu",
           "show_announcement": true,
-          "announcement_text": "Shop our Mother’s Day collection 🎁",
-          "announcement_link": "shopify:\/\/collections\/mothers-day",
+          "announcement_text": "Get a Free 8 oz Carter Move Mug! <u>Refer A Friend<\/u>",
+          "announcement_link": "shopify:\/\/pages\/refer-a-friend",
           "enable_timer": false,
           "end_date": "Sep 30, 2021 07:30:00 GMT-08:00"
         }
@@ -421,15 +421,15 @@
             "type": "splitSlide",
             "settings": {
               "splitSlide__layout": "right",
-              "heroSlide": "shopify:\/\/shop_images\/Fellow_Atmos_LindseySheaFinals-1_rt_v01_OT_1.jpg",
+              "heroSlide": "shopify:\/\/shop_images\/Untitled_drawing_6.png",
               "desktopAlignment": "center",
               "mobileAlignment": "center",
-              "heroSlide__header": "Our Best Seller Is Back",
-              "heroSlide__subheader": "Back in stock and ready for your brew bar, treat your beans to a life of luxury with Atmos.",
+              "heroSlide__header": "Pours Well With Others",
+              "heroSlide__subheader": "Precisely tuned and perfectly balanced, Stagg EKG brings out the best in your pour-over.",
               "subSlide__bgColor": "#c1dbd2",
               "subSlide__textColor": "#231f20",
-              "heroSlide__ctaURL": "shopify:\/\/products\/atmos-vacuum-canister",
-              "heroSlide__ctaCopy": "Shop Atmos",
+              "heroSlide__ctaURL": "shopify:\/\/collections\/bestsellers",
+              "heroSlide__ctaCopy": "Shop Best Sellers",
               "heroSlide__ctaColor": "black",
               "heroSlide__ctaSubtext": ""
             }
@@ -593,14 +593,14 @@
         "type": "hp-iwt",
         "settings": {
           "enable_section": true,
-          "image": "shopify:\/\/shop_images\/87A3122.jpg",
+          "image": "shopify:\/\/shop_images\/Fellow_Atmos_LindseySheaFinals-18_rt_v01_OT.jpg",
           "layout": "left",
-          "header": "Coffee? Not for babies",
-          "description": "<p>But definitely for adults!<\/p>",
+          "header": "Our Best Seller Is Back",
+          "description": "<p>Back in stock and ready for your brew bar, treat your beans to a life of luxury with Atmos.<\/p>",
           "bg_color": "",
           "text_color": "#000000",
-          "cta_url": "shopify:\/\/collections\/mothers-day",
-          "cta_copy": "Shop Mother's Day",
+          "cta_url": "shopify:\/\/products\/atmos-vacuum-canister",
+          "cta_copy": "Shop Atmos",
           "cta_color": "btn--dark"
         }
       },
