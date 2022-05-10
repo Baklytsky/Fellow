@@ -1,0 +1,59 @@
+{% comment %}
+{% render 'marketplace-card-form', product: , uniq_id: , %}
+{% endcomment %}
+
+{% capture dataProductForm %}
+  { "money_format": {{ shop.money_format | json }}, "button": {{ 'products.product.add_to_cart' | t | json }} }
+{% endcapture %}
+
+{% form 'product', product, data-product-form: dataProductForm %}
+  <label for="{{ uniq_id }}-id" class="is-hidden">id</label>
+  <input class="is-hidden" id="{{ uniq_id }}-id" type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}"/>
+  <label for="{{ uniq_id }}-quantity" class="is-hidden">quantity</label>
+  <input class="is-hidden" min="1" type="number" id="{{ uniq_id }}-quantity" name="quantity" value="1"/>
+
+{%- assign hasPreorderTag = false -%}
+  {%- if product.tags contains 'preorder' -%}
+    {%- assign hasPreorderTag = true -%}
+  {%- endif -%}
+
+  {%- if product.selected_or_first_available_variant.metafields.my_fields.preorder or hasPreorderTag -%}
+    <label for="{{ uniq_id }}-pre-order" class="is-hidden">pre-order</label>
+    <input type="hidden" data-preorder="true" id="{{ uniq_id }}-pre-order" name="properties[pre-order]" value="true">
+  {%- endif -%}
+
+  <div class="cmProducts__cardBtn">
+    {%- capture cta -%}
+      {% if product.available %}
+        <span data-atc-copy class="js-atc-copy">
+          {% if product.selected_or_first_available_variant.metafields.my_fields.preorder or hasPreorderTag %}
+            Pre-Order
+          {% else %}
+            Add to Cart
+          {% endif %}
+        </span>
+        {%- assign disableVal = false -%}
+      {% else %}
+        {% if product.tags contains 'discontinued' %}
+          Discontinued
+        {% else %}
+          Out of Stock
+        {% endif %}
+        {%- assign disableVal = true -%}
+      {% endif %}
+    {%- endcapture -%}
+
+    {% render 'component-button' with
+      tag: 'button',
+      id: uniq_id,
+      name: 'add',
+      type: 'submit',
+      href: '#',
+      className: 'button rel btn btn--lg',
+      dataAttr: 'data-marketplace-atc',
+      disabled: disableVal,
+      cta: cta %}
+
+  <p class="PdpErrorMessage"></p>
+  </div>
+{% endform %}

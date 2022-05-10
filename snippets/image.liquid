@@ -1,0 +1,22 @@
+{% comment %}
+{% render 'image', image: , class_name: , alt: , image_attr:  %}
+{% endcomment %}
+
+{%- if alt == blank -%}
+  {%- assign alt = image.alt -%}
+{%- endif -%}
+
+<img class="{{ class_name }}"
+     srcset="{% if image.width >= 288 %}{{ image | img_url: '288x' }} 288w,{% endif %}
+              {% if image.width >= 576 %}{{ image | img_url: '576x' }} 576w,{% endif %}
+              {% if image.width >= 750 %}{{ image | img_url: '750x' }} 750w,{% endif %}
+              {% if image.width >= 1100 %}{{ image | img_url: '1100x' }} 1100w,{% endif %}
+              {% if image.width >= 1500 %}{{ image | img_url: '1500x' }} 1500w,{% endif %}
+              {{ image | img_url: 'master' }} {{ image.width }}w"
+        src="{{ media | img_url: '1x1' }}"
+        sizes="auto"
+        loading="lazy"
+        width="100%"
+        height="100%"
+        alt="{{ alt | escape }}"
+        {{ image_attr }}>

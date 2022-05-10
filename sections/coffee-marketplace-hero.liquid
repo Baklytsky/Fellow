@@ -1,0 +1,124 @@
+{%- assign desktop_image = section.settings.desktop_image -%}
+{%- assign mobile_image = section.settings.mobile_image -%}
+{%- assign heading = section.settings.heading | default: page.title -%}
+{%- assign description = section.settings.description -%}
+{%- assign text_color = section.settings.text_color -%}
+{%- assign text_block_bg_color = section.settings.text_block_bg_color -%}
+{%- assign text_block_position = section.settings.text_block_position -%}
+
+{%- if desktop_image != blank or mobile_image != blank  or heading != blank  or description != blank -%}
+  <section class="cmHero">
+    <div class="cmHero__wrapper rel cmHero__wrapper--{{ text_block_position }}">
+      {%- if desktop_image != blank or mobile_image != blank -%}
+        <div class="cmHero__imageWrapper">
+          {%- if desktop_image != blank -%}
+            {%- assign desktop_image_class = 'cmHero__image image-abs-cover' -%}
+            {%- if mobile_image != blank -%}
+              {%- assign desktop_image_class = 'cmHero__image image-abs-cover hide-mobile' -%}
+            {%- endif -%}
+            {% render 'image', image: desktop_image, class_name: desktop_image_class, alt: heading %}
+          {%- endif -%}
+
+          {%- if mobile_image != blank -%}
+            {%- assign mobile_image_class = 'cmHero__image image-abs-cover' -%}
+            {%- if desktop_image != blank -%}
+              {%- assign mobile_image_class = 'cmHero__image image-abs-cover hide-desktop' -%}
+            {%- endif -%}
+            {% render 'image', image: mobile_image, class_name: mobile_image_class, alt: heading %}
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+      {%- if heading != blank or description != blank -%}
+        <div class="cmHero__contentWrapper" style="color: {{ text_color }}; background-color: {{ text_block_bg_color }};">
+          {%- if heading != blank -%}
+            <h1 class="cmHero__contentHeading">
+              {{ heading | newline_to_br }}
+            </h1>
+          {%- endif -%}
+          {%- if description != blank -%}
+            <p class="cmHero__contentDescription">
+              {{ description | newline_to_br }}
+            </p>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Marketplace Hero",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "desktop_image",
+      "label": "Desktop image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile image"
+    },
+    {
+      "type": "header",
+      "content": "Text"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "select",
+      "id": "text_block_position",
+      "label": "Text position",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Color"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_block_bg_color",
+      "label": "Text background",
+      "default": "#FFFFFF"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marketplace Hero"
+    }
+  ]
+}
+{% endschema %}

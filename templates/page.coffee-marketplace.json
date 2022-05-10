@@ -1,11 +1,235 @@
 {
   "sections": {
     "main": {
-      "type": "hp-iwt",
-      "settings": {}
+      "type": "coffee-marketplace-hero",
+      "settings": {
+        "desktop_image": "shopify:\/\/shop_images\/a-field-of-flowers-in-front-of-buildings.jpg",
+        "mobile_image": "shopify:\/\/shop_images\/Rectangle_1653_1.jpg",
+        "heading": "Nordic Coffee Trip",
+        "description": "Join us on a tour of Scandinavia's finest coffee roasters, selected with care by our tasting panel.",
+        "text_block_position": "center",
+        "text_color": "#000000",
+        "text_block_bg_color": "#ffffff"
+      }
+    },
+    "1649840683b4aca1fd": {
+      "type": "coffee-marketplace-cards",
+      "blocks": {
+        "980fc03d-bb80-45a7-be3d-e8bed8fb49cd": {
+          "type": "Card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Rectangle_1659.jpg",
+            "heading": "Producer",
+            "description": "This is a happy guy in a field.  Presumably.",
+            "link": "shopify:\/\/blogs\/brew-guides"
+          }
+        },
+        "37239fc0-3d35-4c42-8cc3-261e6aeaae47": {
+          "type": "Card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Rectangle_1660.jpg",
+            "heading": "Roaster",
+            "description": "Whole Foods roaster",
+            "link": ""
+          }
+        },
+        "e9b69308-60b2-46e6-a220-1411f94fe034": {
+          "type": "Card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Rectangle_1661.jpg",
+            "heading": "Tasting Panel",
+            "description": "We've got taste buds, are you our taste buds?",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "980fc03d-bb80-45a7-be3d-e8bed8fb49cd",
+        "37239fc0-3d35-4c42-8cc3-261e6aeaae47",
+        "e9b69308-60b2-46e6-a220-1411f94fe034"
+      ],
+      "settings": {
+        "heading": "Fellow’s Unique Selection Process",
+        "description": "Hand-picked coffees from some of the best roasters in the world. Meticulously chosen, tasted, and road-tested with Fellow gear by our expert brewing team."
+      }
+    },
+    "16498420281a16a067": {
+      "type": "coffee-marketplace-products",
+      "blocks": {
+        "fcbb17ec-c2dc-4d8b-992b-aa16901fb4bf": {
+          "type": "product",
+          "settings": {
+            "product": "colombia-el-progreso-washed",
+            "title_1": "Roaster",
+            "description_1": "Brandywine Roaster from Delaware",
+            "title_2": "Producer",
+            "description_2": "Pablo Emmanuel, Guji Region, Ethiopia",
+            "title_3": "Tasting Notes",
+            "description_3": "Milk Chocolate, Toasted Nut, Sweet Vanilla",
+            "title_4": "You",
+            "description_4": "Lower caffeine level ideal afternon coffee"
+          }
+        },
+        "24b67844-2869-47e9-93c0-77c55aac9ff9": {
+          "type": "product",
+          "settings": {
+            "product": "ethiopia-chelbesa-natural-12oz",
+            "title_1": "Roaster",
+            "description_1": "Brandywine Roaster from Delaware",
+            "title_2": "Producer",
+            "description_2": "Pablo Emmanuel, Guji Region, Ethiopia",
+            "title_3": "Tasting Notes",
+            "description_3": "Milk Chocolate, Toasted Nut, Sweet Vanilla",
+            "title_4": "You",
+            "description_4": "Lower caffeine level ideal afternon coffee"
+          }
+        },
+        "82d439e9-77de-464a-a126-25f3f98339e3": {
+          "type": "product",
+          "settings": {
+            "product": "tropical-weather",
+            "title_1": "Roaster",
+            "description_1": "Onyx Coffee Lab",
+            "title_2": "Producer",
+            "description_2": "Various",
+            "title_3": "Tasting Notes",
+            "description_3": "Milk Chocolate, Toasted Nut, Sweet Vanilla",
+            "title_4": "You",
+            "description_4": "My first coffee"
+          }
+        },
+        "9d06b070-f3ca-4e0d-8757-57636dbf56e5": {
+          "type": "lifestyle-image",
+          "settings": {
+            "lifestyle_image": "shopify:\/\/shop_images\/image_1.jpg"
+          }
+        },
+        "55cf4a2a-0d89-4885-af9b-5253020ed6ba": {
+          "type": "product",
+          "settings": {
+            "product": "carter-everywhere-lid",
+            "title_1": "",
+            "description_1": "",
+            "title_2": "",
+            "description_2": "",
+            "title_3": "",
+            "description_3": "",
+            "title_4": "",
+            "description_4": ""
+          }
+        }
+      },
+      "block_order": [
+        "fcbb17ec-c2dc-4d8b-992b-aa16901fb4bf",
+        "24b67844-2869-47e9-93c0-77c55aac9ff9",
+        "82d439e9-77de-464a-a126-25f3f98339e3",
+        "9d06b070-f3ca-4e0d-8757-57636dbf56e5",
+        "55cf4a2a-0d89-4885-af9b-5253020ed6ba"
+      ],
+      "settings": {
+        "heading": "Kenyan Spring Coffee",
+        "description": "This summer the fresh crop of kenyan coffees arrives woop woop"
+      }
+    },
+    "1649944546d9b124de": {
+      "type": "coffee-marketplace-twb",
+      "settings": {
+        "bg_color": "#7c2918",
+        "text_color": "#ffffff",
+        "pre_heading": "Next Up:",
+        "heading": "Colombian Fall Flavors",
+        "description": "Hand-picked coffees from some of the best roasters in the world. Meticulously chosen, tasted, and road-tested with Fellow gear by our expert brewing team.",
+        "cta_text": "Sign Up for Updates",
+        "cta_link": "",
+        "cta_style": "white"
+      }
+    },
+    "16499352731248f01a": {
+      "type": "coffee-marketplace-iwt",
+      "settings": {
+        "heading": "Kenyan Spring Coffee",
+        "description": "Hand-picked coffees from some of the best roasters in the world. Meticulously chosen, tasted, and road-tested with Fellow gear by our expert brewing team.",
+        "cta_text": "read more",
+        "cta_link": "shopify:\/\/blogs\/learn\/onyx-x-fellow-brew-master-class-weekend",
+        "image": "shopify:\/\/shop_images\/Image_74b01459-d177-4b9b-b145-fa7dfac3b203.png",
+        "image_position": "left"
+      }
+    },
+    "1650645747c17529af": {
+      "type": "coffee-marketplace-products",
+      "blocks": {
+        "ce4fc2df-91b3-4c76-b9aa-4a3798da6a3d": {
+          "type": "product",
+          "settings": {
+            "product": "s-o-blend",
+            "title_1": "",
+            "description_1": "",
+            "title_2": "",
+            "description_2": "",
+            "title_3": "",
+            "description_3": "",
+            "title_4": "",
+            "description_4": ""
+          }
+        },
+        "d1e08120-b1a9-456b-8e5d-21eacd408680": {
+          "type": "product",
+          "settings": {
+            "product": "anbessa",
+            "title_1": "Producer",
+            "description_1": "Anbessa",
+            "title_2": "Region",
+            "description_2": "Ethiopia",
+            "title_3": "Process",
+            "description_3": "Natural",
+            "title_4": "Tasted by Eric",
+            "description_4": "Sadness, purell"
+          }
+        }
+      },
+      "block_order": [
+        "ce4fc2df-91b3-4c76-b9aa-4a3798da6a3d",
+        "d1e08120-b1a9-456b-8e5d-21eacd408680"
+      ],
+      "settings": {
+        "heading": "Coava's Finest",
+        "description": "Coava, a specialty roaster in Portland sets the bar for coffee that you can taste if you have covid."
+      }
+    },
+    "16509121575a31edf1": {
+      "type": "coffee-marketplace-products",
+      "blocks": {
+        "a950edcd-b6f7-4244-b580-f992a75c6717": {
+          "type": "product",
+          "settings": {
+            "product": "manhattan-coffee-roasters-diego-burmudez",
+            "title_1": "Roaster",
+            "description_1": "Manhattan",
+            "title_2": "Producer",
+            "description_2": "Bermudez",
+            "title_3": "Fellow's Tasting Notes",
+            "description_3": "Nick T says \"dont buy it\"",
+            "title_4": "For you",
+            "description_4": "Try brewing 8oz at a time so you dont blow your head off"
+          }
+        }
+      },
+      "block_order": [
+        "a950edcd-b6f7-4244-b580-f992a75c6717"
+      ],
+      "settings": {
+        "heading": "Pride Coffees",
+        "description": "Save the world"
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "1649840683b4aca1fd",
+    "16498420281a16a067",
+    "1649944546d9b124de",
+    "16499352731248f01a",
+    "1650645747c17529af",
+    "16509121575a31edf1"
   ]
 }
