@@ -185,8 +185,44 @@ textarea {
   order: 10;
 }
 
-.o- {
+.o-11 {
+  order: 11;
+}
+
+.o-12 {
+  order: 12;
+}
+
+.o-14 {
+  order: 14;
+}
+
+.o-15 {
   order: 15;
+}
+
+.o-16 {
+  order: 16;
+}
+
+.o-17 {
+  order: 17;
+}
+
+.o-18 {
+  order: 18;
+}
+
+.o-19 {
+  order: 19;
+}
+
+.o-20 {
+  order: 20;
+}
+
+.o- {
+  order: 30;
 }
 
 .al {

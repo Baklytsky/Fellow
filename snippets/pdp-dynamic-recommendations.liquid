@@ -1,0 +1,39 @@
+{%- if section.settings.show_product_recommendations -%}
+  {% if product.metafields.custom_fields["hide_pdr_section"] != 1 %}
+    {% assign product_limit = section.settings.product_limit %}
+
+    {% comment %} Metafields for reordering {% endcomment %}
+    {% assign flex_order = product.metafields.custom_fields["pdr_order"] | downcase %}
+    {% if flex_order %}
+      {% unless flex_order == 'default' %}
+        {% assign display_order = flex_order %}
+      {% endunless %}
+    {% endif %}
+
+    <dynamic-recommendations
+            class="x relatedProducts pdpRelatedProducts {% if display_order %} o-{{ display_order }}{% endif %}"
+            data-product-id="{{ product.id }}"
+            data-product-limit="{{ product_limit }}"
+            data-section-id="{{ section.id }}">
+
+      <div class="relatedProducts__inner x f fdc" data-product-row>
+        {% if recommendations.products_count > 0 %}
+            <h2 class="relatedProducts__title">{{ product.metafields.custom_fields["pdr_heading"] | default: 'Recommended products' }}</h2>
+          <div class="relatedProducts__row-wrapper rel">
+            <div class='f jcs fdr one-fourth relatedProducts__row'>
+
+              {% for product in recommendations.products limit: product_limit %}
+                <div class="relatedProducts__item">
+                  {% include 'product-card' with
+                    cx: 'y',
+                    product: product %}
+                </div>
+              {% endfor %}
+
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </dynamic-recommendations>
+  {% endif %}
+{%- endif -%}
