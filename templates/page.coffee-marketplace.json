@@ -1,15 +1,100 @@
 {
   "sections": {
-    "main": {
+    "1652140849c192a2ee": {
+      "type": "coffee-marketplace-twb",
+      "disabled": true,
+      "settings": {
+        "bg_color": "#c1dbd2",
+        "text_color": "#000000",
+        "pre_heading": "",
+        "heading": "Our Coffee Collection",
+        "description": "Introducing Fellow’s Coffee Collection: a rotation of our latest coffee obsessions, updated seasonally and whenever a new roast grabs us.",
+        "cta_text": "",
+        "cta_link": "",
+        "cta_style": "white"
+      }
+    },
+    "16522312584b4699f1": {
       "type": "coffee-marketplace-hero",
       "settings": {
-        "desktop_image": "shopify:\/\/shop_images\/a-field-of-flowers-in-front-of-buildings.jpg",
-        "mobile_image": "shopify:\/\/shop_images\/Rectangle_1653_1.jpg",
-        "heading": "Nordic Coffee Trip",
-        "description": "Join us on a tour of Scandinavia's finest coffee roasters, selected with care by our tasting panel.",
+        "desktop_image": "shopify:\/\/shop_images\/2021-11-2_fellow_drops13046-min_7cb25f01-70fe-4e5f-b34e-a8f1bc92216c.jpg",
+        "mobile_image": "shopify:\/\/shop_images\/2021-11-2_fellow_drops13046-min.jpg",
+        "heading": "Our Coffee Collection",
+        "description": "Introducing Fellow’s Coffee Collection: a rotation of our latest coffee obsessions, updated seasonally and whenever a new roast wows us.",
         "text_block_position": "center",
         "text_color": "#000000",
         "text_block_bg_color": "#ffffff"
+      }
+    },
+    "16498420281a16a067": {
+      "type": "coffee-marketplace-products",
+      "blocks": {
+        "3b13d259-7c1a-4dfa-9ad7-9374188b592f": {
+          "type": "product",
+          "settings": {
+            "product": "good-lifes-mutana-burundi",
+            "title_1": "Roasted In",
+            "description_1": "{{ block.settings.product.metafields.coffee.attribute_1.value }}",
+            "title_2": "Grown In",
+            "description_2": "{{ block.settings.product.metafields.coffee.attribute_2.value }}",
+            "title_3": "We Tasted",
+            "description_3": "{{ block.settings.product.metafields.coffee.attribute_3.value }}",
+            "title_4": "Why Try It?",
+            "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
+          }
+        },
+        "c4eb5518-aae0-43cc-9b3d-c90ad3854e4c": {
+          "type": "product",
+          "settings": {
+            "product": "caballero-gesha",
+            "title_1": "Roasted In",
+            "description_1": "{{ block.settings.product.metafields.coffee.attribute_1.value }}",
+            "title_2": "Grown In",
+            "description_2": "{{ block.settings.product.metafields.coffee.attribute_2.value }}",
+            "title_3": "We Tasted",
+            "description_3": "{{ block.settings.product.metafields.coffee.attribute_3.value }}",
+            "title_4": "Why Try It?",
+            "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
+          }
+        },
+        "6d60c4f4-c8ad-415d-8978-7511cfdb9ce7": {
+          "type": "product",
+          "settings": {
+            "product": "la-cabras-izuba-natural-burundi",
+            "title_1": "Roasted In",
+            "description_1": "{{ block.settings.product.metafields.coffee.attribute_1.value }}",
+            "title_2": "Grown In",
+            "description_2": "{{ block.settings.product.metafields.coffee.attribute_2.value }}",
+            "title_3": "We Tasted",
+            "description_3": "{{ block.settings.product.metafields.coffee.attribute_3.value }}",
+            "title_4": "Why Try It?",
+            "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
+          }
+        },
+        "6df423df-ef10-46e2-8fb4-7f83e38becc8": {
+          "type": "product",
+          "settings": {
+            "product": "sandra-milena-mora",
+            "title_1": "Roasted In",
+            "description_1": "{{ block.settings.product.metafields.coffee.attribute_1.value }}",
+            "title_2": "Grown In",
+            "description_2": "{{ block.settings.product.metafields.coffee.attribute_2.value }}",
+            "title_3": "We Tasted",
+            "description_3": "{{ block.settings.product.metafields.coffee.attribute_3.value }}",
+            "title_4": "Why Try It?",
+            "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
+          }
+        }
+      },
+      "block_order": [
+        "3b13d259-7c1a-4dfa-9ad7-9374188b592f",
+        "c4eb5518-aae0-43cc-9b3d-c90ad3854e4c",
+        "6d60c4f4-c8ad-415d-8978-7511cfdb9ce7",
+        "6df423df-ef10-46e2-8fb4-7f83e38becc8"
+      ],
+      "settings": {
+        "heading": "This Season: Nordic Coffees",
+        "description": "Discover the delicate roast profile that has influenced the whole specialty coffee world."
       }
     },
     "1649840683b4aca1fd": {
@@ -18,27 +103,27 @@
         "980fc03d-bb80-45a7-be3d-e8bed8fb49cd": {
           "type": "Card",
           "settings": {
-            "image": "shopify:\/\/shop_images\/Rectangle_1659.jpg",
-            "heading": "Producer",
-            "description": "This is a happy guy in a field.  Presumably.",
-            "link": "shopify:\/\/blogs\/brew-guides"
+            "image": "shopify:\/\/shop_images\/grower_01_Carousel.jpg",
+            "heading": "Acclaimed Producers",
+            "description": "From Cup of Excellence-winners to experimental and innovative new growers.",
+            "link": ""
           }
         },
         "37239fc0-3d35-4c42-8cc3-261e6aeaae47": {
           "type": "Card",
           "settings": {
-            "image": "shopify:\/\/shop_images\/Rectangle_1660.jpg",
-            "heading": "Roaster",
-            "description": "Whole Foods roaster",
+            "image": "shopify:\/\/shop_images\/roaster_02_Carousel.jpg",
+            "heading": "Cult Roasters",
+            "description": "Enjoy rare access to roasters we love from all over the world.",
             "link": ""
           }
         },
         "e9b69308-60b2-46e6-a220-1411f94fe034": {
           "type": "Card",
           "settings": {
-            "image": "shopify:\/\/shop_images\/Rectangle_1661.jpg",
+            "image": "shopify:\/\/shop_images\/DSCF7123-min.jpg",
             "heading": "Tasting Panel",
-            "description": "We've got taste buds, are you our taste buds?",
+            "description": "Our dedicated panel curates our selection and builds custom recipes for every coffee we share.",
             "link": ""
           }
         }
@@ -50,186 +135,202 @@
       ],
       "settings": {
         "heading": "Fellow’s Unique Selection Process",
-        "description": "Hand-picked coffees from some of the best roasters in the world. Meticulously chosen, tasted, and road-tested with Fellow gear by our expert brewing team."
-      }
-    },
-    "16498420281a16a067": {
-      "type": "coffee-marketplace-products",
-      "blocks": {
-        "fcbb17ec-c2dc-4d8b-992b-aa16901fb4bf": {
-          "type": "product",
-          "settings": {
-            "product": "colombia-el-progreso-washed",
-            "title_1": "Roaster",
-            "description_1": "Brandywine Roaster from Delaware",
-            "title_2": "Producer",
-            "description_2": "Pablo Emmanuel, Guji Region, Ethiopia",
-            "title_3": "Tasting Notes",
-            "description_3": "Milk Chocolate, Toasted Nut, Sweet Vanilla",
-            "title_4": "You",
-            "description_4": "Lower caffeine level ideal afternon coffee"
-          }
-        },
-        "24b67844-2869-47e9-93c0-77c55aac9ff9": {
-          "type": "product",
-          "settings": {
-            "product": "ethiopia-chelbesa-natural-12oz",
-            "title_1": "Roaster",
-            "description_1": "Brandywine Roaster from Delaware",
-            "title_2": "Producer",
-            "description_2": "Pablo Emmanuel, Guji Region, Ethiopia",
-            "title_3": "Tasting Notes",
-            "description_3": "Milk Chocolate, Toasted Nut, Sweet Vanilla",
-            "title_4": "You",
-            "description_4": "Lower caffeine level ideal afternon coffee"
-          }
-        },
-        "82d439e9-77de-464a-a126-25f3f98339e3": {
-          "type": "product",
-          "settings": {
-            "product": "tropical-weather",
-            "title_1": "Roaster",
-            "description_1": "Onyx Coffee Lab",
-            "title_2": "Producer",
-            "description_2": "Various",
-            "title_3": "Tasting Notes",
-            "description_3": "Milk Chocolate, Toasted Nut, Sweet Vanilla",
-            "title_4": "You",
-            "description_4": "My first coffee"
-          }
-        },
-        "9d06b070-f3ca-4e0d-8757-57636dbf56e5": {
-          "type": "lifestyle-image",
-          "settings": {
-            "lifestyle_image": "shopify:\/\/shop_images\/image_1.jpg"
-          }
-        },
-        "55cf4a2a-0d89-4885-af9b-5253020ed6ba": {
-          "type": "product",
-          "settings": {
-            "product": "carter-everywhere-lid",
-            "title_1": "",
-            "description_1": "",
-            "title_2": "",
-            "description_2": "",
-            "title_3": "",
-            "description_3": "",
-            "title_4": "",
-            "description_4": ""
-          }
-        }
-      },
-      "block_order": [
-        "fcbb17ec-c2dc-4d8b-992b-aa16901fb4bf",
-        "24b67844-2869-47e9-93c0-77c55aac9ff9",
-        "82d439e9-77de-464a-a126-25f3f98339e3",
-        "9d06b070-f3ca-4e0d-8757-57636dbf56e5",
-        "55cf4a2a-0d89-4885-af9b-5253020ed6ba"
-      ],
-      "settings": {
-        "heading": "Kenyan Spring Coffee",
-        "description": "This summer the fresh crop of kenyan coffees arrives woop woop"
-      }
-    },
-    "1649944546d9b124de": {
-      "type": "coffee-marketplace-twb",
-      "settings": {
-        "bg_color": "#7c2918",
-        "text_color": "#ffffff",
-        "pre_heading": "Next Up:",
-        "heading": "Colombian Fall Flavors",
-        "description": "Hand-picked coffees from some of the best roasters in the world. Meticulously chosen, tasted, and road-tested with Fellow gear by our expert brewing team.",
-        "cta_text": "Sign Up for Updates",
-        "cta_link": "",
-        "cta_style": "white"
-      }
-    },
-    "16499352731248f01a": {
-      "type": "coffee-marketplace-iwt",
-      "settings": {
-        "heading": "Kenyan Spring Coffee",
-        "description": "Hand-picked coffees from some of the best roasters in the world. Meticulously chosen, tasted, and road-tested with Fellow gear by our expert brewing team.",
-        "cta_text": "read more",
-        "cta_link": "shopify:\/\/blogs\/learn\/onyx-x-fellow-brew-master-class-weekend",
-        "image": "shopify:\/\/shop_images\/Image_74b01459-d177-4b9b-b145-fa7dfac3b203.png",
-        "image_position": "left"
+        "description": "Every coffee we select has passed through the hands of so many people at the top of their games: from legendary producers to outstanding roasters to our veteran tasters. The journey ends in your cup."
       }
     },
     "1650645747c17529af": {
       "type": "coffee-marketplace-products",
       "blocks": {
-        "ce4fc2df-91b3-4c76-b9aa-4a3798da6a3d": {
+        "6982e6ea-0c0d-449d-8d24-32a4957c3b6d": {
           "type": "product",
           "settings": {
-            "product": "s-o-blend",
-            "title_1": "",
-            "description_1": "",
-            "title_2": "",
-            "description_2": "",
-            "title_3": "",
-            "description_3": "",
-            "title_4": "",
-            "description_4": ""
+            "product": "panama-carolyn-saraceni-intrinsic-cherry",
+            "title_1": "Roasted In",
+            "description_1": "{{ block.settings.product.metafields.coffee.attribute_1.value }}",
+            "title_2": "Grown In",
+            "description_2": "{{ block.settings.product.metafields.coffee.attribute_2.value }}",
+            "title_3": "We Tasted",
+            "description_3": "{{ block.settings.product.metafields.coffee.attribute_3.value }}",
+            "title_4": "Why Try It?",
+            "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
           }
         },
-        "d1e08120-b1a9-456b-8e5d-21eacd408680": {
+        "e3e50d28-c549-4c16-9115-8f61c1011e5c": {
           "type": "product",
           "settings": {
-            "product": "anbessa",
-            "title_1": "Producer",
-            "description_1": "Anbessa",
-            "title_2": "Region",
-            "description_2": "Ethiopia",
-            "title_3": "Process",
-            "description_3": "Natural",
-            "title_4": "Tasted by Eric",
-            "description_4": "Sadness, purell"
+            "product": "democratic-republic-of-congo-boza-cooperative",
+            "title_1": "Roasted In",
+            "description_1": "{{ block.settings.product.metafields.coffee.attribute_1.value }}",
+            "title_2": "Grown In",
+            "description_2": "{{ block.settings.product.metafields.coffee.attribute_2.value }}",
+            "title_3": "We Tasted",
+            "description_3": "{{ block.settings.product.metafields.coffee.attribute_3.value }}",
+            "title_4": "Why Try It?",
+            "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
+          }
+        },
+        "2115e373-8bab-4923-a85d-ebece997e478": {
+          "type": "product",
+          "settings": {
+            "product": "rwanda-kanzu-12",
+            "title_1": "Roasted In",
+            "description_1": "Rogers, Arkansas",
+            "title_2": "Grown In",
+            "description_2": "{{ block.settings.product.metafields.coffee.attribute_2.value }}",
+            "title_3": "We Tasted",
+            "description_3": "{{ block.settings.product.metafields.coffee.attribute_3.value }}",
+            "title_4": "Why Try It",
+            "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
+          }
+        },
+        "c71c537e-331b-4b08-980b-9b905e236cf5": {
+          "type": "product",
+          "settings": {
+            "product": "tanzania-lloma-natural",
+            "title_1": "Roasted In",
+            "description_1": "Rogers, Arkansas",
+            "title_2": "Grown In",
+            "description_2": "{{ block.settings.product.metafields.coffee.attribute_2.value }}",
+            "title_3": "We Tasted",
+            "description_3": "{{ block.settings.product.metafields.coffee.attribute_3.value }}",
+            "title_4": "Why Try It?",
+            "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
+          }
+        },
+        "7b0a213d-415f-4371-9680-cae6f7d230ab": {
+          "type": "product",
+          "settings": {
+            "product": "guatelmala-ayarza-natural",
+            "title_1": "Roasted In",
+            "description_1": "Wilmington, Delaware",
+            "title_2": "Grown In",
+            "description_2": "{{ block.settings.product.metafields.coffee.attribute_2.value }}",
+            "title_3": "We Tasted",
+            "description_3": "{{ block.settings.product.metafields.coffee.attribute_3.value }}",
+            "title_4": "Why Try It?",
+            "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
+          }
+        },
+        "4ea87f05-09e8-444b-ae4d-0856d6d03146": {
+          "type": "product",
+          "settings": {
+            "product": "monarch",
+            "title_1": "Roasted In",
+            "description_1": "Rogers, Arkansas",
+            "title_2": "Grown In",
+            "description_2": "{{ block.settings.product.metafields.coffee.attribute_2.value }}",
+            "title_3": "We Tasted",
+            "description_3": "{{ block.settings.product.metafields.coffee.attribute_3.value }}",
+            "title_4": "Why Try It?",
+            "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
+          }
+        },
+        "f1c6aca2-ca7d-49cb-9203-80994c022cb4": {
+          "type": "product",
+          "settings": {
+            "product": "ethiopia-gora-kone",
+            "title_1": "Grown In",
+            "description_1": "{{ block.settings.product.metafields.coffee.attribute_1.value }}",
+            "title_2": "Roasted In",
+            "description_2": "{{ block.settings.product.metafields.coffee.attribute_2.value }}",
+            "title_3": "We Tasted",
+            "description_3": "{{ block.settings.product.metafields.coffee.attribute_3.value }}",
+            "title_4": "Why Try It?",
+            "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
+          }
+        },
+        "9bc02913-d646-4cde-b261-2b4ae4a24550": {
+          "type": "product",
+          "settings": {
+            "product": "ethiopia-chelbesa-natural-12oz",
+            "title_1": "Roasted In",
+            "description_1": "{{ block.settings.product.metafields.coffee.attribute_1.value }}",
+            "title_2": "Grown In",
+            "description_2": "{{ block.settings.product.metafields.coffee.attribute_2.value }}",
+            "title_3": "We Tasted",
+            "description_3": "{{ block.settings.product.metafields.coffee.attribute_3.value }}",
+            "title_4": "Why Try It?",
+            "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
+          }
+        },
+        "a49713bc-0826-4ae9-bc9c-7d03b3b2c981": {
+          "type": "product",
+          "settings": {
+            "product": "tropical-weather",
+            "title_1": "Roasted In",
+            "description_1": "Rogers, Arkansas",
+            "title_2": "Grown In",
+            "description_2": "{{ block.settings.product.metafields.coffee.attribute_2.value }}",
+            "title_3": "We Tasted",
+            "description_3": "{{ block.settings.product.metafields.coffee.attribute_3.value }}",
+            "title_4": "Why Try It?",
+            "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
+          }
+        },
+        "139fb58b-bf5e-4304-b425-1e1341179336": {
+          "type": "product",
+          "settings": {
+            "product": "colombia-el-progreso-washed",
+            "title_1": "Roasted In",
+            "description_1": "Wilmington, Delaware",
+            "title_2": "Grown In",
+            "description_2": "{{ block.settings.product.metafields.coffee.attribute_2.value }}",
+            "title_3": "We Tasted",
+            "description_3": "{{ block.settings.product.metafields.coffee.attribute_3.value }}",
+            "title_4": "Why Try It?",
+            "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
           }
         }
       },
       "block_order": [
-        "ce4fc2df-91b3-4c76-b9aa-4a3798da6a3d",
-        "d1e08120-b1a9-456b-8e5d-21eacd408680"
+        "6982e6ea-0c0d-449d-8d24-32a4957c3b6d",
+        "e3e50d28-c549-4c16-9115-8f61c1011e5c",
+        "2115e373-8bab-4923-a85d-ebece997e478",
+        "c71c537e-331b-4b08-980b-9b905e236cf5",
+        "7b0a213d-415f-4371-9680-cae6f7d230ab",
+        "4ea87f05-09e8-444b-ae4d-0856d6d03146",
+        "f1c6aca2-ca7d-49cb-9203-80994c022cb4",
+        "9bc02913-d646-4cde-b261-2b4ae4a24550",
+        "a49713bc-0826-4ae9-bc9c-7d03b3b2c981",
+        "139fb58b-bf5e-4304-b425-1e1341179336"
       ],
       "settings": {
-        "heading": "Coava's Finest",
-        "description": "Coava, a specialty roaster in Portland sets the bar for coffee that you can taste if you have covid."
+        "heading": "Want More? Here are our Fellow Favorites",
+        "description": "We try hundreds of coffees so you don't have to. Here are some of our recent favorites state-side. Ordered from our most recent obsessions to old time favorites."
       }
     },
-    "16509121575a31edf1": {
-      "type": "coffee-marketplace-products",
-      "blocks": {
-        "a950edcd-b6f7-4244-b580-f992a75c6717": {
-          "type": "product",
-          "settings": {
-            "product": "manhattan-coffee-roasters-diego-burmudez",
-            "title_1": "Roaster",
-            "description_1": "Manhattan",
-            "title_2": "Producer",
-            "description_2": "Bermudez",
-            "title_3": "Fellow's Tasting Notes",
-            "description_3": "Nick T says \"dont buy it\"",
-            "title_4": "For you",
-            "description_4": "Try brewing 8oz at a time so you dont blow your head off"
-          }
-        }
-      },
-      "block_order": [
-        "a950edcd-b6f7-4244-b580-f992a75c6717"
-      ],
+    "1649944546d9b124de": {
+      "type": "coffee-marketplace-twb",
       "settings": {
-        "heading": "Pride Coffees",
-        "description": "Save the world"
+        "bg_color": "#000000",
+        "text_color": "#ffffff",
+        "pre_heading": "Next Season:",
+        "heading": "The Pride Collection",
+        "description": "Coming in June: hand-selected coffees by the best LGBTQ+ roasters in the world.",
+        "cta_text": "",
+        "cta_link": "",
+        "cta_style": "dark"
+      }
+    },
+    "16499352731248f01a": {
+      "type": "coffee-marketplace-iwt",
+      "settings": {
+        "heading": "Spoiled for choice?",
+        "description": "Join Fellow Drops: every week we share just one coffee. Get limited lots, rare processes, and exclusive collaborations with the best roasters in the world.",
+        "cta_text": "Learn More",
+        "cta_link": "shopify:\/\/pages\/join-fellow-drops",
+        "image": "shopify:\/\/shop_images\/drops_Image-Text-Module.jpg",
+        "image_position": "left"
       }
     }
   },
   "order": [
-    "main",
-    "1649840683b4aca1fd",
+    "1652140849c192a2ee",
+    "16522312584b4699f1",
     "16498420281a16a067",
-    "1649944546d9b124de",
-    "16499352731248f01a",
+    "1649840683b4aca1fd",
     "1650645747c17529af",
-    "16509121575a31edf1"
+    "1649944546d9b124de",
+    "16499352731248f01a"
   ]
 }
