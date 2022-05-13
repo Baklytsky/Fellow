@@ -226,8 +226,9 @@
           <div class="subcollection__products one-third">
             {% for product in collection.products %}
               {%- assign gift_product_handleize = 'Gift product' | handleize -%}
+              {%- assign gift_box_handleize = 'Gift box' | handleize -%}
               {%- assign product_type_handleize = product.type | handleize -%}
-              {%- unless product_type_handleize == gift_product_handleize -%}
+              {%- unless product_type_handleize == gift_product_handleize or product_type_handleize == gift_box_handleize -%}
                 {% include 'product-card', product_image: product.images[product_image_index] %}
               {%- endunless -%}
             {%- endfor -%}

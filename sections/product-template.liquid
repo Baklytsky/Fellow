@@ -35,6 +35,7 @@
     {% include 'pdp-compare-products-characteristics' %}
     {% include 'pdp-learn-more' %}
     {% include 'pdp-featured-blog-v2' %}
+    {% include 'pdp-dynamic-recommendations' %}
   </div>
   <div class="product-additional-section">
   {% include 'pdp-reviews' %}
@@ -71,6 +72,26 @@
         "id": "quantity_selector_inline",
         "label": "Align quantity selector with ATC button on desktop",
         "default": false
+      },
+      {
+        "type": "header",
+        "content": "Product dynamic recommendations"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_product_recommendations",
+        "label": "Show dynamic recommendations",
+        "info": "Dynamic recommendations change and improve with time. [Learn more](https://help.shopify.com/en/themes/development/recommended-products)",
+        "default": true
+      },
+      {
+        "type": "range",
+        "id": "product_limit",
+        "min": 2,
+        "max": 12,
+        "step": 1,
+        "label": "Product limit",
+        "default": 8
       }
     ]
   }

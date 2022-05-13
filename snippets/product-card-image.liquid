@@ -37,7 +37,11 @@
         {% for value in product_option.values %}
           {% for variant in product.variants %}
             {% if variant.option1 == value or variant.option2 == value %}
-              {% assign variantImg = variant | img_url: '500x' %}
+              {%- if variant.image != blank -%}
+                {% assign variantImg = variant | img_url: '500x' %}
+              {%- else -%}
+                {% assign variantImg = image_url %}
+              {%- endif -%}
               <div class='productCard__img-container variant js-variant-image'
                 {% if option_name == 'color' or option_name == 'material' %}data-color='{{ value | handleize }}'{% endif %}
                 data-variant-url='{{ variant.url }}'
