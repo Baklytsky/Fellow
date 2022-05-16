@@ -28,7 +28,12 @@
                 {%- assign gift_product_handleize = 'Gift product' | handleize -%}
                 {%- assign product_type_handleize = product.type | handleize -%}
 
-                {%- unless product_type_handleize == gift_Personalization_fee_handleize or product_type_handleize == gift_box_handleize or product_type_handleize == gift_product_handleize -%}
+                {%- unless product_type_handleize == gift_Personalization_fee_handleize
+                  or product_type_handleize == gift_box_handleize
+                  or product_type_handleize == gift_product_handleize
+                  or product.handle == 'carter-everywhere-mug-personalizations'
+                  or product.handle == 'carter-move-mug-with-360-sip-lid-personalized'
+                  or product.handle == 'carter-move-mug-personalizations' -%}
                   <div class="relatedProducts__item">
                     {% include 'product-card' with
                       cx: 'y',
