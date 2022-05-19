@@ -1,0 +1,51 @@
+{%- if section.settings.show_product_recommendations -%}
+  {% if product.metafields.custom_fields["hide_pdr_section"] != 1 %}
+    {% assign product_limit = section.settings.product_limit %}
+
+    {% comment %} Metafields for reordering {% endcomment %}
+    {% assign flex_order = product.metafields.custom_fields["pdr_order"] | downcase %}
+    {% if flex_order %}
+      {% unless flex_order == 'default' %}
+        {% assign display_order = flex_order %}
+      {% endunless %}
+    {% endif %}
+
+    <dynamic-recommendations
+            class="x relatedProducts pdpRelatedProducts {% if display_order %} o-{{ display_order }}{% endif %}"
+            data-product-id="{{ product.id }}"
+            data-product-limit="{{ product_limit }}"
+            data-section-id="{{ section.id }}">
+
+      <div class="relatedProducts__inner x f fdc" data-product-row>
+        {% if recommendations.products_count > 0 %}
+            <h2 class="relatedProducts__title">{{ product.metafields.custom_fields["pdr_heading"] | default: 'You may also like' }}</h2>
+          <div class="relatedProducts__row-wrapper rel">
+            <div class='f jcs fdr one-fourth relatedProducts__row'>
+
+              {% for product in recommendations.products limit: product_limit %}
+                {%- assign gift_Personalization_fee_handleize = 'Personalization fee' | handleize -%}
+                {%- assign gift_box_handleize = 'Gift box' | handleize -%}
+                {%- assign gift_product_handleize = 'Gift product' | handleize -%}
+                {%- assign product_type_handleize = product.type | handleize -%}
+
+                {%- unless product_type_handleize == gift_Personalization_fee_handleize
+                  or product_type_handleize == gift_box_handleize
+                  or product_type_handleize == gift_product_handleize
+                  or product.handle == 'carter-everywhere-mug-personalizations'
+                  or product.handle == 'carter-move-mug-with-360-sip-lid-personalized'
+                  or product.handle == 'carter-move-mug-personalizations' -%}
+                  <div class="relatedProducts__item">
+                    {% include 'product-card' with
+                      cx: 'y',
+                      product: product %}
+                  </div>
+                {%- endunless -%}
+              {% endfor %}
+
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </dynamic-recommendations>
+  {% endif %}
+{%- endif -%}

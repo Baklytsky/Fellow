@@ -70,15 +70,7 @@ h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
         moneyFormat: "{{ shop.money_format }}"
       }
     </script>
-<!-- Smooch / Sunshine Convo Snippet 1/2 --> 
-  {% comment %}
-    <script>
-    !function(o,p,s,e,c){
-        var i,a,h,u=[],d=[];function t(){var t="You must provide a supported major version.";try{if(!c)throw new Error(t);var e,n="https://cdn.smooch.io/",r="smooch";if((e="string"==typeof this.response?JSON.parse(this.response):this.response).url){var o=p.getElementsByTagName("script")[0],s=p.createElement("script");s.async=!0;var i=c.match(/([0-9]+).?([0-9]+)?.?([0-9]+)?/),a=i&&i[1];if(i&&i[3])s.src=n+r+"."+c+".min.js";else{if(!(4<=a&&e["v"+a]))throw new Error(t);s.src=e["v"+a]}o.parentNode.insertBefore(s,o)}}catch(e){e.message===t&&console.error(e)}}o[s]={init:function(){i=arguments;var t={then:function(e){return d.push({type:"t",next:e}),t},catch:function(e){return d.push({type:"c",next:e}),t}};return t},on:function(){u.push(arguments)},render:function(){a=arguments},destroy:function(){h=arguments}},o.__onWebMessengerHostReady__=function(e){if(delete o.__onWebMessengerHostReady__,o[s]=e,i)for(var t=e.init.apply(e,i),n=0;n<d.length;n++){var r=d[n];t="t"===r.type?t.then(r.next):t.catch(r.next)}a&&e.render.apply(e,a),h&&e.destroy.apply(e,h);for(n=0;n<u.length;n++)e.on.apply(e,u[n])};var n=new XMLHttpRequest;n.addEventListener("load",t),n.open("GET","https://"+e+".webloader.smooch.io/",!0),n.responseType="json",n.send()
-    }(window,document,"Smooch","6182f7e81f6e6500e1d1c2d5","5");
-</script>
-{% endcomment %}
-<!-- End Smooch / Sunshine Convo Snippet 1/2 -->
+
   
     <script src="https://js.afterpay.com/afterpay-1.x.js" data-analytics-enabled
  id="afterpay-placement"
@@ -108,17 +100,6 @@ async ></script>
       href="https://fonts.gstatic.com"
       crossorigin />
 
-    <link rel="preload"
-          as="style"
-          href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&family=Oswald:wght@300;400;700&display=swap" />
-
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&family=Oswald:wght@300;400;700&display=swap"
-          media="print" onload="this.media='all'" />
-    <noscript>
-      <link rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&family=Oswald:wght@300;400;700&display=swap" />
-    </noscript>
 
      {% include 'preconnect' %}
 
@@ -136,10 +117,6 @@ async ></script>
     {{ content_for_header }}
   {% include 'friendbuy' %}
     
-   <script type="text/javascript">   
-window.heap=window.heap||[],heap.load=function(e,t){window.heap.appid=e,window.heap.config=t=t||{};var r=document.createElement("script");r.type="text/javascript",r.async=!0,r.src="https://cdn.heapanalytics.com/js/heap-%22+e+%22.js%22;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(r,a);for(var n=function(e){return function(){heap.push([e].concat(Array.prototype.slice.call(arguments,0)))}},p=["addEventProperties","addUserProperties","clearEventProperties","identify","resetIdentity","removeEventProperty","setEventProperties","track","unsetEventProperty"],o=0;o<p.length;o++)heap[p[o]]=n(p[o])};   
-heap.load("2167326671"); 
-</script>
 </head>
 
   <body>
@@ -170,9 +147,6 @@ heap.load("2167326671");
     {{ 'player-chunk-one.js' | asset_url | script_tag }}
     {{ 'player-chunk-two.js' | asset_url | script_tag }}
     {%- endif -%}
- <!-- Smooch / Sunshine Convo Snippet 2/2 -->   
-{% comment %} {{ 'sunco-chat.js' | asset_url | script_tag }} {% endcomment %}
- <!-- End Smooch / Sunshine Convo Snippet 2/2 --> 
 
     <script src="{{ 'custom.js' | asset_url }}" defer='defer'></script>
     <script src="{{ 'index.js' | asset_url }}" defer='defer'></script>
