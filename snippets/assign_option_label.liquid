@@ -9,6 +9,6 @@
 
 {% if value contains ':' %}
   {% assign option_value_label = value | split: ':' | last | strip %}
-  {% assign option_value_group = value | split: ':' | first | capitalize | strip %}
+  {% assign option_value_group = value | split: ':' | first | strip %}
 {% endif %}
 

@@ -21,7 +21,7 @@
 
         <label class='py025 block' data-option-label='{{ option.name }}' data-name-size="{{ option_group_names.size }}" data-option-hand="{{ option_name_handleize }}" {% if option_group_names.size > 2 and option_name_handleize == 'color' %} style="display: none"{% endif %}>
           {% include 'assign_option_label', value: option.selected_value %}
-          <span class='option-title block'><strong>{% if option_group_names.size <= 2 and option_name_handleize == 'color' %}Color{% else %}{{ option.name }}{% endif %} : </strong><span data-option-current='{{ option.name }}' {% if option_name_handleize == 'size' %}data-disabled-size="true"{% endif %}>{{ option_value_label }}</span></span>
+          <span class='option-title block'><strong>{% if option_group_names.size <= 2 and option_name_handleize == 'color' %}Color{% else %}{{ option.name }}{% endif %}: </strong><span data-option-current='{{ option.name }}' {% if option_name_handleize == 'size' %}data-disabled-size="true"{% endif %}>{{ option_value_label }}</span></span>
         </label>
 
         {% assign option_group_names = '' | split: '' %}
@@ -40,7 +40,7 @@
                   {%- comment -%}
                     <span class='caps small my05 block' data-option-label='{{ option.name }}'>{{ group }}</span>
                   {%- endcomment -%}
-                  <span class='option-title option-group-title block'><strong>{{ group }} : </strong><span class="option-group-title-value"></span></span>
+                  <span class='option-title option-group-title block'><strong>{{ group }}: </strong><span class="option-group-title-value"></span></span>
                 </label>
               {% endif %}
               <div class='radio-group f' data-option-{{ option.name | handleize }}>

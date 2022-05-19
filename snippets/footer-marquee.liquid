@@ -5,34 +5,24 @@
 <section class='full rel x y my0'>
   <div class="marquee--left x y">
     <div class="inner f jcb aie" data-component='footerMarquee'>
-      {%
-        include 'component-image' with
-        src: staggSrc,
-        alt: alt,
-        className: 'image stagg walkinDude',
-        scaleDown: true,
-        alignEnd: true,
-        irishFix: true
-      %}
-      {%
-        include 'component-image' with
-        src: atmosSrc,
-        alt: alt,
-        className: 'image atmos walkinDude',
-        scaleDown: true,
-        alignEnd: true,
-        irishFix: true
-      %}
-      {%
-        include 'component-image' with
-        src: clydeSrc,
-        alt: alt,
-        className: 'image clyde walkinDude',
-        scaleDown: true,
-        alignEnd: true,
-        irishFix: true
-      %}
-
+      <div class="image x y f rel aie stagg walkinDude is-visible is-loaded">
+        <img src="{{ staggSrc }}"
+             class='block z1 rel  x scale-down'
+             role='img'
+             alt="Kettle Bud"/>
+      </div>
+      <div class="image x y f rel aie stagg walkinDude is-visible is-loaded">
+        <img src="{{ atmosSrc }}"
+             class='block z1 rel  x scale-down'
+             role='img'
+             alt="Walkin Atmos"/>
+      </div>
+      <div class="image x y f rel aie stagg walkinDude is-visible is-loaded">
+        <img src="{{ clydeSrc }}"
+             class='block z1 rel  x scale-down'
+             role='img'
+             alt="Walkin Clyde"/>
+      </div>
     </div>
   </div>
 </section>
