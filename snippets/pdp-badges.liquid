@@ -11,7 +11,7 @@
 {%- elsif product.metafields.custom_fields["product_badges"] != blank -%}
   <div class="pdpBadges">
     {%- for item in product.metafields.custom_fields["product_badges"] -%}
-      <div class="pdpBadges-item f {% if item["product_badge_learn_more_link"] != blank %}jcb{% else %}jcc{% endif %} aic">
+      <div class="pdpBadges-item f {% if item["product_badge_learn_more_link"] != blank %}jcb{% else %}jcc{% endif %} aic {% if item["product_badge_title"] contains "the third mug personalized" %}hidden-md-down{% endif %}">
         <div class="pdpBadges-item-content f aic">
           {%- if item["product_badge_icon"] != blank  -%}
             {{ item["product_badge_icon"] }}
@@ -29,14 +29,7 @@
 
 {% endif %}
 
-<div class="pdpBadges">
-      <div class="pdpBadges-item f jcb aic">
-        <div class="pdpBadges-item-content f aic">
-            <h4 class="pdpBadges-item-content-title">Spend $200, Get a free 10 oz bag of coffee! Code: COFFEEPLEASE</h4>
-</div>
-         <u id="kl_promo_terms" class="pdpBadges-item-link" style="cursor: pointer;">Terms</u>
-      </div>
-  </div>
+
 
 
 

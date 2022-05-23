@@ -185,8 +185,44 @@ textarea {
   order: 10;
 }
 
-.o- {
+.o-11 {
+  order: 11;
+}
+
+.o-12 {
+  order: 12;
+}
+
+.o-14 {
+  order: 14;
+}
+
+.o-15 {
   order: 15;
+}
+
+.o-16 {
+  order: 16;
+}
+
+.o-17 {
+  order: 17;
+}
+
+.o-18 {
+  order: 18;
+}
+
+.o-19 {
+  order: 19;
+}
+
+.o-20 {
+  order: 20;
+}
+
+.o- {
+  order: 30;
 }
 
 .al {
@@ -16015,7 +16051,47 @@ main#root .pdp-reviews .yotpo.bottomLine .standalone-bottomline .rating-star:las
 [data-material=warm-pink-maple]:after {
   color: #edc890
 }
+    
+[data-color=peace-in-between],
+[data-material=peace-in-between] {
+  color: #fbdadf
+}
 
+[data-color=peace-in-between]:after,
+[data-material=peace-in-between]:after {
+  color: #FFCC4E
+}
+    
+[data-color=shan-shui],
+[data-material=shan-shui] {
+  color: #ffffff
+}
+
+[data-color=shan-shui]:after,
+[data-material=shan-shui]:after {
+  color: #A48CC6
+}
+    
+[data-color=the-caffeinated-cranium],
+[data-material=the-caffeinated-cranium] {
+  color: #000000
+}
+
+[data-color=the-caffeinated-cranium]:after,
+[data-material=the-caffeinated-cranium]:after {
+  color: #D4BF59
+}
+
+    
+[data-color=little-house-in-a-big-city],
+[data-material=little-house-in-a-big-city] {
+  color: #000000
+}
+
+[data-color=little-house-in-a-big-city]:after,
+[data-material=little-house-in-a-big-city]:after {
+  color: #FFFFFF
+}
 
 /*! purgecss end ignore */
 
@@ -16586,7 +16662,8 @@ em,
   margin: -1px;
   padding: 0;
   border: 0;
-  clip: rect(0 0 0 0)
+  clip: rect(0 0 0 0);
+  color: #000000;
 }
 
 .img-grayscale {
@@ -18919,8 +18996,9 @@ textarea {
   margin: 0;
 }
 
-  #PdpErrorMessage,
-#PdpUpsellErrorMessage {
+#PdpErrorMessage,
+#PdpUpsellErrorMessage,
+.PdpErrorMessage {
   display: none;
   margin-top: 16px;
   font-family: "Inter", sans-serif;
@@ -19057,9 +19135,15 @@ ul.list {
   }
 }
 
+    .counter-wrapper {  
+      width: fit-content;
+    }
+    
 .counter {
   margin-right: .5rem
 }
+    
+    
 
 .counter button,
 .counter input {

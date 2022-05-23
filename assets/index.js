@@ -9958,18 +9958,18 @@
                           .concat(r, " data-id=")
                           .concat(i, " data-key=")
                           .concat(n.key, " >\n      <a href='")
-                          .concat(c, "' class=\"cart-drawer__itemImage\">\n        <img src='")
+                          .concat(c, "' class=\"cart-drawer__itemImage\">\n        <img alt='"+ n.title +"' src='")
                           .concat(h, "' />\n      </a>\n\n      <div class='cart-drawer__itemContent f fdc'>\n        <div class='cart-drawer__itemDetails'>\n          <a href='")
                           .concat(c, "' class='cart-drawer__itemTitle'>")
                           .concat(o, "</a>\n          <div class='cart-drawer__itemOptions'>")
                           .concat(f, "</div>\n        </div>\n\n        <div class='f aic jcb pt05'>\n          <div class='cart-item__stepper aic f ")
-                          .concat(0 === a ? "is-disabled" : "", "'>\n            <div class='cart-stepper js-remove-single' data-key='" + n.key + "'>-</div>\n            <input type='text' class='cart-quantity js-single-quantity' value='")
+                          .concat(0 === a ? "is-disabled" : "", "'>\n            <div class='cart-stepper js-remove-single' data-key='" + n.key + "'>-</div>\n    <input type='text' title='Quantity selector for -"+ n.title +"' class='cart-quantity js-single-quantity' value='")
                           .concat(l, "'>\n            <div class='cart-stepper js-add-single' data-key='" + n.key + "'>+</div>\n          </div>\n\n          <div class='cart-item__price'>")
                           .concat(p, "</div>\n        </div>\n\n        <button class='button--reset cart-drawer__itemAction js-remove-item' data-key='" + n.key + "' style='display: none'>")
                           .concat(
-                              '\n  <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentcolor" stroke-width="3" style="display:inline-block;vertical-align:middle;overflow:visible;"><path d="M1.0606601717798212 1.0606601717798212 L14.939339828220179 14.939339828220179"></path><path d="M14.939339828220179 1.0606601717798212 L1.0606601717798212 14.939339828220179"></path></svg>\n',
+                              '\n  <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentcolor" stroke-width="3" style="display:inline-block;vertical-align:middle;overflow:visible;"><title>Remove icon</title><path d="M1.0606601717798212 1.0606601717798212 L14.939339828220179 14.939339828220179"></path><path d="M14.939339828220179 1.0606601717798212 L1.0606601717798212 14.939339828220179"></path></svg>\n',
                               "</button>\n")
-                          .concat('\n <button type="button" data-action="open-item-remove-popup" aria-expanded="false" class="button--reset cart-drawer__itemAction cart-drawer__remove-open"> <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentcolor" stroke-width="3" style="display:inline-block;vertical-align:middle;overflow:visible;"><path d="M1.0606601717798212 1.0606601717798212 L14.939339828220179 14.939339828220179"></path><path d="M14.939339828220179 1.0606601717798212 L1.0606601717798212 14.939339828220179"></path></svg>\n',
+                          .concat('\n <button type="button" data-action="open-item-remove-popup" aria-expanded="false" class="button--reset cart-drawer__itemAction cart-drawer__remove-open"> <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentcolor" stroke-width="3" style="display:inline-block;vertical-align:middle;overflow:visible;"><title>Remove</title><path d="M1.0606601717798212 1.0606601717798212 L14.939339828220179 14.939339828220179"></path><path d="M14.939339828220179 1.0606601717798212 L1.0606601717798212 14.939339828220179"></path></svg>\n',
                               "</button>\n </div>\n    </div>\n"
                           ))
               );
@@ -10004,19 +10004,19 @@
                           .concat(r, " data-id=")
                           .concat(i, " data-key=")
                           .concat(n.key, " >\n      <a href='")
-                          .concat(c, "' class=\"cart-drawer__itemImage\">\n        <img src='")
+                          .concat(c, "' class=\"cart-drawer__itemImage\">\n        <img alt='"+ n.title +"' src='")
                           .concat(h, "' />\n      </a>\n\n      <div class='cart-drawer__itemContent f fdc'>\n        <div class='cart-drawer__itemDetails'>\n          <a href='")
                           .concat(c, "' class='cart-drawer__itemTitle'>")
                           .concat(o, "</a>\n          <div class='cart-drawer__itemOptions'>")
                           .concat(f, "<div class='cart-drawer__personalization'>Personalized Text: ")
                           .concat(prop, "</div>\n </div>\n        </div>\n\n        <div class='f aic jcb pt05'>\n          <div class='cart-item__stepper aic f ")
-                          .concat(0 === a ? "is-disabled" : "", "'>\n            <div class='cart-stepper js-remove-single' data-key='" + n.key + "'>-</div>\n            <input type='text' class='cart-quantity js-single-quantity' value='")
+                          .concat(0 === a ? "is-disabled" : "", "'>\n            <div class='cart-stepper js-remove-single' data-key='" + n.key + "'>-</div>\n            <input type='text' title='Quantity selector for -"+ n.title +"' class='cart-quantity js-single-quantity' value='")
                           .concat(l, "'>\n            <div class='cart-stepper js-add-single' data-key='" + n.key + "'>+</div>\n          </div>\n\n          <div class='cart-item__price'>")
                           .concat(p, "</div>\n        </div>\n\n        <button class='button--reset cart-drawer__itemAction js-remove-item' data-key='" + n.key + "' style='display: none'>")
                           .concat(
-                              '\n  <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentcolor" stroke-width="3" style="display:inline-block;vertical-align:middle;overflow:visible;"><path d="M1.0606601717798212 1.0606601717798212 L14.939339828220179 14.939339828220179"></path><path d="M14.939339828220179 1.0606601717798212 L1.0606601717798212 14.939339828220179"></path></svg>\n',
+                              '\n  <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentcolor" stroke-width="3" style="display:inline-block;vertical-align:middle;overflow:visible;"><title>Remove icon</title><path d="M1.0606601717798212 1.0606601717798212 L14.939339828220179 14.939339828220179"></path><path d="M14.939339828220179 1.0606601717798212 L1.0606601717798212 14.939339828220179"></path></svg>\n',
                               "</button>\n")
-                          .concat('\n <button type="button" data-action="open-item-remove-popup" aria-expanded="false" class="button--reset cart-drawer__itemAction cart-drawer__remove-open"> <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentcolor" stroke-width="3" style="display:inline-block;vertical-align:middle;overflow:visible;"><path d="M1.0606601717798212 1.0606601717798212 L14.939339828220179 14.939339828220179"></path><path d="M14.939339828220179 1.0606601717798212 L1.0606601717798212 14.939339828220179"></path></svg>\n',
+                          .concat('\n <button type="button" data-action="open-item-remove-popup" aria-expanded="false" class="button--reset cart-drawer__itemAction cart-drawer__remove-open"> <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentcolor" stroke-width="3" style="display:inline-block;vertical-align:middle;overflow:visible;"><title>Remove</title><path d="M1.0606601717798212 1.0606601717798212 L14.939339828220179 14.939339828220179"></path><path d="M14.939339828220179 1.0606601717798212 L1.0606601717798212 14.939339828220179"></path></svg>\n',
                               "</button>\n </div>\n    </div>\n"
                           ))
               );
@@ -10050,12 +10050,12 @@
                           .concat(r, " data-id=")
                           .concat(i, " data-key=")
                           .concat(n.key, " >\n      <div data-per-product='")
-                          .concat('Personalization product', "' class=\"cart-drawer__itemImage\">\n        <img src='")
+                          .concat('Personalization product', "' class=\"cart-drawer__itemImage\">\n        <img alt='"+ n.title +"' src='")
                           .concat(h, "' />\n      </div>\n\n      <div class='cart-drawer__itemContent f fdc'>\n        <div class='cart-drawer__itemDetails'>\n          <span data-per-product='")
                           .concat('Personalization product', "' class='cart-drawer__itemTitle'>")
                           .concat(o, "</span>\n          <div class='cart-drawer__itemOptions'>")
                           .concat(f, "</div>\n        </div>\n\n        <div class='f aic jce pt05'>\n          <div style='display: none' class='cart-item__stepper aic f ")
-                          .concat(0 === a ? "is-disabled" : "", "'>\n            <div class='cart-stepper js-remove-single' data-key='" + n.key + "'>-</div>\n            <input type='text' class='cart-quantity js-single-quantity' value='")
+                          .concat(0 === a ? "is-disabled" : "", "'>\n            <div class='cart-stepper js-remove-single' data-key='" + n.key + "'>-</div>\n            <input type='text' title='Quantity selector for -"+ n.title +"' class='cart-quantity js-single-quantity' value='")
                           .concat(l, "'>\n            <div class='cart-stepper js-add-single' data-key='" + n.key + "'>+</div>\n          </div>\n\n          <div class='cart-item__price'>")
                           .concat(p, "</div>\n        </div>\n\n")
                           .concat('\n', "</div>\n    </div>\n"
@@ -10091,18 +10091,18 @@
                           .concat(r, " data-id=")
                           .concat(i, " data-key=")
                           .concat(n.key, " >\n      <div data-free-product='")
-                          .concat('Free gift', "' class=\"cart-drawer__itemImage\">\n        <img src='")
+                          .concat('Free gift', "' class=\"cart-drawer__itemImage\">\n        <img alt='"+ n.title +"' src='")
                           .concat(h, "' />\n      </div>\n\n      <div class='cart-drawer__itemContent f fdc'>\n        <div class='cart-drawer__itemDetails'>\n          <span data-free-product='")
                           .concat('Free gift', "' class='cart-drawer__itemTitle'>")
                           .concat(o, "</span>\n          <div class='cart-drawer__itemOptions'>")
                           .concat(f, "</div>\n        </div>\n\n        <div class='f aic jce pt05'>\n          <div style='display: none' class='cart-item__stepper aic f ")
-                          .concat(0 === a ? "is-disabled" : "", "'>\n            <div class='cart-stepper js-remove-single' data-key='" + n.key + "'>-</div>\n            <input type='text' class='cart-quantity js-single-quantity' value='")
+                          .concat(0 === a ? "is-disabled" : "", "'>\n            <div class='cart-stepper js-remove-single' data-key='" + n.key + "'>-</div>\n            <input type='text' title='Quantity selector for -"+ n.title +"' class='cart-quantity js-single-quantity' value='")
                           .concat(l, "'>\n            <div class='cart-stepper js-add-single' data-key='" + n.key + "'>+</div>\n          </div>\n\n          <div class='cart-item__price'>")
                           .concat('Free', "</div>\n        </div>\n\n        <button class='button--reset cart-drawer__itemAction js-remove-item' data-key='" + n.key + "' style='display: none'>")
                           .concat(
-                              '\n  <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentcolor" stroke-width="3" style="display:inline-block;vertical-align:middle;overflow:visible;"><path d="M1.0606601717798212 1.0606601717798212 L14.939339828220179 14.939339828220179"></path><path d="M14.939339828220179 1.0606601717798212 L1.0606601717798212 14.939339828220179"></path></svg>\n',
+                              '\n  <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentcolor" stroke-width="3" style="display:inline-block;vertical-align:middle;overflow:visible;"><title>Remove icon</title><path d="M1.0606601717798212 1.0606601717798212 L14.939339828220179 14.939339828220179"></path><path d="M14.939339828220179 1.0606601717798212 L1.0606601717798212 14.939339828220179"></path></svg>\n',
                               "</button>\n")
-                          .concat('\n <button type="button" data-action="open-item-remove-popup" data-gift-product="' + Object.keys(n.properties)[0] + '" aria-expanded="false" class="button--reset cart-drawer__itemAction cart-drawer__remove-open"> <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentcolor" stroke-width="3" style="display:inline-block;vertical-align:middle;overflow:visible;"><path d="M1.0606601717798212 1.0606601717798212 L14.939339828220179 14.939339828220179"></path><path d="M14.939339828220179 1.0606601717798212 L1.0606601717798212 14.939339828220179"></path></svg>\n',
+                          .concat('\n <button type="button" data-action="open-item-remove-popup" data-gift-product="' + Object.keys(n.properties)[0] + '" aria-expanded="false" class="button--reset cart-drawer__itemAction cart-drawer__remove-open"> <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentcolor" stroke-width="3" style="display:inline-block;vertical-align:middle;overflow:visible;"><title>Remove</title><path d="M1.0606601717798212 1.0606601717798212 L14.939339828220179 14.939339828220179"></path><path d="M14.939339828220179 1.0606601717798212 L1.0606601717798212 14.939339828220179"></path></svg>\n',
                               "</button>\n </div>\n    </div>\n"
                           ))
               );
@@ -10142,18 +10142,18 @@
                           .concat(r, " data-id=")
                           .concat(i, " data-key=")
                           .concat(n.key, " >\n      <div data-gift-box-product='")
-                          .concat('Gift box', "' class=\"cart-drawer__itemImage\">\n        <img src='")
+                          .concat('Gift box', "' class=\"cart-drawer__itemImage\">\n        <img alt='"+ n.title +"' src='")
                           .concat(h, "' />\n      </div>\n\n      <div class='cart-drawer__itemContent f fdc'>\n        <div class='cart-drawer__itemDetails'>\n          <span data-gift-box-product='")
                           .concat('Gift box', "' class='cart-drawer__itemTitle'>")
                           .concat(o, "</span>\n          <div class='cart-drawer__itemOptions f fdc ais'>")
                           .concat(giftBoxDescriptionBlock, "</div>\n        </div>\n\n        <div class='f aic jce pt05'>\n          <div style='display:none;' class='cart-item__stepper test aic f ")
-                          .concat(0 === a ? "is-disabled" : "", "'>\n            <div class='cart-stepper js-remove-single' data-key='" + n.key + "'>-</div>\n            <input type='text' class='cart-quantity js-single-quantity' value='")
+                          .concat(0 === a ? "is-disabled" : "", "'>\n            <div class='cart-stepper js-remove-single' data-key='" + n.key + "'>-</div>\n            <input type='text' title='Quantity selector for -"+ n.title +"' class='cart-quantity js-single-quantity' value='")
                           .concat(l, "'>\n            <div class='cart-stepper js-add-single' data-key='" + n.key + "'>+</div>\n          </div>\n\n          <div class='cart-item__price'>")
                           .concat(p, "</div>\n        </div>\n\n        <button class='button--reset cart-drawer__itemAction js-remove-item' data-key='" + n.key + "' style='display: none'>")
                           .concat(
-                              '\n  <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentcolor" stroke-width="3" style="display:inline-block;vertical-align:middle;overflow:visible;"><path d="M1.0606601717798212 1.0606601717798212 L14.939339828220179 14.939339828220179"></path><path d="M14.939339828220179 1.0606601717798212 L1.0606601717798212 14.939339828220179"></path></svg>\n',
+                              '\n  <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentcolor" stroke-width="3" style="display:inline-block;vertical-align:middle;overflow:visible;"><title>Remove icon</title><path d="M1.0606601717798212 1.0606601717798212 L14.939339828220179 14.939339828220179"></path><path d="M14.939339828220179 1.0606601717798212 L1.0606601717798212 14.939339828220179"></path></svg>\n',
                               "</button>\n")
-                          .concat('\n <button type="button" data-action="open-item-remove-popup" data-gift-product="true" aria-expanded="false" class="button--reset cart-drawer__itemAction cart-drawer__remove-open"> <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentcolor" stroke-width="3" style="display:inline-block;vertical-align:middle;overflow:visible;"><path d="M1.0606601717798212 1.0606601717798212 L14.939339828220179 14.939339828220179"></path><path d="M14.939339828220179 1.0606601717798212 L1.0606601717798212 14.939339828220179"></path></svg>\n',
+                          .concat('\n <button type="button" data-action="open-item-remove-popup" data-gift-product="true" aria-expanded="false" class="button--reset cart-drawer__itemAction cart-drawer__remove-open"> <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentcolor" stroke-width="3" style="display:inline-block;vertical-align:middle;overflow:visible;"><title>Remove</title><path d="M1.0606601717798212 1.0606601717798212 L14.939339828220179 14.939339828220179"></path><path d="M14.939339828220179 1.0606601717798212 L1.0606601717798212 14.939339828220179"></path></svg>\n',
                               "</button>\n </div>\n    </div>\n"
                           ))
               );

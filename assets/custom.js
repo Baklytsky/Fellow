@@ -243,7 +243,7 @@ theme.addProduct = function () {
       if (error.status == 422) {
         $('#PdpErrorMessage').text(error.responseJSON.description).fadeIn('slow');
 
-        setTimeout(function () {$('#PdpErrorMessage').fadeOut('slow').text('');}, 3500);
+        setTimeout(function () {$('#PdpErrorMessage').text('').hide();}, 3500);
       }
     }
   })
@@ -1157,7 +1157,7 @@ theme.pdpMain = function () {
         error: function (error) {
           if (error.status === 422) {
             $('#PdpErrorMessage').text(error.responseJSON.description).fadeIn('slow');
-            setTimeout(function () {$('#PdpErrorMessage').fadeOut('slow').text('');}, 5500);
+            setTimeout(function () {$('#PdpErrorMessage').text('').hide();}, 5500);
           }
         }
       })
@@ -2473,6 +2473,28 @@ theme.GLOBAL = function () {
     theme.searchPage();
   }
 
+  if ($('.cmProducts__card').length) {
+    $(document).on('click', '[data-marketplace-atc]', function (e) {
+      e.preventDefault();
+      $.ajax({
+        type: 'POST',
+        url: '/cart/add.js',
+        data: $(this).parents('form').serialize(),
+        dataType: 'json',
+        success: function() {
+          CartDrawer.emit("cart:updating");
+          UpdateCart('', '', true)
+        },
+        error: (error) => {
+          if (error.status === 422) {
+            $(this).parents('form').find('.PdpErrorMessage').text(error.responseJSON.description).fadeIn('slow');
+            setTimeout(() => {$(this).parents('form').find('.PdpErrorMessage').text('').hide();}, 3500);
+          }
+        }
+      })
+    })
+  }
+
   /* Video play & pause button */
 
   $(document).on('click', '.mute-video', function () {
@@ -2519,4 +2541,35 @@ theme.GLOBAL = function () {
     $(this).parent().find(".play-button").removeClass('hidden').fadeIn()
     $(this).parent().find(".pause-button").fadeOut()
   });
+
+  if ($('form[action^="htpps://www.facebook.com"]').length) {
+    $('form[action^="htpps://www.facebook.com"]').attr('aria-hidden', 'true')
+  }
 }
+
+class dynamicRecommendations extends HTMLElement {
+  constructor() {
+    super();
+    this.productId = this.getAttribute('data-product-id');
+    this.limit = this.getAttribute('data-product-limit');
+    this.sectionId = this.getAttribute('data-section-id');
+    this.recommendationContainer = this.querySelector('[data-product-row]');
+    this.recommendUrl = `${window.location.origin}/recommendations/products?product_id=${this.productId}&limit=${this.limit}&section_id=${this.sectionId}`;
+    this.loadRecommendations();
+  }
+
+  loadRecommendations() {
+    fetch(this.recommendUrl)
+      .then(response => response.text())
+      .then((text) => {
+        const html = new DOMParser().parseFromString(text, 'text/html'),
+              recommendedContent = html.querySelector('[data-product-row]');
+        if (recommendedContent) this.recommendationContainer.innerHTML = recommendedContent.innerHTML;
+        const recommendedProducts = this.querySelectorAll('.productCard');
+        if (typeof window.yotpo !== "undefined") window.yotpo.initWidgets();
+        recommendedProducts.forEach((Card) => theme.updateSwatches(Card));
+      });
+  }
+}
+
+customElements.define('dynamic-recommendations', dynamicRecommendations);
