@@ -1,28 +1,6 @@
 <!DOCTYPE html>
 <html lang='{{ shop.locale }}'>
 <head>
-  {%- comment -%}
-    <style>.async-hide {
-        opacity: 0 !important
-      }
-    </style>
-    <script>(function (a, s, y, n, c, h, i, d, e) {
-        s.className += ' ' + y;
-        h.start = 1 * new Date;
-        h.end = i = function () {
-          s.className = s.className.replace(RegExp(' ?' + y), '')
-        };
-        (a[n] = a[n] || []).hide = h;
-        setTimeout(function () {
-          i();
-          h.end = null
-        }, c);
-        h.timeout = c;
-      })
-      (window, document.documentElement, 'async-hide', 'dataLayer', 4000, {'OPT-KLVKQBN': true});
-    </script>
-  {%- endcomment -%}
-
   <script src="https://www.googleoptimize.com/optimize.js?id=OPT-KLVKQBN"></script>
   <meta charset='utf-8'>
   <meta name='viewport' content='width=device-width,initial-scale=1,shrink-to-fit=no'>
@@ -89,10 +67,8 @@
 
   
     <script src="https://js.afterpay.com/afterpay-1.x.js" data-analytics-enabled
- id="afterpay-placement"
-       data-min="50.00"
-       data-max="2000.00"
-async ></script>
+           id="afterpay-placement" data-min="50.00" data-max="2000.00" async>
+    </script>
     
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -121,12 +97,12 @@ async ></script>
       crossorigin />
 
 
-     {% include 'preconnect' %}
+    {% include 'preconnect' %}
 
     {{ 'index.css' | asset_url | stylesheet_tag }}
     {{ 'custom.scss.css' | asset_url | stylesheet_tag }}
     
- {%- if request.path contains 'carter-move-mug' or request.path contains 'carter-everywhere-mug' or product.handle contains 'carter-move-mug-with-360-sip-lid' -%}
+    {%- if request.path contains 'carter-move-mug' or request.path contains 'carter-everywhere-mug' or product.handle contains 'carter-move-mug-with-360-sip-lid' -%}
     {{ 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css' | stylesheet_tag }}
     {{ 'player_customized.css' | asset_url | stylesheet_tag }}
       {{ 'player-chunk.css' | asset_url | stylesheet_tag }}
@@ -135,7 +111,7 @@ async ></script>
     {%- endif -%}
     
     {{ content_for_header }}
-  {% include 'friendbuy' %}
+    {% include 'friendbuy' %}
 
 </head>
 
@@ -161,7 +137,7 @@ async ></script>
     {{ 'jquery.ba-throttle-debounce.min.js' | asset_url | script_tag }}
     {{ 'custom-additional-vendor.js' | asset_url | script_tag }}
   
- {%- if request.path contains 'carter-move-mug' or request.path contains 'carter-everywhere-mug' or product.handle contains 'carter-move-mug-with-360-sip-lid' -%}
+    {%- if request.path contains 'carter-move-mug' or request.path contains 'carter-everywhere-mug' or product.handle contains 'carter-move-mug-with-360-sip-lid' -%}
     {{ 'player-event.js' | asset_url | script_tag }}
     {{ 'player-inline.js' | asset_url | script_tag }}
     {{ 'player-chunk-one.js' | asset_url | script_tag }}
@@ -171,12 +147,12 @@ async ></script>
     <script src="{{ 'custom.js' | asset_url }}" defer='defer'></script>
     <script src="{{ 'index.js' | asset_url }}" defer='defer'></script>
     {% comment %} <script src="https://a.klaviyo.com/media/js/onsite/onsite.js"></script> {% endcomment %}
-  <script type="text/javascript">
-document.querySelector("#kl_promo_terms").addEventListener('click',function (){
-        var _klOnsite = window._klOnsite || []
-        _klOnsite.openForm('SJpmKX', () => console.log("you triggered the form!"))
-    });
-</script>
+    <script type="text/javascript">
+      document.querySelector("#kl_promo_terms").addEventListener('click',function (){
+              var _klOnsite = window._klOnsite || []
+              _klOnsite.openForm('SJpmKX', () => console.log("you triggered the form!"))
+          });
+    </script>
   </body>
 
   <script>
