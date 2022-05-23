@@ -227,12 +227,12 @@
             "type": "sub_menu",
             "settings": {
               "target": "bundle-save",
-              "image_1": "shopify:\/\/shop_images\/Ode-Coffee-Grinder-01-Matte-Black-08.jpg",
+              "image_1": "shopify:\/\/shop_images\/Move-Mug-Lifestyle.jpg",
               "title_1": "Shop All Kits + Bundles",
               "url_1": "shopify:\/\/collections\/coffee-products-kits-bundles",
-              "image_2": "shopify:\/\/shop_images\/Mask_Group_1.png",
-              "title_2": "The Brewing Hero Kit",
-              "url_2": "shopify:\/\/products\/brewing-hero",
+              "image_2": "shopify:\/\/shop_images\/Ode_Fellow_20200826-148.jpg",
+              "title_2": "The Next Level Kit",
+              "url_2": "shopify:\/\/products\/next-level-kit",
               "title_3": "",
               "url_3": "",
               "title_4": "",
@@ -309,8 +309,9 @@
           "center_menu": "new-main-menu",
           "menu_left": "new-left-menu-1",
           "menu_right": "new-right-menu",
+          "mobile_menu": "",
           "show_announcement": true,
-          "announcement_text": "Explore our New Curated Coffee Collection <u>Shop Now<\/u>",
+          "announcement_text": "New Launch: Fellow's Coffee Collection <u>Shop Now -&gt;<\/u>",
           "announcement_link": "https:\/\/fellowproducts.com\/pages\/coffee-marketplace",
           "enable_timer": false,
           "end_date": "Sep 30, 2021 07:30:00 GMT-08:00"
@@ -439,17 +440,17 @@
             "type": "splitSlide",
             "settings": {
               "splitSlide__layout": "right",
-              "heroSlide": "shopify:\/\/shop_images\/nordic_homepage_option_02_optimized.gif",
+              "heroSlide": "shopify:\/\/shop_images\/Image_3.png",
               "desktopAlignment": "center",
               "mobileAlignment": "center",
-              "heroSlide__header": "The Nordic Coffee Collection",
-              "heroSlide__subheader": "They do things differently up there. Discover coffees from four international roasters who set the world standard for coffee.",
-              "subSlide__bgColor": "#233539",
-              "subSlide__textColor": "#FFFFFF",
-              "heroSlide__ctaURL": "shopify:\/\/pages\/curated-coffee-collection",
-              "heroSlide__ctaCopy": "Shop Now",
+              "heroSlide__header": "Lush Summer",
+              "heroSlide__subheader": "Fill your morning with great blooms and delicious coffee.",
+              "subSlide__bgColor": "#e0deec",
+              "subSlide__textColor": "#231f20",
+              "heroSlide__ctaURL": "shopify:\/\/products\/stagg-ekg-electric-pour-over-kettle",
+              "heroSlide__ctaCopy": "Shop Stagg EKG",
               "heroSlide__ctaColor": "black",
-              "heroSlide__ctaSubtext": ""
+              "heroSlide__ctaSubtext": "<span>★★★★★ | Elizabeth H.<br>\nMy new kettle makes making my pour-over coffee easy and quick. It is a beautiful addition to my counter as well!\n<a href=\"https:\/\/fellowproducts.com\/products\/stagg-ekg-electric-pour-over-kettle#pdp-reviews\" style=\"text-decoration:underline;\">Read more reviews<\/a><\/span>"
             }
           }
         },
@@ -469,8 +470,10 @@
         "type": "product-template",
         "settings": {
           "show_breadcrumbs": true,
-          "show_quantity_selector": false,
-          "quantity_selector_inline": false
+          "show_quantity_selector": true,
+          "quantity_selector_inline": false,
+          "show_product_recommendations": true,
+          "product_limit": 8
         }
       },
       "collection-subcollection-template": {
@@ -825,13 +828,13 @@
         "type": "hp-iwt",
         "settings": {
           "enable_section": true,
-          "image": "shopify:\/\/shop_images\/Coffee_Marketplace_780x618_Product_Feature_1.jpg",
+          "image": "shopify:\/\/shop_images\/coffee_marketplace_Header-Mobile_1.jpg",
           "layout": "right",
-          "header": "Seasonal tasting menu",
-          "description": "<p>We’ve curated a selection of our favorite coffees from some of the best roasters in the world right now.<\/p>",
-          "bg_color": "",
+          "header": "Seasonal menu",
+          "description": "<p>We just launched Fellow’s new Coffee Collection: a rotation of our latest coffee obsessions, updated seasonally. <\/p>",
+          "bg_color": "#ffffff",
           "text_color": "",
-          "cta_url": "shopify:\/\/collections\/coffee",
+          "cta_url": "shopify:\/\/pages\/curated-coffee-collection",
           "cta_copy": "Shop Coffee",
           "cta_color": "btn--dark"
         }

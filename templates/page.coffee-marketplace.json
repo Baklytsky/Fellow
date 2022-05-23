@@ -94,7 +94,7 @@
       ],
       "settings": {
         "heading": "This Season: Nordic Coffees",
-        "description": "Discover the delicate roast profile that has influenced the whole specialty coffee world."
+        "description": "Discover the delicate light roast profile that has influenced the whole specialty coffee world."
       }
     },
     "1649840683b4aca1fd": {
@@ -141,6 +141,20 @@
     "1650645747c17529af": {
       "type": "coffee-marketplace-products",
       "blocks": {
+        "2115e373-8bab-4923-a85d-ebece997e478": {
+          "type": "product",
+          "settings": {
+            "product": "rwanda-kanzu-12",
+            "title_1": "Roasted In",
+            "description_1": "Rogers, Arkansas",
+            "title_2": "Grown In",
+            "description_2": "{{ block.settings.product.metafields.coffee.attribute_2.value }}",
+            "title_3": "We Tasted",
+            "description_3": "{{ block.settings.product.metafields.coffee.attribute_3.value }}",
+            "title_4": "Why Try It",
+            "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
+          }
+        },
         "6982e6ea-0c0d-449d-8d24-32a4957c3b6d": {
           "type": "product",
           "settings": {
@@ -169,24 +183,10 @@
             "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
           }
         },
-        "2115e373-8bab-4923-a85d-ebece997e478": {
+        "4ea87f05-09e8-444b-ae4d-0856d6d03146": {
           "type": "product",
           "settings": {
-            "product": "rwanda-kanzu-12",
-            "title_1": "Roasted In",
-            "description_1": "Rogers, Arkansas",
-            "title_2": "Grown In",
-            "description_2": "{{ block.settings.product.metafields.coffee.attribute_2.value }}",
-            "title_3": "We Tasted",
-            "description_3": "{{ block.settings.product.metafields.coffee.attribute_3.value }}",
-            "title_4": "Why Try It",
-            "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
-          }
-        },
-        "c71c537e-331b-4b08-980b-9b905e236cf5": {
-          "type": "product",
-          "settings": {
-            "product": "tanzania-lloma-natural",
+            "product": "monarch",
             "title_1": "Roasted In",
             "description_1": "Rogers, Arkansas",
             "title_2": "Grown In",
@@ -211,20 +211,6 @@
             "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
           }
         },
-        "4ea87f05-09e8-444b-ae4d-0856d6d03146": {
-          "type": "product",
-          "settings": {
-            "product": "monarch",
-            "title_1": "Roasted In",
-            "description_1": "Rogers, Arkansas",
-            "title_2": "Grown In",
-            "description_2": "{{ block.settings.product.metafields.coffee.attribute_2.value }}",
-            "title_3": "We Tasted",
-            "description_3": "{{ block.settings.product.metafields.coffee.attribute_3.value }}",
-            "title_4": "Why Try It?",
-            "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
-          }
-        },
         "f1c6aca2-ca7d-49cb-9203-80994c022cb4": {
           "type": "product",
           "settings": {
@@ -232,6 +218,20 @@
             "title_1": "Grown In",
             "description_1": "{{ block.settings.product.metafields.coffee.attribute_1.value }}",
             "title_2": "Roasted In",
+            "description_2": "{{ block.settings.product.metafields.coffee.attribute_2.value }}",
+            "title_3": "We Tasted",
+            "description_3": "{{ block.settings.product.metafields.coffee.attribute_3.value }}",
+            "title_4": "Why Try It?",
+            "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
+          }
+        },
+        "c71c537e-331b-4b08-980b-9b905e236cf5": {
+          "type": "product",
+          "settings": {
+            "product": "tanzania-lloma-natural",
+            "title_1": "Roasted In",
+            "description_1": "Rogers, Arkansas",
+            "title_2": "Grown In",
             "description_2": "{{ block.settings.product.metafields.coffee.attribute_2.value }}",
             "title_3": "We Tasted",
             "description_3": "{{ block.settings.product.metafields.coffee.attribute_3.value }}",
@@ -283,20 +283,20 @@
         }
       },
       "block_order": [
+        "2115e373-8bab-4923-a85d-ebece997e478",
         "6982e6ea-0c0d-449d-8d24-32a4957c3b6d",
         "e3e50d28-c549-4c16-9115-8f61c1011e5c",
-        "2115e373-8bab-4923-a85d-ebece997e478",
-        "c71c537e-331b-4b08-980b-9b905e236cf5",
-        "7b0a213d-415f-4371-9680-cae6f7d230ab",
         "4ea87f05-09e8-444b-ae4d-0856d6d03146",
+        "7b0a213d-415f-4371-9680-cae6f7d230ab",
         "f1c6aca2-ca7d-49cb-9203-80994c022cb4",
+        "c71c537e-331b-4b08-980b-9b905e236cf5",
         "9bc02913-d646-4cde-b261-2b4ae4a24550",
         "a49713bc-0826-4ae9-bc9c-7d03b3b2c981",
         "139fb58b-bf5e-4304-b425-1e1341179336"
       ],
       "settings": {
         "heading": "Want More? Here are our Fellow Favorites",
-        "description": "We try hundreds of coffees so you don't have to. Here are some of our recent favorites state-side. Ordered from our most recent obsessions to old time favorites."
+        "description": "We try hundreds of coffees so you don’t have to. Here are some of our recent favorites state-side. Arranged from our latest obsessions to the endlessly repeatable."
       }
     },
     "1649944546d9b124de": {
