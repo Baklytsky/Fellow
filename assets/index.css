@@ -1529,6 +1529,10 @@ https://flickity.metafizzy.co
   --clydePurple: #d1b3d3
 }
 
+.cw {
+  color: var(--white);
+}
+
 .bg-white {
   background-color: var(--white)
 }
