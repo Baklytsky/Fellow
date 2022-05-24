@@ -20,8 +20,10 @@
           
                   {%- if value contains 'Limited Edition:' -%}
                     {%- assign color_name = value | split: 'Limited Edition:' | last | strip -%}
-                    {%- elsif value contains 'Wooden Accents:' -%}
-                    {%- assign color_name = value | split: 'Wooden Accents:' | last | strip -%}
+                     {%- elsif value contains 'Wooden Accents:' -%}
+                            {%- assign color_name = value | split: 'Wooden Accents:' | last | handleize -%}
+                      {%- elsif value contains 'Artist Series:' -%}
+                            {%- assign color_name = value | split: 'Artist Series:' | last | handleize -%}
                   {%- endif -%}
                 {%- endif -%}
 

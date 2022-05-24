@@ -285,6 +285,22 @@
               "title_4": "",
               "url_4": ""
             }
+          },
+          "07578aa3-3e0e-41c3-b75d-efe854f51c7a": {
+            "type": "sub_menu",
+            "settings": {
+              "target": "fathers-day-gifts",
+              "image_1": "shopify:\/\/shop_images\/ModuleImage_1_Module_2.png",
+              "title_1": "Shop Father's Day Gifts",
+              "url_1": "shopify:\/\/collections\/fathers-day-gifts",
+              "image_2": "shopify:\/\/shop_images\/Carter-Move-Mug-05-Mint-Chip-04.jpg",
+              "title_2": "Shop Drinkware",
+              "url_2": "shopify:\/\/collections\/serve",
+              "title_3": "",
+              "url_3": "",
+              "title_4": "",
+              "url_4": ""
+            }
           }
         },
         "block_order": [
@@ -299,7 +315,8 @@
           "89a2c721-dfe0-4b4d-a289-0aa84be363f8",
           "ae1f64c0-e3cd-4973-a1f8-951b8ea29882",
           "53d5318d-237f-4dd8-a68d-dff2daa5f0ce",
-          "5eddb719-5b0d-490f-9055-2a74fe76d53a"
+          "5eddb719-5b0d-490f-9055-2a74fe76d53a",
+          "07578aa3-3e0e-41c3-b75d-efe854f51c7a"
         ],
         "settings": {
           "logo": "shopify:\/\/shop_images\/Fellow-Logo-black.png",
@@ -809,14 +826,14 @@
         "type": "hp-iwt",
         "settings": {
           "enable_section": true,
-          "image": "shopify:\/\/shop_images\/Product_Feature_Module_-_Mostly_Filter_Kits_1__2x_cda365cf-bcce-4e01-b788-e236f631a958.png",
+          "image": "shopify:\/\/shop_images\/780x618_px_1.png",
           "layout": "left",
-          "header": "Refill here",
-          "description": "<p>Don’t run out when you’re running out. Get more filters and a Carter Move Mug in one convenient kit.<\/p>",
+          "header": "Gifts we picked for Dad",
+          "description": "<p>Give him sleek gear guaranteed to make his year!<\/p>",
           "bg_color": "",
           "text_color": "",
-          "cta_url": "shopify:\/\/products\/mostly-filters",
-          "cta_copy": "Shop Mostly Filters",
+          "cta_url": "shopify:\/\/collections\/fathers-day-gifts",
+          "cta_copy": "Shop Gifts For Dad",
           "cta_color": "btn--dark"
         }
       },
