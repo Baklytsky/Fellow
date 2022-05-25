@@ -14620,6 +14620,8 @@
                 var a = "There are only ".concat(r, " of that product available, requested ").concat(o, ".");
                 throw Dr.emit("error", a), new Error(a)
               }
+              // Add property (_recommended_product) if product is recommended
+              if (window.location.search.indexOf('pr_prod_strat') !== -1) n._recommended_product = true;
               return J(t.id, e, true, n)
             }))
           }(a, r.elements.quantity.value);
