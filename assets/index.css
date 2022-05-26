@@ -22890,18 +22890,17 @@ input[name=product_search_field] {
   padding-bottom: 24px;
 }
 
+.option-groups__group .radio-group {
+  flex-wrap: wrap;
+}
+
+.option-groups__group .radio-group .radio {
+  margin-bottom: 4px;
+}
+
 @media screen and (max-width: 991.98px) {
   .pdpMain__details {
     padding: 1rem
-  }
-
-
-  .option-groups__group .radio-group {
-    flex-wrap: wrap;
-  }
-
-  .option-groups__group .radio-group .radio {
-    margin-bottom: 4px;
   }
 }
 
