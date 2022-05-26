@@ -15,13 +15,6 @@ Uncomment to include
 {% else %}
   <div class='f fdr jcb' id='atc-sticky-wrapper'>
 {% endif %}
-  {% unless template contains 'gift_card' %}
-    {% if section.settings.show_quantity_selector and section.settings.quantity_selector_inline %}
-      <div class="f is-inline">
-        {% include 'component-counter' %}
-      </div>
-    {% endif %}
-  {% endunless %}
     {%- assign hasPreorderTag = false -%}
     {%- if product.tags contains 'preorder' -%}
       {%- assign hasPreorderTag = true -%}

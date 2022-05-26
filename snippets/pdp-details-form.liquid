@@ -2,11 +2,9 @@
 {% comment %} Always include product-options, product.js:20 reads from it for ATC {% endcomment %}
 {% include 'product-options' %}
 
-{% if section.settings.quantity_selector_inline != true %}
-  <div class='pb15' {% if section.settings.show_quantity_selector !=true or product.tags contains 'gift' %}style='display:none'{% endif %}>
-    {% include 'component-counter' %}
-  </div>
-{% endif %}
+<div class='pb15' {% if section.settings.show_quantity_selector !=true or product.tags contains 'gift' %}style='display:none'{% endif %}>
+  {% include 'component-counter' %}
+</div>
 
 {% comment %}
 Uncomment to include
@@ -21,13 +19,6 @@ Uncomment to include
 {% else %}
   <div class='f fdr fw' id='atc-wrapper'>
 {% endif %}
-  {% unless template contains 'gift_card' %}
-    {% if section.settings.show_quantity_selector and section.settings.quantity_selector_inline %}
-      <div class="f is-inline">
-        {% include 'component-counter' %}
-      </div>
-    {% endif %}
-  {% endunless %}
     {%- assign hasPreorderTag = false -%}
     {%- if product.tags contains 'preorder' -%}
       {%- assign hasPreorderTag = true -%}

@@ -7,7 +7,17 @@
 
 <section class='pdpMain__details z2 rel'>
 
-
+  <div class='pdpStickyBar' {% if section.settings.show_sticky_bar != true %} style="display: none; visibility: hidden"{% endif %}>
+    <div class="pdpStickyBar__wrapper">
+      <div class='pdpCopy__header'>
+        <div class='f jcb aic'>
+          <h1 class='pdpCopy__header-title'>{{ product.title }}</h1>
+          <h2 data-selected-var-price class="ml1 visually-hidden">{{ current_variant.price | money | remove: '.00' }}</h2>
+        </div>
+      </div>
+      {% include 'pdp-details-sticky-form' %}
+    </div>
+  </div>
 
   {% comment %} <form action='/cart/add' method='post' enctype='multipart/form-data' data-component='productForm'> {% endcomment %}
   {% form 'product', product, data-product-form: dataProductForm, class: 'shopify-product-form pdpForm' %}

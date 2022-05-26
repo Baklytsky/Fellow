@@ -6,11 +6,10 @@
 
 {%- assign component_button_id = 'pdp-atc' -%}
 
-{% if section.settings.quantity_selector_inline != true %}
-  <div class='pb15' {% if section.settings.show_quantity_selector !=true or product.tags contains 'gift' %}style='display:none'{% endif %}>
-    {% include 'component-counter' %}
-  </div>
-{% endif %}
+
+<div class='pb15' {% if section.settings.show_quantity_selector !=true or product.tags contains 'gift' %}style='display:none'{% endif %}>
+  {% include 'component-counter' %}
+</div>
 
 {% comment %}
 Uncomment to include
@@ -103,13 +102,6 @@ Uncomment to include
 {% endif %}
 
 <div class='f {% if template contains 'gift_card' %}fdc{% else %}fdr{% endif %} jcb' id='atc-wrapper'>
-  {% unless template contains 'gift_card' %}
-    {% if section.settings.show_quantity_selector and section.settings.quantity_selector_inline %}
-      <div class="f is-inline">
-        {% include 'component-counter' %}
-      </div>
-    {% endif %}
-  {% endunless %}
   {%- capture cta -%}
     {% if product.available and available_bundle_variant and available_bundle_product %}
       <span data-atc-copy class="js-atc-copy">
