@@ -118,11 +118,15 @@
                       {%- for filter_value in filter.values -%}
                         {%- assign filter_name = filter_value.value | replace: '-', ' '  | capitalize -%}
 
-                        {%- if filter_title == 'Color' -%}
+                          {%- if filter_title == 'Color' -%}
                           {%- assign color_name = filter_value.value | handleize -%}
                           {%- if filter_value.value contains 'Limited Edition:' -%}
                             {%- assign color_name = filter_value.value | split: 'Limited Edition:' | last | handleize -%}
-                          {%- endif -%}
+                         {%- elsif filter_value.value contains 'Wooden Accents:' -%}
+                            {%- assign color_name = filter_value.value | split: 'Wooden Accents:' | last | handleize -%}
+                      {%- elsif filter_value.value contains 'Artist Series:' -%}
+                            {%- assign color_name = filter_value.value | split: 'Artist Series:' | last | handleize -%}
+                      {%- endif -%}
                           {%- assign color_title = color_name | replace: '-', ' '  | capitalize -%}
                         {%- endif -%}
 
