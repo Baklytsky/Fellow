@@ -8,18 +8,6 @@
 <section class='pdpMain__details z2 rel'>
 
 
-  <div class='pdpStickyBar'>
-    <div class="pdpStickyBar__wrapper">
-      <div class='pdpCopy__header'>
-        <div class='f jcb aic'>
-          <h1 class='pdpCopy__header-title'>{{ product.title }}</h1>
-          <h2 data-selected-var-price class="ml1 visually-hidden">{{ current_variant.price | money | remove: '.00' }}</h2>
-        </div>
-      </div>
-      {% include 'pdp-details-sticky-form' %}
-    </div>
-  </div>
-
 
   {% comment %} <form action='/cart/add' method='post' enctype='multipart/form-data' data-component='productForm'> {% endcomment %}
   {% form 'product', product, data-product-form: dataProductForm, class: 'shopify-product-form pdpForm' %}
@@ -69,7 +57,7 @@
          data-locale="en_US"
          data-modal-link-style="circled-info-icon"
          data-show-upper-limit="false"
-         data-amount="{{ current_variant.price | money | remove: '.00' }}"
+         data-amount-selector=".pdpCopy__header-price"
          data-modal-theme="white" class="mb1 mt1 hidden-md-down">
      </afterpay-placement>
       <div class="pdp__reviews mb05 mt05">
@@ -118,7 +106,7 @@
          data-locale="en_US"
          data-modal-link-style="none"
          data-show-upper-limit="false"
-         data-amount="{{ current_variant.price | money | remove: '.00' }}"
+         data-amount-selector=".pdpCopy__header-price"
          data-modal-theme="white" class="mb1 mt1 hidden-lg-up">
      </afterpay-placement>
     </div>

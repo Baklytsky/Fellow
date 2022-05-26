@@ -7,18 +7,6 @@
 
 <section class='pdpMain__details pdpMain-bundle__details z2 rel'>
 
-  <div class='pdpStickyBar'>
-    <div class="pdpStickyBar__wrapper">
-      <div class='pdpCopy__header'>
-        <div class=' f jcb aic'>
-          <h1 class='pdpCopy__header-title'>{{ product.title }}</h1>
-          <h2 data-selected-var-price class="ml1 visually-hidden">{{ current_variant.price | money | remove: '.00' }}</h2>
-        </div>
-      </div>
-      {% include 'pdp-details-sticky-form' %}
-    </div>
-  </div>
-
   {% form 'product', product, data-product-form: dataProductForm, class: 'shopify-product-form pdpForm' %}
     <div class='pdpCopy__header'>
       <div class=' f jcb aic'>
