@@ -212,7 +212,7 @@
 
           {% include 'product-options' %}
 
-          {% if section.settings.quantity_selector_inline != true and section.settings.show_quantity_selector != true %}
+          {% if section.settings.show_quantity_selector != true %}
             <div class='pb15'
                 {% if section.settings.show_quantity_selector != true or product.tags contains 'gift' %}
                 style='display:none'
@@ -222,15 +222,6 @@
           {% endif %}
 
           <div class='f fdr jcb' id='atc-wrapper'>
-
-            {% unless template contains 'gift_card' %}
-              {% if section.settings.show_quantity_selector and section.settings.quantity_selector_inline %}
-                <div class="f is-inline">
-                  {% include 'component-counter' %}
-                </div>
-              {% endif %}
-            {% endunless %}
-
             {%- capture cta -%}
               {% if product.available %}
                 <span data-atc-copy class="js-atc-copy">

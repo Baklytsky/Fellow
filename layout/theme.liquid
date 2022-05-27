@@ -147,12 +147,18 @@
     <script src="{{ 'custom.js' | asset_url }}" defer='defer'></script>
     <script src="{{ 'index.js' | asset_url }}" defer='defer'></script>
     {% comment %} <script src="https://a.klaviyo.com/media/js/onsite/onsite.js"></script> {% endcomment %}
+  <script type="text/javascript">
+document.querySelector("#kl_promo_terms").addEventListener('click',function (){
+        var _klOnsite = window._klOnsite || []
+        _klOnsite.openForm('SJpmKX', () => console.log("you triggered the form!"))
+    });
+</script>
     <script type="text/javascript">
-      document.querySelector("#kl_promo_terms").addEventListener('click',function (){
-              var _klOnsite = window._klOnsite || []
-              _klOnsite.openForm('SJpmKX', () => console.log("you triggered the form!"))
-          });
-    </script>
+document.querySelector("#vippromo_terms").addEventListener('click',function (){
+        var _klOnsite = window._klOnsite || []
+        _klOnsite.openForm('SwWE8b', () => console.log("you triggered the form!"))
+    });
+</script>
   </body>
 
   <script>

@@ -14620,6 +14620,8 @@
                 var a = "There are only ".concat(r, " of that product available, requested ").concat(o, ".");
                 throw Dr.emit("error", a), new Error(a)
               }
+              // Add property (_recommended_product) if product is recommended
+              if (window.location.search.indexOf('pr_prod_strat') !== -1) n._recommended_product = true;
               return J(t.id, e, true, n)
             }))
           }(a, r.elements.quantity.value);
@@ -14866,13 +14868,19 @@
                   i = t.dataset.variantInventoryManagement.length > 0 || !1,
                   o = t.getAttribute("data-variant-price"),
                   d = (parseFloat(o.substring(1)), "deny" === t.dataset.variantInventoryPolicy || !1);
-              !1 === i && (d = !1), console.log("mainOpt reads ".concat(JSON.stringify(t), " | mainInv reads ").concat(e, " | mainPolicy returns ").concat(d, " | invManagement returns ").concat(i)), e <= 0 && d ? (c.forEach((function(t) {
-                t.innerHTML = y, u.setAttribute("disabled", "")
-              })), null !== l && !1 === v && (l.classList.remove("is-hidden"), u.classList.add("is-hidden")), f.classList.add("is-hidden")) : c.forEach((function(t) {
-                if (u != null) {
-                  t.innerHTML = m, u.hasAttribute("disabled") && u.removeAttribute("disabled"), null !== l && !1 === v && (l.classList.add("is-hidden"), u.classList.remove("is-hidden")), f.classList.remove("is-hidden")
-                }
-              })), s.forEach((function(t) {
+              !1 === i && (d = !1),
+                  console.log("mainOpt reads ".concat(JSON.stringify(t), " | mainInv reads ").concat(e, " | mainPolicy returns ").concat(d, " | invManagement returns ").concat(i)),
+                  e <= 0 && d
+                      ? (c.forEach(function (t) {
+                        (t.innerHTML = y), u.setAttribute("disabled", "");
+                      }),
+                      null !== l && !1 === v && (l.classList.remove("is-hidden"), u.classList.add("is-hidden")),
+                          f.classList.add("is-hidden"))
+                      : c.forEach(function (t) {
+                        if (u != null) {
+                          (t.innerHTML = m), u.hasAttribute("disabled") && u.removeAttribute("disabled"), null !== l && !1 === v && (l.classList.add("is-hidden"), u.classList.remove("is-hidden")), f.classList.remove("is-hidden");
+                        }
+                      }), s.forEach((function(t) {
                 t.innerHTML = o
               })), Dr.emit("productOptions:update", {
                 variantSelected: a.value
