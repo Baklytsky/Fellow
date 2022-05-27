@@ -34,6 +34,7 @@
                    type="radio"
                    name="{{ option_name | append: '-' | append: uniq_id }}"
                    value="{{ option_value | handleize }}"
+                   data-option="{{ item }}"
                    title="{{ option_value }}" {% if forloop.first %}checked{% endif %}>
             <div class="radio__title f aic jcc"
                  data-{{ option_name | handleize }}="{{ option_value | handleize }}">
