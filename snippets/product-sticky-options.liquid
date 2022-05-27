@@ -33,10 +33,6 @@
             {%- assign product_has_size_option = true -%}
           {%- endif -%}
 
-          <script>
-            console.log({{ option_group_names | json }})
-          </script>
-
           <div class="option-groups {% if option_name_handle != 'size' %}f aic fw rel{% else %} option-groups-size{% endif %}" {% if product_has_size_option %}data-disabled-size="true"{% endif %}>
             {% for group in option_group_names %}
               <div class="option-groups__group">
