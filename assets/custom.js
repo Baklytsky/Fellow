@@ -769,6 +769,8 @@ theme.pdpMain = function () {
         if (colorhandle) {
           if (colorhandle.includes("limited-edition-")) {
             colorhandle = colorhandle.replace('limited-edition-','');
+          } else if (colorhandle.includes("artist-series-")) {
+            colorhandle = colorhandle.replace('artist-series-','');
           }
           $('#' + colorhandle).removeAttr('disabled','disabled');
           $('div[data-color^="' + colorhandle + '"]').css('opacity','');
@@ -821,8 +823,8 @@ theme.pdpMain = function () {
         var variant = json_product.variants[i];
         var color = variant.option1;
         // If the color option contains the string "Limited Edition:" we need to strip this
-        if (color.indexOf("Limited Edition:") > -1) {
-          color = color.replace('Limited Edition: ','');
+        if (color.indexOf(":") > -1) {
+          color = color.split(":")[1].trim();
         }
         var size  = variant.option2;
         var quantity  = variant.option3;
@@ -894,6 +896,8 @@ theme.pdpMain = function () {
               // If the color handle contains "limited-edition-" we need to strip this off first
               if (colorhandle.indexOf("limited-edition-") > -1) {
                 colorhandle = colorhandle.replace('limited-edition-','');
+              } else if (colorhandle.indexOf("artist-series-")) {
+                colorhandle = colorhandle.replace('artist-series-','');
               }
               $('#' + colorhandle).attr('disabled','disabled');
               $('div[data-color^="' + colorhandle + '"]').css('opacity','0.2');
@@ -2526,3 +2530,106 @@ class dynamicRecommendations extends HTMLElement {
 }
 
 customElements.define('dynamic-recommendations', dynamicRecommendations);
+
+class bundleMixCard extends HTMLElement {
+  constructor() {
+    super();
+    this.productVariants = JSON.parse(this.querySelector('[type="application/json"]').textContent)
+    this.selectedOptions = this.getOptions()
+    this.selectedVariant = this.getSelectedVariant()
+    this.colors = this.querySelectorAll('input[name^="Color"]')
+    this.sizes = this.querySelectorAll('input[name^="Size"]')
+    this.burrs = this.querySelectorAll('input[name^="Burrs"]')
+    this.radios = this.querySelectorAll('.bundle-radio');
+
+    this.disableUnavailableVariants()
+
+    if (this.radios.length) {
+      this.radios.forEach((radio) => {
+        radio.addEventListener('click', this.onVariantChange.bind(this))
+      })
+    }
+  }
+
+  getSelectedVariant() {
+    return this.productVariants.find((variant) => {
+      return !variant.options.map((option, index) => {
+        let optionValue = option;
+        if (optionValue.includes(':')) optionValue = optionValue.split(':')[1].trim();
+        return this.selectedOptions[index] === optionValue.toLowerCase().replace(/\W+/g, "-");
+      }).includes(false);
+    });
+  }
+
+  getOptions() {
+    let radioGroups = Array.from(this.querySelectorAll('.bundle-product__option-group'));
+    return radioGroups.map((radioGroup) => {
+      return Array.from(radioGroup.querySelectorAll('input')).find((radio) => radio.checked).value;
+    });
+  }
+
+  onVariantChange() {
+    this.selectedOptions = this.getOptions()
+    this.selectedVariant = this.getSelectedVariant()
+    this.disableUnavailableVariants()
+    console.log(this.selectedVariant)
+  }
+
+  disableUnavailableVariants() {
+    this.radios.forEach((radio) => radio.classList.remove('unavailable'))
+    let selectedSizeOrBurrs = false;
+    if (this.sizes.length) selectedSizeOrBurrs = Array.from(this.sizes).find((radio) => radio.checked).value;
+    if (this.burrs.length) selectedSizeOrBurrs = Array.from(this.burrs).find((radio) => radio.checked).value;
+
+    if (selectedSizeOrBurrs) {
+      if (this.colors.length) {
+        this.colors.forEach(color => {
+          let optionsArr = [selectedSizeOrBurrs, color.value]
+          console.log(optionsArr)
+
+          // let _variant = this.productVariants.find((variant) => {
+          //   return !variant.options.map((option, index) => {
+          //     let optionValue = option;
+          //     if (optionValue.includes(':')) optionValue = optionValue.split(':')[1].trim();
+          //     return optionsArr[index] === optionValue.toLowerCase().replace(/\W+/g, "-");
+          //   }).includes(false);
+          // });
+          //
+          // console.log(_variant)
+        })
+      } else {
+
+      }
+    }
+  }
+
+
+
+
+  //   const selectedVariantTitle = selectedVariant.attr('data-variant-options-title'),
+  //       $bundleVariants = $bundleWrapper.find('.js-bundle-variant option');
+  //   $bundleWrapper.find('.bundle-radio').removeClass('unavailable');
+  //   if (selectedVariant.length) {
+  //     if (selectedVariantTitle.includes('/')) {
+  //       const selectedSizeTitle = selectedVariantTitle.split('/')[1],
+  //           unavailableColors = $bundleVariants.map(function () {
+  //             if ($(this).attr('data-variant-options-title').includes(selectedSizeTitle) && $(this).is('[disabled]') && !$(this).attr('data-variant-preorder')) return $(this).attr('data-variant-options-title').split('/')[0]
+  //           })
+  //       if (unavailableColors.length) unavailableColors.each((i, color) => $bundleWrapper.find('input[value="'+ color +'"]').parent().addClass('unavailable'))
+  //     } else {
+  //       const unavailableVariants = $bundleVariants.map(function () {
+  //         if ($(this).is('[disabled]') && !$(this).attr('data-variant-preorder')) return $(this).attr('data-variant-options-title')
+  //       })
+  //       if (unavailableVariants.length) unavailableVariants.each((i, variant) => $bundleWrapper.find('input[value="'+ variant +'"]').parent().addClass('unavailable'))
+  //     }
+  //   } else {
+  //     const unavailableVariants = $bundleVariants.map(function () {
+  //       if ($(this).is('[disabled]') && !$(this).attr('data-variant-preorder')) return $(this).attr('data-variant-options-title')
+  //     })
+  //     if (unavailableVariants.length) unavailableVariants.each((i, variant) => $bundleWrapper.find('input[value="'+ variant +'"]').parent().addClass('unavailable'))
+  //   }
+  // }
+
+}
+
+customElements.define('bundle-mix-card', bundleMixCard);
