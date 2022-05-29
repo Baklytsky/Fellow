@@ -2534,19 +2534,23 @@ customElements.define('dynamic-recommendations', dynamicRecommendations);
 class bundleMixCard extends HTMLElement {
   constructor() {
     super();
-    this.productVariants = JSON.parse(this.querySelector('[type="application/json"]').textContent)
+    this.product = JSON.parse(this.querySelector('[type="application/json"]').textContent)
+    this.productVariants = this.product['variants']
     this.selectedOptions = this.getOptions()
     this.selectedVariant = this.getSelectedVariant()
-    this.colors = this.querySelectorAll('input[name^="Color"]')
-    this.sizes = this.querySelectorAll('input[name^="Size"]')
-    this.burrs = this.querySelectorAll('input[name^="Burrs"]')
+    this.optionGroupFirst = this.querySelectorAll(`input[name^='${this.product.options[0]}']`);
+    if (this.product.options[1]) {
+      this.optionGroupSecond = this.querySelectorAll(`input[name^='${this.product.options[1]}']`);
+    }
     this.select = this.querySelector('.select-wrapper select')
     this.options = this.select.querySelectorAll('option')
     this.radios = this.querySelectorAll('.bundle-radio');
 
+    this.changeSelectedOption()
     this.disableUnavailableVariants()
     this.checkVariantTitle()
     this.toggleAddButton()
+    this.checkPrice()
 
     if (this.radios.length) {
       this.radios.forEach((radio) => {
@@ -2586,26 +2590,35 @@ class bundleMixCard extends HTMLElement {
 
   disableUnavailableVariants() {
     this.radios.forEach((radio) => radio.classList.remove('unavailable'))
-    let selectedSizeOrBurrs = false;
-    if (this.sizes.length) selectedSizeOrBurrs = Array.from(this.sizes).find((radio) => radio.checked).dataset.option;
-    if (this.burrs.length) selectedSizeOrBurrs = Array.from(this.burrs).find((radio) => radio.checked).dataset.option;
-    if (this.colors.length) this.checkAvailableColors(selectedSizeOrBurrs)
+    let firstSelectedOption = Array.from(this.optionGroupFirst).find((radio) => radio.checked).dataset.option
+    let secondSelectedOption = (this.product.options[1])
+        ? Array.from(this.optionGroupSecond).find((radio) => radio.checked).dataset.option
+        : false;
+    if (firstSelectedOption) this.checkAvailableRadios(this.optionGroupFirst, firstSelectedOption, secondSelectedOption, false)
+    if (secondSelectedOption) this.checkAvailableRadios(this.optionGroupSecond, firstSelectedOption, secondSelectedOption, true)
   }
 
-  checkAvailableColors(selectedSizeOrBurrs) {
-    this.colors.forEach((color) => {
-      let optionsArr = [color.dataset.option, selectedSizeOrBurrs]
+  checkAvailableRadios(optionGroup, firstSelectedOption, secondSelectedOption, isSecondOption) {
+    optionGroup.forEach((radio) => {
+      let optionsArr;
+      if (secondSelectedOption) {
+        optionsArr = (isSecondOption) ? [firstSelectedOption, radio.dataset.option] : [radio.dataset.option, secondSelectedOption]
+      } else {
+        optionsArr = [radio.dataset.option]
+      }
       let existVariant = false;
       this.productVariants.forEach((variant) => {
-        let condition = (selectedSizeOrBurrs)
+        let condition = (secondSelectedOption)
             ? variant.options[0] === optionsArr[0] && variant.options[1] === optionsArr[1]
             : variant.options[0] === optionsArr[0];
         if (condition) {
           existVariant = true;
-          if (!variant.available) color.parentElement.classList.add('unavailable');
+          if (!variant.available && !this.selectedOption.hasAttribute('data-variant-preorder')) {
+            radio.parentElement.classList.add('unavailable');
+          }
         }
       });
-      if (!existVariant) color.parentElement.classList.add('unavailable');
+      if (!existVariant) radio.parentElement.classList.add('unavailable');
     })
   }
 
