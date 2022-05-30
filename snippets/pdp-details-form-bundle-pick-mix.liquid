@@ -1,3 +1,4 @@
+<bundle-mix class="bundle-mix">
 {%- assign component_button_id = 'pdp-bundle-atc' -%}
 {%- assign bundle_available = true -%}
 
@@ -240,7 +241,7 @@
     name: 'add',
     type: 'submit',
     href: '#',
-    className: 'js-add-to-cart cart__button pick_mix__cart_bttn',
+    className: 'js-pick-mix-add-to-cart cart__button pick_mix__cart_bttn',
     dataAttr: 'data-atc="true"',
     bundle_name: product.title,
     disabled: disableVal,
@@ -251,3 +252,4 @@
 <div class='is-hidden' data-bis>
   <button class='button cart__button klaviyo-bis-trigger'>Out of Stock | Notify Me</button>
 </div>
+</bundle-mix>

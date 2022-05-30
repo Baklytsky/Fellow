@@ -961,219 +961,6 @@ theme.pdpMain = function () {
     })
   }
 
-  function pdpBundleMix() {
-    //$(document).off('click.bundleRadio')
-    //$(document).off('click.addBundleMix')
-
-    // function fadeOutOfStockVariants(selectedVariant, $bundleWrapper) {
-    //   const selectedVariantTitle = selectedVariant.attr('data-variant-options-title'),
-    //         $bundleVariants = $bundleWrapper.find('.js-bundle-variant option');
-    //   $bundleWrapper.find('.bundle-radio').removeClass('unavailable');
-    //   if (selectedVariant.length) {
-    //     if (selectedVariantTitle.includes('/')) {
-    //       const selectedSizeTitle = selectedVariantTitle.split('/')[1],
-    //           unavailableColors = $bundleVariants.map(function () {
-    //             if ($(this).attr('data-variant-options-title').includes(selectedSizeTitle) && $(this).is('[disabled]') && !$(this).attr('data-variant-preorder')) return $(this).attr('data-variant-options-title').split('/')[0]
-    //           })
-    //       if (unavailableColors.length) unavailableColors.each((i, color) => $bundleWrapper.find('input[value="'+ color +'"]').parent().addClass('unavailable'))
-    //     } else {
-    //       const unavailableVariants = $bundleVariants.map(function () {
-    //         if ($(this).is('[disabled]') && !$(this).attr('data-variant-preorder')) return $(this).attr('data-variant-options-title')
-    //       })
-    //       if (unavailableVariants.length) unavailableVariants.each((i, variant) => $bundleWrapper.find('input[value="'+ variant +'"]').parent().addClass('unavailable'))
-    //     }
-    //   } else {
-    //     const unavailableVariants = $bundleVariants.map(function () {
-    //       if ($(this).is('[disabled]') && !$(this).attr('data-variant-preorder')) return $(this).attr('data-variant-options-title')
-    //     })
-    //     if (unavailableVariants.length) unavailableVariants.each((i, variant) => $bundleWrapper.find('input[value="'+ variant +'"]').parent().addClass('unavailable'))
-    //   }
-    // }
-
-    // function checkBundleVariantTitle(selectedVariant, checkedInputs) {
-    //   const priceDifference = Number(selectedVariant.attr('data-bundle-price-difference'));
-    //   selectedVariant.attr('selected', 'selected')
-    //   selectedVariant.parent().attr('value', selectedVariant.val())
-    //   checkedInputs.each(function() {
-    //     // $(this).parents('.bundle-product__option-group').find('.option-title-value').html(`${$(this).attr('title')}`)
-    //     $(this).parents('.bundle-product__option-group').find('.option-title-value').html(`${$(this).attr('title').split('(')[0]}`) // Remove the price when changing the variant name
-    //   })
-    //   // let optionTitle = (priceDifference > 0) ? `${$(checkedInputs.get(0)).attr('title')} <strong>(+$${priceDifference})</strong>` : `${$(checkedInputs.get(0)).attr('title')}`;
-    //   let optionTitle = `${$(checkedInputs.get(0)).attr('title')}`; // Remove the price from the color variant
-    //   $(checkedInputs.get(0)).parents('.bundle-product__option-group').find('.option-title-value').html(optionTitle)
-    // }
-
-    // $(document).find('.bundle-product').each(function () {
-    //   let selectedOptions = '',
-    //       $bundleWrapper = $(this),
-    //       checkedInputs = $(this).find('.bundle-radio-group input:checked'),
-    //       checkedOptions = $(this).find('.bundle-radio-group input:checked').map((i, option) => option.value);
-    //   checkedOptions.each((i, option) => selectedOptions = (i !== checkedOptions.length - 1) ? selectedOptions + option + '/' : selectedOptions + option)
-    //   $(this).find('.js-bundle-variant option').removeAttr('selected')
-    //   let selectedVariant = $(this).find('[data-variant-options-title="' + selectedOptions + '"]');
-    //   (selectedVariant.attr('data-variant-preorder')) ? selectedVariant.parent().attr('data-selected-variant-preorder', true) : selectedVariant.parent().removeAttr('data-selected-variant-preorder');
-    //   //checkBundleVariantTitle(selectedVariant, checkedInputs)
-    //   //fadeOutOfStockVariants(selectedVariant, $bundleWrapper)
-    // })
-
-    // function checkBundleMixAvailable(unavailableProduct) {
-    //   var $disabledOptions = $(document).find('.js-bundle-variant option:disabled'),
-    //       checkForSelected = $disabledOptions.filter((i, e) => e.hasAttribute('selected'));
-    //
-    //   if (checkForSelected.length) {
-    //     $(document).find('#pdp-bundle-atc').attr('disabled', 'disabled').text('Out Of Stock')
-    //     $(document).find('#pdp-sticky-atc').attr('disabled', 'disabled').text('Out Of Stock')
-    //   } else if (unavailableProduct) {
-    //     $(document).find('#pdp-bundle-atc').attr('disabled', 'disabled').text('Unavailable')
-    //     $(document).find('#pdp-sticky-atc').attr('disabled', 'disabled').text('Unavailable')
-    //   } else {
-    //     $(document).find('#pdp-bundle-atc').removeAttr('disabled').text('Add to Cart')
-    //     $(document).find('#pdp-sticky-atc').removeAttr('disabled').text('Add to Cart')
-    //   }
-    // }
-    // checkBundleMixAvailable()
-
-    // function changeBundleImage(variantUniqID) {
-    //   let $selectedImage = $('[data-variant-media="' + variantUniqID + '"]');
-    //   $selectedImage.parent().find('[data-variant-media]:visible').css('visibility','hidden')
-    //   $selectedImage.css('visibility','visible')
-    // }
-
-    // function checkBundleMixPrice() {
-    //   let priceDiffSum = 0,
-    //       selectedMixVariants = $(document).find('.bundle-product .js-bundle-variant option[selected]'),
-    //       priceDiffArray = selectedMixVariants.map((i, variant) => {return Number(variant.dataset.bundlePriceDifference)});
-    //   priceDiffArray.each((i, priceDiff) => priceDiffSum += priceDiff || 0);
-    //
-    //   const newCompareAtPrice = (window.theme.product.compare_at_price * 0.01) + priceDiffSum,
-    //         newPrice = (window.theme.product.price * 0.01) + priceDiffSum,
-    //         priceInner = $('[data-product-price]'),
-    //         compareAtPriceInner = $('[data-compare-at-price] span');
-    //
-    //   priceInner.each((i, element) => $(element).text('$' + newPrice))
-    //   compareAtPriceInner.each((i, element) => $(element).text('$' + newCompareAtPrice))
-    // }
-    // checkBundleMixPrice()
-
-    // function checkPreorderVariant() {
-    //   $('.pdpForm .bundle-product select').each((i, select) => {
-    //     if ($(select).attr('data-selected-variant-preorder')) {
-    //       $(document).find('#pdp-bundle-atc').removeAttr('disabled').text('Pre-order')
-    //       $(document).find('#pdp-sticky-atc').removeAttr('disabled').text('Pre-order')
-    //     }
-    //   })
-    // }
-    // checkPreorderVariant()
-
-    //$(document).on('click.bundleRadio', '.bundle-radio', function () {
-      // let $bundleWrapper = $(this).parents('.bundle-product'),
-      //     selectedOptions = '',
-      //     checkedInputs = $bundleWrapper.find('.bundle-radio-group input:checked'),
-      //     checkedOptions = $bundleWrapper.find('.bundle-radio-group input:checked').map((i, option) => option.value);
-      // checkedOptions.each((i, option) => selectedOptions = (i !== checkedOptions.length - 1) ? selectedOptions + option + '/' : selectedOptions + option);
-      // let selectedVariant = $bundleWrapper.find('[data-variant-options-title="' + selectedOptions + '"]');
-      // $bundleWrapper.find('.js-bundle-variant option').removeAttr('selected');
-      // selectedVariant.attr('selected', 'selected');
-      // selectedVariant.parent().attr('value', selectedVariant.val());
-      // (selectedVariant.attr('data-variant-preorder')) ? selectedVariant.parent().attr('data-selected-variant-preorder', true) : selectedVariant.parent().removeAttr('data-selected-variant-preorder');
-      // //checkBundleVariantTitle(selectedVariant, checkedInputs);
-      // //fadeOutOfStockVariants(selectedVariant, $bundleWrapper);
-      // if (selectedVariant.length) {
-      //   //changeBundleImage(selectedVariant.attr('data-variant-uniq_id'));
-      //   //checkBundleMixAvailable();
-      // } else {
-      //   checkBundleMixAvailable(true);
-      // }
-      // checkPreorderVariant()
-      // checkBundleMixPrice()
-    //})
-
-    $(document).on('click.addBundleMix', '#pdp-bundle-atc', function (e) {
-      e.preventDefault();
-      var $selectedBundleOptions = $(this).parents('.pdpForm').find('.js-bundle-variant select'),
-          bundle_name = $(this).attr('data-bundle-name') || '',
-          products_data = [],
-          products = [];
-
-      $selectedBundleOptions.each(function () {
-        var variant_id = $(this).attr('value');
-        products.push(variant_id);
-      });
-
-      products.sort();
-      var current = null;
-      var cnt = 0;
-      for (var i = 0; i < products.length; i++) {
-        if (products[i] !== current) {
-          if (cnt > 0) {
-            let prop = {
-              "_bundles": true,
-              "_Bundle_Name": bundle_name
-            }
-
-            if ($('.pdpForm .js-bundle-variant select[value="' + current + '"]').attr('data-selected-variant-preorder')) {
-              prop = {
-                "_bundles": true,
-                "_Bundle_Name": bundle_name,
-                "pre-order": true
-              }
-            }
-
-            if (window.location.search.indexOf('pr_prod_strat') !== -1) prop._recommended_product = true;
-
-            products_data.push({
-              quantity: cnt,
-              id: current,
-              properties: prop
-            })
-          }
-          current = products[i];
-          cnt = 1;
-        } else {
-          cnt++;
-        }
-      }
-      if (cnt > 0) {
-        let prop = {
-          "_bundles": true,
-          "_Bundle_Name": bundle_name
-        }
-
-        if ($('.pdpForm .js-bundle-variant select[value="' + current + '"]').attr('data-selected-variant-preorder')) {
-          prop = {
-            "_bundles": true,
-            "_Bundle_Name": bundle_name,
-            "pre-order": true
-          }
-        }
-
-        if (window.location.search.indexOf('pr_prod_strat') !== -1) prop._recommended_product = true;
-
-        products_data.push({
-          quantity: cnt,
-          id: current,
-          properties: prop
-        })
-      }
-
-      $.ajax({
-        type: 'post',
-        url: '/cart/add.js',
-        data: {items: products_data},
-        dataType: 'json',
-        success: function () {
-          UpdateCart('', '', true)
-        },
-        error: function (error) {
-          if (error.status === 422) {
-            $('#PdpErrorMessage').text(error.responseJSON.description).fadeIn('slow');
-            setTimeout(function () {$('#PdpErrorMessage').text('').hide();}, 5500);
-          }
-        }
-      })
-    })
-  }
-
   theme.pdpUpsellProduct = function() {
     $(document).off('click.upsellRadio')
     $(document).off('click.addUpsellProduct')
@@ -1247,7 +1034,6 @@ theme.pdpMain = function () {
   if ($('.pdpMain__gallery-wrapper').length) {pdpGallary();}
   if ($('.pdpMain__bundle-gallery').length) {pdpBundleGallary();}
   if ($('.upsell-product__wrapper').length) {theme.pdpUpsellProduct();}
-  if ($('.bundle-product').length) {pdpBundleMix();}
   if ($('.pdpRecCollection').length) {theme.pdpRecCollection();}
   if ($('[data-dropdown]').length) {pdpDropdown();}
   if ($('.pdpMediaProof').length) {pdpMediaProof();}
@@ -2384,13 +2170,6 @@ theme.GLOBAL = function () {
     theme.qvChangeColorGroupName()
   }
 
-
-  // if (window.location.hash.indexOf("#contact_form") > -1) {
-  //   $([document.documentElement, document.body]).animate({
-  //     scrollTop: $('.shopify-challenge__container').offset().top
-  //   }, 500);
-  // }
-
   if (window.location.search.indexOf("contact") > -1) {
     $([document.documentElement, document.body]).animate({
       scrollTop: $('.footerInner__Left').offset().top + 500
@@ -2638,7 +2417,7 @@ class bundleMixCard extends HTMLElement {
             ? this.selectedOption.parentElement.setAttribute('data-selected-variant-preorder', 'true')
             : this.selectedOption.parentElement.removeAttribute('data-selected-variant-preorder');
       this.selectedOption.setAttribute('selected', 'selected')
-      this.selectedOption.parentElement.value = this.selectedVariant.id;
+      this.select.setAttribute('value', this.selectedVariant.id)
     } else {
       this.select.setAttribute('data-unavailable', 'true')
     }
@@ -2690,3 +2469,78 @@ class bundleMixCard extends HTMLElement {
 }
 
 customElements.define('bundle-mix-card', bundleMixCard);
+
+class bundleMix extends HTMLElement {
+  constructor() {
+    super();
+    this.atcButton = this.querySelector('.js-pick-mix-add-to-cart');
+    this.bundleName = this.atcButton.getAttribute('data-bundle-name') || '';
+    this.selects = this.querySelectorAll('.js-bundle-variant select');
+    this.atcButton.addEventListener('click', this.addBundleMix.bind(this));
+    this.variantsId = [];
+    this.variantsData = [];
+  }
+
+  addBundleMix(e) {
+    e.preventDefault();
+    this.selects.forEach((select) => {
+      let variant_id = select.getAttribute('value');
+      this.variantsId.push(variant_id);
+    });
+
+    this.variantsId.sort();
+    let current = null,
+        cnt = 0;
+    for (let i = 0; i < this.variantsId.length; i++) {
+      if (this.variantsId[i] !== current) {
+        if (cnt > 0) this.getProperty(current, cnt)
+        current = this.variantsId[i];
+        cnt = 1;
+      } else {
+        cnt++;
+      }
+    }
+    if (cnt > 0) this.getProperty(current, cnt)
+
+    $.ajax({
+      type: 'post',
+      url: '/cart/add.js',
+      data: {items: this.variantsData},
+      dataType: 'json',
+      success: function () {
+        UpdateCart('', '', true)
+      },
+      error: function (error) {
+        if (error.status === 422) {
+          $('#PdpErrorMessage').text(error.responseJSON.description).fadeIn('slow');
+          setTimeout(() => {$('#PdpErrorMessage').text('').hide();}, 5500);
+        }
+      }
+    })
+  }
+
+  getProperty(current, cnt) {
+    let prop = {
+      "_bundles": true,
+      "_Bundle_Name": this.bundleName
+    }
+
+    if ($('.pdpForm .js-bundle-variant select[value="' + current + '"]').attr('data-selected-variant-preorder')) {
+      prop = {
+        "_bundles": true,
+        "_Bundle_Name": this.bundleName,
+        "pre-order": true
+      }
+    }
+
+    if (window.location.search.indexOf('pr_prod_strat') !== -1) prop._recommended_product = true;
+
+    this.variantsData.push({
+      quantity: cnt,
+      id: current,
+      properties: prop
+    })
+  }
+}
+
+customElements.define('bundle-mix', bundleMix);
