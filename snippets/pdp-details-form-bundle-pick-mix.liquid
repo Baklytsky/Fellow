@@ -11,7 +11,7 @@
         {% if item["product"] != blank %}
           {%- assign bundle_product = all_products[item["product"]] -%}
         {% endif %}
-        {%- assign bundle_product_icon = bundle_product.featured_image | img_url: '200x' -%}
+        {%- assign bundle_product_icon = false -%}
         {% if item["product_icon"] != blank %}
           {%- assign bundle_product_icon = item["product_icon"] -%}
         {% endif %}
@@ -29,13 +29,30 @@
         {%- if bundle_product != blank -%}
           <div>
             <bundle-mix-card class="bundle-product">
-              <div class="bundle-product__icon-wrapper rel">
-                <img src="{{ bundle_product_icon }}" class="image-abs-cover" alt="{{ bundle_product.title }}">
-              </div>
-              <div class="bundle-product__description">
+              <div class="bundle-product__header">
+                <div class="bundle-product__icon-wrapper rel">
+                  {%- if bundle_product_icon -%}
+                    <img src="{{ bundle_product_icon }}"
+                         class="image-abs-cover"
+                         alt="{{ bundle_product.title }}"
+                         style="visibility: visible">
+                  {%- else -%}
+                    {%- for variant in bundle_product.variants -%}
+                      {%- assign variant_img = variant.featured_media | img_url: '200x' -%}
+                      <img src="{{ variant_img }}"
+                           class="image-abs-cover"
+                           data-mix-card-media-id="{{ variant.id }}"
+                           alt="{{ variant.title }}"
+                           {% if forloop.first %}style="visibility: visible"{% endif %}>
+                    {%- endfor -%}
+                  {%- endif -%}
+                </div>
                 <h3 class="bundle-product__description-title">
                   <a href="{{ bundle_product.url }}">{{ bundle_product.title }}</a>
                 </h3>
+              </div>
+
+              <div class="bundle-product__description">
                 {%- assign bundle_variant_option1 = '' -%}
                 {%- assign bundle_variant_option2 = '' -%}
                 {%- assign bundle_variant_option3 = '' -%}

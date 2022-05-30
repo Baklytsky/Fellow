@@ -6137,6 +6137,14 @@ h2.pdpCopy__header-price ,
 }
 
 .bundle-product {
+  flex-direction: column;
+  align-items: unset;
+
+  .bundle-product__header {
+    display: flex;
+    align-items: center;
+  }
+
   .bundle-product__option-group {
     .bundle-radio-group[data-option-color] {
       margin-right: 22px;
@@ -6165,6 +6173,11 @@ h2.pdpCopy__header-price ,
     width: 48px;
     height: 48px;
     min-width: 48px;
+  }
+
+  img {
+    z-index: 1;
+    visibility: hidden;
   }
 }
 

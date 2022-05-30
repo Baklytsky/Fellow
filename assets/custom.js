@@ -2424,9 +2424,19 @@ class bundleMixCard extends HTMLElement {
   }
 
   changeMedia() {
+    // Change PDP Main Gallery Image
     let $selectedImage = $('[data-variant-media="' + this.selectedOption.getAttribute('data-variant-uniq_id') + '"]');
-    $selectedImage.parent().find('[data-variant-media]:visible').css('visibility','hidden')
-    $selectedImage.css('visibility','visible')
+    if ($selectedImage.length) {
+      $selectedImage.parent().find('[data-variant-media]:visible').css('visibility','hidden')
+      $selectedImage.css('visibility','visible')
+    }
+
+    // Change Bundle Mix Card Image
+    let $selectedCardImage = $(this).find('[data-mix-card-media-id="' + this.selectedVariant.id + '"]')
+    if ($selectedCardImage.length) {
+      $selectedCardImage.parent().find('[data-mix-card-media-id]:visible').css('visibility','hidden')
+      $selectedCardImage.css('visibility','visible')
+    }
   }
 
   toggleAddButton() {
