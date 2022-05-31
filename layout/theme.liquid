@@ -1,43 +1,37 @@
 <!DOCTYPE html>
 <html lang='{{ shop.locale }}'>
-  <head>
-    <style>.async-hide { opacity: 0 !important} </style>
-<script>(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
-h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
-(a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;
-})(window,document.documentElement,'async-hide','dataLayer',4000,
-{'OPT-KLVKQBN':true});</script>
-    <script src="https://www.googleoptimize.com/optimize.js?id=OPT-KLVKQBN"></script>
-    <meta charset='utf-8'>
-    <meta name='viewport' content='width=device-width,initial-scale=1,shrink-to-fit=no'>
-    <link rel='canonical' href='{{ canonical_url }}'>
-    <link rel='shortcut icon' href='{{ settings.favicon | img_url: "32x32" }}' type='image/png'>
+<head>
+  <script src="https://www.googleoptimize.com/optimize.js?id=OPT-KLVKQBN"></script>
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width,initial-scale=1,shrink-to-fit=no'>
+  <link rel='canonical' href='{{ canonical_url }}'>
+  <link rel='shortcut icon' href='{{ settings.favicon | img_url: "32x32" }}' type='image/png'>
 
-    <link rel="preload" href="{{ 'index.css' | asset_url }}" as="style">
-    <link rel="preload" href="{{ 'custom.scss.css' | asset_url }}" as="style">
+  <link rel="preload" href="{{ 'index.css' | asset_url }}" as="style">
+  <link rel="preload" href="{{ 'custom.scss.css' | asset_url }}" as="style">
 
-    <link rel="preload" href="{{ 'index.js' | asset_url }}" as="script">
-    <link rel="preload" href="{{ 'custom.js' | asset_url }}" as="script">
+  <link rel="preload" href="{{ 'index.js' | asset_url }}" as="script">
+  <link rel="preload" href="{{ 'custom.js' | asset_url }}" as="script">
 
-    {% capture seo_title %}
-      {{ page_title }}
-      {% if current_tags %}
-        {%- assign meta_tags = current_tags | join: ', ' %} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags -}}
-      {% endif %}
-      {% if current_page != 1 %}
-        &ndash; {{ 'general.meta.page' | t: page: current_page }}
-      {% endif %}
-      {% unless page_title contains shop.name %}
-        &ndash; {{ shop.name }}
-      {% endunless %}
-    {% endcapture %}
-    <title>{{ seo_title }}</title>
-
-    {% include 'head-meta' %}
-
-    {% if template.directory == 'customers' %}
-      <script src='{{ 'shopify_common.js' | shopify_asset_url }}' defer='defer'></script>
+  {% capture seo_title %}
+    {{ page_title }}
+    {% if current_tags %}
+      {%- assign meta_tags = current_tags | join: ', ' %} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags -}}
     {% endif %}
+    {% if current_page != 1 %}
+      &ndash; {{ 'general.meta.page' | t: page: current_page }}
+    {% endif %}
+    {% unless page_title contains shop.name %}
+      &ndash; {{ shop.name }}
+    {% endunless %}
+  {% endcapture %}
+  <title>{{ seo_title }}</title>
+
+  {% include 'head-meta' %}
+
+  {% if template.directory == 'customers' %}
+    <script src='{{ 'shopify_common.js' | shopify_asset_url }}' defer='defer'></script>
+  {% endif %}
 
      <script>
       window.theme = {
@@ -73,10 +67,8 @@ h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
 
   
     <script src="https://js.afterpay.com/afterpay-1.x.js" data-analytics-enabled
- id="afterpay-placement"
-       data-min="50.00"
-       data-max="2000.00"
-async ></script>
+           id="afterpay-placement" data-min="50.00" data-max="2000.00" async>
+    </script>
     
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -86,14 +78,18 @@ async ></script>
     })(window,document,'script','dataLayer','GTM-K9G7563');</script>
     <!-- End Google Tag Manager -->
 
-    <!-- Global site tag (gtag.js) - Google Ads: 951859275 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-951859275"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'AW-951859275');
-    </script>
+  <!-- Global site tag (gtag.js) - Google Ads: 951859275 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-951859275"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'AW-951859275');
+  </script>
 
     <!-- Google Fonts via Preconnect -->
     <link rel="preconnect"
@@ -101,12 +97,12 @@ async ></script>
       crossorigin />
 
 
-     {% include 'preconnect' %}
+    {% include 'preconnect' %}
 
     {{ 'index.css' | asset_url | stylesheet_tag }}
     {{ 'custom.scss.css' | asset_url | stylesheet_tag }}
     
- {%- if request.path contains 'carter-move-mug' or request.path contains 'carter-everywhere-mug' or product.handle contains 'carter-move-mug-with-360-sip-lid' -%}
+    {%- if request.path contains 'carter-move-mug' or request.path contains 'carter-everywhere-mug' or product.handle contains 'carter-move-mug-with-360-sip-lid' -%}
     {{ 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css' | stylesheet_tag }}
     {{ 'player_customized.css' | asset_url | stylesheet_tag }}
       {{ 'player-chunk.css' | asset_url | stylesheet_tag }}
@@ -115,8 +111,8 @@ async ></script>
     {%- endif -%}
     
     {{ content_for_header }}
-  {% include 'friendbuy' %}
-    
+    {% include 'friendbuy' %}
+
 </head>
 
   <body>
@@ -141,7 +137,7 @@ async ></script>
     {{ 'jquery.ba-throttle-debounce.min.js' | asset_url | script_tag }}
     {{ 'custom-additional-vendor.js' | asset_url | script_tag }}
   
- {%- if request.path contains 'carter-move-mug' or request.path contains 'carter-everywhere-mug' or product.handle contains 'carter-move-mug-with-360-sip-lid' -%}
+    {%- if request.path contains 'carter-move-mug' or request.path contains 'carter-everywhere-mug' or product.handle contains 'carter-move-mug-with-360-sip-lid' -%}
     {{ 'player-event.js' | asset_url | script_tag }}
     {{ 'player-inline.js' | asset_url | script_tag }}
     {{ 'player-chunk-one.js' | asset_url | script_tag }}
@@ -170,9 +166,18 @@ async ></script>
       }
     </script>
   </body>
+
   <script>
-jQuery('a[href^="http"]').not('a[href^="{{ shop.url }}"]').attr('target', '_blank');
-</script>
-      <script type="text/javascript">(function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/JKrJpoWVtOiKekxIZEcsIIya88lPfCthqp3OznJ5/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
-</script>
+    jQuery('a[href^="http"]').not('a[href^="{{ shop.url }}"]').attr('target', '_blank');
+  </script>
+
+  <!-- yotpo -->
+  <script type="text/javascript">(function e() {
+      var e = document.createElement("script");
+      e.type = "text/javascript", e.async = true, e.src = "//staticw2.yotpo.com/JKrJpoWVtOiKekxIZEcsIIya88lPfCthqp3OznJ5/widget.js";
+      var t = document.getElementsByTagName("script")[0];
+      t.parentNode.insertBefore(e, t)
+    })();
+  </script>
+  <!-- End yotpo -->
 </html>

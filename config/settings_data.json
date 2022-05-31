@@ -437,24 +437,24 @@
           },
           "3e0796bc-698b-4618-80b6-261185f9fb1a": {
             "type": "splitSlide",
-            "disabled": true,
             "settings": {
               "splitSlide__layout": "right",
-              "heroSlide": "shopify:\/\/shop_images\/Untitled_drawing_6.png",
+              "heroSlide": "shopify:\/\/shop_images\/780x618_px_1.png",
               "desktopAlignment": "center",
               "mobileAlignment": "center",
-              "heroSlide__header": "Pours Well With Others",
-              "heroSlide__subheader": "Precisely tuned and perfectly balanced, Stagg EKG brings out the best in your pour-over.",
-              "subSlide__bgColor": "#c1dbd2",
-              "subSlide__textColor": "#231f20",
-              "heroSlide__ctaURL": "shopify:\/\/collections\/bestsellers",
-              "heroSlide__ctaCopy": "Shop Best Sellers",
-              "heroSlide__ctaColor": "black",
+              "heroSlide__header": "Pour-over  picks for Dad",
+              "heroSlide__subheader": "Give him sleek gear guaranteed to make his year!",
+              "subSlide__bgColor": "#000000",
+              "subSlide__textColor": "#FFFFFF",
+              "heroSlide__ctaURL": "shopify:\/\/collections\/fathers-day-gifts",
+              "heroSlide__ctaCopy": "Shop Now",
+              "heroSlide__ctaColor": "white",
               "heroSlide__ctaSubtext": ""
             }
           },
           "91049687-67b8-4bdc-8f37-c74f97e41d00": {
             "type": "splitSlide",
+            "disabled": true,
             "settings": {
               "splitSlide__layout": "right",
               "heroSlide": "shopify:\/\/shop_images\/Image_3.png",
@@ -462,7 +462,7 @@
               "mobileAlignment": "center",
               "heroSlide__header": "Lush Summer",
               "heroSlide__subheader": "Fill your morning with great blooms and delicious coffee.",
-              "subSlide__bgColor": "#e0deec",
+              "subSlide__bgColor": "#ffcc4e",
               "subSlide__textColor": "#231f20",
               "heroSlide__ctaURL": "shopify:\/\/products\/stagg-ekg-electric-pour-over-kettle",
               "heroSlide__ctaCopy": "Shop Stagg EKG",
@@ -488,7 +488,6 @@
         "settings": {
           "show_breadcrumbs": true,
           "show_quantity_selector": true,
-          "quantity_selector_inline": false,
           "show_product_recommendations": true,
           "product_limit": 8
         }

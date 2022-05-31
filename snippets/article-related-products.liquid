@@ -6,7 +6,9 @@
       {% for product_handle in product_refs %}
         {% assign product_ref = all_products[product_handle] %}
         {% assign product = product_ref %}
-        {% include 'product-card', cx: 'mb2' %}
+        {%- if product != blank -%}
+          {% include 'product-card', cx: 'mb2' %}
+        {%- endif -%}
       {% endfor %}
     </div>
   </div>
