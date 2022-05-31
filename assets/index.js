@@ -10687,7 +10687,7 @@
       }), Dr.emit("cart:updated", {
         cart: t
       }), t
-    }))
+    })).then(() => theme.updateCartRecommendedProducts())
   }
 
   function K() {

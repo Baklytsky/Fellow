@@ -551,6 +551,10 @@ theme.pdpMain = function () {
         let optionHandlize = option.toLowerCase().replace(/[^\w\u00C0-\u024f]+/g, "-").replace(/^-+|-+$/g, "")
         if (optionHandlize.indexOf('limited-edition') !== -1 ) {
           $('[data-copy-for="' + optionHandlize.split('limited-edition-')[1] + '"]').addClass('checked');
+        } else if (optionHandlize.indexOf('artist-series') !== -1) {
+          $('[data-copy-for="' + optionHandlize.split('artist-series-')[1] + '"]').addClass('checked');
+        } else if (optionHandlize.indexOf('wooden-accents') !== -1) {
+          $('[data-copy-for="' + optionHandlize.split('wooden-accents-')[1] + '"]').addClass('checked');
         } else {
           $('[data-copy-for="' + optionHandlize + '"]').addClass('checked');
         }

@@ -16,6 +16,10 @@
                   {%- assign color_name = value | handleize -%}
                   {%- assign color_swatch_name = product.handle | append: '_' | append: color_name | append: '.png' -%}
                   {%- assign color_swatch_image = images[color_swatch_name] -%}
+
+                  {%- if value contains ':' -%}
+                    {%- assign color_name = value | split: ':' | last | strip -%}
+                  {%- endif -%}
                 {%- endif -%}
                 
                 <label class='radio f aic rel js-color-update' for='cart-{{ product.title | handleize }}-{{ option_name }}__{{ value | handleize }}' {% if option_name == 'color' or option_name == 'material' %}data-color='{{ value | handleize }}'{% endif %}>

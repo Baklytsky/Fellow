@@ -1,9 +1,26 @@
 {%- assign cart_recommended_heading = settings.cart_recommended_heading -%}
 {%- assign cart_recommended_icon = settings.cart_recommended_icon -%}
 {%- assign cart_recommended_collection = settings.cart_recommended_collection -%}
+{% assign all_available_products = collections[cart_recommended_collection].products | where: "available", true %}
+{%- assign all_pdoducts_in_cart = false -%}
+{%- assign products_counter = 0 -%}
 
+ {%- for cart_item in cart.items -%}
 
- {%- if collections[cart_recommended_collection].products.size > 0 -%}
+   {%- for product in collections[cart_recommended_collection].products -%}
+     {%- if product.id == cart_item.product.id and product.available -%}
+       {%- assign products_counter = products_counter | plus: 1 -%}
+     {%- endif -%}
+   {%- endfor -%}
+
+   {%- if products_counter == all_available_products.size -%}
+     {%- assign all_pdoducts_in_cart = true -%}
+     {%- break -%}
+   {%- endif -%}
+
+ {%- endfor -%}
+
+ {%- if collections[cart_recommended_collection].products.size > 0 and all_pdoducts_in_cart == false -%}
    <section class="cart-recommended" id="{{ section.id }}">
      {%- if cart_recommended_heading != blank -%}
        <div class="cart-recommended__header">
