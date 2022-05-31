@@ -2554,3 +2554,11 @@ class bundleMix extends HTMLElement {
 }
 
 customElements.define('bundle-mix', bundleMix);
+
+class bundleMixMultiple extends HTMLElement {
+  constructor() {
+    super();
+  }
+}
+
+customElements.define('bundle-mix-multiple', bundleMixMultiple);

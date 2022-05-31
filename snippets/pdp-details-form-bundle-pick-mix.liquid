@@ -1,232 +1,131 @@
-<bundle-mix class="bundle-mix">
-{%- assign component_button_id = 'pdp-bundle-atc' -%}
-{%- assign bundle_available = true -%}
-
 {% if product.metafields.custom_fields["bundle_mix_heading"] != blank %}
   <h3 class="bundle-product__heading">{{ product.metafields.custom_fields["bundle_mix_heading"] }}</h3>
 {% endif %}
 
-    {%- if product.metafields.custom_fields["bundle_product"] != blank -%}
-      {% for item in product.metafields.custom_fields["bundle_product"] %}
-        {% if item["product"] != blank %}
-          {%- assign bundle_product = all_products[item["product"]] -%}
-        {% endif %}
-        {%- assign bundle_product_icon = false -%}
-        {% if item["product_icon"] != blank %}
-          {%- assign bundle_product_icon = item["product_icon"] -%}
-        {% endif %}
-        {% if item["product_variants_id"] != blank %}
-          {%- assign bundle_product_variants_id = item["product_variants_id"] | split: ',' -%}
-        {% endif %}
+<bundle-mix class="bundle-mix">
 
-        {%- assign uniq_id = bundle_product.id | append: '-' | append: forloop.index -%}
+  {%- if product.metafields.custom_fields["bundle_product"] != blank -%}
+    {% for item in product.metafields.custom_fields["bundle_product"] %}
+      {% if item["product"] != blank %}
+        {%- assign bundle_product = all_products[item["product"]] -%}
+      {% endif %}
+      {% if item["product_subtitle"] != blank %}
+        {%- assign bundle_product_subtitle = item["product_subtitle"] -%}
+      {% endif %}
+      {%- assign bundle_product_icon = false -%}
+      {% if item["product_icon"] != blank %}
+        {%- assign bundle_product_icon = item["product_icon"] -%}
+      {% endif %}
+      {% if item["product_variants_id"] != blank %}
+        {%- assign bundle_product_variants_id = item["product_variants_id"] | split: ',' -%}
+      {% endif %}
+      {% if item["selected_variant_id"] != blank %}
+        {%- assign bundle_product_selected_variant_id = item["selected_variant_id"] -%}
+      {% endif %}
 
-        {%- assign hasPreorderTag = false -%}
-        {%- if bundle_product.tags contains 'preorder' -%}
-          {%- assign hasPreorderTag = true -%}
-        {%- endif -%}
+      {%- assign hasPreorderTag = false -%}
 
-        {%- if bundle_product != blank -%}
-          <div>
-            <bundle-mix-card class="bundle-product">
-              <div class="bundle-product__header">
-                <div class="bundle-product__icon-wrapper rel">
-                  {%- if bundle_product_icon -%}
-                    <img src="{{ bundle_product_icon }}"
-                         class="image-abs-cover"
-                         alt="{{ bundle_product.title }}"
-                         style="visibility: visible">
-                  {%- else -%}
-                    {%- for variant in bundle_product.variants -%}
-                      {%- assign variant_img = variant.featured_media | img_url: '200x' -%}
-                      <img src="{{ variant_img }}"
-                           class="image-abs-cover"
-                           data-mix-card-media-id="{{ variant.id }}"
-                           alt="{{ variant.title }}"
-                           {% if forloop.first %}style="visibility: visible"{% endif %}>
-                    {%- endfor -%}
-                  {%- endif -%}
-                </div>
-                <h3 class="bundle-product__description-title">
-                  <a href="{{ bundle_product.url }}">{{ bundle_product.title }}</a>
+      {%- if bundle_product != blank -%}
+        {%- include 'budle-mix-card' -%}
+      {%- endif -%}
+
+      {%- assign bundle_product_icon = blank -%}
+      {%- assign bundle_product = blank -%}
+      {%- assign bundle_product_subtitle = blank -%}
+      {%- assign bundle_product_variants_id = blank -%}
+      {%- assign bundle_product_selected_variant_id = blank -%}
+      {%- assign uniq_id = blank -%}
+      {%- assign custom_class = blank -%}
+    {%- endfor -%}
+  {% endif %}
+
+  {%- if product.metafields.custom_fields["multiple_bundle_product_"] != blank -%}
+    {%- for item in product.metafields.custom_fields["multiple_bundle_product_"] -%}
+      {%- if item["card_title"] != blank -%}
+        {%- assign card_title = item["card_title"] -%}
+      {%- endif -%}
+      {%- if item["card_subtitle"] != blank -%}
+        {%- assign card_subtitle = item["card_subtitle"] -%}
+      {%- endif -%}
+      {%- if item["card_icon"] != blank -%}
+        {%- assign card_icon = item["card_icon"] -%}
+      {%- endif -%}
+      {%- if item["bundle_product_item"] != blank -%}
+
+        {%- capture 'slick-bundle-mix-config' -%}
+          {
+            "rows": 1,
+            "slidesToShow": 1.3,
+            "arrows": false,
+            "dots": true,
+            "autoplay": false,
+            "infinite": false,
+            "adaptiveHeight": true
+          }
+        {%- endcapture -%}
+
+        <div class="bundle-product bundle-mix__multiple"
+             data-section-type="slick-slideshow"
+             data-slick-config='{{- slick-bundle-mix-config -}}'>
+          <div class="bundle-mix__multiple-header">
+            {%- if card_icon != blank -%}
+              <div class="bundle-mix____icon-wrapper rel">
+                <img src="{{ card_icon }}"
+                     class="image-abs-cover"
+                     alt="{{ card_title }}">
+              </div>
+            {%- endif -%}
+            {%- if card_title != blank or card_subtitle != blank -%}
+              {%- if card_title != blank -%}
+                <h3 class="bundle-mix__title">
+                  {{ card_title }}
                 </h3>
-              </div>
-
-              <div class="bundle-product__description">
-                {%- assign bundle_variant_option1 = '' -%}
-                {%- assign bundle_variant_option2 = '' -%}
-                {%- assign bundle_variant_option3 = '' -%}
-                {%- assign bundle_option_name_1 = '' -%}
-                {%- assign bundle_option_name_2 = '' -%}
-                {%- assign bundle_option_name_3 = '' -%}
-                {%- assign bundle_variants_min_price = '' -%}
-
-                {%- for option in bundle_product.options_with_values -%}
-                  {%- case forloop.index -%}
-                  {%- when 1 -%}
-                  {%- assign bundle_option_name_1 = option.name -%}
-                  {%- when 2 -%}
-                  {%- assign bundle_option_name_2 = option.name -%}
-                  {%- when 3 -%}
-                  {%- assign bundle_option_name_3 = option.name -%}
-                  {%- endcase -%}
-                {%- endfor -%}
-
-                {%- for variant in bundle_product.variants -%}
-                  {%- assign show_variant = true -%}
-
-                  {%- if bundle_product_variants_id != blank -%}
-                    {%- assign show_variant = false -%}
-
-                    {%- for bundle_variant_id in bundle_product_variants_id -%}
-                      {%- assign bundle_variant_id_num = bundle_variant_id | plus: 0 -%}
-                      {%- if bundle_variant_id_num == variant.id -%}
-                        {%- assign show_variant = true -%}
-
-                        {%- comment -%}
-                          Get min price of bundle product variants
-                        {%- endcomment -%}
-
-                        {%- if forloop.first -%}
-                          {%- assign bundle_variants_min_price = variant.price -%}
-                        {%- else -%}
-                          {%- if bundle_variants_min_price > variant.price -%}
-                            {%- assign bundle_variants_min_price = variant.price -%}
-                          {%- endif -%}
-                        {%- endif -%}
-
-                        {%- break -%}
-                      {%- endif -%}
-                    {%- endfor -%}
-                  {%- else -%}
-
-                    {%- comment -%}
-                      Get min price of bundle product variants
-                    {%- endcomment -%}
-
-                    {%- assign bundle_variants_min_price = bundle_product.price_min -%}
-                  {%- endif -%}
-
-                  {%- if show_variant -%}
-                    {%- for i in (1..3) -%}
-                      {%- assign option_key = "option" | append: i -%}
-                      {%- case i -%}
-                      {%- when 1 -%}
-                      {%- assign bundle_variant_option1 = bundle_variant_option1 | append: variant[option_key] | append: '|#|' -%}
-                      {%- when 2 -%}
-                      {%- assign bundle_variant_option2 = bundle_variant_option2 | append: variant[option_key] | append: '|#|' -%}
-                      {%- when 3 -%}
-                      {%- assign bundle_variant_option3 = bundle_variant_option3 | append: variant[option_key] | append: '|#|' -%}
-                      {%- endcase -%}
-                    {%- endfor -%}
-                  {%- endif -%}
-                {%- endfor -%}
-
-                {%- assign bundle_variant_options1_arr = bundle_variant_option1 | split: '|#|' | uniq -%}
-                {%- assign bundle_variant_options2_arr = bundle_variant_option2 | split: '|#|' | uniq -%}
-                {%- assign bundle_variant_options3_arr = bundle_variant_option3 | split: '|#|' | uniq -%}
-
-                <div class="bundle-product__option-wrapper f fdc">
-                  {%- if bundle_option_name_1 != blank -%}
-                    {% include 'product-options-bundle' with
-                      bundle_product: bundle_product,
-                      options_array: bundle_variant_options1_arr,
-                      option_name: bundle_option_name_1 %}
-                  {%- endif -%}
-
-                  {%- if bundle_option_name_2 != blank -%}
-                    {% include 'product-options-bundle' with
-                      bundle_product: bundle_product,
-                      options_array: bundle_variant_options2_arr,
-                      option_name: bundle_option_name_2 %}
-                  {%- endif -%}
-
-                  {%- if bundle_option_name_3 != blank -%}
-                    {% include 'product-options-bundle' with
-                      bundle_product: bundle_product,
-                      options_array: bundle_variant_options3_arr,
-                      option_name: bundle_option_name_3 %}
-                  {%- endif -%}
-                </div>
-
-                {%- capture options -%}
-                  {%- for variant in bundle_product.variants -%}
-
-                    {%- if variant.available == false and forloop.first -%}
-                      {%- assign bundle_available = false -%}
-                    {%- endif -%}
-
-                    {%- assign options = '' -%}
-                    {%- assign variant_title_arr = variant.title | split: '/' -%}
-                    {%- for variant_title in variant_title_arr -%}
-
-                      {%- if variant_title contains ':' -%}
-                        {%- assign variant_title_hand = variant_title | split: ':' | last | strip | handleize -%}
-                      {%- else -%}
-                        {%- assign variant_title_hand = variant_title | handleize -%}
-                      {%- endif -%}
-
-                      {%- if forloop.last -%}
-                        {%- assign options = options | append: variant_title_hand -%}
-                      {%- else -%}
-                        {%- assign options = options | append: variant_title_hand | append: '/' -%}
-                      {%- endif -%}
-                    {%- endfor -%}
-
-                    {%- assign bundle_price_difference = variant.price | minus: bundle_variants_min_price -%}
-                    {%- assign variant_preorder = variant.metafields.my_fields.preorder -%}
-
-                    <option value='{{ variant.id }}'
-                            data-variant-options-title='{{ options }}'
-                            data-variant-uniq_id='{{ variant.id | append: '-' | append: uniq_id }}'
-                            data-variant-price='{{ variant.price | money | remove: ".00" }}'
-                            data-variant-origin-price='{{ variant.price | times: 0.01 }}'
-                            data-bundle-price-difference='{{ bundle_price_difference | times: 0.01 }}'
-                            data-variant-inventory-quantity='{{ variant.inventory_quantity }}'
-                            data-variant-inventory-policy='{{ variant.inventory_policy }}'
-                            data-variant-inventory-management='{{ variant.inventory_management }}'
-                            {% unless variant.available %}disabled="disabled"{% endunless %}
-                            {% if hasPreorderTag or variant_preorder %}data-variant-preorder='true'{% endif %}
-                            {% if forloop.first %}selected{% endif %}>
-                      {{ variant.title }}
-                    </option>
-                  {%- endfor -%}
-                {%- endcapture -%}
-
-                {%- capture selectTitle -%}Options for {{ bundle_product.title }}{%- endcapture -%}
-                {%- assign selectName = 'bundle-select-' | append: forloop.index -%}
-
-                {% include 'component-select' with
-                  name: selectName,
-                  options: options,
-                  selectTitle: selectTitle,
-                  className: 'js-bundle-variant is-hidden',
-                  placeholder: false,
-                  value: bundle_product.selected_or_first_available_variant.id
-                  required: true,
-                  ariaHidden: true,
-                  attributes: 'data-option-main',
-                  index: forloop.index %}
-
-              </div>
-
-              <script type="application/json">
-                {{ bundle_product | json }}
-              </script>
-
-            </bundle-mix-card>
+              {%- endif -%}
+              {%- if card_subtitle != blank -%}
+                <p class="bundle-mix__subtitle">
+                  {{ card_subtitle }}
+                </p>
+              {%- endif -%}
+            {%- endif -%}
           </div>
 
-        {%- endif -%}
+          <bundle-mix-multiple class="bundle-mix__multiple-wrapper jsSlickSlider">
+            {%- for bundle_product_item in item["bundle_product_item"] -%}
+              {%- if bundle_product_item["product"] != blank -%}
+                {%- assign bundle_product = all_products[bundle_product_item["product"]] -%}
+              {%- endif -%}
+              {%- assign bundle_product_icon = false -%}
+              {%- if bundle_product_item["product_icon"] != blank -%}
+                {%- assign bundle_product_icon = bundle_product_item["product_icon"] -%}
+              {%- endif -%}
+              {%- if bundle_product_item["product_variants_id"] != blank -%}
+                {%- assign bundle_product_variants_id = bundle_product_item["product_variants_id"] | split: ',' -%}
+              {%- endif -%}
+              {%- if bundle_product_item["selected_variant_id"] != blank -%}
+                {%- assign bundle_product_selected_variant_id = bundle_product_item["selected_variant_id"] -%}
+              {%- endif -%}
 
-        {%- assign bundle_product_icon = blank -%}
-        {%- assign bundle_product = blank -%}
-        {%- assign bundle_product_variants_id = blank -%}
-        {%- assign uniq_id = blank -%}
-      {%- endfor -%}
-    {% endif %}
+              {%- assign hasPreorderTag = false -%}
 
-      {% include 'pdp-bundle-description' %}
+              {%- if bundle_product != blank -%}
+                {%- include 'budle-mix-card' -%}
+              {%- endif -%}
+
+              {%- assign bundle_product_icon = blank -%}
+              {%- assign bundle_product = blank -%}
+              {%- assign bundle_product_subtitle = blank -%}
+              {%- assign bundle_product_variants_id = blank -%}
+              {%- assign bundle_product_selected_variant_id = blank -%}
+              {%- assign uniq_id = blank -%}
+              {%- assign custom_class = blank -%}
+            {%- endfor -%}
+          </bundle-mix-multiple>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endif -%}
+
+  {% include 'pdp-bundle-description' %}
 
 
 <div class='f fdc jcb' id='atc-wrapper'>
@@ -254,7 +153,7 @@
   {%
     include 'component-button' with
     tag: 'button',
-    id: component_button_id,
+    id: 'pdp-bundle-atc',
     name: 'add',
     type: 'submit',
     href: '#',

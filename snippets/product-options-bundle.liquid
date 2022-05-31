@@ -1,4 +1,14 @@
+{%- comment -%}
+  {% include 'product-options-bundle' with
+    bundle_product: bundle_product,
+    options_array: bundle_variant_options1_arr,
+    option_name: bundle_option_name_1
+    preselected_variant_option = preselected_variant.option1 %}
+{%- endcomment -%}
+
+{%- assign preselected_option_name = false -%}
 {%- assign option_name_handle = option_name | handleize -%}
+
 {%- case option_name_handle -%}
 {%- when 'color' -%}
 {%- assign order = 1 -%}
@@ -13,6 +23,15 @@
   {%- else -%}
 {%- assign order = 0 -%}
 {%- endcase -%}
+
+{%- if preselected_variant_option != null -%}
+  {%- for item in options_array -%}
+    {%- if preselected_variant_option == item -%}
+      {%- assign preselected_option_name = item -%}
+      {%- break -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
 
 
 <div class="bundle-product__option-group" style="order: {{ order }}; {% if option_name == 'Title' %}display: none;{% endif %}" >
@@ -35,7 +54,12 @@
                    name="{{ option_name | append: '-' | append: uniq_id }}"
                    value="{{ option_value | handleize }}"
                    data-option="{{ item }}"
-                   title="{{ option_value }}" {% if forloop.first %}checked{% endif %}>
+                   title="{{ option_value }}"
+                    {% if preselected_option_name != false %}
+                      {% if preselected_option_name == item %}checked{% endif %}
+                    {% else %}
+                      {% if forloop.first %}checked{% endif %}
+                    {% endif %}>
             <div class="radio__title f aic jcc"
                  data-{{ option_name | handleize }}="{{ option_value | handleize }}">
               <span style="white-space: nowrap">{{ option_value }}</span>
