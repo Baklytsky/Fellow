@@ -9855,11 +9855,11 @@
         t.innerHTML = e.getState().cart.item_count
       }))
     })), Dr.on("cart:toggle", (function(e) {
-      e.cartOpen && !e.isScrolling ? t.classList.add("is-opaque") : e.cartOpen || e.isScrolling || t.classList.remove("is-opaque"), e.cartOpen ? f.forEach((function(t) {
-        t.setAttribute("aria-pressed", "true"), t.setAttribute("aria-expanded", "true")
-      })) : f.forEach((function(t) {
-        t.setAttribute("aria-pressed", "false"), t.setAttribute("aria-expanded", "false")
-      }))
+      // e.cartOpen && !e.isScrolling ? t.classList.add("is-opaque") : e.cartOpen || e.isScrolling || t.classList.remove("is-opaque"), e.cartOpen ? f.forEach((function(t) {
+      //   t.setAttribute("aria-pressed", "true"), t.setAttribute("aria-expanded", "true")
+      // })) : f.forEach((function(t) {
+      //   t.setAttribute("aria-pressed", "false"), t.setAttribute("aria-expanded", "false")
+      // }))
     })), l.forEach((function(t) {
       void 0 !== e.getState().cart.item_count ? t.innerHTML = e.getState().cart.item_count : (t.innerHTML = "0", console.error("Cart Count returning ".concat(e.getState().cart.item_count, ", we likely can't connect to cart.js")))
     })), r.update()

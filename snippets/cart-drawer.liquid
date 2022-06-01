@@ -1,27 +1,29 @@
-{%- assign cart_has_canal = false -%}
-{% for item in cart.items %}  
-{% if item.product.type == 'Coffee' %}
-{% assign cart_has_canal = true %}
-{% endif %}
-{% endfor %}
+<script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
 
-{%- assign cart_has_giftcard = false -%}
-{% for item in cart.items %}
-  {% if item.product.type contains 'Digital Gift Card' %}
-    {% assign cart_has_giftcard = true %}
+<cart-drawer class='cart-drawer-outer fix fill x z10' aria-expanded='false' tabindex='-1' data-component='cartDrawer'>
+
+  {%- assign cart_has_canal = false -%}
+  {% for item in cart.items %}
+    {% if item.product.type == 'Coffee' %}
+      {% assign cart_has_canal = true %}
+    {% endif %}
+  {% endfor %}
+
+  {%- assign cart_has_giftcard = false -%}
+  {% for item in cart.items %}
+    {% if item.product.type contains 'Digital Gift Card' %}
+      {% assign cart_has_giftcard = true %}
+    {% endif %}
+  {% endfor %}
+
+  {%- assign coffee_pdp = false -%}
+  {% if request.path contains "/products/" %}
+    {%- assign slug = request.path | remove_first: '/products/' -%}
+    {% if all_products[slug].type contains "Coffee" %}
+      {% assign coffee_pdp = true %}
+    {% endif %}
   {% endif %}
-{% endfor %}
 
-{%- assign coffee_pdp = false -%}
-{% if request.path contains "/products/" %}
-{%- assign slug = request.path | remove_first: '/products/' -%}
-{% if all_products[slug].type contains "Coffee" %}
-{% assign coffee_pdp = true %}
-{% endif %}
-{% endif %}
-
-{% comment %} To-do: Add ARIA Live updates for items added/removed from cart. -ae102220 {% endcomment %}
-<section class='cart-drawer-outer fix fill x z10' aria-expanded='false' tabindex='-1' data-component='cartDrawer'>
   <div class='cart-drawer-overlay abs fill js-overlay'></div>
   <div id='cart-drawer-content' class='cart-drawer y x f abs top right bottom js-cart-drawer'>
 
@@ -36,7 +38,9 @@
           </button>
         </div>
 
-        <p class='cart-drawer__header-text ac js-empty-cart-text'>{{ 'cart.general.empty' | t }}</p>
+        {%- if cart == empty -%}
+          <p class='cart-drawer__header-text ac js-empty-cart-text'>{{ 'cart.general.empty' | t }}</p>
+        {%- endif -%}
 
         {%- if settings.enable_gwp and settings.gwp_threshold > 0 and all_products[settings.gwp_product ].type == 'Gift product' -%}
           <div class="free-shipping js-free-shipping is-hidden">
@@ -70,61 +74,137 @@
           </div>
         {%- endif -%}
       </header>
+
+      {%- comment -%}
+        <div class='cart-drawer__items-outer'>
+          <div class='cart-drawer__items-inner js-cart-drawer-items'>
+            <p class="eyebrow gwp-nostack-text is-hidden">Stacking promos is not allowed.<br> Manually remove any free gifts from your cart to use a discount code.</p>
+            <div class='js-items x y'>
+              <div class='abs fill'>
+                <svg viewBox="0 0 100 86" class='loader abs fill mxa cg'>
+                  <use xlink:href="#logo"></use>
+                </svg>
+              </div>
+            </div>
+            {% include 'cart-drawer-empty' %}
+          </div>
+        </div>
+      {%- endcomment -%}
+
       <div class='cart-drawer__items-outer'>
-        <div class='cart-drawer__items-inner js-cart-drawer-items'>
-         <p class="eyebrow gwp-nostack-text is-hidden">Stacking promos is not allowed.<br> Manually remove any free gifts from your cart to use a discount code.</p>
-          <div class='js-items x y'>
-            <div class='abs fill'>
-              <svg viewBox="0 0 100 86" class='loader abs fill mxa cg'>
-                <use xlink:href="#logo"></use>
-              </svg>
+        {%- if cart != empty -%}
+          <div class='cart-drawer__items-inner js-cart-drawer-items'>
+            <div class='js-items x y'>
+              {%- for item in cart.items -%}
+                <script>
+                  console.log({{ item | json }})
+                </script>
+                <cart-drawer-item class="cart-drawer__item"
+                     data-component="cartDrawerItem"
+                     data-pid="{{ item.product_id }}"
+                     data-id="{{ item.variant.id }}"
+                     data-key="{{ item.key }}">
+                  <a href="{{ item.url }}" class="cart-drawer__itemImage">
+                    <img srcset="{{ item.image | img_url: '200x' }}"
+                         src="{{ item.media | img_url: '1x1' }}"
+                         sizes="auto"
+                         loading="lazy"
+                         width="100%"
+                         height="100%"
+                         alt="{{ item.title }}">
+                  </a>
+
+                  <div class="cart-drawer__itemContent f fdc">
+                    <div class="cart-drawer__itemDetails">
+                      <a href="{{ item.url }}" class="cart-drawer__itemTitle">{{ item.product.title }}</a>
+                      <div class="cart-drawer__itemOptions">
+                        {%- for option in item.variant.options -%}
+                          {% unless forloop.first %} | {% endunless %}{{ option }}
+                        {%- endfor -%}
+                      </div>
+                    </div>
+
+                    <div class="f aic jcb pt05">
+                      <div class="cart-item__stepper aic f ">
+                        <div class="cart-stepper js-remove-single" data-key="{{ item.key }}">-</div>
+                        <input type="text" title="Quantity selector for - {{ item.title }}" class="cart-quantity js-single-quantity" value="1">
+                        <div class="cart-stepper js-add-single" data-key="{{ item.key }}">+</div>
+                      </div>
+
+                      <div class="cart-item__price">
+                        {%- if item.line_price == item.original.line_price -%}
+                          {{ item.line_price | money_without_trailing_zeros }}
+                        {%- else -%}
+                          <span style="text-decoration: line-through; padding-right: 5px;">
+                            {{ item.original_line_price | money_without_trailing_zeros }}
+                          </span>
+                          {{ item.line_price | money_without_trailing_zeros }}
+                        {%- endif -%}
+                      </div>
+                    </div>
+
+                    <button class="button--reset cart-drawer__itemAction js-remove-item"
+                            data-key="{{ item.key }}"
+                            style="display: none">
+                      {% render 'icon' with 'icon-x' %}
+                    </button>
+
+                    <button type="button"
+                            data-action="open-item-remove-popup"
+                            aria-expanded="false"
+                            class="button--reset cart-drawer__itemAction cart-drawer__remove-open">
+                      {% render 'icon' with 'icon-x' %}
+                    </button>
+                  </div>
+
+                  <script type="application/json">
+                    {{ item | json }}
+                  </script>
+
+                </cart-drawer-item>
+              {%- endfor -%}
+
             </div>
           </div>
+        {%- else -%}
           {% include 'cart-drawer-empty' %}
-        </div>
+        {%- endif -%}
       </div>
 
       <footer class='cart-drawer__footer js-cart-footer'>
-        {% comment %}
-          Disabled. Recommend removing this and adding functionality to cart upsell
-          -ae 04.20.21
-          {% if settings.enable_free_product %}
-            {% include 'cart-free-product' %}
-          {% endif %}
-          related schema available in assets/cart-free-product-schema.js
-        {% endcomment %}
+        {%- if cart != empty -%}
+          {%- if settings.enable_gift_wrapping and settings.gift_box_product and cart_has_canal == false and coffee_pdp == false and cart_has_giftcard == false -%}
+            <div class="cart-drawer__footer-gift-wrapping">
+              {% section 'cart-gift-wrapping' %}
+            </div>
+          {%- endif -%}
 
-        {%- if settings.enable_gift_wrapping and settings.gift_box_product and cart_has_canal == false and coffee_pdp == false and cart_has_giftcard == false -%}
-          <div class="cart-drawer__footer-gift-wrapping">
-            {% section 'cart-gift-wrapping' %}
+          {%- if settings.cart_recommended_enable -%}
+            <div class="cart-drawer__footer-recommended-wrapper">
+              {% section 'cart-recommended' %}
+            </div>
+          {%- endif -%}
+
+          <div class="cart-drawer__footer-action f aic jcb">
+            <section class='cart-footer__total'>
+              <div class='cart-footer__total-item js-shipping-free-text is-hidden'>
+                <span>{{ 'cart.general.shipping_free' | t }}</span>
+              </div>
+              <div class='cart-footer__total-item f aic fw'>
+                <span>{{ 'cart.general.subtotal' | t }}</span>
+                <span class='js-subtotal'></span>
+              </div>
+            </section>
+
+            {%
+              include 'component-button' with
+              tag: 'a',
+              cta: 'Checkout',
+              href: '/checkout',
+              className: 'btn btn--light no-ajax cart-checkout__button'
+            %}
           </div>
         {%- endif -%}
-
-        {%- if settings.cart_recommended_enable -%}
-          <div class="cart-drawer__footer-recommended-wrapper">
-            {% section 'cart-recommended' %}
-          </div>
-        {%- endif -%}
-
-        <div class="cart-drawer__footer-action f aic jcb">
-          <section class='cart-footer__total'>
-            <div class='cart-footer__total-item js-shipping-free-text is-hidden'>
-              <span>{{ 'cart.general.shipping_free' | t }}</span>
-            </div>
-            <div class='cart-footer__total-item f aic fw'>
-              <span>{{ 'cart.general.subtotal' | t }}</span>
-              <span class='js-subtotal'></span>
-            </div>
-          </section>
-
-          {%
-            include 'component-button' with
-            tag: 'a',
-            cta: 'Checkout',
-            href: '/checkout',
-            className: 'btn btn--light no-ajax cart-checkout__button'
-          %}
-        </div>
       </footer>
     </div>
 
@@ -140,4 +220,4 @@
       </div>
     </div>
   </div>
-</section>
+</cart-drawer>
