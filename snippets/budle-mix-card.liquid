@@ -106,7 +106,11 @@
                class="image-abs-cover"
                data-mix-card-media-id="{{ variant.id }}"
                alt="{{ variant.title }}"
-               {% if forloop.first %}style="visibility: visible"{% endif %}>
+              {% if preselected_variant != blank %}
+                {% if preselected_variant.id == variant.id %}style="visibility: visible"{% endif %}
+              {% else %}
+                {% if forloop.first %}style="visibility: visible"{% endif %}
+              {% endif %}>
         {%- endfor -%}
       {%- endif -%}
     </div>
