@@ -9841,28 +9841,28 @@
     /*Dr.on("mobileNav:toggle", (function(e) {
       e.mobileNavOpen ? (t.classList.add("is-open--mobile"), n.classList.add("noscroll"), a.innerHTML = "Close") : (t.classList.remove("is-open--mobile"), n.classList.remove("noscroll"), a.innerHTML = "Menu")
     }));*/
-    for (var l = t.querySelectorAll(".js-cart-count"), f = t.querySelectorAll(".js-cart-drawer-toggle"), h = 0; h < f.length; h++) f[h].addEventListener("click", (function(t) {
-      t.preventDefault(), Dr.emit("cart:toggle", (function(t) {
-        return {
-          cartOpen: !t.cartOpen
-        }
-      }))
-    }));
-    e.on("cart:updated", (function(t) {
-      f.forEach((function(t) {
-        t.setAttribute("aria-label", "Cart Toggle - Cart (".concat(e.getState().cart.item_count, ")"))
-      })), l.forEach((function(t) {
-        t.innerHTML = e.getState().cart.item_count
-      }))
-    })), Dr.on("cart:toggle", (function(e) {
+    // for (var l = t.querySelectorAll(".js-cart-count"), f = t.querySelectorAll(".js-cart-drawer-toggle"), h = 0; h < f.length; h++) f[h].addEventListener("click", (function(t) {
+    //   t.preventDefault(), Dr.emit("cart:toggle", (function(t) {
+    //     return {
+    //       cartOpen: !t.cartOpen
+    //     }
+    //   }))
+    // }));
+    // e.on("cart:updated", (function(t) {
+    //   f.forEach((function(t) {
+    //     t.setAttribute("aria-label", "Cart Toggle - Cart (".concat(e.getState().cart.item_count, ")"))
+    //   })), l.forEach((function(t) {
+    //     t.innerHTML = e.getState().cart.item_count
+    //   }))
+    // })), Dr.on("cart:toggle", (function(e) {
       // e.cartOpen && !e.isScrolling ? t.classList.add("is-opaque") : e.cartOpen || e.isScrolling || t.classList.remove("is-opaque"), e.cartOpen ? f.forEach((function(t) {
       //   t.setAttribute("aria-pressed", "true"), t.setAttribute("aria-expanded", "true")
       // })) : f.forEach((function(t) {
       //   t.setAttribute("aria-pressed", "false"), t.setAttribute("aria-expanded", "false")
       // }))
-    })), l.forEach((function(t) {
-      void 0 !== e.getState().cart.item_count ? t.innerHTML = e.getState().cart.item_count : (t.innerHTML = "0", console.error("Cart Count returning ".concat(e.getState().cart.item_count, ", we likely can't connect to cart.js")))
-    })), r.update()
+    // })), l.forEach((function(t) {
+    //   void 0 !== e.getState().cart.item_count ? t.innerHTML = e.getState().cart.item_count : (t.innerHTML = "0", console.error("Cart Count returning ".concat(e.getState().cart.item_count, ", we likely can't connect to cart.js")))
+    // })), r.update()
   }));
 
   function F(t, e) {
@@ -10307,15 +10307,18 @@
             b = function(t) {
               t.cartPromoActive ? o.classList.add("is-promoActive") : o.classList.remove("is-promoActive")
             };
-        m(e.getState().cart), b(Dr.getState()), n.addEventListener("click", (function(t) {
-          t.preventDefault(), g(), Dr.emit("cart:toggle", {
-            cartOpen: !1
-          })
-        })), r.addEventListener("click", (function(t) {
-          t.preventDefault(), g(), Dr.emit("cart:toggle", {
-            cartOpen: !1
-          })
-        })), e.on("cart:toggle", (function(e) {
+        // m(e.getState().cart), b(Dr.getState()),
+        //     n.addEventListener("click", (function(t) {
+        //   t.preventDefault(), g(), Dr.emit("cart:toggle", {
+        //     cartOpen: !1
+        //   })
+        // })),
+        //     r.addEventListener("click", (function(t) {
+        //   t.preventDefault(), g(), Dr.emit("cart:toggle", {
+        //     cartOpen: !1
+        //   })
+        // })),
+            e.on("cart:toggle", (function(e) {
           var n = e.cart,
               thresholdDifference = window.theme.gwpSettings.gwpThreshold - window.theme.gwpSettings.secondGwpThreshold,
               summaryGwpThreshold = window.theme.gwpSettings.secondGwpThreshold,
@@ -14622,7 +14625,8 @@
               }
               // Add property (_recommended_product) if product is recommended
               if (window.location.search.indexOf('pr_prod_strat') !== -1) n._recommended_product = true;
-              return J(t.id, e, true, n)
+              return theme.cart.cartEvent('/cart/add.js', t.id, e, true, n)
+              //return J(t.id, e, true, n)
             }))
           }(a, r.elements.quantity.value);
           var e = e || [];

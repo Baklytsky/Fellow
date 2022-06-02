@@ -1,0 +1,242 @@
+{%- assign cart_has_canal = false -%}
+  {% for item in cart.items %}
+    {% if item.product.type == 'Coffee' %}
+      {% assign cart_has_canal = true %}
+    {% endif %}
+  {% endfor %}
+
+  {%- assign cart_has_giftcard = false -%}
+  {% for item in cart.items %}
+    {% if item.product.type contains 'Digital Gift Card' %}
+      {% assign cart_has_giftcard = true %}
+    {% endif %}
+  {% endfor %}
+
+  {%- assign coffee_pdp = false -%}
+  {% if request.path contains "/products/" %}
+    {%- assign slug = request.path | remove_first: '/products/' -%}
+    {% if all_products[slug].type contains "Coffee" %}
+      {% assign coffee_pdp = true %}
+    {% endif %}
+  {% endif %}
+
+<div id='cart-drawer-content' class='cart-drawer y x f js-cart-drawer'>
+  <div class="cart-drawer__content-wrapper">
+    <header class='cart-drawer__header f fdc x z2'>
+      <div class="cart-drawer__header-content f aic jcc">
+        {%- render 'icon' with 'cart' -%}
+        <span class='js-cart-count cart-drawer__count'>{{ cart.item_count }}</span>
+
+        <button aria-label="Cart Close" type="button" id="closeCart" class='cart-drawer__close button--reset js-close'>
+          {%- render 'icon', icon: 'arrow-next' -%}
+        </button>
+      </div>
+
+      {%- if cart == empty -%}
+        <p class='cart-drawer__header-text ac js-empty-cart-text'>{{ 'cart.general.empty' | t }}</p>
+      {%- endif -%}
+
+      {%- if settings.enable_gwp and settings.gwp_threshold > 0 and all_products[settings.gwp_product ].type == 'Gift product' -%}
+        <div class="free-shipping js-free-shipping is-hidden">
+          <div class='free-shipping--unmet js-free-shipping-unmet-msg
+        {% if cart.total_price > settings.gwp_threshold %} is-hidden{% endif %}'>
+            You're <strong><span class='js-free-shipping-amount-remaining'>${{ settings.gwp_threshold }}</span></strong> away from free gift
+          </div>
+          <div class='free-shipping--met js-free-shipping-met-msg
+        {% if cart.total_price < settings.gwp_threshold %} is-hidden{% endif %}'>
+            Good news! You get a free {{ settings.gwp_product.title }}.
+          </div>
+
+          <div class='free-shipping__meter f aic'>
+            <div class='free-shipping__meter__progress js-shipping-progress-bar'></div>
+          </div>
+        </div>
+      {%- else -%}
+        <div class="free-shipping js-free-shipping is-hidden">
+          <div class='free-shipping--unmet js-free-shipping-unmet-msg
+        {% if cart.total_price > 9900 and cart_has_canal %} is-hidden{% endif %}'>
+            You're <strong><span class='js-free-shipping-amount-remaining'>$99.00</span></strong> away from free US shipping
+          </div>
+          <div class='free-shipping--met js-free-shipping-met-msg
+        {% if cart.total_price < 9900 and cart_has_canal %} is-hidden{% endif %}'>
+            Congrats! You get free US Shipping!
+          </div>
+
+          <div class='free-shipping__meter f aic'>
+            <div class='free-shipping__meter__progress js-shipping-progress-bar'></div>
+          </div>
+        </div>
+      {%- endif -%}
+    </header>
+
+    {%- comment -%}
+      <div class='cart-drawer__items-outer'>
+        <div class='cart-drawer__items-inner js-cart-drawer-items'>
+          <p class="eyebrow gwp-nostack-text is-hidden">Stacking promos is not allowed.<br> Manually remove any free gifts from your cart to use a discount code.</p>
+          <div class='js-items x y'>
+            <div class='abs fill'>
+              <svg viewBox="0 0 100 86" class='loader abs fill mxa cg'>
+                <use xlink:href="#logo"></use>
+              </svg>
+            </div>
+          </div>
+          {% include 'cart-drawer-empty' %}
+        </div>
+      </div>
+    {%- endcomment -%}
+
+    {%- if cart != empty -%}
+      <div class='cart-drawer__items-outer'>
+        <div class='cart-drawer__items-inner js-cart-drawer-items'>
+          <div class='js-items x y'>
+            {%- for item in cart.items -%}
+              <script>
+                console.log({{ item | json }})
+              </script>
+              <cart-drawer-item class="cart-drawer__item"
+                                data-component="cartDrawerItem"
+                                data-pid="{{ item.product_id }}"
+                                data-id="{{ item.variant.id }}"
+                                data-key="{{ item.key }}">
+                <a href="{{ item.url }}" class="cart-drawer__itemImage">
+                  <img srcset="{{ item.image | img_url: '200x' }}"
+                       src="{{ item.media | img_url: '1x1' }}"
+                       sizes="auto"
+                       loading="lazy"
+                       width="100%"
+                       height="100%"
+                       alt="{{ item.title }}">
+                </a>
+
+                <div class="cart-drawer__itemContent f fdc">
+                  <div class="cart-drawer__itemDetails">
+                    <a href="{{ item.url }}" class="cart-drawer__itemTitle">{{ item.product.title }}</a>
+                    <div class="cart-drawer__itemOptions">
+                      {%- for option in item.variant.options -%}
+                        {% unless forloop.first %} | {% endunless %}{{ option }}
+                      {%- endfor -%}
+                    </div>
+                  </div>
+
+                  <div class="f aic jcb pt05">
+                    <div class="cart-item__stepper aic f ">
+                      <button type="button"
+                              class="cart-stepper js-remove-single"
+                              data-key="{{ item.key }}">-</button>
+                      <input type="text"
+                             title="Quantity selector for - {{ item.title }}"
+                             class="cart-quantity js-single-quantity"
+                             value="{{ item.quantity }}">
+                      <button type="button"
+                              class="cart-stepper js-add-single"
+                              data-key="{{ item.key }}">+</button>
+                    </div>
+
+                    <div class="cart-item__price">
+                      <div class="loading-overlay__spinner">
+                        {% render 'icon' with 'spinner' %}
+                      </div>
+                      <div class="cart-item__price-final m0">
+                        {%- if item.line_price == item.original_line_price -%}
+                          {{ item.line_price | money_without_trailing_zeros }}
+                        {%- else -%}
+                          <span style="text-decoration: line-through; padding-right: 5px;">
+                          {{ item.original_line_price | money_without_trailing_zeros }}
+                        </span>
+                          {{ item.line_price | money_without_trailing_zeros }}
+                        {%- endif -%}
+                      </div>
+                    </div>
+                  </div>
+
+                  <button class="button--reset cart-drawer__itemAction js-remove-item"
+                          data-key="{{ item.key }}"
+                          style="display: none">
+                    {% render 'icon' with 'icon-x' %}
+                  </button>
+
+                  <button type="button"
+                          data-action="open-item-remove-popup"
+                          {% if item.product.type == 'Gift product' %}
+                            data-gift-product="{{ item.properties | first }}"
+                          {% endif %}
+                          aria-expanded="false"
+                          class="button--reset cart-drawer__itemAction cart-drawer__remove-open">
+                    {% render 'icon' with 'icon-x' %}
+                  </button>
+                </div>
+
+                <div class="remove-item__popup js-cart-drawer-popup" aria-hidden="true" tabindex="-1">
+                  <div class="remove-item__inner">
+                    {%- if settings.cart_remove_text != blank -%}
+                      <p class="remove-item__text">{{ settings.cart_remove_text }}</p>
+                    {%- endif -%}
+                    <div class="remove-item__btn-group f jcc aic">
+                      <button type="button" class="btn--clear remove-item__btn--close" data-action="close-item-remove-popup">{{ 'cart.general.popup_keep' | t }}</button>
+                      <button type="button" class="btn--clear remove-item__btn--remove js-remove-item-trigger">{{ 'cart.general.popup_remove' | t }}</button>
+                    </div>
+                  </div>
+                </div>
+
+
+                <script type="application/json">
+                  {{ item | json }}
+                </script>
+
+              </cart-drawer-item>
+            {%- endfor -%}
+
+          </div>
+        </div>
+      </div>
+    {%- else -%}
+      <div class='cart-drawer--empty cart-drawer__items-outer'>
+        {% include 'cart-drawer-empty' %}
+      </div>
+    {%- endif -%}
+
+    <footer class='cart-drawer__footer js-cart-footer'>
+      {%- if cart != empty -%}
+        {%- if settings.enable_gift_wrapping and settings.gift_box_product and cart_has_canal == false and coffee_pdp == false and cart_has_giftcard == false -%}
+          <div class="cart-drawer__footer-gift-wrapping">
+            {% include 'cart-gift-wrapping' %}
+          </div>
+        {%- endif -%}
+
+        {%- if settings.cart_recommended_enable -%}
+          <div class="cart-drawer__footer-recommended-wrapper">
+            {% include 'cart-recommended' %}
+          </div>
+        {%- endif -%}
+
+        <div class="cart-drawer__footer-action f aic jcb">
+          <section class='cart-footer__total'>
+            <div class='cart-footer__total-item js-shipping-free-text is-hidden'>
+              <span>{{ 'cart.general.shipping_free' | t }}</span>
+            </div>
+            <div class='cart-footer__total-item f aic fw'>
+              <span>{{ 'cart.general.subtotal' | t }}</span>
+              <span class='js-subtotal'></span>
+            </div>
+          </section>
+
+          {%
+            include 'component-button' with
+            tag: 'a',
+            cta: 'Checkout',
+            href: '/checkout',
+            className: 'btn btn--light no-ajax cart-checkout__button'
+          %}
+        </div>
+      {%- endif -%}
+    </footer>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Cart drawer content",
+  "class": "cart-drawer-wrapper",
+  "settings": []
+}
+{% endschema %}
