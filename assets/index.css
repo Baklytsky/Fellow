@@ -3405,7 +3405,7 @@ body.is-masthead--empty main {
 }
 
 .spinner {
-  animation: rotator 1.4s linear infinite;
+  animation: rotator 1.7s linear infinite;
 }
 
 @keyframes rotator {
@@ -3422,7 +3422,7 @@ body.is-masthead--empty main {
   stroke-dashoffset: 0;
   transform-origin: center;
   stroke: currentColor;
-  animation: dash 1.4s ease-in-out infinite;
+  animation: dash 1.7s ease-in-out infinite;
 }
 
 .cart-drawer__itemContent {
@@ -3561,7 +3561,7 @@ body.is-masthead--empty main {
   text-transform: capitalize;
 }
 
-.cart-drawer--empty .cart-drawer__items-outer {
+.cart-drawer--empty.cart-drawer__items-outer {
   background-color: #FFF9E5;
 }
 

@@ -14,7 +14,7 @@
 {%- endfor -%}
 
  {%- if gift_wrapping_product.available -%}
-   <section class="cart-gift-wrapping" id="{{ section.id }}">
+   <div class="cart-gift-wrapping">
      <div class="cart-gift-wrapping-header f aic">
        {%- if gift_wrapping__icon != blank -%}
          <div class="cart-gift-wrapping-icon f jcc aic">
@@ -30,7 +30,7 @@
          <button type="button" class="cart-gift-wrapping-btn" data-open-gift-note aria-hidden="false" hidden>Add a gift box + note</button>
        {%- endif -%}
      </div>
-   </section>
+   </div>
    <div class="cart-gift-wrapping-modal" aria-expanded='false'>
      <div class="cart-gift-wrapping-modal__content">
        {%- if gift_wrapping_heading != blank -%}

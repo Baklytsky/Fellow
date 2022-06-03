@@ -123,7 +123,7 @@
     <!-- End Google Tag Manager (noscript) -->
     {% section 'header' %}
     {% include 'modal' %}
-    <div id="page-overlay"></div>
+    <div id="page-overlay" class="page-overlay"></div>
     {% include 'cart-drawer' %}
 
     <main role='main' id='root' tabindex='0'>
@@ -147,6 +147,8 @@
 
     <script src="{{ 'custom.js' | asset_url }}" defer='defer'></script>
     <script src="{{ 'index.js' | asset_url }}" defer='defer'></script>
+    <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
+
     {% comment %} <script src="https://a.klaviyo.com/media/js/onsite/onsite.js"></script> {% endcomment %}
   <script type="text/javascript">
 document.querySelector("#kl_promo_terms").addEventListener('click',function (){

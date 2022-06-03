@@ -10251,20 +10251,20 @@
           }
         }
 
-        if (Cart.attributes['Gift note']) {
-          var giftBoxInCart = false
-          Cart.items.forEach(function (element) {
-            if (element.product_type === 'Gift box') {giftBoxInCart = true}
-          });
-          if (!giftBoxInCart) {
-            var data = {attributes: {'Gift note': ''}}
-            fetch('/cart/update.js', {
-              method: 'POST',
-              headers: {'Content-Type': 'application/json'},
-              body: JSON.stringify(data)
-            }).then(response => {theme.updateGiftWrappingProduct()})
-          }
-        }
+        // if (Cart.attributes['Gift note']) {
+        //   var giftBoxInCart = false
+        //   Cart.items.forEach(function (element) {
+        //     if (element.product_type === 'Gift box') {giftBoxInCart = true}
+        //   });
+        //   if (!giftBoxInCart) {
+        //     var data = {attributes: {'Gift note': ''}}
+        //     fetch('/cart/update.js', {
+        //       method: 'POST',
+        //       headers: {'Content-Type': 'application/json'},
+        //       body: JSON.stringify(data)
+        //     }).then(response => {theme.updateGiftWrappingProduct()})
+        //   }
+        // }
 
         window.giftNote = (Cart.attributes['Gift note']) ? Cart.attributes['Gift note'] : false
 
@@ -10513,27 +10513,27 @@
             }
           }
 
-          if (t.cart.attributes['Gift note']) {
-            var giftBoxInCart = false
-            t.cart.items.forEach(function (element) {
-              if (element.product_type === 'Gift box') {giftBoxInCart = true}
-            });
-            if (!giftBoxInCart) {
-              var data = {attributes: {'Gift note': ''}}
-              fetch('/cart/update.js', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(data)
-              }).then(response => {theme.updateGiftWrappingProduct()})
-            }
-          }
+          // if (t.cart.attributes['Gift note']) {
+          //   var giftBoxInCart = false
+          //   t.cart.items.forEach(function (element) {
+          //     if (element.product_type === 'Gift box') {giftBoxInCart = true}
+          //   });
+          //   if (!giftBoxInCart) {
+          //     var data = {attributes: {'Gift note': ''}}
+          //     fetch('/cart/update.js', {
+          //       method: 'POST',
+          //       headers: {'Content-Type': 'application/json'},
+          //       body: JSON.stringify(data)
+          //     }).then(response => {theme.updateGiftWrappingProduct()})
+          //   }
+          // }
 
           window.giftNote = (t.cart.attributes['Gift note']) ? t.cart.attributes['Gift note'] : false
           t.state;
           var n = t.cart;
-          if (window.theme.giftWrapping.giftWrappingEnable && window.theme.giftWrapping.giftWrappingAvailable) {
-            theme.updateGiftWrappingProduct()
-          }
+          // if (window.theme.giftWrapping.giftWrappingEnable && window.theme.giftWrapping.giftWrappingAvailable) {
+          //   theme.updateGiftWrappingProduct()
+          // }
 
           var thresholdDifference = window.theme.gwpSettings.gwpThreshold - window.theme.gwpSettings.secondGwpThreshold,
               summaryGwpThreshold = window.theme.gwpSettings.gwpThreshold,
@@ -10658,17 +10658,17 @@
         }))
       };
 
-  function Y(t, e, key) {
-    return K().then((function(n) {
-      for (var r = n.items, i = 0; i < r.length; i++) {
-        if (r[i].variant_id === parseInt(t) && r[i].key === key) {
-          return G(i + 1, e)
-        }
-      }
-    }))
-  }
-
-  window.updateCartItemQuantity = Y;
+  // function Y(t, e, key) {
+  //   return K().then((function(n) {
+  //     for (var r = n.items, i = 0; i < r.length; i++) {
+  //       if (r[i].variant_id === parseInt(t) && r[i].key === key) {
+  //         return G(i + 1, e)
+  //       }
+  //     }
+  //   }))
+  // }
+  //
+  // window.updateCartItemQuantity = Y;
 
 
   function G(t, e) {
@@ -10690,7 +10690,7 @@
       }), Dr.emit("cart:updated", {
         cart: t
       }), t
-    })).then(() => theme.updateCartRecommendedProducts())
+    }))
   }
 
   function K() {
@@ -10705,7 +10705,6 @@
   function J(t, e, openCart) {
     var n = arguments.length > 3 && void 0 !== arguments[3] ? arguments[3] : null;
 
-    theme.updateCartRecommendedProducts();
     return Dr.emit("cart:updating"), n ? H("/cart/add.js", {
       method: "POST",
       credentials: "include",
