@@ -1638,60 +1638,60 @@ theme.cartDrawer = function () {
   //   updateCartItemQuantity(id, value, key);
   // });
 
-  $(document).on('click.checkout', '.cart-checkout__button', function (e) {
-    e.preventDefault();
-    const location = $(this).attr('href'),
-          cartContents = fetch('/cart.js')
-          .then(response => response.json())
-          .then(data => { return data });
-    let updateData = {},
-        addData = [];
-
-    cartContents.then((cart) => {
-      console.log(cart)
-      $(cart.items).each(function (i, lineItem) {
-        if (lineItem.properties._bundles && lineItem.discounts.length === 0) {
-          updateData[`${lineItem.key}`] = 0
-          let prop = lineItem.properties;
-          delete prop['_bundles']
-          delete prop['_Bundle_Name']
-          addData.push({
-            id: lineItem.variant_id,
-            quantity: lineItem.quantity,
-            properties: prop
-          })
-        }
-      })
-    }).then(() => {
-      if ($.isEmptyObject(updateData)) {
-        window.location = location;
-      } else {
-        $.ajax({
-          type: 'POST',
-          url: '/cart/update.js',
-          data: {
-            updates: updateData
-          },
-          dataType: 'json',
-          success: () => {
-            $.ajax({
-              type: 'post',
-              url: '/cart/add.js',
-              data: {items: addData},
-              dataType: 'json',
-              success: function () {
-                UpdateCart('', '', true)
-                window.location = location;
-              }
-            })
-          },
-          error: function (err) {
-            console.error(err)
-          }
-        })
-      }
-    })
-  });
+  // $(document).on('click.checkout', '.cart-checkout__button', function (e) {
+  //   e.preventDefault();
+  //   const location = $(this).attr('href'),
+  //         cartContents = fetch('/cart.js')
+  //         .then(response => response.json())
+  //         .then(data => { return data });
+  //   let updateData = {},
+  //       addData = [];
+  //
+  //   cartContents.then((cart) => {
+  //     console.log(cart)
+  //     $(cart.items).each(function (i, lineItem) {
+  //       if (lineItem.properties._bundles && lineItem.discounts.length === 0) {
+  //         updateData[`${lineItem.key}`] = 0
+  //         let prop = lineItem.properties;
+  //         delete prop['_bundles']
+  //         delete prop['_Bundle_Name']
+  //         addData.push({
+  //           id: lineItem.variant_id,
+  //           quantity: lineItem.quantity,
+  //           properties: prop
+  //         })
+  //       }
+  //     })
+  //   }).then(() => {
+  //     if ($.isEmptyObject(updateData)) {
+  //       window.location = location;
+  //     } else {
+  //       $.ajax({
+  //         type: 'POST',
+  //         url: '/cart/update.js',
+  //         data: {
+  //           updates: updateData
+  //         },
+  //         dataType: 'json',
+  //         success: () => {
+  //           $.ajax({
+  //             type: 'post',
+  //             url: '/cart/add.js',
+  //             data: {items: addData},
+  //             dataType: 'json',
+  //             success: function () {
+  //               UpdateCart('', '', true)
+  //               window.location = location;
+  //             }
+  //           })
+  //         },
+  //         error: function (err) {
+  //           console.error(err)
+  //         }
+  //       })
+  //     }
+  //   })
+  // });
 }
 
 theme.addCustomProduct = function (url, id, quantity, openCart, property) {

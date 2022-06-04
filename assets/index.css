@@ -3379,6 +3379,10 @@ body.is-masthead--empty main {
   display: none;
 }
 
+.cart-item__price-final {
+  text-align: right;
+}
+
 .cart-quantity {
   border: none;
   padding: 0;

@@ -1,16 +1,8 @@
-{%- assign cart_has_canal = false -%}
-  {% for item in cart.items %}
-    {% if item.product.type == 'Coffee' %}
-      {% assign cart_has_canal = true %}
-    {% endif %}
-  {% endfor %}
-
+<div id='cart-drawer-content' class='cart-drawer y x f js-cart-drawer'>
+  {%- assign cart_has_canal = false -%}
   {%- assign cart_has_giftcard = false -%}
-  {% for item in cart.items %}
-    {% if item.product.type contains 'Digital Gift Card' %}
-      {% assign cart_has_giftcard = true %}
-    {% endif %}
-  {% endfor %}
+  {%- assign engrave_sku_counter = 0 -%}
+  {%- assign personalization_sku_counter = 0 -%}
 
   {%- assign coffee_pdp = false -%}
   {% if request.path contains "/products/" %}
@@ -20,21 +12,19 @@
     {% endif %}
   {% endif %}
 
-{%- assign gift_product_handle = 'Gift Product' | handleize -%}
-{%- assign gift_box_handle = 'Gift box' | handleize -%}
-{%- assign personalization_handle = 'Personalization' | handleize -%}
-{%- assign Personalization_fee_handle = 'Personalization fee' | handleize -%}
+  {%- assign gift_product_handle = 'Gift Product' | handleize -%}
+  {%- assign gift_box_handle = 'Gift box' | handleize -%}
+  {%- assign personalization_handle = 'Personalization' | handleize -%}
+  {%- assign Personalization_fee_handle = 'Personalization fee' | handleize -%}
 
-<script>
-  console.log({{ cart | json }})
-</script>
-
-<div id='cart-drawer-content' class='cart-drawer y x f js-cart-drawer'>
-  <div class="cart-drawer__content-wrapper">
+  <cart-drawer-content class="cart-drawer__content-wrapper">
     <header class='cart-drawer__header f fdc x z2'>
       <div class="cart-drawer__header-content f aic jcc">
         {%- render 'icon' with 'cart' -%}
-        <span class='js-cart-count cart-drawer__count'>{{ cart.item_count }}</span>
+        <span class='js-cart-count cart-drawer__count'
+              data-cart-count="{{ cart.item_count }}">
+          {{ cart.item_count }}
+        </span>
 
         <button aria-label="Cart Close" type="button" id="closeCart" class='cart-drawer__close button--reset js-close'>
           {%- render 'icon', icon: 'arrow-next' -%}
@@ -62,7 +52,7 @@
         </div>
       {%- else -%}
         <div class="free-shipping js-free-shipping {% if cart == empty %}is-hidden{% endif %}">
-          <div class='free-shipping--unmet js-free-shipping-unmet-msg {% if cart.total_price > 9900 %} is-hidden{% endif %}'>
+          <div class='free-shipping--unmet js-free-shipping-unmet-msg {% if cart.total_price >= 9900 %} is-hidden{% endif %}'>
             {%- assign away_from_shipping = 9900 | minus: cart.total_price -%}
             You're <strong>
               <span class='js-free-shipping-amount-remaining'>{{ away_from_shipping | money_without_trailing_zeros }}</span>
@@ -93,10 +83,30 @@
           <div class='js-items x y'>
             {%- for item in cart.items -%}
               {%- assign product_type_handle = item.product.type | handleize -%}
+
+              {%- if item.sku contains 'ENGRAVE' -%}
+                {%- assign engrave_sku_counter = engrave_sku_counter | plus: item.quantity -%}
+              {%- endif -%}
+
+              {%- if item.sku contains '-PER' -%}
+                {%- assign personalization_sku_counter = personalization_sku_counter | plus: item.quantity -%}
+              {%- endif -%}
+
+              {% if item.product.type == 'Coffee' %}
+                {% assign cart_has_canal = true %}
+              {% endif %}
+
+              {% if item.product.type contains 'Digital Gift Card' %}
+                {% assign cart_has_giftcard = true %}
+              {% endif %}
+
               <script>
                 console.log({{ item | json }})
               </script>
-              <cart-drawer-item class="cart-drawer__item">
+              <cart-drawer-item class="cart-drawer__item"
+                      {% if product_type_handle == gift_box_handle and cart.attributes['Gift note'] != blank %}
+                        data-cart-gift-note
+                      {% endif %}>
                 {%- if product_type_handle == gift_product_handle
                   or product_type_handle == gift_box_handle
                   or product_type_handle == Personalization_fee_handle -%}
@@ -235,9 +245,12 @@
       </div>
     {%- endif -%}
 
+    <p>{{ personalization_sku_counter }}</p>
+    <p>{{ engrave_sku_counter }}</p>
+
     <footer class='cart-drawer__footer js-cart-footer'>
       {%- if cart != empty -%}
-        {%- if settings.enable_gift_wrapping and settings.gift_box_product and cart_has_canal == false and coffee_pdp == false and cart_has_giftcard == false -%}
+        {%- if settings.enable_gift_wrapping and all_products[settings.gift_box_product].available and cart_has_canal == false and coffee_pdp == false and cart_has_giftcard == false -%}
           <cart-gift-wrapping class="cart-drawer__footer-gift-wrapping">
             {% include 'cart-gift-wrapping' %}
           </cart-gift-wrapping>
@@ -279,7 +292,38 @@
         </div>
       {%- endif -%}
     </footer>
-  </div>
+
+    {%- if personalization_sku_counter > 0 or engrave_sku_counter > 0 -%}
+      {%- assign personalization_action = 'false' -%}
+      {%- assign personalization_quantity = personalization_sku_counter -%}
+
+      {%- if personalization_sku_counter > 0 and engrave_sku_counter != personalization_sku_counter -%}
+        {%- if engrave_sku_counter == 0 -%}
+          {%- assign personalization_action = '/cart/add.js' -%}
+        {%- endif -%}
+        {%- if engrave_sku_counter > 0 -%}
+          {%- assign personalization_action = '/cart/change.js' -%}
+        {%- endif -%}
+      {%- endif -%}
+
+      {%- if personalization_sku_counter == 0 and engrave_sku_counter > 0 -%}
+        {%- assign personalization_quantity = 0 -%}
+        {%- assign personalization_action = '/cart/change.js' -%}
+      {%- endif -%}
+
+      <p>{{ personalization_action }}</p>
+
+      <script type="application/ld+json" data-personalization>
+        {
+          "available": "{{ all_products[settings.personalization_product].available }}",
+          "id": "{{ all_products[settings.personalization_product].selected_or_first_available_variant.id  }}",
+          "quantity": "{{ personalization_quantity }}",
+          "action": "{{ personalization_action }}"
+        }
+      </script>
+    {%- endif -%}
+
+  </cart-drawer-content>
 </div>
 
 {% schema %}

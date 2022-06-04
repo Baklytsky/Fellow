@@ -12,6 +12,11 @@ class cartDrawer extends HTMLElement {
       e.preventDefault();
       this.closeDrawer();
     })
+
+    $(document).on('click', '.cart-checkout__button', (e) => {
+      e.preventDefault();
+      this.checkoutEvent()
+    })
   }
 
   openDrawer () {
@@ -35,7 +40,11 @@ class cartDrawer extends HTMLElement {
   renderContent(responseHtml, sectionId) {
     const cartContent = document.getElementById(sectionId)
     const parseDiv = responseHtml.getElementById(sectionId)
+    const cartCount = responseHtml.querySelector('[data-cart-count]').getAttribute('data-cart-count')
     cartContent.innerHTML = parseDiv.innerHTML
+    document.querySelectorAll('.js-cart-count').forEach(element => {
+      element.innerHTML = cartCount
+    })
   }
 
   progressBarState (responseHtml) {
@@ -43,6 +52,8 @@ class cartDrawer extends HTMLElement {
     const progressStatus = responseHtml.querySelector('.js-shipping-progress-bar').style.width
     if (progressBar) progressBar.style.width = progressStatus;
   }
+
+  // All cart events
 
   cartEvent(url, id, quantity, openDrawer, property, errorCallback) {
     property = (property) ? property : {};
@@ -90,9 +101,83 @@ class cartDrawer extends HTMLElement {
           console.error(error);
         })
   }
+
+  getCartState() {
+    return fetch('/cart.js')
+        .then(response => response.json())
+        .then(data => { return data });
+  }
+
+  // Remove all bundle properties if the bundle is not full
+  checkoutEvent() {
+    let updateData = {},
+        addData = [];
+
+    this.getCartState().then((cart) => {
+      cart.items.forEach(lineItem => {
+        if (lineItem.properties._bundles && lineItem.discounts.length === 0) {
+          updateData[`${lineItem.key}`] = 0
+          let prop = lineItem.properties;
+          delete prop['_bundles']
+          delete prop['_Bundle_Name']
+          addData.push({
+            id: lineItem.variant_id,
+            quantity: lineItem.quantity,
+            properties: prop
+          })
+        }
+      })
+    }).then(() => {
+      if ($.isEmptyObject(updateData)) {
+        window.location = '/checkout'
+      } else {
+        $.ajax({
+          type: 'POST',
+          url: '/cart/update.js',
+          data: {
+            updates: updateData
+          },
+          dataType: 'json',
+          success: () => {
+            $.ajax({
+              type: 'post',
+              url: '/cart/add.js',
+              data: {items: addData},
+              dataType: 'json',
+              success: () => {
+                window.location = '/checkout'
+              }
+            })
+          },
+          error: function (err) {
+            console.error(err)
+            window.location = '/checkout'
+          }
+        })
+      }
+    })
+  }
 }
 
 customElements.define('cart-drawer', cartDrawer);
+
+class cartDrawerContent extends HTMLElement {
+  constructor() {
+    super();
+    this.personalization = this.querySelector('[data-personalization]')
+    if (this.personalization) {
+      this.perObj = JSON.parse(this.personalization.textContent)
+      console.log(this.perObj)
+      if (this.perObj.available === 'true' && this.perObj.action !== 'false') {
+        theme.cart.cartEvent(this.perObj.action, this.perObj.id, Number(this.perObj.quantity), true)
+      }
+    }
+
+  }
+
+}
+
+customElements.define('cart-drawer-content', cartDrawerContent);
 
 class cartDrawerItem extends HTMLElement {
   constructor() {
@@ -160,8 +245,33 @@ class cartDrawerItem extends HTMLElement {
     if (this.cartDrwerRemovePopup.getAttribute('data-gift-product')) {
       localStorage.setItem(this.cartDrwerRemovePopup.getAttribute('data-gift-product'), 'true')
     }
-    theme.cart.cartEvent('/cart/change.js', this.lineItem.key, 0, true)
+    if (this.hasAttribute('data-cart-gift-note')) {
+      this.removeGiftNote().then(() => {
+        theme.cart.cartEvent('/cart/change.js', this.lineItem.key, 0, true)
+      })
+    } else {
+      theme.cart.cartEvent('/cart/change.js', this.lineItem.key, 0, true)
+    }
+
     this.closeItemRemovePopup()
+  }
+
+  removeGiftNote() {
+    const config = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/javascript',
+        'X-Requested-With': 'XMLHttpRequest'
+      }
+    }
+    config.body = JSON.stringify({
+      attributes: {
+        'Gift note': '',
+      }
+    });
+
+    return fetch('/cart/update.js', config).then(() => console.log('Gift note removed'))
   }
 
 }
@@ -214,6 +324,7 @@ class cartGiftWrapping extends HTMLElement {
     if (this.giftWrappingCloseBtn) this.giftWrappingCloseBtn.addEventListener('click', this.closeGiftWrappingModal.bind(this))
     if (this.addWrappingBtn) this.addWrappingBtn.addEventListener('click', this.changeGiftWrappingNote.bind(this))
     $(document).on('click', '[data-open-gift-note]', this.openGiftWrappingModal.bind(this))
+    this.addEventListener('input', this.checkNoteLength.bind(this))
   }
 
   openGiftWrappingModal() {

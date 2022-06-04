@@ -10528,7 +10528,7 @@
           //   }
           // }
 
-          window.giftNote = (t.cart.attributes['Gift note']) ? t.cart.attributes['Gift note'] : false
+          // window.giftNote = (t.cart.attributes['Gift note']) ? t.cart.attributes['Gift note'] : false
           t.state;
           var n = t.cart;
           // if (window.theme.giftWrapping.giftWrappingEnable && window.theme.giftWrapping.giftWrappingAvailable) {
