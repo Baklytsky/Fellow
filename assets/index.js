@@ -10167,89 +10167,89 @@
         window.CartDrawer = e;
         window.Cart = e.getState().cart;
 
-        if (window.theme.personalization.perProductAvailable === 'true' ) {
-          var engraveCounter = 0,
-              perProductId = window.theme.personalization.perProductID,
-              perCounter = 0;
+        // if (window.theme.personalization.perProductAvailable === 'true' ) {
+        //   var engraveCounter = 0,
+        //       perProductId = window.theme.personalization.perProductID,
+        //       perCounter = 0;
+        //
+        //   window.Cart.items.forEach(function (element) {
+        //     if (element.sku.indexOf('-PER') !== -1) {perCounter += element.quantity}
+        //     if (element.sku.indexOf('ENGRAVE') !== -1) {engraveCounter += element.quantity}
+        //   });
+        //
+        //   if (perCounter > 0 && engraveCounter !== perCounter) {
+        //     switch (true) {
+        //       case engraveCounter === 0:
+        //         theme.addCustomProduct('/cart/add.js', perProductId, perCounter, false);
+        //         break;
+        //       case engraveCounter > 0:
+        //         theme.addCustomProduct('/cart/change.js', perProductId, perCounter, false);
+        //         break;
+        //     }
+        //   }
+        //
+        //   if (perCounter === 0 && engraveCounter > 0) {
+        //     theme.addCustomProduct('/cart/change.js', perProductId, 0, false);
+        //   }
+        // }
 
-          window.Cart.items.forEach(function (element) {
-            if (element.sku.indexOf('-PER') !== -1) {perCounter += element.quantity}
-            if (element.sku.indexOf('ENGRAVE') !== -1) {engraveCounter += element.quantity}
-          });
+        // if (window.theme.gwpSettings.gwpEnable !== 'true'
+        //     || window.theme.gwpSettings.gwpThreshold <= 0
+        //     || window.theme.gwpSettings.gwpProductAvailable !== 'true'
+        //     || window.theme.gwpSettings.gwpProductType !== 'Gift product'
+        //     || localStorage.getItem('_firstGwp')) {
+        //   setTimeout(function () {
+        //     Cart.items.forEach(function (element) {
+        //       if (element.product_type === 'Gift product' && element.properties.hasOwnProperty('_firstGwp')) {
+        //         theme.checkGwpOnLoad(element)
+        //       }
+        //     });
+        //   }, 0)
+        // }
 
-          if (perCounter > 0 && engraveCounter !== perCounter) {
-            switch (true) {
-              case engraveCounter === 0:
-                theme.addCustomProduct('/cart/add.js', perProductId, perCounter, false);
-                break;
-              case engraveCounter > 0:
-                theme.addCustomProduct('/cart/change.js', perProductId, perCounter, false);
-                break;
-            }
-          }
+        // if (window.theme.gwpSettings.gwpEnable !== 'true'
+        //     || window.theme.gwpSettings.secondGwpThreshold <= 0
+        //     || window.theme.gwpSettings.secondGwpProductAvailable !== 'true'
+        //     || window.theme.gwpSettings.secondGwpProductType !== 'Gift product'
+        //     || localStorage.getItem('_secondGwp')) {
+        //   setTimeout(function () {
+        //     Cart.items.forEach(function (element) {
+        //       if (element.product_type === 'Gift product' && element.properties.hasOwnProperty('_secondGwp')) {
+        //         theme.checkGwpOnLoad(element)
+        //       }
+        //     });
+        //   }, 0)
+        // }
 
-          if (perCounter === 0 && engraveCounter > 0) {
-            theme.addCustomProduct('/cart/change.js', perProductId, 0, false);
-          }
-        }
+        // if (window.theme.gwpSettings.gwpEnable === 'true'
+        //     && window.theme.gwpSettings.gwpThreshold > 0
+        //     && window.theme.gwpSettings.gwpProductAvailable === 'true'
+        //     && window.theme.gwpSettings.gwpProductType === 'Gift product'
+        //     && !localStorage.getItem('_firstGwp')) {
+        //   var gwpThreshold = window.theme.gwpSettings.gwpThreshold * 100,
+        //       gwpProductId = window.theme.gwpSettings.gwpProductId,
+        //       gwpProperty = {'_firstGwp': true},
+        //       propertyToCheck = '_firstGwp';
+        //
+        //   if (Cart.total_price >= gwpThreshold && !theme.checkGwp(Cart, propertyToCheck)) {
+        //     theme.addCustomProduct('/cart/add.js', gwpProductId, 1, true, gwpProperty)
+        //   }
+        // }
 
-        if (window.theme.gwpSettings.gwpEnable !== 'true'
-            || window.theme.gwpSettings.gwpThreshold <= 0
-            || window.theme.gwpSettings.gwpProductAvailable !== 'true'
-            || window.theme.gwpSettings.gwpProductType !== 'Gift product'
-            || localStorage.getItem('_firstGwp')) {
-          setTimeout(function () {
-            Cart.items.forEach(function (element) {
-              if (element.product_type === 'Gift product' && element.properties.hasOwnProperty('_firstGwp')) {
-                theme.checkGwpOnLoad(element)
-              }
-            });
-          }, 0)
-        }
-
-        if (window.theme.gwpSettings.gwpEnable !== 'true'
-            || window.theme.gwpSettings.secondGwpThreshold <= 0
-            || window.theme.gwpSettings.secondGwpProductAvailable !== 'true'
-            || window.theme.gwpSettings.secondGwpProductType !== 'Gift product'
-            || localStorage.getItem('_secondGwp')) {
-          setTimeout(function () {
-            Cart.items.forEach(function (element) {
-              if (element.product_type === 'Gift product' && element.properties.hasOwnProperty('_secondGwp')) {
-                theme.checkGwpOnLoad(element)
-              }
-            });
-          }, 0)
-        }
-
-        if (window.theme.gwpSettings.gwpEnable === 'true'
-            && window.theme.gwpSettings.gwpThreshold > 0
-            && window.theme.gwpSettings.gwpProductAvailable === 'true'
-            && window.theme.gwpSettings.gwpProductType === 'Gift product'
-            && !localStorage.getItem('_firstGwp')) {
-          var gwpThreshold = window.theme.gwpSettings.gwpThreshold * 100,
-              gwpProductId = window.theme.gwpSettings.gwpProductId,
-              gwpProperty = {'_firstGwp': true},
-              propertyToCheck = '_firstGwp';
-
-          if (Cart.total_price >= gwpThreshold && !theme.checkGwp(Cart, propertyToCheck)) {
-            theme.addCustomProduct('/cart/add.js', gwpProductId, 1, true, gwpProperty)
-          }
-        }
-
-        if (window.theme.gwpSettings.gwpEnable === 'true'
-            && window.theme.gwpSettings.secondGwpThreshold > 0
-            && window.theme.gwpSettings.secondGwpProductAvailable === 'true'
-            && window.theme.gwpSettings.secondGwpProductType === 'Gift product'
-            && !localStorage.getItem('_secondGwp')) {
-          var secondGwpThreshold = window.theme.gwpSettings.secondGwpThreshold * 100,
-              secondGwpProductId = window.theme.gwpSettings.secondGwpProductId,
-              secondGwpProperty = {'_secondGwp': true},
-              secondPropertyToCheck = '_secondGwp';
-
-          if (Cart.total_price >= secondGwpThreshold && !theme.checkGwp(Cart, secondPropertyToCheck)) {
-            theme.addCustomProduct('/cart/add.js', secondGwpProductId, 1, true, secondGwpProperty)
-          }
-        }
+        // if (window.theme.gwpSettings.gwpEnable === 'true'
+        //     && window.theme.gwpSettings.secondGwpThreshold > 0
+        //     && window.theme.gwpSettings.secondGwpProductAvailable === 'true'
+        //     && window.theme.gwpSettings.secondGwpProductType === 'Gift product'
+        //     && !localStorage.getItem('_secondGwp')) {
+        //   var secondGwpThreshold = window.theme.gwpSettings.secondGwpThreshold * 100,
+        //       secondGwpProductId = window.theme.gwpSettings.secondGwpProductId,
+        //       secondGwpProperty = {'_secondGwp': true},
+        //       secondPropertyToCheck = '_secondGwp';
+        //
+        //   if (Cart.total_price >= secondGwpThreshold && !theme.checkGwp(Cart, secondPropertyToCheck)) {
+        //     theme.addCustomProduct('/cart/add.js', secondGwpProductId, 1, true, secondGwpProperty)
+        //   }
+        // }
 
         // if (Cart.attributes['Gift note']) {
         //   var giftBoxInCart = false
@@ -10266,47 +10266,47 @@
         //   }
         // }
 
-        window.giftNote = (Cart.attributes['Gift note']) ? Cart.attributes['Gift note'] : false
+        // window.giftNote = (Cart.attributes['Gift note']) ? Cart.attributes['Gift note'] : false
 
-        var n = t.querySelector(".js-overlay"),
-            r = t.querySelector(".js-close"),
-            i = t.querySelector(".js-subtotal"),
-            o = t.querySelector(".js-cart-drawer-items"),
-            a = t.querySelector(".js-items"),
-            s = t.querySelector(".js-cart-drawer"),
-            u = t.querySelectorAll(".js-cart-count"),
-            c = t.querySelector(".js-cart-footer"),
-            l = t.querySelector(".js-no-items"),
-            f = l.querySelector("h4"),
-            h = a.innerHTML,
-            d = t.querySelector(".js-shipping-progress-bar"),
-            p = t.querySelector(".js-free-shipping-amount-remaining"),
-            v = t.querySelector(".js-free-shipping-unmet-msg"),
-            y = t.querySelector(".js-free-shipping-met-msg"),
-            progressBar = t.querySelector(".free-shipping__meter"),
-            emptyCartText = t.querySelector(".js-empty-cart-text"),
-            freeShipping = t.querySelector(".js-free-shipping"),
-            freeShippingTotal = t.querySelector(".js-shipping-free-text"),
-            gwpNostackText = t.querySelector(".gwp-nostack-text"),
-            m = function (t) {
-              var q = (t.total_price === t.original_total_price) ? V(Q(t.total_price)) : '<span style="text-decoration: line-through; padding-right: 5px;">' + V(Q(t.original_total_price)) + '</span>' + V(Q(t.total_price));
-              (a.innerHTML = z(t.items)),
-                  (i.innerHTML = q),
-                  void 0 === t.items
-                      ? (c.classList.add("is-hidden"), a.classList.add("is-hidden"), l.classList.remove("is-hidden"), f.classList.add("is-hidden"), s.classList.add("cart-drawer--empty"), emptyCartText.classList.remove("is-hidden"), freeShipping.classList.add("is-hidden"), localStorage.setItem('_firstGwp', 'false'), localStorage.setItem('_secondGwp', 'false') )
-                      : 0 === t.items.length
-                          ? (c.classList.add("is-hidden"), a.classList.add("is-hidden"), l.classList.remove("is-hidden"), s.classList.add("cart-drawer--empty"), gwpNostackText.classList.add("is-hidden"), emptyCartText.classList.remove("is-hidden"), freeShipping.classList.add("is-hidden"), localStorage.removeItem('_firstGwp'), localStorage.removeItem('_secondGwp'))
-                          : (c.classList.remove("is-hidden"), a.classList.remove("is-hidden"), l.classList.add("is-hidden"), s.classList.remove("cart-drawer--empty"),  emptyCartText.classList.add("is-hidden"), freeShipping.classList.remove("is-hidden"));
-            },
-            g = function() {
-              theme.enableScroll();
-              t.classList.remove("is-visible"), document.getElementById.tabIndex = 0, setTimeout((function() {
-                t.classList.remove("is-active"), t.tabIndex = -1, s.tabIndex = -1, t.setAttribute("aria-expanded", "false")
-              }), 400)
-            },
-            b = function(t) {
-              t.cartPromoActive ? o.classList.add("is-promoActive") : o.classList.remove("is-promoActive")
-            };
+        // var n = t.querySelector(".js-overlay"),
+        //     r = t.querySelector(".js-close"),
+        //     i = t.querySelector(".js-subtotal"),
+        //     o = t.querySelector(".js-cart-drawer-items"),
+        //     a = t.querySelector(".js-items"),
+        //     s = t.querySelector(".js-cart-drawer"),
+        //     u = t.querySelectorAll(".js-cart-count"),
+        //     c = t.querySelector(".js-cart-footer"),
+        //     l = t.querySelector(".js-no-items"),
+        //     f = l.querySelector("h4"),
+        //     h = a.innerHTML,
+        //     d = t.querySelector(".js-shipping-progress-bar"),
+        //     p = t.querySelector(".js-free-shipping-amount-remaining"),
+        //     v = t.querySelector(".js-free-shipping-unmet-msg"),
+        //     y = t.querySelector(".js-free-shipping-met-msg"),
+        //     progressBar = t.querySelector(".free-shipping__meter"),
+        //     emptyCartText = t.querySelector(".js-empty-cart-text"),
+        //     freeShipping = t.querySelector(".js-free-shipping"),
+        //     freeShippingTotal = t.querySelector(".js-shipping-free-text"),
+        //     gwpNostackText = t.querySelector(".gwp-nostack-text"),
+        //     m = function (t) {
+        //       var q = (t.total_price === t.original_total_price) ? V(Q(t.total_price)) : '<span style="text-decoration: line-through; padding-right: 5px;">' + V(Q(t.original_total_price)) + '</span>' + V(Q(t.total_price));
+        //       (a.innerHTML = z(t.items)),
+        //           (i.innerHTML = q),
+        //           void 0 === t.items
+        //               ? (c.classList.add("is-hidden"), a.classList.add("is-hidden"), l.classList.remove("is-hidden"), f.classList.add("is-hidden"), s.classList.add("cart-drawer--empty"), emptyCartText.classList.remove("is-hidden"), freeShipping.classList.add("is-hidden"), localStorage.setItem('_firstGwp', 'false'), localStorage.setItem('_secondGwp', 'false') )
+        //               : 0 === t.items.length
+        //                   ? (c.classList.add("is-hidden"), a.classList.add("is-hidden"), l.classList.remove("is-hidden"), s.classList.add("cart-drawer--empty"), gwpNostackText.classList.add("is-hidden"), emptyCartText.classList.remove("is-hidden"), freeShipping.classList.add("is-hidden"), localStorage.removeItem('_firstGwp'), localStorage.removeItem('_secondGwp'))
+        //                   : (c.classList.remove("is-hidden"), a.classList.remove("is-hidden"), l.classList.add("is-hidden"), s.classList.remove("cart-drawer--empty"),  emptyCartText.classList.add("is-hidden"), freeShipping.classList.remove("is-hidden"));
+        //     },
+        //     g = function() {
+        //       theme.enableScroll();
+        //       t.classList.remove("is-visible"), document.getElementById.tabIndex = 0, setTimeout((function() {
+        //         t.classList.remove("is-active"), t.tabIndex = -1, s.tabIndex = -1, t.setAttribute("aria-expanded", "false")
+        //       }), 400)
+        //     },
+        //     b = function(t) {
+        //       t.cartPromoActive ? o.classList.add("is-promoActive") : o.classList.remove("is-promoActive")
+        //     };
         // m(e.getState().cart), b(Dr.getState()),
         //     n.addEventListener("click", (function(t) {
         //   t.preventDefault(), g(), Dr.emit("cart:toggle", {
@@ -10319,200 +10319,200 @@
         //   })
         // })),
             e.on("cart:toggle", (function(e) {
-          var n = e.cart,
-              thresholdDifference = window.theme.gwpSettings.gwpThreshold - window.theme.gwpSettings.secondGwpThreshold,
-              summaryGwpThreshold = window.theme.gwpSettings.secondGwpThreshold,
-              firstGwpThreshold = window.theme.gwpSettings.gwpThreshold,
-              firstGwpEnabled = false,
-              secondGwpEnabled = false;
-
-          if (thresholdDifference < 0) {
-            summaryGwpThreshold = window.theme.gwpSettings.secondGwpThreshold;
-            firstGwpThreshold =  window.theme.gwpSettings.gwpThreshold;
-          }
-
-          if (window.theme.gwpSettings.gwpEnable === 'true'
-              && window.theme.gwpSettings.gwpThreshold > 0
-              && window.theme.gwpSettings.gwpProductAvailable === 'true'
-              && window.theme.gwpSettings.gwpProductType === 'Gift product'
-              && !localStorage.getItem('_firstGwp')) {
-            firstGwpEnabled = true;
-          }
-
-          if (window.theme.gwpSettings.gwpEnable === 'true'
-              && window.theme.gwpSettings.secondGwpThreshold > 0
-              && window.theme.gwpSettings.secondGwpProductAvailable === 'true'
-              && window.theme.gwpSettings.secondGwpProductType === 'Gift product'
-              && !localStorage.getItem('_secondGwp')) {
-            secondGwpEnabled = true;
-          }
-
-          if (firstGwpEnabled || secondGwpEnabled) {
-            e.cartOpen && function(e) {
-              if (firstGwpEnabled && secondGwpEnabled) {
-                console.log(!progressBar.querySelector('.gwp-point-text'))
-                if (!progressBar.querySelector('.gwp-point-text')) {
-                  let firstGwpPosition = (100 * firstGwpThreshold) / summaryGwpThreshold,
-                      gwpPoint = document.createElement('span'),
-                      gwpPointText = document.createElement('span');
-                  gwpPointText.classList.add("gwp-point-text");
-                  gwpPoint.classList.add("gwp-point");
-                  gwpPointText.innerHTML = 'First Free Mug';
-                  gwpPoint.style.left = firstGwpPosition + '%';
-                  progressBar.append(gwpPoint);
-                  progressBar.append(gwpPointText);
-                }
-                theme.disableScroll();
-                if (t.classList.add("is-active"), a.innerHTML = h, setTimeout((function() {
-                  t.classList.add("is-visible"), t.tabIndex = 0, s.tabIndex = 0, t.setAttribute("aria-expanded", "true"), document.getElementById("root").tabIndex = -1, setTimeout(m(e), 10), Dr.mount()
-                }), 50), e.total_price < (firstGwpThreshold * 100) && e.total_price < (summaryGwpThreshold * 100)) {
-                  v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
-                  var n = Q((firstGwpThreshold * 100) - e.total_price),
-                      r = (e.total_price / summaryGwpThreshold).toFixed(2);
-                  d.style.width = "".concat(r, "%"), p.innerHTML = n, gwpNostackText.classList.add("is-hidden"), v.innerHTML = `You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from a free bag of coffee.`
-                } 
-                
-                else if (t.classList.add("is-active"), a.innerHTML = h, setTimeout((function() {
-                  t.classList.add("is-visible"), t.tabIndex = 0, s.tabIndex = 0, t.setAttribute("aria-expanded", "true"), document.getElementById("root").tabIndex = -1, setTimeout(m(e), 10), Dr.mount()
-                }), 50), e.total_price > (firstGwpThreshold * 100) && e.total_price < (summaryGwpThreshold * 100)) {
-                  v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
-                  var n = Q((summaryGwpThreshold * 100) - e.total_price),
-                      r = (e.total_price / summaryGwpThreshold).toFixed(2);
-                  d.style.width = "".concat(r, "%"), p.innerHTML = n, v.innerHTML = `Nice - You've got a free bag of coffee.<br>You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from a second one!`, freeShippingTotal.innerHTML = '+ Free Coffee', freeShippingTotal.classList.remove("is-hidden"), gwpNostackText.classList.remove("is-hidden");
-                } 
-                
-                else y.innerHTML = 'Good news! You get two Carter Move Mugs on us.', y.classList.remove("is-hidden"), gwpNostackText.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.innerHTML = '+ 2 Free Mugs', freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
-                Dr.emit("nav:toggle", {
-                  navDrawerOpen: !1,
-                  whichNavDrawer: void 0,
-                  navReclick: !1
-                })
-              } else if (firstGwpEnabled) {
-                theme.disableScroll();
-                if (t.classList.add("is-active"), a.innerHTML = h, setTimeout((function() {
-                  t.classList.add("is-visible"), t.tabIndex = 0, s.tabIndex = 0, t.setAttribute("aria-expanded", "true"), document.getElementById("root").tabIndex = -1, setTimeout(m(e), 10), Dr.mount()
-                }), 50), e.total_price < (window.theme.gwpSettings.gwpThreshold * 100)) {
-                  v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
-                  var n = Q((window.theme.gwpSettings.gwpThreshold * 100) - e.total_price),
-                      r = (e.total_price / window.theme.gwpSettings.gwpThreshold).toFixed(2);
-                  d.style.width = "".concat(r, "%"), p.innerHTML = n, v.innerHTML = `You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from a free bag of coffee.`
-                } else y.innerHTML = 'Good news! You get a free bag of coffee.<p class="eyebrow mt0 mb0" style="text-transform:none;font-weight:400">Stacked promos are ineligible.<br>Manually remove the free gift from your cart to use a promo code.</p>', y.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.innerHTML = '+ Free Coffee', freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
-                Dr.emit("nav:toggle", {
-                  navDrawerOpen: !1,
-                  whichNavDrawer: void 0,
-                  navReclick: !1
-                })
-              } else if (secondGwpEnabled) {
-                theme.disableScroll();
-                if (t.classList.add("is-active"), a.innerHTML = h, setTimeout((function() {
-                  t.classList.add("is-visible"), t.tabIndex = 0, s.tabIndex = 0, t.setAttribute("aria-expanded", "true"), document.getElementById("root").tabIndex = -1, setTimeout(m(e), 10), Dr.mount()
-                }), 50), e.total_price < (window.theme.gwpSettings.secondGwpThreshold * 100)) {
-                  v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
-                  var n = Q((window.theme.gwpSettings.secondGwpThreshold * 100) - e.total_price),
-                      r = (e.total_price / window.theme.gwpSettings.secondGwpThreshold).toFixed(2);
-                  d.style.width = "".concat(r, "%"), p.innerHTML = n, v.innerHTML = `You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from another free Carter Move Mug <p class='eyebrow mt0 mb0' style='text-transform:none;font-weight:400;'>Stacked promos are ineligible. Manually remove the free gift from your cart to use a promo code.</p>`
-                } else y.innerHTML = 'Good news! You get two Carter Move Mugs on us.<p class="eyebrow mt0 mb0" style="text-transform:none;font-weight:400;">Stacked promos are ineligible. Manually remove free gifts from your cart to use a promo code.</p>', y.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.innerHTML = '+ 2 Free Mugs', freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
-                Dr.emit("nav:toggle", {
-                  navDrawerOpen: !1,
-                  whichNavDrawer: void 0,
-                  navReclick: !1
-                })
-              }
-            }(n)
-          } else {
-            e.cartOpen && function(e) {
-              theme.disableScroll();
-              if (t.classList.add("is-active"), a.innerHTML = h, setTimeout((function() {
-                t.classList.add("is-visible"), t.tabIndex = 0, s.tabIndex = 0, t.setAttribute("aria-expanded", "true"), document.getElementById("root").tabIndex = -1, setTimeout(m(e), 10), Dr.mount()
-              }), 50), e.total_price < 9900) {
-                v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
-                var n = Q(9900 - e.total_price),
-                    r = (e.total_price / 100).toFixed(2);
-                d.style.width = "".concat(r, "%"), p.innerHTML = n, v.innerHTML = `You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from free US shipping`
-              } else y.innerHTML = 'Congrats! You get Free US Shipping!', y.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.innerHTML = `Shipping: <span style="font-weight: 600;">Free</span>`, freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
-              Dr.emit("nav:toggle", {
-                navDrawerOpen: !1,
-                whichNavDrawer: void 0,
-                navReclick: !1
-              })
-            }(n)
-          }
+          var n = e.cart;
+          //     thresholdDifference = window.theme.gwpSettings.gwpThreshold - window.theme.gwpSettings.secondGwpThreshold,
+          //     summaryGwpThreshold = window.theme.gwpSettings.secondGwpThreshold,
+          //     firstGwpThreshold = window.theme.gwpSettings.gwpThreshold,
+          //     firstGwpEnabled = false,
+          //     secondGwpEnabled = false;
+          //
+          // if (thresholdDifference < 0) {
+          //   summaryGwpThreshold = window.theme.gwpSettings.secondGwpThreshold;
+          //   firstGwpThreshold =  window.theme.gwpSettings.gwpThreshold;
+          // }
+          //
+          // if (window.theme.gwpSettings.gwpEnable === 'true'
+          //     && window.theme.gwpSettings.gwpThreshold > 0
+          //     && window.theme.gwpSettings.gwpProductAvailable === 'true'
+          //     && window.theme.gwpSettings.gwpProductType === 'Gift product'
+          //     && !localStorage.getItem('_firstGwp')) {
+          //   firstGwpEnabled = true;
+          // }
+          //
+          // if (window.theme.gwpSettings.gwpEnable === 'true'
+          //     && window.theme.gwpSettings.secondGwpThreshold > 0
+          //     && window.theme.gwpSettings.secondGwpProductAvailable === 'true'
+          //     && window.theme.gwpSettings.secondGwpProductType === 'Gift product'
+          //     && !localStorage.getItem('_secondGwp')) {
+          //   secondGwpEnabled = true;
+          // }
+          //
+          // if (firstGwpEnabled || secondGwpEnabled) {
+          //   e.cartOpen && function(e) {
+          //     if (firstGwpEnabled && secondGwpEnabled) {
+          //       console.log(!progressBar.querySelector('.gwp-point-text'))
+          //       if (!progressBar.querySelector('.gwp-point-text')) {
+          //         let firstGwpPosition = (100 * firstGwpThreshold) / summaryGwpThreshold,
+          //             gwpPoint = document.createElement('span'),
+          //             gwpPointText = document.createElement('span');
+          //         gwpPointText.classList.add("gwp-point-text");
+          //         gwpPoint.classList.add("gwp-point");
+          //         gwpPointText.innerHTML = 'First Free Mug';
+          //         gwpPoint.style.left = firstGwpPosition + '%';
+          //         progressBar.append(gwpPoint);
+          //         progressBar.append(gwpPointText);
+          //       }
+          //       theme.disableScroll();
+          //       if (t.classList.add("is-active"), a.innerHTML = h, setTimeout((function() {
+          //         t.classList.add("is-visible"), t.tabIndex = 0, s.tabIndex = 0, t.setAttribute("aria-expanded", "true"), document.getElementById("root").tabIndex = -1, setTimeout(m(e), 10), Dr.mount()
+          //       }), 50), e.total_price < (firstGwpThreshold * 100) && e.total_price < (summaryGwpThreshold * 100)) {
+          //         v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
+          //         var n = Q((firstGwpThreshold * 100) - e.total_price),
+          //             r = (e.total_price / summaryGwpThreshold).toFixed(2);
+          //         d.style.width = "".concat(r, "%"), p.innerHTML = n, gwpNostackText.classList.add("is-hidden"), v.innerHTML = `You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from a free bag of coffee.`
+          //       }
+          //
+          //       else if (t.classList.add("is-active"), a.innerHTML = h, setTimeout((function() {
+          //         t.classList.add("is-visible"), t.tabIndex = 0, s.tabIndex = 0, t.setAttribute("aria-expanded", "true"), document.getElementById("root").tabIndex = -1, setTimeout(m(e), 10), Dr.mount()
+          //       }), 50), e.total_price > (firstGwpThreshold * 100) && e.total_price < (summaryGwpThreshold * 100)) {
+          //         v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
+          //         var n = Q((summaryGwpThreshold * 100) - e.total_price),
+          //             r = (e.total_price / summaryGwpThreshold).toFixed(2);
+          //         d.style.width = "".concat(r, "%"), p.innerHTML = n, v.innerHTML = `Nice - You've got a free bag of coffee.<br>You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from a second one!`, freeShippingTotal.innerHTML = '+ Free Coffee', freeShippingTotal.classList.remove("is-hidden"), gwpNostackText.classList.remove("is-hidden");
+          //       }
+          //
+          //       else y.innerHTML = 'Good news! You get two Carter Move Mugs on us.', y.classList.remove("is-hidden"), gwpNostackText.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.innerHTML = '+ 2 Free Mugs', freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
+          //       Dr.emit("nav:toggle", {
+          //         navDrawerOpen: !1,
+          //         whichNavDrawer: void 0,
+          //         navReclick: !1
+          //       })
+          //     } else if (firstGwpEnabled) {
+          //       theme.disableScroll();
+          //       if (t.classList.add("is-active"), a.innerHTML = h, setTimeout((function() {
+          //         t.classList.add("is-visible"), t.tabIndex = 0, s.tabIndex = 0, t.setAttribute("aria-expanded", "true"), document.getElementById("root").tabIndex = -1, setTimeout(m(e), 10), Dr.mount()
+          //       }), 50), e.total_price < (window.theme.gwpSettings.gwpThreshold * 100)) {
+          //         v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
+          //         var n = Q((window.theme.gwpSettings.gwpThreshold * 100) - e.total_price),
+          //             r = (e.total_price / window.theme.gwpSettings.gwpThreshold).toFixed(2);
+          //         d.style.width = "".concat(r, "%"), p.innerHTML = n, v.innerHTML = `You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from a free bag of coffee.`
+          //       } else y.innerHTML = 'Good news! You get a free bag of coffee.<p class="eyebrow mt0 mb0" style="text-transform:none;font-weight:400">Stacked promos are ineligible.<br>Manually remove the free gift from your cart to use a promo code.</p>', y.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.innerHTML = '+ Free Coffee', freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
+          //       Dr.emit("nav:toggle", {
+          //         navDrawerOpen: !1,
+          //         whichNavDrawer: void 0,
+          //         navReclick: !1
+          //       })
+          //     } else if (secondGwpEnabled) {
+          //       theme.disableScroll();
+          //       if (t.classList.add("is-active"), a.innerHTML = h, setTimeout((function() {
+          //         t.classList.add("is-visible"), t.tabIndex = 0, s.tabIndex = 0, t.setAttribute("aria-expanded", "true"), document.getElementById("root").tabIndex = -1, setTimeout(m(e), 10), Dr.mount()
+          //       }), 50), e.total_price < (window.theme.gwpSettings.secondGwpThreshold * 100)) {
+          //         v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
+          //         var n = Q((window.theme.gwpSettings.secondGwpThreshold * 100) - e.total_price),
+          //             r = (e.total_price / window.theme.gwpSettings.secondGwpThreshold).toFixed(2);
+          //         d.style.width = "".concat(r, "%"), p.innerHTML = n, v.innerHTML = `You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from another free Carter Move Mug <p class='eyebrow mt0 mb0' style='text-transform:none;font-weight:400;'>Stacked promos are ineligible. Manually remove the free gift from your cart to use a promo code.</p>`
+          //       } else y.innerHTML = 'Good news! You get two Carter Move Mugs on us.<p class="eyebrow mt0 mb0" style="text-transform:none;font-weight:400;">Stacked promos are ineligible. Manually remove free gifts from your cart to use a promo code.</p>', y.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.innerHTML = '+ 2 Free Mugs', freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
+          //       Dr.emit("nav:toggle", {
+          //         navDrawerOpen: !1,
+          //         whichNavDrawer: void 0,
+          //         navReclick: !1
+          //       })
+          //     }
+          //   }(n)
+          // } else {
+          //   e.cartOpen && function(e) {
+          //     theme.disableScroll();
+          //     if (t.classList.add("is-active"), a.innerHTML = h, setTimeout((function() {
+          //       t.classList.add("is-visible"), t.tabIndex = 0, s.tabIndex = 0, t.setAttribute("aria-expanded", "true"), document.getElementById("root").tabIndex = -1, setTimeout(m(e), 10), Dr.mount()
+          //     }), 50), e.total_price < 9900) {
+          //       v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
+          //       var n = Q(9900 - e.total_price),
+          //           r = (e.total_price / 100).toFixed(2);
+          //       d.style.width = "".concat(r, "%"), p.innerHTML = n, v.innerHTML = `You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from free US shipping`
+          //     } else y.innerHTML = 'Congrats! You get Free US Shipping!', y.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.innerHTML = `Shipping: <span style="font-weight: 600;">Free</span>`, freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
+          //     Dr.emit("nav:toggle", {
+          //       navDrawerOpen: !1,
+          //       whichNavDrawer: void 0,
+          //       navReclick: !1
+          //     })
+          //   }(n)
+          // }
         })), Dr.on("cart:toggle", (function(t) {
           t.cartOpen || g()
         })), e.on("cart:updated", (function(t) {
 
-          if (window.theme.personalization.perProductAvailable === 'true' ) {
-            var engraveCounter = 0,
-                perProductId = window.theme.personalization.perProductID,
-                perCounter = 0;
-
-            t.cart.items.forEach(function (element) {
-              if (element.sku.indexOf('-PER') !== -1) {perCounter += element.quantity}
-              if (element.sku.indexOf('ENGRAVE') !== -1) {engraveCounter += element.quantity}
-            });
-
-            if (perCounter > 0 && engraveCounter !== perCounter) {
-              switch (true) {
-                case engraveCounter === 0:
-                  theme.addCustomProduct('/cart/add.js', perProductId, perCounter, true);
-                  break;
-                case engraveCounter > 0:
-                  theme.addCustomProduct('/cart/change.js', perProductId, perCounter, true);
-                  break;
-              }
-            }
-
-            if (perCounter === 0 && engraveCounter > 0) {
-              theme.addCustomProduct('/cart/change.js', perProductId, 0, true);
-            }
-          }
-
-          if (window.theme.gwpSettings.gwpEnable === 'true'
-              && window.theme.gwpSettings.gwpThreshold > 0
-              && window.theme.gwpSettings.gwpProductAvailable === 'true'
-              && window.theme.gwpSettings.gwpProductType === 'Gift product'
-              && !localStorage.getItem('_firstGwp')) {
-            var gwpThreshold = window.theme.gwpSettings.gwpThreshold * 100,
-                gwpProductId = window.theme.gwpSettings.gwpProductId,
-                gwpProperty = {'_firstGwp': true},
-                propertyToCheck = '_firstGwp';
-
-            if (t.cart.total_price >= gwpThreshold && !theme.checkGwp(t.cart, propertyToCheck)) {
-              theme.addCustomProduct('/cart/add.js', gwpProductId, 1, true, gwpProperty)
-            }
-
-            if (t.cart.total_price < gwpThreshold) {
-              t.cart.items.forEach(function (element) {
-                if (element.product_type === 'Gift product' && element.properties.hasOwnProperty(propertyToCheck)) {
-                  theme.addCustomProduct('/cart/change.js', element.id, 0, true)
-                }
-              });
-            }
-          }
-
-          if (window.theme.gwpSettings.gwpEnable === 'true'
-              && window.theme.gwpSettings.secondGwpThreshold > 0
-              && window.theme.gwpSettings.secondGwpProductAvailable === 'true'
-              && window.theme.gwpSettings.secondGwpProductType === 'Gift product'
-              && !localStorage.getItem('_secondGwp')) {
-            var secondGwpThreshold = window.theme.gwpSettings.secondGwpThreshold * 100,
-                secondGwpProductId = window.theme.gwpSettings.secondGwpProductId,
-                secondGwpProperty = {'_secondGwp': true},
-                secondPropertyToCheck = '_secondGwp';
-
-            if (t.cart.total_price >= secondGwpThreshold && !theme.checkGwp(t.cart, secondPropertyToCheck)) {
-              theme.addCustomProduct('/cart/add.js', secondGwpProductId, 1, true, secondGwpProperty)
-            }
-
-            if (t.cart.total_price < secondGwpThreshold) {
-              t.cart.items.forEach(function (element) {
-                if (element.product_type === 'Gift product' && element.properties.hasOwnProperty(secondPropertyToCheck)) {
-                  theme.addCustomProduct('/cart/change.js', element.id, 0, true)
-                }
-              });
-            }
-          }
-
+          // if (window.theme.personalization.perProductAvailable === 'true' ) {
+          //   var engraveCounter = 0,
+          //       perProductId = window.theme.personalization.perProductID,
+          //       perCounter = 0;
+          //
+          //   t.cart.items.forEach(function (element) {
+          //     if (element.sku.indexOf('-PER') !== -1) {perCounter += element.quantity}
+          //     if (element.sku.indexOf('ENGRAVE') !== -1) {engraveCounter += element.quantity}
+          //   });
+          //
+          //   if (perCounter > 0 && engraveCounter !== perCounter) {
+          //     switch (true) {
+          //       case engraveCounter === 0:
+          //         theme.addCustomProduct('/cart/add.js', perProductId, perCounter, true);
+          //         break;
+          //       case engraveCounter > 0:
+          //         theme.addCustomProduct('/cart/change.js', perProductId, perCounter, true);
+          //         break;
+          //     }
+          //   }
+          //
+          //   if (perCounter === 0 && engraveCounter > 0) {
+          //     theme.addCustomProduct('/cart/change.js', perProductId, 0, true);
+          //   }
+          // }
+          //
+          // if (window.theme.gwpSettings.gwpEnable === 'true'
+          //     && window.theme.gwpSettings.gwpThreshold > 0
+          //     && window.theme.gwpSettings.gwpProductAvailable === 'true'
+          //     && window.theme.gwpSettings.gwpProductType === 'Gift product'
+          //     && !localStorage.getItem('_firstGwp')) {
+          //   var gwpThreshold = window.theme.gwpSettings.gwpThreshold * 100,
+          //       gwpProductId = window.theme.gwpSettings.gwpProductId,
+          //       gwpProperty = {'_firstGwp': true},
+          //       propertyToCheck = '_firstGwp';
+          //
+          //   if (t.cart.total_price >= gwpThreshold && !theme.checkGwp(t.cart, propertyToCheck)) {
+          //     theme.addCustomProduct('/cart/add.js', gwpProductId, 1, true, gwpProperty)
+          //   }
+          //
+          //   if (t.cart.total_price < gwpThreshold) {
+          //     t.cart.items.forEach(function (element) {
+          //       if (element.product_type === 'Gift product' && element.properties.hasOwnProperty(propertyToCheck)) {
+          //         theme.addCustomProduct('/cart/change.js', element.id, 0, true)
+          //       }
+          //     });
+          //   }
+          // }
+          //
+          // if (window.theme.gwpSettings.gwpEnable === 'true'
+          //     && window.theme.gwpSettings.secondGwpThreshold > 0
+          //     && window.theme.gwpSettings.secondGwpProductAvailable === 'true'
+          //     && window.theme.gwpSettings.secondGwpProductType === 'Gift product'
+          //     && !localStorage.getItem('_secondGwp')) {
+          //   var secondGwpThreshold = window.theme.gwpSettings.secondGwpThreshold * 100,
+          //       secondGwpProductId = window.theme.gwpSettings.secondGwpProductId,
+          //       secondGwpProperty = {'_secondGwp': true},
+          //       secondPropertyToCheck = '_secondGwp';
+          //
+          //   if (t.cart.total_price >= secondGwpThreshold && !theme.checkGwp(t.cart, secondPropertyToCheck)) {
+          //     theme.addCustomProduct('/cart/add.js', secondGwpProductId, 1, true, secondGwpProperty)
+          //   }
+          //
+          //   if (t.cart.total_price < secondGwpThreshold) {
+          //     t.cart.items.forEach(function (element) {
+          //       if (element.product_type === 'Gift product' && element.properties.hasOwnProperty(secondPropertyToCheck)) {
+          //         theme.addCustomProduct('/cart/change.js', element.id, 0, true)
+          //       }
+          //     });
+          //   }
+          // }
+          //
           // if (t.cart.attributes['Gift note']) {
           //   var giftBoxInCart = false
           //   t.cart.items.forEach(function (element) {
@@ -10527,85 +10527,85 @@
           //     }).then(response => {theme.updateGiftWrappingProduct()})
           //   }
           // }
-
+          //
           // window.giftNote = (t.cart.attributes['Gift note']) ? t.cart.attributes['Gift note'] : false
-          t.state;
+          // t.state;
           var n = t.cart;
           // if (window.theme.giftWrapping.giftWrappingEnable && window.theme.giftWrapping.giftWrappingAvailable) {
           //   theme.updateGiftWrappingProduct()
           // }
 
-          var thresholdDifference = window.theme.gwpSettings.gwpThreshold - window.theme.gwpSettings.secondGwpThreshold,
-              summaryGwpThreshold = window.theme.gwpSettings.gwpThreshold,
-              firstGwpThreshold = window.theme.gwpSettings.gwpThreshold,
-              firstGwpEnabled = false,
-              secondGwpEnabled = false;
-
-          
-          if (thresholdDifference < 0) {
-            summaryGwpThreshold = window.theme.gwpSettings.secondGwpThreshold;
-            firstGwpThreshold =  window.theme.gwpSettings.gwpThreshold;
-          }
-
-          if (window.theme.gwpSettings.gwpEnable === 'true'
-              && window.theme.gwpSettings.gwpThreshold > 0
-              && window.theme.gwpSettings.gwpProductAvailable === 'true'
-              && window.theme.gwpSettings.gwpProductType === 'Gift product'
-              && !localStorage.getItem('_firstGwp')) {
-            firstGwpEnabled = true;
-          }
-
-          if (window.theme.gwpSettings.gwpEnable === 'true'
-              && window.theme.gwpSettings.secondGwpThreshold > 0
-              && window.theme.gwpSettings.secondGwpProductAvailable === 'true'
-              && window.theme.gwpSettings.secondGwpProductType === 'Gift product'
-              && !localStorage.getItem('_secondGwp')) {
-            secondGwpEnabled = true;
-          }
-
-          if (firstGwpEnabled || secondGwpEnabled) {
-            if (firstGwpEnabled && secondGwpEnabled) {
-              if (m(e.getState().cart), b(Dr.getState()), n.total_price < (firstGwpThreshold * 100) && n.total_price < (summaryGwpThreshold * 100)) {
-                v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
-                var r = Q((firstGwpThreshold * 100) - n.total_price),
-                    i = (n.total_price / summaryGwpThreshold).toFixed(2);
-                d.style.width = "".concat(i, "%"), p.innerHTML = r, gwpNostackText.classList.add("is-hidden"), v.innerHTML = `You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from a a free bag of coffee.`
-              } 
-              else if (m(e.getState().cart), b(Dr.getState()), n.total_price > (firstGwpThreshold * 100) && n.total_price < (summaryGwpThreshold * 100)) {
-                v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
-                var r = Q((summaryGwpThreshold * 100) - n.total_price),
-                    i = (n.total_price / summaryGwpThreshold).toFixed(2);
-                d.style.width = "".concat(i, "%"), p.innerHTML = r, v.innerHTML = `Nice - You've got a free Carter Move Mug. You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from a second one`,freeShippingTotal.innerHTML = '+ Free Coffee', freeShippingTotal.classList.remove("is-hidden"), gwpNostackText.classList.remove("is-hidden");
-              } else y.innerHTML = 'Good news! You get two Carter Move Mugs on us.', y.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.innerHTML = '+ 2 Free Mugs', gwpNostackText.classList.remove("is-hidden"), freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
-            
-            
-            } 
-            
-            else if (firstGwpEnabled) {
-              if (m(e.getState().cart), b(Dr.getState()), n.total_price < (window.theme.gwpSettings.gwpThreshold * 100)) {
-                v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
-                var r = Q((window.theme.gwpSettings.gwpThreshold * 100) - n.total_price),
-                    i = (n.total_price / window.theme.gwpSettings.gwpThreshold).toFixed(2);
-                d.style.width = "".concat(i, "%"), p.innerHTML = r, v.innerHTML = `You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from a free bag of coffee.`
-              } else y.innerHTML = 'Good news! You get a free bag of coffee.<span></span>', y.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.innerHTML = 'Free Gift Added', freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
-            } 
-            
-            else if (secondGwpEnabled) {
-              if (m(e.getState().cart), b(Dr.getState()), n.total_price < (window.theme.gwpSettings.secondGwpThreshold * 100)) {
-                v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
-                var r = Q((window.theme.gwpSettings.secondGwpThreshold * 100) - n.total_price),
-                    i = (n.total_price / window.theme.gwpSettings.secondGwpThreshold).toFixed(2);
-                d.style.width = "".concat(i, "%"), p.innerHTML = r, v.innerHTML = `You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from a free bag of coffee.`
-              } else y.innerHTML = 'Good news! You get two Carter Move Mugs on us.', y.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.innerHTML = 'Free Gift Added', freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
-            }
-          } else {
-            if (m(e.getState().cart), b(Dr.getState()), n.total_price < 9900) {
-              v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
-              var r = Q(9900 - n.total_price),
-                  i = (n.total_price / 100).toFixed(2);
-              d.style.width = "".concat(i, "%"), p.innerHTML = r, v.innerHTML = `You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from free US shipping`
-            } else y.innerHTML = 'Congrats! You get free US Shipping!', y.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.innerHTML = `Shipping: <span style="font-weight: 600;">Free</span>`, freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
-          }
+          // var thresholdDifference = window.theme.gwpSettings.gwpThreshold - window.theme.gwpSettings.secondGwpThreshold,
+          //     summaryGwpThreshold = window.theme.gwpSettings.gwpThreshold,
+          //     firstGwpThreshold = window.theme.gwpSettings.gwpThreshold,
+          //     firstGwpEnabled = false,
+          //     secondGwpEnabled = false;
+          //
+          //
+          // if (thresholdDifference < 0) {
+          //   summaryGwpThreshold = window.theme.gwpSettings.secondGwpThreshold;
+          //   firstGwpThreshold =  window.theme.gwpSettings.gwpThreshold;
+          // }
+          //
+          // if (window.theme.gwpSettings.gwpEnable === 'true'
+          //     && window.theme.gwpSettings.gwpThreshold > 0
+          //     && window.theme.gwpSettings.gwpProductAvailable === 'true'
+          //     && window.theme.gwpSettings.gwpProductType === 'Gift product'
+          //     && !localStorage.getItem('_firstGwp')) {
+          //   firstGwpEnabled = true;
+          // }
+          //
+          // if (window.theme.gwpSettings.gwpEnable === 'true'
+          //     && window.theme.gwpSettings.secondGwpThreshold > 0
+          //     && window.theme.gwpSettings.secondGwpProductAvailable === 'true'
+          //     && window.theme.gwpSettings.secondGwpProductType === 'Gift product'
+          //     && !localStorage.getItem('_secondGwp')) {
+          //   secondGwpEnabled = true;
+          // }
+          //
+          // if (firstGwpEnabled || secondGwpEnabled) {
+          //   if (firstGwpEnabled && secondGwpEnabled) {
+          //     if (m(e.getState().cart), b(Dr.getState()), n.total_price < (firstGwpThreshold * 100) && n.total_price < (summaryGwpThreshold * 100)) {
+          //       v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
+          //       var r = Q((firstGwpThreshold * 100) - n.total_price),
+          //           i = (n.total_price / summaryGwpThreshold).toFixed(2);
+          //       d.style.width = "".concat(i, "%"), p.innerHTML = r, gwpNostackText.classList.add("is-hidden"), v.innerHTML = `You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from a a free bag of coffee.`
+          //     }
+          //     else if (m(e.getState().cart), b(Dr.getState()), n.total_price > (firstGwpThreshold * 100) && n.total_price < (summaryGwpThreshold * 100)) {
+          //       v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
+          //       var r = Q((summaryGwpThreshold * 100) - n.total_price),
+          //           i = (n.total_price / summaryGwpThreshold).toFixed(2);
+          //       d.style.width = "".concat(i, "%"), p.innerHTML = r, v.innerHTML = `Nice - You've got a free Carter Move Mug. You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from a second one`,freeShippingTotal.innerHTML = '+ Free Coffee', freeShippingTotal.classList.remove("is-hidden"), gwpNostackText.classList.remove("is-hidden");
+          //     } else y.innerHTML = 'Good news! You get two Carter Move Mugs on us.', y.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.innerHTML = '+ 2 Free Mugs', gwpNostackText.classList.remove("is-hidden"), freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
+          //
+          //
+          //   }
+          //
+          //   else if (firstGwpEnabled) {
+          //     if (m(e.getState().cart), b(Dr.getState()), n.total_price < (window.theme.gwpSettings.gwpThreshold * 100)) {
+          //       v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
+          //       var r = Q((window.theme.gwpSettings.gwpThreshold * 100) - n.total_price),
+          //           i = (n.total_price / window.theme.gwpSettings.gwpThreshold).toFixed(2);
+          //       d.style.width = "".concat(i, "%"), p.innerHTML = r, v.innerHTML = `You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from a free bag of coffee.`
+          //     } else y.innerHTML = 'Good news! You get a free bag of coffee.<span></span>', y.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.innerHTML = 'Free Gift Added', freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
+          //   }
+          //
+          //   else if (secondGwpEnabled) {
+          //     if (m(e.getState().cart), b(Dr.getState()), n.total_price < (window.theme.gwpSettings.secondGwpThreshold * 100)) {
+          //       v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
+          //       var r = Q((window.theme.gwpSettings.secondGwpThreshold * 100) - n.total_price),
+          //           i = (n.total_price / window.theme.gwpSettings.secondGwpThreshold).toFixed(2);
+          //       d.style.width = "".concat(i, "%"), p.innerHTML = r, v.innerHTML = `You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from a free bag of coffee.`
+          //     } else y.innerHTML = 'Good news! You get two Carter Move Mugs on us.', y.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.innerHTML = 'Free Gift Added', freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
+          //   }
+          // } else {
+          //   if (m(e.getState().cart), b(Dr.getState()), n.total_price < 9900) {
+          //     v.classList.remove("is-hidden"), y.classList.add("is-hidden"), freeShippingTotal.classList.add("is-hidden");
+          //     var r = Q(9900 - n.total_price),
+          //         i = (n.total_price / 100).toFixed(2);
+          //     d.style.width = "".concat(i, "%"), p.innerHTML = r, v.innerHTML = `You're <strong><span class='js-free-shipping-amount-remaining'>${p.innerHTML}</span></strong> away from free US shipping`
+          //   } else y.innerHTML = 'Congrats! You get free US Shipping!', y.classList.remove("is-hidden"), v.classList.add("is-hidden"), freeShippingTotal.innerHTML = `Shipping: <span style="font-weight: 600;">Free</span>`, freeShippingTotal.classList.remove("is-hidden"), d.style.width = "100%";
+          // }
           u.forEach((function(t) {
             t.innerHTML = e.getState().cart.item_count
           })), Dr.mount()
@@ -10671,27 +10671,27 @@
   // window.updateCartItemQuantity = Y;
 
 
-  function G(t, e) {
-    return Dr.emit("cart:updating"), H("/cart/change.js", {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        line: t,
-        quantity: e
-      })
-    }).then((function(t) {
-      return t.json()
-    })).then((function(t) {
-      return Dr.hydrate({
-        cart: t
-      }), Dr.emit("cart:updated", {
-        cart: t
-      }), t
-    }))
-  }
+  // function G(t, e) {
+  //   return Dr.emit("cart:updating"), H("/cart/change.js", {
+  //     method: "POST",
+  //     credentials: "include",
+  //     headers: {
+  //       "Content-Type": "application/json"
+  //     },
+  //     body: JSON.stringify({
+  //       line: t,
+  //       quantity: e
+  //     })
+  //   }).then((function(t) {
+  //     return t.json()
+  //   })).then((function(t) {
+  //     return Dr.hydrate({
+  //       cart: t
+  //     }), Dr.emit("cart:updated", {
+  //       cart: t
+  //     }), t
+  //   }))
+  // }
 
   function K() {
     return H("/cart.js", {

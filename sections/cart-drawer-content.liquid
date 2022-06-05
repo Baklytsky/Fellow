@@ -4,6 +4,26 @@
   {%- assign engrave_sku_counter = 0 -%}
   {%- assign personalization_sku_counter = 0 -%}
 
+  {%- assign enable_gwp = settings.enable_gwp -%}
+
+  {%- assign threshold_gwp_1 = 0 -%}
+  {%- if settings.gwp_threshold > 0 -%}
+    {%- assign threshold_gwp_1 = settings.gwp_threshold | times: 100 -%}
+  {%- endif -%}
+  {%- assign gwp_1 = all_products[settings.gwp_product] -%}
+  {%- assign gwp_1_product_type_handle = gwp_1.type | handleize -%}
+  {%- assign gwp_1_in_cart = false -%}
+  {%- assign gwp_1_key = false -%}
+
+  {%- assign threshold_gwp_2 = 0 -%}
+  {%- if settings.second_gwp_threshold > 0 -%}
+    {%- assign threshold_gwp_2 = settings.second_gwp_threshold | times: 100 -%}
+  {%- endif -%}
+  {%- assign gwp_2 = all_products[settings.second_gwp_product] | default: false -%}
+  {%- assign gwp_2_product_type_handle = gwp_2.type | handleize -%}
+  {%- assign gwp_2_in_cart = false -%}
+  {%- assign gwp_2_key = false -%}
+
   {%- assign coffee_pdp = false -%}
   {% if request.path contains "/products/" %}
     {%- assign slug = request.path | remove_first: '/products/' -%}
@@ -18,7 +38,9 @@
   {%- assign Personalization_fee_handle = 'Personalization fee' | handleize -%}
 
   <cart-drawer-content class="cart-drawer__content-wrapper">
-    <header class='cart-drawer__header f fdc x z2'>
+    <header id="cart-drawer__header"
+            class='cart-drawer__header f fdc x z2'
+            {% if cart == empty %} data-cart-empty {% endif %}>
       <div class="cart-drawer__header-content f aic jcc">
         {%- render 'icon' with 'cart' -%}
         <span class='js-cart-count cart-drawer__count'
@@ -36,18 +58,26 @@
       {%- endif -%}
 
       {%- if settings.enable_gwp and settings.gwp_threshold > 0 and all_products[settings.gwp_product ].type == 'Gift product' -%}
-        <div class="free-shipping js-free-shipping is-hidden">
+        <div class="free-shipping js-free-shipping">
+          {%- assign away_to_free_gift = threshold_gwp_1 | minus: cart.total_price -%}
+
           <div class='free-shipping--unmet js-free-shipping-unmet-msg
-        {% if cart.total_price > settings.gwp_threshold %} is-hidden{% endif %}'>
-            You're <strong><span class='js-free-shipping-amount-remaining'>${{ settings.gwp_threshold }}</span></strong> away from free gift
+        {% if cart.total_price >= threshold_gwp_1 %} is-hidden{% endif %}'>
+            You're <strong><span class='js-free-shipping-amount-remaining'>{{ away_to_free_gift | money_without_trailing_zeros }}</span></strong> away from free {{ gwp_1.title }}
           </div>
           <div class='free-shipping--met js-free-shipping-met-msg
-        {% if cart.total_price < settings.gwp_threshold %} is-hidden{% endif %}'>
-            Good news! You get a free {{ settings.gwp_product.title }}.
+        {% if cart.total_price < threshold_gwp_1 %} is-hidden{% endif %}'>
+            Good news! You get a free {{ gwp_1.title }}.
           </div>
 
           <div class='free-shipping__meter f aic'>
-            <div class='free-shipping__meter__progress js-shipping-progress-bar'></div>
+            {%- if cart.total_price > threshold_gwp_1 -%}
+              {%- assign progress_bar_width = 100 -%}
+            {%- else -%}
+              {%- assign progress_bar_width = cart.total_price | times: 100 | divided_by: threshold_gwp_1 -%}
+            {%- endif -%}
+            <div class='free-shipping__meter__progress js-shipping-progress-bar'
+                 style="width: {{ progress_bar_width }}%"></div>
           </div>
         </div>
       {%- else -%}
@@ -84,6 +114,26 @@
             {%- for item in cart.items -%}
               {%- assign product_type_handle = item.product.type | handleize -%}
 
+              {%- if product_type_handle == gift_product_handle -%}
+                {% assign propertySize = item.properties | size %}
+                {% if propertySize > 0 %}
+
+                  {% for property in item.properties %}
+
+                    {%- if property.first == '_firstGwp' -%}
+                      {%- assign gwp_1_in_cart = true -%}
+                      {%- assign gwp_1_key = item.key -%}
+                    {%- endif -%}
+
+                    {%- if property.first == '_secondGwp' -%}
+                      {%- assign gwp_2_in_cart = true -%}
+                      {%- assign gwp_2_key = item.key -%}
+                    {%- endif -%}
+                  {% endfor %}
+
+                {% endif %}
+              {%- endif -%}
+
               {%- if item.sku contains 'ENGRAVE' -%}
                 {%- assign engrave_sku_counter = engrave_sku_counter | plus: item.quantity -%}
               {%- endif -%}
@@ -100,9 +150,6 @@
                 {% assign cart_has_giftcard = true %}
               {% endif %}
 
-              <script>
-                console.log({{ item | json }})
-              </script>
               <cart-drawer-item class="cart-drawer__item"
                       {% if product_type_handle == gift_box_handle and cart.attributes['Gift note'] != blank %}
                         data-cart-gift-note
@@ -206,28 +253,32 @@
                     </div>
                   </div>
 
-                  <button type="button"
-                          data-action="open-item-remove-popup"
-                          {% if item.product.type == 'Gift product' %}
-                            data-gift-product="{{ item.properties | first }}"
-                          {% endif %}
-                          aria-expanded="false"
-                          class="button--reset cart-drawer__itemAction cart-drawer__remove-open">
-                    {% render 'icon' with 'icon-x' %}
-                  </button>
+                  {%- unless product_type_handle == Personalization_fee_handle or item.sku contains 'ENGRAVE' -%}
+                    <button type="button"
+                            data-action="open-item-remove-popup"
+                            {% if item.product.type == 'Gift product' %}
+                              data-gift-product="{{ item.properties | first | first }}"
+                            {% endif %}
+                            aria-expanded="false"
+                            class="button--reset cart-drawer__itemAction cart-drawer__remove-open">
+                      {% render 'icon' with 'icon-x' %}
+                    </button>
+                  {%- endunless -%}
                 </div>
 
-                <div class="remove-item__popup js-cart-drawer-popup" aria-hidden="true" tabindex="-1">
-                  <div class="remove-item__inner">
-                    {%- if settings.cart_remove_text != blank -%}
-                      <p class="remove-item__text">{{ settings.cart_remove_text }}</p>
-                    {%- endif -%}
-                    <div class="remove-item__btn-group f jcc aic">
-                      <button type="button" class="btn--clear remove-item__btn--close" data-action="close-item-remove-popup">{{ 'cart.general.popup_keep' | t }}</button>
-                      <button type="button" class="btn--clear remove-item__btn--remove js-remove-item-trigger">{{ 'cart.general.popup_remove' | t }}</button>
+                {%- unless product_type_handle == Personalization_fee_handle or item.sku contains 'ENGRAVE' -%}
+                  <div class="remove-item__popup js-cart-drawer-popup" aria-hidden="true" tabindex="-1">
+                    <div class="remove-item__inner">
+                      {%- if settings.cart_remove_text != blank -%}
+                        <p class="remove-item__text">{{ settings.cart_remove_text }}</p>
+                      {%- endif -%}
+                      <div class="remove-item__btn-group f jcc aic">
+                        <button type="button" class="btn--clear remove-item__btn--close" data-action="close-item-remove-popup">{{ 'cart.general.popup_keep' | t }}</button>
+                        <button type="button" class="btn--clear remove-item__btn--remove js-remove-item-trigger">{{ 'cart.general.popup_remove' | t }}</button>
+                      </div>
                     </div>
                   </div>
-                </div>
+                {%- endunless -%}
 
                 <script type="application/json">
                   {{ item | json }}
@@ -244,9 +295,6 @@
         {% include 'cart-drawer-empty' %}
       </div>
     {%- endif -%}
-
-    <p>{{ personalization_sku_counter }}</p>
-    <p>{{ engrave_sku_counter }}</p>
 
     <footer class='cart-drawer__footer js-cart-footer'>
       {%- if cart != empty -%}
@@ -292,6 +340,10 @@
         </div>
       {%- endif -%}
     </footer>
+    
+    {%- comment -%}
+        // Personalization logic
+    {%- endcomment -%}
 
     {%- if personalization_sku_counter > 0 or engrave_sku_counter > 0 -%}
       {%- assign personalization_action = 'false' -%}
@@ -311,14 +363,79 @@
         {%- assign personalization_action = '/cart/change.js' -%}
       {%- endif -%}
 
-      <p>{{ personalization_action }}</p>
-
       <script type="application/ld+json" data-personalization>
         {
           "available": "{{ all_products[settings.personalization_product].available }}",
           "id": "{{ all_products[settings.personalization_product].selected_or_first_available_variant.id  }}",
           "quantity": "{{ personalization_quantity }}",
           "action": "{{ personalization_action }}"
+        }
+      </script>
+    {%- endif -%}
+
+    {%- comment -%}
+      // GWP logic
+    {%- endcomment -%}
+
+    {%- assign gwp_1_action = false -%}
+    {%- assign gwp_2_action = false -%}
+
+    {%- if enable_gwp == false or gwp_1.available == false -%}
+
+      {%- if gwp_1_in_cart -%}
+        {%- assign gwp_1_action = '/cart/change.js' -%}
+      {%- endif -%}
+
+    {%- endif -%}
+
+    {%- if enable_gwp and gwp_1.available -%}
+
+      {%- if gwp_1_in_cart == false and cart.total_price >= threshold_gwp_1 and gwp_1_product_type_handle == gift_product_handle  -%}
+        {%- assign gwp_1_action = '/cart/add.js' -%}
+      {%- endif -%}
+
+      {%- if gwp_1_in_cart and cart.total_price < threshold_gwp_1  -%}
+        {%- assign gwp_1_action = '/cart/change.js' -%}
+      {%- endif -%}
+
+    {%- endif -%}
+
+    {%- if enable_gwp == false or gwp_2.available == false -%}
+
+      {%- if gwp_2_in_cart -%}
+        {%- assign gwp_2_action = '/cart/change.js' -%}
+      {%- endif -%}
+
+    {%- endif -%}
+
+    {%- if enable_gwp and gwp_2.available -%}
+
+      {%- if gwp_2_in_cart == false and cart.total_price >= threshold_gwp_2 and gwp_2_product_type_handle == gift_product_handle  -%}
+        {%- assign gwp_2_action = '/cart/add.js' -%}
+      {%- endif -%}
+
+      {%- if gwp_2_in_cart and cart.total_price < threshold_gwp_2  -%}
+        {%- assign gwp_2_action = '/cart/change.js' -%}
+      {%- endif -%}
+
+    {%- endif -%}
+
+    {%- if enable_gwp or gwp_1_in_cart -%}
+      <script type="application/ld+json" data-first-gwp>
+        {
+          "id": "{{ gwp_1.selected_or_first_available_variant.id }}",
+          "key": "{{ gwp_1_key }}",
+          "action": "{{ gwp_1_action }}"
+        }
+      </script>
+    {%- endif -%}
+
+    {%- if enable_gwp or gwp_2_in_cart -%}
+      <script type="application/ld+json" data-second-gwp>
+        {
+          "id": "{{ gwp_2.selected_or_first_available_variant.id }}",
+          "key": "{{ gwp_2_key }}",
+          "action": "{{ gwp_2_action }}"
         }
       </script>
     {%- endif -%}

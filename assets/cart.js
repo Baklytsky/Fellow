@@ -17,6 +17,7 @@ class cartDrawer extends HTMLElement {
       e.preventDefault();
       this.checkoutEvent()
     })
+    this.checkGwpState(this)
   }
 
   openDrawer () {
@@ -37,14 +38,24 @@ class cartDrawer extends HTMLElement {
     this.classList.remove('is-visible')
   }
 
+  checkGwpState(html) {
+    let headerDrawer = html.querySelector('#cart-drawer__header')
+    if (localStorage.getItem('_firstGwp') === 'true') headerDrawer.classList.add('hide-gwp-1')
+    if (localStorage.getItem('_secondGwp') === 'true') headerDrawer.classList.add('hide-gwp-2')
+    if (headerDrawer.hasAttribute('data-cart-empty')) {
+      headerDrawer.classList.remove('hide-gwp-1', 'hide-gwp-2')
+      if (localStorage.getItem('_firstGwp')) localStorage.removeItem('_firstGwp')
+      if (localStorage.getItem('_secondGwp')) localStorage.removeItem('_secondGwp')
+    }
+  }
+
   renderContent(responseHtml, sectionId) {
     const cartContent = document.getElementById(sectionId)
     const parseDiv = responseHtml.getElementById(sectionId)
     const cartCount = responseHtml.querySelector('[data-cart-count]').getAttribute('data-cart-count')
+    this.checkGwpState(parseDiv)
     cartContent.innerHTML = parseDiv.innerHTML
-    document.querySelectorAll('.js-cart-count').forEach(element => {
-      element.innerHTML = cartCount
-    })
+    document.querySelectorAll('.js-cart-count').forEach(el => el.innerHTML = cartCount)
   }
 
   progressBarState (responseHtml) {
@@ -165,14 +176,33 @@ class cartDrawerContent extends HTMLElement {
   constructor() {
     super();
     this.personalization = this.querySelector('[data-personalization]')
-    if (this.personalization) {
-      this.perObj = JSON.parse(this.personalization.textContent)
-      console.log(this.perObj)
-      if (this.perObj.available === 'true' && this.perObj.action !== 'false') {
-        theme.cart.cartEvent(this.perObj.action, this.perObj.id, Number(this.perObj.quantity), true)
+    this.firstGwp = this.querySelector('[data-first-gwp]')
+    this.secondGwp = this.querySelector('[data-second-gwp]')
+
+    if (this.personalization) this.personalizeEvent()
+    if (this.firstGwp) this.gwpEvent(this.firstGwp, '_firstGwp')
+    if (this.secondGwp) this.gwpEvent(this.secondGwp, '_secondGwp')
+  }
+
+  personalizeEvent() {
+    this.perObj = JSON.parse(this.personalization.textContent)
+    if (this.perObj.available === 'true' && this.perObj.action !== 'false') {
+      theme.cart.cartEvent(this.perObj.action, this.perObj.id, Number(this.perObj.quantity), true)
+    }
+  }
+
+  gwpEvent(obj, gwpProp) {
+    const gwp = JSON.parse(obj.textContent)
+    if (gwp.action !== 'false') {
+      if (gwp.action === '/cart/add.js' && !localStorage.getItem(gwpProp)) {
+        let property = {}
+        property[gwpProp] = true
+        theme.cart.cartEvent(gwp.action, gwp.id, 1, true, property)
+      }
+      if (gwp.action === '/cart/change.js') {
+        theme.cart.cartEvent(gwp.action, gwp.key, 0, true)
       }
     }
-
   }
 
 }
@@ -225,6 +255,11 @@ class cartDrawerItem extends HTMLElement {
 
   changeQuantity() {
     this.price.classList.add('show-loader')
+    if (Number(this.quantityInput.value) === 0
+        &&
+        this.cartDrwerRemovePopupOpenBtn.getAttribute('data-gift-product')) {
+      localStorage.setItem(this.cartDrwerRemovePopupOpenBtn.getAttribute('data-gift-product'), 'true')
+    }
     theme.cart.cartEvent('/cart/change.js', this.lineItem.key, Number(this.quantityInput.value), true)
   }
 
@@ -242,8 +277,8 @@ class cartDrawerItem extends HTMLElement {
 
   removeItem(e) {
     e.preventDefault();
-    if (this.cartDrwerRemovePopup.getAttribute('data-gift-product')) {
-      localStorage.setItem(this.cartDrwerRemovePopup.getAttribute('data-gift-product'), 'true')
+    if (this.cartDrwerRemovePopupOpenBtn.getAttribute('data-gift-product')) {
+      localStorage.setItem(this.cartDrwerRemovePopupOpenBtn.getAttribute('data-gift-product'), 'true')
     }
     if (this.hasAttribute('data-cart-gift-note')) {
       this.removeGiftNote().then(() => {
