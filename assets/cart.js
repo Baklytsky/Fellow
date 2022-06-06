@@ -58,12 +58,6 @@ class cartDrawer extends HTMLElement {
     document.querySelectorAll('.js-cart-count').forEach(el => el.innerHTML = cartCount)
   }
 
-  progressBarState (responseHtml) {
-    const progressBar = document.querySelector('.js-shipping-progress-bar')
-    const progressStatus = responseHtml.querySelector('.js-shipping-progress-bar').style.width
-    if (progressBar) progressBar.style.width = progressStatus;
-  }
-
   // All cart events
 
   cartEvent(url, id, quantity, openDrawer, property, errorCallback) {
@@ -101,11 +95,8 @@ class cartDrawer extends HTMLElement {
         .then((json) => {
           console.log(json)
           const responseHtml = new DOMParser().parseFromString(json.sections[sectionId], 'text/html')
-          this.progressBarState(responseHtml)
-          setTimeout(() => {
-            this.renderContent(responseHtml, sectionId)
-            if (openDrawer) this.openDrawer()
-          }, 250)
+          this.renderContent(responseHtml, sectionId)
+          if (openDrawer) this.openDrawer()
         })
         .catch((error) => {
           if (errorCallback) errorCallback(error)

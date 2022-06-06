@@ -3576,17 +3576,22 @@ body.is-masthead--empty main {
 }
 
 
-.free-shipping {
+.free-shipping,
+.free-gwp {
   padding: 0 10px;
+  text-align: center;
 }
 
 .free-shipping--unmet,
-.free-shipping--met {
+.free-shipping--met,
+.free-gwp--unmet,
+.free-gwp--met {
   margin: 10px 0 15px;
   text-align: center;
 }
 
-.free-shipping__meter {
+.free-shipping__meter,
+.free-gwp__meter {
   background: #585858;
   height: 11px;
   border-radius: 6px;
@@ -3595,11 +3600,67 @@ body.is-masthead--empty main {
   /*overflow: hidden;*/
 }
 
-.free-shipping__meter__progress {
+.free-shipping__meter__progress,
+.free-gwp__meter__progress {
   background: #fff;
   height: 100%;
   transition: width .25s ease;
   border-radius: 6px;
+}
+
+.gwp-1-and-gwp-2 .gwp-1-success,
+.gwp-1-and-gwp-2 .gwp-2-success,
+.gwp-1-and-gwp-2 .gwp-1-progress,
+.gwp-1-and-gwp-2 .gwp-2-progress {
+  display: none;
+}
+
+.hide-when-all-gwp-enabled {
+ display: none;
+}
+
+.hide-gwp-1 .gwp-1-and-gwp-2 .hide-when-all-gwp-enabled {
+  display: block;
+}
+
+.hide-gwp-1 .gwp-1-and-gwp-2 .gwp-1,
+.hide-gwp-1 .gwp-1-and-gwp-2 .gwp-1-and-gwp-2-success,
+.hide-gwp-1 .gwp-1-and-gwp-2 .gwp-1-and-gwp-2-progress,
+.hide-gwp-1 .gwp-1-and-gwp-2 .gwp-1-progress {
+  display: none;
+}
+
+.hide-gwp-1 .gwp-1-and-gwp-2 .gwp-2-success,
+.hide-gwp-1 .gwp-1-and-gwp-2 .gwp-2-progress {
+  display: block;
+}
+
+.hide-gwp-2 .gwp-1-and-gwp-2 .gwp-2,
+.hide-gwp-2 .gwp-1-and-gwp-2 .gwp-1-and-gwp-2-success,
+.hide-gwp-2 .gwp-1-and-gwp-2 .gwp-1-and-gwp-2-progress,
+.hide-gwp-2 .gwp-1-and-gwp-2 .gwp-2-progress {
+  display: none;
+}
+
+.hide-gwp-2 .gwp-1-and-gwp-2 .gwp-1-success,
+.hide-gwp-2 .gwp-1-and-gwp-2 .gwp-1-progress {
+  display: block;
+}
+
+.hide-gwp-1.hide-gwp-2 .gwp-1-and-gwp-2 {
+  display: none;
+}
+
+.hide-gwp-1 .gwp-1-only,
+.hide-gwp-1 .gwp-2-only {
+  display: none;
+}
+
+.hide-gwp-1.hide-gwp-2 .free-shipping-when-gwp-removed,
+.hide-gwp-1 .free-shipping-gwp-1,
+.hide-gwp-2 .free-shipping-gwp-2 {
+  display: block !important;
+  visibility: visible;
 }
 
 .remove-item__popup {
