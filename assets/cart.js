@@ -2,6 +2,10 @@ class cartDrawer extends HTMLElement {
   constructor() {
     super();
     theme.cart = document.getElementById('cartDrawer')
+    $(document).off('click', '.js-cart-drawer-toggle')
+    $(document).off('click', '.js-close')
+    $(document).off('click', '.page-overlay')
+    $(document).off('click', '.cart-checkout__button')
 
     $(document).on('click', '.js-cart-drawer-toggle', (e) => {
       e.preventDefault();
@@ -341,15 +345,16 @@ customElements.define('cart-recommended-product', cartRecommendedProduct);
 class cartGiftWrapping extends HTMLElement {
   constructor() {
     super();
-    this.giftWrappingCloseBtn = this.querySelector('[data-close-gift-note]')
     this.giftWrappingModal = this.querySelector('.cart-gift-wrapping-modal')
     this.addWrappingBtn = this.querySelector('[data-add-gift-note]')
     this.noteArea = this.querySelector('#cart-note')
     this.noteLength = this.querySelector('.note-length')
 
-    if (this.giftWrappingCloseBtn) this.giftWrappingCloseBtn.addEventListener('click', this.closeGiftWrappingModal.bind(this))
     if (this.addWrappingBtn) this.addWrappingBtn.addEventListener('click', this.changeGiftWrappingNote.bind(this))
+    $(document).off('click', '[data-open-gift-note]')
+    $(document).off('click', '[data-close-gift-note]')
     $(document).on('click', '[data-open-gift-note]', this.openGiftWrappingModal.bind(this))
+    $(document).on('click', '[data-close-gift-note]', this.closeGiftWrappingModal.bind(this))
     this.addEventListener('input', this.checkNoteLength.bind(this))
   }
 

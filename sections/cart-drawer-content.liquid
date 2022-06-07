@@ -103,13 +103,13 @@
             {%- assign away_to_gwp_1 = threshold_gwp_1 | minus: cart.total_price -%}
             {%- assign away_to_gwp_2 = summary_gwp_threshold | minus: cart.total_price -%}
 
-            <div class='free-gwp--unmet gwp-1 {% if cart.total_price > threshold_gwp_1 and cart.total_price < threshold_gwp_2 %} is-hidden{% endif %} {% if cart.total_price > threshold_gwp_2 %} is-hidden{% endif %}'>
+            <div class='free-gwp--unmet gwp-1 {% if cart.total_price >= threshold_gwp_1 and cart.total_price <= threshold_gwp_2 %} is-hidden{% endif %} {% if cart.total_price >= threshold_gwp_2 %} is-hidden{% endif %}'>
               You're <strong>
                 <span>{{ away_to_gwp_1 | money_without_trailing_zeros }}</span>
               </strong> away from free {{ gwp_1.title }}
             </div>
 
-            <div class='free-gwp--unmet gwp-2 {% if cart.total_price > threshold_gwp_2 %} is-hidden{% endif %} {% if cart.total_price < threshold_gwp_1 %} hide-when-all-gwp-enabled{% endif %}' >
+            <div class='free-gwp--unmet gwp-2 {% if cart.total_price >= threshold_gwp_2 %} is-hidden{% endif %} {% if cart.total_price < threshold_gwp_1 %} hide-when-all-gwp-enabled{% endif %}' >
               {%- if gwp_1_success_message != blank -%}
                 <div class="gwp-1">{{ gwp_1_success_message }}</div>
               {%- endif -%}
@@ -318,17 +318,25 @@
                         {%- endif -%}
                       </div>
                     {%- else -%}
-                      <a href="{{ item.url }}" class="cart-drawer__itemTitle">{{ item.product.title }}</a>
+
+                      {%- if product_type_handle == gift_product_handle  -%}
+                        <div class="cart-drawer__itemTitle">{{ item.product.title }}</div>
+                      {%- else -%}
+                        <a href="{{ item.url }}" class="cart-drawer__itemTitle">{{ item.product.title }}</a>
+                      {%- endif -%}
+
                       <div class="cart-drawer__itemOptions">
-                        {%- for option in item.variant.options -%}
-                          {%- assign option_name = option -%}
+                        {%- unless item.product.has_only_default_variant -%}
+                          {%- for option in item.variant.options -%}
+                            {%- assign option_name = option -%}
 
-                          {%- if option_name contains ':' -%}
-                            {%- assign option_name = option_name | split: ':' | last | strip -%}
-                          {%- endif -%}
+                            {%- if option_name contains ':' -%}
+                              {%- assign option_name = option_name | split: ':' | last | strip -%}
+                            {%- endif -%}
 
-                          {% unless forloop.first %} | {% endunless %}{{ option_name }}
-                        {%- endfor -%}
+                            {% unless forloop.first %} | {% endunless %}{{ option_name }}
+                          {%- endfor -%}
+                        {%- endunless -%}
 
                         {%- if item.properties['Personalized Text'] != blank -%}
                           <div class="cart-drawer__personalization">
