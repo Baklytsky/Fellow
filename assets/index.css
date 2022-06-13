@@ -3179,7 +3179,7 @@ body.is-masthead--empty main {
   transform: translateX(0)
 }
 
-#page-overlay {
+#js-cart-drawer-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -3194,7 +3194,7 @@ body.is-masthead--empty main {
   background: rgba(0, 0, 0, .5)
 }
 
-#page-overlay.is-active {
+#js-cart-drawer-overlay.is-active {
   visibility: visible;
   opacity: 1;
 }
@@ -3392,6 +3392,18 @@ body.is-masthead--empty main {
   max-width: 27px;
 }
 
+/* Chrome, Safari, Edge, Opera */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 .cart-item__stepper .cart-stepper:hover {
   color: #000
 }
@@ -3577,7 +3589,8 @@ body.is-masthead--empty main {
 
 
 .free-shipping,
-.free-gwp {
+.free-gwp,
+.cart-drawer__header-status {
   padding: 0 10px;
   text-align: center;
 }

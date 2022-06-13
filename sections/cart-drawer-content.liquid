@@ -1,13 +1,32 @@
+<cart-drawer id="cartDrawer" class='cart-drawer-outer z10'
+             aria-expanded='false' tabindex='-1'>
 <div id='cart-drawer-content' class='cart-drawer y x f js-cart-drawer'>
   {%- assign cart_has_canal = false -%}
   {%- assign cart_has_giftcard = false -%}
   {%- assign engrave_sku_counter = 0 -%}
   {%- assign personalization_sku_counter = 0 -%}
+  {%- assign gift_box_in_cart = false -%}
+  {%- assign checkout_update_data = blank -%}
+  {%- assign checkout_add_data = blank -%}
+  {%- assign only_digital_and_free_gift_in_cart = false -%}
+  {%- assign digital_gift_and_free_counter = 0 -%}
 
   {%- assign gift_product_handle = 'Gift Product' | handleize -%}
   {%- assign gift_box_handle = 'Gift box' | handleize -%}
   {%- assign personalization_handle = 'Personalization' | handleize -%}
   {%- assign Personalization_fee_handle = 'Personalization fee' | handleize -%}
+  {%- assign digital_gift_handle = 'Gift card' | handleize -%}
+
+  {%- for item in cart.items -%}
+    {%- assign item_type_handle = item.product.type | handleize -%}
+    {%- if item_type_handle == digital_gift_handle or item_type_handle == gift_product_handle -%}
+      {%- assign digital_gift_and_free_counter = digital_gift_and_free_counter | plus: 1 -%}
+    {%- endif -%}
+  {%- endfor -%}
+
+  {%- if digital_gift_and_free_counter == cart.items.size -%}
+    {%- assign only_digital_and_free_gift_in_cart = true -%}
+  {%- endif -%}
 
   {%- assign enable_gwp = settings.enable_gwp -%}
 
@@ -34,15 +53,13 @@
 
   {%- if threshold_difference < 0 -%}
     {%- assign summary_gwp_threshold = threshold_gwp_2 -%}
-  {%- else -%}
-
   {%- endif -%}
 
-  {%- if enable_gwp and gwp_1.available and threshold_gwp_1 > 0 and gwp_1_product_type_handle == gift_product_handle -%}
+  {%- if enable_gwp and gwp_1.available and threshold_gwp_1 > 0 and gwp_1_product_type_handle == gift_product_handle and only_digital_and_free_gift_in_cart == false -%}
     {%- assign gwp_1_enable = true -%}
   {%- endif -%}
 
-  {%- if enable_gwp and gwp_2.available and threshold_gwp_2 > 0 and gwp_2_product_type_handle == gift_product_handle -%}
+  {%- if enable_gwp and gwp_2.available and threshold_gwp_2 > 0 and gwp_2_product_type_handle == gift_product_handle and only_digital_and_free_gift_in_cart == false -%}
     {%- assign gwp_2_enable = true -%}
   {%- endif -%}
 
@@ -56,7 +73,7 @@
 
   <cart-drawer-content class="cart-drawer__content-wrapper">
     <header id="cart-drawer__header"
-            class='cart-drawer__header f fdc x z2'
+            class='cart-drawer__header f fdc x z2' data-cart-total="{{ cart.total_price }}"
             {% if cart == empty %} data-cart-empty {% endif %}>
       <div class="cart-drawer__header-content f aic jcc">
         {%- render 'icon' with 'cart' -%}
@@ -65,7 +82,7 @@
           {{ cart.item_count }}
         </span>
 
-        <button aria-label="Cart Close" type="button" id="closeCart" class='cart-drawer__close button--reset js-close'>
+        <button aria-label="Cart Close" type="button" class='cart-drawer__close button--reset js-cart-drawer-close'>
           {%- render 'icon', icon: 'arrow-next' -%}
         </button>
       </div>
@@ -238,14 +255,19 @@
         <div class='cart-drawer__items-inner js-cart-drawer-items'>
           <div class='js-items x y'>
             {%- for item in cart.items -%}
+              {%- assign not_full_bundle = false -%}
+              {%- assign other_property = blank -%}
+              {%- assign id = blank -%}
+              {%- assign quantity = blank -%}
+              {%- assign properties = blank -%}
               {%- assign product_type_handle = item.product.type | handleize -%}
 
-              {%- if product_type_handle == gift_product_handle -%}
-                {% assign propertySize = item.properties | size %}
-                {% if propertySize > 0 %}
+              {% assign propertySize = item.properties | size %}
+              {% if propertySize > 0 %}
 
-                  {% for property in item.properties %}
+                {% for property in item.properties %}
 
+                  {%- if product_type_handle == gift_product_handle -%}
                     {%- if property.first == '_firstGwp' -%}
                       {%- assign gwp_1_in_cart = true -%}
                       {%- assign gwp_1_key = item.key -%}
@@ -255,9 +277,30 @@
                       {%- assign gwp_2_in_cart = true -%}
                       {%- assign gwp_2_key = item.key -%}
                     {%- endif -%}
-                  {% endfor %}
+                  {%- endif -%}
 
-                {% endif %}
+                  {%- if property.first != '_bundles' and property.first != '_Bundle_Name' -%}
+                    {%- if forloop.last -%}
+                      {%- assign other_property = other_property | append: '"' | append: property.first | append: '":' | append: '"' | append: property.last | append: '"' -%}
+                    {%- else -%}
+                      {%- assign other_property = other_property | append: '"' | append: property.first | append: '":' | append: '"' | append: property.last | append: '",' -%}
+                    {%- endif -%}
+                  {%- endif -%}
+
+                  {%- if property.first == '_bundles' and item.discounts.size == 0 -%}
+                    {%- assign not_full_bundle = true -%}
+                  {%- endif -%}
+                {% endfor %}
+
+                {%- if not_full_bundle -%}
+                  {%- assign id = '"id":' | append: item.variant_id | append: ',' -%}
+                  {%- assign quantity = '"quantity":' | append: item.quantity | append: ',' -%}
+                  {%- assign properties = '"properties":' | append: '{' | append: other_property | append: '}' -%}
+
+                  {%- assign checkout_update_data = checkout_update_data | append: '"' | append: item.key | append: '"' | append: ': 0&&&' -%}
+                  {%- assign checkout_add_data = checkout_add_data | append: '{' | append: id | append: quantity | append: properties | append: '}&&&' -%}
+
+                {%- endif -%}
               {%- endif -%}
 
               {%- if item.sku contains 'ENGRAVE' -%}
@@ -274,6 +317,10 @@
 
               {% if item.product.type contains 'Digital Gift Card' %}
                 {% assign cart_has_giftcard = true %}
+              {% endif %}
+
+              {% if product_type_handle == gift_box_handle %}
+                {%- assign gift_box_in_cart = true -%}
               {% endif %}
 
               <cart-drawer-item class="cart-drawer__item"
@@ -314,7 +361,7 @@
                           {%- if cart.attributes['Gift note'] != blank -%}
                             <div class="pb05">"{{ cart.attributes['Gift note'] }}"</div>
                           {%- endif -%}
-                          <button type="button" class="cart-gift-wrapping-btn" data-open-gift-note>Edit</button>
+                          <button type="button" class="cart-gift-wrapping-btn" data-gift-note-trigger>Edit</button>
                         {%- endif -%}
                       </div>
                     {%- else -%}
@@ -349,22 +396,18 @@
 
                   <div class="f aic jcb pt05">
 
-                      <div class="cart-item__stepper aic f ">
+                      <quantity-stepper class="cart-item__stepper f aic" data-single-stepper="true">
                         {%- unless product_type_handle == gift_product_handle
                           or product_type_handle == gift_box_handle
                           or product_type_handle == Personalization_fee_handle -%}
-                        <button type="button"
-                                class="cart-stepper js-remove-single"
-                                data-key="{{ item.key }}">-</button>
-                        <input type="text"
+                        <button type="button" class="cart-stepper js-minus">-</button>
+                        <input type="number"
                                title="Quantity selector for - {{ item.title }}"
-                               class="cart-quantity js-single-quantity"
+                               class="cart-quantity js-quantity"
                                value="{{ item.quantity }}">
-                        <button type="button"
-                                class="cart-stepper js-add-single"
-                                data-key="{{ item.key }}">+</button>
+                        <button type="button" class="cart-stepper js-plus">+</button>
                         {%- endunless -%}
-                      </div>
+                      </quantity-stepper>
 
                     <div class="cart-item__price">
                       {%- if product_type_handle == gift_product_handle -%}
@@ -435,7 +478,7 @@
     <footer class='cart-drawer__footer js-cart-footer'>
       {%- if cart != empty -%}
         {%- if settings.enable_gift_wrapping and all_products[settings.gift_box_product].available and cart_has_canal == false and coffee_pdp == false and cart_has_giftcard == false -%}
-          <cart-gift-wrapping class="cart-drawer__footer-gift-wrapping">
+          <cart-gift-wrapping class="cart-drawer__footer-gift-wrapping" data-gift-box-in-cart="{{ gift_box_in_cart }}">
             {% include 'cart-gift-wrapping' %}
           </cart-gift-wrapping>
         {%- endif -%}
@@ -526,7 +569,7 @@
 
     {%- if enable_gwp and gwp_1.available -%}
 
-      {%- if gwp_1_in_cart == false and threshold_gwp_1 > 0 and cart.total_price >= threshold_gwp_1 and gwp_1_product_type_handle == gift_product_handle  -%}
+      {%- if gwp_1_in_cart == false and threshold_gwp_1 > 0 and cart.total_price >= threshold_gwp_1 and gwp_1_product_type_handle == gift_product_handle and only_digital_and_free_gift_in_cart == false  -%}
         {%- assign gwp_1_action = '/cart/add.js' -%}
       {%- endif -%}
 
@@ -535,6 +578,10 @@
       {%- endif -%}
 
       {%- if gwp_1_in_cart and threshold_gwp_1 <= 0 -%}
+        {%- assign gwp_1_action = '/cart/change.js' -%}
+      {%- endif -%}
+
+      {%- if gwp_1_in_cart and only_digital_and_free_gift_in_cart -%}
         {%- assign gwp_1_action = '/cart/change.js' -%}
       {%- endif -%}
 
@@ -550,7 +597,7 @@
 
     {%- if enable_gwp and gwp_2.available -%}
 
-      {%- if gwp_2_in_cart == false and threshold_gwp_2 > 0 and cart.total_price >= threshold_gwp_2 and gwp_2_product_type_handle == gift_product_handle  -%}
+      {%- if gwp_2_in_cart == false and threshold_gwp_2 > 0 and cart.total_price >= threshold_gwp_2 and gwp_2_product_type_handle == gift_product_handle and only_digital_and_free_gift_in_cart == false -%}
         {%- assign gwp_2_action = '/cart/add.js' -%}
       {%- endif -%}
 
@@ -559,6 +606,10 @@
       {%- endif -%}
 
       {%- if gwp_2_in_cart and threshold_gwp_2 <= 0  -%}
+        {%- assign gwp_2_action = '/cart/change.js' -%}
+      {%- endif -%}
+
+      {%- if gwp_2_in_cart and only_digital_and_free_gift_in_cart -%}
         {%- assign gwp_2_action = '/cart/change.js' -%}
       {%- endif -%}
 
@@ -584,8 +635,35 @@
       </script>
     {%- endif -%}
 
+    {%- comment -%}
+      // Checkout Event
+    {%- endcomment -%}
+
+    {%- if checkout_update_data != blank -%}
+      {%- assign checkout_update_data = checkout_update_data | split: '&&&' -%}
+      <script type="application/ld+json" data-checkout-update>
+      {
+        {%- for item in checkout_update_data -%}
+          {{ item }}{%- unless forloop.last -%},{%- endunless -%}
+        {%- endfor -%}
+       }
+    </script>
+    {%- endif -%}
+
+    {%- if checkout_add_data != blank -%}
+      {%- assign checkout_add_data = checkout_add_data | split: '&&&' -%}
+      <script type="application/ld+json" data-checkout-add>
+      [
+        {%- for item in checkout_add_data -%}
+        {{ item }}{%- unless forloop.last -%},{%- endunless -%}
+        {%- endfor -%}
+      ]
+    </script>
+    {%- endif -%}
+
   </cart-drawer-content>
 </div>
+</cart-drawer>
 
 {% schema %}
 {

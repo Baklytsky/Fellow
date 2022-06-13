@@ -58,8 +58,8 @@
     {% include 'gtm-no-script' %}
     {% section 'header' %}
     {% include 'modal' %}
-    <div id="page-overlay" class="page-overlay"></div>
-    {% include 'cart-drawer' %}
+    <div id="js-cart-drawer-overlay"></div>
+    {% section 'cart-drawer-content' %}
 
     <main role='main' id='root' tabindex='0'>
       {{ content_for_layout }}

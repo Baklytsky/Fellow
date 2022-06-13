@@ -14129,7 +14129,12 @@
               }
               // Add property (_recommended_product) if product is recommended
               if (window.location.search.indexOf('pr_prod_strat') !== -1) n._recommended_product = true;
-              return theme.cart.cartEvent('/cart/add.js', t.id, e, true, n)
+              let bodyObj = {
+                id: t.id,
+                quantity: e,
+                properties: n
+              }
+              return theme.cart.cartEvent('/cart/add.js', bodyObj, true)
             }))
           }(a, r.elements.quantity.value);
           var e = e || [];

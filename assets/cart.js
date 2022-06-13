@@ -2,43 +2,40 @@ class cartDrawer extends HTMLElement {
   constructor() {
     super();
     theme.cart = document.getElementById('cartDrawer')
-    $(document).off('click', '.js-cart-drawer-toggle')
-    $(document).off('click', '.js-close')
-    $(document).off('click', '.page-overlay')
-    $(document).off('click', '.cart-checkout__button')
+    this.drawerOverlay = document.getElementById('js-cart-drawer-overlay')
+    this.drawerOpener = document.querySelector('.js-cart-drawer-open')
 
-    $(document).on('click', '.js-cart-drawer-toggle', (e) => {
-      e.preventDefault();
-      this.openDrawer();
-    })
+    this.drawerOpener.addEventListener('click', this.openDrawer.bind(this))
+    this.drawerOverlay.addEventListener('click', this.closeDrawer.bind(this))
 
-    $(document).on('click', '.js-close, .page-overlay', (e) => {
-      e.preventDefault();
-      this.closeDrawer();
-    })
-
-    $(document).on('click', '.cart-checkout__button', (e) => {
-      e.preventDefault();
-      this.checkoutEvent()
-    })
+    this.addEventListener('click', (e) => {
+      if (e.target.closest('.js-cart-drawer-close')) this.closeDrawer()
+      if (e.target.closest('.cart-checkout__button')) this.checkoutEvent(e)
+    });
     this.checkGwpState(this)
   }
 
   openDrawer () {
+    const attributes = {
+      "aria-pressed": "true",
+      "aria-expanded": "true",
+      "tabindex": "0"
+    }
     theme.disableScroll()
-    document.getElementById('page-overlay').classList.add('is-active')
-    this.setAttribute("aria-pressed", "true")
-    this.setAttribute("aria-expanded", "true")
-    this.setAttribute("tabindex", "0")
+    this.drawerOverlay.classList.add('is-active')
+    theme.setAttributes(this, attributes)
     this.classList.add('is-visible')
   }
 
   closeDrawer () {
+    const attributes = {
+      "aria-pressed": "false",
+      "aria-expanded": "false",
+      "tabindex": "-1"
+    }
     theme.enableScroll()
-    document.getElementById('page-overlay').classList.remove('is-active')
-    this.setAttribute("aria-pressed", "false")
-    this.setAttribute("aria-expanded", "false")
-    this.setAttribute("tabindex", "-1")
+    this.drawerOverlay.classList.remove('is-active')
+    theme.setAttributes(this, attributes)
     this.classList.remove('is-visible')
   }
 
@@ -64,8 +61,7 @@ class cartDrawer extends HTMLElement {
 
   // All cart events
 
-  cartEvent(url, id, quantity, openDrawer, property, errorCallback) {
-    property = (property) ? property : {};
+  cartEvent(url, bodyObj, openDrawer, errorCallback) {
     const sectionId = 'cart-drawer-content'
 
     const config = {
@@ -76,28 +72,16 @@ class cartDrawer extends HTMLElement {
         'X-Requested-With': 'XMLHttpRequest'
       }
     }
-
-    if (id) {
-      config.body = JSON.stringify({
-        id: id,
-        quantity: quantity,
-        properties: property,
-        sections: sectionId,
-        sections_url: window.location.pathname
-      });
-    } else {
-      config.body = JSON.stringify({
-        sections: sectionId,
-        sections_url: window.location.pathname
-      });
-    }
+    bodyObj = bodyObj ? bodyObj : {}
+    bodyObj.sections = sectionId
+    bodyObj.sections_url = window.location.pathname
+    config.body = JSON.stringify(bodyObj)
 
     fetch(`${url}`, config)
         .then((response) => {
           return response.json()
         })
         .then((json) => {
-          console.log(json)
           const responseHtml = new DOMParser().parseFromString(json.sections[sectionId], 'text/html')
           this.renderContent(responseHtml, sectionId)
           if (openDrawer) this.openDrawer()
@@ -115,53 +99,39 @@ class cartDrawer extends HTMLElement {
   }
 
   // Remove all bundle properties if the bundle is not full
-  checkoutEvent() {
-    let updateData = {},
-        addData = [];
+  checkoutEvent(e) {
+    e.preventDefault();
+    this.updateObj = this.querySelector('[data-checkout-update]');
 
-    this.getCartState().then((cart) => {
-      cart.items.forEach(lineItem => {
-        if (lineItem.properties._bundles && lineItem.discounts.length === 0) {
-          updateData[`${lineItem.key}`] = 0
-          let prop = lineItem.properties;
-          delete prop['_bundles']
-          delete prop['_Bundle_Name']
-          addData.push({
-            id: lineItem.variant_id,
-            quantity: lineItem.quantity,
-            properties: prop
-          })
-        }
-      })
-    }).then(() => {
-      if ($.isEmptyObject(updateData)) {
+      if (!this.updateObj) {
         window.location = '/checkout'
       } else {
-        $.ajax({
-          type: 'POST',
-          url: '/cart/update.js',
-          data: {
-            updates: updateData
-          },
-          dataType: 'json',
-          success: () => {
-            $.ajax({
-              type: 'post',
-              url: '/cart/add.js',
-              data: {items: addData},
-              dataType: 'json',
-              success: () => {
-                window.location = '/checkout'
+        let updateData = {updates: JSON.parse(this.querySelector('[data-checkout-update]').textContent)},
+            addData = {items: JSON.parse(this.querySelector('[data-checkout-add]').textContent)},
+            configUpdate, configAdd,
+            headers = {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/javascript',
+                'X-Requested-With': 'XMLHttpRequest'
               }
+            };
+
+        configUpdate = {...headers}
+        configAdd = {...headers}
+
+        configUpdate.body = JSON.stringify(updateData)
+        configAdd.body = JSON.stringify(addData)
+
+        fetch('/cart/update.js', configUpdate)
+            .then(() => {
+              fetch('/cart/add.js', configAdd)
+                  .then(() => window.location = '/checkout')
+                  .catch(() => window.location = '/checkout')
             })
-          },
-          error: function (err) {
-            console.error(err)
-            window.location = '/checkout'
-          }
-        })
+            .catch(() => window.location = '/checkout')
       }
-    })
   }
 }
 
@@ -180,23 +150,37 @@ class cartDrawerContent extends HTMLElement {
   }
 
   personalizeEvent() {
+    console.log(111)
     this.perObj = JSON.parse(this.personalization.textContent)
     if (this.perObj.available === 'true' && this.perObj.action !== 'false') {
-      theme.cart.cartEvent(this.perObj.action, this.perObj.id, Number(this.perObj.quantity), true)
+      const bodyObj = {
+        id: this.perObj.id,
+        quantity: Number(this.perObj.quantity)
+      }
+      theme.cart.cartEvent(this.perObj.action, bodyObj, true)
     }
   }
 
   gwpEvent(obj, gwpProp) {
     const gwp = JSON.parse(obj.textContent)
-    if (gwp.action !== 'false') {
-      if (gwp.action === '/cart/add.js' && !localStorage.getItem(gwpProp)) {
-        let property = {}
-        property[gwpProp] = true
-        theme.cart.cartEvent(gwp.action, gwp.id, 1, true, property)
+    if (gwp.action === 'false') return
+    let properties = {},
+        bodyObj;
+    if (gwp.action === '/cart/add.js' && !localStorage.getItem(gwpProp)) {
+      properties[gwpProp] = true
+      bodyObj = {
+        id: gwp.id,
+        quantity: 1,
+        properties: properties
       }
-      if (gwp.action === '/cart/change.js') {
-        theme.cart.cartEvent(gwp.action, gwp.key, 0, true)
+      theme.cart.cartEvent(gwp.action, bodyObj, true)
+    }
+    if (gwp.action === '/cart/change.js') {
+      bodyObj = {
+        id: gwp.key,
+        quantity: 0
       }
+      theme.cart.cartEvent(gwp.action, bodyObj, true)
     }
   }
 
@@ -208,100 +192,64 @@ class cartDrawerItem extends HTMLElement {
   constructor() {
     super();
     this.lineItem = JSON.parse(this.querySelector('[type="application/json"]').textContent)
-    this.quantityInput = this.querySelector('.js-single-quantity')
-    this.removeQtyBtn = this.querySelector('.js-remove-single')
-    this.addQtyBtn = this.querySelector('.js-add-single')
+    this.quantityInput = this.querySelector('.js-quantity')
     this.price = this.querySelector('.cart-item__price')
-    this.cartDrwerRemovePopupOpenBtn = this.querySelector('[data-action="open-item-remove-popup"]')
-    this.cartDrwerRemovePopupCloseBtn = this.querySelector('[data-action="close-item-remove-popup"]')
-    this.cartDrwerRemoveBtn = this.querySelector('.js-remove-item-trigger')
-    this.cartDrwerRemovePopup = this.querySelector('.js-cart-drawer-popup')
-    this.addEventListener('input', this.changeQuantity.bind(this))
+    this.drawerOpenItemRemovePopup = this.querySelector('[data-action="open-item-remove-popup"]')
+    this.drawerCloseItemRemovePopup = this.querySelector('[data-action="close-item-remove-popup"]')
+    this.drawerRemoveItemBtn = this.querySelector('.js-remove-item-trigger')
+    this.drawerRemoveItemPopup = this.querySelector('.js-cart-drawer-popup')
 
-    if (this.removeQtyBtn) {
-      this.removeQtyBtn.addEventListener('click', () => {
-        this.quantityInput.value = Number(this.quantityInput.value) - 1
-        this.removeQtyBtn.setAttribute('disabled', 'disabled')
-        this.changeQuantity()
-      })
-    }
-
-    if (this.addQtyBtn) {
-      this.addQtyBtn.addEventListener('click', () => {
-        this.quantityInput.value = Number(this.quantityInput.value) + 1
-        this.addQtyBtn.setAttribute('disabled', 'disabled')
-        this.changeQuantity()
-      })
-    }
-
-    if (this.cartDrwerRemovePopupOpenBtn) {
-      this.cartDrwerRemovePopupOpenBtn.addEventListener('click', this.openItemRemovePopup.bind(this))
-    }
-
-    if (this.cartDrwerRemovePopupCloseBtn) {
-      this.cartDrwerRemovePopupCloseBtn.addEventListener('click', this.closeItemRemovePopup.bind(this))
-    }
-
-    if (this.cartDrwerRemoveBtn) {
-      this.cartDrwerRemoveBtn.addEventListener('click', this.removeItem.bind(this))
-    }
-
+    if (this.quantityInput) this.quantityInput.addEventListener('changeQty', this.changeQuantity.bind(this))
+    if (this.drawerOpenItemRemovePopup) this.drawerOpenItemRemovePopup.addEventListener('click', this.openItemRemovePopup.bind(this))
+    if (this.drawerCloseItemRemovePopup) this.drawerCloseItemRemovePopup.addEventListener('click', this.closeItemRemovePopup.bind(this))
+    if (this.drawerRemoveItemBtn) this.drawerRemoveItemBtn.addEventListener('click', this.removeItem.bind(this))
   }
 
   changeQuantity() {
     this.price.classList.add('show-loader')
     if (Number(this.quantityInput.value) === 0
         &&
-        this.cartDrwerRemovePopupOpenBtn.getAttribute('data-gift-product')) {
-      localStorage.setItem(this.cartDrwerRemovePopupOpenBtn.getAttribute('data-gift-product'), 'true')
+        this.drawerOpenItemRemovePopup.getAttribute('data-gift-product')) {
+      localStorage.setItem(this.drawerOpenItemRemovePopup.getAttribute('data-gift-product'), 'true')
     }
-    theme.cart.cartEvent('/cart/change.js', this.lineItem.key, Number(this.quantityInput.value), true)
+    let bodyObj = {
+      id: this.lineItem.key,
+      quantity: Number(this.quantityInput.value)
+    }
+    theme.cart.cartEvent('/cart/change.js', bodyObj, true)
   }
 
   openItemRemovePopup() {
-    this.cartDrwerRemovePopup.setAttribute('aria-expanded', 'true')
-    this.cartDrwerRemovePopup.setAttribute('tabindex', '0')
-    this.cartDrwerRemovePopup.setAttribute('aria-hidden', 'false');
+    const attrObj = {
+      "aria-expanded": "true",
+      "aria-hidden": "false",
+      "tabindex": '0'
+    }
+    theme.setAttributes(this.drawerRemoveItemPopup, attrObj)
   }
 
   closeItemRemovePopup() {
-    this.cartDrwerRemovePopup.setAttribute('aria-expanded', 'false')
-    this.cartDrwerRemovePopup.setAttribute('tabindex', '1')
-    this.cartDrwerRemovePopup.setAttribute('aria-hidden', 'true');
+    const attrObj = {
+      "aria-expanded": "false",
+      "aria-hidden": "true",
+      "tabindex": '-1'
+    }
+    theme.setAttributes(this.drawerRemoveItemPopup, attrObj)
   }
 
   removeItem(e) {
     e.preventDefault();
-    if (this.cartDrwerRemovePopupOpenBtn.getAttribute('data-gift-product')) {
-      localStorage.setItem(this.cartDrwerRemovePopupOpenBtn.getAttribute('data-gift-product'), 'true')
+    let bodyObj = {
+      id: this.lineItem.key,
+      quantity: 0
+    };
+    if (this.drawerOpenItemRemovePopup.getAttribute('data-gift-product')) {
+      localStorage.setItem(this.drawerOpenItemRemovePopup.getAttribute('data-gift-product'), 'true')
     }
-    if (this.hasAttribute('data-cart-gift-note')) {
-      this.removeGiftNote().then(() => {
-        theme.cart.cartEvent('/cart/change.js', this.lineItem.key, 0, true)
-      })
-    } else {
-      theme.cart.cartEvent('/cart/change.js', this.lineItem.key, 0, true)
-    }
+    if (this.hasAttribute('data-cart-gift-note')) bodyObj.attributes = {'Gift note': ''}
+    theme.cart.cartEvent('/cart/change.js', bodyObj, true)
 
     this.closeItemRemovePopup()
-  }
-
-  removeGiftNote() {
-    const config = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/javascript',
-        'X-Requested-With': 'XMLHttpRequest'
-      }
-    }
-    config.body = JSON.stringify({
-      attributes: {
-        'Gift note': '',
-      }
-    });
-
-    return fetch('/cart/update.js', config).then(() => console.log('Gift note removed'))
   }
 
 }
@@ -330,12 +278,20 @@ class cartRecommendedProduct extends HTMLElement {
 
   addRecommendedProduct(e) {
     e.preventDefault()
-    const id = this.atcBtn.getAttribute('data-variant-id').split('cart-')[1];
+    let bodyObj = {
+      id: this.atcBtn.getAttribute('data-variant-id').split('cart-')[1],
+      quantity: 1
+    };
     function errorCallback(error) {
-      $('#CartRecommendedErrorMessage').text(error.responseJSON.description).fadeIn('slow');
-      setTimeout(function () {$('#CartRecommendedErrorMessage').fadeOut('slow').text('');}, 3500);
+      let errorMessage = document.querySelector('#CartRecommendedErrorMessage')
+      errorMessage.innerHTML = error.responseJSON.description
+      errorMessage.style.display = 'block'
+      setTimeout(() => {
+        errorMessage.style.display = 'none'
+        errorMessage.innerHTML = ''
+      }, 3500);
     }
-    theme.cart.cartEvent('/cart/add.js', id, 1, true, errorCallback)
+    theme.cart.cartEvent('/cart/add.js', bodyObj, true, errorCallback)
   }
 
 }
@@ -349,21 +305,19 @@ class cartGiftWrapping extends HTMLElement {
     this.addWrappingBtn = this.querySelector('[data-add-gift-note]')
     this.noteArea = this.querySelector('#cart-note')
     this.noteLength = this.querySelector('.note-length')
+    this.giftBoxInCart = this.getAttribute('data-gift-box-in-cart')
 
     if (this.addWrappingBtn) this.addWrappingBtn.addEventListener('click', this.changeGiftWrappingNote.bind(this))
-    $(document).off('click', '[data-open-gift-note]')
-    $(document).off('click', '[data-close-gift-note]')
-    $(document).on('click', '[data-open-gift-note]', this.openGiftWrappingModal.bind(this))
-    $(document).on('click', '[data-close-gift-note]', this.closeGiftWrappingModal.bind(this))
+    document.addEventListener('click', (e) => {
+      if (e.target.closest('[data-gift-note-trigger]')) this.triggerGiftWrappingModal()
+    });
     this.addEventListener('input', this.checkNoteLength.bind(this))
   }
 
-  openGiftWrappingModal() {
-    this.giftWrappingModal.setAttribute('aria-expanded', 'true')
-  }
-
-  closeGiftWrappingModal() {
-    this.giftWrappingModal.setAttribute('aria-expanded', 'false')
+  triggerGiftWrappingModal() {
+    let wrappingModalStatus = this.giftWrappingModal.getAttribute('aria-expanded'),
+        triggerAttr = (wrappingModalStatus === 'false') ? 'true' : 'false';
+    this.giftWrappingModal.setAttribute('aria-expanded', triggerAttr)
   }
 
   checkNoteLength() {
@@ -373,41 +327,19 @@ class cartGiftWrapping extends HTMLElement {
   }
 
   changeGiftWrappingNote() {
-    const config = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/javascript',
-        'X-Requested-With': 'XMLHttpRequest'
-      }
-    }
-
-    config.body = JSON.stringify({
+    let bodyObj = {
       attributes: {
         'Gift note': this.noteArea.value,
       }
-    });
+    };
 
-    fetch('/cart/update.js', config)
-        .then((response) => {
-          return response.json()
-        })
-        .then((cart) => {
-          console.log(cart)
-          let giftBoxInCart = false
-          cart.items.forEach((element) => {
-            if (element.product_type === 'Gift box') giftBoxInCart = true
-          });
-          if (!giftBoxInCart) {
-            theme.cart.cartEvent('/cart/add.js', window.theme.giftWrapping.giftWrappingProductID, 1, true)
-          } else {
-            theme.cart.cartEvent('/cart/update.js', false, 0, true)
-          }
-          this.closeGiftWrappingModal()
-        })
-        .catch((error) => {
-          console.error(error);
-        })
+    if (this.giftBoxInCart === 'false') {
+      bodyObj.id = window.theme.giftWrapping.giftWrappingProductID
+      bodyObj.quantity = 1
+      theme.cart.cartEvent('/cart/add.js', bodyObj, true)
+    } else {
+      theme.cart.cartEvent('/cart/update.js', bodyObj, true)
+    }
   }
 
 }

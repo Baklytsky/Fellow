@@ -4,15 +4,6 @@
 {%- assign gift_wrapping_result_message = settings.gift_wrapping_result_message | default: 'Your order will be sent in a gift box' -%}
 {%- assign gift_wrapping_heading = settings.gift_wrapping_heading -%}
 
-{%- assign gift_box_in_cart = false -%}
-
-{%- for item in cart.items -%}
-  {%- if item.product.type == 'Gift box' -%}
-    {%- assign gift_box_in_cart = true -%}
-    {%- break -%}
-  {%- endif -%}
-{%- endfor -%}
-
  {%- if gift_wrapping_product.available -%}
    <div class="cart-gift-wrapping">
      <div class="cart-gift-wrapping-header f aic">
@@ -27,7 +18,7 @@
          {%- if gift_wrapping_message != blank -%}
            <span>{{ gift_wrapping_message }}</span>
          {%- endif -%}
-         <button type="button" class="cart-gift-wrapping-btn" data-open-gift-note aria-hidden="false" hidden>Add a gift box + note</button>
+         <button type="button" class="cart-gift-wrapping-btn" data-gift-note-trigger aria-hidden="false" hidden>Add a gift box + note</button>
        {%- endif -%}
      </div>
    </div>
@@ -36,7 +27,7 @@
        {%- if gift_wrapping_heading != blank -%}
          <div class="cart-gift-wrapping-modal__content-header rel">
            {{ gift_wrapping_heading }}
-           <button type="button" data-close-gift-note aria-label="Close gift note">
+           <button type="button" data-gift-note-trigger aria-label="Close gift note">
              {%- render 'icon', icon: 'x' -%}
            </button>
          </div>
@@ -87,7 +78,7 @@
          </div>
      </div>
      <div class="cart-gift-wrapping-modal__footer f jcb aic">
-       <button type="button" class="btn--dark" data-close-gift-note>Cancel</button>
+       <button type="button" class="btn--dark" data-gift-note-trigger>Cancel</button>
        <button type="button" class="btn--light" data-add-gift-note>
          {%- if gift_box_in_cart -%}
            Save
