@@ -40,7 +40,7 @@ class cartDrawer extends HTMLElement {
   }
 
   checkGwpState(html) {
-    let headerDrawer = html.querySelector('#cart-drawer__header')
+    const headerDrawer = html.querySelector('#cart-drawer__header')
     if (localStorage.getItem('_firstGwp') === 'true') headerDrawer.classList.add('hide-gwp-1')
     if (localStorage.getItem('_secondGwp') === 'true') headerDrawer.classList.add('hide-gwp-2')
     if (headerDrawer.hasAttribute('data-cart-empty')) {
@@ -106,9 +106,9 @@ class cartDrawer extends HTMLElement {
       if (!this.updateObj) {
         window.location = '/checkout'
       } else {
-        let updateData = {updates: JSON.parse(this.querySelector('[data-checkout-update]').textContent)},
-            addData = {items: JSON.parse(this.querySelector('[data-checkout-add]').textContent)},
-            configUpdate, configAdd,
+        const updateData = {updates: JSON.parse(this.querySelector('[data-checkout-update]').textContent)},
+            addData = {items: JSON.parse(this.querySelector('[data-checkout-add]').textContent)};
+        let configUpdate, configAdd,
             headers = {
               method: 'POST',
               headers: {
@@ -150,7 +150,6 @@ class cartDrawerContent extends HTMLElement {
   }
 
   personalizeEvent() {
-    console.log(111)
     this.perObj = JSON.parse(this.personalization.textContent)
     if (this.perObj.available === 'true' && this.perObj.action !== 'false') {
       const bodyObj = {
@@ -164,8 +163,12 @@ class cartDrawerContent extends HTMLElement {
   gwpEvent(obj, gwpProp) {
     const gwp = JSON.parse(obj.textContent)
     if (gwp.action === 'false') return
+    if (gwp.action === '/cart/add.js' && localStorage.getItem(gwpProp) === 'true') return;
     let properties = {},
-        bodyObj;
+        bodyObj = {
+          id: gwp.key,
+          quantity: 0
+        };
     if (gwp.action === '/cart/add.js' && !localStorage.getItem(gwpProp)) {
       properties[gwpProp] = true
       bodyObj = {
@@ -173,15 +176,8 @@ class cartDrawerContent extends HTMLElement {
         quantity: 1,
         properties: properties
       }
-      theme.cart.cartEvent(gwp.action, bodyObj, true)
     }
-    if (gwp.action === '/cart/change.js') {
-      bodyObj = {
-        id: gwp.key,
-        quantity: 0
-      }
-      theme.cart.cartEvent(gwp.action, bodyObj, true)
-    }
+    theme.cart.cartEvent(gwp.action, bodyObj, true)
   }
 
 }
@@ -195,14 +191,14 @@ class cartDrawerItem extends HTMLElement {
     this.quantityInput = this.querySelector('.js-quantity')
     this.price = this.querySelector('.cart-item__price')
     this.drawerOpenItemRemovePopup = this.querySelector('[data-action="open-item-remove-popup"]')
-    this.drawerCloseItemRemovePopup = this.querySelector('[data-action="close-item-remove-popup"]')
-    this.drawerRemoveItemBtn = this.querySelector('.js-remove-item-trigger')
     this.drawerRemoveItemPopup = this.querySelector('.js-cart-drawer-popup')
 
-    if (this.quantityInput) this.quantityInput.addEventListener('changeQty', this.changeQuantity.bind(this))
-    if (this.drawerOpenItemRemovePopup) this.drawerOpenItemRemovePopup.addEventListener('click', this.openItemRemovePopup.bind(this))
-    if (this.drawerCloseItemRemovePopup) this.drawerCloseItemRemovePopup.addEventListener('click', this.closeItemRemovePopup.bind(this))
-    if (this.drawerRemoveItemBtn) this.drawerRemoveItemBtn.addEventListener('click', this.removeItem.bind(this))
+    if (this.quantityInput) this.quantityInput.addEventListener('change', this.changeQuantity.bind(this))
+    this.addEventListener('click', (e) => {
+      if (e.target.closest('[data-action="open-item-remove-popup"]')) this.openItemRemovePopup()
+      if (e.target.closest('[data-action="close-item-remove-popup"]')) this.closeItemRemovePopup()
+      if (e.target.closest('.js-remove-item-trigger')) this.removeItem()
+    });
   }
 
   changeQuantity() {
@@ -212,7 +208,7 @@ class cartDrawerItem extends HTMLElement {
         this.drawerOpenItemRemovePopup.getAttribute('data-gift-product')) {
       localStorage.setItem(this.drawerOpenItemRemovePopup.getAttribute('data-gift-product'), 'true')
     }
-    let bodyObj = {
+    const bodyObj = {
       id: this.lineItem.key,
       quantity: Number(this.quantityInput.value)
     }
@@ -237,9 +233,8 @@ class cartDrawerItem extends HTMLElement {
     theme.setAttributes(this.drawerRemoveItemPopup, attrObj)
   }
 
-  removeItem(e) {
-    e.preventDefault();
-    let bodyObj = {
+  removeItem() {
+    const bodyObj = {
       id: this.lineItem.key,
       quantity: 0
     };
@@ -278,12 +273,12 @@ class cartRecommendedProduct extends HTMLElement {
 
   addRecommendedProduct(e) {
     e.preventDefault()
-    let bodyObj = {
-      id: this.atcBtn.getAttribute('data-variant-id').split('cart-')[1],
+    const bodyObj = {
+      id: this.atcBtn.getAttribute('data-variant-id'),
       quantity: 1
     };
     function errorCallback(error) {
-      let errorMessage = document.querySelector('#CartRecommendedErrorMessage')
+      const errorMessage = document.querySelector('#CartRecommendedErrorMessage')
       errorMessage.innerHTML = error.responseJSON.description
       errorMessage.style.display = 'block'
       setTimeout(() => {
@@ -315,19 +310,19 @@ class cartGiftWrapping extends HTMLElement {
   }
 
   triggerGiftWrappingModal() {
-    let wrappingModalStatus = this.giftWrappingModal.getAttribute('aria-expanded'),
+    const wrappingModalStatus = this.giftWrappingModal.getAttribute('aria-expanded'),
         triggerAttr = (wrappingModalStatus === 'false') ? 'true' : 'false';
     this.giftWrappingModal.setAttribute('aria-expanded', triggerAttr)
   }
 
   checkNoteLength() {
-    let maxLength = this.noteArea.getAttribute("maxlength"),
+    const maxLength = this.noteArea.getAttribute("maxlength"),
         currentLength = this.noteArea.value.length;
     this.noteLength.innerHTML = `${maxLength - currentLength} Characters Remaining`
   }
 
   changeGiftWrappingNote() {
-    let bodyObj = {
+    const bodyObj = {
       attributes: {
         'Gift note': this.noteArea.value,
       }

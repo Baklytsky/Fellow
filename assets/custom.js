@@ -2035,7 +2035,7 @@ class quantityStepper extends HTMLElement {
       this.minusBtn.setAttribute('disabled', 'disabled')
       this.plusBtn.setAttribute('disabled', 'disabled')
     }
-    const evt = new Event("changeQty");
+    const evt = new Event('change');
     this.quantityInput.dispatchEvent(evt)
   }
 }

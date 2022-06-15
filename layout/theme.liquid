@@ -13,6 +13,10 @@
   <link rel="preload" href="{{ 'index.js' | asset_url }}" as="script">
   <link rel="preload" href="{{ 'custom.js' | asset_url }}" as="script">
 
+  {%- if template == 'cart' -%}
+    <script>window.location = '/'</script>
+  {%- endif -%}
+
   {% capture seo_title %}
     {{ page_title }}
     {% if current_tags %}
@@ -89,10 +93,4 @@
 
   {% include 'link-redirect' %}
   {% include 'yotpo' %}
-
-{%- if template == 'cart' -%}
-  <script>
-    window.location = '/'
-  </script>
-{%- endif -%}
 </html>

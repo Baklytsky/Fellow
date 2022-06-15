@@ -57,7 +57,7 @@
         {{ bottom_content }}
       {% endif %}
 
-      <button type="button" class="btn--clear cart-recommended__add-button" data-action="add-to-cart-recommended" data-variant-id="cart-{{ product.selected_or_first_available_variant.id }}">Add to cart</button>
+      <button type="button" class="btn--clear cart-recommended__add-button" data-action="add-to-cart-recommended" data-variant-id="{{ product.selected_or_first_available_variant.id }}">Add to cart</button>
     </div>
   </div>
 </cart-recommended-product>
