@@ -2123,7 +2123,7 @@ theme.GLOBAL = function () {
         return currentOption;
     });
 
-    if (selectedOption.length < 3) {
+    if (selectedOption.length <= 3) {
       $('#ProductQuickView #quickAdd').attr('disabled', 'disabled');
       let selectedOption1 = $(selectedOption[0]).attr('value');
       let selectedOption2 = $(selectedOption[1]).attr('value');

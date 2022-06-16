@@ -1,6 +1,11 @@
 {% assign backgroundColor = block.settings.subSlide__bgColor %}
 {% assign textColor = block.settings.subSlide__textColor %}
+{% assign ctaCopy = block.settings.heroSlide__ctaCopy %}
+{% assign ctaURL = block.settings.heroSlide__ctaURL %}
 {% assign ctaColor = block.settings.heroSlide__ctaColor %}
+{% assign ctaCopy2 = block.settings.heroSlide__ctaCopy2 %}
+{% assign ctaURL2 = block.settings.heroSlide__ctaURL2 %}
+{% assign ctaColor2 = block.settings.heroSlide__ctaColor2 %}
 {% assign layout = block.settings.splitSlide__layout %}
 
 
@@ -16,66 +21,81 @@
   {% assign ctaClasses = 'btn btn--lg btn--dark' %}
 {% endif %}
 
+{% if ctaColor2 == 'white' %}
+  {%  assign ctaClasses2 = 'btn btn--lg btn--light mt05 second--cta' %}
+{% else %}
+  {% assign ctaClasses2 = 'btn btn--lg btn--dark mt05 second--cta' %}
+{% endif %}
+
 <div id='hero__slide--{{ block.id }}' class='hero__slide' data-color='{{ dataColor }}'
      style="background-color: {{ backgroundColor }}; color: {{ textColor }};">
   <div class="hero__slideWrapper hero__slide--split">
-  {% if block.settings.mobileAlignment != 'center' or block.settings.desktopAlignment or layout != blank %}
-    <style>
-      {% if layout == 'right' %}
-      @media (min-width: 992px) {
-        #hero__slide--{{ block.id }} .hero__slide--split {
-          flex-direction: row-reverse;
+    {% if block.settings.mobileAlignment != 'center' or block.settings.desktopAlignment or layout != blank %}
+      <style>
+        {% if layout == 'right' %}
+        @media (min-width: 992px) {
+          #hero__slide--{{ block.id }} .hero__slide--split {
+            flex-direction: row-reverse;
+          }
         }
-      }
-      {% endif %}
+        {% endif %}
 
-      {% if block.settings.heroSlide__textAlignment %}
-      @media (min-width: 992px) {
-        #hero__slide--{{ block.id }} .hero__textWrapper {
-        {% if block.settings.heroSlide__textAlignment == 'left' %}
-          text-align: left;
-        {% endif %}
-        {% if block.settings.heroSlide__textAlignment == 'right' %}
-          text-align: right;
-        {% endif %}
+        {% if block.settings.heroSlide__textAlignment %}
+        @media (min-width: 992px) {
+          #hero__slide--{{ block.id }} .hero__textWrapper {
+          {% if block.settings.heroSlide__textAlignment == 'left' %}
+            text-align: left;
+          {% endif %}
+          {% if block.settings.heroSlide__textAlignment == 'right' %}
+            text-align: right;
+          {% endif %}
+          }
         }
-      }
-      {% endif %}
-    </style>
-  {% endif %}
+        {% endif %}
+      </style>
+    {% endif %}
 
-  {% if block.settings.heroSlide__header != blank %}
-    <section class='splitSlide__textContainer'>
-      <div class='textContainer__desktopPadding'>
-        <h1 class='m0 p0 splitSlide__Header'>{{ block.settings.heroSlide__header }}</h1>
-        <div class='hero__subheader'>
-          {% comment %} render this even if no text for spacing reasons {% endcomment %}
-          <p class='h3 m0 splitSlide__Description'>{{ block.settings.heroSlide__subheader }}</p>
-          {% if ctaCopy != blank %}
-            {%
-              include 'component-button' with
-              tag: 'a',
-              cta: ctaCopy,
-              href: ctaURL,
-              className: ctaClasses
-            %}
-          {% endif %}
-          {% if ctaSubtext != blank %}
-            <p class='hero__ctaSubtext'>{{ ctaSubtext }}</p>
-          {% endif %}
+    {% if block.settings.heroSlide__header != blank %}
+      <section class='splitSlide__textContainer'>
+        <div class='textContainer__desktopPadding'>
+          <h1 class='m0 p0 splitSlide__Header'>{{ block.settings.heroSlide__header }}</h1>
+          <div class='hero__subheader'>
+            {% comment %} render this even if no text for spacing reasons {% endcomment %}
+            <p class='h3 m0 splitSlide__Description'>{{ block.settings.heroSlide__subheader }}</p>
+            {% if ctaCopy != blank %}
+              {%
+                include 'component-button' with
+                tag: 'a',
+                cta: ctaCopy,
+                href: ctaURL,
+                className: ctaClasses
+              %}
+            {% endif %}
+            {% if ctaCopy2 != blank %}
+              {%
+                include 'component-button' with
+                tag: 'a',
+                cta: ctaCopy2,
+                href: ctaURL2,
+                className: ctaClasses2
+              %}
+            {% endif %}
+            {% if ctaSubtext != blank %}
+              <p class='hero__ctaSubtext'>{{ ctaSubtext }}</p>
+            {% endif %}
+          </div>
         </div>
-      </div>
-    </section>
-  {% endif %}
+      </section>
+    {% endif %}
 
-  <div class="hero__slide--img-wrapper AspectRatio" style="--aspect-ratio: {{ aspect_ratio }};">
-    <img src='{{ block.settings.heroSlide | img_url: "600x" }}'
-        loading="lazy"
-        srcset='{{ block.settings.heroSlide | img_url: "600x" }} 600w,
+    <div class="hero__slide--img-wrapper AspectRatio" style="--aspect-ratio: {{ aspect_ratio }};">
+      <img src='{{ block.settings.heroSlide | img_url: "600x" }}'
+           loading="lazy"
+           srcset='{{ block.settings.heroSlide | img_url: "600x" }} 600w,
             {{ block.settings.heroSlide | img_url: "1000x" }} 991w,
             {{ block.settings.heroSlide | img_url: "1280x" }} 1280w,
             {{ block.settings.heroSlide | img_url: "1440x" }} 1400w'
-        alt='{{ block.settings.heroSlide__header | default: block.settings.heroSlide__header }}'>
-  </div>
+           alt='{{ block.settings.heroSlide__header | default: block.settings.heroSlide__header }}'>
+    </div>
   </div>
 </div>

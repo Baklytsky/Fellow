@@ -14,15 +14,25 @@
       {% assign ctaCopy = block.settings.heroSlide__ctaCopy %}
       {% assign ctaURL = block.settings.heroSlide__ctaURL %}
       {% assign ctaColor = block.settings.heroSlide__ctaColor %}
+      {% assign ctaCopy2 = block.settings.heroSlide__ctaCopy2 %}
+      {% assign ctaURL2 = block.settings.heroSlide__ctaURL2 %}
+      {% assign ctaColor2 = block.settings.heroSlide__ctaColor2 %}
       {% if ctaColor == 'white' %}
         {%  assign ctaClasses = 'btn btn--lg btn--light' %}
       {% else %}
         {% assign ctaClasses = 'btn btn--lg btn--dark' %}
       {% endif %}
+
+      {% if ctaColor2 == 'white' %}
+        {%  assign ctaClasses2 = 'btn btn--lg btn--light mt05' %}
+      {% else %}
+        {% assign ctaClasses2 = 'btn btn--lg btn--dark mt05' %}
+      {% endif %}
+
       {% assign ctaSubtext = block.settings.heroSlide__ctaSubtext %}
       {% if block.type == 'heroSlide' %}
         {% include 'hero-slide-single' %}
-      {% elsif block.type == 'splitSlide' %}
+        {% elsif block.type == 'splitSlide' %}
 
         {%- if aspect_ratio == blank -%}
           {%- assign aspect_ratio = block.settings.heroSlide.aspect_ratio -%}
@@ -46,6 +56,9 @@
       {% assign ctaCopy = block.settings.heroSlide__ctaCopy %}
       {% assign ctaURL = block.settings.heroSlide__ctaURL %}
       {% assign ctaSubtext = block.settings.heroSlide__ctaSubtext %}
+      {% assign ctaCopy2 = block.settings.heroSlide__ctaCopy2 %}
+      {% assign ctaURL2 = block.settings.heroSlide__ctaURL2 %}
+      {% assign ctaColor2 = block.settings.heroSlide__ctaColor2 %}
       {% assign ghostBtn = block.settings.heroSlide__ghostBtn %}
       {% comment %} Define First Block {% endcomment %}
       {% assign firstBlock = false %}
@@ -60,6 +73,13 @@
       {% else %}
         {% assign ctaClasses = 'btn btn--lg btn--dark' %}
       {% endif %}
+
+      {% if ctaColor2 == 'white' %}
+        {%  assign ctaClasses2 = 'btn btn--lg btn--light mt05' %}
+      {% else %}
+        {% assign ctaClasses2 = 'btn btn--lg btn--dark mt05' %}
+      {% endif %}
+
       <div id='hero__text--{{ block.id }}' class='hero__subheader--mobile f fdc aic jcc ac js-mobile-subslide-slide{% if firstBlock == true %} is-visible active{% endif %}' data-color='{{ block.settings.subSlide__textColor }}' data-bg-color='{{ block.settings.subSlide__bgColor }}'>
         {% if subheader != blank %}
           <span class='h3 f aic caps'>{{ subheader }}</span>
@@ -75,6 +95,15 @@
             className: ctaClasses
           %}
         {% endif %}
+        {% if ctaCopy2 != blank %}
+          {%
+            include 'component-button' with
+            tag: 'a',
+            cta: ctaCopy2,
+            href: ctaURL2,
+            className: ctaClasses2
+          %}
+        {% endif %}
         {% if ctaSubtext != blank %}
           <p class='hero__ctaSubtext'>{{ ctaSubtext }}</p>
         {% endif %}
@@ -84,318 +113,351 @@
 </div>
 
 {% schema %}
-  {
-    "name": "Hero Slider",
-    "settings": [
-      {
-        "type": "checkbox",
-        "id": "addMargin",
-        "label": "Add Bottom Padding",
-        "info": "Provides space below the module. Meant for use when hero slider is not followed by Media Proof or Notice Section",
-        "default": false
-      }
-    ],
-    "max_blocks": 6,
-    "blocks": [
-      {
-        "type": "heroSlide",
-        "name": "Slide",
-        "settings": [
-          {
-            "type": "image_picker",
-            "id": "heroSlide",
-            "label": "Slide"
-          },
-          {
-            "type": "header",
-            "content": "Image Positioning"
-          },
-          {
-            "type": "select",
-            "id": "desktopAlignment",
-            "label": "Desktop Alignment",
-            "info": "Adjust the background alignment for desktop, if needed.",
-            "default": "center",
-            "options": [
-              {
-                "value": "top",
-                "label": "Top"
-              },
-              {
-                "value": "center",
-                "label": "Center"
-              },
-              {
-                "value": "bottom",
-                "label": "Bottom"
-              }
-            ]
-          },
-          {
-            "type": "select",
-            "id": "mobileAlignment",
-            "label": "Mobile Alignment",
-            "info": "Adjust the background alignment for mobile, if needed.",
-            "default": "center",
-            "options": [
-              {
-                "value": "left",
-                "label": "Left"
-              },
-              {
-                "value": "center",
-                "label": "Center"
-              },
-              {
-                "value": "right",
-                "label": "Right"
-              }
-            ]
-          },
-          {
-            "type": "header",
-            "content": "Slide Text"
-          },
-          {
-            "type": "text",
-            "id": "heroSlide__header",
-            "label": "Header Text"
-          },
-          {
-            "type": "text",
-            "id": "heroSlide__subheader",
-            "label": "Subheader Text"
-          },
-          {
-            "type": "select",
-            "id": "heroSlide__textAlignment",
-            "label": "Text Alignment",
-            "info": "Reverts to Centered on Mobile",
-            "options": [
-              {
-                "value": "center",
-                "label": "Centered"
-              },
-              {
-                "value": "left",
-                "label": "Left"
-              },
-              {
-                "value": "right",
-                "label": "Right"
-              }
-            ]
-          },
-          {
-            "type": "select",
-            "id": "heroSlide__color",
-            "label": "Text Color",
-            "options": [
-              {
-                "value": "cw",
-                "label": "White"
-              },
-              {
-                "value": "cb",
-                "label": "Black"
-              }
-            ],
-            "default": "cw",
-            "info": "Change the text color. (Defaults to white.)"
-          },
-          {
-            "type": "header",
-            "content": "CTA Settings"
-          },
-          {
-            "type": "url",
-            "id": "heroSlide__ctaURL",
-            "label": "CTA URL"
-          },
-          {
-            "type": "text",
-            "id": "heroSlide__ctaCopy",
-            "label": "CTA Copy"
-          },
-          {
-            "type": "select",
-            "id": "heroSlide__ctaColor",
-            "label": "CTA Color",
-            "options": [
-              {
-                "value": "white",
-                "label": "White"
-              },
-              {
-                "value": "black",
-                "label": "Black"
-              }
-            ],
-            "default": "black",
-            "info": "Change the CTA color. (Defaults to black.)"
-          }
-        ]
-      },
-      {
-        "type": "splitSlide",
-        "name": "Split Slide",
-        "settings": [
-          {
-            "type": "header",
-            "content": "Layout"
-          },
-          {
-            "type": "select",
-            "id": "splitSlide__layout",
-            "label": "Section Positioning",
-            "options": [
-              {
-                "value": "left",
-                "label": "Text Left"
-              },
-              {
-                "value": "right",
-                "label": "Text Right"
-              }
-            ],
-            "default": "left"
-          },
-          {
-            "type": "image_picker",
-            "id": "heroSlide",
-            "label": "Image"
-          },
-          {
-            "type": "header",
-            "content": "Image Positioning"
-          },
-          {
-            "type": "select",
-            "id": "desktopAlignment",
-            "label": "Desktop Alignment",
-            "info": "Adjust the background alignment for desktop, if needed.",
-            "default": "center",
-            "options": [
-              {
-                "value": "top",
-                "label": "Top"
-              },
-              {
-                "value": "center",
-                "label": "Center"
-              },
-              {
-                "value": "bottom",
-                "label": "Bottom"
-              }
-            ]
-          },
-          {
-            "type": "select",
-            "id": "mobileAlignment",
-            "label": "Mobile Alignment",
-            "info": "Adjust the background alignment for mobile, if needed.",
-            "default": "center",
-            "options": [
-              {
-                "value": "left",
-                "label": "Left"
-              },
-              {
-                "value": "center",
-                "label": "Center"
-              },
-              {
-                "value": "right",
-                "label": "Right"
-              }
-            ]
-          },
-          {
-            "type": "header",
-            "content": "Slide Text"
-          },
-          {
-            "type": "text",
-            "id": "heroSlide__header",
-            "label": "Header Text"
-          },
-          {
-            "type": "text",
-            "id": "heroSlide__subheader",
-            "label": "Subheader Text"
-          },
-          {
-            "type": "header",
-            "content": "Text Section Colors"
-          },
-          {
-            "type": "color",
-            "id": "subSlide__bgColor",
-            "label": "Background Color",
-            "default": "#FFFFFF"
-          },
-          {
-            "type": "select",
-            "id": "subSlide__textColor",
-            "label": "Text Color",
-            "options": [
-              {
-                "value": "#FFFFFF",
-                "label": "White"
-              },
-              {
-                "value": "#231f20",
-                "label": "Black"
-              }
-            ],
-            "default": "#231f20"
-          },
-          {
-            "type": "header",
-            "content": "CTA Settings"
-          },
-          {
-            "type": "url",
-            "id": "heroSlide__ctaURL",
-            "label": "CTA URL"
-          },
-          {
-            "type": "text",
-            "id": "heroSlide__ctaCopy",
-            "label": "CTA Copy"
-          },
-          {
-            "type": "select",
-            "id": "heroSlide__ctaColor",
-            "label": "CTA Color",
-            "options": [
-              {
-                "value": "white",
-                "label": "White"
-              },
-              {
-                "value": "black",
-                "label": "Black"
-              }
-            ],
-            "default": "black",
-            "info": "Change the CTA color. (Defaults to black.)"
-          },
-          {
-            "type": "html",
-            "id": "heroSlide__ctaSubtext",
-            "label": "Sub-CTA Text",
-            "info": "Optional text below CTA"
-          }
-        ]
-      }
-    ],
-    "presets": [
-      {
-        "name": "Hero Slider",
-        "category": "Homepage Sections"
-      }
-    ]
-  }
+{
+  "name": "Hero Slider",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "addMargin",
+      "label": "Add Bottom Padding",
+      "info": "Provides space below the module. Meant for use when hero slider is not followed by Media Proof or Notice Section",
+      "default": false
+    }
+  ],
+  "max_blocks": 6,
+  "blocks": [
+    {
+      "type": "heroSlide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "heroSlide",
+          "label": "Slide"
+        },
+        {
+          "type": "header",
+          "content": "Image Positioning"
+        },
+        {
+          "type": "select",
+          "id": "desktopAlignment",
+          "label": "Desktop Alignment",
+          "info": "Adjust the background alignment for desktop, if needed.",
+          "default": "center",
+          "options": [
+            {
+              "value": "top",
+              "label": "Top"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "bottom",
+              "label": "Bottom"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "mobileAlignment",
+          "label": "Mobile Alignment",
+          "info": "Adjust the background alignment for mobile, if needed.",
+          "default": "center",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "Slide Text"
+        },
+        {
+          "type": "text",
+          "id": "heroSlide__header",
+          "label": "Header Text"
+        },
+        {
+          "type": "text",
+          "id": "heroSlide__subheader",
+          "label": "Subheader Text"
+        },
+        {
+          "type": "select",
+          "id": "heroSlide__textAlignment",
+          "label": "Text Alignment",
+          "info": "Reverts to Centered on Mobile",
+          "options": [
+            {
+              "value": "center",
+              "label": "Centered"
+            },
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "heroSlide__color",
+          "label": "Text Color",
+          "options": [
+            {
+              "value": "cw",
+              "label": "White"
+            },
+            {
+              "value": "cb",
+              "label": "Black"
+            }
+          ],
+          "default": "cw",
+          "info": "Change the text color. (Defaults to white.)"
+        },
+        {
+          "type": "header",
+          "content": "CTA Settings"
+        },
+        {
+          "type": "url",
+          "id": "heroSlide__ctaURL",
+          "label": "CTA URL"
+        },
+        {
+          "type": "text",
+          "id": "heroSlide__ctaCopy",
+          "label": "CTA Copy"
+        },
+        {
+          "type": "select",
+          "id": "heroSlide__ctaColor",
+          "label": "CTA Color",
+          "options": [
+            {
+              "value": "white",
+              "label": "White"
+            },
+            {
+              "value": "black",
+              "label": "Black"
+            }
+          ],
+          "default": "black",
+          "info": "Change the CTA color. (Defaults to black.)"
+        }
+      ]
+    },
+    {
+      "type": "splitSlide",
+      "name": "Split Slide",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "select",
+          "id": "splitSlide__layout",
+          "label": "Section Positioning",
+          "options": [
+            {
+              "value": "left",
+              "label": "Text Left"
+            },
+            {
+              "value": "right",
+              "label": "Text Right"
+            }
+          ],
+          "default": "left"
+        },
+        {
+          "type": "image_picker",
+          "id": "heroSlide",
+          "label": "Image"
+        },
+        {
+          "type": "header",
+          "content": "Image Positioning"
+        },
+        {
+          "type": "select",
+          "id": "desktopAlignment",
+          "label": "Desktop Alignment",
+          "info": "Adjust the background alignment for desktop, if needed.",
+          "default": "center",
+          "options": [
+            {
+              "value": "top",
+              "label": "Top"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "bottom",
+              "label": "Bottom"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "mobileAlignment",
+          "label": "Mobile Alignment",
+          "info": "Adjust the background alignment for mobile, if needed.",
+          "default": "center",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "Slide Text"
+        },
+        {
+          "type": "text",
+          "id": "heroSlide__header",
+          "label": "Header Text"
+        },
+        {
+          "type": "text",
+          "id": "heroSlide__subheader",
+          "label": "Subheader Text"
+        },
+        {
+          "type": "header",
+          "content": "Text Section Colors"
+        },
+        {
+          "type": "color",
+          "id": "subSlide__bgColor",
+          "label": "Background Color",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "select",
+          "id": "subSlide__textColor",
+          "label": "Text Color",
+          "options": [
+            {
+              "value": "#FFFFFF",
+              "label": "White"
+            },
+            {
+              "value": "#231f20",
+              "label": "Black"
+            }
+          ],
+          "default": "#231f20"
+        },
+        {
+          "type": "header",
+          "content": "CTA Settings"
+        },
+        {
+          "type": "url",
+          "id": "heroSlide__ctaURL",
+          "label": "CTA URL"
+        },
+        {
+          "type": "text",
+          "id": "heroSlide__ctaCopy",
+          "label": "CTA Copy"
+        },
+        {
+          "type": "select",
+          "id": "heroSlide__ctaColor",
+          "label": "CTA Color",
+          "options": [
+            {
+              "value": "white",
+              "label": "White"
+            },
+            {
+              "value": "black",
+              "label": "Black"
+            }
+          ],
+          "default": "black",
+          "info": "Change the CTA color. (Defaults to black.)"
+        },
+
+        {
+          "type": "header",
+          "content": "CTA 2 Settings"
+        },
+        {
+          "type": "url",
+          "id": "heroSlide__ctaURL2",
+          "label": "CTA 2 URL"
+        },
+        {
+          "type": "text",
+          "id": "heroSlide__ctaCopy2",
+          "label": "CTA 2 Copy"
+        },
+        {
+          "type": "select",
+          "id": "heroSlide__ctaColor2",
+          "label": "CTA 2 Color",
+          "options": [
+            {
+              "value": "white",
+              "label": "White"
+            },
+            {
+              "value": "black",
+              "label": "Black"
+            }
+          ],
+          "default": "black",
+          "info": "Change the CTA color. (Defaults to black.)"
+        },
+
+        {
+          "type": "html",
+          "id": "heroSlide__ctaSubtext",
+          "label": "Sub-CTA Text",
+          "info": "Optional text below CTA"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Slider",
+      "category": "Homepage Sections"
+    }
+  ]
+}
 {% endschema %}
