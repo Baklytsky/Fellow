@@ -1709,6 +1709,47 @@ https://flickity.metafizzy.co
   color: #FFFFFF
 }
 
+
+[data-color=pride-in-the-forest],
+[data-material=pride-in-the-forest] {
+  color: #FFF4BC
+}
+
+[data-color=pride-in-the-forest]:after,
+[data-material=pride-in-the-forest]:after {
+  color: #A0B71F
+}
+
+[data-color=cheers-queers],
+[data-material=cheers-queers] {
+  color: #000000
+}
+
+[data-color=cheers-queers]:after,
+[data-material=cheers-queers]:after {
+  color: #EA99D1
+}
+
+[data-color=personal-growth],
+[data-material=personal-growth] {
+  color: #000000
+}
+
+[data-color=personal-growth]:after,
+[data-material=personal-growth]:after {
+  color: #F0AA4D
+}
+
+[data-color=queer-kinship-is-a-love-spell],
+[data-material=queer-kinship-is-a-love-spell] {
+  color: #ffffff
+}
+
+[data-color=queer-kinship-is-a-love-spell]:after,
+[data-material=queer-kinship-is-a-love-spell]:after {
+  color: #EDABC0
+}
+
 html {
   font-size: 16px
 }
