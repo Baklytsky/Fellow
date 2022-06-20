@@ -4,8 +4,14 @@ class collectionFacets extends HTMLElement {
     this.getProducts()
     this.facetsWrapper = this.querySelector('#facet-group-wrapper')
     this.facetsSourse = this.querySelector("#facet-group-template")
+    this.facetsForm = this.querySelector('#facet-form')
     this.resultWrapper = this.querySelector('#collection__variant-results')
     this.resultSourse = this.querySelector("#collection__variant-template")
+    this.clearAll = this.querySelector('[data-clear-facets]')
+    this.selectedFacetsCount = this.querySelector('.selected-facets-count')
+
+    this.facetsForm.addEventListener('change', () => this.getSelectedFacets())
+    this.clearAll.addEventListener('click', () => this.clearFacets())
   }
 
   getProducts () {
@@ -22,18 +28,23 @@ class collectionFacets extends HTMLElement {
         })
   }
 
+  clearFacets() {
+    this.selectedFacetsCount.innerHTML = ''
+    this.renderFacets(this.facets)
+    this.renderVariants(this.variants)
+  }
+
   renderFacets(facets) {
     const facetsToRender = {
           facetsArr: [
-            {title: 'Shop By Use', facets: this.getFacetsArr(facets, 'shop_by_use')},
-            {title: 'Size', facets: this.getFacetsArr(facets, 'sizes')},
-            {title: 'Color', color: true, facets: this.getFacetsArr(facets, 'color')}
+            {title: 'Shop By Use', handle: 'shop_by_use', facets: this.getFacetsArr(facets, 'shop_by_use')},
+            {title: 'Size', handle: 'size', facets: this.getFacetsArr(facets, 'sizes')},
+            {title: 'Color', handle: 'color',  color: true, facets: this.getFacetsArr(facets, 'color')}
           ]
         },
         facetsSource = this.facetsSourse.innerHTML,
         template = Handlebars.compile(facetsSource);
         this.facetsWrapper.innerHTML = template(facetsToRender)
-    console.log(facetsToRender)
   }
 
   getFacetsArr (facets, facetName) {
@@ -68,6 +79,29 @@ class collectionFacets extends HTMLElement {
     if (typeof window.yotpo !== "undefined") {
       window.yotpo.initWidgets();
     }
+  }
+
+  getSelectedFacets () {
+    const checkedInputs = this.facetsForm.querySelectorAll('.facet-group-wrapper input:checked'),
+          facetGroup = this.facetsForm.querySelectorAll('.facet-group');
+
+    if (checkedInputs.length) this.selectedFacetsCount.innerHTML = `(${checkedInputs.length})`
+    let allSelectedVariants = this.variants;
+
+    facetGroup.forEach(group => {
+      const groupName = group.getAttribute('data-group-name'),
+            groupValues = Array
+            .from(group.querySelectorAll('input:checked'))
+            .map((input) => input.value);
+
+     if (!groupValues.length) return
+
+      const selectedVariants = allSelectedVariants.filter(variant => {
+            return variant[groupName].value && groupValues.indexOf(variant[groupName].value) >= 0
+          });
+      allSelectedVariants = [...selectedVariants]
+    })
+    this.renderVariants(allSelectedVariants)
   }
 
 }

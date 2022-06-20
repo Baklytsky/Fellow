@@ -8169,13 +8169,16 @@ input[name=product_search_field] {
   margin-bottom: 16px
 }
 
-.subcollection__products.one-third>div {
+.subcollection__products.one-third>div,
+.subcollection__products.one-fourth>div {
   margin: 0 12px 16px;
   width: calc(50% - 24px)
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 992px) {
   .subcollection__products.one-fourth>div {
+    margin-left: 12px;
+    margin-right: 12px;
     margin-bottom: 64px;
     width: calc(50% - 24px)
   }

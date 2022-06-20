@@ -31,7 +31,19 @@
     {%- render 'facets' collection: collection -%}
     <div class='collection__products-wrapper rel'>
       <div class="collection__products-results">
-        <div id="collection__variant-results" class="subcollection__products one-third">
+        <div id="collection__variant-results" class="subcollection__products one-fourth">
+          {%- for i in (1..8) -%}
+            <div class="productCard">
+              <div class="productCard__content y">
+                <div class="productCard__img skeleton"></div>
+                <div class="productCard__details">
+                  <div class="productCard__title skeleton"></div>
+                  <div class="productCard__price skeleton"></div>
+                </div>
+                <div class="productCard_ratings f fdr aie mb05 mt05 rel skeleton"></div>
+              </div>
+            </div>
+          {%- endfor -%}
           {%- render 'variant-results' -%}
         </div>
       </div>

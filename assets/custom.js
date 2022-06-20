@@ -2552,12 +2552,12 @@ class SlideToggle {
     if (this.slideTarget) {
       this.el.addEventListener('click', (e) => {
         e.preventDefault();
-        this.SlideToggle()
+        this.slideToggle()
       });
     }
   }
 
-  SlideToggle () {
+  slideToggle () {
     if (!this.slideTarget.classList.contains('active')) {
       this.slideTarget.classList.add('active');
       this.el.classList.add('active');

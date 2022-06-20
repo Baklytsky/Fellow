@@ -23,7 +23,7 @@
 {% paginate collection.products by 1000 %}
 {
   "products": [
-  {%- for product in collection.products -%}
+  {%- for product in collection.products | sort_by: 'price-ascending' -%}
 
     {%- assign product_color_names = blank -%}
     {%- assign product_color_names_uniq = blank -%}
@@ -177,12 +177,16 @@
         "compare_at_price_is_less_than_price": {{ compare_at_price_is_less_than_price }},
           "compare_at_price": "{{ variant.compare_at_price }}",
           "compare_at_price_money": "{{ variant.compare_at_price | money | remove: '.00' }}",
-        "shop_by_use": {{ product_shop_by_use | json }},
+        "shop_by_use": {
+          "value": {{ product_shop_by_use | json }}
+          },
         "color": {
-          "name": "{{ variant_color_name }}",
+          "value": "{{ variant_color_name }}",
           "hex": "{{ variant_color_hex }}"
           },
-        "size": {{ variant_size | json }},
+        "size": {
+          "value": {{ variant_size | json }}
+          },
         "image": {
           "origin": "{{ variant_image | img_url: 'master' }}",
           "small": "{{ variant_image | img_url: 'x180' }}",
