@@ -1,0 +1,83 @@
+{%- comment -%}
+{%- render 'facets' collection: collection -%}
+{%- endcomment -%}
+
+<div class="facet-wrapper">
+  <form id="facet-form" class="facet-form" name="facet">
+    <div class="facet-header">
+      <h2 class="facet-header-title">
+        Shop All {{ collection.title }} ({{ collection.all_products_count }})
+      </h2>
+      <button type="button" data-filter-clear="{{ collection.url }}">Clear all</button>
+      <button type="button" data-slide-toggle="facets">
+        <span class="slide-toggle-active">Hide Filters</span>
+        <span class="slide-toggle-inactive">Show Filters</span>
+        <span class="selected-facets-count"></span>
+        {% render 'icon' with 'filter' %}
+      </button>
+      <div class="facet-header-sort-by rel" data-dropdown>
+        <button type="button"
+                class="facet-header-sort-by-opener rel">
+          Sort By {% render 'icon' with 'dropdown-small' %}
+        </button>
+        <ul class="facet-header-sort-by-list"
+            data-dropdown-content>
+          <li class="facet-group__list-item">
+            <input id='facet-sort-by-best-sellers'
+                   type=radio
+                   name='sort-by'
+                   class="facet-group-input"
+                   value='best-sellers'/>
+            <label class='facet-group-radio f aic'
+                   for='facet-sort-by-best-sellers'>
+              Best sellers
+            </label>
+          </li>
+          <li class="facet-group__list-item">
+            <input id='facet-sort-by-product-size-small-to-big'
+                   type=radio
+                   name='sort-by'
+                   class="facet-group-input"
+                   value='product-size-small-to-big'/>
+            <label class='facet-group-radio f aic'
+                   for='facet-sort-by-product-size-small-to-big'>
+              Product size (small to big)
+            </label>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div id="facet-group-wrapper" class="facet-group-wrapper" data-slide-target="facets">
+      <script id="facet-group-template" type="text/template">
+        {% raw %}
+          {{#each facetsArr}}
+          <div class="facet-group {{#unless facets.length}} is-hidden {{/unless}}">
+            <h3 class="facet-group-name">
+              {{ title }}
+            </h3>
+            <ul class="facet-group__list">
+              {{#each facets}}
+              <li class="facet-group__list-item {{#if ../color }}facet-group__list-item-color{{/if}}">
+                <input id='facet-{{ ../title }}-{{@index}}'
+                       type='radio'
+                       name='{{ ../title }}'
+                       class="filter-group-input"
+                       value='{{ name }}'
+                       data-filter-type='{{ ../title }}'/>
+                <label class='facet-group-radio f aic'
+                       for='facet-{{ ../title }}-{{@index}}'>
+                  {{#if ../color }}
+                  <span class="facet-group-circle f aic jcc rel" style="background-color: {{ hex }};"></span>
+                  {{/if}}
+                  <span class="facet-group-title">{{ name }}</span>
+                </label>
+              </li>
+              {{/each}}
+            </ul>
+          </div>
+          {{/each }}
+        {% endraw %}
+      </script>
+    </div>
+  </form>
+</div>

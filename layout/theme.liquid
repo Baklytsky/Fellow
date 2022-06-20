@@ -13,6 +13,10 @@
   <link rel="preload" href="{{ 'index.js' | asset_url }}" as="script">
   <link rel="preload" href="{{ 'custom.js' | asset_url }}" as="script">
 
+  {%- if template contains 'collection' -%}
+    <link rel="preload" href="{{ 'collection.js' | asset_url }}" as="script">
+  {%- endif -%}
+
   {% capture seo_title %}
     {{ page_title }}
     {% if current_tags %}
@@ -142,6 +146,11 @@
     {{ 'player-inline.js' | asset_url | script_tag }}
     {{ 'player-chunk-one.js' | asset_url | script_tag }}
     {{ 'player-chunk-two.js' | asset_url | script_tag }}
+    {%- endif -%}
+
+    {%- if template contains 'collection' -%}
+      <script src="{{ 'handlebars-v4.7.7.js' | asset_url }}" defer='defer'></script>
+      <script src="{{ 'collection.js' | asset_url }}" defer='defer'></script>
     {%- endif -%}
 
     <script src="{{ 'custom.js' | asset_url }}" defer='defer'></script>

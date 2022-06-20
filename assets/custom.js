@@ -2530,3 +2530,54 @@ class dynamicRecommendations extends HTMLElement {
 }
 
 customElements.define('dynamic-recommendations', dynamicRecommendations);
+
+// Dropdown
+document.addEventListener('click', (e) => {
+  document.querySelectorAll('[data-dropdown]').forEach((item) => {
+    if (item.contains(e.target) && !e.target.closest('[data-dropdown-content]')) {
+      e.target.closest('[data-dropdown]').classList.toggle('active')
+    } else {
+      item.classList.remove('active')
+    }
+  })
+})
+// End dropdown
+
+// Slide toggle
+class SlideToggle {
+  constructor(el) {
+    this.el = el;
+    this.slideTargetName = this.el.getAttribute('data-slide-toggle');
+    this.slideTarget = document.querySelector('[data-slide-target="'+ this.slideTargetName + '"]')
+    if (this.slideTarget) {
+      this.el.addEventListener('click', (e) => {
+        e.preventDefault();
+        this.SlideToggle()
+      });
+    }
+  }
+
+  SlideToggle () {
+    if (!this.slideTarget.classList.contains('active')) {
+      this.slideTarget.classList.add('active');
+      this.el.classList.add('active');
+      this.slideTarget.style.height = 'auto';
+      let height = this.slideTarget.clientHeight + "px";
+      this.slideTarget.style.height = '0px';
+      setTimeout( () => this.slideTarget.style.height = height, 0);
+    } else {
+      this.slideTarget.style.height = '0px'
+      this.slideTarget.addEventListener('transitionend',  () => {
+        this.slideTarget.classList.remove('active');
+        this.el.classList.remove('active');
+      }, {
+        once: true
+      });
+    }
+  }
+}
+
+document.querySelectorAll('[data-slide-toggle]').forEach((el) => {
+  new SlideToggle(el);
+});
+// End Slide toggle
