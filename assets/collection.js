@@ -9,27 +9,39 @@ class collectionFacets extends HTMLElement {
     this.resultSourse = this.querySelector("#collection__variant-template")
     this.clearAll = this.querySelector('[data-clear-facets]')
     this.selectedFacetsCount = this.querySelector('.selected-facets-count')
+    this.defaultSortBy = this.querySelector('[data-default-sort-by]')
+    this.defaultSortByAction = this.defaultSortBy.title
+    this.defaultSortByOrder = this.defaultSortBy.getAttribute('[data-sort-order]')
 
     this.facetsForm.addEventListener('change', () => this.getSelectedFacets())
     this.clearAll.addEventListener('click', () => this.clearFacets())
   }
 
   getProducts () {
-    const url = window.location.pathname
-    fetch(`${url}?view=ajax`)
+    const url = window.location.pathname + '?sort_by=best-selling&view=ajax'
+    fetch(`${url}`)
         .then(resp => {return resp.json()})
         .then(data => {
-          this.products = data
-          this.facets = data.products.map(product => product.facets)
-          this.variants = data.products.reduce((arr, product) => arr.concat(product.variants), [])
-          console.log(this.products)
+          this.originalData = data
+          this.resetData(data)
           this.renderFacets(this.facets)
+          this.sortBy(this.variants, this.defaultSortByAction, this.defaultSortByOrder)
           this.renderVariants(this.variants)
+
+          console.log(this.products)
         })
+  }
+
+  resetData(data) {
+    this.products = data
+    this.facets = data.products.map(product => product.facets)
+    this.variants = data.products.reduce((arr, product) => arr.concat(product.variants), [])
   }
 
   clearFacets() {
     this.selectedFacetsCount.innerHTML = ''
+    this.defaultSortBy.setAttribute('checked', 'checked')
+    this.resetData(this.originalData)
     this.renderFacets(this.facets)
     this.renderVariants(this.variants)
   }
@@ -45,6 +57,7 @@ class collectionFacets extends HTMLElement {
         facetsSource = this.facetsSourse.innerHTML,
         template = Handlebars.compile(facetsSource);
         this.facetsWrapper.innerHTML = template(facetsToRender)
+    console.log(facetsToRender)
   }
 
   getFacetsArr (facets, facetName) {
@@ -83,7 +96,10 @@ class collectionFacets extends HTMLElement {
 
   getSelectedFacets () {
     const checkedInputs = this.facetsForm.querySelectorAll('.facet-group-wrapper input:checked'),
-          facetGroup = this.facetsForm.querySelectorAll('.facet-group');
+          facetGroup = this.facetsForm.querySelectorAll('.facet-group'),
+          sortByInput = this.facetsForm.querySelector('.facet-header-sort-by input:checked'),
+          sortByAction = sortByInput.title,
+          sortByOrder = sortByInput.getAttribute('data-sort-order');
 
     if (checkedInputs.length) this.selectedFacetsCount.innerHTML = `(${checkedInputs.length})`
     let allSelectedVariants = this.variants;
@@ -101,7 +117,41 @@ class collectionFacets extends HTMLElement {
           });
       allSelectedVariants = [...selectedVariants]
     })
+
+    this.sortBy(allSelectedVariants, sortByAction, sortByOrder)
     this.renderVariants(allSelectedVariants)
+  }
+
+  sortBy (data, sortBy, order) {
+    switch (sortBy) {
+      case 'best_selling':
+        data.sort((a, b) => a[sortBy] - b[sortBy])
+        break
+      case 'price':
+        if (order === 'ascending') {
+          data.sort((a, b) => a[sortBy] - b[sortBy])
+        } else {
+          data.sort((a, b) => b[sortBy] - a[sortBy])
+        }
+        break
+      case 'random':
+        data.sort(() => Math.random() - 0.5)
+        break
+      case 'inventory':
+        if (order === 'ascending') {
+          data.sort((a, b) => a[sortBy] - b[sortBy])
+        } else {
+          data.sort((a, b) => b[sortBy] - a[sortBy])
+        }
+        break
+      case 'date':
+        if (order === 'ascending') {
+          data.sort((a, b) => new Date(b[sortBy]) -  new Date (a[sortBy]))
+        } else {
+          data.sort((a, b) => new Date(a[sortBy]) -  new Date (b[sortBy]))
+        }
+        break
+    }
   }
 
 }

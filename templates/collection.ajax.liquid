@@ -23,8 +23,9 @@
 {% paginate collection.products by 1000 %}
 {
   "products": [
-  {%- for product in collection.products | sort_by: 'price-ascending' -%}
+  {%- for product in collection.products -%}
 
+    {%- assign best_selling_order = forloop.index -%}
     {%- assign product_color_names = blank -%}
     {%- assign product_color_names_uniq = blank -%}
     {%- assign product_color_hex = blank -%}
@@ -117,6 +118,9 @@
       "relevance": {{ forloop.index | plus: ratio }},
       "published_date": "{{ product.published_at }}",
       "url": "{{ product.url }}",
+      "best_selling": {{ best_selling_order }},
+      "inventory": {{ product.selected_or_first_available_variant.inventory_quantity }},
+      "date": "{{ product.published_at }}",
       "facets": {
         "shop_by_use": {
           "names": {{ product_shop_by_use | json }}
@@ -174,6 +178,9 @@
         "options": {{ variant.options | json }},
         "price": "{{ variant.price }}",
         "price_money": "{{ variant.price | money | remove: '.00' }}",
+        "best_selling": {{ best_selling_order }},
+        "inventory": {{ variant.inventory_quantity }},
+        "date": "{{ product.published_at }}",
         "compare_at_price_is_less_than_price": {{ compare_at_price_is_less_than_price }},
           "compare_at_price": "{{ variant.compare_at_price }}",
           "compare_at_price_money": "{{ variant.compare_at_price | money | remove: '.00' }}",

@@ -8774,7 +8774,9 @@ dynamic-recommendations {
     margin: 0 4px;
   }
 
-  [data-filter-clear] {
+  [data-clear-facets] {
+    text-decoration: underline 1px;
+    text-underline-offset: 2px;
     order: 1;
   }
 
@@ -8789,7 +8791,7 @@ dynamic-recommendations {
   @media screen and (max-width: $tablet) {
     justify-content: space-between;
 
-    [data-filter-clear] {
+    [data-clear-facets] {
       order: 2;
     }
 
@@ -8797,11 +8799,6 @@ dynamic-recommendations {
       order: 1;
     }
   }
-}
-
-[data-filter-clear] {
-  text-decoration: underline 1px;
-  text-underline-offset: 2px;
 }
 
 .facet-header-sort-by {

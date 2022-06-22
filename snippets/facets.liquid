@@ -22,28 +22,7 @@
         </button>
         <ul class="facet-header-sort-by-list"
             data-dropdown-content>
-          <li class="facet-group__list-item">
-            <input id='facet-sort-by-best-sellers'
-                   type=radio
-                   name='sort-by'
-                   class="facet-group-input"
-                   value='best-sellers'/>
-            <label class='facet-group-radio f aic'
-                   for='facet-sort-by-best-sellers'>
-              Best sellers
-            </label>
-          </li>
-          <li class="facet-group__list-item">
-            <input id='facet-sort-by-product-size-small-to-big'
-                   type=radio
-                   name='sort-by'
-                   class="facet-group-input"
-                   value='product-size-small-to-big'/>
-            <label class='facet-group-radio f aic'
-                   for='facet-sort-by-product-size-small-to-big'>
-              Product size (small to big)
-            </label>
-          </li>
+          {%- render 'facets-sort-by-values' collection: collection -%}
         </ul>
       </div>
     </div>
