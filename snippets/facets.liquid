@@ -8,7 +8,7 @@
       <h2 class="facet-header-title">
         Shop All {{ collection.title }} ({{ collection.all_products_count }})
       </h2>
-      <button type="button" data-clear-facets>Clear all</button>
+      <button type="button" data-clear-facets class="is-hidden">Clear all</button>
       <button type="button" data-slide-toggle="facets">
         <span class="slide-toggle-active">Hide Filters</span>
         <span class="slide-toggle-inactive">Show Filters</span>
@@ -27,33 +27,35 @@
       </div>
     </div>
     <div id="facet-group-wrapper" class="facet-group-wrapper" data-slide-target="facets">
-      <script id="facet-group-template" type="text/template">
+      <script id="facet-group-template" type="text/x-handlebars-template">
         {% raw %}
           {{#each facetsArr}}
-          <div class="facet-group {{#unless facets.length}} is-hidden {{/unless}}" data-group-name="{{ handle }}">
-            <h3 class="facet-group-name">
-              {{ title }}
-            </h3>
-            <ul class="facet-group__list">
-              {{#each facets}}
-              <li class="facet-group__list-item {{#if ../color }}facet-group__list-item-color{{/if}}">
-                <input id='facet-{{ ../handle }}-{{@index}}'
-                       type='radio'
-                       name='{{ ../handle }}'
-                       class="filter-group-input"
-                       value='{{ name }}'
-                       title="{{ ../title }}"/>
-                <label class='facet-group-radio f aic rel'
-                       for='facet-{{ ../handle }}-{{@index}}'>
-                  {{#if ../color }}
-                  <span class="facet-group-circle f aic jcc rel" style="background-color: {{ hex }};"></span>
-                  {{/if}}
-                  <span class="facet-group-title">{{ name }}</span>
-                </label>
-              </li>
-              {{/each}}
-            </ul>
-          </div>
+            {{#if facets.length }}
+              <div class="facet-group" data-group-name="{{ handle }}">
+                <h3 class="facet-group-name">
+                  {{ title }}
+                </h3>
+                <ul class="facet-group__list">
+                  {{#each facets}}
+                  <li class="facet-group__list-item {{#if ../color }}facet-group__list-item-color{{/if}}">
+                    <input id='facet-{{ ../handle }}-{{@index}}'
+                           type='radio'
+                           name='{{ ../handle }}'
+                           class="filter-group-input"
+                           value='{{ name }}'
+                           title="{{ ../title }}"/>
+                    <label class='facet-group-radio f aic rel'
+                           for='facet-{{ ../handle }}-{{@index}}'>
+                      {{#if ../color }}
+                        <span class="facet-group-circle f aic jcc rel" style="background-color: {{ hex }};"></span>
+                      {{/if}}
+                      <span class="facet-group-title">{{ name }}</span>
+                    </label>
+                  </li>
+                  {{/each}}
+                </ul>
+              </div>
+            {{/if }}
           {{/each }}
         {% endraw %}
       </script>

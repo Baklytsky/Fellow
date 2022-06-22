@@ -2,106 +2,34 @@
 {%- render 'facets-sort-by-values' collection: collection -%}
 {%- endcomment -%}
 
-<li class="facet-group__list-item">
-  <input id="facet-sort-by-best-sellers"
-         type="radio"
-         name="sort-by"
-         class="facet-group-input"
-         value="best_selling"
-         title="best_selling"
-         data-default-sort-by/>
-  <label class="facet-group-radio f aic"
-         for="facet-sort-by-best-sellers">
-    Best sellers
-  </label>
-</li>
-<li class="facet-group__list-item">
-  <input id='facet-sort-by-product-random'
-         type="radio"
-         name="sort-by"
-         class="facet-group-input"
-         value="random"
-         title="random"/>
-  <label class="facet-group-radio f aic"
-         for="facet-sort-by-product-random">
-    Random
-  </label>
-</li>
-<li class="facet-group__list-item">
-  <input id='facet-sort-by-product-inventory-low_to_high'
-         type="radio"
-         name="sort-by"
-         class="facet-group-input"
-         value="inventory_low_to_high"
-         title="inventory"
-         data-sort-order="ascending"/>
-  <label class='facet-group-radio f aic'
-         for='facet-sort-by-product-inventory-low_to_high'>
-    Inventory (low to high)
-  </label>
-</li>
-<li class="facet-group__list-item">
-  <input id='facet-sort-by-product-inventory-high_to_low'
-         type="radio"
-         name="sort-by"
-         class="facet-group-input"
-         value="inventory_high_to_low"
-         title="inventory"
-         data-sort-order="descending"/>
-  <label class='facet-group-radio f aic'
-         for='facet-sort-by-product-inventory-high_to_low'>
-    Inventory (high to low)
-  </label>
-</li>
-<li class="facet-group__list-item">
-  <input id='facet-sort-by-product-date-new-to-old'
-         type="radio"
-         name="sort-by"
-         class="facet-group-input"
-         value="date-new-to-old"
-         title="date"
-         data-sort-order="ascending"/>
-  <label class='facet-group-radio f aic'
-         for='facet-sort-by-product-date-new-to-old'>
-    Created date (new to old)
-  </label>
-</li>
-<li class="facet-group__list-item">
-  <input id='facet-sort-by-product-date-old-to-new'
-         type="radio"
-         name="sort-by"
-         class="facet-group-input"
-         value="date-old-to-new"
-         title="date"
-         data-sort-order="descending"/>
-  <label class='facet-group-radio f aic'
-         for='facet-sort-by-product-date-old-to-new'>
-    Created date (old to new)
-  </label>
-</li>
-<li class="facet-group__list-item">
-  <input id='facet-sort-by-product-size-small-to-big'
-         type="radio"
-         name="sort-by"
-         class="facet-group-input"
-         value="price_small_to_big"
-         title="price"
-         data-sort-order="ascending"/>
-  <label class='facet-group-radio f aic'
-         for='facet-sort-by-product-size-small-to-big'>
-    Price (small to big)
-  </label>
-</li>
-<li class="facet-group__list-item">
-  <input id='facet-sort-by-product-size-big_to_small'
-         type="radio"
-         name="sort-by"
-         class="facet-group-input"
-         value="price_big_to_small"
-         title="price"
-         data-sort-order="descending"/>
-  <label class='facet-group-radio f aic'
-         for='facet-sort-by-product-size-big_to_small'>
-    Price (big to small)
-  </label>
-</li>
+{%- assign collection_sort_by = collection.metafields.custom_fields["sort_by"] | handleize -%}
+{%- assign default_sort_by = collection_sort_by | default: 'best-sellers' -%}
+
+{% if shop.metafields.custom_fields["sort_by_items"] != blank %}
+    {% for item in shop.metafields.custom_fields["sort_by_items"] %}
+      {%- if item["name"] != blank and item["value"] != blank -%}
+        {%- assign name_handle = item["name"] | handleize -%}
+        {%- assign title = item["value"] | strip -%}
+
+        <li class="facet-group__list-item">
+          <input id="facet-sort-by-{{ name_handle }}"
+                 type="radio"
+                 name="sort-by"
+                 class="facet-group-input"
+                 value="{{ name_handle }}"
+                 title="{{ title }}"
+                  {% if item["sort_order"] != blank %}
+                    data-sort-order="{{ item["sort_order"] }}"
+                  {% endif %}
+                  {% if default_sort_by == name_handle %}
+                    data-default-sort-by checked="checked"
+                  {% endif %}/>
+          <label class="facet-group-radio f aic"
+                 for="facet-sort-by-{{ name_handle }}">
+            {{ item["name"] }}
+          </label>
+        </li>
+
+      {%- endif -%}
+    {% endfor %}
+{% endif %}

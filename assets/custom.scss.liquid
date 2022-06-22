@@ -8660,7 +8660,7 @@ dynamic-recommendations {
   }
 
   .facet-group__list-item-color {
-    margin: 12px 0;
+    margin: 12px 0 24px;
 
     .facet-group-radio {
       padding: 0;
@@ -8701,6 +8701,8 @@ dynamic-recommendations {
     }
 
     .facet-group__list-item-color {
+      margin: 0 16px 0 0;
+
       .facet-group-radio {
         padding: 8px;
       }
@@ -8822,9 +8824,11 @@ dynamic-recommendations {
     font-size: 14px;
     border-radius: unset;
     border: none;
+    background-color: #fff;
   }
 
-  .filter-group-input:checked + .facet-group-radio {
+  .facet-group-radio:hover,
+  .facet-group-input:checked + .facet-group-radio {
     background-color: #ebe9e9;
   }
 

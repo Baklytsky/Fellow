@@ -26,6 +26,7 @@
   {%- for product in collection.products -%}
 
     {%- assign best_selling_order = forloop.index -%}
+
     {%- assign product_color_names = blank -%}
     {%- assign product_color_names_uniq = blank -%}
     {%- assign product_color_hex = blank -%}
@@ -98,6 +99,15 @@
       {%- assign reviews_count = false -%}
     {%- endif -%}
 
+    {% assign badge_text = product.metafields.custom_fields.card_badge | default: false %}
+
+    {%- assign not_bundle = true -%}
+    {% for tag in product.tags %}
+      {% if product.tags contains 'Bundle' %}
+        {% assign not_bundle = false %}
+      {% endif %}
+    {% endfor %}
+
     {%- assign product_type_handle = product.type | handleize -%}
     {%- if product_type_handle != "gift-product" or product_type_handle != "gift-box" or product_type_handle != "personalization-fee" -%}
       {%- unless forloop.first -%},{%- endunless -%}{
@@ -108,6 +118,9 @@
         "small": "{{ product.featured_image | img_url: 'x180' }}",
         "large": "{{ product.featured_image | img_url: 'x500'}}"
       },
+      {% if product.template_suffix contains 'bundle' %}
+        "bundle": true,
+      {% endif %}
       "price_money": "{{ product.price | money | remove: '.00' }}",
       "price" : {{ product.price }},
       "price_min": {{ product.price_min }},
@@ -118,7 +131,7 @@
       "relevance": {{ forloop.index | plus: ratio }},
       "published_date": "{{ product.published_at }}",
       "url": "{{ product.url }}",
-      "best_selling": {{ best_selling_order }},
+      "best_sellers": {{ best_selling_order }},
       "inventory": {{ product.selected_or_first_available_variant.inventory_quantity }},
       "date": "{{ product.published_at }}",
       "facets": {
@@ -162,9 +175,48 @@
 
         {%- assign variant_image = variant.image | default: product.featured_image -%}
 
-        {%- assign compare_at_price_is_less_than_price = false -%}
-        {%- if variant.compare_at_price < variant.price and variant.compare_at_price != blank -%}
-          {%- assign compare_at_price_is_less_than_price = true -%}
+        {%- assign compare_at_price_is_more_than_price = false -%}
+        {%- assign variant_compare_at_price  = variant.compare_at_price -%}
+        {%- assign variant_price = variant.price -%}
+
+        {%- unless not_bundle -%}
+          {%- assign variant_compare_at_price  = product.compare_at_price -%}
+          {%- assign variant_price = product.price -%}
+        {%- endunless -%}
+
+        {%- if variant_compare_at_price > variant_price and variant_compare_at_price != blank -%}
+          {%- assign compare_at_price_is_more_than_price = true -%}
+        {%- endif -%}
+
+        {%- assign show_badge = false -%}
+        {% if badge_text and badge_text != blank and not_bundle == true %}
+          {%- assign show_badge = true -%}
+          {% elsif not_bundle == false %}
+
+          {% if variant.price_max > variant.price %}
+            {%- assign show_badge = true -%}
+            {%- assign badge_value = product.compare_at_price_max | minus:product.price_max | times:0.01 | floor -%}
+            {%- assign badge_text = 'Save up to $' | append: badge_value -%}
+          {% endif %}
+
+          {%- if product.compare_at_price > product.price -%}
+            {%- assign show_badge = true -%}
+            {%- assign badge_value = product.compare_at_price | minus:product.price | times:0.01 | floor -%}
+            {%- assign badge_text = 'Save up to $' | append: badge_value -%}
+          {%- endif -%}
+
+        {% endif %}
+
+        {%- assign options_in_card = false -%}
+        {%- assign separator = blank -%}
+
+        {%- if color_name != blank or variant_size != blank -%}
+
+          {%- if color_name != blank and variant_size != blank -%}
+            {%- assign separator = ' | ' -%}
+          {%- endif -%}
+
+          {%- assign options_in_card = color_name | append: separator | append: variant_size -%}
         {%- endif -%}
 
         {
@@ -172,18 +224,24 @@
         "product_url": "{{ product.url }}",
         "product_id": {{ product.id }},
         "variant_url": "{{ variant.url }}",
+        {% if product.template_suffix contains 'bundle' %}
+          "bundle": true,
+        {% endif %}
         "reviews_count": {{ reviews_count }},
         "available": {{ variant.available | json }},
         "id": {{ variant.id }},
         "options": {{ variant.options | json }},
-        "price": "{{ variant.price }}",
-        "price_money": "{{ variant.price | money | remove: '.00' }}",
-        "best_selling": {{ best_selling_order }},
+        "options_in_card": "{{ options_in_card }}",
+        "price": "{{ variant_price }}",
+        "price_money": "{{ variant_price | money | remove: '.00' }}",
+        "best_sellers": {{ best_selling_order }},
         "inventory": {{ variant.inventory_quantity }},
         "date": "{{ product.published_at }}",
-        "compare_at_price_is_less_than_price": {{ compare_at_price_is_less_than_price }},
-          "compare_at_price": "{{ variant.compare_at_price }}",
-          "compare_at_price_money": "{{ variant.compare_at_price | money | remove: '.00' }}",
+        "budge": {{ show_badge }},
+        "budge_text": "{{ badge_text }}",
+        "compare_at_price_is_more_than_price": {{ compare_at_price_is_more_than_price }},
+        "compare_at_price": "{{ variant_compare_at_price }}",
+        "compare_at_price_money": "{{ variant_compare_at_price | money | remove: '.00' }}",
         "shop_by_use": {
           "value": {{ product_shop_by_use | json }}
           },

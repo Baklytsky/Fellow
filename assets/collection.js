@@ -15,6 +15,7 @@ class collectionFacets extends HTMLElement {
 
     this.facetsForm.addEventListener('change', () => this.getSelectedFacets())
     this.clearAll.addEventListener('click', () => this.clearFacets())
+    this.facetsForm.style.pointerEvents = 'none'
   }
 
   getProducts () {
@@ -27,8 +28,7 @@ class collectionFacets extends HTMLElement {
           this.renderFacets(this.facets)
           this.sortBy(this.variants, this.defaultSortByAction, this.defaultSortByOrder)
           this.renderVariants(this.variants)
-
-          console.log(this.products)
+          this.facetsForm.style.removeProperty('pointer-events')
         })
   }
 
@@ -40,10 +40,11 @@ class collectionFacets extends HTMLElement {
 
   clearFacets() {
     this.selectedFacetsCount.innerHTML = ''
-    this.defaultSortBy.setAttribute('checked', 'checked')
+    this.clearAll.classList.add('is-hidden')
     this.resetData(this.originalData)
     this.renderFacets(this.facets)
     this.renderVariants(this.variants)
+    this.facetsForm.dispatchEvent(new Event('change'))
   }
 
   renderFacets(facets) {
@@ -57,7 +58,6 @@ class collectionFacets extends HTMLElement {
         facetsSource = this.facetsSourse.innerHTML,
         template = Handlebars.compile(facetsSource);
         this.facetsWrapper.innerHTML = template(facetsToRender)
-    console.log(facetsToRender)
   }
 
   getFacetsArr (facets, facetName) {
@@ -87,7 +87,6 @@ class collectionFacets extends HTMLElement {
           variantsToRender = {
             variants: variants
           };
-    console.log(variantsToRender)
     this.resultWrapper.innerHTML = template(variantsToRender)
     if (typeof window.yotpo !== "undefined") {
       window.yotpo.initWidgets();
@@ -101,7 +100,11 @@ class collectionFacets extends HTMLElement {
           sortByAction = sortByInput.title,
           sortByOrder = sortByInput.getAttribute('data-sort-order');
 
-    if (checkedInputs.length) this.selectedFacetsCount.innerHTML = `(${checkedInputs.length})`
+    if (checkedInputs.length) {
+      this.clearAll.classList.remove('is-hidden')
+      this.selectedFacetsCount.innerHTML = `(${checkedInputs.length})`
+    }
+
     let allSelectedVariants = this.variants;
 
     facetGroup.forEach(group => {
@@ -124,7 +127,7 @@ class collectionFacets extends HTMLElement {
 
   sortBy (data, sortBy, order) {
     switch (sortBy) {
-      case 'best_selling':
+      case 'best_sellers':
         data.sort((a, b) => a[sortBy] - b[sortBy])
         break
       case 'price':
