@@ -8,6 +8,10 @@ theme.enableScroll = function () {
   $('body').css('overflow', '');
 }
 
+theme.handleize = function (str) {
+  return str.toLowerCase().replace(/[^\w\u00C0-\u024f]+/g, "-").replace(/^-+|-+$/g, "");
+};
+
 theme.openModal = function () {
   $('#modal').attr('aria-hidden', 'false').fadeIn();
   theme.disableScroll();
@@ -317,11 +321,6 @@ theme.quickView = function (URL, innerContainer) {
     }
   });
 }
-
-
-theme.handleize = function (str) {
-  return str.toLowerCase().replace(/[^\w\u00C0-\u024f]+/g, "-").replace(/^-+|-+$/g, "");
-};
 
 theme.variantPreOrderCheck = function (variantId) {
   var id = $('#selectid option[value="'+variantId+'"]').data("variant-preorder");

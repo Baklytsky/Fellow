@@ -8677,6 +8677,7 @@ dynamic-recommendations {
     padding: 0;
 
     .facet-group-name {
+      font-family: $font-base;
       margin: 20px 0 10px;
     }
 
@@ -8693,6 +8694,10 @@ dynamic-recommendations {
       ::-webkit-scrollbar {
         display: none;
       }
+    }
+
+    .facet-group-title {
+      font-size: 16px;
     }
 
     .facet-group__list-item {
@@ -8783,7 +8788,13 @@ dynamic-recommendations {
   }
 
   [data-slide-toggle="facets"] {
+    display: flex;
+    align-items: center;
     order: 2;
+  }
+
+  [data-slide-toggle="facets"] > * {
+    order: 4;
   }
 
   .facet-header-sort-by {
@@ -8799,6 +8810,11 @@ dynamic-recommendations {
 
     [data-slide-toggle="facets"] {
       order: 1;
+
+      svg {
+        margin-right: 6px;
+        order: 1;
+      }
     }
   }
 }

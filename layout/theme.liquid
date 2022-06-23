@@ -148,12 +148,13 @@
     {{ 'player-chunk-two.js' | asset_url | script_tag }}
     {%- endif -%}
 
+    <script src="{{ 'custom.js' | asset_url }}" defer='defer'></script>
+
     {%- if template contains 'collection' -%}
       <script src="{{ 'handlebars-v4.7.7.js' | asset_url }}" defer='defer'></script>
       <script src="{{ 'collection.js' | asset_url }}" defer='defer'></script>
     {%- endif -%}
 
-    <script src="{{ 'custom.js' | asset_url }}" defer='defer'></script>
     <script src="{{ 'index.js' | asset_url }}" defer='defer'></script>
     {% comment %} <script src="https://a.klaviyo.com/media/js/onsite/onsite.js"></script> {% endcomment %}
   <script type="text/javascript">

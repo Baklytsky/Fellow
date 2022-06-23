@@ -6,7 +6,8 @@
   <form id="facet-form" class="facet-form" name="facet">
     <div class="facet-header">
       <h2 class="facet-header-title">
-        Shop All {{ collection.title }} ({{ collection.all_products_count }})
+        Shop All {{ collection.title }}
+        <span class="facet-header-results-count"></span>
       </h2>
       <button type="button" data-clear-facets class="is-hidden">Clear all</button>
       <button type="button" data-slide-toggle="facets">
@@ -15,7 +16,7 @@
         <span class="selected-facets-count"></span>
         {% render 'icon' with 'filter' %}
       </button>
-      <div class="facet-header-sort-by rel" data-dropdown>
+      <div class="facet-header-sort-by rel" data-dropdown data-group-name="sort_by">
         <button type="button"
                 class="facet-header-sort-by-opener rel">
           Sort By {% render 'icon' with 'dropdown-small' %}
@@ -39,10 +40,15 @@
                   {{#each facets}}
                   <li class="facet-group__list-item {{#if ../color }}facet-group__list-item-color{{/if}}">
                     <input id='facet-{{ ../handle }}-{{@index}}'
+                          {{#if ../shop_by_use }}
+                           type='checkbox'
+                           name='{{ value }}'
+                          {{else}}
                            type='radio'
                            name='{{ ../handle }}'
+                          {{/if}}
                            class="filter-group-input"
-                           value='{{ name }}'
+                           value='{{ value }}'
                            title="{{ ../title }}"/>
                     <label class='facet-group-radio f aic rel'
                            for='facet-{{ ../handle }}-{{@index}}'>

@@ -84,9 +84,8 @@
     {%- comment -%} /// Get shop by use tag /// {%- endcomment -%}
 
     {%- for tag in product.tags -%}
-      {%- assign tag_handle = tag | handleize -%}
-      {%- if tag_handle contains 'shop-by-use' -%}
-        {%- assign product_shop_by_use = tag | split: '__' | last | replace: '_', ' '  -%}
+      {%- if tag contains 'Use:' -%}
+        {%- assign product_shop_by_use = tag | split: 'Use:' | last | strip -%}
       {%- endif -%}
     {%- endfor -%}
 
@@ -243,14 +242,14 @@
         "compare_at_price": "{{ variant_compare_at_price }}",
         "compare_at_price_money": "{{ variant_compare_at_price | money | remove: '.00' }}",
         "shop_by_use": {
-          "value": {{ product_shop_by_use | json }}
+          "value": "{{ product_shop_by_use | handleize }}"
           },
         "color": {
-          "value": "{{ variant_color_name }}",
+          "value": "{{ variant_color_name | handleize }}",
           "hex": "{{ variant_color_hex }}"
           },
         "size": {
-          "value": {{ variant_size | json }}
+          "value": "{{ variant_size | handleize }}"
           },
         "image": {
           "origin": "{{ variant_image | img_url: 'master' }}",

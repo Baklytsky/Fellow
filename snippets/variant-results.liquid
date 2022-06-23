@@ -3,6 +3,7 @@
 {%- endcomment -%}
 <script id="collection__variant-template" type="text/x-handlebars-template">
   {% raw %}
+  {{#if variants.length}}
     {{#each variants}}
     <div class='productCard'>
       <div class='productCard__content y'>
@@ -76,5 +77,10 @@
       </div>
     </div>
     {{/each }}
+  {{else}}
+    <div class="collection__variant-empty">
+      <h2>No results</h2>
+    </div>
+  {{/if}}
   {% endraw %}
 </script>
