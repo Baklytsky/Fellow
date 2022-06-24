@@ -6,20 +6,20 @@
   <form id="facet-form" class="facet-form" name="facet">
     <div class="facet-header">
       <h2 class="facet-header-title">
-        Shop All {{ collection.title }}
+        {{ 'collections.general.facet_title' | t: title: collection.title }}
         <span class="facet-header-results-count"></span>
       </h2>
-      <button type="button" data-clear-facets class="is-hidden">Clear all</button>
+      <button type="button" data-clear-facets class="is-hidden">{{'collections.general.facet_clear' | t }}</button>
       <button type="button" data-slide-toggle="facets">
-        <span class="slide-toggle-active">Hide Filters</span>
-        <span class="slide-toggle-inactive">Show Filters</span>
+        <span class="slide-toggle-active">{{'collections.general.facet_hide' | t }}</span>
+        <span class="slide-toggle-inactive">{{'collections.general.facet_show' | t }}</span>
         <span class="selected-facets-count"></span>
         {% render 'icon' with 'filter' %}
       </button>
       <div class="facet-header-sort-by rel" data-dropdown data-group-name="sort_by">
         <button type="button"
                 class="facet-header-sort-by-opener rel">
-          Sort By {% render 'icon' with 'dropdown-small' %}
+          {{'collections.general.facet_sort_by' | t }} {% render 'icon' with 'dropdown-small' %}
         </button>
         <ul class="facet-header-sort-by-list"
             data-dropdown-content>

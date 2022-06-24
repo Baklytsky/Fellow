@@ -16,7 +16,6 @@ class collectionFacets extends HTMLElement {
 
     this.facetsForm.addEventListener('change', () => this.getSelectedFacets())
     this.clearAll.addEventListener('click', () => this.clearFacets())
-    this.facetsForm.style.pointerEvents = 'none'
   }
 
   getProducts () {
@@ -29,13 +28,11 @@ class collectionFacets extends HTMLElement {
           this.renderFacets(this.facets)
           this.sortBy(this.variants, this.defaultSortByAction, this.defaultSortByOrder)
           this.renderVariants(this.variants)
-          this.facetsForm.style.removeProperty('pointer-events')
+          this.facetsForm.style.pointerEvents = 'auto'
           this.resultsCount.innerHTML = `(${this.variants.length})`
           if (window.location.search) {
             this.parseUrlParams()
           }
-
-          console.log(this.originalData)
         })
   }
 
@@ -128,7 +125,6 @@ class collectionFacets extends HTMLElement {
             .map((input) => input.value);
 
      if (!groupValues.length) return
-      console.log(groupValues)
 
       const selectedVariants = allSelectedVariants.filter(variant => {
         if (typeof variant[groupName].value == 'object') {
@@ -147,7 +143,6 @@ class collectionFacets extends HTMLElement {
     this.renderVariants(allSelectedVariants)
     this.resultsCount.innerHTML = `(${allSelectedVariants.length})`
     history.replaceState(null, null, urlParams)
-    console.log(allSelectedVariants)
   }
 
   sortBy (data, sortBy, order) {
@@ -183,18 +178,15 @@ class collectionFacets extends HTMLElement {
   }
 
   parseUrlParams() {
-    const params = window.location.search.substr(1),
-        facets = [];
+    const facets = [],
+          searchParams = new URLSearchParams(window.location.search);
 
-    params.split("&").forEach((part) => {
-      const item = part.split("="),
-          options = item[1].split("+");
-
+    for (let param of searchParams) {
       facets.push({
-        name: item[0],
-        options: options
+        name: param[0],
+        options: param[1].split(' ')
       });
-    });
+    }
     this.selectFacetByParams(facets)
   }
 

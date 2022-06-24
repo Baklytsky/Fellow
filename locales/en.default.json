@@ -113,7 +113,12 @@
   "collections": {
     "general": {
       "no_matches": "Sorry, there are no products in this collection",
-      "link_title": "Browse our {{ title }} collection"
+      "link_title": "Browse our {{ title }} collection",
+      "facet_title": "Shop All {{ title }}",
+      "facet_clear": "Clear all",
+      "facet_hide": "Hide filters",
+      "facet_show": "Show filters",
+      "facet_sort_by": "Sort By"
     }
   },
   "contact": {

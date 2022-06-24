@@ -134,7 +134,6 @@
         "compare_at_price": "{{ product.compare_at_price | money | remove: '.00' }}",
       {% endif %}
       "vendor": "{{ product.vendor }}",
-      "relevance": {{ forloop.index | plus: ratio }},
       "published_date": "{{ product.published_at }}",
       "url": "{{ product.url }}",
       "best_sellers": {{ best_selling_order }},
