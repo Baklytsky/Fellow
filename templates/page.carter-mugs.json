@@ -1,26 +1,12 @@
 {
   "sections": {
-    "1652140849c192a2ee": {
-      "type": "coffee-marketplace-twb",
-      "disabled": true,
-      "settings": {
-        "bg_color": "#c1dbd2",
-        "text_color": "#000000",
-        "pre_heading": "",
-        "heading": "Our Coffee Collection",
-        "description": "Introducing Fellow’s Coffee Collection: a rotation of our latest coffee obsessions, updated seasonally and whenever a new roast grabs us.",
-        "cta_text": "",
-        "cta_link": "",
-        "cta_style": "white"
-      }
-    },
     "16522312584b4699f1": {
       "type": "coffee-marketplace-hero",
       "settings": {
-        "desktop_image": "shopify:\/\/shop_images\/Carter_780x618_Product_Feature_900x_ecb42f48-fb11-402d-8869-49e9e8ca485f.webp",
-        "mobile_image": "shopify:\/\/shop_images\/Carter_780x618_Product_Feature_900x_ecb42f48-fb11-402d-8869-49e9e8ca485f.webp",
-        "heading": "Compare Carter Mugs",
-        "description": "Which Carter is right for you?",
+        "desktop_image": "shopify:\/\/shop_images\/CarterSLL-Collection-Header.png",
+        "mobile_image": "shopify:\/\/shop_images\/Blog_Title_Card_700x350__2x_bbc8d63d-5de2-4d3c-9322-3290e57ab1dd.jpg",
+        "heading": "Find Your Travel Mug Sidekick",
+        "description": "The right Carter to keep up with your changing coffee plans.",
         "text_block_position": "center",
         "text_color": "#000000",
         "text_block_bg_color": "#ffffff"
@@ -34,13 +20,13 @@
           "settings": {
             "product": "carter-move-mug-slide-lock-lid",
             "title_1": "Best For",
-            "description_1": "On the go (walking\/driving) best for in-motion drinking, leakproof when closed. One-handed locking lid for sipping and stowing on the move",
-            "title_2": "Cup Holder Compatible",
-            "description_2": "Yes",
-            "title_3": "Stays Hot \/ Cold",
-            "description_3": "6 hours \/ 6 hours",
-            "title_4": "",
-            "description_4": "Fits Most Standard Drippers"
+            "description_1": "Hanging from a bus strap, stuck in traffic, or anywhere you need a mid-commute coffee moment.",
+            "title_2": "Sip-sperience",
+            "description_2": "Slide it open with your thumb to reveal a thin sippable lip.",
+            "title_3": "Brewer Compatibility",
+            "description_3": "Stagg [X]\/[XF] Drippers or most standard pour-over drippers",
+            "title_4": "Drinks Stay",
+            "description_4": "6 hours hot \/ 6 hours cold"
           }
         },
         "7fecf956-0f71-4724-8110-5147421afac4": {
@@ -48,13 +34,13 @@
           "settings": {
             "product": "carter-move-mug",
             "title_1": "Best For",
-            "description_1": "On the go (walking\/driving) leakproof when closed.   Pack it anywhere. [Most versatile]",
-            "title_2": "Grown In",
-            "description_2": "San Ignacio, Peru",
-            "title_3": "We Tasted",
-            "description_3": "{{ block.settings.product.metafields.coffee.attribute_3.value }} test",
-            "title_4": "Why Try It?",
-            "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }} test"
+            "description_1": "For sipping from your car cup holder or packed to enjoy at a second location.",
+            "title_2": "Sip-sperience",
+            "description_2": "With a splash guard to prevent spills, this mug is suitable for bumpy rides.",
+            "title_3": "Brewer Compatibility",
+            "description_3": "Stagg [X]\/[XF] Drippers or most standard pour-over drippers",
+            "title_4": "Drinks Stay",
+            "description_4": "12 hours hot \/ 24 hours cold"
           }
         },
         "06c75fc8-9b5f-49ae-a22b-8796612ea27a": {
@@ -62,13 +48,13 @@
           "settings": {
             "product": "carter-move-mug-with-360-sip-lid",
             "title_1": "Best For",
-            "description_1": "Open style lid, for quick  drinking on the move., Avoid risks: spilling down the shirt, NOT leakproof",
-            "title_2": "Leak Proof",
-            "description_2": "Yes",
-            "title_3": "Aeropress Compatible",
-            "description_3": "No",
-            "title_4": "Pour-Over Dripper Compatible",
-            "description_4": "Fits Most Standard Drippers"
+            "description_1": "Picking up to-go coffee from your favorite cafe, running errands, and walking the dog.",
+            "title_2": "Sip-sperience",
+            "description_2": "Open-top you can sip confidently from any angle with one hand.",
+            "title_3": "Brewer Compatibility",
+            "description_3": "Stagg [X]\/[XF] Drippers or most standard pour-over drippers",
+            "title_4": "Drinks Stay",
+            "description_4": "3 hours hot \/ 3 hours cold"
           }
         },
         "4becf74e-5449-4496-a177-124d68b00aec": {
@@ -76,13 +62,13 @@
           "settings": {
             "product": "carter-everywhere-mug",
             "title_1": "Best For",
-            "description_1": "Wide mouth design for easy drinking while in a settled place.   Pack it and go anywhere.",
-            "title_2": "Cup Holder Compatible",
-            "description_2": "No",
-            "title_3": "Aeropress Compatible",
-            "description_3": "Yes",
-            "title_4": "Pour-Over Dripper Compatible",
-            "description_4": "Fits Most Standard Drippers"
+            "description_1": "At home when you want to keep your brew warm a little longer or for taking to enjoy at another location.",
+            "title_2": "Sip-sperience",
+            "description_2": "The widest mouth for the biggest aromas. This is the muggiest mug of all our travel mugs.",
+            "title_3": "Brewer Compatibilty",
+            "description_3": "AeroPress® Coffee Maker, Stagg [X]\/[XF] Drippers, or most standard pour-over drippers",
+            "title_4": "Drinks Stay",
+            "description_4": "12 hours hot \/ 24 hours cold"
           }
         },
         "51ba94f5-6e31-41eb-bd2f-d78575777b2b": {
@@ -101,53 +87,54 @@
         "51ba94f5-6e31-41eb-bd2f-d78575777b2b"
       ],
       "settings": {
-        "heading": "Compare Mugs",
-        "description": "Compare the Carter Family"
+        "heading": "Compare Carters",
+        "description": "Read more on our <a href=\"https:\/\/fellowproducts.com\/blogs\/learn\/which-carter-are-you\" style=\"text-decoration:underline;\">Blog<\/a>"
       }
     },
     "16554188298ee8a302": {
       "type": "hp-iwt",
       "settings": {
         "enable_section": true,
-        "image": "shopify:\/\/shop_images\/Carter-SLL-GIF-3IMG-Homepage.gif",
+        "image": "shopify:\/\/shop_images\/SLL_Stabilized-Reversed_1.gif",
         "layout": "right",
         "header": "Slide anywhere",
         "description": "<p>Hanging from a bus strap, trapped in traffic, or taking a hike—this is your mug when you’re on a mission and don’t have time for anything less than ridiculously good coffee.<\/p>",
         "bg_color": "",
         "text_color": "",
         "cta_url": "shopify:\/\/products\/carter-move-mug-slide-lock-lid",
-        "cta_copy": "Shop Slide Lock",
+        "cta_copy": "Shop Carter Move + Slide-Lock Lid",
         "cta_color": "btn--dark"
       }
     },
     "1649840683b4aca1fd": {
       "type": "coffee-marketplace-cards",
+      "disabled": true,
       "blocks": {
-        "980fc03d-bb80-45a7-be3d-e8bed8fb49cd": {
+        "e9b69308-60b2-46e6-a220-1411f94fe034": {
           "type": "Card",
           "settings": {
-            "image": "shopify:\/\/shop_images\/Carter_780x618_Product_Feature_900x_ecb42f48-fb11-402d-8869-49e9e8ca485f.webp",
-            "heading": "Carter Move",
-            "description": "From Cup of Excellence-winners to experimental and innovative new growers.",
-            "link": ""
+            "image": "shopify:\/\/shop_images\/SLL_Stabilized.gif",
+            "heading": "Slide-Lock Lid",
+            "description": "Hanging from a bus strap, stuck in traffic, or anywhere you need a\nmid-commute coffee moment.",
+            "link": "shopify:\/\/products\/carter-slide-lock-lid"
           }
         },
         "37239fc0-3d35-4c42-8cc3-261e6aeaae47": {
           "type": "Card",
           "settings": {
             "image": "shopify:\/\/shop_images\/Carter360-Feature-MagneticLid.gif",
-            "heading": "Carter 360",
-            "description": "Add Text Here",
-            "link": "shopify:\/\/products\/carter-move-mug-with-360-sip-lid"
+            "heading": "360° Sip Lid",
+            "description": "Picking up to-go coffee from your favorite cafe, running errands, and walking the dog.",
+            "link": "shopify:\/\/products\/360-sip-lid"
           }
         },
-        "e9b69308-60b2-46e6-a220-1411f94fe034": {
+        "980fc03d-bb80-45a7-be3d-e8bed8fb49cd": {
           "type": "Card",
           "settings": {
-            "image": "shopify:\/\/shop_images\/Carter-SLL-GIF-3IMG-Homepage.gif",
-            "heading": "Carter Slide Lock",
-            "description": "Our dedicated panel curates our selection and builds custom recipes for every coffee we share.",
-            "link": ""
+            "image": "shopify:\/\/shop_images\/Carter_780x618_Product_Feature_900x_ecb42f48-fb11-402d-8869-49e9e8ca485f.webp",
+            "heading": "Classic Move Lid",
+            "description": "For sipping from your car cup holder or packed to enjoy at a second location.",
+            "link": "shopify:\/\/products\/carter-move-lid"
           }
         },
         "91238258-fd21-4eab-b345-bc9cc31799f6": {
@@ -162,14 +149,30 @@
         }
       },
       "block_order": [
-        "980fc03d-bb80-45a7-be3d-e8bed8fb49cd",
-        "37239fc0-3d35-4c42-8cc3-261e6aeaae47",
         "e9b69308-60b2-46e6-a220-1411f94fe034",
+        "37239fc0-3d35-4c42-8cc3-261e6aeaae47",
+        "980fc03d-bb80-45a7-be3d-e8bed8fb49cd",
         "91238258-fd21-4eab-b345-bc9cc31799f6"
       ],
       "settings": {
         "heading": "Which Carter Move Lid?",
         "description": "Three ways to access uncompromised coffee from the best travel mug in the world."
+      }
+    },
+    "1656011218eef9b85d": {
+      "type": "hp-iwt",
+      "disabled": true,
+      "settings": {
+        "enable_section": true,
+        "image": "shopify:\/\/shop_images\/Blog_Desktop_Masthead_1440x740__2x_e71a9edf-4fa6-409a-aafb-bc53303eb4a8.jpg",
+        "layout": "right",
+        "header": "Which Carter Mug Is Right For You?",
+        "description": "<p>Solve “The Which Carter?” Conundrum<\/p>",
+        "bg_color": "",
+        "text_color": "",
+        "cta_url": "shopify:\/\/blogs\/learn\/which-carter-are-you",
+        "cta_copy": "Compare All Travel Mugs",
+        "cta_color": "btn--dark"
       }
     },
     "165549869834a9a646": {
@@ -190,7 +193,7 @@
       ],
       "settings": {
         "enable_section": true,
-        "heading": "Bundle + Save",
+        "heading": "Kits + Bundles",
         "limit": 4,
         "show_view_all": true
       }
@@ -230,7 +233,7 @@
         "2e79902d-160f-4967-a0a4-9d6047bc3627": {
           "type": "product",
           "settings": {
-            "product": "the-whole-family",
+            "product": "carter-fun-pack",
             "title_1": "",
             "description_1": "",
             "title_2": "",
@@ -281,19 +284,47 @@
         "cta_style": "dark"
       }
     },
-    "16499352731248f01a": {
-      "type": "coffee-marketplace-iwt",
+    "1655498452cae2261d": {
+      "type": "featured-collections",
+      "blocks": {
+        "81d0a7ab-1818-4122-916c-c60d829ea356": {
+          "type": "collection",
+          "settings": {
+            "tab_text": "",
+            "collection": "carter-lids-accessories",
+            "button_text": "",
+            "button_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "81d0a7ab-1818-4122-916c-c60d829ea356"
+      ],
       "settings": {
-        "heading": "Make a Statement",
-        "description": "Personalize your mug. Call it your own or make it theirs. Available for Everywhere, Move, and Move + 360°",
-        "cta_text": "Personalize Mugs",
-        "cta_link": "shopify:\/\/pages\/join-fellow-drops",
-        "image": "shopify:\/\/shop_images\/Personalization-Hero-Module-Image.png",
-        "image_position": "left"
+        "enable_section": true,
+        "heading": "Compare Carter Lids",
+        "limit": 4,
+        "show_view_all": true
+      }
+    },
+    "1656007269c7800d50": {
+      "type": "hp-iwt",
+      "settings": {
+        "enable_section": true,
+        "image": "shopify:\/\/shop_images\/Collection-FeatureModule-V4.png",
+        "layout": "left",
+        "header": "Five fonts. Lots of room for creativity.",
+        "description": "",
+        "bg_color": "#fff9e5",
+        "text_color": "",
+        "cta_url": "shopify:\/\/collections\/personalization",
+        "cta_copy": "Explore Your Carter",
+        "cta_color": "btn--dark"
       }
     },
     "16498420281a16a067": {
       "type": "coffee-marketplace-products",
+      "disabled": true,
       "blocks": {
         "c4eb5518-aae0-43cc-9b3d-c90ad3854e4c": {
           "type": "product",
@@ -363,31 +394,9 @@
         "description": ""
       }
     },
-    "16554188087fd87c79": {
-      "type": "featured-collections",
-      "blocks": {
-        "3c808903-29fb-47be-a2dc-7fdadc1b3f32": {
-          "type": "collection",
-          "settings": {
-            "tab_text": "Drink + Serve",
-            "collection": "serve",
-            "button_text": "",
-            "button_url": "shopify:\/\/collections\/serve"
-          }
-        }
-      },
-      "block_order": [
-        "3c808903-29fb-47be-a2dc-7fdadc1b3f32"
-      ],
-      "settings": {
-        "enable_section": true,
-        "heading": "Drink + Serve",
-        "limit": 4,
-        "show_view_all": true
-      }
-    },
     "1655493471270c0fdb": {
       "type": "featured-collections",
+      "disabled": true,
       "blocks": {
         "866f77b1-272a-4e32-84b3-a15f42f4cd6b": {
           "type": "collection",
@@ -409,43 +418,44 @@
         "show_view_all": true
       }
     },
-    "1655498452cae2261d": {
+    "16554188087fd87c79": {
       "type": "featured-collections",
+      "disabled": true,
       "blocks": {
-        "81d0a7ab-1818-4122-916c-c60d829ea356": {
+        "3c808903-29fb-47be-a2dc-7fdadc1b3f32": {
           "type": "collection",
           "settings": {
-            "tab_text": "",
-            "collection": "carter-lids-accessories",
+            "tab_text": "Drink + Serve",
+            "collection": "serve",
             "button_text": "",
-            "button_url": ""
+            "button_url": "shopify:\/\/collections\/serve"
           }
         }
       },
       "block_order": [
-        "81d0a7ab-1818-4122-916c-c60d829ea356"
+        "3c808903-29fb-47be-a2dc-7fdadc1b3f32"
       ],
       "settings": {
         "enable_section": true,
-        "heading": "",
+        "heading": "Drink + Serve",
         "limit": 4,
         "show_view_all": true
       }
     }
   },
   "order": [
-    "1652140849c192a2ee",
     "16522312584b4699f1",
     "1653599595b02d298f",
     "16554188298ee8a302",
     "1649840683b4aca1fd",
+    "1656011218eef9b85d",
     "165549869834a9a646",
     "16554131651db82f58",
     "1649944546d9b124de",
-    "16499352731248f01a",
+    "1655498452cae2261d",
+    "1656007269c7800d50",
     "16498420281a16a067",
-    "16554188087fd87c79",
     "1655493471270c0fdb",
-    "1655498452cae2261d"
+    "16554188087fd87c79"
   ]
 }

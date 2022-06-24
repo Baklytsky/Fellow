@@ -407,27 +407,27 @@
           },
           "58ee7397-6079-412a-9acd-d453a0cf281c": {
             "type": "splitSlide",
-            "disabled": true,
             "settings": {
               "splitSlide__layout": "right",
-              "heroSlide": "shopify:\/\/shop_images\/Manhattan_Hero_HomePage_edit_copy.jpg",
+              "heroSlide": "shopify:\/\/shop_images\/Collage-Homepage.png",
               "desktopAlignment": "center",
               "mobileAlignment": "center",
-              "heroSlide__header": "Fresh + Limited",
-              "heroSlide__subheader": "Spend $200 and we’ll send you our latest coffee obsession - Diego Bermudez by Manhattan Coffee Roasters, flown in from the Netherlands.",
+              "heroSlide__header": "Meet The New Mug In Town",
+              "heroSlide__subheader": "A new Carter for quick sipping, secure stowing, and uncompromised coffee on the go.",
               "subSlide__bgColor": "#000000",
               "subSlide__textColor": "#FFFFFF",
-              "heroSlide__ctaURL": "shopify:\/\/collections\/bestsellers",
-              "heroSlide__ctaCopy": "Shop Now",
+              "heroSlide__ctaURL": "shopify:\/\/products\/carter-move-mug-slide-lock-lid",
+              "heroSlide__ctaCopy": "Shop Carter + Slide-Lock Lid",
               "heroSlide__ctaColor": "white",
-              "heroSlide__ctaURL2": "",
-              "heroSlide__ctaCopy2": "",
-              "heroSlide__ctaColor2": "black",
+              "heroSlide__ctaURL2": "shopify:\/\/pages\/carter-mugs",
+              "heroSlide__ctaCopy2": "Choose Your Carter",
+              "heroSlide__ctaColor2": "white",
               "heroSlide__ctaSubtext": ""
             }
           },
           "1f457594-c59c-4edd-800a-a9f7662f319e": {
             "type": "splitSlide",
+            "disabled": true,
             "settings": {
               "splitSlide__layout": "right",
               "heroSlide": "shopify:\/\/shop_images\/Memorial_Day_Monday.png",
@@ -461,8 +461,8 @@
               "heroSlide__ctaURL": "shopify:\/\/collections\/pride-mugs-coffee-collection",
               "heroSlide__ctaCopy": "Shop Pride Collection",
               "heroSlide__ctaColor": "black",
-              "heroSlide__ctaURL2": "https:\/\/fellowproducts.com\/blogs\/learn\/meet-the-pride-artist-series",
-              "heroSlide__ctaCopy2": "Learn More",
+              "heroSlide__ctaURL2": "",
+              "heroSlide__ctaCopy2": "",
               "heroSlide__ctaColor2": "black",
               "heroSlide__ctaSubtext": ""
             }
@@ -659,6 +659,7 @@
       },
       "1630052841314f69dd": {
         "type": "hp-iwt",
+        "disabled": true,
         "settings": {
           "enable_section": true,
           "image": "shopify:\/\/shop_images\/Fellow_Atmos_LindseySheaFinals-18_rt_v01_OT.jpg",
@@ -844,19 +845,17 @@
       },
       "cart-recommended": {
         "type": "cart-recommended",
-        "settings": {
-        }
+        "settings": {}
       },
       "cart-gift-wrapping": {
         "type": "cart-gift-wrapping",
-        "settings": {
-        }
+        "settings": {}
       },
       "1636101715cd2df3c8": {
         "type": "hp-iwt",
         "settings": {
           "enable_section": true,
-          "image": "shopify:\/\/shop_images\/Large_780x618_Product_Feature_Horizontal_2x_63a1c74f-fb92-4b73-a6cc-012fb2632181.png",
+          "image": "shopify:\/\/shop_images\/Hero_Module_Image_1.png",
           "layout": "left",
           "header": "Brew with Pride",
           "description": "<p>Celebrate all month with The Pride Collection. Because coffee is only worth sharing when there’s a seat at the table for everyone.<\/p>",
@@ -869,8 +868,7 @@
       },
       "page-template": {
         "type": "page-template",
-        "settings": {
-        }
+        "settings": {}
       },
       "16391832269c232690": {
         "type": "hp-iwt",
@@ -889,8 +887,7 @@
       },
       "search-template": {
         "type": "search-template",
-        "settings": {
-        }
+        "settings": {}
       },
       "1648114115d10a8d6a": {
         "type": "hp-hero-video",
@@ -934,7 +931,6 @@
       },
       "164970109872b4e7fa": {
         "type": "hp-iwt",
-        "disabled": true,
         "settings": {
           "enable_section": true,
           "image": "shopify:\/\/shop_images\/Homepage-Module_Bundle.gif",
@@ -988,8 +984,7 @@
       "sections": {
         "featured-product": {
           "type": "featured-product",
-          "settings": {
-          }
+          "settings": {}
         }
       },
       "content_for_index": [
