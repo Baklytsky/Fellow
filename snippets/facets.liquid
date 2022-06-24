@@ -30,6 +30,7 @@
     <div id="facet-group-wrapper" class="facet-group-wrapper" data-slide-target="facets">
       <script id="facet-group-template" type="text/x-handlebars-template">
         {% raw %}
+        {{#if facetsArr.length }}
           {{#each facetsArr}}
             {{#if facets.length }}
               <div class="facet-group" data-group-name="{{ handle }}">
@@ -63,6 +64,7 @@
               </div>
             {{/if }}
           {{/each }}
+        {{/if}}
         {% endraw %}
       </script>
     </div>

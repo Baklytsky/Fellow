@@ -33,6 +33,8 @@
     {%- assign product_color_hex_uniq = blank -%}
     {%- assign product_sizes = blank -%}
     {%- assign product_shop_by_use = blank -%}
+    {%- assign product_shop_by_use_val = blank -%}
+    {%- assign product_shop_by_use_val_uniq = blank -%}
 
     {%- assign option_color_index = blank -%}
     {%- assign option_size_index = blank -%}
@@ -85,13 +87,18 @@
 
     {%- for tag in product.tags -%}
       {%- if tag contains 'Use:' -%}
-        {%- assign product_shop_by_use = tag | split: 'Use:' | last | strip -%}
+        {%- assign use_name = tag | split: 'Use:' | last | strip -%}
+        {%- assign use_name_handle = use_name | handleize -%}
+        {%- assign product_shop_by_use = product_shop_by_use | append: use_name | append: '**' -%}
+        {%- assign product_shop_by_use_val = product_shop_by_use_val | append: use_name_handle | append: '**' -%}
       {%- endif -%}
     {%- endfor -%}
 
     {%- assign product_color_names_uniq = product_color_names | split: '**' | uniq -%}
     {%- assign product_color_hex_uniq = product_color_hex | split: '**' | uniq -%}
     {%- assign product_sizes_uniq = product_sizes | split: '**' | uniq -%}
+    {%- assign product_shop_by_use_uniq = product_shop_by_use | split: '**' | uniq -%}
+    {%- assign product_shop_by_use_val_uniq = product_shop_by_use_val | split: '**' | uniq -%}
 
     {%- assign reviews_count = product.metafields.yotpo.reviews_count | plus: 0 -%}
     {%- if reviews_count == 0 -%}
@@ -135,7 +142,7 @@
       "date": "{{ product.published_at }}",
       "facets": {
         "shop_by_use": {
-          "names": {{ product_shop_by_use | json }}
+          "names": {{ product_shop_by_use_uniq | json }}
         },
         "color": {
           "names": {{ product_color_names_uniq | json }},
@@ -242,7 +249,7 @@
         "compare_at_price": "{{ variant_compare_at_price }}",
         "compare_at_price_money": "{{ variant_compare_at_price | money | remove: '.00' }}",
         "shop_by_use": {
-          "value": "{{ product_shop_by_use | handleize }}"
+          "value": {{ product_shop_by_use_val_uniq | json }}
           },
         "color": {
           "value": "{{ variant_color_name | handleize }}",

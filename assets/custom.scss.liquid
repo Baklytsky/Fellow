@@ -2877,11 +2877,11 @@ h2.pdpCopy__header-price ,
 .pdpCopy__header-price {
   margin: 0 0 0 10px;
   font-family: $font-header;
-  font-size: 26px;
+  font-size: 24px;
   line-height: 100%;
 
   @media screen and (max-width: $tablet) {
-    font-size: 24px;
+    font-size: 16px;
     margin: 0 0 8px 0;
   }
 }
@@ -8755,6 +8755,9 @@ dynamic-recommendations {
   display: flex;
   padding-bottom: 26px;
   border-bottom: 1px solid #C2C2C2;
+  max-height: calc(100vh - var(--header-height) - 100px);
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 
   @media screen and (max-width: $tablet) {
     flex-direction: column;
@@ -8785,12 +8788,14 @@ dynamic-recommendations {
     text-decoration: underline 1px;
     text-underline-offset: 2px;
     order: 1;
+    white-space: nowrap;
   }
 
   [data-slide-toggle="facets"] {
     display: flex;
     align-items: center;
     order: 2;
+    white-space: nowrap;
   }
 
   [data-slide-toggle="facets"] > * {
@@ -8799,6 +8804,7 @@ dynamic-recommendations {
 
   .facet-header-sort-by {
     order: 3;
+    white-space: nowrap;
   }
 
   @media screen and (max-width: $tablet) {
@@ -8810,11 +8816,16 @@ dynamic-recommendations {
 
     [data-slide-toggle="facets"] {
       order: 1;
+      font-size: 18px;
 
       svg {
         margin-right: 6px;
         order: 1;
       }
+    }
+
+    button {
+      font-size: 16px;
     }
   }
 }
@@ -8867,6 +8878,10 @@ dynamic-recommendations {
   width: 200px;
   background-color: #FFFFFF;
   z-index: 4;
+  max-height: calc(100vh - var(--header-height) - 100px);
+  overflow: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .facet-header-title {

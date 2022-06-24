@@ -34,6 +34,8 @@ class collectionFacets extends HTMLElement {
           if (window.location.search) {
             this.parseUrlParams()
           }
+
+          console.log(this.originalData)
         })
   }
 
@@ -126,9 +128,14 @@ class collectionFacets extends HTMLElement {
             .map((input) => input.value);
 
      if (!groupValues.length) return
+      console.log(groupValues)
 
       const selectedVariants = allSelectedVariants.filter(variant => {
-        return variant[groupName].value && groupValues.indexOf(variant[groupName].value) >= 0
+        if (typeof variant[groupName].value == 'object') {
+          return variant[groupName].value.some(value => groupValues.indexOf(value) >= 0)
+        } else {
+          return groupValues.indexOf(variant[groupName].value) >= 0
+        }
           });
       allSelectedVariants = [...selectedVariants]
 
@@ -140,6 +147,7 @@ class collectionFacets extends HTMLElement {
     this.renderVariants(allSelectedVariants)
     this.resultsCount.innerHTML = `(${allSelectedVariants.length})`
     history.replaceState(null, null, urlParams)
+    console.log(allSelectedVariants)
   }
 
   sortBy (data, sortBy, order) {

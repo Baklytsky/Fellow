@@ -2544,8 +2544,9 @@ document.addEventListener('click', (e) => {
 
 // Slide toggle
 class SlideToggle {
-  constructor(el) {
+  constructor(el, duration = 200) {
     this.el = el;
+    this.duration = duration;
     this.slideTargetName = this.el.getAttribute('data-slide-toggle');
     this.slideTarget = document.querySelector('[data-slide-target="'+ this.slideTargetName + '"]')
     if (this.slideTarget) {
@@ -2557,22 +2558,34 @@ class SlideToggle {
   }
 
   slideToggle () {
-    if (!this.slideTarget.classList.contains('active')) {
-      this.slideTarget.classList.add('active');
+    (!this.slideTarget.classList.contains('active')) ? this.slideToggleOpen() : this.slideToggleClose()
+  }
+
+  slideToggleOpen() {
+    this.slideTarget.classList.add('active');
+    this.slideTarget.style.height = 'auto';
+    let height = this.slideTarget.clientHeight + "px";
+    this.slideTarget.style.height = '0px';
+    setTimeout( () => this.slideTarget.style.height = height, 0);
+    setTimeout( () => {
+      this.slideTarget.style.removeProperty('height');
+      this.slideTarget.style.overflow = 'auto';
       this.el.classList.add('active');
-      this.slideTarget.style.height = 'auto';
-      let height = this.slideTarget.clientHeight + "px";
-      this.slideTarget.style.height = '0px';
-      setTimeout( () => this.slideTarget.style.height = height, 0);
-    } else {
-      this.slideTarget.style.height = '0px'
-      this.slideTarget.addEventListener('transitionend',  () => {
-        this.slideTarget.classList.remove('active');
-        this.el.classList.remove('active');
-      }, {
-        once: true
-      });
-    }
+    }, this.duration);
+  }
+
+  slideToggleClose() {
+    this.slideTarget.style.overflow = 'hidden';
+    this.slideTarget.animate({
+      height: [this.slideTarget.clientHeight + 'px', '0px']
+    }, {
+      duration: this.duration,
+      easing: 'linear'
+    });
+    setTimeout( () => {
+      this.slideTarget.classList.remove('active');
+      this.el.classList.remove('active');
+    }, this.duration)
   }
 }
 
