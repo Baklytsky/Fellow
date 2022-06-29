@@ -1,5 +1,5 @@
 {% comment %} Metafield represents index as 1, 2, 3, 4, etc. {% endcomment %}
-{% assign product_image_index = collection.metafields.custom_fields.product_image_index | minus: 1 | at_least: 0 | default: 0 %}
+{% assign product_image_index = 0 %}
 
 {% paginate collection.products by 1000 %}
 
