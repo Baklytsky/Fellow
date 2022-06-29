@@ -183,7 +183,7 @@
               "title_1": "Shop All Drink + Serve",
               "url_1": "shopify:\/\/collections\/serve",
               "image_2": "shopify:\/\/shop_images\/670x650_LargeModule-JeremyFish.jpg",
-              "title_2": "Artist Series",
+              "title_2": "Shop Artist Series",
               "url_2": "shopify:\/\/collections\/artist-series",
               "title_3": "",
               "url_3": "",
@@ -246,9 +246,9 @@
               "image_1": "shopify:\/\/shop_images\/Brew-Bar-Hero-Module-Image.jpg",
               "title_1": "Shop All",
               "url_1": "shopify:\/\/collections\/all-products",
-              "image_2": "shopify:\/\/shop_images\/112421_Atmos_Navigation-2Up.jpg",
-              "title_2": "Shop Atmos",
-              "url_2": "shopify:\/\/products\/atmos-vacuum-canister",
+              "image_2": "shopify:\/\/shop_images\/Blog_Mobile_800x725__2x_0422bb30-2afb-4b16-80f5-63bdb89678e8.jpg",
+              "title_2": "Compare Carter Mugs",
+              "url_2": "shopify:\/\/pages\/carter-mugs",
               "title_3": "",
               "url_3": "",
               "title_4": "",
@@ -409,7 +409,7 @@
             "type": "splitSlide",
             "settings": {
               "splitSlide__layout": "right",
-              "heroSlide": "shopify:\/\/shop_images\/Collage-Homepage.png",
+              "heroSlide": "shopify:\/\/shop_images\/Carter-SLL-GIF-3IMG-Homepage_1.gif",
               "desktopAlignment": "center",
               "mobileAlignment": "center",
               "heroSlide__header": "Meet The New Mug In Town",
@@ -420,7 +420,7 @@
               "heroSlide__ctaCopy": "Shop Carter + Slide-Lock Lid",
               "heroSlide__ctaColor": "white",
               "heroSlide__ctaURL2": "shopify:\/\/pages\/carter-mugs",
-              "heroSlide__ctaCopy2": "Choose Your Carter",
+              "heroSlide__ctaCopy2": "Choose Your Carter Mug",
               "heroSlide__ctaColor2": "white",
               "heroSlide__ctaSubtext": ""
             }
@@ -550,12 +550,12 @@
               "button_url": "shopify:\/\/collections\/bestsellers"
             }
           },
-          "e562759f-87e2-472a-9bff-544a67dff43c": {
+          "61c6e91f-6505-42c0-866f-25296dbe3d4e": {
             "type": "collection",
             "settings": {
-              "tab_text": "Pride Mugs",
-              "collection": "pride-mugs-coffee-collection",
-              "button_text": "Shop The Pride Collection",
+              "tab_text": "Grind + Brew",
+              "collection": "grind-brew",
+              "button_text": "",
               "button_url": ""
             }
           },
@@ -569,6 +569,15 @@
               "button_url": ""
             }
           },
+          "34a21fe6-0cfe-4b56-85f5-42725eb153e6": {
+            "type": "collection",
+            "settings": {
+              "tab_text": "Drink + Serve",
+              "collection": "serve",
+              "button_text": "",
+              "button_url": ""
+            }
+          },
           "bfeb2272-7a44-421f-ac0c-ab8e740b0fe8": {
             "type": "collection",
             "settings": {
@@ -578,21 +587,12 @@
               "button_url": ""
             }
           },
-          "61c6e91f-6505-42c0-866f-25296dbe3d4e": {
+          "e562759f-87e2-472a-9bff-544a67dff43c": {
             "type": "collection",
             "settings": {
-              "tab_text": "Grind + Brew",
-              "collection": "grind-brew",
-              "button_text": "",
-              "button_url": ""
-            }
-          },
-          "34a21fe6-0cfe-4b56-85f5-42725eb153e6": {
-            "type": "collection",
-            "settings": {
-              "tab_text": "Drink + Serve",
-              "collection": "serve",
-              "button_text": "",
+              "tab_text": "Pride Mugs",
+              "collection": "pride-mugs-coffee-collection",
+              "button_text": "Shop The Pride Collection",
               "button_url": ""
             }
           },
@@ -640,11 +640,11 @@
         "block_order": [
           "74896794-3a9a-4ead-a9f5-c8a78fc6788e",
           "1c8f9541-a475-428c-9638-4b46c17cf01e",
-          "e562759f-87e2-472a-9bff-544a67dff43c",
-          "7acc7b63-cc70-4ca0-83e1-ffa6c28c031a",
-          "bfeb2272-7a44-421f-ac0c-ab8e740b0fe8",
           "61c6e91f-6505-42c0-866f-25296dbe3d4e",
+          "7acc7b63-cc70-4ca0-83e1-ffa6c28c031a",
           "34a21fe6-0cfe-4b56-85f5-42725eb153e6",
+          "bfeb2272-7a44-421f-ac0c-ab8e740b0fe8",
+          "e562759f-87e2-472a-9bff-544a67dff43c",
           "a739270d-13fd-4aaf-9bd0-c54e753ab0a7",
           "db2a2a28-0b9f-4295-9b8c-60c865322da2",
           "0bc35052-fa24-4ee9-8955-ae08bee2e924",
@@ -875,7 +875,7 @@
         "settings": {
           "enable_section": true,
           "image": "shopify:\/\/shop_images\/coffee_marketplace_Header-Mobile_1.jpg",
-          "layout": "left",
+          "layout": "right",
           "header": "Seasonal menu",
           "description": "<p>We just launched Fellow’s new Coffee Collection: a rotation of our latest coffee obsessions, updated seasonally. <\/p>",
           "bg_color": "#ffffff",
@@ -933,14 +933,14 @@
         "type": "hp-iwt",
         "settings": {
           "enable_section": true,
-          "image": "shopify:\/\/shop_images\/Homepage-Module_Bundle.gif",
+          "image": "shopify:\/\/shop_images\/Hero_Module_Ode_Burr.png",
           "layout": "right",
-          "header": "Freshly bloomed",
-          "description": "<p>Discover colorful new bundles with curated coffee included.<\/p>",
-          "bg_color": "",
+          "header": "Hit the grind running",
+          "description": "<p>Two burr choices, no wrong answers.  Pick the best to suit your needs.<\/p>",
+          "bg_color": "rgba(0,0,0,0)",
           "text_color": "",
-          "cta_url": "shopify:\/\/collections\/coffee-products-kits-bundles",
-          "cta_copy": "Shop Kits + Bundles",
+          "cta_url": "shopify:\/\/products\/ode-brew-grinder",
+          "cta_copy": "Shop Ode Brew Grinder",
           "cta_color": "btn--dark"
         }
       },
@@ -967,8 +967,8 @@
       "1629968785d9d2e1c7",
       "1648464189e55630c9",
       "162997622949d3f8ee",
-      "1636101715cd2df3c8",
       "164970109872b4e7fa",
+      "1636101715cd2df3c8",
       "1630052841314f69dd",
       "16391832269c232690",
       "16497034024471c77e",
