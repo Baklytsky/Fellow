@@ -243,7 +243,7 @@
             "title_1": "Roasted In",
             "description_1": "{{ block.settings.product.metafields.coffee.attribute_1.value }}",
             "title_2": "Grown In",
-            "description_2": "Santa Cruz, California",
+            "description_2": "{{ block.settings.product.metafields.coffee.attribute_2.value }}",
             "title_3": "We Tasted",
             "description_3": "{{ block.settings.product.metafields.coffee.attribute_3.value }}",
             "title_4": "Why Try It?",
