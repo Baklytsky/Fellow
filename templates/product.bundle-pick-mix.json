@@ -43,8 +43,7 @@
       "type": "product-template-bundle-pick-mix",
       "settings": {
         "show_breadcrumbs": true,
-        "show_quantity_selector": false,
-        "quantity_selector_inline": false
+        "show_quantity_selector": false
       }
     }
   },

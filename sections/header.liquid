@@ -158,7 +158,7 @@
             {%- if logo_svg != blank -%}
               {{ logo_svg }}
             {%- else -%}
-              <img src="{{ logo | img_url }}" alt="{{ logo.alt }}">
+              <img src="{{ logo | img_url: '500x' }}" alt="{{ logo.alt }}" class="pride_logo">
             {%- endif -%}
           {%- else -%}
             {%- render 'fellow-logo' -%}

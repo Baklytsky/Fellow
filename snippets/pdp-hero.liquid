@@ -1,3 +1,12 @@
+
+{% assign pride = false %}
+{% for tag in product.tags %}
+  {% if tag == 'pride' %}
+    {% assign pride = true %}
+  {% endif %}
+{% endfor %}
+
+
 {% if product.metafields.custom_fields["show_hero_module_section_new"] == 1 %}
   {% if product.metafields.custom_fields["hero_module_new"] != blank %}
 
@@ -26,6 +35,24 @@
       {% assign hero_media_type = item["hero_media_type_new"] %}
       {% assign hero_media_webm = item["hero_media_webm"] %}
       {% assign hero_media_mp4 = item["hero_media_mp4"] %}
+
+      {% if pride %}
+        <div class="heroSection pride_trevor mb0">
+          <div class="heroSection__wrapper">
+            <div class="pride_trevor_icon_slot f aic jcc">
+              <img class="pride_trevor_icon" src="https://cdn.shopify.com/s/files/1/0057/6235/1219/files/Group_1224.png?v=1654018867">
+            </div>
+            <div class="pride_trevor_text">
+              <h2>The Trevor Project</h2>
+              <p>For every Pride Artist Series Carter we sell in June, we’re donating $2 to The Trevor Project: the world’s largest suicide prevention and crisis intervention organization for lesbian, gay, bisexual, transgender, queer, and questioning (LGBTQ) young people.</p>
+              <a href="https://www.thetrevorproject.org/">Learn More</a>
+            </div>
+          </div>
+        </div>
+        <div style="max-height:100px;">
+          <img src="https://cdn.shopify.com/s/files/1/0057/6235/1219/files/Group_1204_2.png?v=1654034308" style="width:100%;max-height:100px;">
+        </div>
+      {% endif %}
 
       <section class='heroSection{% if display_order %} o-{{ display_order }}{% endif %}'
                data-component='pdp-hero'
