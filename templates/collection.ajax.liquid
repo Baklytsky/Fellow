@@ -31,7 +31,12 @@
     {%- assign product_color_names_uniq = blank -%}
     {%- assign product_color_hex = blank -%}
     {%- assign product_color_hex_uniq = blank -%}
+    {%- assign product_color_val = blank -%}
+    {%- assign product_color_val_uniq = blank -%}
     {%- assign product_sizes = blank -%}
+    {%- assign product_sizes_uniq = blank -%}
+    {%- assign product_sizes_val = blank -%}
+    {%- assign product_sizes_val_uniq = blank -%}
     {%- assign product_shop_by_use = blank -%}
     {%- assign product_shop_by_use_val = blank -%}
     {%- assign product_shop_by_use_val_uniq = blank -%}
@@ -70,14 +75,20 @@
             {%- assign second_split = first_split | split: '||' | last -%}
             {%- assign name = second_split | split: '&&' | first -%}
             {%- assign hex = second_split | split: '&&' | last -%}
+            {%- assign val = name | handleize -%}
 
             {%- assign product_color_names = product_color_names | append: name | append: '**' -%}
             {%- assign product_color_hex = product_color_hex | append: hex | append: '**' -%}
+            {%- assign product_color_val = product_color_val | append: val | append: '**' -%}
           {%- endif -%}
         {%- endif -%}
 
         {%- if option_size_index != blank -%}
-          {%- assign product_sizes = product_sizes | append: variant.options[option_size_index] | append: '**' -%}
+          {%- assign name = variant.options[option_size_index] -%}
+          {%- assign val = name | handleize -%}
+
+          {%- assign product_sizes = product_sizes | append: name | append: '**' -%}
+          {%- assign product_sizes_val = product_sizes_val | append: val | append: '**' -%}
         {%- endif -%}
 
       {%- endfor -%}
@@ -96,7 +107,11 @@
 
     {%- assign product_color_names_uniq = product_color_names | split: '**' | uniq -%}
     {%- assign product_color_hex_uniq = product_color_hex | split: '**' | uniq -%}
+    {%- assign product_color_val_uniq = product_color_val | split: '**' | uniq -%}
+
     {%- assign product_sizes_uniq = product_sizes | split: '**' | uniq -%}
+    {%- assign product_sizes_val_uniq = product_sizes_val | split: '**' | uniq -%}
+
     {%- assign product_shop_by_use_uniq = product_shop_by_use | split: '**' | uniq -%}
     {%- assign product_shop_by_use_val_uniq = product_shop_by_use_val | split: '**' | uniq -%}
 
@@ -150,6 +165,15 @@
         "sizes": {
           "names": {{ product_sizes_uniq | json}}
         }
+      },
+      "shop_by_use": {
+        "value": {{ product_shop_by_use_val_uniq | json }}
+      },
+      "color": {
+        "value": {{ product_color_val_uniq | json }}
+      },
+      "size": {
+        "value": {{ product_sizes_val_uniq | json}}
       },
       "variants": [
       {% for variant in product.variants %}

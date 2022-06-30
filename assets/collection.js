@@ -5,8 +5,10 @@ class collectionFacets extends HTMLElement {
     this.facetsWrapper = this.querySelector('#facet-group-wrapper')
     this.facetsSourse = this.querySelector("#facet-group-template")
     this.facetsForm = this.querySelector('#facet-form')
-    this.resultWrapper = this.querySelector('#collection__variant-results')
-    this.resultSourse = this.querySelector("#collection__variant-template")
+    this.variantResultWrapper = this.querySelector('#collection__variant-results')
+    this.variantResultSourse = this.querySelector("#collection__variant-template")
+    this.productResultWrapper = this.querySelector('#collection__product-results')
+    this.productResultSourse = this.querySelector("#collection__product-template")
     this.clearAll = this.querySelector('[data-clear-facets]')
     this.selectedFacetsCount = this.querySelector('.selected-facets-count')
     this.resultsCount = this.querySelector('.facet-header-results-count')
@@ -26,8 +28,8 @@ class collectionFacets extends HTMLElement {
           this.originalData = data
           this.resetData(data)
           this.renderFacets(this.facets)
-          this.sortBy(this.variants, this.defaultSortByAction, this.defaultSortByOrder)
-          this.renderVariants(this.variants)
+          this.sortBy(this.data, this.defaultSortByAction, this.defaultSortByOrder)
+          this.renderResults(this.data)
           this.facetsForm.style.pointerEvents = 'auto'
           this.resultsCount.innerHTML = `(${this.variants.length})`
           if (window.location.search) {
@@ -37,9 +39,10 @@ class collectionFacets extends HTMLElement {
   }
 
   resetData(data) {
-    this.products = data
-    this.facets = data.products.map(product => product.facets)
-    this.variants = data.products.reduce((arr, product) => arr.concat(product.variants), [])
+    this.products = data.products
+    this.facets = data.products.map(product => product.facets);
+    this.variants = data.products.reduce((arr, product) => arr.concat(product.variants), []);
+    this.data = (this.variantResultWrapper) ? this.variants : this.products
   }
 
   clearFacets() {
@@ -47,7 +50,7 @@ class collectionFacets extends HTMLElement {
     this.clearAll.classList.add('is-hidden')
     this.resetData(this.originalData)
     this.renderFacets(this.facets)
-    this.renderVariants(this.variants)
+    this.renderResults(this.data)
     this.resultsCount.innerHTML = `(${this.variants.length})`
     this.facetsForm.dispatchEvent(new Event('change'))
     history.replaceState(null, null, '')
@@ -88,13 +91,12 @@ class collectionFacets extends HTMLElement {
     return facet
   }
 
-  renderVariants (variants) {
-    const resultSource = this.resultSourse.innerHTML,
+  renderResults (data) {
+    const resultSource = (this.variantResultSourse) ? this.variantResultSourse.innerHTML : this.productResultSourse.innerHTML,
           template = Handlebars.compile(resultSource),
-          variantsToRender = {
-            variants: variants
-          };
-    this.resultWrapper.innerHTML = template(variantsToRender)
+          renderElement = (this.variantResultSourse) ? {variants: data} : {products: data},
+          resultWrapper = (this.variantResultSourse) ? this.variantResultWrapper : this.productResultWrapper;
+    resultWrapper.innerHTML = template(renderElement)
     if (typeof window.yotpo !== "undefined") {
       window.yotpo.initWidgets();
     }
@@ -116,7 +118,7 @@ class collectionFacets extends HTMLElement {
       this.selectedFacetsCount.innerHTML = ''
     }
 
-    let allSelectedVariants = this.variants;
+    let allSelectedItems = this.data
 
     facetGroup.forEach(group => {
       const groupName = group.getAttribute('data-group-name'),
@@ -126,23 +128,36 @@ class collectionFacets extends HTMLElement {
 
      if (!groupValues.length) return
 
-      const selectedVariants = allSelectedVariants.filter(variant => {
-        if (typeof variant[groupName].value == 'object') {
-          return variant[groupName].value.some(value => groupValues.indexOf(value) >= 0)
-        } else {
-          return groupValues.indexOf(variant[groupName].value) >= 0
-        }
-          });
-      allSelectedVariants = [...selectedVariants]
+      const selectedItems = this.filterResults(allSelectedItems, groupName, groupValues)
+      allSelectedItems = [...selectedItems]
+
+      if (this.productResultWrapper) {
+        const productSelectedVariants = selectedItems.map(product => {
+          const productClone = {...product}
+          productClone.variants = this.filterResults(productClone.variants, groupName, groupValues)
+          return productClone
+        })
+        allSelectedItems = [...productSelectedVariants]
+      }
 
      const groupValuesStr = groupValues.join('+');
       urlParams+= '&' + groupName + '=' + groupValuesStr
     })
 
-    this.sortBy(allSelectedVariants, sortByAction, sortByOrder)
-    this.renderVariants(allSelectedVariants)
-    this.resultsCount.innerHTML = `(${allSelectedVariants.length})`
+    this.sortBy(allSelectedItems, sortByAction, sortByOrder)
+    this.renderResults(allSelectedItems)
+    this.resultsCount.innerHTML = `(${allSelectedItems.length})`
     history.replaceState(null, null, urlParams)
+  }
+
+  filterResults (items, groupName, groupValues) {
+    return items.filter(item => {
+      if (typeof item[groupName].value == 'object') {
+        return item[groupName].value.some(value => groupValues.indexOf(value) >= 0)
+      } else {
+        return groupValues.indexOf(item[groupName].value) >= 0
+      }
+    });
   }
 
   sortBy (data, sortBy, order) {
@@ -153,18 +168,33 @@ class collectionFacets extends HTMLElement {
       case 'price':
         if (order === 'ascending') {
           data.sort((a, b) => a[sortBy] - b[sortBy])
+          if (this.productResultWrapper) {
+            data.forEach(product => product.variants.sort((a, b) => a[sortBy] - b[sortBy]))
+          }
         } else {
           data.sort((a, b) => b[sortBy] - a[sortBy])
+          if (this.productResultWrapper) {
+            data.forEach(product => product.variants.sort((a, b) => b[sortBy] - a[sortBy]))
+          }
         }
         break
       case 'random':
         data.sort(() => Math.random() - 0.5)
+        if (this.productResultWrapper) {
+          data.forEach(product => product.variants.sort(() => Math.random() - 0.5))
+        }
         break
       case 'inventory':
         if (order === 'ascending') {
           data.sort((a, b) => a[sortBy] - b[sortBy])
+          if (this.productResultWrapper) {
+            data.forEach(product => product.variants.sort((a, b) => a[sortBy] - b[sortBy]))
+          }
         } else {
           data.sort((a, b) => b[sortBy] - a[sortBy])
+          if (this.productResultWrapper) {
+            data.forEach(product => product.variants.sort((a, b) => b[sortBy] - a[sortBy]))
+          }
         }
         break
       case 'date':

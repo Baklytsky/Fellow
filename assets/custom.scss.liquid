@@ -9131,6 +9131,11 @@ dynamic-recommendations {
   }
 }
 
+.collection__product-title.skeleton {
+  height: 14px;
+  width: 80%;
+}
+
 .productCard__img.skeleton {
   border-radius: 12px
 }
@@ -9152,3 +9157,34 @@ dynamic-recommendations {
 .productCard_ratings.skeleton {
   width: 40%;
 }
+
+.collection__product-item {
+  display: flex;
+}
+
+.collection__product-content {
+  width: 22%;
+}
+
+.collection__product-variants {
+  margin-bottom: 64px;
+  display: flex;
+  width: 100%;
+  overflow-x: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  .productCard {
+    min-width: 31.2%;
+    max-width: 31.2%;
+    padding-right: 24px;
+  }
+}
+
