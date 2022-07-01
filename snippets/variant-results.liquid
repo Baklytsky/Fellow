@@ -71,9 +71,11 @@
           <a href="{{ product_url }}#pdp-reviews" class="abs x y z5" aria-label="{{ title }} rating stars"></a>
         </div>
 
-      {{#if options_in_card}}
-        <div class="productCard_options">{{ options_in_card }}</div>
-      {{/if}}
+        {{#unless bundle}}
+          {{#if options_in_card}}
+            <div class="productCard_options">{{ options_in_card }}</div>
+          {{/if}}
+        {{/unless }}
       </div>
     </div>
     {{/each }}

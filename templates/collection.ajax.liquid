@@ -115,6 +115,26 @@
     {%- assign product_shop_by_use_uniq = product_shop_by_use | split: '**' | uniq -%}
     {%- assign product_shop_by_use_val_uniq = product_shop_by_use_val | split: '**' | uniq -%}
 
+    {%- assign tag_info = blank -%}
+    {%- assign tag_info_item = blank -%}
+    {%- assign tag_info_arr = blank -%}
+
+    {%- for use_tag in product_shop_by_use_uniq -%}
+      {%- assign use_tag_handle = use_tag | handleize -%}
+
+      {%- case use_tag_handle -%}
+      {%- when 'car-compatible' -%}
+      {%- assign tag_info_item = 'Fits in Cup Holder' -%}
+      {%- when 'one-handed' -%}
+      {%- assign tag_info_item = 'Single Handed' -%}
+        {%- else -%}
+      {%- assign tag_info_item = use_tag -%}
+      {%- endcase -%}
+
+      {%- assign tag_info = tag_info | append: tag_info_item | append: '**' -%}
+    {%- endfor -%}
+    {%- assign tag_info_arr = tag_info | split: '**' -%}
+
     {%- assign reviews_count = product.metafields.yotpo.reviews_count | plus: 0 -%}
     {%- if reviews_count == 0 -%}
       {%- assign reviews_count = false -%}
@@ -128,6 +148,37 @@
         {% assign not_bundle = false %}
       {% endif %}
     {% endfor %}
+
+    {%- assign size_info = blank -%}
+    {%- assign sizes = blank -%}
+
+    {%- if product_sizes_uniq.size > 0 -%}
+      {%- assign penultimate = product_sizes_uniq.size | minus: 1 -%}
+      {%- assign sort_sizes = product_sizes_uniq | reverse -%}
+
+      {%- for size in sort_sizes -%}
+        {%- if size contains 'oz' -%}
+          {%- assign splited_size = size | split: 'oz' | first | strip -%}
+        {%- endif -%}
+
+        {%- if size contains 'L' -%}
+          {%- assign splited_size = size | split: 'L' | first | strip -%}
+        {%- endif -%}
+
+        {%- if forloop.last -%}
+          {%- assign sizes = sizes | append: size -%}
+          {%- break -%}
+        {%- endif -%}
+
+        {%- if forloop.index != penultimate -%}
+          {%- assign sizes = sizes | append: splited_size | append: ', ' -%}
+        {%- else -%}
+          {%- assign sizes = sizes | append: splited_size | append: ' & ' -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {%- assign size_info = 'Available in ' | append: sizes -%}
+
+    {%- endif -%}
 
     {%- assign product_type_handle = product.type | handleize -%}
     {%- if product_type_handle != "gift-product" or product_type_handle != "gift-box" or product_type_handle != "personalization-fee" -%}
@@ -175,6 +226,8 @@
       "size": {
         "value": {{ product_sizes_val_uniq | json}}
       },
+      "size_info": {{ size_info | json }},
+      "tag_info": {{ tag_info_arr | json }},
       "variants": [
       {% for variant in product.variants %}
         {%- assign variant_color_name = blank -%}
