@@ -41,13 +41,8 @@
                   {{#each facets}}
                   <li class="facet-group__list-item {{#if ../color }}facet-group__list-item-color{{/if}}">
                     <input id='facet-{{ ../handle }}-{{@index}}'
-                          {{#if ../shop_by_use }}
                            type='checkbox'
                            name='{{ value }}'
-                          {{else}}
-                           type='radio'
-                           name='{{ ../handle }}'
-                          {{/if}}
                            class="filter-group-input"
                            value='{{ value }}'
                            title="{{ ../title }}"/>

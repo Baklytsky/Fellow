@@ -140,8 +140,6 @@
       {%- assign reviews_count = false -%}
     {%- endif -%}
 
-    {% assign badge_text = product.metafields.custom_fields.card_badge | default: false %}
-
     {%- assign not_bundle = true -%}
     {% for tag in product.tags %}
       {% if product.tags contains 'Bundle' %}
@@ -271,6 +269,12 @@
         {%- endif -%}
 
         {%- assign show_badge = false -%}
+        {%- if variant.metafields.custom.budge != blank -%}
+          {%- assign badge_text = variant.metafields.custom.budge -%}
+        {%- else -%}
+          {% assign badge_text = product.metafields.custom_fields.card_badge | default: false %}
+        {%- endif -%}
+
         {% if badge_text and badge_text != blank and not_bundle == true %}
           {%- assign show_badge = true -%}
           {% elsif not_bundle == false %}
