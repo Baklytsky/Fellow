@@ -178,25 +178,6 @@ class collectionFacets extends HTMLElement {
           }
         }
         break
-      case 'random':
-        data.sort(() => Math.random() - 0.5)
-        if (this.productResultWrapper) {
-          data.forEach(product => product.variants.sort(() => Math.random() - 0.5))
-        }
-        break
-      case 'inventory':
-        if (order === 'ascending') {
-          data.sort((a, b) => a[sortBy] - b[sortBy])
-          if (this.productResultWrapper) {
-            data.forEach(product => product.variants.sort((a, b) => a[sortBy] - b[sortBy]))
-          }
-        } else {
-          data.sort((a, b) => b[sortBy] - a[sortBy])
-          if (this.productResultWrapper) {
-            data.forEach(product => product.variants.sort((a, b) => b[sortBy] - a[sortBy]))
-          }
-        }
-        break
       case 'date':
         if (order === 'ascending') {
           data.sort((a, b) => new Date(b[sortBy]) -  new Date (a[sortBy]))
