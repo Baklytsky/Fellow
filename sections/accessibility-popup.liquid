@@ -1,0 +1,70 @@
+{%- if section.settings.btn_text != blank -%}
+  <modal-opener class="accessibility__opener {% unless section.settings.test_mode %}visually-hidden{% endunless %}"
+                data-modal="#PopupModal--accessibility">
+    <button class="accessibility__opener-btn btn btn--lg btn--dark"
+            type="button"
+            aria-haspopup="dialog">
+      {{ section.settings.btn_text }}
+    </button>
+  </modal-opener>
+{%- endif -%}
+
+{%- if section.settings.heading != blank or section.settings.description != blank -%}
+  <modal-dialog id="PopupModal--accessibility" class="accessibility-popup">
+    <div class="accessibility-popup__content"
+         role="dialog"
+         aria-label="{{ section.settings.heading }}"
+         aria-modal="true"
+         aria-hidden='true'
+         tabindex="-1">
+      <button id="ModalClose--accessibility"
+              type="button"
+              class="modal-close-btn"
+              aria-label="{{ 'general.accessibility.close' | t }}">
+        {% render 'icon-close' %}
+      </button>
+      <div class="accessibility-popup__content-wrapper">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="accessibility-popup__heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.description != blank -%}
+          <div class="accessibility-popup__description">{{ section.settings.description }}</div>
+        {%- endif -%}
+      </div>
+    </div>
+  </modal-dialog>
+{%- endif -%}
+
+{% schema %}
+  {
+    "name": "Accessibility Popup",
+    "settings": [
+      {
+        "type": "text",
+        "id": "btn_text",
+        "label": "Modal opener text",
+        "info": "This button is invisible to the average user and only appears when the screen reader is activated"
+      },
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading"
+      },
+      {
+        "type": "richtext",
+        "id": "description",
+        "label": "Description"
+      },
+      {
+        "type": "header",
+        "content": "Test mode"
+      },
+      {
+        "type": "checkbox",
+        "id": "test_mode",
+        "label": "On/Off the test mode",
+        "info": "In this mode, the button will be visible to all users."
+      }
+    ]
+  }
+{% endschema %}

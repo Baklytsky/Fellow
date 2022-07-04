@@ -2127,6 +2127,10 @@ em,
   visibility: hidden
 }
 
+.overflow-hidden {
+  overflow: hidden;
+}
+
 @media screen and (min-width: 992px) {
   .anim--translateUp {
     transition: all var(--medium) var(--ease);
