@@ -28,23 +28,11 @@
     },
     "1653599595b02d298f": {
       "type": "coffee-marketplace-products",
+      "disabled": true,
       "blocks": {
-        "7fecf956-0f71-4724-8110-5147421afac4": {
-          "type": "product",
-          "settings": {
-            "product": "couplet-peaceful-peru",
-            "title_1": "Roasted In",
-            "description_1": "Los Angeles, California",
-            "title_2": "Grown In",
-            "description_2": "San Ignacio, Peru",
-            "title_3": "We Tasted",
-            "description_3": "{{ block.settings.product.metafields.coffee.attribute_3.value }}",
-            "title_4": "Why Try It?",
-            "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
-          }
-        },
         "06c75fc8-9b5f-49ae-a22b-8796612ea27a": {
           "type": "product",
+          "disabled": true,
           "settings": {
             "product": "brandywine-pride-blend-coffee",
             "title_1": "Roasted In",
@@ -73,6 +61,7 @@
         },
         "4becf74e-5449-4496-a177-124d68b00aec": {
           "type": "product",
+          "disabled": true,
           "settings": {
             "product": "pride-coffee-bundle",
             "title_1": "Can't Decide?",
@@ -91,14 +80,28 @@
           "settings": {
             "lifestyle_image": "shopify:\/\/shop_images\/vert_pride01_3289x6960_8432181f-ecaa-418f-a7b9-8f9943897308.jpg"
           }
+        },
+        "7fecf956-0f71-4724-8110-5147421afac4": {
+          "type": "product",
+          "settings": {
+            "product": "couplet-peaceful-peru",
+            "title_1": "Roasted In",
+            "description_1": "Los Angeles, California",
+            "title_2": "Grown In",
+            "description_2": "San Ignacio, Peru",
+            "title_3": "We Tasted",
+            "description_3": "{{ block.settings.product.metafields.coffee.attribute_3.value }}",
+            "title_4": "Why Try It?",
+            "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
+          }
         }
       },
       "block_order": [
-        "7fecf956-0f71-4724-8110-5147421afac4",
         "06c75fc8-9b5f-49ae-a22b-8796612ea27a",
         "00563b8d-ad99-4b88-9b82-e5c9727ad9d6",
         "4becf74e-5449-4496-a177-124d68b00aec",
-        "51ba94f5-6e31-41eb-bd2f-d78575777b2b"
+        "51ba94f5-6e31-41eb-bd2f-d78575777b2b",
+        "7fecf956-0f71-4724-8110-5147421afac4"
       ],
       "settings": {
         "heading": "June: The Pride Collection",
@@ -182,6 +185,7 @@
       "blocks": {
         "2115e373-8bab-4923-a85d-ebece997e478": {
           "type": "product",
+          "disabled": true,
           "settings": {
             "product": "rwanda-kanzu-12",
             "title_1": "Roasted In",
@@ -333,6 +337,34 @@
             "title_4": "Why Try It?",
             "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
           }
+        },
+        "e7de929d-e76a-450a-8dde-f31d60d80cc3": {
+          "type": "product",
+          "settings": {
+            "product": "couplet-peaceful-peru",
+            "title_1": "Roasted In",
+            "description_1": "Los Angeles, California",
+            "title_2": "Grown In",
+            "description_2": "San Ignacio, Peru",
+            "title_3": "We Tasted",
+            "description_3": "Peach, Caramel, Dried Cranberry, Lime",
+            "title_4": "Why Try It?",
+            "description_4": "A nuanced and fruity single-origin from a queer woman-owned roaster."
+          }
+        },
+        "6f701f26-c0b2-4587-b388-960d258ddea8": {
+          "type": "product",
+          "settings": {
+            "product": "queer-wave-coffee-marigold",
+            "title_1": "Roasted In",
+            "description_1": "Oakland, California",
+            "title_2": "Grown In",
+            "description_2": "Santa Elena, La Paz, Honduras",
+            "title_3": "We Tasted",
+            "description_3": "Tealike Mouthfeel, Slight Florals, Tangerine",
+            "title_4": "Why Try It?",
+            "description_4": "A super light Honduran from a roaster breaking down coffee culture norms."
+          }
         }
       },
       "block_order": [
@@ -346,11 +378,13 @@
         "c71c537e-331b-4b08-980b-9b905e236cf5",
         "9bc02913-d646-4cde-b261-2b4ae4a24550",
         "a49713bc-0826-4ae9-bc9c-7d03b3b2c981",
-        "139fb58b-bf5e-4304-b425-1e1341179336"
+        "139fb58b-bf5e-4304-b425-1e1341179336",
+        "e7de929d-e76a-450a-8dde-f31d60d80cc3",
+        "6f701f26-c0b2-4587-b388-960d258ddea8"
       ],
       "settings": {
-        "heading": "More Fellow Favorites",
-        "description": "We try hundreds of coffees so you don’t have to. Here are some of our recent favorites state-side. Arranged from our latest obsessions to the endlessly repeatable."
+        "heading": "Our Top Picks",
+        "description": "We try hundreds of coffees so you don’t have to. Here are some of our recent favorites. Arranged from our latest obsessions to the endlessly repeatable."
       }
     },
     "1649944546d9b124de": {
