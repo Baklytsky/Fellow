@@ -118,7 +118,8 @@ class collectionFacets extends HTMLElement {
       this.selectedFacetsCount.innerHTML = ''
     }
 
-    let allSelectedItems = this.data
+    let allSelectedItems = this.data,
+        allSelectedVariants = this.variants;
 
     facetGroup.forEach(group => {
       const groupName = group.getAttribute('data-group-name'),
@@ -134,10 +135,13 @@ class collectionFacets extends HTMLElement {
       if (this.productResultWrapper) {
         const productSelectedVariants = selectedItems.map(product => {
           const productClone = {...product}
-          productClone.variants = this.filterResults(productClone.variants, groupName, groupValues)
+          if (!product.bundle) {
+            productClone.variants = this.filterResults(productClone.variants, groupName, groupValues)
+          }
           return productClone
         })
         allSelectedItems = [...productSelectedVariants]
+        allSelectedVariants = allSelectedItems.reduce((arr, product) => arr.concat(product.variants), []);
       }
 
      const groupValuesStr = groupValues.join('+');
@@ -146,7 +150,9 @@ class collectionFacets extends HTMLElement {
 
     this.sortBy(allSelectedItems, sortByAction, sortByOrder)
     this.renderResults(allSelectedItems)
-    this.resultsCount.innerHTML = `(${allSelectedItems.length})`
+    this.resultsCount.innerHTML = (this.productResultWrapper)
+        ? `(${allSelectedVariants.length})`
+        : `(${allSelectedItems.length})`
     history.replaceState(null, null, urlParams)
   }
 

@@ -5590,6 +5590,7 @@ h3.productCard__title {
 .productCard__img {
   padding-top: 100%;
   overflow: hidden;
+  font-size: 0;
 }
 
 @media screen and (max-width: 991px) {
@@ -5704,9 +5705,10 @@ h3.productCard__title {
   padding-top: 12px;
 }
 
- .productCard__reviewNum {
-  position:relative;
- }
+.productCard__reviewNum {
+  position: relative;
+  font-size: 14px;
+}
 
 .productCard__price {
   display: flex;

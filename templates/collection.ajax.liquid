@@ -141,16 +141,114 @@
     {%- endif -%}
 
     {%- assign not_bundle = true -%}
-    {% for tag in product.tags %}
-      {% if product.tags contains 'Bundle' %}
-        {% assign not_bundle = false %}
-      {% endif %}
-    {% endfor %}
+    {% if product.template_suffix contains 'bundle' %}
+      {% assign not_bundle = false %}
+    {% endif %}
+
+    {%- comment -%} /// Get all bundle products options /// {%- endcomment -%}
+
+    {%- unless not_bundle -%}
+      {%- if product.metafields.custom_fields["bundle_product"] != blank  -%}
+        {%- assign product_color_names = blank -%}
+        {%- assign product_color_names_uniq = blank -%}
+        {%- assign product_color_hex = blank -%}
+        {%- assign product_color_hex_uniq = blank -%}
+        {%- assign product_color_val = blank -%}
+        {%- assign product_color_val_uniq = blank -%}
+        {%- assign product_sizes = blank -%}
+        {%- assign product_sizes_uniq = blank -%}
+        {%- assign product_sizes_val = blank -%}
+        {%- assign product_sizes_val_uniq = blank -%}
+
+        {%- for item in product.metafields.custom_fields["bundle_product"] -%}
+          
+          {% if item["product"] != blank %}
+            {%- assign bundle_product = all_products[item["product"]] -%}
+          {% endif %}
+          {% if item["product_variants_id"] != blank %}
+            {%- assign bundle_product_variants_id = item["product_variants_id"] | split: ',' -%}
+          {% endif %}
+
+          {%- if bundle_product != blank -%}
+            {%- assign option_color_index = blank -%}
+            {%- assign option_size_index = blank -%}
+
+            {%- comment -%} /// Get size & color option index /// {%- endcomment -%}
+
+            {%- for option in bundle_product.options_with_values -%}
+              {%- assign option_name = option.name | handleize -%}
+              {%- if option_name == 'color' -%}
+                {%- assign option_color_index = forloop.index | minus: 1 -%}
+              {%- endif -%}
+              {%- if option_name == 'size' -%}
+                {%- assign option_size_index = forloop.index | minus: 1 -%}
+              {%- endif -%}
+            {%- endfor -%}
+
+            {%- for variant in bundle_product.variants -%}
+              {%- assign show_variant = true -%}
+
+              {%- if bundle_product_variants_id != blank -%}
+                {%- assign show_variant = false -%}
+
+                {%- for bundle_variant_id in bundle_product_variants_id -%}
+                  {%- assign bundle_variant_id_num = bundle_variant_id | plus: 0 -%}
+                  {%- if bundle_variant_id_num == variant.id -%}
+                    {%- assign show_variant = true -%}
+                    {%- break -%}
+                  {%- endif -%}
+                {%- endfor -%}
+              {%- endif -%}
+
+              {%- if show_variant -%}
+                {%- if option_color_index != blank -%}
+                  {%- assign color_name = variant.options[option_color_index] -%}
+
+                  {%- if color_name contains ':' -%}
+                    {%- assign color_name = color_name | split: ':' | last | strip -%}
+                  {%- endif -%}
+
+                  {%- assign color_for_search = color_name | handleize | append: '~' | prepend: '~' -%}
+
+                  {%- if colors_str contains color_for_search -%}
+                    {%- assign first_split = colors_str | split: color_for_search | first -%}
+                    {%- assign second_split = first_split | split: '||' | last -%}
+                    {%- assign name = second_split | split: '&&' | first -%}
+                    {%- assign hex = second_split | split: '&&' | last -%}
+                    {%- assign val = name | handleize -%}
+
+                    {%- assign product_color_names = product_color_names | append: name | append: '**' -%}
+                    {%- assign product_color_hex = product_color_hex | append: hex | append: '**' -%}
+                    {%- assign product_color_val = product_color_val | append: val | append: '**' -%}
+                  {%- endif -%}
+                {%- endif -%}
+
+                {%- if option_size_index != blank -%}
+                  {%- assign name = variant.options[option_size_index] -%}
+                  {%- assign val = name | handleize -%}
+
+                  {%- assign product_sizes = product_sizes | append: name | append: '**' -%}
+                  {%- assign product_sizes_val = product_sizes_val | append: val | append: '**' -%}
+                {%- endif -%}
+              {%- endif -%}
+            {%- endfor -%}
+            
+          {%- endif -%}
+        {%- endfor -%}
+
+        {%- assign product_color_names_uniq = product_color_names | split: '**' | uniq -%}
+        {%- assign product_color_hex_uniq = product_color_hex | split: '**' | uniq -%}
+        {%- assign product_color_val_uniq = product_color_val | split: '**' | uniq -%}
+
+        {%- assign product_sizes_uniq = product_sizes | split: '**' | uniq -%}
+        {%- assign product_sizes_val_uniq = product_sizes_val | split: '**' | uniq -%}
+      {%- endif -%}
+    {%- endunless -%}
 
     {%- assign size_info = blank -%}
     {%- assign sizes = blank -%}
 
-    {%- if product_sizes_uniq.size > 0 -%}
+    {%- if product_sizes_uniq.size > 0 and not_bundle -%}
       {%- assign penultimate = product_sizes_uniq.size | minus: 1 -%}
       {%- assign sort_sizes = product_sizes_uniq | reverse -%}
 
@@ -175,7 +273,6 @@
         {%- endif -%}
       {%- endfor -%}
       {%- assign size_info = 'Available in ' | append: sizes -%}
-
     {%- endif -%}
 
     {%- assign product_type_handle = product.type | handleize -%}
@@ -260,7 +357,7 @@
         {%- assign variant_price = variant.price -%}
 
         {%- unless not_bundle -%}
-          {%- assign variant_compare_at_price  = product.compare_at_price -%}
+          {%- assign variant_compare_at_price = product.compare_at_price -%}
           {%- assign variant_price = product.price -%}
         {%- endunless -%}
 
@@ -332,11 +429,11 @@
           "value": {{ product_shop_by_use_val_uniq | json }}
           },
         "color": {
-          "value": "{{ variant_color_name | handleize }}",
+          "value": {% if not_bundle %}"{{ variant_color_name | handleize }}"{% else %}{{ product_color_val_uniq | json }}{% endif %},
           "hex": "{{ variant_color_hex }}"
           },
         "size": {
-          "value": "{{ variant_size | handleize }}"
+          "value": {% if not_bundle %}"{{ variant_size | handleize }}"{% else %}{{ product_sizes_val_uniq | json}}{% endif %}
           },
         "image": {
           "origin": "{{ variant_image | img_url: 'master' }}",

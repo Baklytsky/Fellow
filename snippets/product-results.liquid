@@ -11,9 +11,11 @@
             <a href="{{ product_url }}">{{ title }}</a>
           </h3>
           <div class="collection__product-info">
-          {{#if size_info}}
-            <p class="collection__product-info-item">{{ size_info }}</p>
-          {{/if}}
+          {{#unless bundle}}
+            {{#if size_info}}
+              <p class="collection__product-info-item">{{ size_info }}</p>
+            {{/if}}
+          {{/unless }}
           {{#if tag_info.length}}
             {{#each tag_info}}
              <p class="collection__product-info-item">{{ this }}</p>
