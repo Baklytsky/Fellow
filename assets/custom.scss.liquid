@@ -8769,7 +8769,7 @@ dynamic-recommendations {
   }
 
   .facet-group__list-item-color {
-    margin: 0 0 24px;
+    margin: 0 0 42px;
 
     .facet-group-radio {
       padding: 0;
@@ -9046,7 +9046,7 @@ dynamic-recommendations {
 .facet-group-circle {
   width: 24px;
   height: 24px;
-  margin: 0 16px 0 0;
+  margin: 0 26px 0 0;
   border: 2px solid #ABABAB;
   flex-shrink: 0;
   border-radius: 50%;
@@ -9085,7 +9085,7 @@ dynamic-recommendations {
     }
 
     .facet-group-title {
-      display: inline-block;
+      display: -webkit-box;
       position: absolute;
       top: calc(100% + 8px);
       left: 12px;
@@ -9097,13 +9097,19 @@ dynamic-recommendations {
 @media screen and (min-width: $tablet-up) {
   .facet-group__list-item-color {
     .facet-group-title {
-      max-width: 40px;
-      text-overflow: ellipsis;
+      width: 50px;
+      height: 30px;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
       overflow: hidden;
+      -o-text-overflow: ellipsis;
+      text-overflow: ellipsis;
+      white-space: normal;
+      text-align: center;
     }
     &:hover {
       .facet-group-title {
-        display: inline-block;
+        display: -webkit-box;
         position: absolute;
         top: calc(100% + 8px);
         left: 12px;
@@ -9119,9 +9125,9 @@ dynamic-recommendations {
     background-color: #000;
 
     .facet-group-title {
+      display: inline-block;
       color: #FFF;
     }
-
   }
 
   .facet-group__list-item-color {
