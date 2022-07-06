@@ -769,11 +769,8 @@ theme.pdpMain = function () {
 
       // Enable all sizes and return to default styling now that a new variant option has been selected
       $('input[name^="Color"]').each(function(){
-        var colorhandle = $(this).data('value-handle');
+        var colorhandle = theme.handleize($(this).attr('title'));
         if (colorhandle) {
-          if (colorhandle.includes("limited-edition-")) {
-            colorhandle = colorhandle.replace('limited-edition-','');
-          }
           $('#' + colorhandle).removeAttr('disabled','disabled');
           $('div[data-color^="' + colorhandle + '"]').css('opacity','');
       	}
@@ -781,8 +778,7 @@ theme.pdpMain = function () {
 
       // Enable all sizes and return to default styling now that a new variant option has been selected
       $('input[name^="Size"]').each(function(){
-        var sizevar = $(this).attr('title');
-        var sizehandle = $(this).data('value-handle');
+        var sizehandle = theme.handleize($(this).attr('title'));
         $('#' + sizehandle).removeAttr('disabled','disabled');
         $('div[data-size^="' + sizehandle + '"]').css('text-decoration','');
         $('div[data-size^="' + sizehandle + '"]').css('color','');
@@ -790,8 +786,7 @@ theme.pdpMain = function () {
 
       // Enable all quantities and return to default styling now that a new variant option has been selected
       $('input[name^="Quantity"]').each(function(){
-        var quantityvar = $(this).attr('title');
-        var quantityhandle = $(this).data('value-handle');
+        var quantityhandle = theme.handleize($(this).attr('title'));
         $('#' + quantityhandle).removeAttr('disabled','disabled');
         $('div[data-quantity^="' + quantityhandle + '"]').css('color','');
         $('div[data-quantity^="' + quantityhandle + '"]').css('text-decoration','');
@@ -825,8 +820,8 @@ theme.pdpMain = function () {
         var variant = json_product.variants[i];
         var color = variant.option1;
         // If the color option contains the string "Limited Edition:" we need to strip this
-        if (color.indexOf("Limited Edition:") > -1) {
-          color = color.replace('Limited Edition: ','');
+        if (color.indexOf(":") > -1) {
+          color = color.split(':')[1].trim();
         }
         var size  = variant.option2;
         var quantity  = variant.option3;
@@ -892,13 +887,9 @@ theme.pdpMain = function () {
           /// Loop all the color input elements
           $('input[name^="Color"]').each(function(){
             var colorvar = $(this).attr('title');
-            var colorhandle = $(this).data('value-handle');
+            var colorhandle = theme.handleize(colorvar);
             // If the color element is found in the all_colors list we need to disable this element as it is not an available color option
             if (all_colors.indexOf(colorvar) > -1) {
-              // If the color handle contains "limited-edition-" we need to strip this off first
-              if (colorhandle.indexOf("limited-edition-") > -1) {
-                colorhandle = colorhandle.replace('limited-edition-','');
-              }
               $('#' + colorhandle).attr('disabled','disabled');
               $('div[data-color^="' + colorhandle + '"]').css('opacity','0.2');
             }
@@ -2101,11 +2092,10 @@ theme.GLOBAL = function () {
   }
 
     // ======================================== Neels code starts here ========================================
-  // var popup_is_size_selected = false;
-  //
-  // $('input[name^="Size"]').click(function(){
-  //   popup_is_size_selected = true;
-  // });
+  var popup_is_size_selected = false;
+  $(document).on('click', '.pdpQuickView__description input[name^="Size"]', () => {
+    popup_is_size_selected = true
+  })
   // ======================================== Neels code ends here ========================================
 
 
@@ -2157,183 +2147,177 @@ theme.GLOBAL = function () {
       if (selectedVariant()) {
 
          // ======================================== Neels code starts here ========================================
-        // var selectedColor = $('.pdp__options-main [data-option-label="Color"] [data-option-current]').text();
-        // var selectedSize = $('.pdp__options-main [data-option-label="Size"] [data-option-current]').text();
-        // var selectedQuantity = $('.pdp__options-main [data-option-label="Quantity"] [data-option-current]').text();
-        // var all_colors = [];
-        // var all_sizes = [];
-        // var all_quantities = [];
-        //
-        // // In the quick add popup the product color titles have the "Limited Edition:" text appended to them so we need to splice this
-        // if (selectedColor.includes("Limited Edition:")) {
-        //   selectedColor = selectedColor.replace('Limited Edition: ','');
-        // }
-        //
-        // // Enable all sizes and return to default styling now that a new variant option has been selected
-        // $('input[name^="Color"]').each(function(){
-        //   var colorhandle = $(this).data('value-handle').toString();
-        //   if (colorhandle.includes("limited-edition-")) {
-        //     colorhandle = colorhandle.replace('limited-edition-','');
-        //   }
-        //   $('#' + colorhandle.toString()).removeAttr('disabled','disabled');
-        //   $('div[data-color^="' + colorhandle + '"]').css('opacity','');
-        // });
-        //
-        // // Enable all sizes and return to default styling now that a new variant option has been selected
-        // $('input[name^="Size"]').each(function(){
-        //   var sizevar = $(this).attr('title');
-        //   var sizehandle = $(this).data('value-handle').toString();
-        //   $('#' + sizehandle.toString()).removeAttr('disabled','disabled');
-        //   $('div[data-size^="' + sizehandle + '"]').css('opacity','');
-        //   $('span[data-size^="' + sizevar + '"]').css('text-decoration','');
-        // });
-        //
-        // // Enable all quantities and return to default styling now that a new variant option has been selected
-        // $('input[name^="Quantity"]').each(function(){
-        //   var quantityvar = $(this).attr('title');
-        //   var quantityhandle = $(this).data('value-handle').toString();
-        //   $('#' + quantityhandle.toString()).removeAttr('disabled','disabled');
-        //   $('div[data-quantity^="' + quantityhandle + '"]').css('color','');
-        //   $('span[data-quantity^="' + quantityvar + '"]').css('text-decoration','');
-        // });
-        //
-        // // Add all colors to the all_colors array list
-        // $('span[data-color]').each(function(){
-        //   if (all_colors.indexOf($(this).data('color')) === -1 && $(this).data('color').indexOf('-') === -1) {
-        //     all_colors.push($(this).data('color'));
-        //   }
-        // });
-        // // Add all sizes to the all_sizes array list
-        // $('span[data-size]').each(function(){
-        //   if (all_sizes.indexOf($(this).data('size')) === -1) {
-        //     all_sizes.push($(this).data('size'));
-        //   }
-        // });
-        // // Add all quantities to the all_quantities array list
-        // $('span[data-quantity]').each(function(){
-        //   if (all_quantities.indexOf($(this).data('quantity')) === -1) {
-        //     all_quantities.push($(this).data('quantity'));
-        //   }
-        // });
-        //
-        // // Create hasQuantities variable if the quantities array is populated, else we know the product only has color and size options
-        // if (all_quantities.length){
-        //   var hasQuantities = true;
-        // }
-        //
-        // // Loop all variants of the selected product
-        // for (i=0; i<json_product.variants.length; i++) {
-        //   var variant = json_product.variants[i];
-        //   var color = variant.option1;
-        //   // If the color option contains the string "Limited Edition:" we need to strip this
-        //   if (color.includes("Limited Edition:")) {
-        //     color = color.replace('Limited Edition: ','');
-        //   }
-        //   var size  = variant.option2;
-        //   var quantity  = variant.option3;
-        //
-        //   // Check if the product has 3 options of color, size and quantity
-        //   if (hasQuantities){
-        //     // Check if the color and size selected by the customer is the current loop index color and size values
-        //     if (color.indexOf(selectedColor) >= 0 && size.indexOf(selectedSize) >= 0) {
-        //       if (all_quantities.length && all_quantities.indexOf(quantity) !== -1) {
-        //         const index = all_quantities.indexOf(quantity);
-        //         if (index > -1) {
-        //           all_quantities.splice(index, 1);
-        //         }
-        //       }
-        //     }
-        //     // Check if the color and quantity selected by the customer is the current loop index color and quantity values
-        //     if (color.indexOf(selectedColor) >= 0 && quantity.indexOf(selectedQuantity) >= 0) {
-        //       if (all_sizes.indexOf(size) !== -1) {
-        //         const index = all_sizes.indexOf(size);
-        //         if (index > -1) {
-        //           all_sizes.splice(index, 1);
-        //         }
-        //       }
-        //     }
-        //     // Check if the size and quantity selected by the customer is the current loop index size and quantity values
-        //     if (size.indexOf(selectedSize) >= 0 && quantity.indexOf(selectedQuantity) >= 0) {
-        //       if (all_colors.indexOf(color) !== -1) {
-        //         const index = all_colors.indexOf(color);
-        //         if (index > -1) {
-        //           all_colors.splice(index, 1);
-        //         }
-        //       }
-        //     }
-        //   }
-        //   // Product only has 2 options of color and size
-        //   else {
-        //     // Check if the color selected by the customer is the current loop index color
-        //     if (color.indexOf(selectedColor) >= 0) {
-        //       // Check if the current variant size exists in the all_sizes array and if so, remove it from the array
-        //       if (all_sizes.indexOf(size) !== -1) {
-        //         const index = all_sizes.indexOf(size);
-        //         if (index > -1) {
-        //           all_sizes.splice(index, 1);
-        //         }
-        //       }
-        //     }
-        //     // Check if the size selected by the customer is the current loop index size
-        //     if (size.indexOf(selectedSize) >= 0) {
-        //       // Check if the current variant color exists in the all_colors array and if so, remove it from the array
-        //       if (all_colors.indexOf(color) !== -1) {
-        //         const index = all_colors.indexOf(color);
-        //         if (index > -1) {
-        //           all_colors.splice(index, 1);
-        //         }
-        //       }
-        //     }
-        //   }
-        // }
-        //
-        // // Check if there are any colors left in the all_colors array and if so, disable these color buttons as they are unavailable colors for the selected variant
-        // if (popup_is_size_selected) {
-        //   if (all_colors.length) {
-        //     /// Loop all the color input elements
-        //     $('input[name^="Color"]').each(function(){
-        //       var colorvar = $(this).attr('title');
-        //       var colorhandle = $(this).data('value-handle').toString();
-        //       // If the color element is found in the all_colors list we need to disable this element as it is not an available color option
-        //       if (all_colors.indexOf(colorvar) > -1) {
-        //         // If the color handle contains "limited-edition-" we need to strip this off first
-        //         if (colorhandle.includes("limited-edition-")) {
-        //           colorhandle = colorhandle.replace('limited-edition-','');
-        //         }
-        //         $('#' + colorhandle.toString()).attr('disabled','disabled');
-        //         $('div[data-color^="' + colorhandle + '"]').css('opacity','0.2');
-        //       }
-        //     });
-        //   }
-        //
-        //   // Check if there are any quantities left in the all_quantities array and if so, disable these quantity buttons as they are unavailable quantities for the selected variant color
-        //   if (all_quantities.length) {
-        //     $('input[name^="Quantity"]').each(function(){
-        //       var quantityvar = $(this).attr('title');
-        //       var quantityhandle = $(this).data('value-handle').toString();
-        //       // If the quantity element is found in the all_quantities list we need to disable this element as it is not an available quantity option
-        //       if (all_quantities.indexOf(quantityvar) > -1) {
-        //         $('#' + quantityhandle.toString()).attr('disabled','disabled');
-        //         $('div[data-quantity^="' + quantityhandle + '"]').css('color','#ABABAB');
-        //         $('span[data-quantity^="' + quantityvar + '"]').css('text-decoration','line-through');
-        //       }
-        //     });
-        //   }
-        // }
-        //
-        // // Check if there are any sizes left in the all_sizes array and if so, disable these size buttons as they are unavailable sizes for the selected variant color
-        // if (all_sizes.length) {
-        //   $('input[name^="Size"]').each(function(){
-        //     var sizevar = $(this).attr('title');
-        //     var sizehandle = $(this).data('value-handle').toString();
-        //     // If the size element is found in the all_sizes list we need to disable this element as it is not an available size option
-        //     if (all_sizes.indexOf(sizevar) > -1) {
-        //       $('#' + sizehandle.toString()).attr('disabled','disabled');
-        //       $('div[data-size^="' + sizehandle + '"]').css('opacity','0.5');
-        //       $('span[data-size^="' + sizevar + '"]').css('text-decoration','line-through');
-        //     }
-        //   });
-        // }
+        var selectedColor = $('.pdp__options-main [data-option-label="Color"] [data-option-current]').text();
+        var selectedSize = $('.pdp__options-main [data-option-label="Size"] [data-option-current]').text();
+        var selectedQuantity = $('.pdp__options-main [data-option-label="Quantity"] [data-option-current]').text();
+        var qvDescription = $('.pdpQuickView__description');
+        var all_colors = [];
+        var all_sizes = [];
+        var all_quantities = [];
+
+        // In the quick add popup the product color titles have the ":" text appended to them so we need to splice this
+        if (selectedColor.includes(":")) {
+          selectedColor = selectedColor.split(':')[1].trim();
+        }
+
+        // Enable all sizes and return to default styling now that a new variant option has been selected
+        $('input[name^="Color"]').each(function(){
+          var colorhandle = theme.handleize($(this).attr('title'));
+          $('#' + colorhandle.toString()).removeAttr('disabled','disabled');
+          $('div[data-color^="' + colorhandle + '"]').css('opacity','');
+        });
+
+        // Enable all sizes and return to default styling now that a new variant option has been selected
+        $('input[name^="Size"]').each(function(){
+          var sizevar = $(this).attr('title');
+          var sizehandle = theme.handleize(sizevar);
+          $('#' + sizehandle.toString()).removeAttr('disabled','disabled');
+          $('div[data-size^="' + sizehandle + '"]').css('opacity','');
+          $('span[data-size^="' + sizevar + '"]').css('text-decoration','');
+        });
+
+        // Enable all quantities and return to default styling now that a new variant option has been selected
+        $('input[name^="Quantity"]').each(function(){
+          var quantityvar = $(this).attr('title');
+          var quantityhandle = theme.handleize(quantityvar);
+          $('#' + quantityhandle.toString()).removeAttr('disabled','disabled');
+          $('div[data-quantity^="' + quantityhandle + '"]').css('color','');
+          $('span[data-quantity^="' + quantityvar + '"]').css('text-decoration','');
+        });
+
+        // Add all colors to the all_colors array list
+        $('span[data-color]').each(function(){
+          if (all_colors.indexOf($(this).data('color')) === -1) {
+            all_colors.push($(this).data('color'));
+          }
+        });
+        // Add all sizes to the all_sizes array list
+        $('span[data-size]').each(function(){
+          if (all_sizes.indexOf($(this).data('size')) === -1) {
+            all_sizes.push($(this).data('size'));
+          }
+        });
+        // Add all quantities to the all_quantities array list
+        $('span[data-quantity]').each(function(){
+          if (all_quantities.indexOf($(this).data('quantity')) === -1) {
+            all_quantities.push($(this).data('quantity'));
+          }
+        });
+
+        // Create hasQuantities variable if the quantities array is populated, else we know the product only has color and size options
+        if (all_quantities.length){
+          var hasQuantities = true;
+        }
+
+        // Loop all variants of the selected product
+        for (i=0; i<json_product.variants.length; i++) {
+          var variant = json_product.variants[i];
+          var color = variant.option1;
+          // If the color option contains the string ":" we need to strip this
+          if (color.indexOf(":") > -1) {
+            color = color.split(':')[1].trim();
+          }
+          var size  = variant.option2;
+          var quantity  = variant.option3;
+
+          // Check if the product has 3 options of color, size and quantity
+          if (hasQuantities){
+            // Check if the color and size selected by the customer is the current loop index color and size values
+            if (color.indexOf(selectedColor) >= 0 && size.indexOf(selectedSize) >= 0) {
+              if (all_quantities.length && all_quantities.indexOf(quantity) !== -1) {
+                const index = all_quantities.indexOf(quantity);
+                if (index > -1) {
+                  all_quantities.splice(index, 1);
+                }
+              }
+            }
+            // Check if the color and quantity selected by the customer is the current loop index color and quantity values
+            if (color.indexOf(selectedColor) >= 0 && quantity.indexOf(selectedQuantity) >= 0) {
+              if (all_sizes.indexOf(size) !== -1) {
+                const index = all_sizes.indexOf(size);
+                if (index > -1) {
+                  all_sizes.splice(index, 1);
+                }
+              }
+            }
+            // Check if the size and quantity selected by the customer is the current loop index size and quantity values
+            if (size.indexOf(selectedSize) >= 0 && quantity.indexOf(selectedQuantity) >= 0) {
+              if (all_colors.indexOf(color) !== -1) {
+                const index = all_colors.indexOf(color);
+                if (index > -1) {
+                  all_colors.splice(index, 1);
+                }
+              }
+            }
+          }
+          // Product only has 2 options of color and size
+          else {
+            // Check if the color selected by the customer is the current loop index color
+            if (color.indexOf(selectedColor) >= 0) {
+              // Check if the current variant size exists in the all_sizes array and if so, remove it from the array
+              if (all_sizes.indexOf(size) !== -1) {
+                const index = all_sizes.indexOf(size);
+                if (index > -1) {
+                  all_sizes.splice(index, 1);
+                }
+              }
+            }
+            // Check if the size selected by the customer is the current loop index size
+            if (size.indexOf(selectedSize) >= 0) {
+              // Check if the current variant color exists in the all_colors array and if so, remove it from the array
+              if (all_colors.indexOf(color) !== -1) {
+                const index = all_colors.indexOf(color);
+                if (index > -1) {
+                  all_colors.splice(index, 1);
+                }
+              }
+            }
+          }
+        }
+
+        // Check if there are any colors left in the all_colors array and if so, disable these color buttons as they are unavailable colors for the selected variant
+        if (popup_is_size_selected) {
+          if (all_colors.length) {
+            /// Loop all the color input elements
+            $('input[name^="Color"]').each(function(){
+              var colorvar = $(this).attr('title');
+              var colorhandle = theme.handleize(colorvar);
+              // If the color element is found in the all_colors list we need to disable this element as it is not an available color option
+              if (all_colors.indexOf(colorvar) > -1) {
+                qvDescription.find('#' + colorhandle).attr('disabled','disabled');
+                qvDescription.find('div[data-color^="' + colorhandle + '"]').css('opacity','0.2');
+              }
+            });
+          }
+
+          // Check if there are any quantities left in the all_quantities array and if so, disable these quantity buttons as they are unavailable quantities for the selected variant color
+          if (all_quantities.length) {
+            $('input[name^="Quantity"]').each(function(){
+              var quantityvar = $(this).attr('title');
+              var quantityhandle = theme.handleize(quantityvar);
+              // If the quantity element is found in the all_quantities list we need to disable this element as it is not an available quantity option
+              if (all_quantities.indexOf(quantityvar) > -1) {
+                qvDescription.find('#' + quantityhandle).attr('disabled','disabled');
+                qvDescription.find('div[data-quantity^="' + quantityhandle + '"]').css('color','#ABABAB');
+                qvDescription.find('span[data-quantity^="' + quantityvar + '"]').css('text-decoration','line-through');
+              }
+            });
+          }
+        }
+
+        // Check if there are any sizes left in the all_sizes array and if so, disable these size buttons as they are unavailable sizes for the selected variant color
+        if (all_sizes.length) {
+          $('input[name^="Size"]').each(function(){
+            var sizevar = $(this).attr('title');
+            var sizehandle = theme.handleize(sizevar);
+            // If the size element is found in the all_sizes list we need to disable this element as it is not an available size option
+            if (all_sizes.indexOf(sizevar) > -1) {
+              qvDescription.find('#' + sizehandle).attr('disabled','disabled');
+              qvDescription.find('div[data-size^="' + sizehandle + '"]').css('opacity','0.5');
+              qvDescription.find('span[data-size^="' + sizevar + '"]').css('text-decoration','line-through');
+            }
+          });
+        }
         // ======================================== Neels code ends here ========================================
 
 
