@@ -329,7 +329,7 @@
           "mobile_menu": "",
           "show_announcement": false,
           "announcement_text": "Celebrate with The Pride Collection <u>Shop Now -&gt;<\/u>",
-          "announcement_link": "shopify:\/\/collections\/pride-mugs-coffee-collection",
+          "announcement_link": "",
           "enable_timer": false,
           "end_date": "Sep 30, 2021 07:30:00 GMT-08:00"
         }
@@ -367,20 +367,20 @@
             "type": "splitSlide",
             "settings": {
               "splitSlide__layout": "right",
-              "heroSlide": "shopify:\/\/shop_images\/Image_3.png",
+              "heroSlide": "shopify:\/\/shop_images\/HeroImage_Summer_Brew_Desktop__2x_338677d1-205e-4b35-b26c-560f9669aa15.jpg",
               "desktopAlignment": "center",
               "mobileAlignment": "center",
-              "heroSlide__header": "Lush Summer",
-              "heroSlide__subheader": "Fill your morning with great blooms and delicious coffee.",
-              "subSlide__bgColor": "#e0deec",
+              "heroSlide__header": "The Summer Collection",
+              "heroSlide__subheader": "Precision brewing gear for putting all your coffee plans on ice.",
+              "subSlide__bgColor": "#ffcc4e",
               "subSlide__textColor": "#231f20",
-              "heroSlide__ctaURL": "shopify:\/\/products\/stagg-ekg-electric-pour-over-kettle",
-              "heroSlide__ctaCopy": "Shop Stagg EKG",
+              "heroSlide__ctaURL": "shopify:\/\/collections\/summer-brew",
+              "heroSlide__ctaCopy": "Shop Summer Essentials",
               "heroSlide__ctaColor": "black",
               "heroSlide__ctaURL2": "",
               "heroSlide__ctaCopy2": "",
               "heroSlide__ctaColor2": "black",
-              "heroSlide__ctaSubtext": "<span>★★★★★ | Elizabeth H.<br>\nMy new kettle makes making my pour-over coffee easy and quick. It is a beautiful addition to my counter as well!\n<a href=\"https:\/\/fellowproducts.com\/products\/stagg-ekg-electric-pour-over-kettle#pdp-reviews\" style=\"text-decoration:underline;\">Read more reviews<\/a><\/span>"
+              "heroSlide__ctaSubtext": ""
             }
           },
           "e6275e05-4fc2-4478-85db-37e4aceedf86": {
@@ -651,24 +651,23 @@
         ],
         "settings": {
           "enable_section": true,
-          "heading": "Your brewing bread and butter.",
+          "heading": "Brewing gifts for every stage of the journey.",
           "limit": 4,
           "show_view_all": true
         }
       },
       "1630052841314f69dd": {
         "type": "hp-iwt",
-        "disabled": true,
         "settings": {
           "enable_section": true,
-          "image": "shopify:\/\/shop_images\/Fellow_Atmos_LindseySheaFinals-18_rt_v01_OT.jpg",
-          "layout": "right",
-          "header": "Our Best Seller Is Back",
-          "description": "<p>Back in stock and ready for your brew bar, treat your beans to a life of luxury with Atmos.<\/p>",
+          "image": "shopify:\/\/shop_images\/HP_Module_2_Summer_Brew__2x_1.jpg",
+          "layout": "left",
+          "header": "Sip ‘n Slide",
+          "description": "<p>Enjoy easy access to your coffee anywhere with new Carter + Slide-Lock Lid.<\/p>",
           "bg_color": "",
           "text_color": "#000000",
-          "cta_url": "shopify:\/\/products\/atmos-vacuum-canister",
-          "cta_copy": "Shop Atmos",
+          "cta_url": "shopify:\/\/products\/carter-move-mug-slide-lock-lid",
+          "cta_copy": "Shop Now",
           "cta_color": "btn--dark"
         }
       },
@@ -843,16 +842,9 @@
           "cta_color": "btn--dark"
         }
       },
-      "cart-recommended": {
-        "type": "cart-recommended",
-        "settings": {}
-      },
-      "cart-gift-wrapping": {
-        "type": "cart-gift-wrapping",
-        "settings": {}
-      },
       "1636101715cd2df3c8": {
         "type": "hp-iwt",
+        "disabled": true,
         "settings": {
           "enable_section": true,
           "image": "shopify:\/\/shop_images\/NEW-Collections-HeaderIMG-Mobile-SLL.png",
@@ -931,6 +923,7 @@
       },
       "164970109872b4e7fa": {
         "type": "hp-iwt",
+        "disabled": true,
         "settings": {
           "enable_section": true,
           "image": "shopify:\/\/shop_images\/Hero_Module_Ode_Burr.png",
@@ -946,19 +939,22 @@
       },
       "16497034024471c77e": {
         "type": "hp-iwt",
-        "disabled": true,
         "settings": {
           "enable_section": true,
-          "image": "shopify:\/\/shop_images\/Coffee_Marketplace_780x618_Product_Feature_1.jpg",
-          "layout": "left",
-          "header": "Seasonal tasting menu",
-          "description": "<p>We’ve curated a selection of our favorite coffees from some of the best roasters in the world right now.<\/p>",
+          "image": "shopify:\/\/shop_images\/HP_Module_1_Summer_Brew_Desktop__2x_5555db90-8188-4671-9944-32c43e6c7dc3.jpg",
+          "layout": "right",
+          "header": "For Richer or Pourer",
+          "description": "<p>Beautifully functional wedding gifts they’ll use everyday.<\/p>",
           "bg_color": "",
           "text_color": "",
-          "cta_url": "shopify:\/\/collections\/coffee",
-          "cta_copy": "Shop Coffee",
+          "cta_url": "shopify:\/\/collections\/wedding-gifts",
+          "cta_copy": "Shop Wedding Gifts",
           "cta_color": "btn--dark"
         }
+      },
+      "cart-drawer-content": {
+        "type": "cart-drawer-content",
+        "settings": {}
       }
     },
     "content_for_index": [
@@ -969,9 +965,9 @@
       "162997622949d3f8ee",
       "164970109872b4e7fa",
       "1636101715cd2df3c8",
+      "16497034024471c77e",
       "1630052841314f69dd",
       "16391832269c232690",
-      "16497034024471c77e",
       "163005286553dd2458",
       "16342252676e2388c3",
       "1630069783d5517455",
