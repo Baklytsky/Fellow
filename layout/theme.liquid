@@ -13,6 +13,10 @@
   <link rel="preload" href="{{ 'index.js' | asset_url }}" as="script">
   <link rel="preload" href="{{ 'custom.js' | asset_url }}" as="script">
 
+  {%- if template == 'cart' -%}
+    <script>window.location = '/'</script>
+  {%- endif -%}
+
   {% capture seo_title %}
     {{ page_title }}
     {% if current_tags %}
@@ -33,70 +37,9 @@
     <script src='{{ 'shopify_common.js' | shopify_asset_url }}' defer='defer'></script>
   {% endif %}
 
-     <script>
-      window.theme = {
-        strings: {
-          addToCart: "{{ 'products.product.add_to_cart' | t }}",
-          soldOut: "{{ 'products.product.sold_out' | t }}",
-          unavailable: "{{ 'products.product.unavailable' | t }}"
-        },
-        gwpSettings: {
-          gwpEnable: "{{ settings.enable_gwp }}",
-          gwpThreshold: "{% if settings.gwp_threshold > 0 %}{{ settings.gwp_threshold }}{% else %}0{% endif %}",
-          secondGwpThreshold: "{% if settings.second_gwp_threshold > 0 %}{{ settings.second_gwp_threshold }}{% else %}0{% endif %}",
-          gwpProductAvailable : "{{ all_products[settings.gwp_product].available }}",
-          secondGwpProductAvailable : "{{ all_products[settings.second_gwp_product].available }}",
-          gwpProductId: "{{ all_products[settings.gwp_product].selected_or_first_available_variant.id }}",
-          secondGwpProductId: "{{ all_products[settings.second_gwp_product].selected_or_first_available_variant.id }}",
-          gwpProductType: "{{ all_products[settings.gwp_product].type }}",
-          secondGwpProductType: "{{ all_products[settings.second_gwp_product].type }}"
-        },
-        personalization: {
-          perProductAvailable: "{{ all_products[settings.personalization_product].available }}",
-          perProductID: "{{ all_products[settings.personalization_product].selected_or_first_available_variant.id  }}"
-        },
-        giftWrapping: {
-          giftWrappingEnable: "{{ settings.enable_gift_wrapping }}",
-          giftWrappingAvailable: "{{ all_products[settings.gift_box_product].available }}",
-          giftWrappingProductID: "{{ all_products[settings.gift_box_product].selected_or_first_available_variant.id  }}"
-        },
-        {% if template.name == 'product' %}product: {{ product | json }},{% endif %}
-        moneyFormat: "{{ shop.money_format }}"
-      }
-    </script>
-
-  
-    <script src="https://js.afterpay.com/afterpay-1.x.js" data-analytics-enabled
-           id="afterpay-placement" data-min="50.00" data-max="2000.00" async>
-    </script>
-    
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-K9G7563');</script>
-    <!-- End Google Tag Manager -->
-
-  <!-- Global site tag (gtag.js) - Google Ads: 951859275 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-951859275"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-
-    gtag('js', new Date());
-    gtag('config', 'AW-951859275');
-  </script>
-
-    <!-- Google Fonts via Preconnect -->
-    <link rel="preconnect"
-      href="https://fonts.gstatic.com"
-      crossorigin />
-
-
+    {% include 'global-obj' %}
+    {% include 'afterpay' %}
+    {% include 'google-tag-manager' %}
     {% include 'preconnect' %}
 
     {{ 'index.css' | asset_url | stylesheet_tag }}
@@ -116,14 +59,11 @@
 </head>
 
   <body>
-
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K9G7563"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
+    {% include 'gtm-no-script' %}
     {% section 'header' %}
     {% include 'modal' %}
-    {% include 'cart-drawer' %}
+    <div id="js-cart-drawer-overlay"></div>
+    {% section 'cart-drawer-content' %}
 
     <main role='main' id='root' tabindex='0'>
       {{ content_for_layout }}
@@ -146,32 +86,11 @@
 
     <script src="{{ 'custom.js' | asset_url }}" defer='defer'></script>
     <script src="{{ 'index.js' | asset_url }}" defer='defer'></script>
-    {% comment %} <script src="https://a.klaviyo.com/media/js/onsite/onsite.js"></script> {% endcomment %}
-  <script type="text/javascript">
-document.querySelector("#kl_promo_terms").addEventListener('click',function (){
-        var _klOnsite = window._klOnsite || []
-        _klOnsite.openForm('SJpmKX', () => console.log("you triggered the form!"))
-    });
-</script>
-    <script type="text/javascript">
-document.querySelector("#vippromo_terms").addEventListener('click',function (){
-        var _klOnsite = window._klOnsite || []
-        _klOnsite.openForm('SwWE8b', () => console.log("you triggered the form!"))
-    });
-</script>
+    <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
+
+    {% include 'klaviyo' %}
   </body>
 
-  <script>
-    jQuery('a[href^="http"]').not('a[href^="{{ shop.url }}"]').attr('target', '_blank');
-  </script>
-
-  <!-- yotpo -->
-  <script type="text/javascript">(function e() {
-      var e = document.createElement("script");
-      e.type = "text/javascript", e.async = true, e.src = "//staticw2.yotpo.com/JKrJpoWVtOiKekxIZEcsIIya88lPfCthqp3OznJ5/widget.js";
-      var t = document.getElementsByTagName("script")[0];
-      t.parentNode.insertBefore(e, t)
-    })();
-  </script>
-  <!-- End yotpo -->
+  {% include 'link-redirect' %}
+  {% include 'yotpo' %}
 </html>
