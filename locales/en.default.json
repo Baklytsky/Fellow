@@ -116,8 +116,8 @@
       "link_title": "Browse our {{ title }} collection",
       "facet_title": "Shop All {{ title }}",
       "facet_clear": "Clear all",
-      "facet_hide": "Hide filters",
-      "facet_show": "Show filters",
+      "facet_hide": "Hide Filters",
+      "facet_show": "Show Filters",
       "facet_sort_by": "Sort By"
     }
   },

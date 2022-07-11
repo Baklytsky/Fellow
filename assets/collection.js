@@ -21,7 +21,7 @@ class collectionFacets extends HTMLElement {
   }
 
   getProducts () {
-    const url = window.location.pathname + '?sort_by=best-selling&view=ajax'
+    const url = window.location.pathname + '?sort_by=best-selling&view=ajax-obj'
     fetch(`${url}`)
         .then(resp => {return resp.json()})
         .then(data => {

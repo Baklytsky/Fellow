@@ -20,6 +20,16 @@
   {% endfor %}
 {% endif %}
 
+{%- comment -%} /// Hidden "sizes" in filters  /// {%- endcomment -%}
+{% if collection.metafields["custom_fields"]["hidden_sizes"] != blank %}
+  {%- assign hidden_sizes_arr = collection.metafields["custom_fields"]["hidden_sizes"] | split: ',' -%}
+{% endif %}
+
+{%- comment -%} /// Hidden "shop by use" in filters  /// {%- endcomment -%}
+{% if collection.metafields["custom_fields"]["hidden_shop_by_use_tags"] != blank %}
+  {%- assign hidden_shop_by_use_arr = collection.metafields["custom_fields"]["hidden_shop_by_use_tags"] | split: ',' -%}
+{% endif %}
+
 {% paginate collection.products by 1000 %}
 {
   "products": [
@@ -84,11 +94,24 @@
         {%- endif -%}
 
         {%- if option_size_index != blank -%}
+          {%- assign skip_size = false -%}
           {%- assign name = variant.options[option_size_index] -%}
           {%- assign val = name | handleize -%}
 
-          {%- assign product_sizes = product_sizes | append: name | append: '**' -%}
-          {%- assign product_sizes_val = product_sizes_val | append: val | append: '**' -%}
+          {%- if hidden_sizes_arr.size > 0 -%}
+            {%- for hidden_size in hidden_sizes_arr -%}
+              {%- assign hidden_size_val = hidden_size | handleize -%}
+              {%- if hidden_size_val == val -%}
+                {%- assign skip_size = true -%}
+                {%- break -%}
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endif -%}
+
+          {%- unless skip_size -%}
+            {%- assign product_sizes = product_sizes | append: name | append: '**' -%}
+            {%- assign product_sizes_val = product_sizes_val | append: val | append: '**' -%}
+          {%- endunless -%}
         {%- endif -%}
 
       {%- endfor -%}
@@ -98,10 +121,26 @@
 
     {%- for tag in product.tags -%}
       {%- if tag contains 'Use:' -%}
+        {%- assign skip_tag = false -%}
         {%- assign use_name = tag | split: 'Use:' | last | strip -%}
         {%- assign use_name_handle = use_name | handleize -%}
-        {%- assign product_shop_by_use = product_shop_by_use | append: use_name | append: '**' -%}
-        {%- assign product_shop_by_use_val = product_shop_by_use_val | append: use_name_handle | append: '**' -%}
+
+        {%- if hidden_shop_by_use_arr.size > 0 -%}
+          {%- for hidden_shop_by_use in hidden_shop_by_use_arr -%}
+            {%- assign hidden_shop_by_use_handle = hidden_shop_by_use | handleize -%}
+            {%- if hidden_shop_by_use_handle == use_name_handle -%}
+              {%- assign skip_tag = true -%}
+              {%- break -%}
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+
+        {%- unless skip_tag -%}
+          {%- assign product_shop_by_use = product_shop_by_use | append: use_name | append: '**' -%}
+          {%- assign product_shop_by_use_val = product_shop_by_use_val | append: use_name_handle | append: '**' -%}
+        {%- endunless -%}
+
+
       {%- endif -%}
     {%- endfor -%}
 
@@ -224,11 +263,25 @@
                 {%- endif -%}
 
                 {%- if option_size_index != blank -%}
+                  {%- assign skip_size = false -%}
                   {%- assign name = variant.options[option_size_index] -%}
                   {%- assign val = name | handleize -%}
 
-                  {%- assign product_sizes = product_sizes | append: name | append: '**' -%}
-                  {%- assign product_sizes_val = product_sizes_val | append: val | append: '**' -%}
+                  {%- if hidden_sizes_arr.size > 0 -%}
+                    {%- for hidden_size in hidden_sizes_arr -%}
+                      {%- assign hidden_size_val = hidden_size | handleize -%}
+                      {%- if hidden_size_val == val -%}
+                        {%- assign skip_size = true -%}
+                        {%- break -%}
+                      {%- endif -%}
+                    {%- endfor -%}
+                  {%- endif -%}
+
+                  {%- unless skip_size -%}
+                    {%- assign product_sizes = product_sizes | append: name | append: '**' -%}
+                    {%- assign product_sizes_val = product_sizes_val | append: val | append: '**' -%}
+                  {%- endunless -%}
+
                 {%- endif -%}
               {%- endif -%}
             {%- endfor -%}
