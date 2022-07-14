@@ -4,6 +4,25 @@ theme.setAttributes = function (el, attrObj) {
   Object.keys(attrObj).forEach(key => el.setAttribute(key, attrObj[key]));
 }
 
+theme.serializeObject = function (form) {
+  const formData = new FormData(form),
+        bodyObj = {};
+  for (const [name, value] of formData) bodyObj[name] = value;
+  return bodyObj
+}
+
+theme.pdpErrorMessage = function (error) {
+  if (error.status === 422) {
+    let errorMessage = document.querySelector('.PdpErrorMessage')
+    errorMessage.innerHTML = error.responseJSON.description
+    errorMessage.style.display = 'block'
+    setTimeout(() => {
+      errorMessage.style.display = 'none'
+      errorMessage.innerHTML = ''
+    }, 3500);
+  }
+}
+
 theme.disableScroll = function () {
   $('body').css('overflow', 'hidden');
 }
@@ -230,27 +249,6 @@ theme.slickSlider = function () {
 
     $slider.not('.slick-initialized').slick(config);
   });
-}
-
-theme.addProduct = function () {
-  $.ajax({
-    type: 'POST',
-    url: '/cart/add.js',
-    data: $('[data-add-id]').parents('form').serialize(),
-    dataType: 'json',
-    success: function() {
-      CartDrawer.emit("cart:updating");
-      UpdateCart('', '', true)
-      theme.closeModal();
-    },
-    error: function (error) {
-      if (error.status == 422) {
-        $('#PdpErrorMessage').text(error.responseJSON.description).fadeIn('slow');
-
-        setTimeout(function () {$('#PdpErrorMessage').text('').hide();}, 3500);
-      }
-    }
-  })
 }
 
 theme.toggleTab = function ($this) {
@@ -527,23 +525,6 @@ theme.pdpMain = function () {
     }
   }
 
-  // function changeVariantImage(variantId) {
-  //   var selectedVariantThumbnail = $(document).find('[data-variant-img="' + variantId + '"]'),
-  //       selectedVariantImage = $(document).find('[data-variant-media="' + variantId + '"]'),
-  //       slideIndexMobile = selectedVariantImage.parent().data('slick-index'),
-  //       mobileProductSlider = $(document).find('.pdpMain__gallery-wrapper');
-  //
-  //   if ($(window).width() < 992) {
-  //     if (selectedVariantThumbnail.length) {
-  //       mobileProductSlider.slick('slickGoTo', parseInt(slideIndexMobile), false);
-  //     }
-  //   } else {
-  //     if (selectedVariantImage.length) {
-  //       mobileProductSlider.slick('slickGoTo', parseInt(slideIndexMobile), false);
-  //     }
-  //   }
-  // }
-
   function pdpStickyBar() {
     var $productStickyBar = $('.pdpStickyBar'),
         $pdpDetails = $('.pdpMain__details .pdpForm #atc-wrapper');
@@ -634,22 +615,16 @@ theme.pdpMain = function () {
 
   function bundle () {
     theme.kitPreOrderCheck()
-    var selectors = {
-      addBundle: '#pdp-bundle-atc',
-      cartButton: '.js-cart-drawer-toggle',
-      cartCount: '.js-cart-count',
-      cartDrawer: '#cart-drawer-content',
-      form: '[action="/cart/add"]'
-    };
 
-    $(document).on('click', selectors.addBundle, function (e) {
+    $(document).on('click', '#pdp-bundle-atc', function (e) {
       e.preventDefault();
-      var $availableVariants = $('[data-variant-available="true"]'),
-          bundle_name = $(this).attr('data-bundle-name') || '';
-      let products_data = [];
+      let $availableVariants = $('[data-variant-available="true"]'),
+          bundle_name = $(this).attr('data-bundle-name') || '',
+          products_data = [],
+          prop = {};
 
       $availableVariants.each(function (i, element) {
-        let prop = {
+        prop = {
           "_bundles": true,
           "_Bundle_Name": bundle_name
         }
@@ -671,28 +646,8 @@ theme.pdpMain = function () {
         })
       });
 
-      $.ajax({
-        type: 'post',
-        url: '/cart/add.js',
-        data: {items: products_data},
-        dataType: 'json',
-        success: function () {
-          updateCartDrawer()
-        },
-        error: function (XMLHttpRequest) {
-        }
-      })
+      theme.cart.cartEvent('/cart/add.js', {items: products_data}, true, theme.pdpErrorMessage)
     })
-
-    function updateCartDrawer() {
-      fetch('/cart.js')
-          .then(response => response.json())
-          .then(function (cartObject) {
-            $(selectors.cartCount).html(cartObject.item_count)
-            CartDrawer.emit("cart:updated", {cart: cartObject})
-            CartDrawer.emit("cart:toggle", {cartOpen: !0})
-          });
-    }
   }
 
 
@@ -773,11 +728,8 @@ theme.pdpMain = function () {
 
       // Enable all sizes and return to default styling now that a new variant option has been selected
       $('input[name^="Color"]').each(function(){
-        var colorhandle = $(this).data('value-handle');
+        var colorhandle = theme.handleize($(this).attr('title'));
         if (colorhandle) {
-          if (colorhandle.includes("limited-edition-")) {
-            colorhandle = colorhandle.replace('limited-edition-','');
-          }
           $('#' + colorhandle).removeAttr('disabled','disabled');
           $('div[data-color^="' + colorhandle + '"]').css('opacity','');
       	}
@@ -785,8 +737,7 @@ theme.pdpMain = function () {
 
       // Enable all sizes and return to default styling now that a new variant option has been selected
       $('input[name^="Size"]').each(function(){
-        var sizevar = $(this).attr('title');
-        var sizehandle = $(this).data('value-handle');
+        var sizehandle = theme.handleize($(this).attr('title'));
         $('#' + sizehandle).removeAttr('disabled','disabled');
         $('div[data-size^="' + sizehandle + '"]').css('text-decoration','');
         $('div[data-size^="' + sizehandle + '"]').css('color','');
@@ -794,8 +745,7 @@ theme.pdpMain = function () {
 
       // Enable all quantities and return to default styling now that a new variant option has been selected
       $('input[name^="Quantity"]').each(function(){
-        var quantityvar = $(this).attr('title');
-        var quantityhandle = $(this).data('value-handle');
+        var quantityhandle = theme.handleize($(this).attr('title'));
         $('#' + quantityhandle).removeAttr('disabled','disabled');
         $('div[data-quantity^="' + quantityhandle + '"]').css('color','');
         $('div[data-quantity^="' + quantityhandle + '"]').css('text-decoration','');
@@ -829,8 +779,8 @@ theme.pdpMain = function () {
         var variant = json_product.variants[i];
         var color = variant.option1;
         // If the color option contains the string "Limited Edition:" we need to strip this
-        if (color.indexOf("Limited Edition:") > -1) {
-          color = color.replace('Limited Edition: ','');
+        if (color.indexOf(":") > -1) {
+          color = color.split(':')[1].trim();
         }
         var size  = variant.option2;
         var quantity  = variant.option3;
@@ -896,13 +846,9 @@ theme.pdpMain = function () {
           /// Loop all the color input elements
           $('input[name^="Color"]').each(function(){
             var colorvar = $(this).attr('title');
-            var colorhandle = $(this).data('value-handle');
+            var colorhandle = theme.handleize(colorvar);
             // If the color element is found in the all_colors list we need to disable this element as it is not an available color option
             if (all_colors.indexOf(colorvar) > -1) {
-              // If the color handle contains "limited-edition-" we need to strip this off first
-              if (colorhandle.indexOf("limited-edition-") > -1) {
-                colorhandle = colorhandle.replace('limited-edition-','');
-              }
               $('#' + colorhandle).attr('disabled','disabled');
               $('div[data-color^="' + colorhandle + '"]').css('opacity','0.2');
             }
@@ -1092,7 +1038,7 @@ theme.pdpMain = function () {
       checkBundleMixPrice()
     })
 
-    $(document).on('click.addBundleMix', '#pdp-bundle-atc', function (e) {
+    $(document).on('click.addBundleMix', '#pdp-bundle-mix-atc', function (e) {
       e.preventDefault();
       var $selectedBundleOptions = $(this).parents('.pdpForm').find('.js-bundle-variant select'),
           bundle_name = $(this).attr('data-bundle-name') || '',
@@ -1160,21 +1106,7 @@ theme.pdpMain = function () {
         })
       }
 
-      $.ajax({
-        type: 'post',
-        url: '/cart/add.js',
-        data: {items: products_data},
-        dataType: 'json',
-        success: function () {
-          UpdateCart('', '', true)
-        },
-        error: function (error) {
-          if (error.status === 422) {
-            $('#PdpErrorMessage').text(error.responseJSON.description).fadeIn('slow');
-            setTimeout(function () {$('#PdpErrorMessage').text('').hide();}, 5500);
-          }
-        }
-      })
+      theme.cart.cartEvent('/cart/add.js', {items: products_data}, true, theme.pdpErrorMessage)
     })
   }
 
@@ -1224,25 +1156,23 @@ theme.pdpMain = function () {
     })
     $(document).on('click.addUpsellProduct', '#pdp-product-upsell-atc', function (e) {
       e.preventDefault();
-      var selectedUpsellId = $(this).parents('.upsell-product__wrapper').find('.js-product-upsell-variant select').attr('value');
-      $.ajax({
-        type: 'post',
-        url: '/cart/add.js',
-        data: {
-          id: selectedUpsellId,
-          quantity: 1,
-        },
-        dataType: 'json',
-        success: function () {
-          UpdateCart('', '', true)
-        },
-        error: function (error) {
-          if (error.status === 422) {
-            $('#PdpUpsellErrorMessage').text(error.responseJSON.description).fadeIn('slow');
-            setTimeout(function () {$('#PdpUpsellErrorMessage').fadeOut('slow').text('');}, 5500);
-          }
+      let selectedUpsellId = $(this).parents('.upsell-product__wrapper').find('.js-product-upsell-variant select').attr('value'),
+          bodyObj = {
+            id: selectedUpsellId,
+            quantity: 1
+          };
+      function errorMessage(error) {
+        if (error.status === 422) {
+          let errorMessage = document.querySelector('#PdpUpsellErrorMessage')
+          errorMessage.innerHTML = error.responseJSON.description
+          errorMessage.style.display = 'block'
+          setTimeout(() => {
+            errorMessage.style.display = 'none'
+            errorMessage.innerHTML = ''
+          }, 3500);
         }
-      })
+      }
+      theme.cart.cartEvent('/cart/add.js', bodyObj, true, errorMessage)
     })
   }
 
@@ -1485,267 +1415,6 @@ theme.collectionAndSearch = function (isSearchPage) {
       });
     })
   }
-}
-
-theme.cartDrawer = function () {
-  // Remove all $(document) Events
-  $(document).off('click.openItemRemovePopup');
-  $(document).off('click.closeItemRemovePopup');
-  $(document).off('click.updateRecommendedAddId');
-  $(document).off('click.addRecommendedProduct');
-  $(document).off('click.updateCartInputQTY');
-  $(document).off('click.openGWModal');
-  $(document).off('click.closeGWModal');
-  $(document).off('click.addGWNote');
-  $(document).off('input.noteLength');
-
-  theme.openItemRemovePopup = function (cartItemRemoveBtn, isGWP) {
-    $(document).off('click.removeItemInCart');
-
-    $('.js-cart-drawer-popup').attr('aria-hidden', 'false');
-
-    $(document).on('click.removeItemInCart', '.js-remove-item-trigger', function (e) {
-      e.preventDefault();
-      if (isGWP) {localStorage.setItem(isGWP, 'true');}
-      cartItemRemoveBtn.trigger('click');
-      theme.closeItemRemovePopup();
-    });
-  }
-
-  theme.closeItemRemovePopup = function () {
-    $('.js-cart-drawer-popup').attr('aria-hidden', 'true');
-  }
-
-  $(document).on('click.openItemRemovePopup', '[data-action="open-item-remove-popup"]', function (e) {
-    e.preventDefault();
-    var cartItemRemoveBtn = $(this).parents('.cart-drawer__item').find('.js-remove-item'),
-        isGWP = $(this).attr('data-gift-product');
-    $(this).attr('aria-expanded', 'true');
-    theme.openItemRemovePopup(cartItemRemoveBtn, isGWP);
-  });
-
-  $(document).on('click.closeItemRemovePopup', '[data-action="close-item-remove-popup"]', function (e) {
-    e.preventDefault();
-    $('[data-action="open-item-remove-popup"]').attr('aria-expanded', 'false');
-    theme.closeItemRemovePopup();
-  });
-
-  // Change button id on color changes, recommended products section
-
-  $(document).on('click.updateRecommendedAddId', '.productCard__recommended .js-productCard-option', function (e) {
-    e.preventDefault();
-    let $addButton = $(this).parents('.productCard__recommended').find('[data-action="add-to-cart-recommended"]'),
-        variantId = $(this).attr('data-variant-id');
-    $addButton.attr('data-variant-id', variantId);
-  });
-
-  $(document).on('click.addRecommendedProduct', '[data-action="add-to-cart-recommended"]', function (e) {
-    e.preventDefault();
-
-    let id = $(this).attr('data-variant-id').split('cart-')[1];
-    let data = {
-      id: id,
-      quantity: 1
-    };
-
-    $.ajax({
-      type: 'POST',
-      url: '/cart/add.js',
-      data: data,
-      dataType: 'json',
-      success: function() {
-        // CartDrawer.emit("cart:updating");
-        UpdateCart('', '', true)
-      },
-      error: function (error) {
-        if (error.status == 422) {
-          $('#CartRecommendedErrorMessage').text(error.responseJSON.description).fadeIn('slow');
-          setTimeout(function () {$('#CartRecommendedErrorMessage').fadeOut('slow').text('');}, 3500);
-        }
-      }
-    })
-  });
-
-  theme.updateGiftWrappingProduct = function () {
-    var $sectionWrapper = $('.cart-drawer__footer-gift-wrapping');
-    if ($sectionWrapper.length) {
-      $.ajax({
-        type: 'GET',
-        url: '/?section_id=cart-gift-wrapping',
-        success: function(content) {
-          $sectionWrapper.html(content);
-        }
-      })
-    }
-  }
-
-  theme.changeGiftWrappingNote = function () {
-    var data = {
-      attributes: {
-        'Gift note': $(document).find('#cart-note').val(),
-      }
-    }
-
-    $.ajax({
-      type: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      data: JSON.stringify(data),
-      dataType: 'json',
-      url: '/cart/update.js',
-      success: function(cart) {
-        console.log(cart)
-        var giftBoxInCart = false
-        cart.items.forEach(function (element) {
-          if (element.product_type === 'Gift box') {giftBoxInCart = true}
-        });
-        if (!giftBoxInCart) {
-          theme.addCustomProduct('/cart/add.js', window.theme.giftWrapping.giftWrappingProductID, 1, true)
-        } else {
-          UpdateCart('', '', true);
-        }
-        theme.updateGiftWrappingProduct()
-        theme.closeGiftWrappingModal()
-      }
-    })
-  }
-
-  theme.openGiftWrappingModal = function () {
-    $(document).find('.cart-gift-wrapping-modal').attr('aria-expanded', true)
-  }
-
-  theme.closeGiftWrappingModal = function () {
-    $(document).find('.cart-gift-wrapping-modal').attr('aria-expanded', false)
-  }
-
-  $(document).on('click.openGWModal', '[data-open-gift-note]', theme.openGiftWrappingModal)
-  $(document).on('click.closeGWModal', '[data-close-gift-note]', theme.closeGiftWrappingModal)
-  $(document).on('click.addGWNote', '[data-add-gift-note]', theme.changeGiftWrappingNote)
-  $(document).on('input.noteLength', '#cart-note', function (e) {
-    let target = e.currentTarget,
-        maxLength = target.getAttribute("maxlength"),
-        currentLength = target.value.length;
-    $(this).parents('.cart-gift-wrapping-modal__note').find('.note-length').text(`${maxLength - currentLength} Characters Remaining`)
-  })
-
-  theme.updateCartRecommendedProducts = function () {
-    var $sectionWrapper = $('.cart-drawer__footer-recommended-wrapper');
-    if ($sectionWrapper.length) {
-      $.ajax({
-        type: 'GET',
-        url: '/?section_id=cart-recommended',
-        success: function(content) {
-          $sectionWrapper.html(content);
-        }
-      })
-    }
-  }
-
-  $(document).on('change.updateCartInputQTY', 'input.cart-quantity', function () {
-    let value = parseInt($(this).val(), 10),
-        id = $(this).parents('.cart-drawer__item').attr('data-id'),
-        key = $(this).parents('.cart-drawer__item').attr('data-key');
-    updateCartItemQuantity(id, value, key);
-  });
-
-  $(document).on('click.checkout', '.cart-checkout__button', function (e) {
-    e.preventDefault();
-    const location = $(this).attr('href'),
-          cartContents = fetch('/cart.js')
-          .then(response => response.json())
-          .then(data => { return data });
-    let updateData = {},
-        addData = [];
-
-    cartContents.then((cart) => {
-      console.log(cart)
-      $(cart.items).each(function (i, lineItem) {
-        if (lineItem.properties._bundles && lineItem.discounts.length === 0) {
-          updateData[`${lineItem.key}`] = 0
-          let prop = lineItem.properties;
-          delete prop['_bundles']
-          delete prop['_Bundle_Name']
-          addData.push({
-            id: lineItem.variant_id,
-            quantity: lineItem.quantity,
-            properties: prop
-          })
-        }
-      })
-    }).then(() => {
-      if ($.isEmptyObject(updateData)) {
-        window.location = location;
-      } else {
-        $.ajax({
-          type: 'POST',
-          url: '/cart/update.js',
-          data: {
-            updates: updateData
-          },
-          dataType: 'json',
-          success: () => {
-            $.ajax({
-              type: 'post',
-              url: '/cart/add.js',
-              data: {items: addData},
-              dataType: 'json',
-              success: function () {
-                UpdateCart('', '', true)
-                window.location = location;
-              }
-            })
-          },
-          error: function (err) {
-            console.error(err)
-          }
-        })
-      }
-    })
-  });
-}
-
-theme.addCustomProduct = function (url, id, quantity, openCart, property) {
-  var properties = (property) ? property : {};
-  $.ajax({
-    type: 'POST',
-    url: url,
-    data: {
-      id: id,
-      quantity: quantity,
-      properties: properties,
-    },
-    dataType: 'json',
-    success: function () {
-      CartDrawer.emit("cart:updating");
-      UpdateCart('', '', openCart);
-    }
-  })
-}
-
-theme.checkGwp = function (cart, propertyToCheck) {
-  let hasGwp = false;
-  cart.items.forEach(function (element) {
-    if (element.product_type === 'Gift product' && element.properties.hasOwnProperty(propertyToCheck)) {
-      hasGwp = true
-    }
-  });
-  return hasGwp;
-}
-
-theme.checkGwpOnLoad = function (element) {
-  $.ajax({
-    type: 'POST',
-    url: '/cart/change.js',
-    data: {
-      id: element.id,
-      quantity: 0,
-    },
-    dataType: 'json',
-    success: function () {
-      UpdateCart('', '', false);
-    }
-  })
 }
 
 theme.searchBar = function () {
@@ -2105,11 +1774,10 @@ theme.GLOBAL = function () {
   }
 
     // ======================================== Neels code starts here ========================================
-  // var popup_is_size_selected = false;
-  //
-  // $('input[name^="Size"]').click(function(){
-  //   popup_is_size_selected = true;
-  // });
+  var popup_is_size_selected = false;
+  $(document).on('click', '.pdpQuickView__description input[name^="Size"]', () => {
+    popup_is_size_selected = true
+  })
   // ======================================== Neels code ends here ========================================
 
 
@@ -2161,183 +1829,177 @@ theme.GLOBAL = function () {
       if (selectedVariant()) {
 
          // ======================================== Neels code starts here ========================================
-        // var selectedColor = $('.pdp__options-main [data-option-label="Color"] [data-option-current]').text();
-        // var selectedSize = $('.pdp__options-main [data-option-label="Size"] [data-option-current]').text();
-        // var selectedQuantity = $('.pdp__options-main [data-option-label="Quantity"] [data-option-current]').text();
-        // var all_colors = [];
-        // var all_sizes = [];
-        // var all_quantities = [];
-        //
-        // // In the quick add popup the product color titles have the "Limited Edition:" text appended to them so we need to splice this
-        // if (selectedColor.includes("Limited Edition:")) {
-        //   selectedColor = selectedColor.replace('Limited Edition: ','');
-        // }
-        //
-        // // Enable all sizes and return to default styling now that a new variant option has been selected
-        // $('input[name^="Color"]').each(function(){
-        //   var colorhandle = $(this).data('value-handle').toString();
-        //   if (colorhandle.includes("limited-edition-")) {
-        //     colorhandle = colorhandle.replace('limited-edition-','');
-        //   }
-        //   $('#' + colorhandle.toString()).removeAttr('disabled','disabled');
-        //   $('div[data-color^="' + colorhandle + '"]').css('opacity','');
-        // });
-        //
-        // // Enable all sizes and return to default styling now that a new variant option has been selected
-        // $('input[name^="Size"]').each(function(){
-        //   var sizevar = $(this).attr('title');
-        //   var sizehandle = $(this).data('value-handle').toString();
-        //   $('#' + sizehandle.toString()).removeAttr('disabled','disabled');
-        //   $('div[data-size^="' + sizehandle + '"]').css('opacity','');
-        //   $('span[data-size^="' + sizevar + '"]').css('text-decoration','');
-        // });
-        //
-        // // Enable all quantities and return to default styling now that a new variant option has been selected
-        // $('input[name^="Quantity"]').each(function(){
-        //   var quantityvar = $(this).attr('title');
-        //   var quantityhandle = $(this).data('value-handle').toString();
-        //   $('#' + quantityhandle.toString()).removeAttr('disabled','disabled');
-        //   $('div[data-quantity^="' + quantityhandle + '"]').css('color','');
-        //   $('span[data-quantity^="' + quantityvar + '"]').css('text-decoration','');
-        // });
-        //
-        // // Add all colors to the all_colors array list
-        // $('span[data-color]').each(function(){
-        //   if (all_colors.indexOf($(this).data('color')) === -1 && $(this).data('color').indexOf('-') === -1) {
-        //     all_colors.push($(this).data('color'));
-        //   }
-        // });
-        // // Add all sizes to the all_sizes array list
-        // $('span[data-size]').each(function(){
-        //   if (all_sizes.indexOf($(this).data('size')) === -1) {
-        //     all_sizes.push($(this).data('size'));
-        //   }
-        // });
-        // // Add all quantities to the all_quantities array list
-        // $('span[data-quantity]').each(function(){
-        //   if (all_quantities.indexOf($(this).data('quantity')) === -1) {
-        //     all_quantities.push($(this).data('quantity'));
-        //   }
-        // });
-        //
-        // // Create hasQuantities variable if the quantities array is populated, else we know the product only has color and size options
-        // if (all_quantities.length){
-        //   var hasQuantities = true;
-        // }
-        //
-        // // Loop all variants of the selected product
-        // for (i=0; i<json_product.variants.length; i++) {
-        //   var variant = json_product.variants[i];
-        //   var color = variant.option1;
-        //   // If the color option contains the string "Limited Edition:" we need to strip this
-        //   if (color.includes("Limited Edition:")) {
-        //     color = color.replace('Limited Edition: ','');
-        //   }
-        //   var size  = variant.option2;
-        //   var quantity  = variant.option3;
-        //
-        //   // Check if the product has 3 options of color, size and quantity
-        //   if (hasQuantities){
-        //     // Check if the color and size selected by the customer is the current loop index color and size values
-        //     if (color.indexOf(selectedColor) >= 0 && size.indexOf(selectedSize) >= 0) {
-        //       if (all_quantities.length && all_quantities.indexOf(quantity) !== -1) {
-        //         const index = all_quantities.indexOf(quantity);
-        //         if (index > -1) {
-        //           all_quantities.splice(index, 1);
-        //         }
-        //       }
-        //     }
-        //     // Check if the color and quantity selected by the customer is the current loop index color and quantity values
-        //     if (color.indexOf(selectedColor) >= 0 && quantity.indexOf(selectedQuantity) >= 0) {
-        //       if (all_sizes.indexOf(size) !== -1) {
-        //         const index = all_sizes.indexOf(size);
-        //         if (index > -1) {
-        //           all_sizes.splice(index, 1);
-        //         }
-        //       }
-        //     }
-        //     // Check if the size and quantity selected by the customer is the current loop index size and quantity values
-        //     if (size.indexOf(selectedSize) >= 0 && quantity.indexOf(selectedQuantity) >= 0) {
-        //       if (all_colors.indexOf(color) !== -1) {
-        //         const index = all_colors.indexOf(color);
-        //         if (index > -1) {
-        //           all_colors.splice(index, 1);
-        //         }
-        //       }
-        //     }
-        //   }
-        //   // Product only has 2 options of color and size
-        //   else {
-        //     // Check if the color selected by the customer is the current loop index color
-        //     if (color.indexOf(selectedColor) >= 0) {
-        //       // Check if the current variant size exists in the all_sizes array and if so, remove it from the array
-        //       if (all_sizes.indexOf(size) !== -1) {
-        //         const index = all_sizes.indexOf(size);
-        //         if (index > -1) {
-        //           all_sizes.splice(index, 1);
-        //         }
-        //       }
-        //     }
-        //     // Check if the size selected by the customer is the current loop index size
-        //     if (size.indexOf(selectedSize) >= 0) {
-        //       // Check if the current variant color exists in the all_colors array and if so, remove it from the array
-        //       if (all_colors.indexOf(color) !== -1) {
-        //         const index = all_colors.indexOf(color);
-        //         if (index > -1) {
-        //           all_colors.splice(index, 1);
-        //         }
-        //       }
-        //     }
-        //   }
-        // }
-        //
-        // // Check if there are any colors left in the all_colors array and if so, disable these color buttons as they are unavailable colors for the selected variant
-        // if (popup_is_size_selected) {
-        //   if (all_colors.length) {
-        //     /// Loop all the color input elements
-        //     $('input[name^="Color"]').each(function(){
-        //       var colorvar = $(this).attr('title');
-        //       var colorhandle = $(this).data('value-handle').toString();
-        //       // If the color element is found in the all_colors list we need to disable this element as it is not an available color option
-        //       if (all_colors.indexOf(colorvar) > -1) {
-        //         // If the color handle contains "limited-edition-" we need to strip this off first
-        //         if (colorhandle.includes("limited-edition-")) {
-        //           colorhandle = colorhandle.replace('limited-edition-','');
-        //         }
-        //         $('#' + colorhandle.toString()).attr('disabled','disabled');
-        //         $('div[data-color^="' + colorhandle + '"]').css('opacity','0.2');
-        //       }
-        //     });
-        //   }
-        //
-        //   // Check if there are any quantities left in the all_quantities array and if so, disable these quantity buttons as they are unavailable quantities for the selected variant color
-        //   if (all_quantities.length) {
-        //     $('input[name^="Quantity"]').each(function(){
-        //       var quantityvar = $(this).attr('title');
-        //       var quantityhandle = $(this).data('value-handle').toString();
-        //       // If the quantity element is found in the all_quantities list we need to disable this element as it is not an available quantity option
-        //       if (all_quantities.indexOf(quantityvar) > -1) {
-        //         $('#' + quantityhandle.toString()).attr('disabled','disabled');
-        //         $('div[data-quantity^="' + quantityhandle + '"]').css('color','#ABABAB');
-        //         $('span[data-quantity^="' + quantityvar + '"]').css('text-decoration','line-through');
-        //       }
-        //     });
-        //   }
-        // }
-        //
-        // // Check if there are any sizes left in the all_sizes array and if so, disable these size buttons as they are unavailable sizes for the selected variant color
-        // if (all_sizes.length) {
-        //   $('input[name^="Size"]').each(function(){
-        //     var sizevar = $(this).attr('title');
-        //     var sizehandle = $(this).data('value-handle').toString();
-        //     // If the size element is found in the all_sizes list we need to disable this element as it is not an available size option
-        //     if (all_sizes.indexOf(sizevar) > -1) {
-        //       $('#' + sizehandle.toString()).attr('disabled','disabled');
-        //       $('div[data-size^="' + sizehandle + '"]').css('opacity','0.5');
-        //       $('span[data-size^="' + sizevar + '"]').css('text-decoration','line-through');
-        //     }
-        //   });
-        // }
+        var selectedColor = $('.pdp__options-main [data-option-label="Color"] [data-option-current]').text();
+        var selectedSize = $('.pdp__options-main [data-option-label="Size"] [data-option-current]').text();
+        var selectedQuantity = $('.pdp__options-main [data-option-label="Quantity"] [data-option-current]').text();
+        var qvDescription = $('.pdpQuickView__description');
+        var all_colors = [];
+        var all_sizes = [];
+        var all_quantities = [];
+
+        // In the quick add popup the product color titles have the ":" text appended to them so we need to splice this
+        if (selectedColor.includes(":")) {
+          selectedColor = selectedColor.split(':')[1].trim();
+        }
+
+        // Enable all sizes and return to default styling now that a new variant option has been selected
+        $('input[name^="Color"]').each(function(){
+          var colorhandle = theme.handleize($(this).attr('title'));
+          $('#' + colorhandle.toString()).removeAttr('disabled','disabled');
+          $('div[data-color^="' + colorhandle + '"]').css('opacity','');
+        });
+
+        // Enable all sizes and return to default styling now that a new variant option has been selected
+        $('input[name^="Size"]').each(function(){
+          var sizevar = $(this).attr('title');
+          var sizehandle = theme.handleize(sizevar);
+          $('#' + sizehandle.toString()).removeAttr('disabled','disabled');
+          $('div[data-size^="' + sizehandle + '"]').css('opacity','');
+          $('span[data-size^="' + sizevar + '"]').css('text-decoration','');
+        });
+
+        // Enable all quantities and return to default styling now that a new variant option has been selected
+        $('input[name^="Quantity"]').each(function(){
+          var quantityvar = $(this).attr('title');
+          var quantityhandle = theme.handleize(quantityvar);
+          $('#' + quantityhandle.toString()).removeAttr('disabled','disabled');
+          $('div[data-quantity^="' + quantityhandle + '"]').css('color','');
+          $('span[data-quantity^="' + quantityvar + '"]').css('text-decoration','');
+        });
+
+        // Add all colors to the all_colors array list
+        $('span[data-color]').each(function(){
+          if (all_colors.indexOf($(this).data('color')) === -1) {
+            all_colors.push($(this).data('color'));
+          }
+        });
+        // Add all sizes to the all_sizes array list
+        $('span[data-size]').each(function(){
+          if (all_sizes.indexOf($(this).data('size')) === -1) {
+            all_sizes.push($(this).data('size'));
+          }
+        });
+        // Add all quantities to the all_quantities array list
+        $('span[data-quantity]').each(function(){
+          if (all_quantities.indexOf($(this).data('quantity')) === -1) {
+            all_quantities.push($(this).data('quantity'));
+          }
+        });
+
+        // Create hasQuantities variable if the quantities array is populated, else we know the product only has color and size options
+        if (all_quantities.length){
+          var hasQuantities = true;
+        }
+
+        // Loop all variants of the selected product
+        for (i=0; i<json_product.variants.length; i++) {
+          var variant = json_product.variants[i];
+          var color = variant.option1;
+          // If the color option contains the string ":" we need to strip this
+          if (color.indexOf(":") > -1) {
+            color = color.split(':')[1].trim();
+          }
+          var size  = variant.option2;
+          var quantity  = variant.option3;
+
+          // Check if the product has 3 options of color, size and quantity
+          if (hasQuantities){
+            // Check if the color and size selected by the customer is the current loop index color and size values
+            if (color.indexOf(selectedColor) >= 0 && size.indexOf(selectedSize) >= 0) {
+              if (all_quantities.length && all_quantities.indexOf(quantity) !== -1) {
+                const index = all_quantities.indexOf(quantity);
+                if (index > -1) {
+                  all_quantities.splice(index, 1);
+                }
+              }
+            }
+            // Check if the color and quantity selected by the customer is the current loop index color and quantity values
+            if (color.indexOf(selectedColor) >= 0 && quantity.indexOf(selectedQuantity) >= 0) {
+              if (all_sizes.indexOf(size) !== -1) {
+                const index = all_sizes.indexOf(size);
+                if (index > -1) {
+                  all_sizes.splice(index, 1);
+                }
+              }
+            }
+            // Check if the size and quantity selected by the customer is the current loop index size and quantity values
+            if (size.indexOf(selectedSize) >= 0 && quantity.indexOf(selectedQuantity) >= 0) {
+              if (all_colors.indexOf(color) !== -1) {
+                const index = all_colors.indexOf(color);
+                if (index > -1) {
+                  all_colors.splice(index, 1);
+                }
+              }
+            }
+          }
+          // Product only has 2 options of color and size
+          else {
+            // Check if the color selected by the customer is the current loop index color
+            if (color.indexOf(selectedColor) >= 0) {
+              // Check if the current variant size exists in the all_sizes array and if so, remove it from the array
+              if (all_sizes.indexOf(size) !== -1) {
+                const index = all_sizes.indexOf(size);
+                if (index > -1) {
+                  all_sizes.splice(index, 1);
+                }
+              }
+            }
+            // Check if the size selected by the customer is the current loop index size
+            if (size.indexOf(selectedSize) >= 0) {
+              // Check if the current variant color exists in the all_colors array and if so, remove it from the array
+              if (all_colors.indexOf(color) !== -1) {
+                const index = all_colors.indexOf(color);
+                if (index > -1) {
+                  all_colors.splice(index, 1);
+                }
+              }
+            }
+          }
+        }
+
+        // Check if there are any colors left in the all_colors array and if so, disable these color buttons as they are unavailable colors for the selected variant
+        if (popup_is_size_selected) {
+          if (all_colors.length) {
+            /// Loop all the color input elements
+            $('input[name^="Color"]').each(function(){
+              var colorvar = $(this).attr('title');
+              var colorhandle = theme.handleize(colorvar);
+              // If the color element is found in the all_colors list we need to disable this element as it is not an available color option
+              if (all_colors.indexOf(colorvar) > -1) {
+                qvDescription.find('#' + colorhandle).attr('disabled','disabled');
+                qvDescription.find('div[data-color^="' + colorhandle + '"]').css('opacity','0.2');
+              }
+            });
+          }
+
+          // Check if there are any quantities left in the all_quantities array and if so, disable these quantity buttons as they are unavailable quantities for the selected variant color
+          if (all_quantities.length) {
+            $('input[name^="Quantity"]').each(function(){
+              var quantityvar = $(this).attr('title');
+              var quantityhandle = theme.handleize(quantityvar);
+              // If the quantity element is found in the all_quantities list we need to disable this element as it is not an available quantity option
+              if (all_quantities.indexOf(quantityvar) > -1) {
+                qvDescription.find('#' + quantityhandle).attr('disabled','disabled');
+                qvDescription.find('div[data-quantity^="' + quantityhandle + '"]').css('color','#ABABAB');
+                qvDescription.find('span[data-quantity^="' + quantityvar + '"]').css('text-decoration','line-through');
+              }
+            });
+          }
+        }
+
+        // Check if there are any sizes left in the all_sizes array and if so, disable these size buttons as they are unavailable sizes for the selected variant color
+        if (all_sizes.length) {
+          $('input[name^="Size"]').each(function(){
+            var sizevar = $(this).attr('title');
+            var sizehandle = theme.handleize(sizevar);
+            // If the size element is found in the all_sizes list we need to disable this element as it is not an available size option
+            if (all_sizes.indexOf(sizevar) > -1) {
+              qvDescription.find('#' + sizehandle).attr('disabled','disabled');
+              qvDescription.find('div[data-size^="' + sizehandle + '"]').css('opacity','0.5');
+              qvDescription.find('span[data-size^="' + sizevar + '"]').css('text-decoration','line-through');
+            }
+          });
+        }
         // ======================================== Neels code ends here ========================================
 
 
@@ -2388,22 +2050,21 @@ theme.GLOBAL = function () {
     theme.qvChangeColorGroupName()
   }
 
-
-  // if (window.location.hash.indexOf("#contact_form") > -1) {
-  //   $([document.documentElement, document.body]).animate({
-  //     scrollTop: $('.shopify-challenge__container').offset().top
-  //   }, 500);
-  // }
-
   if (window.location.search.indexOf("contact") > -1) {
     $([document.documentElement, document.body]).animate({
       scrollTop: $('.footerInner__Left').offset().top + 500
     }, 100);
   }
 
-  $(document).on('click', '[data-add-id]', function (event) {
-    event.preventDefault();
-    theme.addProduct()
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('[data-add-id]')) {
+      e.preventDefault();
+      let form = e.target.closest('form'),
+          bodyObj = theme.serializeObject(form);
+
+      theme.cart.cartEvent('/cart/add.js', bodyObj, true, theme.pdpErrorMessage)
+      theme.closeModal();
+    }
   })
 
   if ($('[data-section-type]').attr('data-section-type') == 'slick-slideshow') {
@@ -2422,10 +2083,6 @@ theme.GLOBAL = function () {
     theme.pdpMain()
   }
 
-  if ($('.cart-drawer').length) {
-    theme.cartDrawer()
-  }
-
   if ($('.headerSearch').length) {
     theme.searchBar();
   }
@@ -2435,24 +2092,15 @@ theme.GLOBAL = function () {
   }
 
   if ($('.cmProducts__card').length) {
-    $(document).on('click', '[data-marketplace-atc]', function (e) {
-      e.preventDefault();
-      $.ajax({
-        type: 'POST',
-        url: '/cart/add.js',
-        data: $(this).parents('form').serialize(),
-        dataType: 'json',
-        success: function() {
-          CartDrawer.emit("cart:updating");
-          UpdateCart('', '', true)
-        },
-        error: (error) => {
-          if (error.status === 422) {
-            $(this).parents('form').find('.PdpErrorMessage').text(error.responseJSON.description).fadeIn('slow');
-            setTimeout(() => {$(this).parents('form').find('.PdpErrorMessage').text('').hide();}, 3500);
-          }
-        }
-      })
+    document.addEventListener('click', function (e) {
+      if (e.target.closest('[data-marketplace-atc]')) {
+        e.preventDefault();
+        let form = e.target.closest('form'),
+            bodyObj = theme.serializeObject(form);
+
+        theme.cart.cartEvent('/cart/add.js', bodyObj, true, theme.pdpErrorMessage)
+        theme.closeModal();
+      }
     })
   }
 
@@ -2534,6 +2182,31 @@ class dynamicRecommendations extends HTMLElement {
 }
 
 customElements.define('dynamic-recommendations', dynamicRecommendations);
+
+class quantityStepper extends HTMLElement {
+  constructor() {
+    super();
+    this.singleStepper = this.getAttribute('data-single-stepper')
+    this.quantityInput = this.querySelector('.js-quantity')
+    this.minusBtn = this.querySelector('.js-minus')
+    this.plusBtn = this.querySelector('.js-plus')
+
+    if (this.minusBtn) this.minusBtn.addEventListener('click', () => this.quantityStepper('minus'))
+    if (this.plusBtn) this.plusBtn.addEventListener('click', () => this.quantityStepper('plus'))
+  }
+
+  quantityStepper(action) {
+    this.quantityInput.value = (action === 'minus') ? Number(this.quantityInput.value) - 1 : Number(this.quantityInput.value) + 1
+    if (this.singleStepper === 'true') {
+      this.minusBtn.setAttribute('disabled', 'disabled')
+      this.plusBtn.setAttribute('disabled', 'disabled')
+    }
+    const evt = new Event('change');
+    this.quantityInput.dispatchEvent(evt)
+  }
+}
+
+customElements.define('quantity-stepper', quantityStepper);
 
 
 class ModalDialog extends HTMLElement {

@@ -34,7 +34,7 @@
               <div class='productCard__img-container variant js-variant-image'
                 {% if option_name == 'color' or option_name == 'material' %}data-color='{{ value | handleize }}'{% endif %}
                 data-variant-url='{{ variant.url }}'
-                data-variant-id='cart-{{ variant.id }}'
+                data-variant-id='{{ variant.id }}'
                 aria-label='{{ variant.title }}'>
                 <img src="{{ variantImg }}" alt="{{ alt }}" class="productCard__image image image-abs-cover">
                 {%- comment -%}
