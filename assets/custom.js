@@ -2207,3 +2207,60 @@ class quantityStepper extends HTMLElement {
 }
 
 customElements.define('quantity-stepper', quantityStepper);
+
+
+class ModalDialog extends HTMLElement {
+  constructor() {
+    super();
+    this.content = this.querySelector('[role="dialog"]')
+    this.querySelector('[id^="ModalClose-"]').addEventListener(
+        'click',
+        this.hide.bind(this)
+    );
+    this.addEventListener('keyup', (event) => {
+      if (event.code.toUpperCase() === 'ESCAPE') this.hide()
+    });
+    this.addEventListener('click', (event) => {
+      if (event.target.nodeName === 'MODAL-DIALOG') this.hide()
+    });
+  }
+
+  show(opener) {
+    const attributes = {
+      'tabindex': '0',
+      'aria-hidden': 'false'
+    }
+    this.openedBy = opener
+    theme.disableScroll()
+    theme.setAttributes(this.content, attributes)
+    this.setAttribute('open', '')
+    setTimeout(() => this.content.focus(), 500)
+  }
+
+  hide() {
+    const attributes = {
+      'tabindex': '-1',
+      'aria-hidden': 'true'
+    }
+    theme.enableScroll()
+    theme.setAttributes(this.content, attributes)
+    this.removeAttribute('open')
+    this.content.blur()
+  }
+}
+customElements.define('modal-dialog', ModalDialog);
+
+class ModalOpener extends HTMLElement {
+  constructor() {
+    super();
+
+    const button = this.querySelector('button');
+
+    if (!button) return;
+    button.addEventListener('click', () => {
+      const modal = document.querySelector(this.getAttribute('data-modal'));
+      if (modal) modal.show(button);
+    });
+  }
+}
+customElements.define('modal-opener', ModalOpener);
