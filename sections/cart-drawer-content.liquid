@@ -1,0 +1,674 @@
+<cart-drawer id="cartDrawer" class='cart-drawer-outer z10'
+             aria-expanded='false' tabindex='-1'>
+<div id='cart-drawer-content' class='cart-drawer y x f js-cart-drawer'>
+  {%- assign cart_has_canal = false -%}
+  {%- assign cart_has_giftcard = false -%}
+  {%- assign engrave_sku_counter = 0 -%}
+  {%- assign personalization_sku_counter = 0 -%}
+  {%- assign gift_box_in_cart = false -%}
+  {%- assign checkout_update_data = blank -%}
+  {%- assign checkout_add_data = blank -%}
+  {%- assign only_digital_and_free_gift_in_cart = false -%}
+  {%- assign digital_gift_and_free_counter = 0 -%}
+
+  {%- assign gift_product_handle = 'Gift Product' | handleize -%}
+  {%- assign gift_box_handle = 'Gift box' | handleize -%}
+  {%- assign personalization_handle = 'Personalization' | handleize -%}
+  {%- assign Personalization_fee_handle = 'Personalization fee' | handleize -%}
+  {%- assign digital_gift_handle = 'Gift card' | handleize -%}
+
+  {%- for item in cart.items -%}
+    {%- assign item_type_handle = item.product.type | handleize -%}
+    {%- if item_type_handle == digital_gift_handle or item_type_handle == gift_product_handle -%}
+      {%- assign digital_gift_and_free_counter = digital_gift_and_free_counter | plus: 1 -%}
+    {%- endif -%}
+  {%- endfor -%}
+
+  {%- if digital_gift_and_free_counter == cart.items.size -%}
+    {%- assign only_digital_and_free_gift_in_cart = true -%}
+  {%- endif -%}
+
+  {%- assign enable_gwp = settings.enable_gwp -%}
+
+  {%- assign threshold_gwp_1 = settings.gwp_threshold | times: 100 -%}
+  {%- assign gwp_1 = all_products[settings.gwp_product] -%}
+  {%- assign gwp_1_product_type_handle = gwp_1.type | handleize -%}
+  {%- assign gwp_1_in_cart = false -%}
+  {%- assign gwp_1_key = false -%}
+  {%- assign gwp_1_success_message = settings.gwp_1_success_message -%}
+
+  {%- assign threshold_gwp_2 = settings.second_gwp_threshold | times: 100 -%}
+  {%- assign gwp_2 = all_products[settings.second_gwp_product] | default: false -%}
+  {%- assign gwp_2_product_type_handle = gwp_2.type | handleize -%}
+  {%- assign gwp_2_in_cart = false -%}
+  {%- assign gwp_2_key = false -%}
+  {%- assign gwp_2_success_message = settings.gwp_2_success_message -%}
+
+  {%- assign finally_gwp_success_message = settings.finally_gwp_success_message -%}
+
+  {%- assign threshold_difference = threshold_gwp_1 | minus: threshold_gwp_2 -%}
+  {%- assign summary_gwp_threshold = threshold_gwp_1 -%}
+  {%- assign gwp_1_enable = false -%}
+  {%- assign gwp_2_enable = false -%}
+
+  {%- if threshold_difference < 0 -%}
+    {%- assign summary_gwp_threshold = threshold_gwp_2 -%}
+  {%- endif -%}
+
+  {%- if enable_gwp and gwp_1.available and threshold_gwp_1 > 0 and gwp_1_product_type_handle == gift_product_handle and only_digital_and_free_gift_in_cart == false -%}
+    {%- assign gwp_1_enable = true -%}
+  {%- endif -%}
+
+  {%- if enable_gwp and gwp_2.available and threshold_gwp_2 > 0 and gwp_2_product_type_handle == gift_product_handle and only_digital_and_free_gift_in_cart == false -%}
+    {%- assign gwp_2_enable = true -%}
+  {%- endif -%}
+
+  {%- assign coffee_pdp = false -%}
+  {% if request.path contains "/products/" %}
+    {%- assign slug = request.path | remove_first: '/products/' -%}
+    {% if all_products[slug].type contains "Coffee" %}
+      {% assign coffee_pdp = true %}
+    {% endif %}
+  {% endif %}
+
+  <cart-drawer-content class="cart-drawer__content-wrapper">
+    <header id="cart-drawer__header"
+            class='cart-drawer__header f fdc x z2' data-cart-total="{{ cart.total_price }}"
+            {% if cart == empty %} data-cart-empty {% endif %}>
+      <div class="cart-drawer__header-content f aic jcc">
+        {%- render 'icon' with 'cart' -%}
+        <span class='js-cart-count cart-drawer__count'
+              data-cart-count="{{ cart.item_count }}">
+          {{ cart.item_count }}
+        </span>
+
+        <button aria-label="Cart Close" type="button" class='cart-drawer__close button--reset js-cart-drawer-close'>
+          {%- render 'icon', icon: 'arrow-next' -%}
+        </button>
+      </div>
+
+      {%- if cart == empty -%}
+        <p class='cart-drawer__header-text ac js-empty-cart-text'>{{ 'cart.general.empty' | t }}</p>
+      {%- endif -%}
+
+      {%- capture free_shipping -%}
+        <div class='free-shipping--unmet {% if cart.total_price >= 9900 %} is-hidden{% endif %}'>
+          {%- assign away_from_shipping = 9900 | minus: cart.total_price -%}
+          You're <strong>
+            <span>{{ away_from_shipping | money_without_trailing_zeros }}</span>
+          </strong> away from free US shipping
+        </div>
+        <div class='free-shipping--met {% if cart.total_price < 9900 %} is-hidden{% endif %}'>
+          Congrats! You get free US Shipping!
+        </div>
+
+        <div class='free-shipping__meter f aic'>
+          {%- if cart.total_price > 9900 -%}
+            {%- assign progress_bar_width = 100 -%}
+          {%- else -%}
+            {%- assign progress_bar_width = cart.total_price | times: 100 | divided_by: 9900 -%}
+          {%- endif -%}
+
+          <div class='free-shipping__meter__progress js-progress-bar'
+               style="width: {{ progress_bar_width }}%"></div>
+        </div>
+      {%- endcapture -%}
+
+      {%- if gwp_1_enable or gwp_2_enable -%}
+        {%- if gwp_1_enable and gwp_2_enable -%}
+          <div class="free-gwp gwp-1-and-gwp-2 {% if cart == empty %}is-hidden{% endif %}">
+            {%- assign away_to_gwp_1 = threshold_gwp_1 | minus: cart.total_price -%}
+            {%- assign away_to_gwp_2 = summary_gwp_threshold | minus: cart.total_price -%}
+
+            <div class='free-gwp--unmet gwp-1 {% if cart.total_price >= threshold_gwp_1 and cart.total_price <= threshold_gwp_2 %} is-hidden{% endif %} {% if cart.total_price >= threshold_gwp_2 %} is-hidden{% endif %}'>
+              You're <strong>
+                <span>{{ away_to_gwp_1 | money_without_trailing_zeros }}</span>
+              </strong> away from free {{ gwp_1.title }}
+            </div>
+
+            <div class='free-gwp--unmet gwp-2 {% if cart.total_price >= threshold_gwp_2 %} is-hidden{% endif %} {% if cart.total_price < threshold_gwp_1 %} hide-when-all-gwp-enabled{% endif %}' >
+              {%- if gwp_1_success_message != blank -%}
+                <div class="gwp-1">{{ gwp_1_success_message }}</div>
+              {%- endif -%}
+
+              You're <strong>
+                <span>{{ away_to_gwp_2 | money_without_trailing_zeros }}</span>
+              </strong> away from free {{ gwp_2.title }}
+            </div>
+
+            <div class='free-gwp--met gwp-1-and-gwp-2-success {% if cart.total_price < summary_gwp_threshold %} is-hidden{% endif %}'>
+              {{ finally_gwp_success_message }}
+            </div>
+
+            <div class='free-gwp--met gwp-1-success {% if cart.total_price < threshold_gwp_1 %} is-hidden{% endif %}'>
+              {{ gwp_1_success_message }}
+            </div>
+
+            <div class='free-gwp--met gwp-2-success {% if cart.total_price < threshold_gwp_2 %} is-hidden{% endif %}'>
+              {{ gwp_2_success_message }}
+            </div>
+
+            <div class='free-gwp__meter f aic'>
+              {%- if cart.total_price > summary_gwp_threshold -%}
+                {%- assign total_progress_bar_width = 100 -%}
+              {%- else -%}
+                {%- assign total_progress_bar_width = cart.total_price | times: 100 | divided_by: summary_gwp_threshold -%}
+              {%- endif -%}
+
+              {%- if cart.total_price > threshold_gwp_1 -%}
+                {%- assign gwp_1_progress_bar_width = 100 -%}
+              {%- else -%}
+                {%- assign gwp_1_progress_bar_width = cart.total_price | times: 100 | divided_by: threshold_gwp_1 -%}
+              {%- endif -%}
+
+              {%- if cart.total_price > threshold_gwp_2 -%}
+                {%- assign gwp_2_progress_bar_width = 100 -%}
+              {%- else -%}
+                {%- assign gwp_2_progress_bar_width = cart.total_price | times: 100 | divided_by: threshold_gwp_2 -%}
+              {%- endif -%}
+
+              <div class='free-gwp__meter__progress js-progress-bar gwp-1-and-gwp-2-progress'
+                   style="width: {{ total_progress_bar_width }}%">
+                <span class="gwp-point" style="left: {{ 100 | times: threshold_gwp_1 | divided_by: summary_gwp_threshold }}%;"></span>
+                <span class="gwp-point-text" style="left: {{ 100 | times: threshold_gwp_1 | divided_by: summary_gwp_threshold }}%;">First Free Gift</span>
+              </div>
+              <div class='free-gwp__meter__progress js-progress-bar gwp-1-progress'
+                   style="width: {{ gwp_1_progress_bar_width }}%"></div>
+              <div class='free-gwp__meter__progress js-progress-bar gwp-2-progress'
+                   style="width: {{ gwp_2_progress_bar_width }}%"></div>
+            </div>
+          </div>
+
+          <div class="free-shipping free-shipping-when-gwp-removed is-hidden">
+            {{ free_shipping }}
+          </div>
+        {%- elsif gwp_1_enable -%}
+
+          <div class="free-gwp gwp-1-only {% if cart == empty %}is-hidden{% endif %}">
+            {%- assign away_to_gwp_1 = threshold_gwp_1 | minus: cart.total_price -%}
+
+            <div class='free-gwp--unmet {% if cart.total_price >= threshold_gwp_1 %} is-hidden{% endif %}'>
+              You're <strong>
+                <span>{{ away_to_gwp_1 | money_without_trailing_zeros }}</span>
+              </strong> away from free {{ gwp_1.title }}
+            </div>
+
+            <div class='free-gwp--met {% if cart.total_price < threshold_gwp_1 %} is-hidden{% endif %}'>
+              {{ gwp_1_success_message }}
+            </div>
+
+            <div class='free-gwp__meter f aic'>
+              {%- if cart.total_price > threshold_gwp_1 -%}
+                {%- assign gwp_1_progress_bar_width = 100 -%}
+              {%- else -%}
+                {%- assign gwp_1_progress_bar_width = cart.total_price | times: 100 | divided_by: threshold_gwp_1 -%}
+              {%- endif -%}
+              <div class='free-gwp__meter__progress js-progress-bar'
+                   style="width: {{ gwp_1_progress_bar_width }}%"></div>
+            </div>
+          </div>
+
+          <div class="free-shipping free-shipping-gwp-1 is-hidden">
+            {{ free_shipping }}
+          </div>
+
+        {%- elsif gwp_2_enable -%}
+
+          <div class="free-gwp gwp-2-only {% if cart == empty %}is-hidden{% endif %}">
+            {%- assign away_to_gwp_2 = threshold_gwp_2 | minus: cart.total_price -%}
+
+            <div class='free-gwp--unmet {% if cart.total_price >= threshold_gwp_2 %} is-hidden{% endif %}'>
+              You're <strong>
+                <span>{{ away_to_gwp_2 | money_without_trailing_zeros }}</span>
+              </strong> away from free {{ gwp_2.title }}
+            </div>
+
+            <div class='free-gwp--met {% if cart.total_price < threshold_gwp_2 %} is-hidden{% endif %}'>
+              {{ gwp_2_success_message }}
+            </div>
+
+            <div class='free-gwp__meter f aic'>
+              {%- if cart.total_price > threshold_gwp_2 -%}
+                {%- assign gwp_2_progress_bar_width = 100 -%}
+              {%- else -%}
+                {%- assign gwp_2_progress_bar_width = cart.total_price | times: 100 | divided_by: threshold_gwp_2 -%}
+              {%- endif -%}
+              <div class='free-gwp__meter__progress js-progress-bar'
+                   style="width: {{ gwp_2_progress_bar_width }}%"></div>
+            </div>
+          </div>
+
+          <div class="free-shipping free-shipping-gwp-2 is-hidden">
+            {{ free_shipping }}
+          </div>
+
+        {%- endif -%}
+      {%- else -%}
+        <div class="free-shipping {% if cart == empty %}is-hidden{% endif %}">
+          {{ free_shipping }}
+        </div>
+      {%- endif -%}
+    </header>
+
+    {%- if cart != empty -%}
+      <div class='cart-drawer__items-outer'>
+        <div class='cart-drawer__items-inner js-cart-drawer-items'>
+          <div class='js-items x y'>
+            {%- for item in cart.items -%}
+              {%- assign not_full_bundle = false -%}
+              {%- assign other_property = blank -%}
+              {%- assign id = blank -%}
+              {%- assign quantity = blank -%}
+              {%- assign properties = blank -%}
+              {%- assign product_type_handle = item.product.type | handleize -%}
+
+              {% assign propertySize = item.properties | size %}
+              {% if propertySize > 0 %}
+
+                {% for property in item.properties %}
+
+                  {%- if product_type_handle == gift_product_handle -%}
+                    {%- if property.first == '_firstGwp' -%}
+                      {%- assign gwp_1_in_cart = true -%}
+                      {%- assign gwp_1_key = item.key -%}
+                    {%- endif -%}
+
+                    {%- if property.first == '_secondGwp' -%}
+                      {%- assign gwp_2_in_cart = true -%}
+                      {%- assign gwp_2_key = item.key -%}
+                    {%- endif -%}
+                  {%- endif -%}
+
+                  {%- if property.first != '_bundles' and property.first != '_Bundle_Name' -%}
+                    {%- if forloop.last -%}
+                      {%- assign other_property = other_property | append: '"' | append: property.first | append: '":' | append: '"' | append: property.last | append: '"' -%}
+                    {%- else -%}
+                      {%- assign other_property = other_property | append: '"' | append: property.first | append: '":' | append: '"' | append: property.last | append: '",' -%}
+                    {%- endif -%}
+                  {%- endif -%}
+
+                  {%- if property.first == '_bundles' and item.discounts.size == 0 -%}
+                    {%- assign not_full_bundle = true -%}
+                  {%- endif -%}
+                {% endfor %}
+
+                {%- if not_full_bundle -%}
+                  {%- assign id = '"id":' | append: item.variant_id | append: ',' -%}
+                  {%- assign quantity = '"quantity":' | append: item.quantity | append: ',' -%}
+                  {%- assign properties = '"properties":' | append: '{' | append: other_property | append: '}' -%}
+
+                  {%- assign checkout_update_data = checkout_update_data | append: '"' | append: item.key | append: '"' | append: ': 0&&&' -%}
+                  {%- assign checkout_add_data = checkout_add_data | append: '{' | append: id | append: quantity | append: properties | append: '}&&&' -%}
+
+                {%- endif -%}
+              {%- endif -%}
+
+              {%- if item.sku contains 'ENGRAVE' -%}
+                {%- assign engrave_sku_counter = engrave_sku_counter | plus: item.quantity -%}
+              {%- endif -%}
+
+              {%- if item.sku contains '-PER' -%}
+                {%- assign personalization_sku_counter = personalization_sku_counter | plus: item.quantity -%}
+              {%- endif -%}
+
+              {% if item.product.type == 'Coffee' %}
+                {% assign cart_has_canal = true %}
+              {% endif %}
+
+              {% if item.product.type contains 'Digital Gift Card' %}
+                {% assign cart_has_giftcard = true %}
+              {% endif %}
+
+              {% if product_type_handle == gift_box_handle %}
+                {%- assign gift_box_in_cart = true -%}
+              {% endif %}
+
+              <cart-drawer-item class="cart-drawer__item"
+                      {% if product_type_handle == gift_box_handle and cart.attributes['Gift note'] != blank %}
+                        data-cart-gift-note
+                      {% endif %}>
+                {%- if product_type_handle == gift_product_handle
+                  or product_type_handle == gift_box_handle
+                  or product_type_handle == Personalization_fee_handle -%}
+                  <div class="cart-drawer__itemImage">
+                    <img srcset="{{ item.image | img_url: '200x' }}"
+                         src="{{ item.media | img_url: '1x1' }}"
+                         sizes="auto"
+                         loading="lazy"
+                         width="100%"
+                         height="100%"
+                         alt="{{ item.title }}">
+                  </div>
+                {%- else -%}
+                  <a href="{{ item.url }}" class="cart-drawer__itemImage">
+                    <img srcset="{{ item.image | img_url: '200x' }}"
+                         src="{{ item.media | img_url: '1x1' }}"
+                         sizes="auto"
+                         loading="lazy"
+                         width="100%"
+                         height="100%"
+                         alt="{{ item.title }}">
+                  </a>
+                {%- endif -%}
+
+                <div class="cart-drawer__itemContent f fdc">
+                  <div class="cart-drawer__itemDetails">
+                    {%- if product_type_handle == gift_box_handle
+                      or product_type_handle == Personalization_fee_handle -%}
+                      <div class="cart-drawer__itemTitle">{{ item.product.title }}</div>
+                      <div class="cart-drawer__itemOptions">
+                        {%- if product_type_handle == gift_box_handle -%}
+                          {%- if cart.attributes['Gift note'] != blank -%}
+                            <div class="pb05">"{{ cart.attributes['Gift note'] }}"</div>
+                          {%- endif -%}
+                          <button type="button" class="cart-gift-wrapping-btn" data-gift-note-trigger>Edit</button>
+                        {%- endif -%}
+                      </div>
+                    {%- else -%}
+
+                      {%- if product_type_handle == gift_product_handle  -%}
+                        <div class="cart-drawer__itemTitle">{{ item.product.title }}</div>
+                      {%- else -%}
+                        <a href="{{ item.url }}" class="cart-drawer__itemTitle">{{ item.product.title }}</a>
+                      {%- endif -%}
+
+                      <div class="cart-drawer__itemOptions">
+                        {%- unless item.product.has_only_default_variant -%}
+                          {%- for option in item.variant.options -%}
+                            {%- assign option_name = option -%}
+
+                            {%- if option_name contains ':' -%}
+                              {%- assign option_name = option_name | split: ':' | last | strip -%}
+                            {%- endif -%}
+
+                            {% unless forloop.first %} | {% endunless %}{{ option_name }}
+                          {%- endfor -%}
+                        {%- endunless -%}
+
+                        {%- if item.properties['Personalized Text'] != blank -%}
+                          <div class="cart-drawer__personalization">
+                            Personalized Text: {{ item.properties['Personalized Text'] }}
+                          </div>
+                        {%- endif -%}
+                      </div>
+                    {%- endif -%}
+                  </div>
+
+                  <div class="f aic jcb pt05">
+
+                      <quantity-stepper class="cart-item__stepper f aic" data-single-stepper="true">
+                        {%- unless product_type_handle == gift_product_handle
+                          or product_type_handle == gift_box_handle
+                          or product_type_handle == Personalization_fee_handle -%}
+                        <button type="button" class="cart-stepper js-minus">-</button>
+                        <input type="number"
+                               title="Quantity selector for - {{ item.title }}"
+                               class="cart-quantity js-quantity"
+                               value="{{ item.quantity }}">
+                        <button type="button" class="cart-stepper js-plus">+</button>
+                        {%- endunless -%}
+                      </quantity-stepper>
+
+                    <div class="cart-item__price">
+                      {%- if product_type_handle == gift_product_handle -%}
+                        <div class="cart-item__price-final">
+                          Free
+                        </div>
+                      {%- else -%}
+                        <div class="loading-overlay__spinner">
+                          {% render 'icon' with 'spinner' %}
+                        </div>
+                        <div class="cart-item__price-final m0">
+                          {%- if item.line_price == item.original_line_price -%}
+                            {{ item.line_price | money_without_trailing_zeros }}
+                          {%- else -%}
+                            <span style="text-decoration: line-through; padding-right: 5px;">
+                          {{ item.original_line_price | money_without_trailing_zeros }}
+                        </span>
+                            {{ item.line_price | money_without_trailing_zeros }}
+                          {%- endif -%}
+                        </div>
+                      {%- endif -%}
+                    </div>
+                  </div>
+
+                  {%- unless product_type_handle == Personalization_fee_handle or item.sku contains 'ENGRAVE' -%}
+                    <button type="button"
+                            data-action="open-item-remove-popup"
+                            {% if item.product.type == 'Gift product' %}
+                              data-gift-product="{{ item.properties | first | first }}"
+                            {% endif %}
+                            aria-expanded="false"
+                            class="button--reset cart-drawer__itemAction cart-drawer__remove-open">
+                      {% render 'icon' with 'icon-x' %}
+                    </button>
+                  {%- endunless -%}
+                </div>
+
+                {%- unless product_type_handle == Personalization_fee_handle or item.sku contains 'ENGRAVE' -%}
+                  <div class="remove-item__popup js-cart-drawer-popup" aria-hidden="true" tabindex="-1">
+                    <div class="remove-item__inner">
+                      {%- if settings.cart_remove_text != blank -%}
+                        <p class="remove-item__text">{{ settings.cart_remove_text }}</p>
+                      {%- endif -%}
+                      <div class="remove-item__btn-group f jcc aic">
+                        <button type="button" class="btn--clear remove-item__btn--close" data-action="close-item-remove-popup">{{ 'cart.general.popup_keep' | t }}</button>
+                        <button type="button" class="btn--clear remove-item__btn--remove js-remove-item-trigger">{{ 'cart.general.popup_remove' | t }}</button>
+                      </div>
+                    </div>
+                  </div>
+                {%- endunless -%}
+
+                <script type="application/json">
+                  {{ item | json }}
+                </script>
+
+              </cart-drawer-item>
+            {%- endfor -%}
+
+          </div>
+        </div>
+      </div>
+    {%- else -%}
+      <div class='cart-drawer--empty cart-drawer__items-outer'>
+        {% include 'cart-drawer-empty' %}
+      </div>
+    {%- endif -%}
+
+    <footer class='cart-drawer__footer js-cart-footer'>
+      {%- if cart != empty -%}
+        {%- if settings.enable_gift_wrapping and all_products[settings.gift_box_product].available and cart_has_canal == false and coffee_pdp == false and cart_has_giftcard == false -%}
+          <cart-gift-wrapping class="cart-drawer__footer-gift-wrapping" data-gift-box-in-cart="{{ gift_box_in_cart }}">
+            {% include 'cart-gift-wrapping' %}
+          </cart-gift-wrapping>
+        {%- endif -%}
+
+        {%- if settings.cart_recommended_enable -%}
+          <div class="cart-drawer__footer-recommended-wrapper">
+            {% include 'cart-recommended' %}
+          </div>
+        {%- endif -%}
+
+        <div class="cart-drawer__footer-action f aic jcb">
+          <section class='cart-footer__total'>
+            <div class='cart-footer__total-item js-shipping-free-text {% if cart.total_price < 9900 %}is-hidden{% endif %}'>
+              Shipping: <span style="font-weight: 600;">Free</span>
+            </div>
+            <div class='cart-footer__total-item f aic fw'>
+              <span>{{ 'cart.general.subtotal' | t }}</span>
+              <span class='js-subtotal'>
+                {%- if cart.total_price == cart.original_total_price -%}
+                  {{ cart.total_price | money_without_trailing_zeros }}
+                {%- else -%}
+                  <span style="text-decoration: line-through; padding-right: 5px;">
+                    {{ cart.original_total_price | money_without_trailing_zeros }}
+                  </span>
+                  {{ cart.total_price | money_without_trailing_zeros }}
+                {%- endif -%}
+              </span>
+            </div>
+          </section>
+
+          {%
+            include 'component-button' with
+            tag: 'a',
+            cta: 'Checkout',
+            href: '/checkout',
+            className: 'btn btn--light no-ajax cart-checkout__button'
+          %}
+        </div>
+      {%- endif -%}
+    </footer>
+    
+    {%- comment -%}
+        // Personalization logic
+    {%- endcomment -%}
+
+    {%- if personalization_sku_counter > 0 or engrave_sku_counter > 0 -%}
+      {%- assign personalization_action = 'false' -%}
+      {%- assign personalization_quantity = personalization_sku_counter -%}
+
+      {%- if personalization_sku_counter > 0 and engrave_sku_counter != personalization_sku_counter -%}
+        {%- if engrave_sku_counter == 0 -%}
+          {%- assign personalization_action = '/cart/add.js' -%}
+        {%- endif -%}
+        {%- if engrave_sku_counter > 0 -%}
+          {%- assign personalization_action = '/cart/change.js' -%}
+        {%- endif -%}
+      {%- endif -%}
+
+      {%- if personalization_sku_counter == 0 and engrave_sku_counter > 0 -%}
+        {%- assign personalization_quantity = 0 -%}
+        {%- assign personalization_action = '/cart/change.js' -%}
+      {%- endif -%}
+
+      <script type="application/ld+json" data-personalization>
+        {
+          "available": "{{ all_products[settings.personalization_product].available }}",
+          "id": "{{ all_products[settings.personalization_product].selected_or_first_available_variant.id  }}",
+          "quantity": "{{ personalization_quantity }}",
+          "action": "{{ personalization_action }}"
+        }
+      </script>
+    {%- endif -%}
+
+    {%- comment -%}
+      // GWP logic
+    {%- endcomment -%}
+
+    {%- assign gwp_1_action = false -%}
+    {%- assign gwp_2_action = false -%}
+
+    {%- if enable_gwp == false or gwp_1.available == false -%}
+
+      {%- if gwp_1_in_cart -%}
+        {%- assign gwp_1_action = '/cart/change.js' -%}
+      {%- endif -%}
+
+    {%- endif -%}
+
+    {%- if enable_gwp and gwp_1.available -%}
+
+      {%- if gwp_1_in_cart == false and threshold_gwp_1 > 0 and cart.total_price >= threshold_gwp_1 and gwp_1_product_type_handle == gift_product_handle and only_digital_and_free_gift_in_cart == false  -%}
+        {%- assign gwp_1_action = '/cart/add.js' -%}
+      {%- endif -%}
+
+      {%- if gwp_1_in_cart and cart.total_price < threshold_gwp_1  -%}
+        {%- assign gwp_1_action = '/cart/change.js' -%}
+      {%- endif -%}
+
+      {%- if gwp_1_in_cart and threshold_gwp_1 <= 0 -%}
+        {%- assign gwp_1_action = '/cart/change.js' -%}
+      {%- endif -%}
+
+      {%- if gwp_1_in_cart and only_digital_and_free_gift_in_cart -%}
+        {%- assign gwp_1_action = '/cart/change.js' -%}
+      {%- endif -%}
+
+    {%- endif -%}
+
+    {%- if enable_gwp == false or gwp_2.available == false -%}
+
+      {%- if gwp_2_in_cart -%}
+        {%- assign gwp_2_action = '/cart/change.js' -%}
+      {%- endif -%}
+
+    {%- endif -%}
+
+    {%- if enable_gwp and gwp_2.available -%}
+
+      {%- if gwp_2_in_cart == false and threshold_gwp_2 > 0 and cart.total_price >= threshold_gwp_2 and gwp_2_product_type_handle == gift_product_handle and only_digital_and_free_gift_in_cart == false -%}
+        {%- assign gwp_2_action = '/cart/add.js' -%}
+      {%- endif -%}
+
+      {%- if gwp_2_in_cart and cart.total_price < threshold_gwp_2  -%}
+        {%- assign gwp_2_action = '/cart/change.js' -%}
+      {%- endif -%}
+
+      {%- if gwp_2_in_cart and threshold_gwp_2 <= 0  -%}
+        {%- assign gwp_2_action = '/cart/change.js' -%}
+      {%- endif -%}
+
+      {%- if gwp_2_in_cart and only_digital_and_free_gift_in_cart -%}
+        {%- assign gwp_2_action = '/cart/change.js' -%}
+      {%- endif -%}
+
+    {%- endif -%}
+
+    {%- if enable_gwp or gwp_1_in_cart -%}
+      <script type="application/ld+json" data-first-gwp>
+        {
+          "id": "{{ gwp_1.selected_or_first_available_variant.id }}",
+          "key": "{{ gwp_1_key }}",
+          "action": "{{ gwp_1_action }}"
+        }
+      </script>
+    {%- endif -%}
+
+    {%- if enable_gwp or gwp_2_in_cart -%}
+      <script type="application/ld+json" data-second-gwp>
+        {
+          "id": "{{ gwp_2.selected_or_first_available_variant.id }}",
+          "key": "{{ gwp_2_key }}",
+          "action": "{{ gwp_2_action }}"
+        }
+      </script>
+    {%- endif -%}
+
+    {%- comment -%}
+      // Checkout Event
+    {%- endcomment -%}
+
+    {%- if checkout_update_data != blank -%}
+      {%- assign checkout_update_data = checkout_update_data | split: '&&&' -%}
+      <script type="application/ld+json" data-checkout-update>
+      {
+        {%- for item in checkout_update_data -%}
+          {{ item }}{%- unless forloop.last -%},{%- endunless -%}
+        {%- endfor -%}
+       }
+    </script>
+    {%- endif -%}
+
+    {%- if checkout_add_data != blank -%}
+      {%- assign checkout_add_data = checkout_add_data | split: '&&&' -%}
+      <script type="application/ld+json" data-checkout-add>
+      [
+        {%- for item in checkout_add_data -%}
+        {{ item }}{%- unless forloop.last -%},{%- endunless -%}
+        {%- endfor -%}
+      ]
+    </script>
+    {%- endif -%}
+
+  </cart-drawer-content>
+</div>
+</cart-drawer>
+
+{% schema %}
+{
+  "name": "Cart drawer content",
+  "class": "cart-drawer-wrapper",
+  "settings": []
+}
+{% endschema %}
