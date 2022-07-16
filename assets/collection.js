@@ -2,13 +2,12 @@ class collectionFacets extends HTMLElement {
   constructor() {
     super();
     this.getProducts()
+    this.template = this.dataset.template
     this.facetsWrapper = this.querySelector('#facet-group-wrapper')
     this.facetsSourse = this.querySelector("#facet-group-template")
     this.facetsForm = this.querySelector('#facet-form')
-    this.variantResultWrapper = this.querySelector('#collection__variant-results')
-    this.variantResultSourse = this.querySelector("#collection__variant-template")
-    this.productResultWrapper = this.querySelector('#collection__product-results')
-    this.productResultSourse = this.querySelector("#collection__product-template")
+    this.resultWrapper = this.querySelector('#collection__result-wrapper')
+    this.resultSourse = this.querySelector("#collection__result-source")
     this.clearAll = this.querySelector('[data-clear-facets]')
     this.selectedFacetsCount = this.querySelector('.selected-facets-count')
     this.resultsCount = this.querySelector('.facet-header-results-count')
@@ -28,12 +27,13 @@ class collectionFacets extends HTMLElement {
           this.originalData = data
           this.resetData(data)
           this.renderFacets(this.facets)
-          this.sortBy(this.data, this.defaultSortByAction, this.defaultSortByOrder)
-          this.renderResults(this.data)
           this.facetsForm.style.pointerEvents = 'auto'
           this.resultsCount.innerHTML = `(${this.variants.length})`
           if (window.location.search) {
             this.parseUrlParams()
+          } else {
+            this.sortBy(this.data, this.defaultSortByAction, this.defaultSortByOrder)
+            this.renderResults(this.data)
           }
         })
   }
@@ -42,7 +42,7 @@ class collectionFacets extends HTMLElement {
     this.products = data.products
     this.facets = data.products.map(product => product.facets);
     this.variants = data.products.reduce((arr, product) => arr.concat(product.variants), []);
-    this.data = (this.variantResultWrapper) ? this.variants : this.products
+    this.data = (this.template === 'by-variant') ? this.variants : this.products
   }
 
   clearFacets() {
@@ -50,7 +50,6 @@ class collectionFacets extends HTMLElement {
     this.clearAll.classList.add('is-hidden')
     this.resetData(this.originalData)
     this.renderFacets(this.facets)
-    this.renderResults(this.data)
     this.resultsCount.innerHTML = `(${this.variants.length})`
     this.facetsForm.dispatchEvent(new Event('change'))
     history.replaceState(null, null, '')
@@ -92,11 +91,9 @@ class collectionFacets extends HTMLElement {
   }
 
   renderResults (data) {
-    const resultSource = (this.variantResultSourse) ? this.variantResultSourse.innerHTML : this.productResultSourse.innerHTML,
-          template = Handlebars.compile(resultSource),
-          renderElement = (this.variantResultSourse) ? {variants: data} : {products: data},
-          resultWrapper = (this.variantResultSourse) ? this.variantResultWrapper : this.productResultWrapper;
-    resultWrapper.innerHTML = template(renderElement)
+    const resultSource = this.resultSourse.innerHTML,
+          template = Handlebars.compile(resultSource);
+    this.resultWrapper.innerHTML = template({items: data})
     if (typeof window.yotpo !== "undefined") {
       window.yotpo.initWidgets();
     }
@@ -132,7 +129,7 @@ class collectionFacets extends HTMLElement {
       const selectedItems = this.filterResults(allSelectedItems, groupName, groupValues)
       allSelectedItems = [...selectedItems]
 
-      if (this.productResultWrapper) {
+      if (this.template === 'by-product') {
         const productSelectedVariants = selectedItems.map(product => {
           const productClone = {...product}
           if (!product.bundle) {
@@ -150,7 +147,7 @@ class collectionFacets extends HTMLElement {
 
     this.sortBy(allSelectedItems, sortByAction, sortByOrder)
     this.renderResults(allSelectedItems)
-    this.resultsCount.innerHTML = (this.productResultWrapper)
+    this.resultsCount.innerHTML = (this.template === 'by-product')
         ? `(${allSelectedVariants.length})`
         : `(${allSelectedItems.length})`
     history.replaceState(null, null, urlParams)
@@ -174,12 +171,12 @@ class collectionFacets extends HTMLElement {
       case 'price':
         if (order === 'ascending') {
           data.sort((a, b) => a[sortBy] - b[sortBy])
-          if (this.productResultWrapper) {
+          if (this.template === 'by-product') {
             data.forEach(product => product.variants.sort((a, b) => a[sortBy] - b[sortBy]))
           }
         } else {
           data.sort((a, b) => b[sortBy] - a[sortBy])
-          if (this.productResultWrapper) {
+          if (this.template === 'by-product') {
             data.forEach(product => product.variants.sort((a, b) => b[sortBy] - a[sortBy]))
           }
         }

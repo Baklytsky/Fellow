@@ -31,7 +31,8 @@
 {% endif %}
 
 {% paginate collection.products by 1000 %}
-{
+{%- assign product_counter = 0 -%}
+  {
   "products": [
   {%- for product in collection.products -%}
 
@@ -59,10 +60,9 @@
     {%- for option in product.options_with_values -%}
       {%- assign option_name = option.name | handleize -%}
       {%- if option_name == 'color' -%}
-        {%- assign option_color_index = forloop.index | minus: 1 -%}
-      {%- endif -%}
-      {%- if option_name == 'size' -%}
-        {%- assign option_size_index = forloop.index | minus: 1 -%}
+        {%- assign option_color_index = forloop.index0 -%}
+      {%- elsif option_name == 'size' -%}
+        {%- assign option_size_index = forloop.index0 -%}
       {%- endif -%}
     {%- endfor -%}
 
@@ -217,10 +217,9 @@
             {%- for option in bundle_product.options_with_values -%}
               {%- assign option_name = option.name | handleize -%}
               {%- if option_name == 'color' -%}
-                {%- assign option_color_index = forloop.index | minus: 1 -%}
-              {%- endif -%}
-              {%- if option_name == 'size' -%}
-                {%- assign option_size_index = forloop.index | minus: 1 -%}
+                {%- assign option_color_index = forloop.index0 -%}
+              {%- elsif option_name == 'size' -%}
+                {%- assign option_size_index = forloop.index0 -%}
               {%- endif -%}
             {%- endfor -%}
 
@@ -330,7 +329,8 @@
 
     {%- assign product_type_handle = product.type | handleize -%}
     {%- if product_type_handle != "gift-product" or product_type_handle != "gift-box" or product_type_handle != "personalization-fee" -%}
-      {%- unless forloop.first -%},{%- endunless -%}{
+      {%- assign product_counter = product_counter | plus: 1 -%}
+      {%- if product_counter != 1 -%},{%- endif -%}{
       "title": {{ product.title | json }},
       "id": {{ product.id }},
       "featured_image": {
@@ -341,11 +341,11 @@
       {% if product.template_suffix contains 'bundle' %}
         "bundle": true,
       {% endif %}
-      "price_money": "{{ product.price | money | remove: '.00' }}",
+      "price_money": "{{ product.price | money_without_trailing_zeros }}",
       "price" : {{ product.price }},
       "price_min": {{ product.price_min }},
       {% if product.compare_at_price %}
-        "compare_at_price": "{{ product.compare_at_price | money | remove: '.00' }}",
+        "compare_at_price": "{{ product.compare_at_price | money_without_trailing_zeros }}",
       {% endif %}
       "vendor": "{{ product.vendor }}",
       "published_date": "{{ product.published_at }}",
@@ -469,7 +469,7 @@
         "options": {{ variant.options | json }},
         "options_in_card": "{{ options_in_card }}",
         "price": "{{ variant_price }}",
-        "price_money": "{{ variant_price | money | remove: '.00' }}",
+        "price_money": "{{ variant_price | money_without_trailing_zeros }}",
         "best_sellers": {{ best_selling_order }},
         "inventory": {{ variant.inventory_quantity }},
         "date": "{{ product.published_at }}",
@@ -477,7 +477,7 @@
         "budge_text": "{{ badge_text }}",
         "compare_at_price_is_more_than_price": {{ compare_at_price_is_more_than_price }},
         "compare_at_price": "{{ variant_compare_at_price }}",
-        "compare_at_price_money": "{{ variant_compare_at_price | money | remove: '.00' }}",
+        "compare_at_price_money": "{{ variant_compare_at_price | money_without_trailing_zeros }}",
         "shop_by_use": {
           "value": {{ product_shop_by_use_val_uniq | json }}
           },

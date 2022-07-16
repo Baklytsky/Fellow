@@ -8837,6 +8837,7 @@ dynamic-recommendations {
 }
 
 [data-slide-toggle] {
+  cursor: pointer;
   .slide-toggle-active {
     display: none;
   }
@@ -8879,7 +8880,8 @@ dynamic-recommendations {
   padding: 20px 0;
   border-bottom: 1px solid #C2C2C2;
 
-  button {
+  button,
+  [data-slide-toggle] {
     padding: 0 4px;
     display: flex;
     align-items: center;
@@ -8933,7 +8935,8 @@ dynamic-recommendations {
       }
     }
 
-    button {
+    button,
+    [data-slide-toggle] {
       font-size: 16px;
     }
   }

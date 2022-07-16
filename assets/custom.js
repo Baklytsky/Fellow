@@ -2543,14 +2543,14 @@ document.addEventListener('click', (e) => {
 // End dropdown
 
 // Slide toggle
-class SlideToggle {
-  constructor(el, duration = 200) {
-    this.el = el;
-    this.duration = duration;
-    this.slideTargetName = this.el.getAttribute('data-slide-toggle');
+class SlideToggle extends HTMLElement {
+  constructor() {
+    super();
+    this.duration = this.dataset.duration || 200;
+    this.slideTargetName = this.getAttribute('data-slide-toggle');
     this.slideTarget = document.querySelector('[data-slide-target="'+ this.slideTargetName + '"]')
     if (this.slideTarget) {
-      this.el.addEventListener('click', (e) => {
+      this.addEventListener('click', (e) => {
         e.preventDefault();
         this.slideToggle()
       });
@@ -2570,7 +2570,7 @@ class SlideToggle {
     setTimeout( () => {
       this.slideTarget.style.removeProperty('height');
       this.slideTarget.style.overflow = 'auto';
-      this.el.classList.add('active');
+      this.classList.add('active');
     }, this.duration);
   }
 
@@ -2584,12 +2584,10 @@ class SlideToggle {
     });
     setTimeout( () => {
       this.slideTarget.classList.remove('active');
-      this.el.classList.remove('active');
+      this.classList.remove('active');
     }, this.duration)
   }
 }
 
-document.querySelectorAll('[data-slide-toggle]').forEach((el) => {
-  new SlideToggle(el);
-});
+customElements.define('slide-toggle', SlideToggle);
 // End Slide toggle

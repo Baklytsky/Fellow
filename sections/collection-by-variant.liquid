@@ -11,7 +11,7 @@
 {% endif %}
 {%- assign collection_title = collection.title -%}
 
-<section class='collection' data-component='collection'>
+<section class='collection'>
   {%- if section.settings.show_breadcrumbs -%}
     {% include 'breadcrumbs' %}
   {%- endif -%}
@@ -27,11 +27,11 @@
     %}
   {% endif %}
 
-  <collection-facets class='collection-wrapper'>
+  <collection-facets class='collection-wrapper' data-template="{{ template.suffix }}">
     {%- render 'facets' collection: collection -%}
     <div class='collection__products-wrapper rel'>
       <div class="collection__products-results">
-        <div id="collection__variant-results" class="subcollection__products one-fourth">
+        <div id="collection__result-wrapper" class="subcollection__products one-fourth">
           {%- for i in (1..8) -%}
             <div class="productCard">
               <div class="productCard__content y">
