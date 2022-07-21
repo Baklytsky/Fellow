@@ -15,9 +15,7 @@
   <link rel="preload" href="{{ 'index.js' | asset_url }}" as="script">
   <link rel="preload" href="{{ 'custom.js' | asset_url }}" as="script">
 
-  {%- if template == 'cart' -%}
-    <script>window.location = '/'</script>
-  {%- endif -%}
+  {% include 'redirects' %}
 
   {% capture seo_title %}
     {{ page_title }}
