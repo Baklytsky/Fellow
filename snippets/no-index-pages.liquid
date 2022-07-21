@@ -1,0 +1,8 @@
+{% if shop.metafields["custom_fields"]["url_list"] != blank %}
+  {% for item in shop.metafields["custom_fields"]["url_list"] %}
+    {% if item["noindex_url_path"] != blank and request.path == item["noindex_url_path"] %}
+      <meta name="robots" content="noindex, nofollow">
+      <meta name="googlebot" content="noindex, nofollow">
+    {% endif %}
+  {% endfor %}
+{% endif %}
