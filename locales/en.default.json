@@ -1,7 +1,8 @@
 {
   "general": {
     "accessibility": {
-      "skip_to_content": "Skip to content"
+      "skip_to_content": "Skip to content",
+      "close": "Close"
     },
     "meta": {
       "tags": "Tagged \"{{ tags }}\"",

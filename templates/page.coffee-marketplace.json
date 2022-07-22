@@ -17,8 +17,8 @@
     "16522312584b4699f1": {
       "type": "coffee-marketplace-hero",
       "settings": {
-        "desktop_image": "shopify:\/\/shop_images\/j7KQNRkQSSarZbg2orpL.jpg",
-        "mobile_image": "shopify:\/\/shop_images\/Roaster-Image-M.png",
+        "desktop_image": "shopify:\/\/shop_images\/Collections_Banner_Coffee_Marketplace_Desktop__2x_f66d473f-4386-44bb-923f-8c4a08c7cbe2.png",
+        "mobile_image": "shopify:\/\/shop_images\/Collections_Banner_Coffee_Marketplace_Desktop__2x_f66d473f-4386-44bb-923f-8c4a08c7cbe2.png",
         "heading": "Fellow's Coffee Collection",
         "description": "Introducing our new Coffee Collection: a rotation of our latest coffee obsessions, updated seasonally and whenever a new roast wows us.",
         "text_block_position": "center",
@@ -29,28 +29,14 @@
     "1653599595b02d298f": {
       "type": "coffee-marketplace-products",
       "blocks": {
-        "7fecf956-0f71-4724-8110-5147421afac4": {
-          "type": "product",
-          "settings": {
-            "product": "couplet-peaceful-peru",
-            "title_1": "Roasted In",
-            "description_1": "Los Angeles, California",
-            "title_2": "Grown In",
-            "description_2": "San Ignacio, Peru",
-            "title_3": "We Tasted",
-            "description_3": "{{ block.settings.product.metafields.coffee.attribute_3.value }}",
-            "title_4": "Why Try It?",
-            "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
-          }
-        },
         "06c75fc8-9b5f-49ae-a22b-8796612ea27a": {
           "type": "product",
           "settings": {
-            "product": "brandywine-pride-blend-coffee",
+            "product": "coava-ethiopia-kilenso",
             "title_1": "Roasted In",
-            "description_1": "Wilmington, Delaware",
+            "description_1": "{{ block.settings.product.metafields.coffee.attribute_1.value }}",
             "title_2": "Grown In",
-            "description_2": "Colombia",
+            "description_2": "Sidama, Ethiopia",
             "title_3": "We Tasted",
             "description_3": "{{ block.settings.product.metafields.coffee.attribute_3.value }}",
             "title_4": "Why Try It?",
@@ -60,11 +46,25 @@
         "00563b8d-ad99-4b88-9b82-e5c9727ad9d6": {
           "type": "product",
           "settings": {
-            "product": "queer-wave-coffee-marigold",
+            "product": "black-and-white-halo-hartume",
             "title_1": "Roasted In",
-            "description_1": "Oakland, California",
+            "description_1": "Raleigh, North Carolina",
             "title_2": "Grown In",
-            "description_2": "Santa Elena, La Paz, Honduras",
+            "description_2": "Gedeb, Yirgacheffe, Ethiopia",
+            "title_3": "We Tasted",
+            "description_3": "{{ block.settings.product.metafields.coffee.attribute_3.value }}",
+            "title_4": "Why Try It?",
+            "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
+          }
+        },
+        "7fecf956-0f71-4724-8110-5147421afac4": {
+          "type": "product",
+          "settings": {
+            "product": "bird-rock-anderacha",
+            "title_1": "Roasted In",
+            "description_1": "San Diego, California",
+            "title_2": "Grown In",
+            "description_2": "Jimma, Ethiopia",
             "title_3": "We Tasted",
             "description_3": "{{ block.settings.product.metafields.coffee.attribute_3.value }}",
             "title_4": "Why Try It?",
@@ -73,36 +73,36 @@
         },
         "4becf74e-5449-4496-a177-124d68b00aec": {
           "type": "product",
+          "disabled": true,
           "settings": {
-            "product": "pride-coffee-bundle",
+            "product": "ethiopia-fresh-crop-bundle",
             "title_1": "Can't Decide?",
-            "description_1": "Taste test all three in our Pride Collection!",
+            "description_1": "Three coffees. Three distinct regions. Taste the best of the season.",
             "title_2": "What's Included",
-            "description_2": "Couplet Peaceful Peru, Brandywine Pride Blend, and Queer Wave Marigold.",
+            "description_2": "Enjoy the decadent dessert-like Andaracha by Bird Rock, the sweet and creamy Kilenso by Coava, and the floral tea-noted Halo Hartume by Black & White.",
             "title_3": "Why Try It?",
-            "description_3": "Featuring three processes: washed, natural, and a blend of each.",
+            "description_3": "Try all three of our curated favorites from this year’s crop out of Ethiopia.",
             "title_4": "",
             "description_4": ""
           }
         },
         "51ba94f5-6e31-41eb-bd2f-d78575777b2b": {
           "type": "lifestyle-image",
-          "disabled": true,
           "settings": {
-            "lifestyle_image": "shopify:\/\/shop_images\/vert_pride01_3289x6960_8432181f-ecaa-418f-a7b9-8f9943897308.jpg"
+            "lifestyle_image": "shopify:\/\/shop_images\/image_1.jpg"
           }
         }
       },
       "block_order": [
-        "7fecf956-0f71-4724-8110-5147421afac4",
         "06c75fc8-9b5f-49ae-a22b-8796612ea27a",
         "00563b8d-ad99-4b88-9b82-e5c9727ad9d6",
+        "7fecf956-0f71-4724-8110-5147421afac4",
         "4becf74e-5449-4496-a177-124d68b00aec",
         "51ba94f5-6e31-41eb-bd2f-d78575777b2b"
       ],
       "settings": {
-        "heading": "June: The Pride Collection",
-        "description": "Coffees worth a parade. Discover incredible LGBTQIA+ owned and operated roasters."
+        "heading": "Ethiopia Fresh Crop",
+        "description": "It’s the most wonderful time of the year. Discover our favorite single origin coffees from this year’s crop out of the birthplace of coffee."
       }
     },
     "16498420281a16a067": {
@@ -182,6 +182,7 @@
       "blocks": {
         "2115e373-8bab-4923-a85d-ebece997e478": {
           "type": "product",
+          "disabled": true,
           "settings": {
             "product": "rwanda-kanzu-12",
             "title_1": "Roasted In",
@@ -191,6 +192,48 @@
             "title_3": "We Tasted",
             "description_3": "{{ block.settings.product.metafields.coffee.attribute_3.value }}",
             "title_4": "Why Try It",
+            "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
+          }
+        },
+        "a49713bc-0826-4ae9-bc9c-7d03b3b2c981": {
+          "type": "product",
+          "settings": {
+            "product": "tropical-weather",
+            "title_1": "Roasted In",
+            "description_1": "Rogers, Arkansas",
+            "title_2": "Grown In",
+            "description_2": "{{ block.settings.product.metafields.coffee.attribute_2.value }}",
+            "title_3": "We Tasted",
+            "description_3": "{{ block.settings.product.metafields.coffee.attribute_3.value }}",
+            "title_4": "Why Try It?",
+            "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
+          }
+        },
+        "6982e6ea-0c0d-449d-8d24-32a4957c3b6d": {
+          "type": "product",
+          "settings": {
+            "product": "panama-carolyn-saraceni-intrinsic-cherry",
+            "title_1": "Roasted In",
+            "description_1": "Wilmington, Delaware",
+            "title_2": "Grown In",
+            "description_2": "{{ block.settings.product.metafields.coffee.attribute_2.value }}",
+            "title_3": "We Tasted",
+            "description_3": "{{ block.settings.product.metafields.coffee.attribute_3.value }}",
+            "title_4": "Why Try It?",
+            "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
+          }
+        },
+        "139fb58b-bf5e-4304-b425-1e1341179336": {
+          "type": "product",
+          "settings": {
+            "product": "colombia-el-progreso-washed",
+            "title_1": "Roasted In",
+            "description_1": "Wilmington, Delaware",
+            "title_2": "Grown In",
+            "description_2": "{{ block.settings.product.metafields.coffee.attribute_2.value }}",
+            "title_3": "We Tasted",
+            "description_3": "{{ block.settings.product.metafields.coffee.attribute_3.value }}",
+            "title_4": "Why Try It?",
             "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
           }
         },
@@ -208,12 +251,12 @@
             "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
           }
         },
-        "6982e6ea-0c0d-449d-8d24-32a4957c3b6d": {
+        "e3e50d28-c549-4c16-9115-8f61c1011e5c": {
           "type": "product",
           "settings": {
-            "product": "panama-carolyn-saraceni-intrinsic-cherry",
+            "product": "democratic-republic-of-congo-boza-cooperative",
             "title_1": "Roasted In",
-            "description_1": "Wilmington, Delaware",
+            "description_1": "{{ block.settings.product.metafields.coffee.attribute_1.value }}",
             "title_2": "Grown In",
             "description_2": "{{ block.settings.product.metafields.coffee.attribute_2.value }}",
             "title_3": "We Tasted",
@@ -236,20 +279,6 @@
             "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
           }
         },
-        "e3e50d28-c549-4c16-9115-8f61c1011e5c": {
-          "type": "product",
-          "settings": {
-            "product": "democratic-republic-of-congo-boza-cooperative",
-            "title_1": "Roasted In",
-            "description_1": "{{ block.settings.product.metafields.coffee.attribute_1.value }}",
-            "title_2": "Grown In",
-            "description_2": "Santa Cruz, California",
-            "title_3": "We Tasted",
-            "description_3": "{{ block.settings.product.metafields.coffee.attribute_3.value }}",
-            "title_4": "Why Try It?",
-            "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
-          }
-        },
         "7b0a213d-415f-4371-9680-cae6f7d230ab": {
           "type": "product",
           "settings": {
@@ -262,6 +291,20 @@
             "description_3": "{{ block.settings.product.metafields.coffee.attribute_3.value }}",
             "title_4": "Why Try It?",
             "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
+          }
+        },
+        "e7de929d-e76a-450a-8dde-f31d60d80cc3": {
+          "type": "product",
+          "settings": {
+            "product": "couplet-peaceful-peru",
+            "title_1": "Roasted In",
+            "description_1": "Los Angeles, California",
+            "title_2": "Grown In",
+            "description_2": "San Ignacio, Peru",
+            "title_3": "We Tasted",
+            "description_3": "Peach, Caramel, Dried Cranberry, Lime",
+            "title_4": "Why Try It?",
+            "description_4": "A nuanced and fruity single-origin from a queer woman-owned roaster."
           }
         },
         "f1c6aca2-ca7d-49cb-9203-80994c022cb4": {
@@ -292,6 +335,20 @@
             "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
           }
         },
+        "6f701f26-c0b2-4587-b388-960d258ddea8": {
+          "type": "product",
+          "settings": {
+            "product": "queer-wave-coffee-marigold",
+            "title_1": "Roasted In",
+            "description_1": "Oakland, California",
+            "title_2": "Grown In",
+            "description_2": "Santa Elena, La Paz, Honduras",
+            "title_3": "We Tasted",
+            "description_3": "Tealike Mouthfeel, Slight Florals, Tangerine",
+            "title_4": "Why Try It?",
+            "description_4": "A super light Honduran from a roaster breaking down coffee culture norms."
+          }
+        },
         "9bc02913-d646-4cde-b261-2b4ae4a24550": {
           "type": "product",
           "settings": {
@@ -305,56 +362,31 @@
             "title_4": "Why Try It?",
             "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
           }
-        },
-        "a49713bc-0826-4ae9-bc9c-7d03b3b2c981": {
-          "type": "product",
-          "settings": {
-            "product": "tropical-weather",
-            "title_1": "Roasted In",
-            "description_1": "Rogers, Arkansas",
-            "title_2": "Grown In",
-            "description_2": "{{ block.settings.product.metafields.coffee.attribute_2.value }}",
-            "title_3": "We Tasted",
-            "description_3": "{{ block.settings.product.metafields.coffee.attribute_3.value }}",
-            "title_4": "Why Try It?",
-            "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
-          }
-        },
-        "139fb58b-bf5e-4304-b425-1e1341179336": {
-          "type": "product",
-          "settings": {
-            "product": "colombia-el-progreso-washed",
-            "title_1": "Roasted In",
-            "description_1": "Wilmington, Delaware",
-            "title_2": "Grown In",
-            "description_2": "{{ block.settings.product.metafields.coffee.attribute_2.value }}",
-            "title_3": "We Tasted",
-            "description_3": "{{ block.settings.product.metafields.coffee.attribute_3.value }}",
-            "title_4": "Why Try It?",
-            "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
-          }
         }
       },
       "block_order": [
         "2115e373-8bab-4923-a85d-ebece997e478",
-        "4f0b6739-c0f3-47f5-ae19-16b54a1cb82c",
+        "a49713bc-0826-4ae9-bc9c-7d03b3b2c981",
         "6982e6ea-0c0d-449d-8d24-32a4957c3b6d",
-        "4ea87f05-09e8-444b-ae4d-0856d6d03146",
+        "139fb58b-bf5e-4304-b425-1e1341179336",
+        "4f0b6739-c0f3-47f5-ae19-16b54a1cb82c",
         "e3e50d28-c549-4c16-9115-8f61c1011e5c",
+        "4ea87f05-09e8-444b-ae4d-0856d6d03146",
         "7b0a213d-415f-4371-9680-cae6f7d230ab",
+        "e7de929d-e76a-450a-8dde-f31d60d80cc3",
         "f1c6aca2-ca7d-49cb-9203-80994c022cb4",
         "c71c537e-331b-4b08-980b-9b905e236cf5",
-        "9bc02913-d646-4cde-b261-2b4ae4a24550",
-        "a49713bc-0826-4ae9-bc9c-7d03b3b2c981",
-        "139fb58b-bf5e-4304-b425-1e1341179336"
+        "6f701f26-c0b2-4587-b388-960d258ddea8",
+        "9bc02913-d646-4cde-b261-2b4ae4a24550"
       ],
       "settings": {
-        "heading": "More Fellow Favorites",
-        "description": "We try hundreds of coffees so you don’t have to. Here are some of our recent favorites state-side. Arranged from our latest obsessions to the endlessly repeatable."
+        "heading": "Your Dream Coffee Aisle",
+        "description": "We try hundreds of coffees so you don’t have to. Here are some of our recent favorites. Arranged from our latest obsessions to the endlessly repeatable."
       }
     },
     "1649944546d9b124de": {
       "type": "coffee-marketplace-twb",
+      "disabled": true,
       "settings": {
         "bg_color": "#000000",
         "text_color": "#ffffff",
@@ -391,8 +423,8 @@
           "type": "Card",
           "settings": {
             "image": "shopify:\/\/shop_images\/DSCF7123-min.jpg",
-            "heading": "Tasting Panel",
-            "description": "Our dedicated panel curates our selection and builds custom recipes for every coffee we share.",
+            "heading": "Tasting Experts",
+            "description": "Our tasting panel curates our selection and builds custom recipes for every coffee.",
             "link": ""
           }
         }
@@ -410,11 +442,11 @@
     "16499352731248f01a": {
       "type": "coffee-marketplace-iwt",
       "settings": {
-        "heading": "Spoiled for choice?",
-        "description": "Join Fellow Drops: every week we share just one coffee via text. Get limited lots, rare processes, and exclusive collaborations with the best roasters in the world.",
+        "heading": "Take It One Week At  A Time",
+        "description": "Join Fellow Drops and get limited lots, rare processes, and exclusive collaborations with the best roasters in the world. Every week, we’ll share one very special coffee with you.",
         "cta_text": "Join Our Text List",
         "cta_link": "shopify:\/\/pages\/join-fellow-drops",
-        "image": "shopify:\/\/shop_images\/drops_Image-Text-Module.jpg",
+        "image": "shopify:\/\/shop_images\/Collections_Feature_Module_Coffee_Marketplace_Mobile.png",
         "image_position": "left"
       }
     }

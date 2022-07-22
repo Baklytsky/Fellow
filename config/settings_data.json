@@ -183,7 +183,7 @@
               "title_1": "Shop All Drink + Serve",
               "url_1": "shopify:\/\/collections\/serve",
               "image_2": "shopify:\/\/shop_images\/670x650_LargeModule-JeremyFish.jpg",
-              "title_2": "Artist Series",
+              "title_2": "Shop Artist Series",
               "url_2": "shopify:\/\/collections\/artist-series",
               "title_3": "",
               "url_3": "",
@@ -195,11 +195,11 @@
             "type": "sub_menu",
             "settings": {
               "target": "coffee",
-              "image_1": "shopify:\/\/shop_images\/Roaster-Image-M.png",
-              "title_1": "Coffee Collection",
+              "image_1": "shopify:\/\/shop_images\/2021-11-2_fellow_drops12791_copy-min_1.jpg",
+              "title_1": "Shop Coffee Collection",
               "url_1": "https:\/\/fellowproducts.com\/pages\/coffee-marketplace",
               "image_2": "shopify:\/\/shop_images\/HP_FellowDrops_Module.jpg",
-              "title_2": "Text-to-order Coffee",
+              "title_2": "Join Fellow Drops",
               "url_2": "https:\/\/drops.fellowproducts.com",
               "title_3": "",
               "url_3": "",
@@ -246,9 +246,9 @@
               "image_1": "shopify:\/\/shop_images\/Brew-Bar-Hero-Module-Image.jpg",
               "title_1": "Shop All",
               "url_1": "shopify:\/\/collections\/all-products",
-              "image_2": "shopify:\/\/shop_images\/112421_Atmos_Navigation-2Up.jpg",
-              "title_2": "Shop Atmos",
-              "url_2": "shopify:\/\/products\/atmos-vacuum-canister",
+              "image_2": "shopify:\/\/shop_images\/Blog_Mobile_800x725__2x_0422bb30-2afb-4b16-80f5-63bdb89678e8.jpg",
+              "title_2": "Compare Carter Mugs",
+              "url_2": "shopify:\/\/pages\/carter-mugs",
               "title_3": "",
               "url_3": "",
               "title_4": "",
@@ -319,7 +319,7 @@
           "07578aa3-3e0e-41c3-b75d-efe854f51c7a"
         ],
         "settings": {
-          "logo": "shopify:\/\/shop_images\/Logo-Pride-Gradient-2000.png",
+          "logo": "shopify:\/\/shop_images\/Fellow-Logo-black_256x256_a2e945bd-f946-4272-b903-e369a6797c38.webp",
           "logo_svg": "",
           "logo_desktop_size": 130,
           "logo_mobile_size": 100,
@@ -327,9 +327,9 @@
           "menu_left": "new-left-menu-1",
           "menu_right": "new-right-menu",
           "mobile_menu": "",
-          "show_announcement": true,
+          "show_announcement": false,
           "announcement_text": "Celebrate with The Pride Collection <u>Shop Now -&gt;<\/u>",
-          "announcement_link": "shopify:\/\/collections\/pride-mugs-coffee-collection",
+          "announcement_link": "",
           "enable_timer": false,
           "end_date": "Sep 30, 2021 07:30:00 GMT-08:00"
         }
@@ -363,41 +363,59 @@
       "1565155576930": {
         "type": "hero-slider",
         "blocks": {
-          "e6275e05-4fc2-4478-85db-37e4aceedf86": {
+          "c15c0d5c-f86c-436e-95b6-2f10cb6c8b20": {
             "type": "splitSlide",
-            "disabled": true,
             "settings": {
               "splitSlide__layout": "right",
-              "heroSlide": "shopify:\/\/shop_images\/Gift-Card_Option-2.gif",
+              "heroSlide": "shopify:\/\/shop_images\/2021-11-2_fellow_drops12791_copy_1.jpg",
               "desktopAlignment": "center",
               "mobileAlignment": "center",
-              "heroSlide__header": "The last minute gift",
-              "heroSlide__subheader": "You’re in luck with our digital gift cards. Just tell them to refresh their inbox.",
-              "subSlide__bgColor": "#557367",
-              "subSlide__textColor": "#FFFFFF",
-              "heroSlide__ctaURL": "shopify:\/\/products\/digital-gift-card",
-              "heroSlide__ctaCopy": "Send It Now",
-              "heroSlide__ctaColor": "white",
+              "heroSlide__header": "Just Cropped Up",
+              "heroSlide__subheader": "Discover our curated favorites from this year's Ethiopian coffee harvest.",
+              "subSlide__bgColor": "#8cbde0",
+              "subSlide__textColor": "#231f20",
+              "heroSlide__ctaURL": "https:\/\/fellowproducts.com\/pages\/curated-coffee-collection",
+              "heroSlide__ctaCopy": "Shop Fresh Crop",
+              "heroSlide__ctaColor": "black",
               "heroSlide__ctaURL2": "",
               "heroSlide__ctaCopy2": "",
               "heroSlide__ctaColor2": "black",
               "heroSlide__ctaSubtext": ""
             }
           },
-          "c15c0d5c-f86c-436e-95b6-2f10cb6c8b20": {
+          "e6275e05-4fc2-4478-85db-37e4aceedf86": {
             "type": "splitSlide",
-            "disabled": true,
             "settings": {
               "splitSlide__layout": "right",
-              "heroSlide": "shopify:\/\/shop_images\/New_Web_HP_11_f6f22585-a520-4c8d-8077-1aeace883ad8.png",
+              "heroSlide": "shopify:\/\/shop_images\/HeroImage_WormyWeek_Mobile__2x_3164d789-1d61-4f20-ad8a-7dfa13cd2f04.jpg",
               "desktopAlignment": "center",
               "mobileAlignment": "center",
-              "heroSlide__header": "The Sale You’ve Been Waiting For",
-              "heroSlide__subheader": "The once-a-year sale your brew bar dreams about is back. Shop your favorites while they’re still in stock.",
-              "subSlide__bgColor": "#cee1f0",
+              "heroSlide__header": "Are You The Next Wormy World Champion?",
+              "heroSlide__subheader": "Play the video game hidden in all our electric kettles for the chance at glory (and prizes).",
+              "subSlide__bgColor": "#000000",
+              "subSlide__textColor": "#FFFFFF",
+              "heroSlide__ctaURL": "https:\/\/fellowproducts.com\/wormy",
+              "heroSlide__ctaCopy": "Enter The Competition",
+              "heroSlide__ctaColor": "white",
+              "heroSlide__ctaURL2": "shopify:\/\/collections\/choose-your-controller",
+              "heroSlide__ctaCopy2": "Choose Your Controller",
+              "heroSlide__ctaColor2": "white",
+              "heroSlide__ctaSubtext": ""
+            }
+          },
+          "91049687-67b8-4bdc-8f37-c74f97e41d00": {
+            "type": "splitSlide",
+            "settings": {
+              "splitSlide__layout": "right",
+              "heroSlide": "shopify:\/\/shop_images\/HeroImage_Summer_Brew_Desktop__2x_338677d1-205e-4b35-b26c-560f9669aa15.jpg",
+              "desktopAlignment": "center",
+              "mobileAlignment": "center",
+              "heroSlide__header": "The Summer Collection",
+              "heroSlide__subheader": "Precision brewing gear for putting all your coffee plans on ice.",
+              "subSlide__bgColor": "#ffcc4e",
               "subSlide__textColor": "#231f20",
-              "heroSlide__ctaURL": "https:\/\/fellowproducts.com\/products\/ode-brew-grinder?variant=39495206371428",
-              "heroSlide__ctaCopy": "Shop The Sale",
+              "heroSlide__ctaURL": "shopify:\/\/collections\/summer-brew",
+              "heroSlide__ctaCopy": "Shop Summer Essentials",
               "heroSlide__ctaColor": "black",
               "heroSlide__ctaURL2": "",
               "heroSlide__ctaCopy2": "",
@@ -407,9 +425,10 @@
           },
           "58ee7397-6079-412a-9acd-d453a0cf281c": {
             "type": "splitSlide",
+            "disabled": true,
             "settings": {
               "splitSlide__layout": "right",
-              "heroSlide": "shopify:\/\/shop_images\/Collage-Homepage.png",
+              "heroSlide": "shopify:\/\/shop_images\/Carter-SLL-GIF-3IMG-Homepage_1.gif",
               "desktopAlignment": "center",
               "mobileAlignment": "center",
               "heroSlide__header": "Meet The New Mug In Town",
@@ -420,7 +439,7 @@
               "heroSlide__ctaCopy": "Shop Carter + Slide-Lock Lid",
               "heroSlide__ctaColor": "white",
               "heroSlide__ctaURL2": "shopify:\/\/pages\/carter-mugs",
-              "heroSlide__ctaCopy2": "Choose Your Carter",
+              "heroSlide__ctaCopy2": "Choose Your Carter Mug",
               "heroSlide__ctaColor2": "white",
               "heroSlide__ctaSubtext": ""
             }
@@ -466,36 +485,15 @@
               "heroSlide__ctaColor2": "black",
               "heroSlide__ctaSubtext": ""
             }
-          },
-          "91049687-67b8-4bdc-8f37-c74f97e41d00": {
-            "type": "splitSlide",
-            "disabled": true,
-            "settings": {
-              "splitSlide__layout": "right",
-              "heroSlide": "shopify:\/\/shop_images\/Image_3.png",
-              "desktopAlignment": "center",
-              "mobileAlignment": "center",
-              "heroSlide__header": "Lush Summer",
-              "heroSlide__subheader": "Fill your morning with great blooms and delicious coffee.",
-              "subSlide__bgColor": "#e0deec",
-              "subSlide__textColor": "#231f20",
-              "heroSlide__ctaURL": "shopify:\/\/products\/stagg-ekg-electric-pour-over-kettle",
-              "heroSlide__ctaCopy": "Shop Stagg EKG",
-              "heroSlide__ctaColor": "black",
-              "heroSlide__ctaURL2": "",
-              "heroSlide__ctaCopy2": "",
-              "heroSlide__ctaColor2": "black",
-              "heroSlide__ctaSubtext": "<span>★★★★★ | Elizabeth H.<br>\nMy new kettle makes making my pour-over coffee easy and quick. It is a beautiful addition to my counter as well!\n<a href=\"https:\/\/fellowproducts.com\/products\/stagg-ekg-electric-pour-over-kettle#pdp-reviews\" style=\"text-decoration:underline;\">Read more reviews<\/a><\/span>"
-            }
           }
         },
         "block_order": [
-          "e6275e05-4fc2-4478-85db-37e4aceedf86",
           "c15c0d5c-f86c-436e-95b6-2f10cb6c8b20",
+          "e6275e05-4fc2-4478-85db-37e4aceedf86",
+          "91049687-67b8-4bdc-8f37-c74f97e41d00",
           "58ee7397-6079-412a-9acd-d453a0cf281c",
           "1f457594-c59c-4edd-800a-a9f7662f319e",
-          "3e0796bc-698b-4618-80b6-261185f9fb1a",
-          "91049687-67b8-4bdc-8f37-c74f97e41d00"
+          "3e0796bc-698b-4618-80b6-261185f9fb1a"
         ],
         "settings": {
           "addMargin": false
@@ -523,9 +521,9 @@
         "type": "logo-text",
         "settings": {
           "enable_section": true,
-          "text": "This way to a brighter, less boring morning",
+          "text": "Brighten up your brew bar for summer. Shop Best Sellers.",
           "url": "shopify:\/\/collections\/bestsellers",
-          "icon": "shopify:\/\/shop_images\/Bowtie-Pride-Gradient-1200.png"
+          "icon": "shopify:\/\/shop_images\/Fellow-altIcon-black_50x50_0e6456f9-e7c3-4d7a-a84a-276b63301d34.webp"
         }
       },
       "162997622949d3f8ee": {
@@ -550,12 +548,12 @@
               "button_url": "shopify:\/\/collections\/bestsellers"
             }
           },
-          "e562759f-87e2-472a-9bff-544a67dff43c": {
+          "61c6e91f-6505-42c0-866f-25296dbe3d4e": {
             "type": "collection",
             "settings": {
-              "tab_text": "Pride Mugs",
-              "collection": "pride-mugs-coffee-collection",
-              "button_text": "Shop The Pride Collection",
+              "tab_text": "Grind + Brew",
+              "collection": "grind-brew",
+              "button_text": "",
               "button_url": ""
             }
           },
@@ -569,6 +567,15 @@
               "button_url": ""
             }
           },
+          "34a21fe6-0cfe-4b56-85f5-42725eb153e6": {
+            "type": "collection",
+            "settings": {
+              "tab_text": "Drink + Serve",
+              "collection": "serve",
+              "button_text": "",
+              "button_url": ""
+            }
+          },
           "bfeb2272-7a44-421f-ac0c-ab8e740b0fe8": {
             "type": "collection",
             "settings": {
@@ -578,21 +585,12 @@
               "button_url": ""
             }
           },
-          "61c6e91f-6505-42c0-866f-25296dbe3d4e": {
+          "e562759f-87e2-472a-9bff-544a67dff43c": {
             "type": "collection",
             "settings": {
-              "tab_text": "Grind + Brew",
-              "collection": "grind-brew",
-              "button_text": "",
-              "button_url": ""
-            }
-          },
-          "34a21fe6-0cfe-4b56-85f5-42725eb153e6": {
-            "type": "collection",
-            "settings": {
-              "tab_text": "Drink + Serve",
-              "collection": "serve",
-              "button_text": "",
+              "tab_text": "Pride Mugs",
+              "collection": "pride-mugs-coffee-collection",
+              "button_text": "Shop The Pride Collection",
               "button_url": ""
             }
           },
@@ -640,11 +638,11 @@
         "block_order": [
           "74896794-3a9a-4ead-a9f5-c8a78fc6788e",
           "1c8f9541-a475-428c-9638-4b46c17cf01e",
-          "e562759f-87e2-472a-9bff-544a67dff43c",
-          "7acc7b63-cc70-4ca0-83e1-ffa6c28c031a",
-          "bfeb2272-7a44-421f-ac0c-ab8e740b0fe8",
           "61c6e91f-6505-42c0-866f-25296dbe3d4e",
+          "7acc7b63-cc70-4ca0-83e1-ffa6c28c031a",
           "34a21fe6-0cfe-4b56-85f5-42725eb153e6",
+          "bfeb2272-7a44-421f-ac0c-ab8e740b0fe8",
+          "e562759f-87e2-472a-9bff-544a67dff43c",
           "a739270d-13fd-4aaf-9bd0-c54e753ab0a7",
           "db2a2a28-0b9f-4295-9b8c-60c865322da2",
           "0bc35052-fa24-4ee9-8955-ae08bee2e924",
@@ -652,29 +650,29 @@
         ],
         "settings": {
           "enable_section": true,
-          "heading": "Your brewing bread and butter.",
+          "heading": "Brewing gifts for every stage of the journey.",
           "limit": 4,
           "show_view_all": true
         }
       },
       "1630052841314f69dd": {
         "type": "hp-iwt",
-        "disabled": true,
         "settings": {
           "enable_section": true,
-          "image": "shopify:\/\/shop_images\/Fellow_Atmos_LindseySheaFinals-18_rt_v01_OT.jpg",
-          "layout": "right",
-          "header": "Our Best Seller Is Back",
-          "description": "<p>Back in stock and ready for your brew bar, treat your beans to a life of luxury with Atmos.<\/p>",
+          "image": "shopify:\/\/shop_images\/HP_Module_2_WormyWeek_Rename__2x_f9958efb-4882-45dd-81f0-8092ce861ef2.jpg",
+          "layout": "left",
+          "header": "Say \"I Brew\"",
+          "description": "<p>This wedding season, gift beautiful gear for their forever brew bar.<\/p>",
           "bg_color": "",
           "text_color": "#000000",
-          "cta_url": "shopify:\/\/products\/atmos-vacuum-canister",
-          "cta_copy": "Shop Atmos",
+          "cta_url": "shopify:\/\/collections\/wedding-gifts",
+          "cta_copy": "Shop Wedding Gifts",
           "cta_color": "btn--dark"
         }
       },
       "163005286553dd2458": {
         "type": "hp-iwt",
+        "disabled": true,
         "settings": {
           "enable_section": true,
           "image": "shopify:\/\/shop_images\/Fellow-Highlight.jpg",
@@ -751,19 +749,7 @@
           "243f1fe7-12cb-4b51-b5ac-6897c8af25d9": {
             "type": "article",
             "settings": {
-              "article": "learn\/personalized-carter-ideas"
-            }
-          },
-          "b89badb0-2f13-4dfd-b834-29780dfc72cd": {
-            "type": "article",
-            "settings": {
-              "article": "learn\/northern-lights-drop"
-            }
-          },
-          "3b78c804-955a-454f-b8d7-af7b4271d9a4": {
-            "type": "article",
-            "settings": {
-              "article": "brew-guides\/back-to-brewing-school-pour-over-basics-101"
+              "article": "learn\/2022-wormy-world-championships"
             }
           },
           "8034bca3-6535-40a1-83ce-613a916266d4": {
@@ -771,13 +757,26 @@
             "settings": {
               "article": "learn\/which-carter-are-you"
             }
+          },
+          "b89badb0-2f13-4dfd-b834-29780dfc72cd": {
+            "type": "article",
+            "settings": {
+              "article": "learn\/the-golden-ratio-for-brewing-coffee"
+            }
+          },
+          "3b78c804-955a-454f-b8d7-af7b4271d9a4": {
+            "type": "article",
+            "disabled": true,
+            "settings": {
+              "article": "brew-guides\/back-to-brewing-school-pour-over-basics-101"
+            }
           }
         },
         "block_order": [
           "243f1fe7-12cb-4b51-b5ac-6897c8af25d9",
+          "8034bca3-6535-40a1-83ce-613a916266d4",
           "b89badb0-2f13-4dfd-b834-29780dfc72cd",
-          "3b78c804-955a-454f-b8d7-af7b4271d9a4",
-          "8034bca3-6535-40a1-83ce-613a916266d4"
+          "3b78c804-955a-454f-b8d7-af7b4271d9a4"
         ],
         "settings": {
           "heading": "Commence Your Coffee Quest Here",
@@ -832,37 +831,30 @@
         "type": "hp-iwt",
         "settings": {
           "enable_section": true,
-          "image": "shopify:\/\/shop_images\/Product_Feature_Module-Drops.jpg",
-          "layout": "left",
+          "image": "shopify:\/\/shop_images\/section_2_mobile_1.jpg",
+          "layout": "right",
           "header": "Take it one week at a time",
           "description": "<p>Join Fellow Drops: no-commitment coffee recommendations from people who drink way too much of it.<\/p>",
           "bg_color": "#ffffff",
           "text_color": "",
           "cta_url": "https:\/\/drops.fellowproducts.com",
-          "cta_copy": "Sign Up For Free",
+          "cta_copy": "Text Me Coffee Recs",
           "cta_color": "btn--dark"
         }
       },
-      "cart-recommended": {
-        "type": "cart-recommended",
-        "settings": {}
-      },
-      "cart-gift-wrapping": {
-        "type": "cart-gift-wrapping",
-        "settings": {}
-      },
       "1636101715cd2df3c8": {
         "type": "hp-iwt",
+        "disabled": true,
         "settings": {
           "enable_section": true,
-          "image": "shopify:\/\/shop_images\/Hero_Module_Image_1.png",
+          "image": "shopify:\/\/shop_images\/NEW-Collections-HeaderIMG-Mobile-SLL.png",
           "layout": "left",
-          "header": "Brew with Pride",
-          "description": "<p>Celebrate all month with The Pride Collection. Because coffee is only worth sharing when there’s a seat at the table for everyone.<\/p>",
+          "header": "Find Your Travel Mug Sidekick",
+          "description": "<p>The right Carter to keep up with your changing coffee plans.<\/p>",
           "bg_color": "",
           "text_color": "",
-          "cta_url": "shopify:\/\/collections\/pride-mugs-coffee-collection",
-          "cta_copy": "The Pride Collection",
+          "cta_url": "shopify:\/\/pages\/carter-mugs",
+          "cta_copy": "Choose Your Carter Mug",
           "cta_color": "btn--dark"
         }
       },
@@ -872,12 +864,13 @@
       },
       "16391832269c232690": {
         "type": "hp-iwt",
+        "disabled": true,
         "settings": {
           "enable_section": true,
-          "image": "shopify:\/\/shop_images\/coffee_marketplace_Header-Mobile_1.jpg",
-          "layout": "left",
+          "image": "shopify:\/\/shop_images\/2021-11-2_fellow_drops12932-min.jpg",
+          "layout": "right",
           "header": "Seasonal menu",
-          "description": "<p>We just launched Fellow’s new Coffee Collection: a rotation of our latest coffee obsessions, updated seasonally. <\/p>",
+          "description": "<p>Just launched: Fellow’s new Coffee Collection. A rotation of our latest coffee obsessions, updated seasonally. <\/p>",
           "bg_color": "#ffffff",
           "text_color": "",
           "cta_url": "shopify:\/\/pages\/curated-coffee-collection",
@@ -931,33 +924,46 @@
       },
       "164970109872b4e7fa": {
         "type": "hp-iwt",
+        "disabled": true,
         "settings": {
           "enable_section": true,
-          "image": "shopify:\/\/shop_images\/Homepage-Module_Bundle.gif",
+          "image": "shopify:\/\/shop_images\/Hero_Module_Ode_Burr.png",
           "layout": "right",
-          "header": "Freshly bloomed",
-          "description": "<p>Discover colorful new bundles with curated coffee included.<\/p>",
-          "bg_color": "",
+          "header": "Hit the grind running",
+          "description": "<p>Two burr choices, no wrong answers. Pick the best to suit your needs.<\/p>",
+          "bg_color": "rgba(0,0,0,0)",
           "text_color": "",
-          "cta_url": "shopify:\/\/collections\/coffee-products-kits-bundles",
-          "cta_copy": "Shop Kits + Bundles",
+          "cta_url": "shopify:\/\/products\/ode-brew-grinder",
+          "cta_copy": "Shop Ode Brew Grinder",
           "cta_color": "btn--dark"
         }
       },
       "16497034024471c77e": {
         "type": "hp-iwt",
-        "disabled": true,
         "settings": {
           "enable_section": true,
-          "image": "shopify:\/\/shop_images\/Coffee_Marketplace_780x618_Product_Feature_1.jpg",
-          "layout": "left",
-          "header": "Seasonal tasting menu",
-          "description": "<p>We’ve curated a selection of our favorite coffees from some of the best roasters in the world right now.<\/p>",
+          "image": "shopify:\/\/shop_images\/HP_Module_1_WormyWeek_Desktop__2x_96543400-2383-4260-88db-96c2c17c9fcd.jpg",
+          "layout": "right",
+          "header": "Ethiopia Fresh Crop",
+          "description": "<p>Just in. Discover our new curated collection from the birthplace of coffee.<\/p>",
           "bg_color": "",
           "text_color": "",
-          "cta_url": "shopify:\/\/collections\/coffee",
+          "cta_url": "https:\/\/fellowproducts.com\/pages\/curated-coffee-collection",
           "cta_copy": "Shop Coffee",
           "cta_color": "btn--dark"
+        }
+      },
+      "cart-drawer-content": {
+        "type": "cart-drawer-content",
+        "settings": {}
+      },
+      "accessibility-popup": {
+        "type": "accessibility-popup",
+        "settings": {
+          "btn_text": "Skip to Accessibility Statement",
+          "heading": "Fellow's Commitment to Accessibility",
+          "description": "<p>Fellow is committed to making our website's content accessible and user friendly to everyone. If you are having difficulty viewing or navigating the content on this website, or notice any content, feature, or functionality that you believe is not fully accessible to people with disabilities, please email our Customer Experience team at <a href=\"mailto:hello@fellowproducts.com\" title=\"Email Us at hello@fellowproducts.com\">hello@fellowproducts.com<\/a> with \"Disabled Access\" in the subject line and provide a description of the specific feature you feel is not fully accessible or a suggestion for improvement. Fellow takes your feedback seriously and will consider it as we evaluate ways to accommodate all of our customers and our overall accessibility policies. Additionally, while we do not control such vendors, we strongly encourage vendors of third-party digital content to provide content that is accessible and user friendly.<\/p>",
+          "test_mode": false
         }
       }
     },
@@ -967,11 +973,11 @@
       "1629968785d9d2e1c7",
       "1648464189e55630c9",
       "162997622949d3f8ee",
-      "1636101715cd2df3c8",
       "164970109872b4e7fa",
+      "1636101715cd2df3c8",
+      "16497034024471c77e",
       "1630052841314f69dd",
       "16391832269c232690",
-      "16497034024471c77e",
       "163005286553dd2458",
       "16342252676e2388c3",
       "1630069783d5517455",
