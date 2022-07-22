@@ -44,6 +44,7 @@
     {%- assign product_color_hex_uniq = blank -%}
     {%- assign product_color_val = blank -%}
     {%- assign product_color_val_uniq = blank -%}
+    {%- assign color_count = 0 -%}
     {%- assign product_sizes = blank -%}
     {%- assign product_sizes_uniq = blank -%}
     {%- assign product_sizes_val = blank -%}
@@ -59,8 +60,81 @@
 
     {%- for option in product.options_with_values -%}
       {%- assign option_name = option.name | handleize -%}
-      {%- if option_name == 'color' -%}
+      {%- if option_name == 'color' or option_name == 'material' -%}
         {%- assign option_color_index = forloop.index0 -%}
+
+        {%- comment -%} /// Get product images /// {%- endcomment -%}
+
+        {%- capture product_images -%}
+          {%- for value in option.values -%}
+            {%- for variant in product.variants -%}
+              {%- if variant.option1 == value or variant.option2 == value -%}
+                {%- if variant.image != blank -%}
+                  {%- assign variantImg = variant | img_url: '500x' -%}
+                {%- else -%}
+                  {%- assign variantImg = image_url -%}
+                {%- endif -%}
+                <div class='productCard__img-container variant js-variant-image'
+                     {% if option_name == 'color' or option_name == 'material' %}data-color='{{ value | handleize }}'{% endif %}
+                     data-variant-url='{{ variant.url }}'
+                     data-variant-id='{{ variant.id }}'
+                     aria-label='{{ variant.title }}'>
+                  <img src='{{ variantImg }}' alt='{{ alt }}' class='productCard__image image image-abs-cover'>
+                </div>
+                {% break %}
+              {% endif %}
+            {% endfor %}
+          {% endfor %}
+        {%- endcapture -%}
+
+        {%- comment -%} /// Get color swatch /// {%- endcomment -%}
+
+        {%- capture color_swatches -%}
+          <div class='radio-group f' data-option-{{ option_name }}>
+            {%- for value in option.values -%}
+              {%- for variant in product.variants -%}
+                {%- if variant.option1 == value or variant.option2 == value or variant.option2 == value -%}
+                  {%- assign color_count = color_count | plus: 1 -%}
+
+                  {%- if option_name == 'color'-%}
+                    {%- assign color_name = value | handleize -%}
+                    {%- assign color_swatch_name = product.handle | append: '_' | append: color_name | append: '.png' -%}
+                    {%- assign color_swatch_image = images[color_swatch_name] -%}
+
+                    {%- if value contains ':' -%}
+                      {%- assign color_name = value | split: ':' | last | strip -%}
+                    {%- endif -%}
+                  {%- endif -%}
+
+                  <label class='radio f aic rel js-color-update' for='{{ product.title | handleize }}-{{ option_name }}__{{ value | handleize }}{{ block_id }}' {%- if option_name == 'color' or option_name == 'material' -%}data-color='{{- value | handleize -}}'{%- endif -%}>
+                    <span class='u-sr-only'>Label for {{ product.title }} {{ option_name }}</span>
+                    <input
+                            type='radio'
+                            id='{{ product.title | handleize }}-{{ option_name }}__{{ value | handleize }}{{ block_id }}'
+                            data-value-handle='{{ value | handleize }}'
+                            {% if option_name == 'color' %}
+                              data-color='{{ value | handleize }}'
+                              class='checked'
+                            {% endif %}
+                            {% if option_name == 'material' %}data-material='{{ value | handleize }}'{% endif %}
+                            value='{{ value }}'
+                            data-option-selector>
+                    <div class='radio__title js-productCard-option js-color-update {% if color_swatch_image != blank %}radio__title-bg-image{% endif %}'
+                         {% if option_name == 'color' %}data-color='{{ color_name | handleize }}'{% endif %}
+                            {% if option_name == 'material' %}data-material='{{ value | handleize }}'{% endif %}
+                         data-variant-url='{{ variant.url }}'
+                         data-variant-id='{{ variant.id }}'
+                         data-variant-price='{{ variant.price }}'
+                            {% if color_swatch_image != blank %}style='background: url({{ color_swatch_image | img_url: '64x64' }}) no-repeat center center / cover; color: transparent; border-color: white'{% endif %}>
+                    </div>
+                  </label>
+                  {%- break -%}
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endfor -%}
+          </div>
+        {%- endcapture -%}
+
       {%- elsif option_name == 'size' -%}
         {%- assign option_size_index = forloop.index0 -%}
       {%- endif -%}
@@ -216,7 +290,7 @@
 
             {%- for option in bundle_product.options_with_values -%}
               {%- assign option_name = option.name | handleize -%}
-              {%- if option_name == 'color' -%}
+              {%- if option_name == 'color' or option_name == 'material' -%}
                 {%- assign option_color_index = forloop.index0 -%}
               {%- elsif option_name == 'size' -%}
                 {%- assign option_size_index = forloop.index0 -%}
@@ -327,10 +401,43 @@
       {%- assign size_info = 'Available in ' | append: sizes -%}
     {%- endif -%}
 
+    {%- assign show_product_badge = false -%}
+    {%- assign product_badge_text = false -%}
+    {%- if product.metafields.custom_fields.card_badge  != blank -%}
+      {%- assign product_badge_text = product.metafields.custom_fields.card_badge -%}
+    {%- endif -%}
+
+    {% if product_badge_text and product_badge_text != blank and not_bundle == true %}
+      {%- assign show_product_badge = true -%}
+      {% elsif not_bundle == false %}
+
+      {% if product.price_max > product.price %}
+        {%- assign show_product_badge = true -%}
+        {%- assign product_badge_value = product.compare_at_price_max | minus: product.price_max | times:0.01 | floor -%}
+        {%- assign product_badge_text = 'Save up to $' | append: product_badge_value -%}
+      {% endif %}
+
+      {%- if product.compare_at_price > product.price -%}
+        {%- assign show_product_badge = true -%}
+        {%- assign product_badge_value = product.compare_at_price | minus: product.price | times:0.01 | floor -%}
+        {%- assign product_badge_text = 'Save up to $' | append: product_badge_value -%}
+      {%- endif -%}
+
+    {% endif %}
+
+    {%- assign product_compare_at_price_is_more_than_price = false -%}
+    {%- assign product_compare_at_price = product.compare_at_price -%}
+    {%- assign product_price = product.price -%}
+
+    {%- if product_compare_at_price > product_price and product_compare_at_price != blank -%}
+      {%- assign product_compare_at_price_is_more_than_price = true -%}
+    {%- endif -%}
+
     {%- assign product_type_handle = product.type | handleize -%}
     {%- if product_type_handle != "gift-product" or product_type_handle != "gift-box" or product_type_handle != "personalization-fee" -%}
       {%- assign product_counter = product_counter | plus: 1 -%}
       {%- if product_counter != 1 -%},{%- endif -%}{
+      "available": {{ product.available | json }},
       "title": {{ product.title | json }},
       "id": {{ product.id }},
       "featured_image": {
@@ -341,12 +448,15 @@
       {% if product.template_suffix contains 'bundle' %}
         "bundle": true,
       {% endif %}
+      "badge": {{ show_product_badge }},
+      "badge_text": "{{ product_badge_text }}",
+      "reviews_count": {{ reviews_count }},
       "price_money": "{{ product.price | money_without_trailing_zeros }}",
       "price" : {{ product.price }},
       "price_min": {{ product.price_min }},
-      {% if product.compare_at_price %}
-        "compare_at_price": "{{ product.compare_at_price | money_without_trailing_zeros }}",
-      {% endif %}
+      "compare_at_price_is_more_than_price": {{ product_compare_at_price_is_more_than_price }},
+      "compare_at_price": "{{ product_compare_at_price }}",
+      "compare_at_price_money": "{{ product_compare_at_price | money_without_trailing_zeros }}",
       "vendor": "{{ product.vendor }}",
       "published_date": "{{ product.published_at }}",
       "url": "{{ product.url }}",
@@ -376,6 +486,11 @@
       },
       "size_info": {{ size_info | json }},
       "tag_info": {{ tag_info_arr | json }},
+      {% if color_count > 1 %}
+        "product_images": "{{ product_images | strip_newlines }}",
+        "color_swatches": "{{ color_swatches | strip_newlines }}",
+        "color_count": "{{ color_count }}",
+      {% endif %}
       "variants": [
       {% for variant in product.variants %}
         {%- assign variant_color_name = blank -%}
@@ -429,7 +544,7 @@
           {%- assign show_badge = true -%}
           {% elsif not_bundle == false %}
 
-          {% if variant.price_max > variant.price %}
+          {% if product.price_max > product.price %}
             {%- assign show_badge = true -%}
             {%- assign badge_value = product.compare_at_price_max | minus:product.price_max | times:0.01 | floor -%}
             {%- assign badge_text = 'Save up to $' | append: badge_value -%}
@@ -473,8 +588,8 @@
         "best_sellers": {{ best_selling_order }},
         "inventory": {{ variant.inventory_quantity }},
         "date": "{{ product.published_at }}",
-        "budge": {{ show_badge }},
-        "budge_text": "{{ badge_text }}",
+        "badge": {{ show_badge }},
+        "badge_text": "{{ badge_text }}",
         "compare_at_price_is_more_than_price": {{ compare_at_price_is_more_than_price }},
         "compare_at_price": "{{ variant_compare_at_price }}",
         "compare_at_price_money": "{{ variant_compare_at_price | money_without_trailing_zeros }}",

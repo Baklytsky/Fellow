@@ -6,7 +6,11 @@
   <form id="facet-form" class="facet-form" name="facet">
     <div class="facet-header">
       <h2 class="facet-header-title">
-        {{ 'collections.general.facet_title' | t: title: collection.title }}
+        {%- if request.path == '/collections/all-products' -%}
+          {{  collection.title }}
+        {%- else -%}
+          {{ 'collections.general.facet_title' | t: title: collection.title }}
+        {%- endif -%}
         <span class="facet-header-results-count"></span>
       </h2>
       <button type="button" data-clear-facets class="is-hidden">{{'collections.general.facet_clear' | t }}</button>

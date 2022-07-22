@@ -35,6 +35,7 @@ class collectionFacets extends HTMLElement {
             this.sortBy(this.data, this.defaultSortByAction, this.defaultSortByOrder)
             this.renderResults(this.data)
           }
+          console.log(this.data)
         })
   }
 
@@ -94,9 +95,9 @@ class collectionFacets extends HTMLElement {
     const resultSource = this.resultSourse.innerHTML,
           template = Handlebars.compile(resultSource);
     this.resultWrapper.innerHTML = template({items: data})
-    if (typeof window.yotpo !== "undefined") {
-      window.yotpo.initWidgets();
-    }
+    const allCards = this.querySelectorAll('.productCard');
+    if (allCards.length) allCards.forEach((card) => theme.updateSwatches(card));
+    if (typeof window.yotpo !== "undefined") window.yotpo.initWidgets();
   }
 
   getSelectedFacets () {

@@ -12,20 +12,23 @@
           <span class="productCard__badge abs z3 xsmall cb bg-xlightgrey">{{ badge_text }}</span>
         {{/if}}
           <div class='productCard__img-container default'>
-            <img src="{{ image.large }}"
+            <img src="{{ featured_image.large }}"
                  alt="{{ title }}"
                  class="productCard__image image image-abs-cover">
           </div>
           {{#unless bundle}}
+          {{#if product_images}}
+            {{{ product_images }}}
+          {{/if}}
           <div class="productCardImg__QuickView">
             <button class="productCardImg__QuickViewButton js-product-view"
-                    data-quick-view="{{ variant_url }}&view=quick-view" type="button">
+                    data-quick-view="{{ url }}?view=quick-view" type="button">
               + Quick Add
             </button>
           </div>
           {{/unless }}
           <a class='productCardImg__ProductLink abs fill z2 js-product-link'
-             href='{{ variant_url }}'
+             href='{{ url }}'
              title="{{ title }}"></a>
         </div>
         <div class='productCard__details rel'>
@@ -60,19 +63,30 @@
             {{/if}}
             </div>
           </div>
-          <a href='{{ variant_url }}' class='abs fill z2 js-product-link' aria-label='{{ title }}'></a>
+          <a href='{{ url }}' class='abs fill z2 js-product-link' aria-label='{{ title }}'></a>
         </div>
 
         <div class="productCard_ratings f fdr aie mb05 mt05 rel"
              {{#unless reviews_count }}style="display:none;"{{/unless}}>
-          <div class="yotpo bottomLine" style="display:inline-block;" data-product-id="{{ product_id }}"></div>
+          <div class="yotpo bottomLine" style="display:inline-block;" data-product-id="{{ id }}"></div>
           <span class="productCard__reviewNum">({{ reviews_count }})</span>
-          <a href="{{ product_url }}#pdp-reviews" class="abs x y z5" aria-label="{{ title }} rating stars"></a>
+          <a href="{{ url }}#pdp-reviews" class="abs x y z5" aria-label="{{ title }} rating stars"></a>
         </div>
 
         {{#unless bundle}}
-          {{#if options_in_card}}
-            <div class="productCard_options">{{ options_in_card }}</div>
+           {{#if color_swatches}}
+            <div class="productCard__variants rel">
+              <div class='productCard__options'>
+                {{{ color_swatches }}}
+              </div>
+            </div>
+          {{/if}}
+          {{#if color_count}}
+            <div class="productCardVariants__ColorCount">
+              <a class="productCardVariants__CountButton" href="{{ url }}" title="{{ title }}" role="button">
+                {{ color_count }} colors
+              </a>
+            </div>
           {{/if}}
         {{/unless }}
       </div>
