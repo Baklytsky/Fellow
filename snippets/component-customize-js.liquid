@@ -1,0 +1,27 @@
+{%- comment -%}
+  {%- if request.path contains 'carter-move-mug' or request.path contains 'carter-everywhere-mug' or product.handle contains 'carter-move-mug-with-360-sip-lid' -%}
+    {{ 'player-event.js' | asset_url | script_tag }}
+    {{ 'player-inline.js' | asset_url | script_tag }}
+    {{ 'player-chunk-one.js' | asset_url | script_tag }}
+    {{ 'player-chunk-two.js' | asset_url | script_tag }}
+  {%- endif -%}
+{%- endcomment -%}
+
+<script type="text/javascript">
+  class componentCustomize extends HTMLElement {
+    constructor() {
+      super();
+      this.scripts = {
+        "player-event": "{{ 'player-event.js' | asset_url }}",
+        "player-inline": "{{ 'player-inline.js' | asset_url }}",
+        "player-chunk-one": "{{ 'player-chunk-one.js' | asset_url }}",
+        "player-chunk-two": "{{ 'player-chunk-two.js' | asset_url }}"
+      };
+      this.addEventListener('click', () => {
+        theme.addScripts(this.scripts).then(() => openPlayer())
+      })
+    }
+  }
+
+  customElements.define('component-customize', componentCustomize);
+</script>
