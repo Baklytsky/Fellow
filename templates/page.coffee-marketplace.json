@@ -73,7 +73,6 @@
         },
         "4becf74e-5449-4496-a177-124d68b00aec": {
           "type": "product",
-          "disabled": true,
           "settings": {
             "product": "ethiopia-fresh-crop-bundle",
             "title_1": "Can't Decide?",
@@ -88,6 +87,7 @@
         },
         "51ba94f5-6e31-41eb-bd2f-d78575777b2b": {
           "type": "lifestyle-image",
+          "disabled": true,
           "settings": {
             "lifestyle_image": "shopify:\/\/shop_images\/image_1.jpg"
           }
