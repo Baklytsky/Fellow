@@ -17,8 +17,8 @@
     "16522312584b4699f1": {
       "type": "coffee-marketplace-hero",
       "settings": {
-        "desktop_image": "shopify:\/\/shop_images\/Collections_Banner_Coffee_Marketplace_Desktop__2x_f66d473f-4386-44bb-923f-8c4a08c7cbe2.png",
-        "mobile_image": "shopify:\/\/shop_images\/Collections_Banner_Coffee_Marketplace_Desktop__2x_f66d473f-4386-44bb-923f-8c4a08c7cbe2.png",
+        "desktop_image": "shopify:\/\/shop_images\/2021-11-2_fellow_drops13046-min.jpg",
+        "mobile_image": "shopify:\/\/shop_images\/2021-11-2_fellow_drops12791_copy-min_1.jpg",
         "heading": "Fellow's Coffee Collection",
         "description": "Introducing our new Coffee Collection: a rotation of our latest coffee obsessions, updated seasonally and whenever a new roast wows us.",
         "text_block_position": "center",
@@ -73,7 +73,6 @@
         },
         "4becf74e-5449-4496-a177-124d68b00aec": {
           "type": "product",
-          "disabled": true,
           "settings": {
             "product": "ethiopia-fresh-crop-bundle",
             "title_1": "Can't Decide?",
@@ -88,6 +87,7 @@
         },
         "51ba94f5-6e31-41eb-bd2f-d78575777b2b": {
           "type": "lifestyle-image",
+          "disabled": true,
           "settings": {
             "lifestyle_image": "shopify:\/\/shop_images\/image_1.jpg"
           }
@@ -442,11 +442,11 @@
     "16499352731248f01a": {
       "type": "coffee-marketplace-iwt",
       "settings": {
-        "heading": "Take It One Week At  A Time",
-        "description": "Join Fellow Drops and get limited lots, rare processes, and exclusive collaborations with the best roasters in the world. Every week, we’ll share one very special coffee with you.",
+        "heading": "Spoiled for choice?",
+        "description": "Join Fellow Drops: every week we share just one coffee via text. Get limited lots, rare processes, and exclusive collaborations with the best roasters in the world.",
         "cta_text": "Join Our Text List",
         "cta_link": "shopify:\/\/pages\/join-fellow-drops",
-        "image": "shopify:\/\/shop_images\/Collections_Feature_Module_Coffee_Marketplace_Mobile.png",
+        "image": "shopify:\/\/shop_images\/drops_Image-Text-Module.jpg",
         "image_position": "left"
       }
     }
