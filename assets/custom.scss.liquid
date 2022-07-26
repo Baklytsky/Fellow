@@ -9248,6 +9248,11 @@ modal-opener {
   }
 }
 
+.collection__product-results {
+  display: flex;
+  flex-direction: column;
+}
+
 .collection__product-title.skeleton {
   height: 20px;
   width: 80%;
@@ -9316,9 +9321,11 @@ modal-opener {
 
 .collection__product-content {
   width: 21%;
+  padding-right: 15px;
 
   @media screen and (max-width: $large_desk) {
     width: 100%;
+    padding-right: 0;
   }
 }
 

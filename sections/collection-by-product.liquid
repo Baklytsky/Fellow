@@ -28,6 +28,34 @@
   {% endif %}
 
   <collection-facets class='collection-wrapper' data-template="{{ template.suffix }}">
+    {%- if template.suffix == 'by-product-with-subcollection'
+      and collection.metafields["custom_fields"]["subcollection_list"] != blank -%}
+      {%- assign subcollection_counter = 0 -%}
+
+      <script type="application/ld+json" data-subcollections>
+          {
+            "subcollections": [
+              {%- for item in collection.metafields["custom_fields"]["subcollection_list"] -%}
+                {%- assign collection = collections[item["collection"]] -%}
+                {%- assign title = item["title"] | default: collection.title -%}
+                {%- assign description = item["description"] | default: false -%}
+                {%- assign order = item["order"] | minus: 2 | default: 100 -%}
+                {%- if collection != blank -%}
+                {%- assign subcollection_counter = subcollection_counter | plus: 1 -%}
+                {%- if subcollection_counter != 1 -%},{%- endif -%}{
+                  "title": "{{ title }}",
+                  "description": {{ description | json }},
+                  "order": "{{ order }}",
+                  "url": "{{ collection.url }}"
+                }
+                {%- endif -%}
+              {%- endfor -%}
+            ]
+          }
+        </script>
+
+    {%- endif -%}
+
     {%- render 'facets' collection: collection -%}
     <div class='collection__products-wrapper rel'>
       <div class="collection__products-results">

@@ -1,7 +1,8 @@
 class collectionFacets extends HTMLElement {
   constructor() {
     super();
-    this.getProducts()
+    this.subcollections = this.querySelector('[data-subcollections]');
+    (this.subcollections) ? this.getSubCollections() : this.getProducts()
     this.template = this.dataset.template
     this.facetsWrapper = this.querySelector('#facet-group-wrapper')
     this.facetsSourse = this.querySelector("#facet-group-template")
@@ -19,12 +20,59 @@ class collectionFacets extends HTMLElement {
     this.clearAll.addEventListener('click', () => this.clearFacets())
   }
 
+  getSubCollections() {
+    this.subCollectionData = []
+    const subCollections = JSON.parse(this.subcollections.textContent).subcollections;
+    Promise.all(subCollections.map(collection => {
+      const url = collection.url + '?sort_by=best-selling&view=ajax-obj'
+      return fetch(`${url}`)
+          .then(resp => {
+            return resp.json()
+          })
+          .then(data => {
+            const products = data.products
+            return {
+              url: collection.url,
+              order: collection.order,
+              title: collection.title,
+              description: collection.description,
+              facets: {
+                color: {
+                  hex: this.getSetOfValues(products, ['facets', 'color', 'hex']),
+                  names: this.getSetOfValues(products, ['facets', 'color', 'names'])
+                },
+                shop_by_use: {names: this.getSetOfValues(products, ['facets', 'shop_by_use', 'names'])},
+                sizes: {names: this.getSetOfValues(products, ['facets', 'sizes', 'names'])}
+              },
+              shop_by_use: {value: this.getSetOfValues(products, ['shop_by_use', 'value'])},
+              size: {value: this.getSetOfValues(products, ['size', 'value'])},
+              color: {value: this.getSetOfValues(products, ['color', 'value'])},
+              variants: data.products.reduce((arr, product) => arr.concat(product.variants), [])
+            }
+          })
+          .then((subCollectionProduct) => {
+            this.subCollectionData.push(subCollectionProduct)
+          })
+    })).then(() => this.getProducts())
+  }
+
+  getSetOfValues (arrToReduce, keyArr) {
+    return [...new Set(arrToReduce.reduce((arr, item) => {
+      let val;
+      keyArr.forEach((key, i) => (i === 0) ? val = item[key] : val = val[key])
+      return arr.concat(val)
+    }, []))]
+  }
+
   getProducts () {
     const url = window.location.pathname + '?sort_by=best-selling&view=ajax-obj'
     fetch(`${url}`)
         .then(resp => {return resp.json()})
         .then(data => {
           this.originalData = data
+          if (this.subCollectionData && this.subCollectionData.length) {
+            this.originalData.products.push(...this.subCollectionData)
+          }
           this.resetData(data)
           this.renderFacets(this.facets)
           this.facetsForm.style.pointerEvents = 'auto'
@@ -35,7 +83,6 @@ class collectionFacets extends HTMLElement {
             this.sortBy(this.data, this.defaultSortByAction, this.defaultSortByOrder)
             this.renderResults(this.data)
           }
-          console.log(this.data)
         })
   }
 
@@ -70,13 +117,11 @@ class collectionFacets extends HTMLElement {
   }
 
   getFacetsArr (facets, facetName) {
-    let facet = [], allColorHex, uniqHex;
-    const allFacetNames = facets.reduce((arr, facet) => arr.concat(facet[facetName].names), []),
-          uniqNames = [...new Set(allFacetNames)];
+    let facet = [], uniqHex;
+    const uniqNames = this.getSetOfValues(facets, [facetName, 'names']);
 
     if (facetName === 'color' ) {
-      allColorHex = facets.reduce((arr, facet) => arr.concat(facet[facetName].hex), [])
-      uniqHex = [...new Set(allColorHex)];
+      uniqHex = this.getSetOfValues(facets, [facetName, 'hex']);
     }
 
     uniqNames.forEach((name, i) => {
@@ -130,7 +175,7 @@ class collectionFacets extends HTMLElement {
       const selectedItems = this.filterResults(allSelectedItems, groupName, groupValues)
       allSelectedItems = [...selectedItems]
 
-      if (this.template === 'by-product') {
+      if (this.template.includes('by-product')) {
         const productSelectedVariants = selectedItems.map(product => {
           const productClone = {...product}
           if (!product.bundle) {
@@ -148,7 +193,7 @@ class collectionFacets extends HTMLElement {
 
     this.sortBy(allSelectedItems, sortByAction, sortByOrder)
     this.renderResults(allSelectedItems)
-    this.resultsCount.innerHTML = (this.template === 'by-product')
+    this.resultsCount.innerHTML = (this.template.includes('by-product'))
         ? `(${allSelectedVariants.length})`
         : `(${allSelectedItems.length})`
     history.replaceState(null, null, urlParams)

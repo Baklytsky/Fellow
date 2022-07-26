@@ -5,10 +5,10 @@
   {% raw %}
   {{#if items.length}}
     {{#each items}}
-      <div class="collection__product-item">
+      <div class="collection__product-item" style="order: {{#if order}}{{order}}{{else}}{{@index}}{{/if}}">
         <div class="collection__product-content">
           <h3 class="collection__product-title">
-            <a href="{{ product_url }}">{{ title }}</a>
+            <a href="{{ url }}">{{ title }}</a>
           </h3>
           <div class="collection__product-info">
           {{#unless bundle}}
@@ -16,6 +16,9 @@
               <p class="collection__product-info-item">{{ size_info }}</p>
             {{/if}}
           {{/unless }}
+          {{#if description}}
+            <p class="collection__product-info-item">{{ description }}</p>
+          {{/if}}
           {{#if tag_info.length}}
             {{#each tag_info}}
              <p class="collection__product-info-item">{{ this }}</p>
@@ -29,8 +32,8 @@
             <div class='productCard'>
               <div class='productCard__content y'>
                 <div aria-label='Image of {{ title }}' class='productCard__img rel z0'>
-                {{#if budge}}
-                  <span class="productCard__badge abs z3 xsmall cb bg-xlightgrey">{{ budge_text }}</span>
+                {{#if badge}}
+                  <span class="productCard__badge abs z3 xsmall cb bg-xlightgrey">{{ badge_text }}</span>
                 {{/if}}
                   <div class='productCard__img-container default'>
                     <img src="{{ image.large }}"

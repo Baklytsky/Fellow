@@ -582,7 +582,7 @@
         "available": {{ variant.available | json }},
         "id": {{ variant.id }},
         "options": {{ variant.options | json }},
-        "options_in_card": "{{ options_in_card }}",
+        "options_in_card": {{ options_in_card | json }},
         "price": "{{ variant_price }}",
         "price_money": "{{ variant_price | money_without_trailing_zeros }}",
         "best_sellers": {{ best_selling_order }},
