@@ -158,8 +158,8 @@
                                 
                                 {%- if filter_title == 'Color' -%}
                                   {%- assign color_name = filter_value.value | handleize -%}
-                                  {%- if filter_value.value contains 'Limited Edition:' -%}
-                                    {%- assign color_name = filter_value.value | split: 'Limited Edition:' | last | handleize -%}
+                                  {%- if filter_value.value contains ':' -%}
+                                    {%- assign color_name = filter_value.value | split: ':' | last | handleize -%}
                                   {%- endif -%}
                                   {%- assign color_title = color_name | replace: '-', ' '  | capitalize -%}
                                 {%- endif -%}

@@ -1,0 +1,66 @@
+{%- if collection.metafields.custom_fields["show_collection_module"] == 1 -%}
+  {%- assign collection_module_bg = collection.metafields.custom_fields["collection_module_background"] | default:  '#FFF9E5' -%}
+  {%- assign collection_module_image = collection.metafields.custom_fields["collection_module_image"] -%}
+  {%- assign collection_module_image_mobile = collection.metafields.custom_fields["collection_module_mobile_image"] -%}
+  {%- assign collection_module_title = collection.metafields.custom_fields["collection_module_title"] -%}
+  {% if collection.metafields.custom_fields["collection_module_arrow"] == 1 %}
+    {%- assign enable_arrow = true -%}
+  {% endif %}
+  {%- assign collection_module_btn_text = collection.metafields.custom_fields["collection_module_button_text"] | default:  'Shop Now' -%}
+  {%- assign collection_module_btn_url = collection.metafields.custom_fields["collection_module_button_url"] -%}
+
+  <div class="collectionModule" style="background-color: {{ collection_module_bg }}">
+    <div class="collectionModule__wrapper">
+      {%- if collection_module_image != blank -%}
+        {%- assign desctop_image_class = 'image image-abs-contain' -%}
+
+        {%- if collection_module_image_mobile != blank -%}
+          {%- assign desctop_image_class = 'image image-abs-contain hide-tablet' -%}
+        {%- endif -%}
+        <div class="collectionModule__media rel">
+          {%
+            include 'component-image' with
+            src: collection_module_image,
+            alt: collection_module_title,
+            className: desctop_image_class,
+            absolute: true,
+            fill: true
+          %}
+          {%- if collection_module_image_mobile != blank -%}
+            {%
+              include 'component-image' with
+              src: collection_module_image_mobile,
+              alt: collection_module_title,
+              className: 'image image-abs-contain hide-tablet-desk',
+              absolute: true,
+              fill: true
+            %}
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+      {%- if collection_module_title != blank or collection_module_btn_url != blank -%}
+        <div class="collectionModule__content rel">
+          {%- if enable_arrow -%}
+            <div class="collectionModule__content-arrow hide-tablet">
+              {%- render 'icon' with 'collection-arrow' -%}
+            </div>
+            <div class="collectionModule__content-arrow hide-tablet-desk">
+              {%- render 'icon' with 'collection-arrow-mobile' -%}
+            </div>
+          {%- endif -%}
+          {%- if collection_module_title != blank -%}
+            <h3 class="collectionModule__contentTitle">
+              {{ collection_module_title }}
+            </h3>
+          {%- endif -%}
+          {%- if collection_module_btn_url != blank -%}
+            <a href="{{ collection_module_btn_url }}"
+               class="collectionModule__contentLink btn--dark">
+              {{ collection_module_btn_text }}
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+{%- endif -%}

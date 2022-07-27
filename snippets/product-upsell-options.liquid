@@ -46,8 +46,8 @@
        {% if options_array.size == 1 or hide_size_option %}style="display: none"{% endif %}>
     {%- for item in options_array -%}
       {%- assign option_value = item -%}
-      {%- if item contains 'Limited Edition:' -%}
-        {%- assign option_value = item | split: 'Limited Edition:' | last | strip -%}
+      {%- if item contains ':' -%}
+        {%- assign option_value = item | split: ':' | last | strip -%}
       {%- endif -%}
       <div class="radio-group upsell-radio-group f aic" data-option-{{ option_name | handleize }}>
         <label class="upsell-radio" for="{{ option_value | handleize | append: '-' | append: uniq_id }}">

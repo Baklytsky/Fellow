@@ -1,7 +1,7 @@
 {%- assign collection = collections[section.settings.collection] -%}
 {% comment %} {%- assign product_limit = section.settings.grid | times: section.settings.rows -%} {% endcomment %}
 
-{% assign product_image_index = collection.metafields.custom_fields.product_image_index | minus: 1 | at_least: 0 | default: 0 %}
+{% assign product_image_index = 0 %}
 
 
 {% if section.settings.show_intro_card %}
