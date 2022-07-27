@@ -612,43 +612,6 @@ theme.pdpMain = function () {
     })
   }
 
-  function bundle () {
-    theme.kitPreOrderCheck()
-
-    $(document).on('click', '#pdp-bundle-atc', function (e) {
-      e.preventDefault();
-      let $availableVariants = $('[data-variant-available="true"]'),
-          bundle_name = $(this).attr('data-bundle-name') || '',
-          products_data = [],
-          prop = {};
-
-      $availableVariants.each(function (i, element) {
-        prop = {
-          "_bundles": true,
-          "_Bundle_Name": bundle_name
-        }
-
-        if ($(element).attr('data-variant-preorder')) {
-          prop = {
-            "_bundles": true,
-            "_Bundle_Name": bundle_name,
-            "pre-order": true
-          }
-        }
-
-        if (window.location.search.indexOf('pr_prod_strat') !== -1) prop._recommended_product = true;
-
-        products_data.push({
-          quantity: 1,
-          id: $(this).attr('id'),
-          properties: prop
-        })
-      });
-
-      theme.cart.cartEvent('/cart/add.js', {items: products_data}, true, theme.pdpErrorMessage)
-    })
-  }
-
 
     // ======================================== Neels code starts here ========================================
   var is_size_selected = false;
@@ -985,7 +948,6 @@ theme.pdpMain = function () {
   if ($('[data-dropdown]').length) {pdpDropdown();}
   if ($('.pdpMediaProof').length) {pdpMediaProof();}
   if ($('.pdpLearnMore').length) {pdpLearMore();}
-  if ($('.pdpMain-bundle__details').length) {bundle();}
   if ($('.pdpCompare').length) {pdpCompare();}
   pdpStickyBar()
 }
@@ -2156,11 +2118,7 @@ class bundleMixCard extends HTMLElement {
     this.toggleAddButton()
     this.checkPrice()
 
-    if (this.radios.length) {
-      this.radios.forEach((radio) => {
-        radio.addEventListener('click', this.onVariantChange.bind(this))
-      })
-    }
+    this.addEventListener('change', () => this.onVariantChange())
   }
 
   getSelectedVariant() {
@@ -2168,7 +2126,7 @@ class bundleMixCard extends HTMLElement {
       return !variant.options.map((option, index) => {
         let optionValue = option;
         if (optionValue.includes(':')) optionValue = optionValue.split(':')[1].trim();
-        return this.selectedOptions[index] === optionValue.toLowerCase().replace(/\W+/g, "-");
+        return this.selectedOptions[index] === theme.handleize(optionValue);
       }).includes(false);
     });
   }
@@ -2310,7 +2268,7 @@ class bundleMix extends HTMLElement {
     super();
     this.atcButton = this.querySelector('.js-pick-mix-add-to-cart');
     this.bundleName = this.atcButton.getAttribute('data-bundle-name') || '';
-    this.selects = this.querySelectorAll('.js-bundle-variant select');
+    this.selects = this.querySelectorAll('.js-bundle-variant .js-select');
     this.atcButton.addEventListener('click', this.addBundleMix.bind(this));
     this.variantsId = [];
     this.variantsData = [];
@@ -2337,38 +2295,18 @@ class bundleMix extends HTMLElement {
     }
     if (cnt > 0) this.getProperty(current, cnt)
 
-    $.ajax({
-      type: 'post',
-      url: '/cart/add.js',
-      data: {items: this.variantsData},
-      dataType: 'json',
-      success: function () {
-        UpdateCart('', '', true)
-      },
-      error: function (error) {
-        if (error.status === 422) {
-          $('#PdpErrorMessage').text(error.responseJSON.description).fadeIn('slow');
-          setTimeout(() => {$('#PdpErrorMessage').text('').hide();}, 5500);
-        }
-      }
-    })
+    theme.cart.cartEvent('/cart/add.js', {items: this.variantsData}, true, theme.pdpErrorMessage)
   }
 
   getProperty(current, cnt) {
-    let prop = {
+    const select = this.querySelector('.js-select[value="' + current + '"]')
+    const prop = {
       "_bundles": true,
       "_Bundle_Name": this.bundleName
     }
 
-    if ($('.pdpForm .js-bundle-variant select[value="' + current + '"]').attr('data-selected-variant-preorder')) {
-      prop = {
-        "_bundles": true,
-        "_Bundle_Name": this.bundleName,
-        "pre-order": true
-      }
-    }
-
-    if (window.location.search.indexOf('pr_prod_strat') !== -1) prop._recommended_product = true;
+    if (select.hasAttribute('data-selected-variant-preorder')) prop["pre-order"] = true
+    if (window.location.search.indexOf('pr_prod_strat') !== -1) prop["_recommended_product"] = true;
 
     this.variantsData.push({
       quantity: cnt,

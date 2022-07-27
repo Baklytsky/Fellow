@@ -56,6 +56,8 @@ Uncomment to include
               {%- endif -%}
               <li
                       id='{{ variant.id }}'
+                      value="{{ variant.id }}"
+                      {% if variant.available %}class="js-select"{% endif %}
                       data-variant-available="{{ variant.available }}"
                       data-variant-price='{{ variant.price | money | remove: ".00" }}'
                       data-variant-inventory-quantity='{{ variant.inventory_quantity }}'
@@ -83,6 +85,8 @@ Uncomment to include
           {%- endif -%}
           <li
                   id='{{ current_bundle_variant.id }}'
+                  value="{{ current_bundle_variant.id }}"
+                  {% if current_bundle_variant.available %}class="js-select"{% endif %}
                   data-variant-available="{{ current_bundle_variant.available }}"
                   data-variant-price='{{ current_bundle_variant.price | money | remove: ".00" }}'
                   data-variant-inventory-quantity='{{ current_bundle_variant.inventory_quantity }}'
