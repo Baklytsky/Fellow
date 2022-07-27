@@ -910,205 +910,6 @@ theme.pdpMain = function () {
     })
   }
 
-  function pdpBundleMix() {
-    $(document).off('click.bundleRadio')
-    $(document).off('click.addBundleMix')
-
-    function fadeOutOfStockVariants(selectedVariant, $bundleWrapper) {
-      const selectedVariantTitle = selectedVariant.attr('data-variant-options-title'),
-            $bundleVariants = $bundleWrapper.find('.js-bundle-variant option');
-      $bundleWrapper.find('.bundle-radio').removeClass('unavailable');
-      if (selectedVariant.length) {
-        if (selectedVariantTitle.includes('/')) {
-          const selectedSizeTitle = selectedVariantTitle.split('/')[1],
-              unavailableColors = $bundleVariants.map(function () {
-                if ($(this).attr('data-variant-options-title').includes(selectedSizeTitle) && $(this).is('[disabled]') && !$(this).attr('data-variant-preorder')) return $(this).attr('data-variant-options-title').split('/')[0]
-              })
-          if (unavailableColors.length) unavailableColors.each((i, color) => $bundleWrapper.find('input[value="'+ color +'"]').parent().addClass('unavailable'))
-        } else {
-          const unavailableVariants = $bundleVariants.map(function () {
-            if ($(this).is('[disabled]') && !$(this).attr('data-variant-preorder')) return $(this).attr('data-variant-options-title')
-          })
-          if (unavailableVariants.length) unavailableVariants.each((i, variant) => $bundleWrapper.find('input[value="'+ variant +'"]').parent().addClass('unavailable'))
-        }
-      } else {
-        const unavailableVariants = $bundleVariants.map(function () {
-          if ($(this).is('[disabled]') && !$(this).attr('data-variant-preorder')) return $(this).attr('data-variant-options-title')
-        })
-        if (unavailableVariants.length) unavailableVariants.each((i, variant) => $bundleWrapper.find('input[value="'+ variant +'"]').parent().addClass('unavailable'))
-      }
-    }
-
-    function checkBundleVariantTitle(selectedVariant, checkedInputs) {
-      const priceDifference = Number(selectedVariant.attr('data-bundle-price-difference'));
-      selectedVariant.attr('selected', 'selected')
-      selectedVariant.parent().attr('value', selectedVariant.val())
-      checkedInputs.each(function() {
-        // $(this).parents('.bundle-product__option-group').find('.option-title-value').html(`${$(this).attr('title')}`)
-        $(this).parents('.bundle-product__option-group').find('.option-title-value').html(`${$(this).attr('title').split('(')[0]}`) // Remove the price when changing the variant name
-      })
-      // let optionTitle = (priceDifference > 0) ? `${$(checkedInputs.get(0)).attr('title')} <strong>(+$${priceDifference})</strong>` : `${$(checkedInputs.get(0)).attr('title')}`;
-      let optionTitle = `${$(checkedInputs.get(0)).attr('title')}`; // Remove the price from the color variant
-      $(checkedInputs.get(0)).parents('.bundle-product__option-group').find('.option-title-value').html(optionTitle)
-    }
-
-    $(document).find('.bundle-product').each(function () {
-      let selectedOptions = '',
-          $bundleWrapper = $(this),
-          checkedInputs = $(this).find('.bundle-radio-group input:checked'),
-          checkedOptions = $(this).find('.bundle-radio-group input:checked').map((i, option) => option.value);
-      checkedOptions.each((i, option) => selectedOptions = (i !== checkedOptions.length - 1) ? selectedOptions + option + '/' : selectedOptions + option)
-      $(this).find('.js-bundle-variant option').removeAttr('selected')
-      let selectedVariant = $(this).find('[data-variant-options-title="' + selectedOptions + '"]');
-      (selectedVariant.attr('data-variant-preorder')) ? selectedVariant.parent().attr('data-selected-variant-preorder', true) : selectedVariant.parent().removeAttr('data-selected-variant-preorder');
-      checkBundleVariantTitle(selectedVariant, checkedInputs)
-      fadeOutOfStockVariants(selectedVariant, $bundleWrapper)
-    })
-
-    function checkBundleMixAvailable(unavailableProduct) {
-      var $disabledOptions = $(document).find('.js-bundle-variant option:disabled'),
-          checkForSelected = $disabledOptions.filter((i, e) => e.hasAttribute('selected'));
-
-      if (checkForSelected.length) {
-        $(document).find('#pdp-bundle-atc').attr('disabled', 'disabled').text('Out Of Stock')
-        $(document).find('#pdp-sticky-atc').attr('disabled', 'disabled').text('Out Of Stock')
-      } else if (unavailableProduct) {
-        $(document).find('#pdp-bundle-atc').attr('disabled', 'disabled').text('Unavailable')
-        $(document).find('#pdp-sticky-atc').attr('disabled', 'disabled').text('Unavailable')
-      } else {
-        $(document).find('#pdp-bundle-atc').removeAttr('disabled').text('Add to Cart')
-        $(document).find('#pdp-sticky-atc').removeAttr('disabled').text('Add to Cart')
-      }
-    }
-    checkBundleMixAvailable()
-
-    function changeBundleImage(variantUniqID) {
-      let $selectedImage = $('[data-variant-media="' + variantUniqID + '"]');
-      $selectedImage.parent().find('[data-variant-media]:visible').css('visibility','hidden')
-      $selectedImage.css('visibility','visible')
-    }
-
-    function checkBundleMixPrice() {
-      let priceDiffSum = 0,
-          selectedMixVariants = $(document).find('.bundle-product .js-bundle-variant option[selected]'),
-          priceDiffArray = selectedMixVariants.map((i, variant) => {return Number(variant.dataset.bundlePriceDifference)});
-      priceDiffArray.each((i, priceDiff) => priceDiffSum += priceDiff || 0);
-
-      const newCompareAtPrice = (window.theme.product.compare_at_price * 0.01) + priceDiffSum,
-            newPrice = (window.theme.product.price * 0.01) + priceDiffSum,
-            priceInner = $('[data-product-price]'),
-            compareAtPriceInner = $('[data-compare-at-price] span');
-
-      priceInner.each((i, element) => $(element).text('$' + newPrice))
-      compareAtPriceInner.each((i, element) => $(element).text('$' + newCompareAtPrice))
-    }
-    checkBundleMixPrice()
-
-    function checkPreorderVariant() {
-      $('.pdpForm .bundle-product select').each((i, select) => {
-        if ($(select).attr('data-selected-variant-preorder')) {
-          $(document).find('#pdp-bundle-atc').removeAttr('disabled').text('Pre-order')
-          $(document).find('#pdp-sticky-atc').removeAttr('disabled').text('Pre-order')
-        }
-      })
-    }
-    checkPreorderVariant()
-
-    $(document).on('click.bundleRadio', '.bundle-radio', function () {
-      let $bundleWrapper = $(this).parents('.bundle-product'),
-          selectedOptions = '',
-          checkedInputs = $bundleWrapper.find('.bundle-radio-group input:checked'),
-          checkedOptions = $bundleWrapper.find('.bundle-radio-group input:checked').map((i, option) => option.value);
-      checkedOptions.each((i, option) => selectedOptions = (i !== checkedOptions.length - 1) ? selectedOptions + option + '/' : selectedOptions + option);
-      let selectedVariant = $bundleWrapper.find('[data-variant-options-title="' + selectedOptions + '"]');
-      $bundleWrapper.find('.js-bundle-variant option').removeAttr('selected');
-      selectedVariant.attr('selected', 'selected');
-      selectedVariant.parent().attr('value', selectedVariant.val());
-      (selectedVariant.attr('data-variant-preorder')) ? selectedVariant.parent().attr('data-selected-variant-preorder', true) : selectedVariant.parent().removeAttr('data-selected-variant-preorder');
-      checkBundleVariantTitle(selectedVariant, checkedInputs);
-      fadeOutOfStockVariants(selectedVariant, $bundleWrapper);
-      if (selectedVariant.length) {
-        changeBundleImage(selectedVariant.attr('data-variant-uniq_id'));
-        checkBundleMixAvailable();
-      } else {
-        checkBundleMixAvailable(true);
-      }
-      checkPreorderVariant()
-      checkBundleMixPrice()
-    })
-
-    $(document).on('click.addBundleMix', '#pdp-bundle-mix-atc', function (e) {
-      e.preventDefault();
-      var $selectedBundleOptions = $(this).parents('.pdpForm').find('.js-bundle-variant select'),
-          bundle_name = $(this).attr('data-bundle-name') || '',
-          products_data = [],
-          products = [];
-
-      $selectedBundleOptions.each(function () {
-        var variant_id = $(this).attr('value');
-        products.push(variant_id);
-      });
-
-      products.sort();
-      var current = null;
-      var cnt = 0;
-      for (var i = 0; i < products.length; i++) {
-        if (products[i] !== current) {
-          if (cnt > 0) {
-            let prop = {
-              "_bundles": true,
-              "_Bundle_Name": bundle_name
-            }
-
-            if ($('.pdpForm .js-bundle-variant select[value="' + current + '"]').attr('data-selected-variant-preorder')) {
-              prop = {
-                "_bundles": true,
-                "_Bundle_Name": bundle_name,
-                "pre-order": true
-              }
-            }
-
-            if (window.location.search.indexOf('pr_prod_strat') !== -1) prop._recommended_product = true;
-
-            products_data.push({
-              quantity: cnt,
-              id: current,
-              properties: prop
-            })
-          }
-          current = products[i];
-          cnt = 1;
-        } else {
-          cnt++;
-        }
-      }
-      if (cnt > 0) {
-        let prop = {
-          "_bundles": true,
-          "_Bundle_Name": bundle_name
-        }
-
-        if ($('.pdpForm .js-bundle-variant select[value="' + current + '"]').attr('data-selected-variant-preorder')) {
-          prop = {
-            "_bundles": true,
-            "_Bundle_Name": bundle_name,
-            "pre-order": true
-          }
-        }
-
-        if (window.location.search.indexOf('pr_prod_strat') !== -1) prop._recommended_product = true;
-
-        products_data.push({
-          quantity: cnt,
-          id: current,
-          properties: prop
-        })
-      }
-
-      theme.cart.cartEvent('/cart/add.js', {items: products_data}, true, theme.pdpErrorMessage)
-    })
-  }
-
   theme.pdpUpsellProduct = function() {
     $(document).off('click.upsellRadio')
     $(document).off('click.addUpsellProduct')
@@ -1180,7 +981,6 @@ theme.pdpMain = function () {
   if ($('.pdpMain__gallery-wrapper').length) {pdpGallary();}
   if ($('.pdpMain__bundle-gallery').length) {pdpBundleGallary();}
   if ($('.upsell-product__wrapper').length) {theme.pdpUpsellProduct();}
-  if ($('.bundle-product').length) {pdpBundleMix();}
   if ($('.pdpRecCollection').length) {theme.pdpRecCollection();}
   if ($('[data-dropdown]').length) {pdpDropdown();}
   if ($('.pdpMediaProof').length) {pdpMediaProof();}
@@ -2334,3 +2134,256 @@ class SlideToggle extends HTMLElement {
 
 customElements.define('slide-toggle', SlideToggle);
 // End Slide toggle
+
+class bundleMixCard extends HTMLElement {
+  constructor() {
+    super();
+    this.product = JSON.parse(this.querySelector('[type="application/json"]').textContent)
+    this.productVariants = this.product['variants']
+    this.selectedOptions = this.getOptions()
+    this.selectedVariant = this.getSelectedVariant()
+    this.optionGroupFirst = this.querySelectorAll(`input[name^='${this.product.options[0]}']`);
+    if (this.product.options[1]) {
+      this.optionGroupSecond = this.querySelectorAll(`input[name^='${this.product.options[1]}']`);
+    }
+    this.select = this.querySelector('.select-wrapper select')
+    this.options = this.select.querySelectorAll('option')
+    this.radios = this.querySelectorAll('.bundle-radio');
+
+    this.changeSelectedOption()
+    this.disableUnavailableVariants()
+    this.checkVariantTitle()
+    this.toggleAddButton()
+    this.checkPrice()
+
+    if (this.radios.length) {
+      this.radios.forEach((radio) => {
+        radio.addEventListener('click', this.onVariantChange.bind(this))
+      })
+    }
+  }
+
+  getSelectedVariant() {
+    return this.productVariants.find((variant) => {
+      return !variant.options.map((option, index) => {
+        let optionValue = option;
+        if (optionValue.includes(':')) optionValue = optionValue.split(':')[1].trim();
+        return this.selectedOptions[index] === optionValue.toLowerCase().replace(/\W+/g, "-");
+      }).includes(false);
+    });
+  }
+
+  getOptions() {
+    let radioGroups = Array.from(this.querySelectorAll('.bundle-product__option-group'));
+    return radioGroups.map((radioGroup) => {
+      return Array.from(radioGroup.querySelectorAll('input')).find((radio) => radio.checked).value;
+    });
+  }
+
+  onVariantChange() {
+    this.selectedOptions = this.getOptions()
+    this.selectedVariant = this.getSelectedVariant()
+    this.changeSelectedOption()
+    this.disableUnavailableVariants()
+    this.checkVariantTitle()
+    this.changeMedia()
+    this.toggleAddButton()
+    this.checkPrice()
+    console.log(this.selectedVariant)
+  }
+
+  disableUnavailableVariants() {
+    this.radios.forEach((radio) => radio.classList.remove('unavailable'))
+    let firstSelectedOption = Array.from(this.optionGroupFirst).find((radio) => radio.checked).dataset.option
+    let secondSelectedOption = (this.product.options[1])
+        ? Array.from(this.optionGroupSecond).find((radio) => radio.checked).dataset.option
+        : false;
+    if (firstSelectedOption) this.checkAvailableRadios(this.optionGroupFirst, firstSelectedOption, secondSelectedOption, false)
+    if (secondSelectedOption) this.checkAvailableRadios(this.optionGroupSecond, firstSelectedOption, secondSelectedOption, true)
+  }
+
+  checkAvailableRadios(optionGroup, firstSelectedOption, secondSelectedOption, isSecondOption) {
+    optionGroup.forEach((radio) => {
+      let optionsArr;
+      if (secondSelectedOption) {
+        optionsArr = (isSecondOption) ? [firstSelectedOption, radio.dataset.option] : [radio.dataset.option, secondSelectedOption]
+      } else {
+        optionsArr = [radio.dataset.option]
+      }
+      let existVariant = false;
+      this.productVariants.forEach((variant) => {
+        let condition = (secondSelectedOption)
+            ? variant.options[0] === optionsArr[0] && variant.options[1] === optionsArr[1]
+            : variant.options[0] === optionsArr[0];
+        if (condition) {
+          existVariant = true;
+          if (!variant.available && !this.selectedOption.hasAttribute('data-variant-preorder')) {
+            radio.parentElement.classList.add('unavailable');
+          }
+        }
+      });
+      if (!existVariant) radio.parentElement.classList.add('unavailable');
+    })
+  }
+
+  checkVariantTitle() {
+    this.checkedOptions = this.querySelectorAll('input:checked')
+    this.checkedOptions.forEach((option) => {
+      $(option).parents('.bundle-product__option-group').find('.option-title-value').html(`${option.title}`)
+    })
+  }
+
+  changeSelectedOption() {
+    if (this.selectedVariant) {
+      this.select.removeAttribute('data-unavailable')
+      this.options.forEach(option => option.removeAttribute('selected'))
+      this.selectedOption = this.querySelector(`option[value='${this.selectedVariant.id}']`);
+        (this.selectedOption.getAttribute('data-variant-preorder'))
+            ? this.selectedOption.parentElement.setAttribute('data-selected-variant-preorder', 'true')
+            : this.selectedOption.parentElement.removeAttribute('data-selected-variant-preorder');
+      this.selectedOption.setAttribute('selected', 'selected')
+      this.select.setAttribute('value', this.selectedVariant.id)
+    } else {
+      this.select.setAttribute('data-unavailable', 'true')
+    }
+  }
+
+  changeMedia() {
+    // Change PDP Main Gallery Image
+    let $selectedImage = $('[data-variant-media="' + this.selectedOption.getAttribute('data-variant-uniq_id') + '"]');
+    if ($selectedImage.length) {
+      $selectedImage.parent().find('[data-variant-media]:visible').css('visibility','hidden')
+      $selectedImage.css('visibility','visible')
+    }
+
+    // Change Bundle Mix Card Image
+    let $selectedCardImage = $(this).find('[data-mix-card-media-id="' + this.selectedVariant.id + '"]')
+    if ($selectedCardImage.length) {
+      $selectedCardImage.parent().find('[data-mix-card-media-id]:visible').css('visibility','hidden')
+      $selectedCardImage.css('visibility','visible')
+    }
+  }
+
+  toggleAddButton() {
+    var $disabledOptions = $(document).find('.js-bundle-variant option:disabled'),
+        $checkForSelected = $disabledOptions.filter((i, e) => e.hasAttribute('selected')),
+        $unavailable = $(document).find('.js-bundle-variant select[data-unavailable]'),
+        $preOrder = $(document).find('.js-bundle-variant select[data-selected-variant-preorder]');
+
+    if ($unavailable.length) {
+      $(document).find('#pdp-bundle-atc').attr('disabled', 'disabled').text('Unavailable')
+      $(document).find('#pdp-sticky-atc').attr('disabled', 'disabled').text('Unavailable')
+    } else if ($preOrder.length) {
+      $(document).find('#pdp-bundle-atc').removeAttr('disabled', 'disabled').text('Pre-order')
+      $(document).find('#pdp-sticky-atc').removeAttr('disabled', 'disabled').text('Pre-order')
+    } else if ($checkForSelected.length) {
+      $(document).find('#pdp-bundle-atc').attr('disabled', 'disabled').text('Out Of Stock')
+      $(document).find('#pdp-sticky-atc').attr('disabled', 'disabled').text('Out Of Stock')
+    }  else {
+      $(document).find('#pdp-bundle-atc').removeAttr('disabled').text('Add to Cart')
+      $(document).find('#pdp-sticky-atc').removeAttr('disabled').text('Add to Cart')
+    }
+  }
+
+  checkPrice() {
+    let priceDiffSum = 0,
+        selectedMixVariants = $(document).find('.bundle-product .js-bundle-variant option[selected]'),
+        priceDiffArray = selectedMixVariants.map((i, variant) => {return Number(variant.dataset.bundlePriceDifference)});
+
+    priceDiffArray.each((i, priceDiff) => priceDiffSum += priceDiff || 0);
+
+    const newCompareAtPrice = (window.theme.product.compare_at_price * 0.01) + priceDiffSum,
+          newPrice = (window.theme.product.price * 0.01) + priceDiffSum,
+          priceInner = $('[data-product-price]'),
+          compareAtPriceInner = $('[data-compare-at-price] span');
+
+    priceInner.each((i, element) => $(element).text('$' + newPrice))
+    compareAtPriceInner.each((i, element) => $(element).text('$' + newCompareAtPrice))
+  }
+
+}
+
+customElements.define('bundle-mix-card', bundleMixCard);
+
+class bundleMix extends HTMLElement {
+  constructor() {
+    super();
+    this.atcButton = this.querySelector('.js-pick-mix-add-to-cart');
+    this.bundleName = this.atcButton.getAttribute('data-bundle-name') || '';
+    this.selects = this.querySelectorAll('.js-bundle-variant select');
+    this.atcButton.addEventListener('click', this.addBundleMix.bind(this));
+    this.variantsId = [];
+    this.variantsData = [];
+  }
+
+  addBundleMix(e) {
+    e.preventDefault();
+    this.selects.forEach((select) => {
+      let variant_id = select.getAttribute('value');
+      this.variantsId.push(variant_id);
+    });
+
+    this.variantsId.sort();
+    let current = null,
+        cnt = 0;
+    for (let i = 0; i < this.variantsId.length; i++) {
+      if (this.variantsId[i] !== current) {
+        if (cnt > 0) this.getProperty(current, cnt)
+        current = this.variantsId[i];
+        cnt = 1;
+      } else {
+        cnt++;
+      }
+    }
+    if (cnt > 0) this.getProperty(current, cnt)
+
+    $.ajax({
+      type: 'post',
+      url: '/cart/add.js',
+      data: {items: this.variantsData},
+      dataType: 'json',
+      success: function () {
+        UpdateCart('', '', true)
+      },
+      error: function (error) {
+        if (error.status === 422) {
+          $('#PdpErrorMessage').text(error.responseJSON.description).fadeIn('slow');
+          setTimeout(() => {$('#PdpErrorMessage').text('').hide();}, 5500);
+        }
+      }
+    })
+  }
+
+  getProperty(current, cnt) {
+    let prop = {
+      "_bundles": true,
+      "_Bundle_Name": this.bundleName
+    }
+
+    if ($('.pdpForm .js-bundle-variant select[value="' + current + '"]').attr('data-selected-variant-preorder')) {
+      prop = {
+        "_bundles": true,
+        "_Bundle_Name": this.bundleName,
+        "pre-order": true
+      }
+    }
+
+    if (window.location.search.indexOf('pr_prod_strat') !== -1) prop._recommended_product = true;
+
+    this.variantsData.push({
+      quantity: cnt,
+      id: current,
+      properties: prop
+    })
+  }
+}
+
+customElements.define('bundle-mix', bundleMix);
+
+class bundleMixMultiple extends HTMLElement {
+  constructor() {
+    super();
+  }
+}
+
+customElements.define('bundle-mix-multiple', bundleMixMultiple);

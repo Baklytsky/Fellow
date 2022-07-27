@@ -24,17 +24,54 @@
         {% if item["product_variants_id"] != blank %}
           {%- assign bundle_product_variants_id = item["product_variants_id"] | split: ',' -%}
         {% endif %}
+        {% if item["selected_variant_id"] != blank %}
+          {%- assign bundle_product_selected_variant_id = item["selected_variant_id"] -%}
+        {% endif %}
 
-        {%- assign uniq_id = bundle_product.id | append: '-' | append: forloop.index -%}
+        {%- assign preselected_variant = blank -%}
 
         {%- if bundle_product != blank -%}
+          {%- assign uniq_id = bundle_product.id | append: '-' | append: forloop.index -%}
+
+          {%- for variant in bundle_product.variants -%}
+            {%- assign show_variant = true -%}
+
+            {%- if bundle_product_variants_id != blank -%}
+              {%- assign show_variant = false -%}
+
+              {%- for bundle_variant_id in bundle_product_variants_id -%}
+                {%- assign bundle_variant_id_num = bundle_variant_id | plus: 0 -%}
+                {%- if bundle_variant_id_num == variant.id -%}
+                  {%- assign show_variant = true -%}
+                  {%- break -%}
+                {%- endif -%}
+              {%- endfor -%}
+
+            {%- endif -%}
+
+            {%- if show_variant -%}
+              {%- if bundle_product_selected_variant_id != blank -%}
+                {%- assign preselected_variant_id = bundle_product_selected_variant_id | plus: 0 -%}
+                {%- if preselected_variant_id == variant.id -%}
+                  {%- assign preselected_variant = variant -%}
+                {%- endif -%}
+              {%- endif -%}
+            {%- endif -%}
+
+          {%- endfor -%}
+
           {%- if bundle_product_variants_id == blank -%}
             {%- if bundle_product.variants.size > 1 -%}
               <div class="pdpMain__bundle-image-wrapper rel x f aic">
                 {% for variant in bundle_product.variants %}
                   {%- assign imageSrc = variant.image.src | img_url: '900x' -%}
                     <div class='pdpMain__bundle-image abs x y f aic'
-                         data-variant-media='{{ variant.id | append: '-' | append: uniq_id }}' {%- if forloop.first %} style="visibility: visible" {% endif %}>
+                         data-variant-media='{{ variant.id | append: '-' | append: uniq_id }}'
+                            {% if preselected_variant != blank %}
+                              {% if preselected_variant.id == variant.id %}style="visibility: visible"{% endif %}
+                            {% else %}
+                              {% if forloop.first %}style="visibility: visible"{% endif %}
+                            {% endif %}>
                       {%- if variant.image.alt contains 'tag:' and forloop.first == false -%}
                         {%- assign image_custom_tag = variant.image.alt | split: 'tag:' | last -%}
                         <span class="productCard__badge abs z3 xsmall cb bg-xlightgrey">{{ image_custom_tag }}</span>
@@ -80,7 +117,12 @@
               {%- if show_variant -%}
               {%- assign imageSrc = variant.image.src | img_url: '900x' -%}
                   <div class='pdpMain__bundle-image abs x y f aic'
-                       data-variant-media='{{ variantId | append: '-' | append: uniq_id }}' {% if variant_counter == 1 %} style="visibility: visible" {% endif %}>
+                       data-variant-media='{{ variantId | append: '-' | append: uniq_id }}'
+                          {% if preselected_variant != blank %}
+                            {% if preselected_variant.id == variant.id %}style="visibility: visible"{% endif %}
+                          {% else %}
+                            {% if variant_counter == 1 %}style="visibility: visible"{% endif %}
+                          {% endif %}>
                     {%- if image.alt contains 'tag:' and forloop.first == false -%}
                       {%- assign image_custom_tag = image.alt | split: 'tag:' | last -%}
                       <span class="productCard__badge abs z3 xsmall cb bg-xlightgrey">{{ image_custom_tag }}</span>

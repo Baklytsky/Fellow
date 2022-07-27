@@ -1,18 +1,37 @@
+{%- comment -%}
+  {% include 'product-options-bundle' with
+    bundle_product: bundle_product,
+    options_array: bundle_variant_options1_arr,
+    option_name: bundle_option_name_1
+    preselected_variant_option = preselected_variant.option1 %}
+{%- endcomment -%}
+
+{%- assign preselected_option_name = false -%}
 {%- assign option_name_handle = option_name | handleize -%}
+
 {%- case option_name_handle -%}
-{%- when 'size' -%}
-{%- assign order = 1 -%}
-{%- when 'version' -%}
-{%- assign order = 2 -%}
-{%- when 'material' -%}
-{%- assign order = 3 -%}
 {%- when 'color' -%}
+{%- assign order = 1 -%}
+{%- when 'size' -%}
+{%- assign order = 2 -%}
+{%- when 'version' -%}
+{%- assign order = 3 -%}
+{%- when 'material' -%}
 {%- assign order = 4 -%}
 {%- when 'burrs' -%}
 {%- assign order = 5 -%}
   {%- else -%}
 {%- assign order = 0 -%}
 {%- endcase -%}
+
+{%- if preselected_variant_option != null -%}
+  {%- for item in options_array -%}
+    {%- if preselected_variant_option == item -%}
+      {%- assign preselected_option_name = item -%}
+      {%- break -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
 
 
 <div class="bundle-product__option-group" style="order: {{ order }}; {% if option_name == 'Title' %}display: none;{% endif %}" >
@@ -22,10 +41,8 @@
     <div class="bundle-product__radio-group f" {% if options_array.size == 1 %}style="display: none"{% endif %}>
       {%- for item in options_array -%}
         {%- assign option_value = item -%}
-        {%- if item contains 'Limited Edition:' -%}
-          {%- assign option_value = item | split: 'Limited Edition:' | last | strip -%}
-        {%- elsif item contains 'Wooden Accents:' -%}
-      	 {%- assign option_value = item | split: 'Wooden Accents:' | last | strip -%}
+        {%- if item contains ':' -%}
+          {%- assign option_value = item | split: ':' | last | strip -%}
         {%- elsif item contains 'Upgraded SSP MP Brew Burrs' -%}
          {% comment %}{%- assign option_value = item | split: '(+ $186)' | first | strip -%}{% endcomment %}
         {%- endif -%}
@@ -36,7 +53,13 @@
                    type="radio"
                    name="{{ option_name | append: '-' | append: uniq_id }}"
                    value="{{ option_value | handleize }}"
-                   title="{{ option_value }}" {% if forloop.first %}checked{% endif %}>
+                   data-option="{{ item }}"
+                   title="{{ option_value }}"
+                    {% if preselected_option_name != false %}
+                      {% if preselected_option_name == item %}checked{% endif %}
+                    {% else %}
+                      {% if forloop.first %}checked{% endif %}
+                    {% endif %}>
             <div class="radio__title f aic jcc"
                  data-{{ option_name | handleize }}="{{ option_value | handleize }}">
               <span style="white-space: nowrap">{{ option_value }}</span>
