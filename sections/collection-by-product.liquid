@@ -11,6 +11,17 @@
 {% endif %}
 {%- assign collection_title = collection.title -%}
 
+{%- comment -%} /// Hidden "sizes" in filters  /// {%- endcomment -%}
+{%- assign hidden_sizes_arr = false -%}
+{%- if collection.metafields["custom_fields"]["hidden_sizes"] != blank -%}
+{%- assign hidden_sizes_arr = collection.metafields["custom_fields"]["hidden_sizes"] | split: ',' | strip -%}
+{%- endif -%}
+{%- comment -%} /// Hidden "shop by use" in filters  /// {%- endcomment -%}
+{%- assign hidden_shop_by_use_arr = false -%}
+{%- if collection.metafields["custom_fields"]["hidden_shop_by_use_tags"] != blank -%}
+{%- assign hidden_shop_by_use_arr = collection.metafields["custom_fields"]["hidden_shop_by_use_tags"] | split: ',' | strip -%}
+{%- endif -%}
+
 <section class='collection'>
   {%- if section.settings.show_breadcrumbs -%}
     {% include 'breadcrumbs' %}
@@ -36,18 +47,20 @@
           {
             "subcollections": [
               {%- for item in collection.metafields["custom_fields"]["subcollection_list"] -%}
-                {%- assign collection = collections[item["collection"]] -%}
+                {%- assign subcollection = collections[item["collection"]] -%}
                 {%- assign title = item["title"] | default: collection.title -%}
                 {%- assign description = item["description"] | default: false -%}
-                {%- assign order = item["order"] | minus: 2 | default: 100 -%}
-                {%- if collection != blank -%}
+                {%- assign order = item["order"] | default: 1 -%}
+                {%- if subcollection != blank -%}
                 {%- assign subcollection_counter = subcollection_counter | plus: 1 -%}
                 {%- if subcollection_counter != 1 -%},{%- endif -%}{
                   "title": "{{ title }}",
-                  "description": {{ description | json }},
+                  "description": {{ description | newline_to_br | json }},
                   "order": "{{ order }}",
-                  "url": "{{ collection.url }}",
-                  "link_text": "{{'collections.general.link_text' | t }}"
+                  "url": "{{ subcollection.url }}",
+                  "link_text": "{{'collections.general.link_text' | t }}",
+                  "hidden_sizes_arr": {{ hidden_sizes_arr | json }},
+                  "hidden_shop_by_use_arr": {{ hidden_shop_by_use_arr | json }}
                 }
                 {%- endif -%}
               {%- endfor -%}
