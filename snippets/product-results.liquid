@@ -25,6 +25,9 @@
             {{/each}}
           {{/if}}
           </div>
+          {{#if link_text}}
+            <a href="{{ url }}" class="collection__product-info-link">{{ link_text }}</a>
+          {{/if}}
         </div>
         <div class="collection__product-variants">
           {{#if variants.length}}

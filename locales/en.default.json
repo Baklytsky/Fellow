@@ -119,7 +119,8 @@
       "facet_clear": "Clear all",
       "facet_hide": "Hide Filters",
       "facet_show": "Show Filters",
-      "facet_sort_by": "Sort By"
+      "facet_sort_by": "Sort By",
+      "link_text": "View More"
     }
   },
   "contact": {
@@ -274,7 +275,8 @@
       "from_text": "from",
       "quantity": "Quantity",
       "add_to_cart": "Add to Cart",
-      "quick_view": "+ Quick Add"
+      "quick_view": "+ Quick Add",
+      "link_text": "View Details"
     }
   },
   "sections": {

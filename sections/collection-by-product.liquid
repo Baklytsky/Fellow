@@ -46,7 +46,8 @@
                   "title": "{{ title }}",
                   "description": {{ description | json }},
                   "order": "{{ order }}",
-                  "url": "{{ collection.url }}"
+                  "url": "{{ collection.url }}",
+                  "link_text": "{{'collections.general.link_text' | t }}"
                 }
                 {%- endif -%}
               {%- endfor -%}

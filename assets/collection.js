@@ -36,6 +36,7 @@ class collectionFacets extends HTMLElement {
               order: collection.order,
               title: collection.title,
               description: collection.description,
+              link_text: collection.link_text,
               facets: {
                 color: {
                   hex: this.getSetOfValues(products, ['facets', 'color', 'hex']),
