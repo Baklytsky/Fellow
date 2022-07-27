@@ -37,7 +37,7 @@
   {{ className }}
 {%- endcapture -%}
 
-<div class='productCard productCard__recommended productCard--{{ product.title | handleize }} {{ cx }}' data-component='productCard'>
+<cart-recommended-product class='productCard productCard__recommended productCard--{{ product.title | handleize }} {{ cx }}' data-component='productCard'>
   <div class='productCard__content f' data-image-url="{{ image_url }}">
     <div class="productCard__image-wrapper">
       {% include 'product-card-recommended-image',
@@ -57,10 +57,10 @@
         {{ bottom_content }}
       {% endif %}
 
-      <button type="button" class="btn--clear cart-recommended__add-button" data-action="add-to-cart-recommended" data-variant-id="cart-{{ product.selected_or_first_available_variant.id }}">Add to cart</button>
+      <button type="button" class="btn--clear cart-recommended__add-button" data-action="add-to-cart-recommended" data-variant-id="{{ product.selected_or_first_available_variant.id }}">Add to cart</button>
     </div>
   </div>
-</div>
+</cart-recommended-product>
 
 {% comment %} Reset {% endcomment %}
 {% assign className = blank %}

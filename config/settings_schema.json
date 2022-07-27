@@ -127,6 +127,11 @@
         "label": "GWP Product"
       },
       {
+        "type": "text",
+        "id": "gwp_1_success_message",
+        "label": "First GWP success message"
+      },
+      {
         "type": "number",
         "id": "second_gwp_threshold",
         "label": "Second GWP threshold"
@@ -135,6 +140,16 @@
         "type": "product",
         "id": "second_gwp_product",
         "label": "Second GWP Product"
+      },
+      {
+        "type": "text",
+        "id": "gwp_2_success_message",
+        "label": "Second GWP success message"
+      },
+      {
+        "type": "text",
+        "id": "finally_gwp_success_message",
+        "label": "Finally GWP success message"
       }
     ]
   },
