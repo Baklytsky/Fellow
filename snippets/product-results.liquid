@@ -5,7 +5,7 @@
   {% raw %}
   {{#if items.length}}
     {{#each items}}
-      <div class="collection__product-item" style="order: {{#if order}}{{order}}{{else}}{{@index}}{{/if}}">
+      <div class="collection__product-item">
         <div class="collection__product-content">
           <h3 class="collection__product-title">
             <a href="{{ url }}">{{ title }}</a>
@@ -17,7 +17,7 @@
             {{/if}}
           {{/unless }}
           {{#if description}}
-            <p class="collection__product-info-item">{{ description }}</p>
+            <p class="collection__product-info-item">{{{ description }}}</p>
           {{/if}}
           {{#if tag_info.length}}
             {{#each tag_info}}

@@ -30,8 +30,18 @@ class collectionFacets extends HTMLElement {
             return resp.json()
           })
           .then(data => {
-            const products = data.products
+            const products = data.products;
+            let shopByUseNames = this.getSetOfValues(products, ['facets', 'shop_by_use', 'names']),
+                sizesNames = this.getSetOfValues(products, ['facets', 'sizes', 'names']);
+
+            if (collection['hidden_shop_by_use_arr']) {
+              shopByUseNames = this.checkHiddenOptions(shopByUseNames, collection['hidden_shop_by_use_arr'])
+            }
+            if (collection['hidden_sizes_arr']) {
+              sizesNames = this.checkHiddenOptions(sizesNames, collection['hidden_sizes_arr'])
+            }
             return {
+              subCollection: true,
               url: collection.url,
               order: collection.order,
               title: collection.title,
@@ -42,8 +52,8 @@ class collectionFacets extends HTMLElement {
                   hex: this.getSetOfValues(products, ['facets', 'color', 'hex']),
                   names: this.getSetOfValues(products, ['facets', 'color', 'names'])
                 },
-                shop_by_use: {names: this.getSetOfValues(products, ['facets', 'shop_by_use', 'names'])},
-                sizes: {names: this.getSetOfValues(products, ['facets', 'sizes', 'names'])}
+                shop_by_use: {names: shopByUseNames},
+                sizes: {names: sizesNames}
               },
               shop_by_use: {value: this.getSetOfValues(products, ['shop_by_use', 'value'])},
               size: {value: this.getSetOfValues(products, ['size', 'value'])},
@@ -55,6 +65,10 @@ class collectionFacets extends HTMLElement {
             this.subCollectionData.push(subCollectionProduct)
           })
     })).then(() => this.getProducts())
+  }
+
+  checkHiddenOptions (optArr, hiddenOptArr) {
+    return optArr.filter(opt => !hiddenOptArr.includes(opt))
   }
 
   getSetOfValues (arrToReduce, keyArr) {
@@ -138,12 +152,19 @@ class collectionFacets extends HTMLElement {
   }
 
   renderResults (data) {
+    if (this.subcollections) this.checkSubCollectionOrder(data)
     const resultSource = this.resultSourse.innerHTML,
           template = Handlebars.compile(resultSource);
     this.resultWrapper.innerHTML = template({items: data})
     const allCards = this.querySelectorAll('.productCard');
     if (allCards.length) allCards.forEach((card) => theme.updateSwatches(card));
     if (typeof window.yotpo !== "undefined") window.yotpo.initWidgets();
+  }
+
+  checkSubCollectionOrder (data) {
+    data.forEach((item, i) => {
+      if (item['subCollection']) data.splice(item['order'] - 1,0,data.splice(i,1)[0]);
+    })
   }
 
   getSelectedFacets () {
@@ -218,12 +239,12 @@ class collectionFacets extends HTMLElement {
       case 'price':
         if (order === 'ascending') {
           data.sort((a, b) => a[sortBy] - b[sortBy])
-          if (this.template === 'by-product') {
+          if (this.template.includes('by-product')) {
             data.forEach(product => product.variants.sort((a, b) => a[sortBy] - b[sortBy]))
           }
         } else {
           data.sort((a, b) => b[sortBy] - a[sortBy])
-          if (this.template === 'by-product') {
+          if (this.template.includes('by-product')) {
             data.forEach(product => product.variants.sort((a, b) => b[sortBy] - a[sortBy]))
           }
         }
