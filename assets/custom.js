@@ -2100,94 +2100,64 @@ customElements.define('slide-toggle', SlideToggle);
 class bundleMixCard extends HTMLElement {
   constructor() {
     super();
+    this.pdpContainer = this.closest('.pdpMain__container')
     this.product = JSON.parse(this.querySelector('[type="application/json"]').textContent)
     this.productVariants = this.product['variants']
-    this.selectedOptions = this.getOptions()
-    this.selectedVariant = this.getSelectedVariant()
-    this.optionGroupFirst = this.querySelectorAll(`input[name^='${this.product.options[0]}']`);
-    if (this.product.options[1]) {
-      this.optionGroupSecond = this.querySelectorAll(`input[name^='${this.product.options[1]}']`);
-    }
     this.select = this.querySelector('.select-wrapper select')
     this.options = this.select.querySelectorAll('option')
-    this.radios = this.querySelectorAll('.bundle-radio');
+    this.radioGroups = Array.from(this.querySelectorAll('.bundle-product__option-group'));
+    this.radios = this.querySelectorAll('.bundle-radio')
+    this.atc = this.pdpContainer.querySelector('.js-pick-mix-add-to-cart')
 
-    this.changeSelectedOption()
-    this.disableUnavailableVariants()
-    this.checkVariantTitle()
-    this.toggleAddButton()
-    this.checkPrice()
-
+    this.onVariantChange()
     this.addEventListener('change', () => this.onVariantChange())
   }
 
-  getSelectedVariant() {
+  getSelectedVariant(optionsArr) {
     return this.productVariants.find((variant) => {
       return !variant.options.map((option, index) => {
         let optionValue = option;
         if (optionValue.includes(':')) optionValue = optionValue.split(':')[1].trim();
-        return this.selectedOptions[index] === theme.handleize(optionValue);
+        return optionsArr[index] === theme.handleize(optionValue);
       }).includes(false);
     });
   }
 
   getOptions() {
-    let radioGroups = Array.from(this.querySelectorAll('.bundle-product__option-group'));
-    return radioGroups.map((radioGroup) => {
+    return this.radioGroups.map((radioGroup) => {
       return Array.from(radioGroup.querySelectorAll('input')).find((radio) => radio.checked).value;
     });
   }
 
   onVariantChange() {
     this.selectedOptions = this.getOptions()
-    this.selectedVariant = this.getSelectedVariant()
+    this.selectedVariant = this.getSelectedVariant(this.selectedOptions)
     this.changeSelectedOption()
     this.disableUnavailableVariants()
     this.checkVariantTitle()
     this.changeMedia()
     this.toggleAddButton()
     this.checkPrice()
-    console.log(this.selectedVariant)
   }
 
   disableUnavailableVariants() {
     this.radios.forEach((radio) => radio.classList.remove('unavailable'))
-    let firstSelectedOption = Array.from(this.optionGroupFirst).find((radio) => radio.checked).dataset.option
-    let secondSelectedOption = (this.product.options[1])
-        ? Array.from(this.optionGroupSecond).find((radio) => radio.checked).dataset.option
-        : false;
-    if (firstSelectedOption) this.checkAvailableRadios(this.optionGroupFirst, firstSelectedOption, secondSelectedOption, false)
-    if (secondSelectedOption) this.checkAvailableRadios(this.optionGroupSecond, firstSelectedOption, secondSelectedOption, true)
-  }
-
-  checkAvailableRadios(optionGroup, firstSelectedOption, secondSelectedOption, isSecondOption) {
-    optionGroup.forEach((radio) => {
-      let optionsArr;
-      if (secondSelectedOption) {
-        optionsArr = (isSecondOption) ? [firstSelectedOption, radio.dataset.option] : [radio.dataset.option, secondSelectedOption]
-      } else {
-        optionsArr = [radio.dataset.option]
-      }
-      let existVariant = false;
-      this.productVariants.forEach((variant) => {
-        let condition = (secondSelectedOption)
-            ? variant.options[0] === optionsArr[0] && variant.options[1] === optionsArr[1]
-            : variant.options[0] === optionsArr[0];
-        if (condition) {
-          existVariant = true;
-          if (!variant.available && !this.selectedOption.hasAttribute('data-variant-preorder')) {
-            radio.parentElement.classList.add('unavailable');
-          }
-        }
-      });
-      if (!existVariant) radio.parentElement.classList.add('unavailable');
-    })
+    for (let i = 0; i < this.selectedOptions.length; i++) {
+      const groupRadios = this.radioGroups[i].querySelectorAll('.bundle-radio input');
+      groupRadios.forEach(radio => {
+        const options = [...this.selectedOptions]
+        options.splice(i,1, radio.value)
+        if (!this.getSelectedVariant(options)) radio.parentElement.classList.add('unavailable');
+      })
+    }
   }
 
   checkVariantTitle() {
     this.checkedOptions = this.querySelectorAll('input:checked')
     this.checkedOptions.forEach((option) => {
-      $(option).parents('.bundle-product__option-group').find('.option-title-value').html(`${option.title}`)
+      const optionGroup = option.closest('.bundle-product__option-group'),
+            optionGroupTitle = optionGroup.querySelector('.option-title-value');
+      optionGroupTitle.innerHTML = `${option.title}`
     })
   }
 
@@ -2207,77 +2177,87 @@ class bundleMixCard extends HTMLElement {
   }
 
   changeMedia() {
+    if (!this.selectedVariant) return
     // Change PDP Main Gallery Image
-    let $selectedImage = $('[data-variant-media="' + this.selectedOption.getAttribute('data-variant-uniq_id') + '"]');
-    if ($selectedImage.length) {
-      $selectedImage.parent().find('[data-variant-media]:visible').css('visibility','hidden')
-      $selectedImage.css('visibility','visible')
-    }
-
+    const mainImageId = this.selectedOption.getAttribute('data-variant-uniq_id'),
+          mediaSelector = '[data-variant-media="' + mainImageId + '"]',
+          selectedImage = this.pdpContainer.querySelector(mediaSelector);
+    this.showImage(selectedImage, 'data-variant-media')
     // Change Bundle Mix Card Image
-    let $selectedCardImage = $(this).find('[data-mix-card-media-id="' + this.selectedVariant.id + '"]')
-    if ($selectedCardImage.length) {
-      $selectedCardImage.parent().find('[data-mix-card-media-id]:visible').css('visibility','hidden')
-      $selectedCardImage.css('visibility','visible')
-    }
+    const cardImageId = this.selectedVariant.id,
+          selectedCardImage = this.querySelector('[data-mix-card-media-id="' + cardImageId + '"]');
+    this.showImage(selectedCardImage, 'data-mix-card-media-id')
+  }
+
+  showImage(imageToShow, mediaAttr) {
+    if (!imageToShow) return
+    const imageSelector = `.visible[${mediaAttr}]`,
+        visibleImage = imageToShow.parentElement.querySelector(imageSelector);
+    if (visibleImage) visibleImage.classList.remove('visible');
+    imageToShow.classList.add('visible');
   }
 
   toggleAddButton() {
-    var $disabledOptions = $(document).find('.js-bundle-variant option:disabled'),
-        $checkForSelected = $disabledOptions.filter((i, e) => e.hasAttribute('selected')),
-        $unavailable = $(document).find('.js-bundle-variant select[data-unavailable]'),
-        $preOrder = $(document).find('.js-bundle-variant select[data-selected-variant-preorder]');
+    const disabledOptions = this.pdpContainer.querySelectorAll('.js-bundle-variant option:disabled'),
+          disabled = Array.from(disabledOptions).filter((i) => i.hasAttribute('selected')),
+          unavailable = Array.from(this.pdpContainer.querySelectorAll('.js-bundle-variant select[data-unavailable]')),
+          preOrder = Array.from(this.pdpContainer.querySelectorAll('.js-bundle-variant select[data-selected-variant-preorder]'));
 
-    if ($unavailable.length) {
-      $(document).find('#pdp-bundle-atc').attr('disabled', 'disabled').text('Unavailable')
-      $(document).find('#pdp-sticky-atc').attr('disabled', 'disabled').text('Unavailable')
-    } else if ($preOrder.length) {
-      $(document).find('#pdp-bundle-atc').removeAttr('disabled', 'disabled').text('Pre-order')
-      $(document).find('#pdp-sticky-atc').removeAttr('disabled', 'disabled').text('Pre-order')
-    } else if ($checkForSelected.length) {
-      $(document).find('#pdp-bundle-atc').attr('disabled', 'disabled').text('Out Of Stock')
-      $(document).find('#pdp-sticky-atc').attr('disabled', 'disabled').text('Out Of Stock')
+    if (unavailable.length) {
+      this.changeButtonState('disabled', 'Unavailable')
+    } else if (preOrder.length) {
+      this.changeButtonState('active', 'Pre-order')
+    } else if (disabled.length) {
+      this.changeButtonState('disabled', 'Out Of Stock')
     }  else {
-      $(document).find('#pdp-bundle-atc').removeAttr('disabled').text('Add to Cart')
-      $(document).find('#pdp-sticky-atc').removeAttr('disabled').text('Add to Cart')
+      this.changeButtonState('active', 'Add to Cart')
     }
   }
 
-  checkPrice() {
-    let priceDiffSum = 0,
-        selectedMixVariants = $(document).find('.bundle-product .js-bundle-variant option[selected]'),
-        priceDiffArray = selectedMixVariants.map((i, variant) => {return Number(variant.dataset.bundlePriceDifference)});
+  changeButtonState(state, text) {
+    (state === 'active')
+        ? this.atc.removeAttribute('disabled')
+        : this.atc.setAttribute('disabled', 'disabled')
+    this.atc.innerHTML = text
+  }
 
-    priceDiffArray.each((i, priceDiff) => priceDiffSum += priceDiff || 0);
+  checkPrice() {
+    let priceDiffSum = 0;
+    const selectedMixVariants = this.pdpContainer.querySelectorAll('.js-bundle-variant option[selected]'),
+          priceDiffArray = Array.from(selectedMixVariants).map((variant) => {
+            return Number(variant.dataset.bundlePriceDifference)
+          });
+
+    priceDiffArray.forEach(priceDiff => priceDiffSum += priceDiff);
 
     const newCompareAtPrice = (window.theme.product.compare_at_price * 0.01) + priceDiffSum,
           newPrice = (window.theme.product.price * 0.01) + priceDiffSum,
-          priceInner = $('[data-product-price]'),
-          compareAtPriceInner = $('[data-compare-at-price] span');
+          priceInner = this.pdpContainer.querySelectorAll('[data-product-price]'),
+          compareAtPriceInner = this.pdpContainer.querySelectorAll('[data-compare-at-price] span');
 
-    priceInner.each((i, element) => $(element).text('$' + newPrice))
-    compareAtPriceInner.each((i, element) => $(element).text('$' + newCompareAtPrice))
+    priceInner.forEach(element => element.innerHTML = '$' + newPrice)
+    compareAtPriceInner.forEach(element => element.innerHTML = '$' + newCompareAtPrice)
   }
 
 }
 
 customElements.define('bundle-mix-card', bundleMixCard);
 
-class bundleMix extends HTMLElement {
+class bundle extends HTMLElement {
   constructor() {
     super();
     this.atcButton = this.querySelector('.js-pick-mix-add-to-cart');
-    this.bundleName = this.atcButton.getAttribute('data-bundle-name') || '';
+    this.bundleName = this.atcButton.getAttribute('data-bundle-name');
     this.selects = this.querySelectorAll('.js-bundle-variant .js-select');
-    this.atcButton.addEventListener('click', this.addBundleMix.bind(this));
+    this.atcButton.addEventListener('click', this.addBundle.bind(this));
     this.variantsId = [];
     this.variantsData = [];
   }
 
-  addBundleMix(e) {
+  addBundle(e) {
     e.preventDefault();
     this.selects.forEach((select) => {
-      let variant_id = select.getAttribute('value');
+      const variant_id = select.getAttribute('value');
       this.variantsId.push(variant_id);
     });
 
@@ -2316,7 +2296,7 @@ class bundleMix extends HTMLElement {
   }
 }
 
-customElements.define('bundle-mix', bundleMix);
+customElements.define('bundle-mix', bundle);
 
 class bundleMixMultiple extends HTMLElement {
   constructor() {

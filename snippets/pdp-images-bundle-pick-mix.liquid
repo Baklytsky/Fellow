@@ -64,14 +64,21 @@
             {%- if bundle_product.variants.size > 1 -%}
               <div class="pdpMain__bundle-image-wrapper rel x f aic">
                 {% for variant in bundle_product.variants %}
+                  {%- assign visible = false -%}
+
+                  {% if preselected_variant != blank %}
+                    {% if preselected_variant.id == variant.id %}
+                      {%- assign visible = true -%}
+                    {% endif %}
+                  {% else %}
+                    {% if forloop.first %}
+                      {%- assign visible = true -%}
+                    {% endif %}
+                  {% endif %}
+
                   {%- assign imageSrc = variant.image.src | img_url: '900x' -%}
-                    <div class='pdpMain__bundle-image abs x y f aic'
-                         data-variant-media='{{ variant.id | append: '-' | append: uniq_id }}'
-                            {% if preselected_variant != blank %}
-                              {% if preselected_variant.id == variant.id %}style="visibility: visible"{% endif %}
-                            {% else %}
-                              {% if forloop.first %}style="visibility: visible"{% endif %}
-                            {% endif %}>
+                    <div class='pdpMain__bundle-image abs x y f aic {% if visible %}visible{% endif %}'
+                         data-variant-media='{{ variant.id | append: '-' | append: uniq_id }}'>
                       {%- if variant.image.alt contains 'tag:' and forloop.first == false -%}
                         {%- assign image_custom_tag = variant.image.alt | split: 'tag:' | last -%}
                         <span class="productCard__badge abs z3 xsmall cb bg-xlightgrey">{{ image_custom_tag }}</span>
@@ -86,8 +93,8 @@
               </div>
             {%- else -%}
               <div class="pdpMain__bundle-image-wrapper rel x f aic">
-                <div class='pdpMain__bundle-image abs x y f aic'
-                     data-variant-media='{{ bundle_product.selected_or_first_available_variant.id | append: '-' | append: uniq_id }}' style="visibility: visible">
+                <div class='pdpMain__bundle-image abs x y f aic visible'
+                     data-variant-media='{{ bundle_product.selected_or_first_available_variant.id | append: '-' | append: uniq_id }}'>
                     {%- if bundle_product.featured_image.alt contains 'tag:' -%}
                       {%- assign image_custom_tag = bundle_product.featured_image.alt | split: 'tag:' | last -%}
                       <span class="productCard__badge abs z3 xsmall cb bg-xlightgrey">{{ image_custom_tag }}</span>
@@ -115,14 +122,21 @@
               {%- endfor -%}
 
               {%- if show_variant -%}
+                {%- assign visible = false -%}
+
+                {% if preselected_variant != blank %}
+                  {% if preselected_variant.id == variant.id %}
+                    {%- assign visible = true -%}
+                  {% endif %}
+                {% else %}
+                  {% if variant_counter == 1 %}
+                    {%- assign visible = true -%}
+                  {% endif %}
+                {% endif %}
+
               {%- assign imageSrc = variant.image.src | img_url: '900x' -%}
-                  <div class='pdpMain__bundle-image abs x y f aic'
-                       data-variant-media='{{ variantId | append: '-' | append: uniq_id }}'
-                          {% if preselected_variant != blank %}
-                            {% if preselected_variant.id == variant.id %}style="visibility: visible"{% endif %}
-                          {% else %}
-                            {% if variant_counter == 1 %}style="visibility: visible"{% endif %}
-                          {% endif %}>
+                  <div class='pdpMain__bundle-image abs x y f aic {% if visible %}visible{% endif %}'
+                       data-variant-media='{{ variantId | append: '-' | append: uniq_id }}'>
                     {%- if image.alt contains 'tag:' and forloop.first == false -%}
                       {%- assign image_custom_tag = image.alt | split: 'tag:' | last -%}
                       <span class="productCard__badge abs z3 xsmall cb bg-xlightgrey">{{ image_custom_tag }}</span>
@@ -143,8 +157,8 @@
 
       {%- if product.featured_image != blank -%}
         <div class="pdpMain__bundle-image-wrapper rel x f aic">
-          <div class='pdpMain__bundle-image abs x y f aic'
-               data-variant-media='{{ product.selected_or_first_available_variant }}' style="visibility: visible">
+          <div class='pdpMain__bundle-image abs x y f aic visible'
+               data-variant-media='{{ product.selected_or_first_available_variant }}'>
             {%- if badge_text != blank -%}
               <span class="productCard__badge abs z3 xsmall cb bg-xlightgrey" style="display:none;">{{ badge_text }}</span>
             {%- endif -%}
@@ -164,8 +178,8 @@
       {% endif %}
       {%- assign imageSrc = image.src | img_url: '900x' -%}
       <div class="pdpMain__bundle-image-wrapper rel x f aic">
-        <div class='pdpMain__bundle-image abs x y f aic'
-             data-variant-media='{{ variantId }}' style="visibility: visible">
+        <div class='pdpMain__bundle-image abs x y f aic visible'
+             data-variant-media='{{ variantId }}'>
           {%- if forloop.first and badge_text != blank -%}
             <span class="productCard__badge abs z3 xsmall cb bg-xlightgrey">{{ badge_text }}</span>
           {%- endif -%}

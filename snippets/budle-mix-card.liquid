@@ -95,22 +95,28 @@
     <div class="bundle-product__icon-wrapper rel">
       {%- if bundle_product_icon -%}
         <img src="{{ bundle_product_icon }}"
-             class="image-abs-cover"
-             alt="{{ bundle_product.title }}"
-             style="visibility: visible">
+             class="image-abs-cover visible"
+             alt="{{ bundle_product.title }}">
       {%- else -%}
         {%- for variant in bundle_product.variants -%}
           {%- assign image = variant.featured_media | default: bundle_product.featured_media -%}
           {%- assign variant_img = image | img_url: '200x' -%}
+          {%- assign visible = false -%}
+
+          {%- if preselected_variant != blank -%}
+            {%- if preselected_variant.id == variant.id -%}
+              {%- assign visible = true -%}
+            {%- endif -%}
+          {%- else -%}
+            {%- if forloop.first -%}
+              {%- assign visible = true -%}
+            {%- endif -%}
+          {%- endif -%}
+
           <img src="{{ variant_img }}"
-               class="image-abs-cover"
+               class="image-abs-cover {% if visible %}visible{% endif %}"
                data-mix-card-media-id="{{ variant.id }}"
-               alt="{{ variant.title }}"
-              {% if preselected_variant != blank %}
-                {% if preselected_variant.id == variant.id %}style="visibility: visible"{% endif %}
-              {% else %}
-                {% if forloop.first %}style="visibility: visible"{% endif %}
-              {% endif %}>
+               alt="{{ variant.title }}">
         {%- endfor -%}
       {%- endif -%}
     </div>

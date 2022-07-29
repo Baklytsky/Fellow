@@ -5,28 +5,18 @@
 {%- assign variant_bundles_array = product.metafields.custom_fields["bundle_variants_id"] -%}
 
 {%- assign component_button_id = 'pdp-atc' -%}
+{%- assign component_button_class_name = 'js-add-to-cart cart__button' -%}
 
-
-<div class='pb15' {% if section.settings.show_quantity_selector !=true or product.tags contains 'gift' %}style='display:none'{% endif %}>
-  {% include 'component-counter' %}
-</div>
-
-{% comment %}
-Uncomment to include
-<div class='f aic py1'>
-  <span data-selected-var-price>{{ current_variant.price | money }}</span>
-  <s data-compare-price style='display: none'>{{ current_variant.compare_at_price | money }}</s>
-</div>
-{% endcomment %}
-
+<bundle-mix class="bundle-mix">
 {%- assign available_bundle_product = true -%}
 {%- assign available_bundle_variant = true -%}
 {%- assign variantHasPreorder = false -%}
 
 {% if product_bundles_array != blank %}
   {%- assign component_button_id = 'pdp-bundle-atc' -%}
+  {%- assign component_button_class_name = 'js-pick-mix-add-to-cart cart__button' -%}
   {% assign product_bundles = product_bundles_array | split: "|" %}
-  <ul class="bundle-products is-hidden">
+  <ul class="bundle-products is-hidden js-bundle-variant">
     {% if variant_bundles_array != blank %}
       {% assign variant_bundles = variant_bundles_array | split: "," %}
     {% endif %}
@@ -137,7 +127,7 @@ Uncomment to include
     name: 'add',
     type: 'submit',
     href: '#',
-    className: 'js-add-to-cart cart__button',
+    className: component_button_class_name,
     dataAttr: 'data-atc="true"',
     bundle_name: product.title,
     disabled: disableVal,
@@ -147,3 +137,4 @@ Uncomment to include
 <div class='is-hidden' data-bis>
   <button class='button cart__button klaviyo-bis-trigger'>Out of Stock | Notify Me</button>
 </div>
+</bundle-mix>

@@ -39,6 +39,7 @@
     {%- endfor -%}
   {% endif %}
 
+  {%- comment -%}
   {%- if product.metafields.custom_fields["multiple_bundle_product_"] != blank -%}
     {%- for item in product.metafields.custom_fields["multiple_bundle_product_"] -%}
       {%- if item["card_title"] != blank -%}
@@ -124,7 +125,7 @@
       {%- endif -%}
     {%- endfor -%}
   {%- endif -%}
-
+  {%- endcomment -%}
   {% include 'pdp-bundle-description' %}
 
 
