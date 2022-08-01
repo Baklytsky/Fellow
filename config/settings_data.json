@@ -365,6 +365,7 @@
         "blocks": {
           "1f457594-c59c-4edd-800a-a9f7662f319e": {
             "type": "splitSlide",
+            "disabled": true,
             "settings": {
               "splitSlide__layout": "right",
               "heroSlide": "shopify:\/\/shop_images\/HeroImage_Award_Winning_Mobile__2x_bde01ab1-e5d9-41d4-b039-10c45b3ee981.png",
@@ -377,26 +378,6 @@
               "heroSlide__ctaURL": "shopify:\/\/collections\/award-winners",
               "heroSlide__ctaCopy": "Shop Award Winners",
               "heroSlide__ctaColor": "white",
-              "heroSlide__ctaURL2": "",
-              "heroSlide__ctaCopy2": "",
-              "heroSlide__ctaColor2": "black",
-              "heroSlide__ctaSubtext": ""
-            }
-          },
-          "c15c0d5c-f86c-436e-95b6-2f10cb6c8b20": {
-            "type": "splitSlide",
-            "settings": {
-              "splitSlide__layout": "right",
-              "heroSlide": "shopify:\/\/shop_images\/Collections_Banner_Coffee_Marketplace_Desktop__2x_f66d473f-4386-44bb-923f-8c4a08c7cbe2.png",
-              "desktopAlignment": "center",
-              "mobileAlignment": "center",
-              "heroSlide__header": "Just Cropped Up",
-              "heroSlide__subheader": "Discover our curated favorites from this year's Ethiopian coffee harvest.",
-              "subSlide__bgColor": "#8cbde0",
-              "subSlide__textColor": "#231f20",
-              "heroSlide__ctaURL": "https:\/\/fellowproducts.com\/pages\/curated-coffee-collection",
-              "heroSlide__ctaCopy": "Shop Fresh Crop",
-              "heroSlide__ctaColor": "black",
               "heroSlide__ctaURL2": "",
               "heroSlide__ctaCopy2": "",
               "heroSlide__ctaColor2": "black",
@@ -416,6 +397,26 @@
               "subSlide__textColor": "#231f20",
               "heroSlide__ctaURL": "shopify:\/\/collections\/summer-brew",
               "heroSlide__ctaCopy": "Shop Summer Essentials",
+              "heroSlide__ctaColor": "black",
+              "heroSlide__ctaURL2": "",
+              "heroSlide__ctaCopy2": "",
+              "heroSlide__ctaColor2": "black",
+              "heroSlide__ctaSubtext": ""
+            }
+          },
+          "c15c0d5c-f86c-436e-95b6-2f10cb6c8b20": {
+            "type": "splitSlide",
+            "settings": {
+              "splitSlide__layout": "right",
+              "heroSlide": "shopify:\/\/shop_images\/Collections_Banner_Coffee_Marketplace_Desktop__2x_f66d473f-4386-44bb-923f-8c4a08c7cbe2.png",
+              "desktopAlignment": "center",
+              "mobileAlignment": "center",
+              "heroSlide__header": "Just Cropped Up",
+              "heroSlide__subheader": "Discover our curated favorites from this year's Ethiopian coffee harvest.",
+              "subSlide__bgColor": "#8cbde0",
+              "subSlide__textColor": "#231f20",
+              "heroSlide__ctaURL": "https:\/\/fellowproducts.com\/pages\/curated-coffee-collection",
+              "heroSlide__ctaCopy": "Shop Fresh Crop",
               "heroSlide__ctaColor": "black",
               "heroSlide__ctaURL2": "",
               "heroSlide__ctaCopy2": "",
@@ -489,8 +490,8 @@
         },
         "block_order": [
           "1f457594-c59c-4edd-800a-a9f7662f319e",
-          "c15c0d5c-f86c-436e-95b6-2f10cb6c8b20",
           "91049687-67b8-4bdc-8f37-c74f97e41d00",
+          "c15c0d5c-f86c-436e-95b6-2f10cb6c8b20",
           "e6275e05-4fc2-4478-85db-37e4aceedf86",
           "58ee7397-6079-412a-9acd-d453a0cf281c",
           "3e0796bc-698b-4618-80b6-261185f9fb1a"
@@ -657,6 +658,7 @@
       },
       "1630052841314f69dd": {
         "type": "hp-iwt",
+        "disabled": true,
         "settings": {
           "enable_section": true,
           "image": "shopify:\/\/shop_images\/HeroImage_WormyWeek_Desktop__2x_2de8ede4-faee-47a0-9507-23802205642a.jpg",
@@ -939,6 +941,7 @@
       },
       "16497034024471c77e": {
         "type": "hp-iwt",
+        "disabled": true,
         "settings": {
           "enable_section": true,
           "image": "shopify:\/\/shop_images\/HP_Module_1_Award_Winning__2x_2ac07ba0-b88f-4868-a0f6-a55686423143.png",
