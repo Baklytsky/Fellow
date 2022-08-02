@@ -56,6 +56,53 @@ theme.closeModal = function (clean) {
   $(document).off('mousedown.QvClose')
 }
 
+theme.slickSlider = function () {
+  $('[data-section-type="slick-slideshow"]').each(function () {
+    const $slider = $(this).find('.jsSlickSlider');
+    let config = null;
+
+    if ($(this).attr('data-slick-config')) {
+      config = $.parseJSON($(this).attr('data-slick-config'));
+      if (config) {
+        if (config['arrows']) {
+          config.prevArrow = $(this).find('.jsPrevSlide');
+          config.nextArrow = $(this).find('.jsNextSlide');
+        }
+      }
+    }
+
+    if ($slider.length) $slider.not('.slick-initialized').slick(config);
+  });
+}
+
+theme.slickSlider()
+
+theme.mutation = function updateProductColors ($targetNode, callback) {
+  const config = { attributes: true, childList: true, subtree: true },
+      observer = new MutationObserver(callback);
+  observer.observe($targetNode, config);
+}
+
+theme.checkSlickResponse = function (selector, config, response, maxMedia) {
+  if (!$(selector).length) return
+  function checkSlider() {
+    console.log($(selector))
+    const condition = (maxMedia) ? $(window).width() < response : $(window).width() > response;
+    if (condition) {
+      $(selector).not('.slick-initialized').slick(config)
+    } else {
+      if ($(selector).hasClass('slick-initialized')) {
+        $(selector).slick('unslick')
+      }
+    }
+  }
+
+  checkSlider();
+  $(window).resize(function () {
+    checkSlider();
+  });
+}
+
 theme.header = function () {
 
 //-----------------------Header navigation----------------------------------
@@ -244,25 +291,6 @@ theme.horizontalScroll = function (list, elements, offset) {
   }
 }
 
-theme.slickSlider = function () {
-  $('[data-section-type="slick-slideshow"]').each(function () {
-    let $slider = $(this).find('.jsSlickSlider'),
-        config = null;
-
-    if ($(this).attr('data-slick-config')) {
-      config = $.parseJSON($(this).attr('data-slick-config'));
-      if (config) {
-        if (config['arrows']) {
-          config.prevArrow = $(this).find('.jsPrevSlide');
-          config.nextArrow = $(this).find('.jsNextSlide');
-        }
-      }
-    }
-
-    $slider.not('.slick-initialized').slick(config);
-  });
-}
-
 theme.toggleTab = function ($this) {
   // Required button element: data-selected='true/false'; aria-controls='TAB_ID'; data-action='toggle-tab'
   // Required tab element: data-selected='true/false'; data-tab='TAB_ID'
@@ -278,30 +306,6 @@ theme.toggleTab = function ($this) {
       }
     })
   }
-}
-
-theme.mutation = function updateProductColors ($targetNode, callback) {
-  var config = { attributes: true, childList: true, subtree: true };
-  let observer = new MutationObserver(callback);
-  observer.observe($targetNode, config);
-}
-
-theme.checkSlickResponse = function ($slider, config, response, maxMedia) {
-  function checkSlider() {
-    var condition = (maxMedia) ? $(window).width() < response : $(window).width() > response;
-    if (condition) {
-      $slider.not('.slick-initialized').slick(config)
-    } else {
-      if ($slider.hasClass('slick-initialized')) {
-        $slider.slick('unslick')
-      }
-    }
-  }
-
-  checkSlider();
-  $(window).resize(function () {
-    checkSlider();
-  });
 }
 
 theme.qvChangeSlide = function () {
@@ -447,60 +451,9 @@ theme.pdpMain = function () {
     topSpacer: document.getElementById('MainHeader').offsetHeight + 24
   });
 
-  function thumbnailScrollOnClick () {
-    $(document).off('click.thumbnails')
-    $(document).on('click.thumbnails', '.pdpMain__container .pdpMain__gallery-thumbnails-item', function () {
-      let scrollElement = $(document).find('[data-variant-media="' + $(this).attr('data-variant-img') + '"]'),
-          headerHeight = document.getElementById('MainHeader').offsetHeight;
-        $([document.documentElement, document.body]).animate({
-          scrollTop: scrollElement.offset().top - headerHeight
-        }, 500);
-      $(document).find('.pdpMain__gallery-thumbnails-item').removeClass('current-thumbnail')
-      $(this).addClass('current-thumbnail')
-    })
-  }
-
-  function changeActiveThumbnail() {
-    $(document).off('scroll.galleryImage')
-    var $variantImage = $(document).find('.pdpMain__variant-image'),
-        $thumbnailSlider = $(document).find('.pdpMain__gallery-thumbnails');
-    $(document).find('.pdpMain__gallery-thumbnails-item').removeClass('current-thumbnail')
-    $(document).find(".pdpMain__gallery-thumbnails-item:first").addClass('current-thumbnail')
-    $(document).on('scroll.galleryImage', $.debounce(300, function () {
-      $variantImage.each(function () {
-        let imagePosition = $(this)[0].getBoundingClientRect();
-        if (imagePosition.top < 300) {
-          let $thumbnailImage = $('[data-variant-img="' + $(this).attr('data-variant-media') + '"]')
-          let slideIndex = $thumbnailImage.data('slick-index')
-          $('.pdpMain__gallery-thumbnails-item').removeClass('current-thumbnail')
-          $thumbnailImage.addClass('current-thumbnail')
-          $thumbnailSlider.slick('slickGoTo', parseInt(slideIndex), true);
-        }
-      })
-    }))
-  }
-
-  function pdpThumbnails() {
-    thumbnailScrollOnClick()
-    changeActiveThumbnail()
-  }
-
   function pdpBar() {
-    var $pdpBarWrapper = $('.pdpBar__wrapper'),
-        pdpBarConfig = $.parseJSON($('.pdpBar').attr('data-slick-config'));
-    theme.checkSlickResponse($pdpBarWrapper, pdpBarConfig, 992, true)
-  }
-
-  function pdpGallary() {
-    var $pdpGalleryWrapper = $(document).find('.pdpMain__gallery-wrapper'),
-        pdpGalleryConfig = $.parseJSON($pdpGalleryWrapper.attr('data-slick-config'));
-    theme.checkSlickResponse($pdpGalleryWrapper, pdpGalleryConfig, 992, true)
-  }
-
-  function pdpBundleGallary() {
-    var $pdpBundleGalleryWrapper = $(document).find('.pdpMain__bundle-gallery-wrapper'),
-        pdpBundleGalleryConfig = $.parseJSON($('.pdpMain__bundle-gallery').attr('data-slick-config'));
-    theme.checkSlickResponse($pdpBundleGalleryWrapper, pdpBundleGalleryConfig, 992, true)
+    const pdpBarConfig = $.parseJSON($('.pdpBar').attr('data-slick-config'));
+    theme.checkSlickResponse('.pdpBar__wrapper', pdpBarConfig, 992, true)
   }
 
   function pdpDropdown() {
@@ -664,8 +617,8 @@ theme.pdpMain = function () {
           if ($productPersonalize.length) $productPersonalize.html($newProductPersonalize);
 
           theme.slickSlider()
-          pdpGallary()
-          pdpThumbnails()
+          //pdpGallary()
+          //pdpThumbnails()
              // Change product Upsell
           var $newProductUpsellWrapper = $(data).find('.pdpMain__Content .upsell-product__wrapper'),
               $newProductUpsellHtml = $(data).find('.pdpMain__Content .upsell-product').html()
@@ -765,9 +718,9 @@ theme.pdpMain = function () {
   }
 
   if ($('.pdpBar__wrapper').length) {pdpBar();}
-  if ($('.pdpMain__gallery-thumbnails').length) {pdpThumbnails();}
-  if ($('.pdpMain__gallery-wrapper').length) {pdpGallary();}
-  if ($('.pdpMain__bundle-gallery').length) {pdpBundleGallary();}
+  //if ($('.pdpMain__gallery-thumbnails').length) {pdpThumbnails();}
+  //if ($('.pdpMain__gallery-wrapper').length) {pdpGallary();}
+  //if ($('.pdpMain__bundle-gallery').length) {pdpBundleGallary();}
   if ($('.upsell-product__wrapper').length) {theme.pdpUpsellProduct();}
   if ($('.pdpRecCollection').length) {theme.pdpRecCollection();}
   if ($('[data-dropdown]').length) {pdpDropdown();}
@@ -1237,28 +1190,6 @@ $(document).ready(function () {
 theme.GLOBAL = function () {
   // Remove all $(document) Events
   // clicks:
-  $(document).off('click.toggleTab')
-  $(document).off('click.closeModal')
-  $(document).off('click.closeQvFullPage')
-  $(document).off('click.dataQuickView')
-  $(document).off('click.quickViewATC')
-  $(document).off('click.jsCounterRemove')
-  $(document).off('click.radioGroup')
-  //PDP
-  $(document).off('click.pdpDropdown')
-  $(document).off('click.pdpStickyAtc')
-  $(document).off('click.pdpStickyOptions')
-  $(document).off('click.pdpStickySize')
-  $(document).off('click.pdpStickyCloseSize')
-  $(document).off('click.pdpLearMoreShowAll')
-  $(document).off('click.pdpSelectSize')
-  $(document).off('click.click.pdpStickySelectSize')
-  // scrolls:
-  $(document).off('scroll.galleryImage')
-  $(document).off('scroll.pdpStickyBar')
-  $(window).off('scroll.pdp')
-  // resize:
-  $(window).off("resize.pdp");
 
   $(document).on('click.toggleTab', '[data-action="toggle-tab"]', function () {
     theme.toggleTab($(this));
@@ -1663,9 +1594,9 @@ theme.GLOBAL = function () {
     }
   })
 
-  if ($('[data-section-type]').attr('data-section-type') == 'slick-slideshow') {
-    theme.slickSlider()
-  }
+  // if ($('[data-section-type]').attr('data-section-type') == 'slick-slideshow') {
+  //   theme.slickSlider()
+  // }
 
   if ($('.collection').length || $('.searchMain').length) {
     if ($('.searchMain').length) {
@@ -2002,6 +1933,7 @@ class PdpMain extends PdpHelper {
     super();
     this.product = window.theme.product
     this.productVariants = this.product['variants']
+    this.media = this.querySelector('.pdpMain__Media')
     this.form = this.querySelector('.pdpForm')
     this.optionTitles = this.form.querySelectorAll('.option-title-value')
     this.quantity = this.form.querySelector('[name="quantity"]')
@@ -2032,19 +1964,83 @@ class PdpMain extends PdpHelper {
   }
 
   changeContent() {
-
+    if (!this.selectedVariant) return;
+    fetch(window.location.href + '&view=ajax-media')
+        .then(response => response.text())
+        .then(data => {
+          const html = new DOMParser().parseFromString(data, 'text/html')
+          this.media.innerHTML = html.querySelector('.pdpMain__Media').innerHTML
+          theme.slickSlider()
+        })
   }
 
   addToCart(e) {
     e.preventDefault()
-    const bodyObj = {
-      id: this.selectedVariant.id,
-      quantity: this.quantity.value
-    }
-    console.log(e)
+    const bodyObj = theme.serializeObject(this.form),
+          prop = {};
+    if (window.theme.product_is_recommended) prop["_recommended_product"] = true
+    if (Object.keys(prop).length) bodyObj.properties = prop
+    theme.cart.cartEvent('/cart/add.js', bodyObj, true, theme.pdpErrorMessage)
   }
 }
 customElements.define('pdp-main', PdpMain);
+
+class PdpThumbnails extends HTMLElement {
+  constructor () {
+    super()
+    this.container = this.closest('.pdpMain__Media')
+    this.variantImages = this.container.querySelectorAll('.pdpMain__variant-image')
+    this.thumbnails = this.querySelectorAll('.pdpMain__gallery-thumbnails-item')
+
+    this.thumbnails.forEach(thumbnail => {
+      thumbnail.addEventListener('click', () => this.thumbnailScrollOnClick(thumbnail))
+    })
+    document.addEventListener('scroll', () => {
+      setTimeout(() => this.changeActiveThumbnail(), 400)
+    })
+  }
+
+  thumbnailScrollOnClick (thumbnail) {
+    if (thumbnail.classList.contains('current-thumbnail')) return
+    const id = thumbnail.getAttribute('data-variant-img'),
+          scrollElement = this.container.querySelector('[data-variant-media="' + id + '"]'),
+          headerHeight = document.getElementById('MainHeader').offsetHeight,
+          topPosition = scrollElement.offsetTop + headerHeight;
+    window.scrollTo({ top: topPosition, behavior: 'smooth'});
+    this.thumbnails.forEach(item => item.classList.remove('current-thumbnail'))
+    thumbnail.classList.add('current-thumbnail')
+  }
+
+  changeActiveThumbnail() {
+    this.variantImages.forEach(image => {
+      let imagePosition = image.getBoundingClientRect();
+      if (imagePosition.top < 300) {
+        const id = image.getAttribute('data-variant-media')
+        const thumbnailImage = this.querySelector('[data-variant-img="' + id + '"]')
+        let slideIndex = thumbnailImage.dataset.slickIndex
+        this.thumbnails.forEach(item => item.classList.remove('current-thumbnail'))
+        thumbnailImage.classList.add('current-thumbnail')
+        $(this).slick('slickGoTo', parseInt(slideIndex), true);
+      }
+    })
+  }
+}
+
+customElements.define('pdp-thumbnails', PdpThumbnails);
+
+class PdpGallery extends HTMLElement {
+  constructor() {
+    super();
+    this.mainGallery()
+  }
+
+  mainGallery() {
+    const config = JSON.parse(this.getAttribute('data-slick-config'))
+    theme.checkSlickResponse('.pdpMain__gallery-wrapper', config, 992, true)
+  }
+}
+
+customElements.define('pdp-gallery', PdpGallery);
 
 class bundleMixCard extends PdpHelper {
   constructor() {
@@ -2145,12 +2141,20 @@ customElements.define('bundle-mix-card', bundleMixCard);
 class bundle extends HTMLElement {
   constructor() {
     super();
+    this.pdpContainer = this.closest('.pdpMain')
+    this.gallery = this.pdpContainer.querySelector('.pdpMain__bundle-gallery')
     this.atcButton = this.querySelector('.js-pick-mix-add-to-cart');
     this.bundleName = this.atcButton.getAttribute('data-bundle-name');
     this.selects = this.querySelectorAll('.js-bundle-variant .js-select');
     this.atcButton.addEventListener('click', this.addBundle.bind(this));
     this.variantsId = [];
     this.variantsData = [];
+    if (this.gallery) this.bundleGallery()
+  }
+
+  bundleGallery() {
+    const config = JSON.parse(this.gallery.getAttribute('data-slick-config'))
+    theme.checkSlickResponse('.pdpMain__bundle-gallery-wrapper', config, 992, true)
   }
 
   addBundle(e) {
@@ -2185,7 +2189,7 @@ class bundle extends HTMLElement {
     }
 
     if (select.hasAttribute('data-selected-variant-preorder')) prop["pre-order"] = true
-    if (window.location.search.indexOf('pr_prod_strat') !== -1) prop["_recommended_product"] = true;
+    if (window.theme.product_is_recommended) prop["_recommended_product"] = true;
 
     this.variantsData.push({
       quantity: cnt,

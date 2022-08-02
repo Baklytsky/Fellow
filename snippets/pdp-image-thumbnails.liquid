@@ -42,20 +42,23 @@
 <div class='pdpMain__gallery x rel f'
      data-section-type="slick-slideshow"
      data-slick-config='{{- slick-thumbnail-config -}}'>
-  <div class='pdpMain__gallery-thumbnails jsSlickSlider' data-json="{{ selected_variant.id }}">
+  <pdp-thumbnails class='pdpMain__gallery-thumbnails jsSlickSlider' data-json="{{ selected_variant.id }}">
     {%- if selected_variant.image != blank or has_metafields_images -%}
       {%- if selected_variant.image != blank -%}
-        <div class='pdpMain__gallery-thumbnails-item rel x' data-variant-img='{{ selected_variant.id }}'>
+        <div class='pdpMain__gallery-thumbnails-item rel x current-thumbnail' data-variant-img='{{ selected_variant.id }}'>
           <img src='{{ selected_variant.image | img_url: '200x' }}' class='image-abs-cover x' alt='{{ image.alt }}' role='img' loading='lazy'/>
         </div>
       {%- endif -%}
       {%- for variant in product.variants -%}
         {%- if variant.id == selected_variant.id -%}
+          {%- assign counter = 0 -%}
           {%- for i in (1..10) -%}
             {%- assign metafield_key =  'variant_image_' | append: i -%}
             {%- assign metafield_variant_image = variant.metafields.my_fields[metafield_key] -%}
             {%- if metafield_variant_image != blank -%}
-              <div class='pdpMain__gallery-thumbnails-item rel x' data-variant-img='{{ selected_variant.id | append: forloop.index }}'>
+              {%- assign counter = counter | plus: 1 -%}
+              <div class='pdpMain__gallery-thumbnails-item rel x {% if selected_variant.image == blank and counter == 1 %}current-thumbnail{% endif %}'
+                   data-variant-img='{{ selected_variant.id | append: forloop.index }}'>
                 <img src='{{ metafield_variant_image | img_url: '200x' }}' class='image-abs-cover x' alt='{{ image.alt }}' role='img' loading='lazy'/>
               </div>
             {%- endif -%}
@@ -77,8 +80,8 @@
         </div>
       {% endfor %}
     {%- endif -%}
-  </div>
-  <div class='pdpMain__gallery-wrapper x y block rel'
+  </pdp-thumbnails>
+  <pdp-gallery class='pdpMain__gallery-wrapper x y block rel'
        data-slick-config='{{- slick-pdp-mobile-config -}}'>
     {%- if selected_variant.image != blank or has_metafields_images -%}
       {%- if selected_variant.image != blank -%}
@@ -145,5 +148,5 @@
         </div>
       {% endfor %}
     {%- endif -%}
-  </div>
+  </pdp-gallery>
 </div>

@@ -32,10 +32,6 @@
   {% section 'product-template' %}
 </div>
 
-<script>
-  var json_product = {{ product | json }};
-</script>
-
 
 <script type="text/javascript">
   var klElecWrnty = document.querySelector("#kl_elec_wrnty");
@@ -54,7 +50,10 @@ document.querySelector("#freeShipPopup").addEventListener('click',function (){
 </script>
 <script type="text/javascript">
   var _learnq = _learnq || [];
-  document.getElementById("pdp-atc").addEventListener('click',function (){
-    _learnq.push(['track', 'Added to Cart', item]);
-  });
+  const atc = document.getElementById("pdp-atc")
+  if (atc) {
+    atc.addEventListener('click',function () {
+      _learnq.push(['track', 'Added to Cart', item]);
+    });
+  }
 </script>
