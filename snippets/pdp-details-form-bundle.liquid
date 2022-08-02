@@ -1,11 +1,8 @@
-{% comment %}form start & end moved to pdp-details-main to adjust for shop pay {% endcomment %}
-{% comment %} Always include product-options, product.js:20 reads from it for ATC {% endcomment %}
-{% include 'product-options' %}
 {%- assign product_bundles_array = product.metafields.custom_fields["bundle_products_group"] -%}
 {%- assign variant_bundles_array = product.metafields.custom_fields["bundle_variants_id"] -%}
 
-{%- assign component_button_id = 'pdp-atc' -%}
-{%- assign component_button_class_name = 'js-add-to-cart cart__button' -%}
+{%- assign component_button_id = 'pdp-bundle-atc' -%}
+{%- assign component_button_class_name = 'js-pick-mix-add-to-cart cart__button' -%}
 
 <bundle-mix class="bundle-mix">
 {%- assign available_bundle_product = true -%}
@@ -13,8 +10,6 @@
 {%- assign variantHasPreorder = false -%}
 
 {% if product_bundles_array != blank %}
-  {%- assign component_button_id = 'pdp-bundle-atc' -%}
-  {%- assign component_button_class_name = 'js-pick-mix-add-to-cart cart__button' -%}
   {% assign product_bundles = product_bundles_array | split: "|" %}
   <ul class="bundle-products is-hidden js-bundle-variant">
     {% if variant_bundles_array != blank %}
@@ -51,10 +46,8 @@
                       data-variant-available="{{ variant.available }}"
                       data-variant-price='{{ variant.price | money | remove: ".00" }}'
                       data-variant-inventory-quantity='{{ variant.inventory_quantity }}'
-                      data-variant-inventory-policy='{{ variant.inventory_policy }}'
-                      data-variant-inventory-management='{{ variant.inventory_management }}'
                       data-product-title='{{ _product.title }}'
-                      {% if variant.available and hasPreorderTag or variant.available and variant_preorder %}data-variant-preorder='true'{% endif %}>
+                      {% if variant.available and hasPreorderTag or variant.available and variant_preorder %}data-selected-variant-preorder='true'{% endif %}>
                 {{ variant.title }}
               </li>
               {%- assign has_selected_variant_id = true -%}
@@ -80,10 +73,8 @@
                   data-variant-available="{{ current_bundle_variant.available }}"
                   data-variant-price='{{ current_bundle_variant.price | money | remove: ".00" }}'
                   data-variant-inventory-quantity='{{ current_bundle_variant.inventory_quantity }}'
-                  data-variant-inventory-policy='{{ current_bundle_variant.inventory_policy }}'
-                  data-variant-inventory-management='{{ current_bundle_variant.inventory_management }}'
                   data-product-title='{{ _product.title }}'
-                  {% if current_bundle_variant.available and hasPreorderTag or current_bundle_variant.available and variant_preorder %}data-variant-preorder='true'{% endif %}>
+                  {% if current_bundle_variant.available and hasPreorderTag or current_bundle_variant.available and variant_preorder %}data-selected-variant-preorder='true'{% endif %}>
             {{ current_bundle_variant.title }}
           </li>
         {% endunless %}
@@ -92,6 +83,26 @@
       {%- endif -%}
 
     {% endfor %}
+  </ul>
+{% else %}
+  <ul class="bundle-products is-hidden js-bundle-variant">
+    {%- assign variant_preorder = current_variant.metafields.my_fields.preorder -%}
+
+    {%- if variant_preorder -%}
+      {%- assign variantHasPreorder = true -%}
+    {%- endif -%}
+
+    <li
+            id='{{ current_variant.id }}'
+            value="{{ current_variant.id }}"
+            {% if current_variant.available %}class="js-select"{% endif %}
+            data-variant-available="{{ current_variant.available }}"
+            data-variant-price='{{ current_variant.price | money | remove: ".00" }}'
+            data-variant-inventory-quantity='{{ current_variant.inventory_quantity }}'
+            data-product-title='{{ product.title }}'
+            {% if current_variant.available and hasPreorderTag or current_variant.available and variant_preorder %}data-selected-variant-preorder='true'{% endif %}>
+      {{ variant.title }}
+    </li>
   </ul>
 {% endif %}
 
@@ -105,10 +116,6 @@
           Add to Cart
         {% endif %}
       </span>
-      {%- comment -%}
-        <span> | </span>
-        <span data-selected-var-price>{{ current_variant.price | money }}</span>
-      {%- endcomment -%}
 
       {%- assign disableVal = false -%}
     {% else %}

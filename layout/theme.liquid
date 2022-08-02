@@ -96,7 +96,9 @@
       <script src="{{ 'collection.js' | asset_url }}" defer='defer'></script>
     {%- endif -%}
 
-    <script src="{{ 'index.js' | asset_url }}" defer='defer'></script>
+    {%- comment -%}
+      <script src="{{ 'index.js' | asset_url }}" defer='defer'></script>
+    {%- endcomment -%}
     <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
 
     {% include 'klaviyo' %}

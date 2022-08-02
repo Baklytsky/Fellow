@@ -34,7 +34,7 @@
 {%- endif -%}
 
 
-<div class="bundle-product__option-group" style="order: {{ order }}; {% if option_name == 'Title' %}display: none;{% endif %}" >
+<div class="pdp__options-item bundle-product__option-group" style="order: {{ order }}; {% if option_name == 'Title' %}display: none;{% endif %}" >
     <label class="block" data-option-label="{{ option_name }}">
       <span class="option-title block"><strong>{{ option_name }}: </strong><span class="option-title-value">{{ options_array | first }}</span></span>
     </label>
@@ -43,11 +43,9 @@
         {%- assign option_value = item -%}
         {%- if item contains ':' -%}
           {%- assign option_value = item | split: ':' | last | strip -%}
-        {%- elsif item contains 'Upgraded SSP MP Brew Burrs' -%}
-         {% comment %}{%- assign option_value = item | split: '(+ $186)' | first | strip -%}{% endcomment %}
         {%- endif -%}
         <div class="radio-group bundle-radio-group f" data-option-{{ option_name | handleize }}>
-          <label class="bundle-radio" for="{{ option_value | handleize | append: '-' | append: uniq_id  }}">
+          <label class="radio bundle-radio" for="{{ option_value | handleize | append: '-' | append: uniq_id  }}">
             <span class="u-sr-only">{{ option_value }}</span>
             <input id="{{ option_value | handleize | append: '-' | append: uniq_id }}"
                    type="radio"

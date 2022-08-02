@@ -156,9 +156,6 @@
 
   <div id="ProductQuickView" data-product-id="{{ product.id }}">
     {% assign current_variant = product.selected_or_first_available_variant %}
-    {% if product.metafields.custom_fields["desktop_masthead_image"] or product.metafields.custom_fields["mobile_masthead_image"] != blank %}
-      {%- assign masthead_exists = true -%}
-    {% endif %}
     <div class='pdpMain no-gutters'>
       <div class='pdpQuickView__gallery'>
 

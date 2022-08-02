@@ -1,5 +1,13 @@
 var scrollPosition = 0;
 
+theme.changeBtnState = function (btn, state, btnInner) {
+  if (!btn) return
+    (state === 'active')
+        ? btn.removeAttribute('disabled')
+        : btn.setAttribute('disabled', 'disabled')
+  if (btnInner) btn.innerHTML = btnInner
+}
+
 theme.setAttributes = function (el, attrObj) {
   Object.keys(attrObj).forEach(key => el.setAttribute(key, attrObj[key]));
 }
@@ -667,9 +675,6 @@ theme.pdpMain = function () {
            } else {
              $productUpsell.html('');
            }
-
-
-
         }
       });
     }
@@ -677,186 +682,6 @@ theme.pdpMain = function () {
     if (variantId && changeMediaContent) {
       changeMedia()
       theme.variantPreOrderCheck(variantId)
-    }
-
-        // ======================================== Neels code starts here ========================================
-    var selectedColor = $('.pdp__options-main [data-option-label="Color"] [data-option-current]').text();
-    if ($('div[data-index]').length > 2) {
-      var selectedSize = $('.pdp__options-main [data-option-label="Size"] [data-option-current]').text();
-      var selectedQuantity = $('.pdp__options-main [data-option-label="Quantity"] [data-option-current]').text();
-      var all_colors = [];
-      var all_sizes = [];
-      var all_quantities = [];
-
-      // Enable all sizes and return to default styling now that a new variant option has been selected
-      $('input[name^="Color"]').each(function(){
-        var colorhandle = theme.handleize($(this).attr('title'));
-        if (colorhandle) {
-          $('#' + colorhandle).removeAttr('disabled','disabled');
-          $('div[data-color^="' + colorhandle + '"]').css('opacity','');
-      	}
-      });
-
-      // Enable all sizes and return to default styling now that a new variant option has been selected
-      $('input[name^="Size"]').each(function(){
-        var sizehandle = theme.handleize($(this).attr('title'));
-        $('#' + sizehandle).removeAttr('disabled','disabled');
-        $('div[data-size^="' + sizehandle + '"]').css('text-decoration','');
-        $('div[data-size^="' + sizehandle + '"]').css('color','');
-      });
-
-      // Enable all quantities and return to default styling now that a new variant option has been selected
-      $('input[name^="Quantity"]').each(function(){
-        var quantityhandle = theme.handleize($(this).attr('title'));
-        $('#' + quantityhandle).removeAttr('disabled','disabled');
-        $('div[data-quantity^="' + quantityhandle + '"]').css('color','');
-        $('div[data-quantity^="' + quantityhandle + '"]').css('text-decoration','');
-      });
-
-      // Add all colors to the all_colors array list
-      $('span[data-color]').each(function(){
-        if (all_colors.indexOf($(this).data('color')) === -1) {
-          all_colors.push($(this).data('color'));
-        }
-      });
-      // Add all sizes to the all_sizes array list
-      $('span[data-size]').each(function(){
-        if (all_sizes.indexOf($(this).data('size')) === -1) {
-          all_sizes.push($(this).data('size'));
-        }
-      });
-      // Add all quantities to the all_quantities array list
-      $('span[data-quantity]').each(function(){
-        if (all_quantities.indexOf($(this).data('quantity')) === -1) {
-          all_quantities.push($(this).data('quantity'));
-        }
-      });
-      // Create hasQuantities variable if the quantities array is populated, else we know the product only has color and size options
-      if (all_quantities.length){
-        var hasQuantities = true;
-      }
-
-      // Loop all variants of the selected product
-      for (i=0; i<json_product.variants.length; i++) {
-        var variant = json_product.variants[i];
-        var color = variant.option1;
-        // If the color option contains the string "Limited Edition:" we need to strip this
-        if (color.indexOf(":") > -1) {
-          color = color.split(':')[1].trim();
-        }
-        var size  = variant.option2;
-        var quantity  = variant.option3;
-
-        // Check if the product has 3 options of color, size and quantity
-        if (hasQuantities){
-          // Check if the color and size selected by the customer is the current loop index color and size values
-          if (color.indexOf(selectedColor) >= 0 && size.indexOf(selectedSize) >= 0) {
-            if (all_quantities.length && all_quantities.indexOf(quantity) !== -1) {
-              const index = all_quantities.indexOf(quantity);
-              if (index > -1) {
-                all_quantities.splice(index, 1);
-              }
-            }
-          }
-          // Check if the color and quantity selected by the customer is the current loop index color and quantity values
-          if (color.indexOf(selectedColor) >= 0 && quantity.indexOf(selectedQuantity) >= 0) {
-            if (all_sizes.indexOf(size) !== -1) {
-              const index = all_sizes.indexOf(size);
-              if (index > -1) {
-                all_sizes.splice(index, 1);
-              }
-            }
-          }
-          // Check if the size and quantity selected by the customer is the current loop index size and quantity values
-          if (size.indexOf(selectedSize) >= 0 && quantity.indexOf(selectedQuantity) >= 0) {
-            if (all_colors.indexOf(color) !== -1) {
-              const index = all_colors.indexOf(color);
-              if (index > -1) {
-                all_colors.splice(index, 1);
-              }
-            }
-          }
-        }
-        // Product only has 2 options of color and size
-        else {
-          // Check if the color selected by the customer is the current loop index color
-          if (color.indexOf(selectedColor) >= 0) {
-            // Check if the current variant size exists in the all_sizes array and if so, remove it from the array
-            if (all_sizes.indexOf(size) !== -1) {
-              const index = all_sizes.indexOf(size);
-              if (index > -1) {
-                all_sizes.splice(index, 1);
-              }
-            }
-          }
-          // Check if the size selected by the customer is the current loop index size
-          if (size.indexOf(selectedSize) >= 0) {
-            // Check if the current variant color exists in the all_colors array and if so, remove it from the array
-            if (all_colors.indexOf(color) !== -1) {
-              const index = all_colors.indexOf(color);
-              if (index > -1) {
-                all_colors.splice(index, 1);
-              }
-            }
-          }
-        }
-      }
-
-      // Check if there are any colors left in the all_colors array and if so, disable these color buttons as they are unavailable colors for the selected variant
-      if (is_size_selected){
-        if (all_colors.length) {
-          /// Loop all the color input elements
-          $('input[name^="Color"]').each(function(){
-            var colorvar = $(this).attr('title');
-            var colorhandle = theme.handleize(colorvar);
-            // If the color element is found in the all_colors list we need to disable this element as it is not an available color option
-            if (all_colors.indexOf(colorvar) > -1) {
-              $('#' + colorhandle).attr('disabled','disabled');
-              $('div[data-color^="' + colorhandle + '"]').css('opacity','0.2');
-            }
-          });
-        }
-
-        // Check if there are any quantities left in the all_quantities array and if so, disable these quantity buttons as they are unavailable quantities for the selected variant color
-        if (all_quantities.length) {
-          $('input[name^="Quantity"]').each(function(){
-            var quantityvar = $(this).attr('title');
-            var quantityhandle = $(this).data('value-handle');
-            // If the quantity element is found in the all_quantities list we need to disable this element as it is not an available quantity option
-            if (all_quantities.indexOf(quantityvar) > -1) {
-              $('#' + quantityhandle).attr('disabled','disabled');
-              $('div[data-quantity^="' + quantityhandle + '"]').css('color','#ABABAB');
-              $('div[data-quantity^="' + quantityhandle + '"]').css('text-decoration','line-through');
-            }
-          });
-        }
-      }
-
-      // Check if there are any sizes left in the all_sizes array and if so, disable these size buttons as they are unavailable sizes for the selected variant color
-      if (all_sizes.length) {
-        $('input[name^="Size"]').each(function(){
-          var sizevar = $(this).attr('title');
-          var sizehandle = $(this).data('value-handle');
-          // If the size element is found in the all_sizes list we need to disable this element as it is not an available size option
-          if (all_sizes.indexOf(sizevar) > -1) {
-            $('#' + sizehandle).attr('disabled','disabled');
-            $('div[data-size^="' + sizehandle + '"]').css('text-decoration','line-through');
-            $('div[data-size^="' + sizehandle + '"]').css('color','#ababab');
-          }
-        });
-      }
-    }
-    // ======================================== Neels code ends here ========================================
-
-
-    if ($('.option-group-title').length) {
-      var selectedColor = $('.pdp__options-main [data-option-label="Color"] [data-option-current]').text();
-      $('.option-group-title-value').html('')
-      $('.pdp__options-main [data-option-color] input').each(function () {
-        if ($(this).is(':checked')) {
-          $(this).parents('.option-groups__group').find('.option-group-title-value').html(selectedColor);
-        }
-      })
     }
   }
 
@@ -1964,16 +1789,29 @@ class quantityStepper extends HTMLElement {
 
     if (this.minusBtn) this.minusBtn.addEventListener('click', () => this.quantityStepper('minus'))
     if (this.plusBtn) this.plusBtn.addEventListener('click', () => this.quantityStepper('plus'))
+    this.quantityInput.addEventListener('change', () => this.quantityCheck())
   }
 
   quantityStepper(action) {
-    this.quantityInput.value = (action === 'minus') ? Number(this.quantityInput.value) - 1 : Number(this.quantityInput.value) + 1
-    if (this.singleStepper === 'true') {
-      this.minusBtn.setAttribute('disabled', 'disabled')
-      this.plusBtn.setAttribute('disabled', 'disabled')
-    }
+    this.quantityInput.value = (action === 'minus')
+        ? Number(this.quantityInput.value) - 1
+        : Number(this.quantityInput.value) + 1;
+    if (this.singleStepper === 'true') this.quantitySingle()
     const evt = new Event('change');
     this.quantityInput.dispatchEvent(evt)
+  }
+
+  quantitySingle() {
+    theme.changeBtnState(this.minusBtn, 'disabled')
+    theme.changeBtnState(this.plusBtn, 'disabled')
+  }
+
+  quantityCheck() {
+    const min = Number(this.quantityInput.min),
+          max = Number(this.quantityInput.max);
+    let val = Number(this.quantityInput.value);
+    if (max && (val >= max)) this.quantityInput.value = max
+    if (val <= min) this.quantityInput.value = min
   }
 }
 
@@ -2097,20 +1935,9 @@ class SlideToggle extends HTMLElement {
 customElements.define('slide-toggle', SlideToggle);
 // End Slide toggle
 
-class bundleMixCard extends HTMLElement {
+class PdpHelper extends HTMLElement {
   constructor() {
     super();
-    this.pdpContainer = this.closest('.pdpMain__container')
-    this.product = JSON.parse(this.querySelector('[type="application/json"]').textContent)
-    this.productVariants = this.product['variants']
-    this.select = this.querySelector('.select-wrapper select')
-    this.options = this.select.querySelectorAll('option')
-    this.radioGroups = Array.from(this.querySelectorAll('.bundle-product__option-group'));
-    this.radios = this.querySelectorAll('.bundle-radio')
-    this.atc = this.pdpContainer.querySelector('.js-pick-mix-add-to-cart')
-
-    this.onVariantChange()
-    this.addEventListener('change', () => this.onVariantChange())
   }
 
   getSelectedVariant(optionsArr) {
@@ -2129,21 +1956,25 @@ class bundleMixCard extends HTMLElement {
     });
   }
 
-  onVariantChange() {
-    this.selectedOptions = this.getOptions()
-    this.selectedVariant = this.getSelectedVariant(this.selectedOptions)
-    this.changeSelectedOption()
-    this.disableUnavailableVariants()
-    this.checkVariantTitle()
-    this.changeMedia()
-    this.toggleAddButton()
-    this.checkPrice()
+  changeSelectedOption() {
+    if (this.selectedVariant) {
+      this.select.removeAttribute('data-unavailable')
+      this.options.forEach(option => option.removeAttribute('selected'))
+      this.selectedOption = this.querySelector(`option[value='${this.selectedVariant.id}']`);
+      (this.selectedOption.getAttribute('data-variant-preorder'))
+          ? this.selectedOption.parentElement.setAttribute('data-selected-variant-preorder', 'true')
+          : this.selectedOption.parentElement.removeAttribute('data-selected-variant-preorder');
+      this.selectedOption.setAttribute('selected', 'selected')
+      this.select.setAttribute('value', this.selectedVariant.id)
+    } else {
+      this.select.setAttribute('data-unavailable', 'true')
+    }
   }
 
   disableUnavailableVariants() {
     this.radios.forEach((radio) => radio.classList.remove('unavailable'))
     for (let i = 0; i < this.selectedOptions.length; i++) {
-      const groupRadios = this.radioGroups[i].querySelectorAll('.bundle-radio input');
+      const groupRadios = this.radioGroups[i].querySelectorAll('.radio input');
       groupRadios.forEach(radio => {
         const options = [...this.selectedOptions]
         options.splice(i,1, radio.value)
@@ -2153,30 +1984,98 @@ class bundleMixCard extends HTMLElement {
   }
 
   checkVariantTitle() {
-    this.checkedOptions = this.querySelectorAll('input:checked')
+    this.optionTitles.forEach(title => title.innerHTML = '')
+    this.checkedOptions = this.form.querySelectorAll('input:checked')
     this.checkedOptions.forEach((option) => {
-      const optionGroup = option.closest('.bundle-product__option-group'),
-            optionGroupTitle = optionGroup.querySelector('.option-title-value');
-      optionGroupTitle.innerHTML = `${option.title}`
+      const optionGroup = option.closest('.option-groups__item'),
+          optionSingle = option.closest('.pdp__options-item'),
+          optionSelector = (optionGroup) ? optionGroup : optionSingle,
+          optionTitle = optionSelector.querySelector('.option-title-value');
+      if (optionTitle) optionTitle.innerHTML = `${option.title}`
     })
   }
+}
+customElements.define('pdp-helper', PdpHelper);
 
-  changeSelectedOption() {
-    if (this.selectedVariant) {
-      this.select.removeAttribute('data-unavailable')
-      this.options.forEach(option => option.removeAttribute('selected'))
-      this.selectedOption = this.querySelector(`option[value='${this.selectedVariant.id}']`);
-        (this.selectedOption.getAttribute('data-variant-preorder'))
-            ? this.selectedOption.parentElement.setAttribute('data-selected-variant-preorder', 'true')
-            : this.selectedOption.parentElement.removeAttribute('data-selected-variant-preorder');
-      this.selectedOption.setAttribute('selected', 'selected')
-      this.select.setAttribute('value', this.selectedVariant.id)
-    } else {
-      this.select.setAttribute('data-unavailable', 'true')
-    }
+class PdpMain extends PdpHelper {
+  constructor() {
+    super();
+    this.product = window.theme.product
+    this.productVariants = this.product['variants']
+    this.form = this.querySelector('.pdpForm')
+    this.optionTitles = this.form.querySelectorAll('.option-title-value')
+    this.quantity = this.form.querySelector('[name="quantity"]')
+    this.select = this.form.querySelector('.select-wrapper select')
+    this.options = this.select.querySelectorAll('option')
+    this.radioGroups = Array.from(this.form.querySelectorAll('[data-option-radio]'));
+    this.radios = this.form.querySelectorAll('.radio')
+    this.atc = this.form.querySelector('.js-add-to-cart')
+
+    this.onVariantChange()
+    this.addEventListener('change', () => this.onVariantChange())
+    this.atc.addEventListener('click', (e) => this.addToCart(e))
   }
 
-  changeMedia() {
+  onVariantChange() {
+    this.selectedOptions = this.getOptions()
+    this.selectedVariant = this.getSelectedVariant(this.selectedOptions)
+    this.changeUrl()
+    this.changeSelectedOption()
+    this.disableUnavailableVariants()
+    this.checkVariantTitle()
+    this.changeContent()
+  }
+
+  changeUrl() {
+    if (!this.selectedVariant) return;
+    window.history.replaceState({}, '', `${window.location.origin}/products/${this.product.handle}?variant=${this.selectedVariant.id}`);
+  }
+
+  changeContent() {
+
+  }
+
+  addToCart(e) {
+    e.preventDefault()
+    const bodyObj = {
+      id: this.selectedVariant.id,
+      quantity: this.quantity.value
+    }
+    console.log(e)
+  }
+}
+customElements.define('pdp-main', PdpMain);
+
+class bundleMixCard extends PdpHelper {
+  constructor() {
+    super();
+    this.pdpContainer = this.closest('.pdpMain__container')
+    this.product = JSON.parse(this.querySelector('[type="application/json"]').textContent)
+    this.productVariants = this.product['variants']
+    this.optionTitles = this.querySelectorAll('.option-title-value')
+    this.form = this
+    this.select = this.querySelector('.select-wrapper select')
+    this.options = this.select.querySelectorAll('option')
+    this.radioGroups = Array.from(this.querySelectorAll('.bundle-product__option-group'));
+    this.radios = this.querySelectorAll('.bundle-radio')
+    this.atc = this.pdpContainer.querySelector('.js-pick-mix-add-to-cart')
+
+    this.onCardVariantChange()
+    this.addEventListener('change', () => this.onCardVariantChange())
+  }
+
+  onCardVariantChange() {
+    this.selectedOptions = this.getOptions()
+    this.selectedVariant = this.getSelectedVariant(this.selectedOptions)
+    this.changeSelectedOption()
+    this.disableUnavailableVariants()
+    this.checkVariantTitle()
+    this.changeBundleMedia()
+    this.toggleAddButton()
+    this.checkBundlePrice()
+  }
+
+  changeBundleMedia() {
     if (!this.selectedVariant) return
     // Change PDP Main Gallery Image
     const mainImageId = this.selectedOption.getAttribute('data-variant-uniq_id'),
@@ -2221,7 +2120,7 @@ class bundleMixCard extends HTMLElement {
     this.atc.innerHTML = text
   }
 
-  checkPrice() {
+  checkBundlePrice() {
     let priceDiffSum = 0;
     const selectedMixVariants = this.pdpContainer.querySelectorAll('.js-bundle-variant option[selected]'),
           priceDiffArray = Array.from(selectedMixVariants).map((variant) => {
