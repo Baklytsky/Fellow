@@ -39,10 +39,10 @@
   {%- endif -%}
 {%- endfor -%}
 
-<div class='pdpMain__gallery x rel f'
+<pdp-gallery class='pdpMain__gallery x rel f'
      data-section-type="slick-slideshow"
      data-slick-config='{{- slick-thumbnail-config -}}'>
-  <pdp-thumbnails class='pdpMain__gallery-thumbnails jsSlickSlider' data-json="{{ selected_variant.id }}">
+  <div class='pdpMain__gallery-thumbnails jsSlickSlider' data-json="{{ selected_variant.id }}">
     {%- if selected_variant.image != blank or has_metafields_images -%}
       {%- if selected_variant.image != blank -%}
         <div class='pdpMain__gallery-thumbnails-item rel x current-thumbnail' data-variant-img='{{ selected_variant.id }}'>
@@ -80,8 +80,8 @@
         </div>
       {% endfor %}
     {%- endif -%}
-  </pdp-thumbnails>
-  <pdp-gallery class='pdpMain__gallery-wrapper x y block rel'
+  </div>
+  <div class='pdpMain__gallery-wrapper x y block rel'
        data-slick-config='{{- slick-pdp-mobile-config -}}'>
     {%- if selected_variant.image != blank or has_metafields_images -%}
       {%- if selected_variant.image != blank -%}
@@ -148,5 +148,5 @@
         </div>
       {% endfor %}
     {%- endif -%}
-  </pdp-gallery>
-</div>
+  </div>
+</pdp-gallery>

@@ -2,19 +2,7 @@
 {% comment %} Always include product-options, product.js:20 reads from it for ATC {% endcomment %}
 {% include 'product-sticky-options' %}
 
-{% comment %}
-Uncomment to include
-<div class='f aic py1'>
-  <span data-selected-var-price>{{ current_variant.price | money }}</span>
-  <s data-compare-price style='display: none'>{{ current_variant.compare_at_price | money }}</s>
-</div>
-{% endcomment %}
-
-{% if template contains 'gift_card' %}
-  <div class='f fdc jcb' id='atc-sticky-wrapper'>
-{% else %}
-  <div class='f fdr jcb' id='atc-sticky-wrapper'>
-{% endif %}
+  <div class='f {% if template contains 'gift_card' %}fdc{% else %}fdr{% endif %} jcb' id='atc-sticky-wrapper'>
     {%- assign hasPreorderTag = false -%}
     {%- if product.tags contains 'preorder' -%}
       {%- assign hasPreorderTag = true -%}
@@ -28,11 +16,6 @@ Uncomment to include
           Add to Cart
         {% endif %}
       </span>
-      {%- comment -%}
-        <span> | </span>
-        <span data-selected-var-price>{{ current_variant.price | money }}</span>
-      {%- endcomment -%}
-
       {%- assign disableVal = false -%}
     {% else %}
     <span data-atc-copy class="js-atc-copy">
@@ -66,14 +49,3 @@ Uncomment to include
       %}
     </div>
 </div>
-  <div class='none' data-pay-btn>
-    <div class='py1'>
-      {{ form | payment_button }}
-    </div>
-  </div>
-    {%- comment -%}
-      <div class='is-hidden' data-bis>
-        <button class='button cart__button klaviyo-bis-trigger'>Out of Stock | Notify Me</button>
-      </div>
-    {%- endcomment -%}
-

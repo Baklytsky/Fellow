@@ -1,7 +1,8 @@
-<div class='radio' data-copy-for='{{ label | handleize }}'>
+<label class='radio {% if checked %}checked{% endif %}' for='{{ label | handleize }}'>
   <span class='u-sr-only'>{{ value | escape }}</span>
-  <div class="radio__title f aic jcc" data-{{ name }}='{{ label | handleize }}'><span>{{label}}</span></div>
-</div>
+  <input type="hidden" value="{{ label | handleize }}">
+  <span class="radio__title f aic jcc" data-{{ name }}='{{ label | handleize }}'><span>{{label}}</span></span>
+</label>
 
 {% assign label = blank %}
 {% assign name = blank %}

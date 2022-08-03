@@ -1,15 +1,15 @@
 <div class="pdpInfo">
   {%- if product.description != blank -%}
     <div class="pdpInfo-item dropdown">
-      <div class="dropdownHeader" data-dropdown>
+      <slide-toggle class="dropdownHeader active" data-slide-toggle="product-description">
         <h3 class="dropdownHeader-title">
           Overview
         </h3>
         <div class="dropdownHeader-icon dropdownHeader-icon--rotate">
           {% render 'icon' with 'dropdown' %}
         </div>
-      </div>
-      <div class="dropdownContent" data-dropdown-list>
+      </slide-toggle>
+      <div class="dropdownContent active" data-slide-target="product-description">
         <div class="dropdownContent--animate-block dropdownContent--animate-block-visible">
           <p>{{ product.description }}</p>
         </div>
@@ -19,19 +19,20 @@
   {% if product.metafields.custom_fields["product_info_new"] != blank %}
     {% for item in product.metafields.custom_fields["product_info_new"] %}
       {%- if item["product_info_heading_new"] != blank and item["product_info_content_new"] != blank -%}
+        {%- assign handle = item["product_info_heading_new"] | handleize -%}
         <div class="pdpInfo-item dropdown">
-          <div class="dropdownHeader" data-dropdown>
+          <slide-toggle class="dropdownHeader {% if product.description == blank and forloop.first %}active{% endif %}"
+                        data-slide-toggle="{{ handle }}">
             <h3 class="dropdownHeader-title">
               {{ item["product_info_heading_new"]}}
             </h3>
-            <div class="dropdownHeader-icon {% if product.description == blank and forloop.first %} dropdownHeader-icon--rotate {% endif %}">
+            <div class="dropdownHeader-icon dropdownHeader-icon--rotate">
               {% render 'icon' with 'dropdown' %}
             </div>
-          </div>
-          <div class="dropdownContent" data-dropdown-list
-               {% if product.description == blank and forloop.first %}style="display: block;"
-               {% else %}style="display: none;"{% endif %}>
-            <div class="dropdownContent--animate-block {% if product.description == blank and forloop.first %} dropdownContent--animate-block-visible {% endif %}">
+          </slide-toggle>
+          <div class="dropdownContent"
+               data-slide-target="{{ handle }}">
+            <div class="dropdownContent--animate-block dropdownContent--animate-block-visible">
               <p>{{ item["product_info_content_new"] }}</p>
             </div>
           </div>

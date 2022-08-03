@@ -3128,6 +3128,10 @@ h2.pdpCopy__header-price,
   .dropdownHeader-icon--rotate {
     transform: rotate(180deg);
   }
+
+  .dropdownHeader.active .dropdownHeader-icon--rotate {
+    transform: rotate(0);
+  }
 }
 
 .pdpInfo {
@@ -3379,17 +3383,6 @@ h2.pdpCopy__header-price,
     }
   }
 
-  [data-option-color] .radio,
-  [data-option-material] .radio {
-    &:not(:last-child) {
-      margin-right: 16px;
-
-      @media screen and (min-width: $large_desk + 1px) and (max-width: $larger_desk) {
-        margin-right: 10px;
-      }
-    }
-  }
-
   .cart__button {
     font-size: 16px;
   }
@@ -3398,6 +3391,7 @@ h2.pdpCopy__header-price,
     margin: 0;
     min-width: 218px;
     pointer-events: none;
+    border: 2px solid #ababab;
 
     @media screen and (max-width: $large_desk) {
       pointer-events: auto;
@@ -3417,6 +3411,10 @@ h2.pdpCopy__header-price,
       display: block;
     }
   }
+}
+
+.pdpStickyBar.show {
+  display: block;
 }
 
 .pdp__options {
@@ -3495,13 +3493,6 @@ h2.pdpCopy__header-price,
     transition: border .4s, border-radius .4s .4s;
   }
 
-  .pdp__sticky-options-label[data-option-label="Size"] .option-title.is-open {
-    border-color: #000;
-    border-radius: 5px 5px 0 0;
-    border-bottom: none;
-    transition: border .2s, border-radius .2s;
-  }
-
   .pdp__sticky-options-label[data-option-label="Size"] .option-title strong {
     overflow: hidden;
     font-weight: 400;
@@ -3571,11 +3562,11 @@ h2.pdpCopy__header-price,
         transition: all .2s linear;
       }
     }
+  }
 
-    .group-open {
-      svg {
-        transform: rotate(180deg);
-      }
+  .pdp__sticky-options-item.active {
+    svg {
+      transform: rotate(180deg);
     }
   }
 
@@ -3603,13 +3594,14 @@ h2.pdpCopy__header-price,
   .option-groups-size {
     display: none;
     position: absolute;
-    top: calc(100% - 2px);
+    top: calc(100% + 2px);
     left: 0;
     width: 100%;
     max-width: 127px;
     border: 1px solid #000;
-    border-top: none;
-    border-radius: 0 0 5px 5px;
+    border-radius: 5px;
+    background-color: #fff;
+    overflow: hidden;
 
     .radio:last-child {
       margin-bottom: 0;
