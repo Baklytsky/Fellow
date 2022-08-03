@@ -1568,7 +1568,7 @@ https://flickity.metafizzy.co
 }
 
 [data-color=slate-grey] {
-  color: #5a5a69
+  color: #848484
 }
 
 [data-color=smoke-grey],
@@ -1748,6 +1748,13 @@ https://flickity.metafizzy.co
 [data-color=queer-kinship-is-a-love-spell]:after,
 [data-material=queer-kinship-is-a-love-spell]:after {
   color: #EDABC0
+}
+
+[data-color=really-red] {
+  color: #9C182F;
+}
+[data-color=peri-twinkle] {
+  color: #C6B4E3;
 }
 
 html {

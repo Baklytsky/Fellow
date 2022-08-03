@@ -328,8 +328,8 @@
           "menu_right": "new-right-menu",
           "mobile_menu": "",
           "show_announcement": true,
-          "announcement_text": "Discover exclusive and limited new coffees. <u>Join Fellow Drops -&gt; <\/u>",
-          "announcement_link": "https:\/\/drops.fellowproducts.com\/",
+          "announcement_text": "Free US shipping on orders over $99 <u id=\"freeShipPopup\" class=\"ml05\" style=\"cursor:pointer;\"> Learn more<\/u>",
+          "announcement_link": "",
           "enable_timer": false,
           "end_date": "Sep 30, 2021 07:30:00 GMT-08:00"
         }
@@ -365,6 +365,7 @@
         "blocks": {
           "1f457594-c59c-4edd-800a-a9f7662f319e": {
             "type": "splitSlide",
+            "disabled": true,
             "settings": {
               "splitSlide__layout": "right",
               "heroSlide": "shopify:\/\/shop_images\/HeroImage_Award_Winning_Mobile__2x_bde01ab1-e5d9-41d4-b039-10c45b3ee981.png",
@@ -377,6 +378,46 @@
               "heroSlide__ctaURL": "shopify:\/\/collections\/award-winners",
               "heroSlide__ctaCopy": "Shop Award Winners",
               "heroSlide__ctaColor": "white",
+              "heroSlide__ctaURL2": "",
+              "heroSlide__ctaCopy2": "",
+              "heroSlide__ctaColor2": "black",
+              "heroSlide__ctaSubtext": ""
+            }
+          },
+          "58ee7397-6079-412a-9acd-d453a0cf281c": {
+            "type": "splitSlide",
+            "settings": {
+              "splitSlide__layout": "right",
+              "heroSlide": "shopify:\/\/shop_images\/New_Carter_Colors_HeroImage_Desktop__2x_a7d5c3f6-ec87-4ef3-bc19-9154f442b81d.png",
+              "desktopAlignment": "center",
+              "mobileAlignment": "center",
+              "heroSlide__header": "Breaking Hues",
+              "heroSlide__subheader": "The new Carter collection has arrived. New colors, new lids, new ways to move.",
+              "subSlide__bgColor": "#000000",
+              "subSlide__textColor": "#FFFFFF",
+              "heroSlide__ctaURL": "shopify:\/\/collections\/serve",
+              "heroSlide__ctaCopy": "Shop Travel Mugs",
+              "heroSlide__ctaColor": "white",
+              "heroSlide__ctaURL2": "shopify:\/\/pages\/carter-mugs",
+              "heroSlide__ctaCopy2": "Choose Your Carter Mug",
+              "heroSlide__ctaColor2": "white",
+              "heroSlide__ctaSubtext": ""
+            }
+          },
+          "91049687-67b8-4bdc-8f37-c74f97e41d00": {
+            "type": "splitSlide",
+            "settings": {
+              "splitSlide__layout": "right",
+              "heroSlide": "shopify:\/\/shop_images\/HeroImage_Summer_Brew_Desktop__2x_338677d1-205e-4b35-b26c-560f9669aa15.jpg",
+              "desktopAlignment": "center",
+              "mobileAlignment": "center",
+              "heroSlide__header": "It’s a hot one...",
+              "heroSlide__subheader": "Put your coffee plans on ice with our summer brewing essentials.",
+              "subSlide__bgColor": "#ffcc4e",
+              "subSlide__textColor": "#231f20",
+              "heroSlide__ctaURL": "shopify:\/\/collections\/summer-brew",
+              "heroSlide__ctaCopy": "Shop Summer Brew",
+              "heroSlide__ctaColor": "black",
               "heroSlide__ctaURL2": "",
               "heroSlide__ctaCopy2": "",
               "heroSlide__ctaColor2": "black",
@@ -403,35 +444,15 @@
               "heroSlide__ctaSubtext": ""
             }
           },
-          "91049687-67b8-4bdc-8f37-c74f97e41d00": {
-            "type": "splitSlide",
-            "settings": {
-              "splitSlide__layout": "right",
-              "heroSlide": "shopify:\/\/shop_images\/HeroImage_Summer_Brew_Desktop__2x_338677d1-205e-4b35-b26c-560f9669aa15.jpg",
-              "desktopAlignment": "center",
-              "mobileAlignment": "center",
-              "heroSlide__header": "The Summer Collection",
-              "heroSlide__subheader": "Precision brewing gear for putting all your coffee plans on ice.",
-              "subSlide__bgColor": "#ffcc4e",
-              "subSlide__textColor": "#231f20",
-              "heroSlide__ctaURL": "shopify:\/\/collections\/summer-brew",
-              "heroSlide__ctaCopy": "Shop Summer Essentials",
-              "heroSlide__ctaColor": "black",
-              "heroSlide__ctaURL2": "",
-              "heroSlide__ctaCopy2": "",
-              "heroSlide__ctaColor2": "black",
-              "heroSlide__ctaSubtext": ""
-            }
-          },
           "e6275e05-4fc2-4478-85db-37e4aceedf86": {
             "type": "splitSlide",
             "disabled": true,
             "settings": {
               "splitSlide__layout": "right",
-              "heroSlide": "shopify:\/\/shop_images\/HeroImage_WormyWeek_Mobile__2x_3164d789-1d61-4f20-ad8a-7dfa13cd2f04.jpg",
+              "heroSlide": "shopify:\/\/shop_images\/New_Carter_Colors_HeroImage_Desktop__2x_a7d5c3f6-ec87-4ef3-bc19-9154f442b81d.png",
               "desktopAlignment": "center",
               "mobileAlignment": "center",
-              "heroSlide__header": "Are You The Next Wormy World Champion?",
+              "heroSlide__header": "Breaking Hues",
               "heroSlide__subheader": "Play the video game hidden in all our electric kettles for the chance at glory (and prizes).",
               "subSlide__bgColor": "#000000",
               "subSlide__textColor": "#FFFFFF",
@@ -440,27 +461,6 @@
               "heroSlide__ctaColor": "white",
               "heroSlide__ctaURL2": "shopify:\/\/collections\/choose-your-controller",
               "heroSlide__ctaCopy2": "Choose Your Controller",
-              "heroSlide__ctaColor2": "white",
-              "heroSlide__ctaSubtext": ""
-            }
-          },
-          "58ee7397-6079-412a-9acd-d453a0cf281c": {
-            "type": "splitSlide",
-            "disabled": true,
-            "settings": {
-              "splitSlide__layout": "right",
-              "heroSlide": "shopify:\/\/shop_images\/Carter-SLL-GIF-3IMG-Homepage_1.gif",
-              "desktopAlignment": "center",
-              "mobileAlignment": "center",
-              "heroSlide__header": "Meet The New Mug In Town",
-              "heroSlide__subheader": "A new Carter for quick sipping, secure stowing, and uncompromised coffee on the go.",
-              "subSlide__bgColor": "#000000",
-              "subSlide__textColor": "#FFFFFF",
-              "heroSlide__ctaURL": "shopify:\/\/products\/carter-move-mug-slide-lock-lid",
-              "heroSlide__ctaCopy": "Shop Carter + Slide-Lock Lid",
-              "heroSlide__ctaColor": "white",
-              "heroSlide__ctaURL2": "shopify:\/\/pages\/carter-mugs",
-              "heroSlide__ctaCopy2": "Choose Your Carter Mug",
               "heroSlide__ctaColor2": "white",
               "heroSlide__ctaSubtext": ""
             }
@@ -489,10 +489,10 @@
         },
         "block_order": [
           "1f457594-c59c-4edd-800a-a9f7662f319e",
-          "c15c0d5c-f86c-436e-95b6-2f10cb6c8b20",
-          "91049687-67b8-4bdc-8f37-c74f97e41d00",
-          "e6275e05-4fc2-4478-85db-37e4aceedf86",
           "58ee7397-6079-412a-9acd-d453a0cf281c",
+          "91049687-67b8-4bdc-8f37-c74f97e41d00",
+          "c15c0d5c-f86c-436e-95b6-2f10cb6c8b20",
+          "e6275e05-4fc2-4478-85db-37e4aceedf86",
           "3e0796bc-698b-4618-80b6-261185f9fb1a"
         ],
         "settings": {
@@ -657,6 +657,7 @@
       },
       "1630052841314f69dd": {
         "type": "hp-iwt",
+        "disabled": true,
         "settings": {
           "enable_section": true,
           "image": "shopify:\/\/shop_images\/HeroImage_WormyWeek_Desktop__2x_2de8ede4-faee-47a0-9507-23802205642a.jpg",
@@ -923,22 +924,22 @@
       },
       "164970109872b4e7fa": {
         "type": "hp-iwt",
-        "disabled": true,
         "settings": {
           "enable_section": true,
-          "image": "shopify:\/\/shop_images\/Hero_Module_Ode_Burr.png",
-          "layout": "right",
-          "header": "Hit the grind running",
-          "description": "<p>Two burr choices, no wrong answers. Pick the best to suit your needs.<\/p>",
+          "image": "shopify:\/\/shop_images\/New_Carter_Colors_Module_2__2x_87f6ea13-bd07-4520-ae21-f5c653731ce5.png",
+          "layout": "left",
+          "header": "Cupping Season",
+          "description": "<p>Browse ridiculously useful gifts for all your summer weddings.<\/p>",
           "bg_color": "rgba(0,0,0,0)",
           "text_color": "",
-          "cta_url": "shopify:\/\/products\/ode-brew-grinder",
-          "cta_copy": "Shop Ode Brew Grinder",
+          "cta_url": "shopify:\/\/collections\/wedding-gifts",
+          "cta_copy": "Shop Wedding Gifts",
           "cta_color": "btn--dark"
         }
       },
       "16497034024471c77e": {
         "type": "hp-iwt",
+        "disabled": true,
         "settings": {
           "enable_section": true,
           "image": "shopify:\/\/shop_images\/HP_Module_1_Award_Winning__2x_2ac07ba0-b88f-4868-a0f6-a55686423143.png",
