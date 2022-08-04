@@ -422,11 +422,6 @@ theme.pdpMain = function () {
     topSpacer: document.getElementById('MainHeader').offsetHeight + 24
   });
 
-  function pdpBar() {
-    const pdpBarConfig = $.parseJSON($('.pdpBar').attr('data-slick-config'));
-    theme.checkSlickResponse('.pdpBar__wrapper', pdpBarConfig, 992, true)
-  }
-
   function pdpMediaProof() {
     var $pdpMediaProofWrapper = $('.pdpMediaProof .jsSlickSlider'),
         pdpGalleryConfig = $.parseJSON($('.pdpMediaProof').attr('data-slick-config'));
@@ -519,7 +514,6 @@ theme.pdpMain = function () {
     })
   }
 
-  if ($('.pdpBar__wrapper').length) {pdpBar();}
   if ($('.upsell-product__wrapper').length) {theme.pdpUpsellProduct();}
   if ($('.pdpRecCollection').length) {theme.pdpRecCollection();}
   if ($('.pdpMediaProof').length) {pdpMediaProof();}
@@ -1662,6 +1656,20 @@ class SlideToggle extends HTMLElement {
 
 customElements.define('slide-toggle', SlideToggle);
 // End Slide toggle
+
+class PdpBar extends HTMLElement {
+  constructor() {
+    super();
+    this.init();
+  }
+
+  init() {
+    const config = JSON.parse(this.getAttribute('data-slick-config'))
+    theme.checkSlickResponse('.pdpBar__wrapper', config, 992, true)
+  }
+}
+
+customElements.define('pdp-bar', PdpBar);
 
 class PdpHelper extends HTMLElement {
   constructor() {
