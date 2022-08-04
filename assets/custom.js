@@ -8,6 +8,11 @@ theme.changeBtnState = function (btn, state, btnInner) {
   if (btnInner) btn.innerHTML = btnInner
 }
 
+theme.isHidden = function (el) {
+  const style = window.getComputedStyle(el);
+  return (style.display === 'none' || style.visibility === 'hidden')
+}
+
 theme.setAttributes = function (el, attrObj) {
   Object.keys(attrObj).forEach(key => el.setAttribute(key, attrObj[key]));
 }
@@ -1731,7 +1736,9 @@ class PdpStickyBar extends PdpHelper {
     this.selectSizeBtn = this.querySelector('.cart__button--select-size')
 
     document.addEventListener('scroll', () => this.showStickyBar())
-    this.selectSizeBtn.addEventListener('click', () => this.scrollToTop())
+    if (this.selectSizeBtn) {
+      this.selectSizeBtn.addEventListener('click', () => this.scrollToTop())
+    }
   }
 
   stickyBarVariantChange(selectedOptions) {
@@ -1784,6 +1791,7 @@ class PdpMain extends PdpHelper {
     this.radios = this.form.querySelectorAll('.radio')
     this.atc = this.form.querySelector('.js-add-to-cart')
     this.stickyAtc = this.querySelector('#pdp-sticky-atc')
+    this.klaviyoOOS = this.querySelector('.klaviyo-bis-trigger')
     this.stickyBar = this.querySelector('pdp-sticky-bar')
     this.personalizeBtn = this.form.querySelector('.pdpDetails__personalize')
 
@@ -1794,7 +1802,9 @@ class PdpMain extends PdpHelper {
       this.changeUrl()
     })
     this.atc.addEventListener('click', (e) => this.addToCart(e))
-    if (this.stickyAtc) this.stickyAtc.addEventListener('click', (e) => this.addToCart(e))
+    if (this.stickyAtc) this.stickyAtc.addEventListener('click', (e) => {
+      theme.isHidden(this.atc) ? this.klaviyoOOS.click() : this.addToCart(e)
+    })
     if (this.sizeOptions.length) {
       this.sizeOptions.forEach(radio => radio.addEventListener('click', () => this.checkSizeSelected()))
     }
@@ -1846,7 +1856,13 @@ class PdpMain extends PdpHelper {
 
   toggleAddButton() {
     const preOrder = this.select.hasAttribute('data-selected-variant-preorder'),
-          buttonsArr = [this.atc, this.stickyAtc]
+          buttonsArr = [this.atc, this.stickyAtc];
+
+    if (theme.isHidden(this.atc)) {
+      this.atc.classList.remove('is-hidden')
+      this.klaviyoOOS.parentElement.classList.add('is-hidden')
+    }
+
     buttonsArr.forEach(btn => {
       if (!btn) return
       if (!this.selectedVariant) {
@@ -1855,10 +1871,17 @@ class PdpMain extends PdpHelper {
         theme.changeBtnState(btn, 'active', 'Pre-order')
       } else if (!this.selectedVariant.available) {
         theme.changeBtnState(btn, 'disabled', 'Out Of Stock')
+        this.outOfStock()
       }  else {
         theme.changeBtnState(btn, 'active', 'Add to Cart')
       }
     })
+  }
+
+  outOfStock() {
+    if (this.stickyAtc) this.stickyAtc.removeAttribute('disabled')
+    this.atc.classList.add('is-hidden')
+    this.klaviyoOOS.parentElement.classList.remove('is-hidden')
   }
 
   addToCart(e) {
