@@ -10,6 +10,14 @@
           <h3 class="collection__product-title">
             <a href="{{ url }}">{{ title }}</a>
           </h3>
+          {{#unless subCollection }}
+          <div class="productCard_ratings f fdr aie rel"
+               {{#unless reviews_count }}style="display:none;"{{/unless}}>
+            <div class="yotpo bottomLine" style="display:inline-block;" data-product-id="{{ id }}"></div>
+            <span class="productCard__reviewNum">({{ reviews_count }})</span>
+            <a href="{{ url }}#pdp-reviews" class="abs x y z5" aria-label="{{ title }} rating stars"></a>
+          </div>
+          {{/unless}}
           <div class="collection__product-info">
           {{#unless bundle}}
             {{#if size_info}}
@@ -89,13 +97,14 @@
                   </div>
                   <a href='{{ variant_url }}' class='abs fill z2 js-product-link' aria-label='{{ title }}'></a>
                 </div>
-
+                {{#if ../subCollection }}
                 <div class="productCard_ratings f fdr aie rel"
                      {{#unless reviews_count }}style="display:none;"{{/unless}}>
                   <div class="yotpo bottomLine" style="display:inline-block;" data-product-id="{{ product_id }}"></div>
                   <span class="productCard__reviewNum">({{ reviews_count }})</span>
                   <a href="{{ product_url }}#pdp-reviews" class="abs x y z5" aria-label="{{ title }} rating stars"></a>
                 </div>
+                {{/if}}
 
               {{#unless bundle}}
                 {{#if options_in_card}}
