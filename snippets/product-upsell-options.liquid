@@ -19,8 +19,8 @@
 
 {%- for item in options_array -%}
   {%- assign option_value = item -%}
-  {%- if item contains 'Limited Edition:' -%}
-    {%- assign option_value = item | split: 'Limited Edition:' | last | strip -%}
+  {%- if item contains ':' -%}
+    {%- assign option_value = item | split: ':' | last | strip -%}
   {%- endif -%}
 
   {%- if has_upsell_variant -%}
@@ -34,7 +34,7 @@
   {%- endif -%}
 {%- endfor -%}
 
-<div class="upsell-product__option-group"
+<div class="pdp__options-item upsell-product__option-group"
      style="order: {{ order }}; {% if option_name_handle == 'title' %}display: none;{% endif %}">
   <label class="block" data-option-label="{{ option_name }}">
     <span class="option-title block">

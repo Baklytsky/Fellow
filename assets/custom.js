@@ -37,11 +37,11 @@ theme.pdpErrorMessage = function (error) {
 }
 
 theme.disableScroll = function () {
-  $('body').css('overflow', 'hidden');
+  document.body.style.overflow = 'hidden';
 }
 
 theme.enableScroll = function () {
-  $('body').css('overflow', '');
+  document.body.style.removeProperty('overflow');
 }
 
 theme.handleize = function (str) {
@@ -105,6 +105,70 @@ theme.checkSlickResponse = function (selector, config, response, maxMedia) {
   $(window).resize(function () {
     checkSlider();
   });
+}
+
+theme.formatMoney = function (cents, format) {
+  if (typeof cents === 'string') {
+    cents = cents.replace('.', '');
+  }
+
+  const defaultTo = function(value, defaultValue) {
+    return (value == null || value !== value) ? defaultValue : value
+  }
+
+  let value = '';
+  const placeholderRegex = /\{\{\s*(\w+)\s*\}\}/;
+  const formatString = (format || moneyFormat);
+
+  function formatWithDelimiters(number, precision, thousands, decimal) {
+    precision = defaultTo(precision, 2);
+    thousands = defaultTo(thousands, ',');
+    decimal = defaultTo(decimal, '.');
+
+    if (isNaN(number) || number == null) {
+      return 0;
+    }
+
+    number = (number / 100.0).toFixed(precision);
+
+    const parts = number.split('.');
+    const dollarsAmount = parts[0].replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1' + thousands);
+    const centsAmount = parts[1] ? (decimal + parts[1]) : '';
+
+    return dollarsAmount + centsAmount;
+  }
+
+  switch (formatString.match(placeholderRegex)[1]) {
+    case 'amount':
+      value = formatWithDelimiters(cents, 2);
+      break;
+    case 'amount_no_decimals':
+      value = formatWithDelimiters(cents, 0);
+      break;
+    case 'amount_with_comma_separator':
+      value = formatWithDelimiters(cents, 2, '.', ',');
+      break;
+    case 'amount_no_decimals_with_comma_separator':
+      value = formatWithDelimiters(cents, 0, '.', ',');
+      break;
+  }
+
+  return formatString.replace(placeholderRegex, value);
+}
+
+theme.headerHeight = function () {
+  document.documentElement.style.setProperty('--header-height', document.getElementById('MainHeader').offsetHeight + 'px');
+}
+
+theme.horizontalScroll = function (list, elements, offset) {
+  for (var i=0; i < elements.length; i++) {
+    elements[i].onclick = function(){
+      list.scroll({
+        left: this.offsetLeft - offset,
+        behavior: 'smooth'
+      });
+    }
+  }
 }
 
 theme.header = function () {
@@ -250,51 +314,6 @@ theme.header = function () {
 //-----------------------End Header navigation----------------------------------
 }
 
-theme.pdpRecCollection = function () {
-  const $container = $('.pdpRecCollection');
-  const $slideshow = $container.find('.pdpRecCollection__slideshow');
-
-  $slideshow.slick({
-    dots: false,
-    infinite: false,
-    speed: 300,
-    slidesToShow: 4,
-    prevArrow: '<button type="button" class="slick-prev"><span class="sr-only">Previous</span>' +
-        '&larr;</button>',
-    nextArrow: '<button type="button" class="slick-next"><span class="sr-only">Next</span>' +
-        '&rarr;</button>',
-    responsive: [
-      {
-        breakpoint: 1399,
-        settings: {
-          slidesToShow: 3
-        }
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1.6
-        }
-      }
-    ]
-  });
-}
-
-theme.headerHeight = function () {
-  document.documentElement.style.setProperty('--header-height', document.getElementById('MainHeader').offsetHeight + 'px');
-}
-
-theme.horizontalScroll = function (list, elements, offset) {
-  for (var i=0; i < elements.length; i++) {
-    elements[i].onclick = function(){
-      list.scroll({
-        left: this.offsetLeft - offset,
-        behavior: 'smooth'
-      });
-    }
-  }
-}
-
 theme.toggleTab = function ($this) {
   // Required button element: data-selected='true/false'; aria-controls='TAB_ID'; data-action='toggle-tab'
   // Required tab element: data-selected='true/false'; data-tab='TAB_ID'
@@ -342,86 +361,6 @@ theme.quickView = function (URL, innerContainer) {
 
 theme.pdpMain = function () {
 
-  function stickyScrolling(options) {
-    var $container = options.container || undefined;
-    var $elements = options.elements || [];
-    var topSpacer = options.topSpacer || 0;
-    if ($container.length < 1 || typeof $container === "undefined")
-      return false;
-    var lastScrollPosition = window.scrollY;
-    var currentScrollPosition = window.scrollY;
-    var viewportHeight;
-    var startPosition;
-    var endPosition;
-    var elementDetails = {};
-
-    var recalculateHeights = function() {
-      viewportHeight = window.innerHeight,
-      startPosition = $container.offset().top,
-      endPosition = $container.innerHeight() + startPosition - viewportHeight;
-      $.each($elements, function(index) {
-        var element = $(this);
-        elementDetails[index] = {
-          height: element.height(),
-          position: elementDetails.hasOwnProperty(index) ? elementDetails[index].position : 0
-        }
-      })
-    };
-    recalculateHeights();
-
-    var updatePosition = function() {
-      currentScrollPosition = window.scrollY;
-      $.each($elements, function(index) {
-        var element = $(this);
-        var height = elementDetails[index].height;
-        var position = elementDetails[index].position;
-        var overflow = topSpacer + height - viewportHeight;
-        position += currentScrollPosition - lastScrollPosition;
-        position = currentScrollPosition <= startPosition ? 0 : position;
-        position = currentScrollPosition > endPosition ? overflow : position;
-        position = Math.abs(position) === position && Math.abs(position) > overflow ? overflow : position;
-        position = Math.abs(position) !== position ? 0 : position;
-        elementDetails[index].position = position;
-        element.css({
-          top: topSpacer + position * -1
-        })
-      });
-      lastScrollPosition = currentScrollPosition
-    };
-    updatePosition();
-
-    var refetchElements = function() {
-      if ($container) {
-        $container = $($container.selector)
-      }
-      if ($elements.length > 1) {
-        var freshElements = [];
-        $.each($elements, function(index) {
-          freshElements.push($($elements[index].className))
-        });
-        $elements = freshElements
-      } else {
-        $elements = $($elements.selector)
-      }
-    };
-
-    $(window).on("resize.pdp", recalculateHeights);
-    $(window).on("scroll.pdp", updatePosition);
-    $(window).on("recalculateScroll", function(event, clickEvent) {
-      refetchElements()
-      recalculateHeights()
-      if (!clickEvent) {
-        updatePosition()
-      }
-    })
-  }
-
-  stickyScrolling({
-    container: $(".pdpMain__container"),
-    elements: $(".pdpMain__details"),
-    topSpacer: document.getElementById('MainHeader').offsetHeight + 24
-  });
-
   function pdpMediaProof() {
     var $pdpMediaProofWrapper = $('.pdpMediaProof .jsSlickSlider'),
         pdpGalleryConfig = $.parseJSON($('.pdpMediaProof').attr('data-slick-config'));
@@ -448,74 +387,6 @@ theme.pdpMain = function () {
     })
   }
 
-  theme.pdpUpsellProduct = function() {
-    $(document).off('click.upsellRadio')
-    $(document).off('click.addUpsellProduct')
-    var sizeNotSelected = $(document).find('.pdpForm  .pdpDetails__btns[data-disabled-size="true"]'),
-        $productUpsell = $(document).find('.upsell-product');
-    (sizeNotSelected.length) ? $productUpsell.hide() : $productUpsell.show()
-    function checkUpsellAvailable(unavailableProduct) {
-      var $disabledOptions = $(document).find('.js-product-upsell-variant option:disabled'),
-          checkForSelected = $disabledOptions.filter((i, e) => e.hasAttribute('selected'));
-      if (checkForSelected.length) {
-        $(document).find('#pdp-product-upsell-atc').attr('disabled', 'disabled').text('Out Of Stock')
-      } else if (unavailableProduct) {
-        $(document).find('#pdp-product-upsell-atc').attr('disabled', 'disabled').text('Unavailable')
-      } else {
-        $(document).find('#pdp-product-upsell-atc').removeAttr('disabled').text('Add to Cart')
-      }
-    }
-    checkUpsellAvailable()
-    function changeUpsellImage(variantUniqID) {
-      let $selectedImage = $(document).find('[data-upsell-variant-media="' + variantUniqID + '"]');
-      $selectedImage.parent().find('[data-upsell-variant-media]:visible').css('visibility','hidden')
-      $selectedImage.css('visibility','visible')
-    }
-    $(document).on('click.upsellRadio', '.upsell-radio', function () {
-      let $upsellWrapper = $(this).parents('.upsell-product__wrapper'),
-          selectedOptions = '',
-          checkedInputs = $upsellWrapper.find('.upsell-radio-group input:checked'),
-          checkedOptions = $upsellWrapper.find('.upsell-radio-group input:checked').map((i, option) => option.value);
-      checkedOptions.each((i, option) => selectedOptions = (i !== checkedOptions.length - 1) ? selectedOptions + option + '/' : selectedOptions + option)
-      checkedInputs.each(function() {
-        $(this).parents('.upsell-product__option-group').find('.option-title-value').text($(this).attr('title'))
-      })
-      let selectedVariant = $upsellWrapper.find('[data-upsell-variant-options="' + selectedOptions + '"]');
-      $upsellWrapper.find('.upsell-product__content-price').text(selectedVariant.attr('data-variant-price'))
-      $upsellWrapper.find('.js-product-upsell-variant option').removeAttr('selected')
-      selectedVariant.attr('selected', 'selected')
-      selectedVariant.parent().attr('value', selectedVariant.val())
-      if (selectedVariant.length) {
-        changeUpsellImage(selectedVariant.attr('data-variant-uniq_id'));
-        checkUpsellAvailable()
-      } else {
-        checkUpsellAvailable(true)
-      }
-    })
-    $(document).on('click.addUpsellProduct', '#pdp-product-upsell-atc', function (e) {
-      e.preventDefault();
-      let selectedUpsellId = $(this).parents('.upsell-product__wrapper').find('.js-product-upsell-variant select').attr('value'),
-          bodyObj = {
-            id: selectedUpsellId,
-            quantity: 1
-          };
-      function errorMessage(error) {
-        if (error.status === 422) {
-          let errorMessage = document.querySelector('#PdpUpsellErrorMessage')
-          errorMessage.innerHTML = error.responseJSON.description
-          errorMessage.style.display = 'block'
-          setTimeout(() => {
-            errorMessage.style.display = 'none'
-            errorMessage.innerHTML = ''
-          }, 3500);
-        }
-      }
-      theme.cart.cartEvent('/cart/add.js', bodyObj, true, errorMessage)
-    })
-  }
-
-  if ($('.upsell-product__wrapper').length) {theme.pdpUpsellProduct();}
-  if ($('.pdpRecCollection').length) {theme.pdpRecCollection();}
   if ($('.pdpMediaProof').length) {pdpMediaProof();}
   if ($('.pdpLearnMore').length) {pdpLearMore();}
   if ($('.pdpCompare').length) {pdpCompare();}
@@ -1657,6 +1528,59 @@ class SlideToggle extends HTMLElement {
 customElements.define('slide-toggle', SlideToggle);
 // End Slide toggle
 
+class StickyScrolling extends HTMLElement {
+  constructor() {
+    super();
+    this.element = this.querySelector('.pdpMain__details')
+    if (!this.element) return false
+    this.topSpacer = document.getElementById('MainHeader').offsetHeight + 24
+    this.lastScrollPosition = window.scrollY
+    this.currentScrollPosition = window.scrollY
+    this.elementDetails = {}
+
+    this.init()
+    document.addEventListener('resize', ()=> this.recalculateHeights())
+    document.addEventListener('scroll', ()=> this.updatePosition())
+  }
+
+  init () {
+    this.recalculateHeights()
+    this.updatePosition()
+  }
+
+  recalculateHeights() {
+    this.viewportHeight = window.innerHeight
+    this.startPosition = this.parentElement.getBoundingClientRect().top + window.scrollY
+    this.endPosition = this.parentElement.offsetHeight + this.startPosition - this.viewportHeight
+    this.elementDetails = {
+      height: this.element.offsetHeight,
+      position: this.elementDetails.hasOwnProperty('position') ? this.elementDetails.position + 'px' : '0px'
+    }
+  }
+
+  updatePosition() {
+    this.currentScrollPosition = window.scrollY;
+    const overflow = this.topSpacer + this.elementDetails.height - this.viewportHeight
+    let position = this.elementDetails.position
+    position += this.currentScrollPosition - this.lastScrollPosition;
+    position = this.currentScrollPosition <= this.startPosition ? 0 : position;
+    position = this.currentScrollPosition > this.endPosition ? overflow : position;
+    position = Math.abs(position) === position && Math.abs(position) > overflow ? overflow : position;
+    position = Math.abs(position) !== position ? 0 : position;
+    this.elementDetails.position = position
+    this.element.style.top = `${this.topSpacer + position * -1}px`
+    this.lastScrollPosition = this.currentScrollPosition
+    this.checkElementHeight()
+  }
+
+  checkElementHeight() {
+    if (this.element.offsetHeight === this.elementDetails.height) return
+    this.elementDetails.height = this.element.offsetHeight
+  }
+}
+
+customElements.define('sticky-scrolling', StickyScrolling);
+
 class PdpBar extends HTMLElement {
   constructor() {
     super();
@@ -1802,10 +1726,11 @@ class PdpMain extends PdpHelper {
     this.klaviyoOOS = this.querySelector('.klaviyo-bis-trigger')
     this.stickyBar = this.querySelector('pdp-sticky-bar')
     this.personalizeBtn = this.form.querySelector('.pdpDetails__personalize')
+    this.upsell = this.querySelector('.upsell-product')
 
     this.onVariantChange()
 
-    this.addEventListener('change', () => {
+    this.form.addEventListener('change', () => {
       this.onVariantChange()
       this.changeUrl()
     })
@@ -1858,6 +1783,8 @@ class PdpMain extends PdpHelper {
           this.price.forEach(price => {
             price.innerHTML = html.querySelector('.pdpCopy__price').innerHTML
           })
+          const upsell = html.querySelector('.upsell-product')
+          this.upsell.innerHTML = (upsell.hasChildNodes()) ? upsell.innerHTML : ''
           theme.slickSlider()
         })
   }
@@ -2037,7 +1964,9 @@ class bundleMixCard extends PdpHelper {
           compareAtPriceInner = this.pdpContainer.querySelectorAll('[data-compare-at-price] span');
 
     priceInner.forEach(element => element.innerHTML = '$' + newPrice)
-    compareAtPriceInner.forEach(element => element.innerHTML = '$' + newCompareAtPrice)
+    if (compareAtPriceInner.length) {
+      compareAtPriceInner.forEach(element => element.innerHTML = '$' + newCompareAtPrice)
+    }
   }
 
 }
@@ -2106,6 +2035,78 @@ class bundle extends HTMLElement {
 }
 
 customElements.define('bundle-mix', bundle);
+
+class UpsellProduct extends PdpHelper {
+  constructor() {
+    super();
+    this.product = JSON.parse(this.querySelector('[type="application/json"]').textContent)
+    this.productVariants = this.product['variants']
+    this.optionTitles = this.querySelectorAll('.option-title-value')
+    this.form = this
+    this.price = this.querySelector('.upsell-product__content-price')
+    this.select = this.querySelector('.js-product-upsell-variant select')
+    this.options = this.select.querySelectorAll('option')
+    this.radioGroups = Array.from(this.querySelectorAll('.upsell-product__option-group'));
+    this.radios = this.querySelectorAll('.upsell-radio')
+    this.atc = this.querySelector('.js-upsell-add-to-cart')
+
+    this.onUpsellVariantChange()
+    this.addEventListener('change', () => this.onUpsellVariantChange())
+    this.atc.addEventListener('click', (e) => this.upsellAddToCart(e))
+  }
+
+  onUpsellVariantChange() {
+    this.selectedOptions = this.getOptions()
+    this.selectedVariant = this.getSelectedVariant(this.selectedOptions)
+    this.disableUnavailableVariants()
+    this.changeUpsellImage()
+    this.checkVariantTitle()
+    this.changePrice()
+    this.changeSelectedOption()
+    this.toggleUpsellAddButton()
+  }
+
+  changeUpsellImage() {
+    if (!this.selectedVariant) return
+    const selectedImage = this.querySelector('[data-upsell-variant-media="' + this.selectedVariant.id + '"]');
+    this.querySelector('[data-upsell-variant-media].visible').classList.remove('visible');
+    selectedImage.classList.add('visible')
+  }
+
+  changePrice() {
+    if (!this.selectedVariant) return
+    this.price.innerHTML = theme.formatMoney(this.selectedVariant.price, '${{amount_no_decimals}}')
+  }
+
+  toggleUpsellAddButton() {
+    const preOrder = this.select.hasAttribute('data-selected-variant-preorder');
+
+    if (theme.isHidden(this.atc)) this.atc.classList.remove('is-hidden')
+    if (!this.selectedVariant) {
+      theme.changeBtnState(this.atc, 'disabled', 'Unavailable')
+    } else if (preOrder) {
+      theme.changeBtnState(this.atc, 'active', 'Pre-order')
+    } else if (!this.selectedVariant.available) {
+      theme.changeBtnState(this.atc, 'disabled', 'Out Of Stock')
+    }  else {
+      theme.changeBtnState(this.atc, 'active', 'Add to Cart')
+    }
+  }
+
+  upsellAddToCart(e) {
+    e.preventDefault()
+    const bodyObj = {id: this.selectedVariant.id, quantity: 1};
+    if (this.select.hasAttribute('data-selected-variant-preorder')) {
+      bodyObj.properties = {
+        'pre-order': true
+      }
+    }
+    theme.cart.cartEvent('/cart/add.js', bodyObj, true, theme.pdpErrorMessage)
+  }
+
+}
+
+customElements.define('upsell-product', UpsellProduct);
 
 class bundleMixMultiple extends HTMLElement {
   constructor() {

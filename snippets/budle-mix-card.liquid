@@ -192,9 +192,6 @@
                 data-variant-price='{{ variant.price | money | remove: ".00" }}'
                 data-variant-origin-price='{{ variant.price | times: 0.01 }}'
                 data-bundle-price-difference='{{ bundle_price_difference | times: 0.01 }}'
-                data-variant-inventory-quantity='{{ variant.inventory_quantity }}'
-                data-variant-inventory-policy='{{ variant.inventory_policy }}'
-                data-variant-inventory-management='{{ variant.inventory_management }}'
                 {% unless variant.available %}disabled="disabled"{% endunless %}
                 {% if hasPreorderTag or variant_preorder %}data-variant-preorder='true'{% endif %}
                 {% if forloop.first %}selected{% endif %}>
