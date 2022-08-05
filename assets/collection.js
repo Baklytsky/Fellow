@@ -14,7 +14,7 @@ class collectionFacets extends HTMLElement {
     this.resultsCount = this.querySelector('.facet-header-results-count')
     this.defaultSortBy = this.querySelector('[data-default-sort-by]')
     this.defaultSortByAction = this.defaultSortBy.title
-    this.defaultSortByOrder = this.defaultSortBy.getAttribute('[data-sort-order]')
+    this.defaultSortByOrder = this.defaultSortBy.getAttribute('data-sort-order')
 
     this.facetsForm.addEventListener('change', () => this.getSelectedFacets())
     this.clearAll.addEventListener('click', () => this.clearFacets())
