@@ -135,15 +135,12 @@ theme.header = function () {
     }
   })
 
-  $('.mobileMenu .newHeader__link').on('click', function () {
+  $('.mobileMenu .newHeader__link').on('click', function (e) {
+    e.preventDefault();
     if ($(this).parents('.mobileMenu')) {
       $(this).siblings('.subMenuList').slideToggle();
       $(this).toggleClass('active')
     }
-    // mega hack pico sidestep on mobile
-    // if (window.innerWidth < 500 && this.hasAttribute('href')){
-    //   window.location.href = this.getAttribute('href');
-    // }
   })
 
   theme.countdownTimer = function () {
