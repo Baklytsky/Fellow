@@ -136,7 +136,7 @@ theme.header = function () {
   })
 
   $('.mobileMenu .newHeader__link').on('click', function (e) {
-    e.preventDefault();
+    if (this.classList.contains('newHeader__button')) e.preventDefault();
     if ($(this).parents('.mobileMenu')) {
       $(this).siblings('.subMenuList').slideToggle();
       $(this).toggleClass('active')
