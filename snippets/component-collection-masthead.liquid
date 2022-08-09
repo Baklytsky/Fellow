@@ -4,33 +4,29 @@
   {% assign img_alt = section.settings.title | replace: "'", ' ' %}
 {% endif %}
 
-{%- assign desctop_image_class = 'image image-abs-cover' -%}
+{%- assign desctop_image_class = 'image-abs-cover' -%}
 
 {%- if imgMobile != blank -%}
-  {%- assign desctop_image_class = 'image image-abs-cover hide-mobile' -%}
+  {%- assign desctop_image_class = 'image-abs-cover hide-mobile' -%}
 {%- endif -%}
 
 <div class="collectionHero">
   <div class="collectionHero__media rel">
     {% if img != blank %}
-      {%
-        include 'component-image' with
-        src: img,
+      {% render 'image-lazy-metafields',
+        image: img,
+        class_name: desctop_image_class,
+        size: 'medium',
         alt: img_alt,
-        className: desctop_image_class,
-        absolute: true,
-        fill: true
-      %}
+        loader: true %}
     {% endif %}
     {%- if imgMobile != blank -%}
-      {%
-        include 'component-image' with
-        src: imgMobile,
+      {% render 'image-lazy-metafields',
+        image: imgMobile,
+        class_name: 'image-abs-cover hide-desktop',
+        size: 'medium',
         alt: img_alt,
-        className: 'image image-abs-cover hide-desktop',
-        absolute: true,
-        fill: true
-      %}
+        loader: true %}
     {%- endif -%}
   </div>
   <div class='collectionHero__content'>

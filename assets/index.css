@@ -6682,8 +6682,8 @@ h3.productCard__title {
   }
 }
 
-.mediaProof__item .image {
-  max-width: 130px;
+.mediaProof__item .mediaProof__item-image {
+  width: 130px;
   min-height: 40px;
   max-height: 40px;
   margin-right: auto;
@@ -6691,7 +6691,7 @@ h3.productCard__title {
 }
 
 @media screen and (min-width: 992px) {
-  .mediaProof__item .image {
+  .mediaProof__item .mediaProof__item-image {
     min-height: 50px;
     max-height: 50px
   }
@@ -8776,8 +8776,9 @@ input[name=product_search_field] {
   max-width: 7rem
 }
 
-.addlFeature__icon .image {
+.addlFeature__icon .addlFeature__icon-wrapper {
   max-width: 56px;
+  height: 56px;
 }
 
 .keyFeatureDetails__icon img,

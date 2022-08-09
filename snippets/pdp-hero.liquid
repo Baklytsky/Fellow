@@ -63,7 +63,7 @@
               {{ hero_copy }}
             </div>
           </div>
-          <div class='heroSection__image-block x {% if enable_round_image and hero_media_type != 'Video' %} heroSection__image-block-round{% endif %}'>
+          <div class='heroSection__image-block rel x {% if enable_round_image and hero_media_type != 'Video' %} heroSection__image-block-round{% endif %}'>
             {% if hero_media_type == 'Video' %}
               <video class='heroSection__image x y fill' autoplay muted loop playsinline controls>
                 {% if hero_media_webm != blank %}
@@ -75,13 +75,9 @@
               </video>
             {% else %}
               {% if image != blank %}
-                {%
-                  include 'component-image' with
-                  src: image,
-                  alt: alt,
-                  className: 'heroSection__image image',
-                  fill: true
-                %}
+                <div class="heroSection__image">
+                  {% render 'image-lazy-metafields', image: image, alt: hero_copy, size: 'medium' %}
+                </div>
               {% endif %}
             {% endif %}
           </div>

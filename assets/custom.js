@@ -1,5 +1,3 @@
-var scrollPosition = 0;
-
 theme.changeBtnState = function (btn, state, btnInner) {
   if (!btn) return
     (state === 'active')
@@ -82,12 +80,6 @@ theme.slickSlider = function () {
 
 theme.slickSlider()
 
-theme.mutation = function updateProductColors ($targetNode, callback) {
-  const config = { attributes: true, childList: true, subtree: true },
-      observer = new MutationObserver(callback);
-  observer.observe($targetNode, config);
-}
-
 theme.checkSlickResponse = function (selector, config, response, maxMedia) {
   if (!$(selector).length) return
   function checkSlider() {
@@ -105,6 +97,28 @@ theme.checkSlickResponse = function (selector, config, response, maxMedia) {
   $(window).resize(function () {
     checkSlider();
   });
+}
+
+theme.checkAllSlidersResponse = function () {
+  const allResponseSliders = document.querySelectorAll('[data-check-slick-response]')
+  allResponseSliders.forEach(slider => {
+    const sliderAttr = slider.getAttribute('data-check-slick-response');
+    if (!sliderAttr) return
+    const settings = JSON.parse(sliderAttr);
+    console.log(settings.selector)
+    console.log(settings.config)
+    console.log(settings.response)
+    console.log(settings.maxMedia)
+    theme.checkSlickResponse(settings.selector, settings.config, settings.response, settings.maxMedia)
+  })
+}
+
+theme.checkAllSlidersResponse()
+
+theme.mutation = function updateProductColors ($targetNode, callback) {
+  const config = { attributes: true, childList: true, subtree: true },
+      observer = new MutationObserver(callback);
+  observer.observe($targetNode, config);
 }
 
 theme.formatMoney = function (cents, format) {
@@ -357,39 +371,6 @@ theme.quickView = function (URL, innerContainer) {
 
     }
   });
-}
-
-theme.pdpMain = function () {
-
-  function pdpMediaProof() {
-    var $pdpMediaProofWrapper = $('.pdpMediaProof .jsSlickSlider'),
-        pdpGalleryConfig = $.parseJSON($('.pdpMediaProof').attr('data-slick-config'));
-    theme.checkSlickResponse($pdpMediaProofWrapper, pdpGalleryConfig, 992, true)
-  }
-
-  function pdpLearMore() {
-    $(document).on('click.pdpLearMoreShowAll', '.pdpLearnMore__dropdown-view-all', function () {
-      $(this).parents('.pdpLearnMore__dropdown-content').find('.pdpLearnMore__dropdown-link-item').show()
-      $(this).hide()
-    })
-  }
-
-  function pdpCompare() {
-    function changeTableHeight() {
-      let trHeight = $(document).find('.pdpCompare__table thead').height() - 24;
-      $('.pdpCompare__table-th').css('minHeight', trHeight)
-    }
-    changeTableHeight()
-
-    $(document).on('resize.pdpCompare', function () {
-      $('.pdpCompare__table-th').css('minHeight', 'auto')
-      changeTableHeight()
-    })
-  }
-
-  if ($('.pdpMediaProof').length) {pdpMediaProof();}
-  if ($('.pdpLearnMore').length) {pdpLearMore();}
-  if ($('.pdpCompare').length) {pdpCompare();}
 }
 
 theme.pdpQuickView = function () {
@@ -850,8 +831,6 @@ $(document).ready(function () {
 })
 
 theme.GLOBAL = function () {
-  // Remove all $(document) Events
-  // clicks:
 
   $(document).on('click.toggleTab', '[data-action="toggle-tab"]', function () {
     theme.toggleTab($(this));
@@ -1268,10 +1247,6 @@ theme.GLOBAL = function () {
     theme.collectionAndSearch(isSearchPage);
   }
 
-  if ($('.pdpMain').length) {
-    theme.pdpMain()
-  }
-
   if ($('.headerSearch').length) {
     theme.searchBar();
   }
@@ -1482,7 +1457,7 @@ document.addEventListener('click', (e) => {
 class SlideToggle extends HTMLElement {
   constructor() {
     super();
-    this.duration = this.dataset.duration || 200;
+    this.duration = this.dataset.duration || 250;
     this.slideTargetName = this.getAttribute('data-slide-toggle');
     this.slideTarget = document.querySelector('[data-slide-target="'+ this.slideTargetName + '"]')
     if (this.slideTarget) {
@@ -1512,16 +1487,16 @@ class SlideToggle extends HTMLElement {
 
   slideToggleClose() {
     this.slideTarget.style.overflow = 'hidden';
+    setTimeout( () => {
+      this.slideTarget.classList.remove('active');
+      this.classList.remove('active');
+    }, this.duration - 50)
     this.slideTarget.animate({
       height: [this.slideTarget.clientHeight + 'px', '0px']
     }, {
       duration: this.duration,
-      easing: 'linear'
+      easing: 'ease-in-out'
     });
-    setTimeout( () => {
-      this.slideTarget.classList.remove('active');
-      this.classList.remove('active');
-    }, this.duration)
   }
 }
 
@@ -1580,20 +1555,6 @@ class StickyScrolling extends HTMLElement {
 }
 
 customElements.define('sticky-scrolling', StickyScrolling);
-
-class PdpBar extends HTMLElement {
-  constructor() {
-    super();
-    this.init();
-  }
-
-  init() {
-    const config = JSON.parse(this.getAttribute('data-slick-config'))
-    theme.checkSlickResponse('.pdpBar__wrapper', config, 992, true)
-  }
-}
-
-customElements.define('pdp-bar', PdpBar);
 
 class PdpHelper extends HTMLElement {
   constructor() {
@@ -1728,7 +1689,7 @@ class PdpMain extends PdpHelper {
     this.personalizeBtn = this.form.querySelector('.pdpDetails__personalize')
     this.upsell = this.querySelector('.upsell-product')
 
-    this.onVariantChange()
+    //this.onVariantChange()
 
     this.form.addEventListener('change', () => {
       this.onVariantChange()
@@ -1760,6 +1721,7 @@ class PdpMain extends PdpHelper {
     this.querySelectorAll('[data-disabled-size="true"]').forEach(el => {
       el.removeAttribute('data-disabled-size')
     })
+    if (this.personalizeBtn) this.personalizeBtn.querySelector('.customize-btn').style.display = 'block'
     this.sizeSelected = true
   }
 
@@ -2107,6 +2069,38 @@ class UpsellProduct extends PdpHelper {
 }
 
 customElements.define('upsell-product', UpsellProduct);
+
+class PdpLearnMore extends HTMLElement {
+  constructor() {
+    super();
+    this.items = this.querySelectorAll('.pdpLearnMore__dropdown-link-item')
+    this.learnMoreBtn = this.querySelector('.pdpLearnMore__dropdown-view-all')
+    if (this.learnMoreBtn) this.learnMoreBtn.addEventListener('click', () => this.showMore())
+  }
+
+  showMore() {
+    this.items.forEach((item => item.style.removeProperty('display')))
+    this.learnMoreBtn.classList.add('is-hidden')
+  }
+}
+
+customElements.define('pdp-learn-more', PdpLearnMore);
+
+class PdpCompare extends HTMLElement {
+  constructor() {
+    super();
+    this.tableHead = this.querySelector('.pdpCompare__table thead')
+    this.th = this.querySelectorAll('.pdpCompare__table-th')
+    this.changeTableHeight()
+  }
+
+  changeTableHeight() {
+    const thHeight = this.tableHead.clientHeight - 24;
+    this.th.forEach(th => th.style.minHeight = thHeight + 'px')
+  }
+}
+
+customElements.define('pdp-compare', PdpCompare);
 
 class bundleMixMultiple extends HTMLElement {
   constructor() {

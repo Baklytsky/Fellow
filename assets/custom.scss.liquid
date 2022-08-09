@@ -57,6 +57,42 @@ button {
   color: currentColor;
 }
 
+img[data-sizes="auto"] {
+  display: block;
+  width: 100%;
+}
+
+.lazyload,
+.lazyloading {
+  opacity: 0;
+}
+
+.image-loader {
+  position: absolute;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  top: 0;
+  opacity: 0;
+  visibility: hidden;
+  margin: auto;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.lazyload ~ .image-loader {
+  opacity: 1;
+  visibility: visible;
+  z-index: 2;
+}
+
 
 //-----------------------Header navigation----------------------------------
 #header .newHeader__openedBlock .newHeader__button {
@@ -2808,6 +2844,8 @@ pdp-main {
 .pdpMain__variant-image {
   background-color: #F5F5F5;
   margin-bottom: 16px;
+  padding-top: 100%;
+
   @media screen and (max-width: $tablet) {
     margin-bottom: 0;
     padding-top: 100%;
@@ -3899,6 +3937,16 @@ h2.pdpCopy__header-price,
   }
 }
 
+.addlFeature__copy.hide-mobile[data-slide-target] {
+  @media screen and (min-width: $tablet) {
+    display: block;
+  }
+}
+
+.addlFeature__copy.active {
+  display: block;
+}
+
 .addlFeature__icon-desktop {
   margin-bottom: 16px;
   @media screen and (max-width: $tablet) {
@@ -3914,6 +3962,16 @@ h2.pdpCopy__header-price,
 
   @media screen and (min-width: 993px) {
     display: none;
+  }
+}
+
+.dropdownHeader-icon {
+  transition: all .2s linear;
+}
+
+.pdpAdditionalFeatures__mobile-dropdown.active {
+  .dropdownHeader-icon {
+    transform: rotate(180deg);
   }
 }
 
@@ -4020,6 +4078,10 @@ h2.pdpCopy__header-price,
 .pdpLearnMore__dropdown {
   margin-bottom: 16px;
 
+  .dropdownHeader-icon {
+    transition: all .2s linear;
+  }
+
   @media screen and (max-width: $tablet) {
     margin-bottom: 8px;
   }
@@ -4030,6 +4092,12 @@ h2.pdpCopy__header-price,
   cursor: pointer;
 }
 
+.pdpLearnMore__dropdown-header.active {
+  .dropdownHeader-icon {
+    transform: rotate(180deg);
+  }
+}
+
 .pdpLearnMore__dropdown-title {
   margin: 0;
   font-weight: 600;
@@ -4038,7 +4106,7 @@ h2.pdpCopy__header-price,
   text-transform: capitalize;
 }
 
-.pdpLearnMore__dropdown-content {
+.pdpLearnMore__dropdown-content-wrapper {
   padding: 0 24px 24px;
 }
 
@@ -4411,6 +4479,8 @@ h2.pdpCopy__header-price,
 }
 
 .pdpFeature__content-imageWrapper {
+  padding-top: 100%;
+
   @media screen and (max-width: $large_desk) {
     margin-bottom: 32px;
   }
@@ -8991,7 +9061,7 @@ modal-opener {
 }
 
 [data-slide-target] {
-  transition: height .2s linear;
+  transition: all .2s ease-in-out;
   overflow: hidden;
 }
 

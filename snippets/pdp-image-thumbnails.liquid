@@ -59,6 +59,12 @@
               {%- assign counter = counter | plus: 1 -%}
               <div class='pdpMain__gallery-thumbnails-item rel x {% if selected_variant.image == blank and counter == 1 %}current-thumbnail{% endif %}'
                    data-variant-img='{{ selected_variant.id | append: forloop.index }}'>
+                {% render 'image-lazy',
+                  image: metafield_variant_image,
+                  class_name: 'x image-abs-cover',
+                  size: 'small',
+                  hide_id: true,
+                  alt: selected_variant.title %}
                 <img src='{{ metafield_variant_image | img_url: '200x' }}' class='image-abs-cover x' alt='{{ image.alt }}' role='img' loading='lazy'/>
               </div>
             {%- endif -%}
@@ -74,9 +80,13 @@
         {% else %}
           {%- assign variantId = product.id | append: forloop.index -%}
         {% endif %}
-        {%- assign imageSrc = image.src | img_url: '200x' -%}
         <div class='pdpMain__gallery-thumbnails-item rel x' data-variant-img='{{ variantId }}'>
-          <img src='{{ imageSrc }}' class='image-abs-cover x' alt='{{ image.alt }}' role='img' loading='lazy'/>
+          {% render 'image-lazy',
+            image: image,
+            class_name: 'x image-abs-cover',
+            size: 'small',
+            hide_id: true,
+            alt: image.alt %}
         </div>
       {% endfor %}
     {%- endif -%}
@@ -95,7 +105,7 @@
               <span class="productCard__badge abs z3 xsmall cb bg-xlightgrey">{{ image_custom_tag }}</span>
             {%- endif -%}
             <img src="{{ selected_variant.image | img_url: '900x' }}"
-                 class='x' alt='{{ selected_variant.image.alt }}'
+                 class='x image-abs-cover' alt='{{ selected_variant.title }}'
                  role='img'
                  loading='lazy'/>
           </div>
@@ -114,7 +124,7 @@
                     <span class="productCard__badge abs z3 xsmall cb bg-xlightgrey">{{ badge_text }}</span>
                   {%- endif -%}
                   <img src="{{ metafield_variant_image | img_url: '900x' }}"
-                       class='x' alt='{{ metafield_variant_image.alt }}'
+                       class='x image-abs-cover' alt='{{ variant.title }}'
                        role='img'
                        loading='lazy'/>
                 </div>
@@ -132,7 +142,6 @@
         {% else %}
           {%- assign variantId = product.id | append: forloop.index -%}
         {% endif %}
-        {%- assign imageSrc = image.src | img_url: '900x' -%}
         <div class="x">
           <div class='pdpMain__variant-image rel x f aic'
                data-variant-media='{{ variantId }}'>
@@ -143,7 +152,9 @@
               {%- assign image_custom_tag = image.alt | split: 'tag:' | last -%}
               <span class="productCard__badge abs z3 xsmall cb bg-xlightgrey">{{ image_custom_tag }}</span>
             {%- endif -%}
-            <img src="{{ imageSrc }}" class='x' alt='{{ image.alt }}' role='img' loading='lazy'/>
+            {% render 'image',
+              image: image,
+              class_name: 'x image-abs-cover' %}
           </div>
         </div>
       {% endfor %}

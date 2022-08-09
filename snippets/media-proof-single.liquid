@@ -5,12 +5,9 @@
 {% endif %}
 
 <div class='mediaProof__item rel ac'>
-  {%
-    include 'component-image' with
-    src: imageSrc,
-    alt: altText,
-    className: 'image'
-  %}
+  <div class="mediaProof__item-image rel">
+    {% render 'image-lazy-metafields', image: imageSrc, size: 'small', alt: altText, loader: true %}
+  </div>
   <p class='mxa'>“{{ quote }}”</p>
 </div>
 

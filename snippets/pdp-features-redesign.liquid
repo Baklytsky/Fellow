@@ -49,7 +49,7 @@
                   <div class='pdpFeature__copy pdpFeature__copy-textEnd'>
                     {% if logo != blank %}
                       <div class='pdpFeature__icon x rel'>
-                        <img src="{{ logo }}" alt="{{ heading }}">
+                        {% render 'image-lazy-metafields', image: logo, alt: heading, size: 'small', loader: true %}
                       </div>
                     {% endif %}
                     <div class="pdpFeature__copy-wrapper pdpFeature__copy-textRight">
@@ -96,7 +96,7 @@
                   <div class='pdpFeature__copy'>
                     {% if logo != blank %}
                       <div class='pdpFeature__icon x rel'>
-                        <img src="{{ logo }}" alt="{{ heading }}">
+                        {% render 'image-lazy-metafields', image: logo, alt: heading, size: 'small', loader: true %}
                       </div>
                     {% endif %}
                     <div class="pdpFeature__copy-wrapper">
@@ -137,7 +137,7 @@
           {%- if desktop_image != blank -%}
             <div class="pdpFeature__content-image f aic">
               <div class="pdpFeature__content-imageWrapper x rel">
-                <img src="{{ desktop_image }}" alt="{{ section_heading }}">
+                {% render 'image-lazy-metafields', image: desktop_image, class_name: 'image-abs-cover', alt: section_heading, size: 'medium', loader: true %}
               </div>
             </div>
           {%- endif -%}
@@ -154,7 +154,7 @@
           <div class="pdpFeature__content-mobile">
             {%- if mobile_image != blank -%}
               <div class="pdpFeature__content-imageWrapper x rel">
-                <img src="{{ mobile_image }}" alt="{{ section_heading }}">
+                {% render 'image-lazy-metafields', image: mobile_image, class_name: 'image-abs-cover', alt: section_heading, size: 'medium', loader: true %}
               </div>
             {%- endif -%}
             <div class="pdpFeature__content jsSlickSlider">

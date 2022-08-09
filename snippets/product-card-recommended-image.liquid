@@ -10,16 +10,6 @@
 
   <div class='productCard__img-container default'>
     <img src="{{ image_url }}" alt="{{ alt }}" class="productCard__image image image-abs-cover">
-    {%- comment -%}
-      {%
-        include 'component-image' with
-        src: image_url,
-        alt: alt,
-        absolute: true,
-        fill: true,
-        className: 'productCard__image image'
-      %}
-    {%- endcomment -%}
   </div>
   {% comment %}Only make multiple image divs if there's more than one option{% endcomment %}
   {% if hide_variants != true and product.variants.size > 1 %}
@@ -37,16 +27,6 @@
                 data-variant-id='{{ variant.id }}'
                 aria-label='{{ variant.title }}'>
                 <img src="{{ variantImg }}" alt="{{ alt }}" class="productCard__image image image-abs-cover">
-                {%- comment -%}
-                  {%
-                    include 'component-image' with
-                    src: variantImg,
-                    alt: alt,
-                    absolute: true,
-                    fill: true,
-                    className: 'productCard__image image'
-                  %}
-                {%- endcomment -%}
               </div>
               {% break %}
             {% endif %}

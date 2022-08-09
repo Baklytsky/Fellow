@@ -1,0 +1,80 @@
+{% comment %}
+{% render 'image-lazy-metafields',
+  image: ,
+  class_name: ,
+  image_attr: ,
+  id: ,
+  alt: alt,
+  size: '',
+  preload: boolean,
+  loader: boolean,
+  loader_alt: boolean   %}
+{% endcomment %}
+
+{%- if size == blank -%}
+  {%- assign size = 'large' -%}
+{%- endif -%}
+
+{%- case size -%}
+{%- when 'small' -%}
+  {%- capture image_size -%}
+    {{ image | append: 'w_50' }} 25w,
+    {{ image | append: 'w_72' }} 36w,
+    {{ image | append: 'w_144' }} 72w,
+    {{ image | append: 'w_288' }} 144w
+  {%- endcapture -%}
+{%- when 'medium' -%}
+  {%- capture image_size -%}
+    {{ image | append: 'w_50' }} 25w,
+    {{ image | append: 'w_72' }} 36w,
+    {{ image | append: 'w_144' }} 72w,
+    {{ image | append: 'w_288' }} 144w,
+    {{ image | append: 'w_480' }} 240w,
+    {{ image | append: 'w_720' }} 360w,
+    {{ image | append: 'w_1080' }} 540w
+  {%- endcapture -%}
+  {%- else -%}
+  {%- capture image_size -%}
+    {{ image | append: 'w_50' }} 25w,
+    {{ image | append: 'w_72' }} 36w,
+    {{ image | append: 'w_144' }} 72w,
+    {{ image | append: 'w_288' }} 144w,
+    {{ image | append: 'w_480' }} 240w,
+    {{ image | append: 'w_720' }} 360w,
+    {{ image | append: 'w_1080' }} 540w,
+    {{ image | append: 'w_1480' }} 720w,
+    {{ image | append: 'w_1350' }} 900w,
+    {{ image | append: 'w_1512' }} 1080w,
+    {{ image | append: 'w_1728' }} 1296w,
+    {{ image | append: 'w_1920' }} 1350w,
+    {{ image | append: 'w_1980' }} 1728w,
+    {{ image | append: 'w_2160' }} 1920w,
+    {{ image | append: 'w_2560' }} 2560w
+  {%- endcapture -%}
+{%- endcase -%}
+
+{%- if preload -%}
+  <link rel="preload" href="{{ image | append: 'w_360' }}" as="image" imagesrcset="{{ image_size }}">
+{%- endif -%}
+
+{%- assign alt = alt | default: image.alt | escape -%}
+
+<img {% if id != balnk %}id="{{ id }}"{% endif %}
+     data-srcset="{{ image_size }}"
+     class="lazyload {{ class_name }}"
+     data-sizes="auto"
+     data-optimumx="auto"
+     data-src="{{ image | append: 'w_360' }}"
+     data-parent-fit="contain"
+     alt="{{ alt }}"
+     width="100%"
+     height="100%"
+        {{ image_attr }}>
+
+{%- if loader -%}
+  <span class="image-loader skeleton f jcc aic">
+    {%- if loader_alt -%}
+      {{ alt }}
+    {%- endif -%}
+  </span>
+{%- endif -%}

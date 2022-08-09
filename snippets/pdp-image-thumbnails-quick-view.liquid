@@ -48,6 +48,7 @@
             {%- assign image_custom_tag = image.alt | split: 'tag:' | last -%}
             <span class="productCard__badge abs z3 xsmall cb bg-xlightgrey">{{ image_custom_tag }}</span>
           {%- endif -%}
+
           <img src="{{ imageSrc }}" class='x image-abs-cover' alt='{{ image.alt }}' role='img' loading='lazy'/>
         </div>
       </div>
