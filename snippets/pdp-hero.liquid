@@ -76,7 +76,7 @@
             {% else %}
               {% if image != blank %}
                 <div class="heroSection__image">
-                  {% render 'image-lazy-metafields', image: image, alt: hero_copy, size: 'medium' %}
+                  {% render 'image-lazy-metafields', image: image, alt: hero_copy, size: 'medium', loader: true %}
                 </div>
               {% endif %}
             {% endif %}

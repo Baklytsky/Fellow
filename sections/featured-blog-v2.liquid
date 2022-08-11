@@ -69,14 +69,12 @@
                            aria-label="Image link"
                            role="button"
                            title="{{ article.title }}">
-                          <img class="BlogSectionArticle__Image"
-                               src='{{ article | img_url: "100x" }}'
-                               loading="lazy"
-                               srcset='{{ article | img_url: "450x" }} 450w,
-                                     {{ article | img_url: "560x" }} 560w,
-                                     {{ article | img_url: "650x" }} 650w,
-                                     {{ article | img_url: "900x" }} 900w'
-                               alt="{{ article.image.alt | default: article.title | escape }}">
+                          {% render 'image-lazy',
+                            image: article,
+                            class_name: 'BlogSectionArticle__Image',
+                            size: 'medium',
+                            alt: article.title,
+                            loader: true %}
                         </a>
                       {%- endif -%}
                       <div class="BlogSectionArticle__Content">

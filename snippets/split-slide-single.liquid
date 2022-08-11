@@ -89,13 +89,11 @@
     {% endif %}
 
     <div class="hero__slide--img-wrapper AspectRatio" style="--aspect-ratio: {{ aspect_ratio }};">
-      <img src='{{ block.settings.heroSlide | img_url: "600x" }}'
-           loading="lazy"
-           srcset='{{ block.settings.heroSlide | img_url: "600x" }} 600w,
-            {{ block.settings.heroSlide | img_url: "1000x" }} 991w,
-            {{ block.settings.heroSlide | img_url: "1280x" }} 1280w,
-            {{ block.settings.heroSlide | img_url: "1440x" }} 1400w'
-           alt='{{ block.settings.heroSlide__header | default: block.settings.heroSlide__header }}'>
+      {% render 'image-lazy',
+        image: block.settings.heroSlide,
+        size: 'medium',
+        alt: block.settings.heroSlide__header,
+        loader: true %}
     </div>
   </div>
 </div>

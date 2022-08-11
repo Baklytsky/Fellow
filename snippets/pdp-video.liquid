@@ -7,6 +7,7 @@
   {% if video_poster %}
     {% include 'cf-image' with image: video_poster, print: "none", size: "1920x1080", format: "pjpg" %}
   {% endif %}
+  {%- assign video_type = false -%}
 
   {% assign flex_order = product.metafields.custom_fields["video_order_new"] | downcase %}
   {% if flex_order %}
@@ -21,10 +22,28 @@
     {%- assign video_in_line = false -%}
   {% endif %}
 
-  <section class='video-section {% if display_order %} o-{{ display_order }}{% endif %}{% if video_copy %} has-copy{% endif %}'
-    data-component='pdpVideo'
-    data-videourl='{{ video_url }}'
-    {% if video_poster %}data-poster='{{ video_hasposter }}'{% endif %}>
+  {%- if video_url contains 'youtu' -%}
+    {%- assign video_type = 'youtube' -%}
+    {% if video_url contains 'v=' %}
+      {% assign video_id = video_url | split: 'v=' | last %}
+    {% else %}
+      {% assign video_id = video_url | split: 'youtu.be/' | last %}
+    {% endif %}
+  {%- else -%}
+    {% assign video_id = video_url | split: 'vimeo.com/' | last %}
+    {%- assign video_type = 'vimeo' -%}
+  {%- endif -%}
+
+  {%- capture video_options -%}
+    {
+    "videoType": {{ video_type | json }},
+    "videoId": {{ video_id | json }},
+    "requestHost": {{ request.host | json }}
+    }
+  {%- endcapture -%}
+
+  <video-section class='video-section {% if display_order %} o-{{ display_order }}{% endif %}{% if video_copy %} has-copy{% endif %}'
+                 data-video-options='{{ video_options }}'>
 
     {% if video_copy != blank or video_url != blank %}
       <div class="pdpVideo__Container">
@@ -38,25 +57,28 @@
         {%- endif -%}
         {%- if video_url != blank -%}
           <div class='pdpVideo__Content'>
-            <div class="video_section__player-with-copy js-video-wrapper" style="--aspect-ratio:(16/9);">
-              <div class="js-video-mount"></div>
-            </div>
-            <div class="video-section__cover-with-copy" style="{% if video_poster %}background-image:url('{{ cf_image}}');{% endif %} --aspect-ratio:(16/9);">
-              <button aria-label='Play Video' class="btn btn--clear video-section__load-player-button js-video-load-button{% if video_btn_color == 'white' %} cw{% else %} cb{% endif %}">
+            <div class="video_section__player-with-copy rel js-video-wrapper">
+              {% if video_poster %}
+                {% render 'image-lazy-metafields',
+                  image: cf_image,
+                  class_name: 'video_section__poster image-abs-cover',
+                  alt: alt,
+                  size: 'medium',
+                  loader: true %}
+              {% endif %}
+              <button aria-label='Play Video'
+                      class="btn btn--clear video-section__load-player-button js-video-play-button{% if video_btn_color == 'white' %} cw{% else %} cb{% endif %}">
                 <span class="is-hidden">play video</span>
                 {% render 'icon' with 'play-btn' %}
-                {%- comment -%}
-                  <div class="video-section__load-player-button-triangle"></div>
-                  <div class="video-section__load-player-button-circle"></div>
-                {%- endcomment -%}
               </button>
+              <div class="js-video-mount"></div>
             </div>
           </div>
         {%- endif -%}
       </div>
       </div>
     {% endif %}
-  </section>
+  </video-section>
 {% endif %}
 
 {% comment %} Reset {% endcomment %}

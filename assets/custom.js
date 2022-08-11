@@ -105,10 +105,6 @@ theme.checkAllSlidersResponse = function () {
     const sliderAttr = slider.getAttribute('data-check-slick-response');
     if (!sliderAttr) return
     const settings = JSON.parse(sliderAttr);
-    console.log(settings.selector)
-    console.log(settings.config)
-    console.log(settings.response)
-    console.log(settings.maxMedia)
     theme.checkSlickResponse(settings.selector, settings.config, settings.response, settings.maxMedia)
   })
 }
@@ -2101,6 +2097,106 @@ class PdpCompare extends HTMLElement {
 }
 
 customElements.define('pdp-compare', PdpCompare);
+
+class YoutubeVimeoVideo extends HTMLElement {
+  constructor() {
+    super();
+    this.options = JSON.parse(this.dataset.videoOptions);
+    if (!this.options['videoType']) return
+    this.videoId = this.dataset.videoId
+    this.playerWrapper = this.querySelector('.js-video-wrapper')
+    this.playerInner = this.querySelector('.js-video-mount')
+    this.playBtn = this.querySelector('.js-video-play-button')
+    this.loadScript().then(this.setupPlayer.bind(this));
+
+    this.playBtn.addEventListener('click', () => {
+      if (this.player) this.player.playVideo()
+      this.playerWrapper.classList.add('is-playing')
+    })
+  }
+
+  loadScript() {
+    return new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      document.body.appendChild(script);
+      script.async = true;
+      script.src = this.options['videoType'] === 'youtube'
+          ? '//www.youtube.com/iframe_api'
+          : '//player.vimeo.com/api/player.js';
+      script.onload = resolve;
+      script.onerror = reject;
+    });
+  }
+
+  setupPlayer() {
+      const playerLoadingInterval = setInterval(() => {
+        (this.options['videoType'] === 'youtube')
+            ? this.youtubeSetup(playerLoadingInterval)
+            : this.vimeoSetup(playerLoadingInterval)
+      }, 200)
+  }
+
+  youtubeSetup(playerLoadingInterval) {
+    if (window.YT) {
+      this.player = new YT.Player(this.playerInner, {
+        videoId: this.options['videoId'],
+        playerVars: {
+          showinfo: 0,
+          controls: 0,
+          fs: 0,
+          rel: 0,
+          height: '100%',
+          width: '100%',
+          iv_load_policy: 3,
+          html5: 1,
+          loop: 1,
+          playsinline: 1,
+          modestbranding: 1,
+          disablekb: 1,
+          origin: this.options['requestHost']
+        },
+        events: {
+          onReady: this.onYouTubeReady(),
+          onStateChange: this.onYouTubeStateChange()
+        }
+      });
+
+      clearInterval(playerLoadingInterval);
+    }
+  }
+
+  vimeoSetup(playerLoadingInterval) {
+    if (window.Vimeo) {
+      this.player = new Vimeo.Player(this.playerInner.parentNode, {
+        id: this.options['videoId'],
+        muted: false,
+        loop: true
+      });
+
+      this.player.ready().then(() => this.onVimeoReady())
+      clearInterval(playerLoadingInterval);
+    }
+  }
+
+  onYouTubeReady() {
+    this.isLoaded()
+  }
+
+  onYouTubeStateChange() {
+    console.log('Youtube state change')
+  }
+
+  onVimeoReady() {
+    this.isLoaded()
+  }
+
+  isLoaded() {
+    this.playerWrapper.classList.add('is-loaded')
+  }
+
+}
+
+customElements.define('video-section', YoutubeVimeoVideo);
 
 class bundleMixMultiple extends HTMLElement {
   constructor() {
