@@ -1,0 +1,16 @@
+{% if collection.metafields.custom_fields["show_collection_tm"] == 1 %}
+  {%- assign title = collection.metafields.custom_fields["collection_text_module_title"] -%}
+  {%- assign description = collection.metafields.custom_fields["collection_text_module_desc"] -%}
+
+  {% if title != blank or description != blank %}
+    <div class="collectionTM">
+      {%- if title != blank -%}
+        <h4 class="collectionTM__title">{{ title }}</h4>
+      {%- endif -%}
+
+      {%- if description != blank -%}
+        <p class="collectionTM__description">{{ description }}</p>
+      {%- endif -%}
+    </div>
+  {% endif %}
+{% endif %}

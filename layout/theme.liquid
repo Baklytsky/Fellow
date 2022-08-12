@@ -15,6 +15,10 @@
   <link rel="preload" href="{{ 'index.js' | asset_url }}" as="script">
   <link rel="preload" href="{{ 'custom.js' | asset_url }}" as="script">
 
+  {%- if template contains 'collection' -%}
+    <link rel="preload" href="{{ 'collection.js' | asset_url }}" as="script">
+  {%- endif -%}
+
   {% include 'redirects' %}
 
   {% capture seo_title %}
@@ -44,7 +48,7 @@
 
     {{ 'index.css' | asset_url | stylesheet_tag }}
     {{ 'custom.scss.css' | asset_url | stylesheet_tag }}
-    
+
     {%- if request.path contains 'carter-move-mug' or request.path contains 'carter-everywhere-mug' or product.handle contains 'carter-move-mug-with-360-sip-lid' -%}
     {{ 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css' | stylesheet_tag }}
     {{ 'player_customized.css' | asset_url | stylesheet_tag }}
@@ -77,17 +81,18 @@
     {{ 'jquery-1.11.0.min.js' | asset_url | script_tag }}
     {{ 'jquery.ba-throttle-debounce.min.js' | asset_url | script_tag }}
     {{ 'custom-additional-vendor.js' | asset_url | script_tag }}
-  
-    {%- if request.path contains 'carter-move-mug' or request.path contains 'carter-everywhere-mug' or product.handle contains 'carter-move-mug-with-360-sip-lid' -%}
-    {{ 'player-event.js' | asset_url | script_tag }}
-    {{ 'player-inline.js' | asset_url | script_tag }}
-    {{ 'player-chunk-one.js' | asset_url | script_tag }}
-    {{ 'player-chunk-two.js' | asset_url | script_tag }}
-    {%- endif -%}
 
     <script src="{{ 'custom.js' | asset_url }}" defer='defer'></script>
+
+    {%- if template contains 'collection' -%}
+      <script src="{{ 'handlebars-v4.7.7.js' | asset_url }}" defer='defer'></script>
+      <script src="{{ 'collection.js' | asset_url }}" defer='defer'></script>
+    {%- endif -%}
+
     <script src="{{ 'index.js' | asset_url }}" defer='defer'></script>
     <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
+
+    {% include 'component-customize-js' %}
 
     {% include 'klaviyo' %}
   </body>

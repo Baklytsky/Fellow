@@ -1,10 +1,10 @@
 {% assign badge_text = product.metafields.custom_fields.card_badge %}
 
 {%- assign not_bundle = true -%}
-{% for tag in product.tags %}  
-{% if product.tags contains 'Bundle' %}
-{% assign not_bundle = false %}
-{% endif %}
+{% for tag in product.tags %}
+  {% if product.tags contains 'Bundle' %}
+    {% assign not_bundle = false %}
+  {% endif %}
 {% endfor %}
 
 <div aria-label='Image of {{ product.title }}' class='productCard__img rel z0{% unless transparent_image == true %} productCard__img--solid{% endunless %}'>
@@ -12,7 +12,12 @@
   {% if badge_text and badge_text != blank and not_bundle == true %}
     <span class="productCard__badge abs z3 xsmall cb bg-xlightgrey">{{ badge_text }}</span>
   {% elsif not_bundle == false %}
-    <span class="productCard__badge abs z3 xsmall cb bg-xlightgrey">{% if product.price_max > product.price %}Save up to ${{ product.compare_at_price_max | minus:product.price_max | times:0.01 | floor }} {% elsif product.compare_at_price > product.price %} Save ${{ product.compare_at_price | minus:product.price | times:0.01 | floor }} {% else %} {% endif %}</span>
+    <span class="productCard__badge abs z3 xsmall cb bg-xlightgrey">
+      {% if product.price_max > product.price %}Save up to ${{ product.compare_at_price_max | minus:product.price_max | times:0.01 | floor }}
+        {% elsif product.compare_at_price > product.price %} Save ${{ product.compare_at_price | minus:product.price | times:0.01 | floor }}
+      {% else %}
+      {% endif %}
+    </span>
   {% endif %}
 
   <div class='productCard__img-container default'>

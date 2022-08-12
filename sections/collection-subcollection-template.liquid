@@ -44,7 +44,7 @@
           We've got a collection, loop through its products now.
           {% endcomment %}
           {% assign subcollection = link.object %}
-          {% assign sub_product_image_index = subcollection.metafields.custom_fields.product_image_index | minus: 1 | at_least: 0 | default: 0 %}
+          {% assign sub_product_image_index = 0 %}
 
           {% assign number_of_links = number_of_links | plus: 1 %}
           <div class='subcollection'>
@@ -85,7 +85,7 @@
   {% else %}
     <div class='container--l'>
       <div class='subcollection__products one-fourth'>
-        {% assign product_image_index = subcollection.metafields.custom_fields.product_image_index | minus: 1 | at_least: 0 | default: 0 %}
+        {% assign product_image_index = 0 %}
         {% for product in collection.products %}
           {% include 'product-card', product_image: product.images[product_image_index] %}
         {% endfor %}
