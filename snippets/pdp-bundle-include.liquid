@@ -23,36 +23,37 @@
         {%- assign bundle_include_description_title = item["bundle_description_title"] -%}
         {%- assign bundle_include_description_text = item["bundle_description_text"] -%}
         {%- assign bundle_include_features = item["bundle_features"] -%}
+        {%- assign id = bundle_include_product_title | append: '-' | append: forloop.index | handleize -%}
 
         <div class="pdpBundleInclude__dropdown-wrapper">
-          <div class="pdpBundleInclude__dropdown pdpBundleInclude__dropdown--{{ forloop.index0 }} dropdown">
+          <div class="pdpBundleInclude__dropdown pdpBundleInclude__dropdown--{{ forloop.index0 }}">
             {%- if bundle_include_product != blank -%}
-              <div class="pdpBundleInclude__dropdown-header f jcb aic" data-dropdown>
+              <slide-toggle class="pdpBundleInclude__dropdown-header f jcb aic" data-slide-toggle="{{ id }}">
                 <div class="pdpBundleInclude__dropdown-title">
                   {{ bundle_include_product_title }}
                 </div>
                 <div class="dropdownHeader-icon">
                   {% render 'icon' with 'dropdown' %}
                 </div>
-              </div>
+              </slide-toggle>
             {%- endif -%}
-            <div class="pdpBundleInclude__dropdown-content dropdownContent--animate-block" data-dropdown-list style="display: none">
+            <div class="pdpBundleInclude__dropdown-content" data-slide-target="{{ id }}">
               {%- if bundle_include_product != blank -%}
-                {%- assign bundle_ip_image_url = product.featured_image.src | img_url: '800x' -%}
+                {%- if bundle_include_product_image != blank -%}
+                  {%- assign bundle_image = bundle_include_product_image -%}
+                {%- else -%}
+                  {%- assign bundle_image = bundle_include_product.featured_image.src -%}
+                {%- endif -%}
 
                 <div class="pdpBundleInclude__imageWrapper">
-                  <div class="pdpBundleInclude__image rel x">
-                    {%- if bundle_include_product_image != blank -%}
-                      {%- assign bundle_ip_image_url = bundle_include_product_image -%}
-                    {%- endif -%}
-                    {% include 'component-image' with
-                      src: bundle_ip_image_url,
+                  <a href="{{ bundle_include_product.url }}" class="pdpBundleInclude__image block rel x">
+                    {% render 'image-lazy-metafields',
+                      image: bundle_image,
+                      class_name: 'image image-abs-cover',
                       alt: bundle_include_product_title,
-                      className: 'image image-abs-cover',
-                      absolute: true,
-                      href: bundle_include_product.url,
-                      fill: true %}
-                  </div>
+                      size: 'medium',
+                      loader: true %}
+                  </a>
                 </div>
 
                 <div class="pdpBundleInclude__description">
@@ -76,12 +77,12 @@
                         {%- if feature_icon != blank -%}
                           <div class="pdpBundleInclude__featureItemIconWrapper">
                             <div class="pdpBundleInclude__featureItemIcon rel x">
-                              {% include 'component-image' with
-                                src: feature_icon,
+                              {% render 'image-lazy-metafields',
+                                image: feature_icon,
+                                class_name: 'image image-abs-cover',
                                 alt: feature_text,
-                                className: 'image image-abs-cover',
-                                absolute: true,
-                                fill: true %}
+                                size: 'small',
+                                loader: true %}
                             </div>
                           </div>
                         {%- endif -%}

@@ -21,14 +21,11 @@
   class='{{ cx | strip }}'
 >
   {% if img and imgMobile == blank %}
-    {%
-      include 'component-image' with
-      src: img,
+    {% render 'image-lazy-metafields',
+      image: img,
+      class_name: 'image-abs-cover',
       alt: img_alt,
-      className: 'image',
-      absolute: true,
-      fill: true
-    %}
+      loader: true %}
   {% elsif img and imgMobile != blank %}
     <picture class='image fill abs x y is-visible is-loaded'>
       {% if imgMobile %}<source class='x y' media='(max-width: 991px)' srcset='{{ imgMobile }}'>{% endif %}

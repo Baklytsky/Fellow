@@ -7,36 +7,45 @@
       {% assign display_order = flex_order %}
     {% endunless %}
   {% endif %}
+
+  {%- capture 'slick-config' -%}
+    {
+    "slidesToShow": 1,
+    "slidesToScroll": 1,
+    "dots": false,
+    "arrows": true,
+    "autoplay": true,
+    "speed": 500,
+    "autoplaySpeed": 7000,
+    "adaptiveHeight": true
+    }
+  {%- endcapture -%}
+
   <div class='jumboSlider__mobileWrap{% if display_order %} o-{{ display_order }}{% endif %}'>
-    <section class='jumboSlider module pdpJumboSlider' data-component='jumboSlider'>
-      <div class='x y block rel' data-jumboSlider>
+    <section class='jumboSlider rel' data-section-type='slick-slideshow' data-slick-config='{{- slick-config -}}'>
+      <div class='jsSlickSlider'>
         {% for item in product.metafields.custom_fields["jumbo_slider_new"] %}
           {% assign imageSrc = item["jumbo_slide_new"] %}
           {% assign alt = item["jumbo_slide_alt_text_new"] | escape %}
-          <div class='jumboSlider__slide x y fill abs'>
-            {%
-              include 'component-image' with
-              src: imageSrc,
-              alt: alt,
-              className: 'image',
-              fill: true
-            %}
+          <div class='jumboSlider__slide'>
+            <div class="jumboSlider__slide-item rel x">
+              {% render 'image-lazy-metafields',
+                image: imageSrc,
+                class_name: 'image-abs-cover',
+                alt: alt,
+                size: 'medium',
+                loader: true %}
+            </div>
           </div>
         {% endfor %}
       </div>
       {% if product.metafields.custom_fields["jumbo_slider_new"].size > 1 %}
-      <div class='slider__controls abs block fill'>
-        <div class='rel f fdr aic jcc y'>
-          <div class='slider__nav rel f jcb x'>
-            <button data-slidePrev aria-label="Slide Previous">
-              {% render 'icon' with 'arrow-prev' %}
-            </button>
-            <button data-slideNex aria-label="Slide Next">
-              {% render 'icon' with 'arrow-next' %}
-            </button>
-          </div>
-        </div>
-      </div>
+        <button class="jsPrevSlide" aria-label="Slide Previous">
+          {% render 'icon' with 'arrow-prev' %}
+        </button>
+        <button class="jsNextSlide" aria-label="Slide Next">
+          {% render 'icon' with 'arrow-next' %}
+        </button>
       {% endif %}
     </section>
   </div>

@@ -3,9 +3,7 @@
 {%- assign footer_menu_bottom = section.settings.footer_menu_bottom -%}
 {%- assign show_footer_payment_icon = section.settings.show_footer_payment_icon -%}
 
-{% if section.settings.bigfooter_marquee == true %}
-  {% include 'bigfooter-marquee' %}
-{% else %}
+{% if section.settings.enable_marquee == true %}
   {% include 'footer-marquee' %}
 {% endif %}
 
@@ -199,14 +197,9 @@
       },
       {
         "type": "checkbox",
-        "id": "bigfooter_marquee",
-        "label": "Show Bigfoot in Marquee?",
+        "id": "enable_marquee",
+        "label": "Show Footer Marquee",
         "default": true
-      },
-      {
-        "type": "url",
-        "id": "bigfoot_url",
-        "label": "URL for Bigfoot (Leave blank to not include a link)"
       },
       {
       "type": "header",

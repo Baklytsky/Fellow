@@ -12,14 +12,12 @@
   <a href="{{ article.url }}" class='abs z1 x y fill'></a>
   {% if article.image %}
     <div class='additionalPost__thumb rel'>
-      {%
-        include 'component-image' with
-        src: imgSrc,
-        alt: article.title,
-        className: 'image ais',
-        centered: false,
-        fill: true
-      %}
+      <div class="image ais">
+        {% render 'image-lazy',
+          image: article.image,
+          alt: article.title,
+          loader: true %}
+      </div>
     </div>
   {% endif %}
   <div class='additionalPost__copy'>

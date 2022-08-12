@@ -1685,10 +1685,11 @@ class PdpMain extends PdpHelper {
     this.personalizeBtn = this.form.querySelector('.pdpDetails__personalize')
     this.upsell = this.querySelector('.upsell-product')
 
-    //this.onVariantChange()
+    this.onVariantChange()
 
     this.form.addEventListener('change', () => {
       this.onVariantChange()
+      this.changeContent()
       this.changeUrl()
     })
     this.atc.addEventListener('click', (e) => this.addToCart(e))
@@ -1706,7 +1707,6 @@ class PdpMain extends PdpHelper {
     this.changeSelectedOption()
     this.disableUnavailableVariants()
     this.checkVariantTitle()
-    this.changeContent()
     this.toggleAddButton()
     if (this.personalizeBtn) this.setVariantForPersonalize()
     if (this.stickyBar) this.stickyBar.stickyBarVariantChange(this.selectedOptions)
@@ -2110,7 +2110,7 @@ class YoutubeVimeoVideo extends HTMLElement {
     this.loadScript().then(this.setupPlayer.bind(this));
 
     this.playBtn.addEventListener('click', () => {
-      if (this.player) this.player.playVideo()
+      if (this.player.A) this.player.playVideo()
       this.playerWrapper.classList.add('is-playing')
     })
   }
@@ -2137,32 +2137,26 @@ class YoutubeVimeoVideo extends HTMLElement {
   }
 
   youtubeSetup(playerLoadingInterval) {
-    if (window.YT) {
+    window.YT.ready(()=> {
       this.player = new YT.Player(this.playerInner, {
         videoId: this.options['videoId'],
         playerVars: {
-          showinfo: 0,
-          controls: 0,
-          fs: 0,
           rel: 0,
           height: '100%',
           width: '100%',
           iv_load_policy: 3,
-          html5: 1,
           loop: 1,
           playsinline: 1,
           modestbranding: 1,
-          disablekb: 1,
           origin: this.options['requestHost']
         },
         events: {
-          onReady: this.onYouTubeReady(),
-          onStateChange: this.onYouTubeStateChange()
+          onReady: this.onPlayerReady()
         }
       });
 
       clearInterval(playerLoadingInterval);
-    }
+    })
   }
 
   vimeoSetup(playerLoadingInterval) {
@@ -2173,24 +2167,12 @@ class YoutubeVimeoVideo extends HTMLElement {
         loop: true
       });
 
-      this.player.ready().then(() => this.onVimeoReady())
+      this.player.ready().then(() => this.onPlayerReady())
       clearInterval(playerLoadingInterval);
     }
   }
 
-  onYouTubeReady() {
-    this.isLoaded()
-  }
-
-  onYouTubeStateChange() {
-    console.log('Youtube state change')
-  }
-
-  onVimeoReady() {
-    this.isLoaded()
-  }
-
-  isLoaded() {
+  onPlayerReady() {
     this.playerWrapper.classList.add('is-loaded')
   }
 

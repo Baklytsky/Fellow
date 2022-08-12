@@ -88,7 +88,7 @@ img[data-sizes="auto"] {
 }
 
 .lazyload ~ .image-loader {
-  opacity: 1;
+  opacity: 0.8;
   visibility: visible;
   z-index: 2;
 }
@@ -1081,6 +1081,44 @@ img[data-sizes="auto"] {
 
 .slick-vertical .slick-track {
   flex-direction: column;
+}
+
+.jsPrevSlide,
+.jsNextSlide {
+  position: absolute;
+  top: 50%;
+  width: 29px;
+  height: 29px;
+  transform: translateY(-50%);
+  color: inherit;
+  background-color: transparent;
+  z-index: 1;
+}
+
+.jsPrevSlide {
+  left: 0;
+
+  @media screen and (max-width: $large_desk) {
+    left: -50px;
+  }
+
+  @media screen and (max-width: $tablet) {
+    left: 25px;
+    color: #000000;
+  }
+}
+
+.jsNextSlide {
+  right: 0;
+
+  @media screen and (max-width: $large_desk) {
+    right: -50px;
+  }
+
+  @media screen and (max-width: $tablet) {
+    right: 25px;
+    color: #000000;
+  }
 }
 
 .image-abs-cover {
@@ -3381,8 +3419,10 @@ h2.pdpCopy__header-price,
     font-weight: bold;
   }
 
-  .card__price--regular {
-    color: #ABABAB;
+  .pdpCopy__header-price-small {
+    font-size: 14px;
+    padding-right: 5px;
+    font-weight: 500;
   }
 
   .pdp__options {
@@ -5000,6 +5040,12 @@ h2.pdpCopy__header-price,
 
   @media screen and (max-width: $tablet) {
     padding: 24px 16px;
+  }
+}
+
+.pdpBundleInclude__dropdown-header.active {
+  .dropdownHeader-icon {
+    transform: rotate(180deg);
   }
 }
 

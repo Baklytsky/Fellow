@@ -4714,56 +4714,11 @@ ul.list {
   transition: opacity 200ms var(--cubic)
 }
 
-.image::before {
-  content: attr(data-alt);
-  color: #fff;
-  background-color: rgba(20, 20, 20, .15);
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: auto;
-  font-size: calc((14 /16) * 1rem);
-  font-family: "Oswald", -apple-system, system-ui, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
-  text-transform: uppercase;
-  opacity: .6;
-  max-width: 100%;
-  max-height: 100%;
-  overflow: hidden;
-  z-index: 0;
-  transition: opacity 200ms var(--cubic);
-  -webkit-animation: fading 2.5s infinite;
-  animation: fading 2.5s infinite
-}
-
 @media(prefers-reduced-motion) {
   .image::before {
     -webkit-animation: none;
     animation: none
   }
-}
-
-.image img {
-  -o-object-fit: cover;
-  object-fit: cover;
-  opacity: 0;
-  transition: opacity 200ms var(--cubic)
-}
-
-.image.is-loaded::before {
-  opacity: 0;
-  max-width: 100%;
-  max-height: 100%;
-  -webkit-animation: none;
-  animation: none
-}
-
-.image.is-loaded img {
-  opacity: 1
 }
 
 .image-square:after {
@@ -6214,72 +6169,43 @@ h3.productCard__title {
   overflow: hidden
 }
 
-/*@media screen and (max-width: 991.98px) {*/
-/*  .jumboSlider__mobileWrap {*/
-/*    overflow: hidden*/
-/*  }*/
-/*}*/
-
 .jumboSlider {
-  height: 90vh;
-  max-height: 760px;
+  width: 100%;
   overflow: hidden;
-  pointer-events: auto
+}
+
+.jumboSlider__slide-item {
+  padding-top: 52%;
+}
+
+.jumboSlider .jsPrevSlide {
+  left: 50px;
+}
+
+.jumboSlider .jsNextSlide {
+  right: 50px;
+}
+
+.jumboSlider .jsPrevSlide,
+.jumboSlider .jsNextSlide {
+  opacity: 0;
+}
+
+.jumboSlider:hover .jsPrevSlide,
+.jumboSlider:hover .jsNextSlide {
+  opacity: 1;
 }
 
 @media screen and (max-width: 991.98px) {
   .jumboSlider {
-    height: 70vw;
-    margin-left: -0.33rem;
-    margin-right: -0.33rem
+    margin-left: -16px;
+    margin-right: -16px;
   }
-}
 
-.jumboSlider__slide img {
-  -o-object-fit: cover;
-  object-fit: cover;
-  width: 100%;
-  /*max-width: calc(100% - 1.25rem)*/
-}
-
-@media screen and (max-width: 991.98px) {
-  .jumboSlider__slide img {
-    /*max-width: calc(90vw - .33rem)*/
+  .jumboSlider .jsNextSlide,
+  .jumboSlider .jsPrevSlide {
+    display: none !important;
   }
-}
-
-.jumboSlider:hover .slider__controls {
-  opacity: 1
-}
-
-.jumboSlider .slider__controls {
-  opacity: 0;
-  pointer-events: none;
-  padding: 4.5rem;
-  transition: opacity var(--fast) var(--ease)
-}
-
-@media screen and (max-width: 991.98px) {
-  .jumboSlider .slider__controls {
-    display: none
-  }
-}
-
-.jumboSlider .slider__nav button {
-  display: block;
-  height: 32px;
-  width: 32px;
-  pointer-events: all;
-  color: #000;
-  /*border: 1px solid #e7e8e6;*/
-  border-radius: 100%;
-  transition: all var(--fast) var(--ease)
-}
-
-.jumboSlider .slider__nav button:hover {
-  color: #000;
-  /*border-color: #000;*/
-  /*background: #fff*/
 }
 
 .hero__module {
@@ -8774,6 +8700,10 @@ input[name=product_search_field] {
 
 .keyFeature__image-wrapper .keyFeature__image--secondary {
   display: none
+}
+
+.keyFeature__image {
+  padding-top: 70%;
 }
 
 @media screen and (min-width: 768px) {

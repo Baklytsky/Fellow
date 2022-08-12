@@ -19,12 +19,13 @@
         </div>
         <div class='col-lg-4'>
           {% if specsImage == true %}
-            {%
-              include 'component-image' with
-              src: image,
-              alt: alt,
-              className: 'pdpSpecs__image image'
-            %}
+            <div class="pdpSpecs__image image">
+              {% render 'image-lazy-metafields',
+                image: image,
+                alt: alt,
+                size: 'medium',
+                loader: true %}
+            </div>
           {% endif %}
         </div>
         <div class='col-lg-1{% if specsImage == true %} divider{% endif %}'>

@@ -35,12 +35,13 @@
 <div class='container--l pt0 mt3rem' data-component='page'>
   <div class='row'>
     <div class='col-lg-3'>
-      {%
-        include 'component-image' with
-        src: introImage,
-        alt: alt,
-        className: 'image'
-      %}
+      <div class="image">
+        {% render 'image-lazy-metafields',
+          image: introImage,
+          alt: alt,
+          size: 'medium',
+          loader: true %}
+      </div>
     </div>
     <div class='col-lg-7 offset-lg-1'>
       <div class="rte">

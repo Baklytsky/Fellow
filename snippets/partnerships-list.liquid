@@ -18,13 +18,13 @@
             <div class='row'>
               {% if partnershipImage != blank %}
                 <div class='col-lg-6 pr25'>
-                  {%
-                    include 'component-image' with
-                    src: partnershipImage,
-                    alt: alt,
-                    className: 'image',
-                    scaleDown: true,
-                  %}
+                  <div class="image">
+                    {% render 'image-lazy-metafields',
+                      image: partnershipImage,
+                      alt: alt,
+                      size: 'medium',
+                      loader: true %}
+                  </div>
                 </div>
               {% endif %}
 

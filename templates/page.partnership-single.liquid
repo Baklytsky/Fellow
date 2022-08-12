@@ -44,12 +44,13 @@ TODO: Add Other Partnerships Links
     <div class='row aic mt2'>
       {% if introImage != blank %}
         <div class='col-lg-4 introImage'>
-          {%
-            include 'component-image' with
-            src: introImage,
-            alt: alt,
-            className: 'image'
-          %}
+          <div class="image">
+            {% render 'image-lazy-metafields',
+              image: introImage,
+              alt: alt,
+              size: 'medium',
+              loader: true %}
+          </div>
         </div>
       {% endif %}
       <div class='col offset-lg-1 introCopy'>
@@ -79,12 +80,13 @@ TODO: Add Other Partnerships Links
         {% endif %}
         <div class="row partnership-detail detail-row aic my3rem">
           <div class="col-lg-6 detailRow--image">
-            {%
-              include 'component-image' with
-              src: imgSrc,
-              alt: alt,
-              className: 'image'
-            %}
+            <div class="image">
+              {% render 'image-lazy-metafields',
+                image: imgSrc,
+                alt: alt,
+                size: 'medium',
+                loader: true %}
+            </div>
           </div>
           <div class="col-lg-6 detailRow--copy">
             <h2 class='caps'>
@@ -115,12 +117,13 @@ TODO: Add Other Partnerships Links
       {% if page.metafields.custom_fields["partner_page_about_image"] != blank %}
         <div class='col-lg-6'>
           {% assign aboutImage = page.metafields.custom_fields["partner_page_about_image"] %}
-          {%
-            include 'component-image' with
-            src: aboutImage,
-            alt: alt,
-            className: 'image'
-          %}
+          <div class="image">
+            {% render 'image-lazy-metafields',
+              image: aboutImage,
+              alt: alt,
+              size: 'medium',
+              loader: true %}
+          </div>
         </div>
       {% endif %}
     </div>

@@ -17,23 +17,19 @@
           {%- assign image_class = 'image image-abs-cover hide-tablet' -%}
         {%- endif -%}
         <div class="collectionIWT__media rel">
-          {%
-            include 'component-image' with
-            src: collection_iwt_image,
+          {% render 'image-lazy-metafields',
+            image: collection_iwt_image,
+            class_name: image_class,
             alt: collection_iwt_title,
-            className: image_class,
-            absolute: true,
-            fill: true
-          %}
+            size: 'medium',
+            loader: true %}
           {%- if collection_iwt_image_mobile != blank -%}
-            {%
-              include 'component-image' with
-              src: collection_iwt_image_mobile,
+            {% render 'image-lazy-metafields',
+              image: collection_iwt_image_mobile,
+              class_name: 'image image-abs-cover hide-tablet-desk',
               alt: collection_iwt_title,
-              className: 'image image-abs-cover hide-tablet-desk',
-              absolute: true,
-              fill: true
-            %}
+              size: 'medium',
+              loader: true %}
           {%- endif -%}
         </div>
       {%- endif -%}

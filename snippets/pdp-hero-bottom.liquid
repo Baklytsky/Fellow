@@ -35,13 +35,13 @@
             </video>
           {% else %}
             {% unless image == blank %}
-              {%
-                include 'component-image' with
-                src: image,
-                alt: alt,
-                className: 'heroSection__image image p3rem',
-                fill: true
-              %}
+              <div class="heroSection__image image p3rem">
+                {% render 'image-lazy-metafields',
+                  image: image,
+                  alt: alt,
+                  size: 'medium',
+                  loader: true %}
+              </div>
             {% endunless %}
           {% endif %}
         </div>
