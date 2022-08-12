@@ -198,9 +198,8 @@
               "image_1": "shopify:\/\/shop_images\/2021-11-2_fellow_drops12791_copy-min_1.jpg",
               "title_1": "Shop Coffee Collection",
               "url_1": "https:\/\/fellowproducts.com\/pages\/coffee-marketplace",
-              "image_2": "shopify:\/\/shop_images\/HP_FellowDrops_Module.jpg",
-              "title_2": "Join Fellow Drops",
-              "url_2": "https:\/\/drops.fellowproducts.com",
+              "title_2": "",
+              "url_2": "",
               "title_3": "",
               "url_3": "",
               "title_4": "",
@@ -323,13 +322,13 @@
           "logo_svg": "",
           "logo_desktop_size": 130,
           "logo_mobile_size": 100,
-          "center_menu": "new-main-menu",
+          "center_menu": "main-navigation-q3-2022",
           "menu_left": "new-left-menu-1",
           "menu_right": "new-right-menu",
-          "mobile_menu": "",
+          "mobile_menu": "mobile-navigation-q3-2022",
           "show_announcement": true,
-          "announcement_text": "Free US shipping on orders over $99 <u id=\"freeShipPopup\" class=\"ml05\" style=\"cursor:pointer;\"> Learn more<\/u>",
-          "announcement_link": "",
+          "announcement_text": "Free US shipping on orders over $99 <u id=\"freeShipPopup\" class=\"ml05\" style=\"cursor:pointer;\"> Learn more -&gt;<\/u>",
+          "announcement_link": "shopify:\/\/collections\/all-products",
           "enable_timer": false,
           "end_date": "Sep 30, 2021 07:30:00 GMT-08:00"
         }
@@ -339,7 +338,7 @@
         "settings": {
           "footer_menu": "new-footer-nav",
           "footer_menu_bottom": "new-bottom-menu",
-          "show_footer_payment_icon": true,
+          "show_footer_payment_icon": false,
           "show_icons": true,
           "instagram": true,
           "facebook": true,
@@ -349,7 +348,7 @@
           "linkedin": false,
           "bigfooter_marquee": false,
           "bigfoot_url": "",
-          "show_newsletter": true,
+          "show_newsletter": false,
           "newsletter_heading": "Sign up for updates + 10% off your first order",
           "newsletter_subheading": ""
         }
@@ -365,23 +364,22 @@
         "blocks": {
           "1f457594-c59c-4edd-800a-a9f7662f319e": {
             "type": "splitSlide",
-            "disabled": true,
             "settings": {
               "splitSlide__layout": "right",
-              "heroSlide": "shopify:\/\/shop_images\/HeroImage_Award_Winning_Mobile__2x_bde01ab1-e5d9-41d4-b039-10c45b3ee981.png",
+              "heroSlide": "shopify:\/\/shop_images\/Award_Winning_Clara_HeroImage_Desktop__2x_918b2caa-a5e5-4f3a-90cb-bac16ee7adf1.png",
               "desktopAlignment": "center",
               "mobileAlignment": "center",
-              "heroSlide__header": "The Award Winners Collection",
-              "heroSlide__subheader": "Browse brewing gear recognized as the best in the business.",
-              "subSlide__bgColor": "#000000",
-              "subSlide__textColor": "#FFFFFF",
+              "heroSlide__header": "Pick A Winner",
+              "heroSlide__subheader": "Discover precision brewing gear recognized as the best of the best.",
+              "subSlide__bgColor": "#fff4bc",
+              "subSlide__textColor": "#231f20",
               "heroSlide__ctaURL": "shopify:\/\/collections\/award-winners",
               "heroSlide__ctaCopy": "Shop Award Winners",
-              "heroSlide__ctaColor": "white",
+              "heroSlide__ctaColor": "black",
               "heroSlide__ctaURL2": "",
               "heroSlide__ctaCopy2": "",
               "heroSlide__ctaColor2": "black",
-              "heroSlide__ctaSubtext": ""
+              "heroSlide__ctaSubtext": "<img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0057\/6235\/1219\/files\/Award_Winning_Clara_Award_Logos.png?v=1659977584\" alt=\"Logos of awards Fellow has received for their products including the Clara French Press and the Ode Brew Grinder\" style=\"padding:0;max-width: 327px;object-fit:contain;height:auto;\">"
             }
           },
           "58ee7397-6079-412a-9acd-d453a0cf281c": {
@@ -406,6 +404,7 @@
           },
           "91049687-67b8-4bdc-8f37-c74f97e41d00": {
             "type": "splitSlide",
+            "disabled": true,
             "settings": {
               "splitSlide__layout": "right",
               "heroSlide": "shopify:\/\/shop_images\/HeroImage_Summer_Brew_Desktop__2x_338677d1-205e-4b35-b26c-560f9669aa15.jpg",
@@ -926,14 +925,14 @@
         "type": "hp-iwt",
         "settings": {
           "enable_section": true,
-          "image": "shopify:\/\/shop_images\/New_Carter_Colors_Module_2__2x_87f6ea13-bd07-4520-ae21-f5c653731ce5.png",
+          "image": "shopify:\/\/shop_images\/Award_Winning_Clara_Module_1__2x_4e0016aa-c43e-49d7-ba6f-fd7410216a63.png",
           "layout": "left",
-          "header": "Cupping Season",
-          "description": "<p>Browse ridiculously useful gifts for all your summer weddings.<\/p>",
+          "header": "All The Bright Moves",
+          "description": "<p>Our new Carter collection has landed. New colors, new lids, new ways to move.<\/p>",
           "bg_color": "rgba(0,0,0,0)",
           "text_color": "",
           "cta_url": "shopify:\/\/collections\/wedding-gifts",
-          "cta_copy": "Shop Wedding Gifts",
+          "cta_copy": "Shop Carter",
           "cta_color": "btn--dark"
         }
       },
@@ -962,7 +961,7 @@
         "settings": {
           "btn_text": "Skip to Accessibility Statement",
           "heading": "Fellow's Commitment to Accessibility",
-          "description": "<p>Fellow Industries is committed to digital accessibility, conforming to the <a href=\"https:\/\/fellowproducts.com\/pages\/Web%20Content%20Accessibility%20Guidelines%20(WCAG)\" target=\"_blank\">Web Content Accessibility Guidelines (WCAG)<\/a> 2.1, Level A and AA, and complying with <a href=\"https:\/\/www.essentialaccessibility.com\/blog\/ada-requirements\" target=\"_blank\">Americans with Disabilities Act (ADA)<\/a> effective communication requirements and other applicable regulations.<br\/><br\/>To accomplish this, we have <a href=\"http:\/\/www.essentialaccessibility.com\/\" target=\"_blank\">partnered with eSSENTIAL Accessibility<\/a> to administer our accessibility program and oversee its governance. Their accessibility program evaluates our digital products on an ongoing basis in accordance with best practices and is supported by a diverse team of accessibility professionals, including users of assistive technologies. The platform, moreover, goes beyond minimum compliance requirements by making an <a href=\"https:\/\/www.essentialaccessibility.com\/fellow\" target=\"_blank\">assistive CX technology application<\/a> available to customers who have trouble typing, gesturing, moving a mouse, or reading. The application is free to download, and it incorporates tools such as mouse and keyboard replacements, voice recognition, speech enablement, hands-free\/touch-free navigation, and more.<br\/><br\/>We want to hear from you if you encounter any accessibility barriers on our digital properties. Please contact our Customer Support at <a href=\"mailto:hello@fellowproducts.com\" target=\"_blank\">hello@fellowproducts.com<\/a> with \"Accessibility support\" in the subject line.<br\/><br\/>Fellow takes your feedback seriously and will consider it as we evaluate ways to accommodate all of our customers and our overall accessibility policies. Our team is working on an ongoing basis to make the website more accessible.<br\/><br\/>Additionally, while we do not control such vendors, we strongly encourage vendors of third-party digital content to provide content that is accessible and user-friendly.<\/p>",
+          "description": "<p>Fellow is committed to making our website's content accessible and user friendly to everyone. If you are having difficulty viewing or navigating the content on this website, or notice any content, feature, or functionality that you believe is not fully accessible to people with disabilities, please email our Customer Experience team at <a href=\"mailto:hello@fellowproducts.com\" title=\"Email Us at hello@fellowproducts.com\">hello@fellowproducts.com<\/a> with \"Disabled Access\" in the subject line and provide a description of the specific feature you feel is not fully accessible or a suggestion for improvement. Fellow takes your feedback seriously and will consider it as we evaluate ways to accommodate all of our customers and our overall accessibility policies. Additionally, while we do not control such vendors, we strongly encourage vendors of third-party digital content to provide content that is accessible and user friendly.<\/p>",
           "test_mode": false
         }
       },
