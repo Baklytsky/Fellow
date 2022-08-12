@@ -1,0 +1,71 @@
+{%- comment -%}
+{%- render 'facets' collection: collection -%}
+{%- endcomment -%}
+
+<div class="facet-wrapper">
+  <form id="facet-form" class="facet-form" name="facet">
+    <div class="facet-header">
+      <h2 class="facet-header-title">
+        {%- if request.path == '/collections/all-products' -%}
+          {{  collection.title }}
+        {%- else -%}
+          {{ 'collections.general.facet_title' | t: title: collection.title }}
+        {%- endif -%}
+        <span class="facet-header-results-count"></span>
+      </h2>
+      <button type="button" data-clear-facets class="is-hidden">{{'collections.general.facet_clear' | t }}</button>
+      <slide-toggle type="button" data-slide-toggle="facets">
+        <span class="slide-toggle-active">{{'collections.general.facet_hide' | t }}</span>
+        <span class="slide-toggle-inactive">{{'collections.general.facet_show' | t }}</span>
+        <span class="selected-facets-count"></span>
+        {% render 'icon' with 'filter' %}
+      </slide-toggle>
+      <div class="facet-header-sort-by rel" data-dropdown data-group-name="sort_by">
+        <button type="button"
+                class="facet-header-sort-by-opener rel">
+          {{'collections.general.facet_sort_by' | t }} {% render 'icon' with 'dropdown-small' %}
+        </button>
+        <ul class="facet-header-sort-by-list"
+            data-dropdown-content>
+          {%- render 'facets-sort-by-values' collection: collection -%}
+        </ul>
+      </div>
+    </div>
+    <div id="facet-group-wrapper" class="facet-group-wrapper" data-slide-target="facets">
+      <script id="facet-group-template" type="text/x-handlebars-template">
+        {% raw %}
+        {{#if facetsArr.length }}
+          {{#each facetsArr}}
+            {{#if facets.length }}
+              <div class="facet-group" data-group-name="{{ handle }}">
+                <h3 class="facet-group-name">
+                  {{ title }}
+                </h3>
+                <ul class="facet-group__list">
+                  {{#each facets}}
+                  <li class="facet-group__list-item {{#if ../color }}facet-group__list-item-color{{/if}}">
+                    <input id='facet-{{ ../handle }}-{{@index}}'
+                           type='checkbox'
+                           name='{{ value }}'
+                           class="filter-group-input"
+                           value='{{ value }}'
+                           title="{{ ../title }}"/>
+                    <label class='facet-group-radio f aic rel'
+                           for='facet-{{ ../handle }}-{{@index}}'>
+                      {{#if ../color }}
+                        <span class="facet-group-circle f aic jcc rel" style="background: {{ hex }};"></span>
+                      {{/if}}
+                      <span class="facet-group-title">{{ name }}</span>
+                    </label>
+                  </li>
+                  {{/each}}
+                </ul>
+              </div>
+            {{/if }}
+          {{/each }}
+        {{/if}}
+        {% endraw %}
+      </script>
+    </div>
+  </form>
+</div>

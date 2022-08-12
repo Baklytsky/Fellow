@@ -38,22 +38,14 @@
               </li>
             {%- endif -%}
             <li class="megaMenu__item {% if mega_item.links != blank %} megaMenu__itemBold {% endif %}">
-              {% if mega_item.links == blank %}
-                <a data-selected="false" class="newHeader__link linkBlack"
-                   href="{{ mega_item.url }}">
-                  {{ mega_item.title }}
-                  {%- if mobile_menu == true and mega_item.links != blank -%}
-                    {%- render 'icon', icon: 'arrow' -%}
-                  {%- endif -%}
-                </a>
-              {% else %}
-                <button data-selected="false" class="newHeader__link newHeader__button">
-                  {{ mega_item.title }}
-                  {%- if mobile_menu == true and mega_item.links != blank -%}
-                    {%- render 'icon', icon: 'arrow' -%}
-                  {%- endif -%}
-                </button>
-              {% endif %}
+              <a href="{{ mega_item.url }}"
+                 data-selected="false"
+                 class="newHeader__link {% if mega_item.links == blank %}linkBlack{% else %}newHeader__button{% endif %}">
+                {{ mega_item.title }}
+                {%- if mobile_menu == true and mega_item.links != blank -%}
+                  {%- render 'icon', icon: 'arrow' -%}
+                {%- endif -%}
+              </a>
 
               {%- if mega_item.links != blank -%}
                 <ul class="megaMenu__subMenuList subMenuList">

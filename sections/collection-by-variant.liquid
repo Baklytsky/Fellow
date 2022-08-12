@@ -1,0 +1,83 @@
+{% comment %} Metafield represents index as 1, 2, 3, 4, etc. {% endcomment %}
+{% assign product_image_index = 0 %}
+
+{% paginate collection.products by 1000 %}
+
+{% if collection.metafields.custom_fields["desktop_masthead_image"] != blank %}
+  {%- assign desktop_masthead = collection.metafields.custom_fields["desktop_masthead_image"] -%}
+{% endif %}
+{% if collection.metafields.custom_fields["mobile_masthead_image"] != blank %}
+  {%- assign mobile_masthead = collection.metafields.custom_fields["mobile_masthead_image"] -%}
+{% endif %}
+{%- assign collection_title = collection.title -%}
+
+<section class='collection'>
+  {%- if section.settings.show_breadcrumbs -%}
+    {% include 'breadcrumbs' %}
+  {%- endif -%}
+  {% if desktop_masthead != blank %}
+    {%
+      include 'component-collection-masthead' with
+      img: desktop_masthead,
+      imgMobile: mobile_masthead,
+      dataAttr: 'componentMasthead',
+      heading: collection.title,
+      copy: collection.description,
+      className: ''
+    %}
+  {% endif %}
+
+  <collection-facets class='collection-wrapper' data-template="{{ template.suffix }}">
+    {%- render 'facets' collection: collection -%}
+    <div class='collection__products-wrapper rel'>
+      <div class="collection__products-results">
+        <div id="collection__result-wrapper" class="subcollection__products one-fourth">
+          {%- for i in (1..8) -%}
+            <div class="productCard">
+              <div class="productCard__content y">
+                <div class="productCard__img skeleton"></div>
+                <div class="productCard__details">
+                  <div class="productCard__title skeleton"></div>
+                  <div class="productCard__price skeleton"></div>
+                </div>
+                <div class="productCard_ratings f fdr aie mb05 mt05 rel skeleton"></div>
+              </div>
+            </div>
+          {%- endfor -%}
+          {%- render 'variant-results' -%}
+        </div>
+      </div>
+    </div>
+  </collection-facets>
+  <div class='f fw'>
+    <div class='col-lg-12'>
+      {% if paginate.pages > 1 %}
+        {% include 'pagination' %}
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% endpaginate %}
+
+{% schema %}
+  {
+    "name": {
+      "de": "Kategorie",
+      "en": "Collection",
+      "es": "Colección",
+      "fr": "Collection",
+      "it": "Collezione",
+      "ja": "コレクション",
+      "pt-BR": "Coleção"
+    },
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_breadcrumbs",
+        "label": "Show breadcrumbs",
+        "default": true
+      }
+    ]
+  }
+{% endschema %}

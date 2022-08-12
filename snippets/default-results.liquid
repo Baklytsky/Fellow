@@ -1,0 +1,101 @@
+{%- comment -%}
+{%- render 'variant-results' -%}
+{%- endcomment -%}
+<script id="collection__result-source" type="text/x-handlebars-template">
+  {% raw %}
+  {{#if items.length}}
+    {{#each items}}
+    <div class='productCard'>
+      <div class='productCard__content y'>
+        <div aria-label='Image of {{ title }}' class='productCard__img rel z0'>
+        {{#if badge}}
+          <span class="productCard__badge abs z3 xsmall cb bg-xlightgrey">{{ badge_text }}</span>
+        {{/if}}
+          <div class='productCard__img-container default'>
+            <img src="{{ featured_image.large }}"
+                 alt="{{ title }}"
+                 class="productCard__image image image-abs-cover">
+          </div>
+          {{#unless bundle}}
+          {{#if product_images}}
+            {{{ product_images }}}
+          {{/if}}
+          <div class="productCardImg__QuickView">
+            <button class="productCardImg__QuickViewButton js-product-view"
+                    data-quick-view="{{ url }}?view=quick-view" type="button">
+              + Quick Add
+            </button>
+          </div>
+          {{/unless }}
+          <a class='productCardImg__ProductLink abs fill z2 js-product-link'
+             href='{{ url }}'
+             title="{{ title }}"></a>
+        </div>
+        <div class='productCard__details rel'>
+          <h3 class='productCard__title js-product-card-title'>{{ title }}</h3>
+          <div class="productCard__price js-product-card-price">
+            {{#unless available}}
+              <p class='productCard__from eyebrow'>Sold Out</p>
+            {{/unless }}
+            <div class="ar productCard__price-wrapper">
+            {{#if available}}
+              {{#if compare_at_price_is_more_than_price}}
+              <div class="pdpCopy__price f aic">
+                <span class="inline-block strike card__price--regular ml1 pdpCopy__header-price pdpCopy__header-price-small rel">
+                  {{ compare_at_price_money }}
+                  <div class="price-round-arrow">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="25" height="14" viewBox="0 0 25 14" fill="none">
+                        <path d="M21.8717 2.55273L22.064 7.23249L17.2605 7.54226" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M21 6.49951C21 6.49951 16.3627 1.55385 10.0543 3.38802C3.74592 5.22219 1.9372 10.8949 1.9372 10.8949" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+                      </svg>
+                  </div>
+                </span>
+                <span class="visually-hidden">Regular price</span>
+                <h2 class="inline-block card__price--sale ml1 pdpCopy__header-price">
+                  {{ price_money }}
+                </h2>
+              </div>
+              {{ else }}
+                <h2 class="ml1 pdpCopy__header-price">{{ price_money }}</h2>
+              {{/if}}
+            {{ else }}
+              <h2 class='strike'>{{ price_money }}</h2>
+            {{/if}}
+            </div>
+          </div>
+          <a href='{{ url }}' class='abs fill z2 js-product-link' aria-label='{{ title }}'></a>
+        </div>
+
+        <div class="productCard_ratings f fdr aie mb05 mt05 rel"
+             {{#unless reviews_count }}style="display:none;"{{/unless}}>
+          <div class="yotpo bottomLine" style="display:inline-block;" data-product-id="{{ id }}"></div>
+          <span class="productCard__reviewNum">({{ reviews_count }})</span>
+          <a href="{{ url }}#pdp-reviews" class="abs x y z5" aria-label="{{ title }} rating stars"></a>
+        </div>
+
+        {{#unless bundle}}
+           {{#if color_swatches}}
+            <div class="productCard__variants rel">
+              <div class='productCard__options'>
+                {{{ color_swatches }}}
+              </div>
+            </div>
+          {{/if}}
+          {{#if color_count}}
+            <div class="productCardVariants__ColorCount">
+              <a class="productCardVariants__CountButton" href="{{ url }}" title="{{ title }}" role="button">
+                {{ color_count }} colors
+              </a>
+            </div>
+          {{/if}}
+        {{/unless }}
+      </div>
+    </div>
+    {{/each }}
+  {{else}}
+    <div class="collection__variant-empty">
+      <h2>No results</h2>
+    </div>
+  {{/if}}
+  {% endraw %}
+</script>

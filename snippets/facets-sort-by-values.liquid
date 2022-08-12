@@ -1,0 +1,35 @@
+{%- comment -%}
+{%- render 'facets-sort-by-values' collection: collection -%}
+{%- endcomment -%}
+
+{%- assign collection_sort_by = collection.metafields.custom_fields["sort_by"] | handleize -%}
+{%- assign default_sort_by = collection_sort_by | default: 'best-sellers' -%}
+
+{% if shop.metafields.custom_fields["sort_by_items"] != blank %}
+    {% for item in shop.metafields.custom_fields["sort_by_items"] %}
+      {%- if item["name"] != blank and item["value"] != blank -%}
+        {%- assign name_handle = item["name"] | handleize -%}
+        {%- assign title = item["value"] | strip -%}
+
+        <li class="facet-group__list-item">
+          <input id="facet-sort-by-{{ name_handle }}"
+                 type="radio"
+                 name="sort_by"
+                 class="facet-group-input"
+                 value="{{ name_handle }}"
+                 title="{{ title }}"
+                  {% if item["sort_order"] != blank %}
+                    data-sort-order="{{ item["sort_order"] }}"
+                  {% endif %}
+                  {% if default_sort_by == name_handle %}
+                    data-default-sort-by checked="checked"
+                  {% endif %}/>
+          <label class="facet-group-radio f aic"
+                 for="facet-sort-by-{{ name_handle }}">
+            {{ item["name"] }}
+          </label>
+        </li>
+
+      {%- endif -%}
+    {% endfor %}
+{% endif %}

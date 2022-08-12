@@ -3,339 +3,273 @@
 
 {% paginate collection.products by 1000 %}
 
-{% if collection.metafields.custom_fields["desktop_masthead_image"] != blank %}
-  {%- assign desktop_masthead = collection.metafields.custom_fields["desktop_masthead_image"] -%}
-{% endif %}
-{% if collection.metafields.custom_fields["mobile_masthead_image"] != blank %}
-  {%- assign mobile_masthead = collection.metafields.custom_fields["mobile_masthead_image"] -%}
-{% endif %}
+  {% if collection.metafields.custom_fields["desktop_masthead_image"] != blank %}
+    {%- assign desktop_masthead = collection.metafields.custom_fields["desktop_masthead_image"] -%}
+  {% endif %}
+  {% if collection.metafields.custom_fields["mobile_masthead_image"] != blank %}
+    {%- assign mobile_masthead = collection.metafields.custom_fields["mobile_masthead_image"] -%}
+  {% endif %}
 {%- assign collection_title = collection.title -%}
 
-<section class='collection' data-component='collection'>
-  {%- if section.settings.show_breadcrumbs -%}
-    {% include 'breadcrumbs' %}
-  {%- endif -%}
-  {% if desktop_masthead != blank %}
-    {%
-      include 'component-collection-masthead' with
-      img: desktop_masthead,
-      imgMobile: mobile_masthead,
-      dataAttr: 'componentMasthead',
-      heading: collection.title,
-      copy: collection.description,
-      className: ''
-    %}
-  {% endif %}
+  <section class='collection' data-component='collection'>
+    {%- if section.settings.show_breadcrumbs -%}
+      {% include 'breadcrumbs' %}
+    {%- endif -%}
+    {% if desktop_masthead != blank %}
+      {%
+        include 'component-collection-masthead' with
+        img: desktop_masthead,
+        imgMobile: mobile_masthead,
+        dataAttr: 'componentMasthead',
+        heading: collection.title,
+        copy: collection.description,
+        className: ''
+      %}
+    {% endif %}
 
-  <div class='collectionContainer'>
-    <div class="collectionFilters">
-      <form id="filter-form" class="filter-form" name="filter">
-        <div class="filter-group-mobile">
-          <button type="button" data-mobile-filter="custom">Filter <span></span> {% render 'icon' with 'dropdown' %}</button>
-          <button type="button" data-clear-filter="{{ collection.url }}">Clear all</button>
-          <button type="button" data-mobile-filter="sort">Sort By {% render 'icon' with 'dropdown' %}</button>
-        </div>
-        <div class="filter-group-wrapper filter-group-sort dropdown" data-mobile-dropdown="sort">
-          <div class="dropdownHeader" data-dropdown-filter>
-            <h3 class="dropdownHeader-title">
-              Sort by
-            </h3>
-            <div class="dropdownHeader-icon">
-              {% render 'icon' with 'dropdown' %}
+    <div class='collectionContainer'>
+      <div class="collectionFilters">
+        <form id="filter-form" class="filter-form" name="filter">
+          <div class="filter-group-mobile">
+            <button type="button" data-mobile-filter="custom">Filter <span></span> {% render 'icon' with 'dropdown' %}</button>
+            <button type="button" data-clear-filter="{{ collection.url }}">Clear all</button>
+            <button type="button" data-mobile-filter="sort">Sort By {% render 'icon' with 'dropdown' %}</button>
+          </div>
+          <div class="filter-group-wrapper filter-group-sort dropdown" data-mobile-dropdown="sort">
+            <div class="dropdownHeader" data-dropdown-filter>
+              <h3 class="dropdownHeader-title">
+                Sort by
+              </h3>
+              <div class="dropdownHeader-icon">
+                {% render 'icon' with 'dropdown' %}
+              </div>
+            </div>
+            <div class="dropdownContent" data-dropdown-list>
+              <ul class="filter-group-sort-by dropdownContent--animate-block">
+                {% assign sort_by = collection.sort_by | default: collection.default_sort_by %}
+                {%- assign order = 100 -%}
+
+                {% for option in collection.sort_options %}
+
+                  {%- case option.value -%}
+                  {%- when 'best-selling' -%}
+                  {%- assign show_sort_filter = true -%}
+                  {%- assign filter_title = 'Best sellers' -%}
+                  {%- assign order = 3 -%}
+                  {%- when 'price-ascending' -%}
+                  {%- assign show_sort_filter = true -%}
+                  {%- assign filter_title = 'Price low to high' -%}
+                  {%- assign order = 1 -%}
+                  {%- when 'price-descending' -%}
+                  {%- assign show_sort_filter = true -%}
+                  {%- assign filter_title = 'Price high to low' -%}
+                  {%- assign order = 2 -%}
+                    {%- else -%}
+                  {%- assign show_sort_filter = false -%}
+                  {%- endcase -%}
+
+                  {%- if show_sort_filter -%}
+                    <li class="filter-group__list-item">
+                      <label class='filter-group-radio f aic'
+                             for='Filter-sort-by-{{ option.value }}-{{ forloop.index }}'
+                             style="order: {{ order }}">
+                        <input id='Filter-sort-by-{{ option.value }}-{{ forloop.index }}'
+                               type=radio
+                               name='sort_by'
+                               class="filter-group-input"
+                               value='{{ option.value }}'
+                               title='{{ filter_title }}'
+                               data-filter-type="sort-by"
+                               {% if option.value == sort_by %}checked{% endif %} />
+                        <span class="filter-group-circle f aic jcc rel"></span>
+                        <span class="filter-group-title">{{ filter_title }}</span>
+                      </label>
+                    </li>
+                  {%- endif -%}
+                {% endfor %}
+              </ul>
             </div>
           </div>
-          <div class="dropdownContent" data-dropdown-list>
-            <ul class="filter-group-sort-by dropdownContent--animate-block">
-              {% assign sort_by = collection.sort_by | default: collection.default_sort_by %}
-              {%- assign order = 100 -%}
+          <div class="filter-group-wrapper filter-group-custom dropdown" data-mobile-dropdown="custom">
+            {%- for filter in collection.filters -%}
+              {%- assign filter_title = filter.label -%}
 
-              {% for option in collection.sort_options %}
-
-                {%- case option.value -%}
-                {%- when 'best-selling' -%}
-                {%- assign show_sort_filter = true -%}
-                {%- assign filter_title = 'Best sellers' -%}
-                {%- assign order = 3 -%}
-                {%- when 'price-ascending' -%}
-                {%- assign show_sort_filter = true -%}
-                {%- assign filter_title = 'Price low to high' -%}
-                {%- assign order = 1 -%}
-                {%- when 'price-descending' -%}
-                {%- assign show_sort_filter = true -%}
-                {%- assign filter_title = 'Price high to low' -%}
-                {%- assign order = 2 -%}
-                  {%- else -%}
-                {%- assign show_sort_filter = false -%}
-                {%- endcase -%}
-
-                {%- if show_sort_filter -%}
-                  <li class="filter-group__list-item">
-                    <label class='filter-group-radio f aic'
-                           for='Filter-sort-by-{{ option.value }}-{{ forloop.index }}'
-                           style="order: {{ order }}">
-                      <input id='Filter-sort-by-{{ option.value }}-{{ forloop.index }}'
-                             type=radio
-                             name='sort_by'
-                             class="filter-group-input"
-                             value='{{ option.value }}'
-                             title='{{ filter_title }}'
-                             data-filter-type="sort-by"
-                             {% if option.value == sort_by %}checked{% endif %} />
-                      <span class="filter-group-circle f aic jcc rel"></span>
-                      <span class="filter-group-title">{{ filter_title }}</span>
-                    </label>
-                  </li>
+              {% comment %}
+                {%- if filter.label == 'Product type' -%}
+                  {%- assign filter_title = 'Category' -%}
                 {%- endif -%}
-              {% endfor %}
-            </ul>
-          </div>
-        </div>
-        <div class="filter-group-wrapper filter-group-custom dropdown" data-mobile-dropdown="custom">
-          {%- for filter in collection.filters -%}
-            {%- assign filter_title = filter.label -%}
+              {% endcomment %}
 
-          {% comment %}
-            {%- if filter.label == 'Product type' -%}
-              {%- assign filter_title = 'Category' -%}
-            {%- endif -%}
-          {% endcomment %}
-
-            <div class="filter-group dropdown {% if filter.label == 'Price' %} filter-group-price {% endif %}">
-              <div class="dropdownHeader" data-dropdown-filter>
-                <h3 class="dropdownHeader-title">
-                  {{ filter_title }}
-                </h3>
-                <div class="dropdownHeader-icon">
-                  {% render 'icon' with 'dropdown' %}
+              <div class="filter-group dropdown {% if filter.label == 'Price' %} filter-group-price {% endif %}">
+                <div class="dropdownHeader" data-dropdown-filter>
+                  <h3 class="dropdownHeader-title">
+                    {{ filter_title }}
+                  </h3>
+                  <div class="dropdownHeader-icon">
+                    {% render 'icon' with 'dropdown' %}
+                  </div>
                 </div>
-              </div>
 
-              <div class="dropdownContent" data-dropdown-list>
-                <div class="dropdownContent--animate-block">
-                  {%- case filter.type -%}
-                  {%- when 'list' -%}
-                    <ul class="filter-group__list">
-                      {%- for filter_value in filter.values -%}
-                        {%- assign filter_name = filter_value.value | replace: '-', ' '  | capitalize -%}
+                <div class="dropdownContent" data-dropdown-list>
+                  <div class="dropdownContent--animate-block">
+                    {%- case filter.type -%}
+                    {%- when 'list' -%}
+                      <ul class="filter-group__list">
+                        {%- for filter_value in filter.values -%}
+                          {%- assign filter_name = filter_value.value | replace: '-', ' '  | capitalize -%}
 
                           {%- if filter_title == 'Color' -%}
-                          {%- assign color_name = filter_value.value | handleize -%}
-                          {%- if filter_value.value contains 'Limited Edition:' -%}
-                            {%- assign color_name = filter_value.value | split: 'Limited Edition:' | last | handleize -%}
-                         {%- elsif filter_value.value contains 'Wooden Accents:' -%}
-                            {%- assign color_name = filter_value.value | split: 'Wooden Accents:' | last | handleize -%}
-                      {%- elsif filter_value.value contains 'Artist Series:' -%}
-                            {%- assign color_name = filter_value.value | split: 'Artist Series:' | last | handleize -%}
-                      {%- endif -%}
-                          {%- assign color_title = color_name | replace: '-', ' '  | capitalize -%}
-                        {%- endif -%}
+                            {%- assign color_name = filter_value.value | handleize -%}
+                            {%- if filter_value.value contains 'Limited Edition:' -%}
+                              {%- assign color_name = filter_value.value | split: 'Limited Edition:' | last | handleize -%}
+                              {%- elsif filter_value.value contains 'Wooden Accents:' -%}
+                              {%- assign color_name = filter_value.value | split: 'Wooden Accents:' | last | handleize -%}
+                              {%- elsif filter_value.value contains 'Artist Series:' -%}
+                              {%- assign color_name = filter_value.value | split: 'Artist Series:' | last | handleize -%}
+                            {%- endif -%}
+                            {%- assign color_title = color_name | replace: '-', ' '  | capitalize -%}
+                          {%- endif -%}
 
-                        <li class="filter-group__list-item {% if color_name != blank -%}filter-group__list-item-color{%- endif %}">
-                          <label class='filter-group-radio f aic'
-                                 for='Filter-{{ filter.label }}-{{ forloop.index }}'
-                                  {% if color_name != blank -%} data-color="{{ color_name }}" {%- endif %}>
-                            <input id='Filter-{{ filter.label }}-{{ forloop.index }}'
-                                   type='radio'
-                                   name='{{ filter_value.param_name }}'
-                                   class="filter-group-input"
-                                   value='{{ filter_value.value }}'
-                                   title='{% if color_name != blank -%}{{ color_title }}{% else %}{{ filter_name }}{%- endif %}'
-                                   data-filter-type="{{ filter_title }}"
-                                    {% if color_name != blank -%} data-color="{{ color_name }}" {%- endif %}
-                                    {% if filter_value.active -%}checked{%- endif %} />
-                            <span class="filter-group-circle f aic jcc rel"
+                          <li class="filter-group__list-item {% if color_name != blank -%}filter-group__list-item-color{%- endif %}">
+                            <label class='filter-group-radio f aic'
+                                   for='Filter-{{ filter.label }}-{{ forloop.index }}'
+                                    {% if color_name != blank -%} data-color="{{ color_name }}" {%- endif %}>
+                              <input id='Filter-{{ filter.label }}-{{ forloop.index }}'
+                                     type='radio'
+                                     name='{{ filter_value.param_name }}'
+                                     class="filter-group-input"
+                                     value='{{ filter_value.value }}'
+                                     title='{% if color_name != blank -%}{{ color_title }}{% else %}{{ filter_name }}{%- endif %}'
+                                     data-filter-type="{{ filter_title }}"
+                                      {% if color_name != blank -%} data-color="{{ color_name }}" {%- endif %}
+                                      {% if filter_value.active -%}checked{%- endif %} />
+                              <span class="filter-group-circle f aic jcc rel"
                                       {% if color_name != blank -%} data-color="{{ color_name }}" {%- endif %}></span>
-                            <span class="filter-group-title">{% if color_name != blank -%}{{ color_title }}{% else %}{{ filter_name }}{%- endif %}</span>
-                          </label>
-                        </li>
-                      {%- endfor -%}
-                    </ul>
+                              <span class="filter-group-title">{% if color_name != blank -%}{{ color_title }}{% else %}{{ filter_name }}{%- endif %}</span>
+                            </label>
+                          </li>
+                        {%- endfor -%}
+                      </ul>
 
-                  {%- when 'price_range' -%}
-                    <div class="filter-group__price-range">
-                      {% assign minPrice = collection.products | sort: 'price' %}
-                      {%- comment -%}
-                        <div class="filter-group__price-range-from">
-                          <input name="{{ filter.min_value.param_name }}"
+                    {%- when 'price_range' -%}
+                      <div class="filter-group__price-range">
+                        {% assign minPrice = collection.products | sort: 'price' %}
+                        {%- comment -%}
+                          <div class="filter-group__price-range-from">
+                            <input name="{{ filter.min_value.param_name }}"
+                                   id="Filter-{{ filter.label }}-{{ forloop.index }}"
+                                   value="0"
+                                   type="number"
+                                   placeholder="0"
+                                   min="0"
+                                   max="{{ filter.range_max | money_without_currency | replace: ',', '' }}">
+                          </div>
+                        {%- endcomment -%}
+
+                        <div class="filter-group__price-range-to">
+                          <label for="Filter-{{ filter.label }}-{{ forloop.index }}" class="visually-hidden">Price</label>
+                          <input name="{{ filter.max_value.param_name }}"
                                  id="Filter-{{ filter.label }}-{{ forloop.index }}"
-                                 value="0"
-                                 type="number"
-                                 placeholder="0"
-                                 min="0"
+                                 value="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                                 type="range"
+                                 placeholder="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                                 min="{{ minPrice[0].price_min | times: 0.01 | round }}"
                                  max="{{ filter.range_max | money_without_currency | replace: ',', '' }}">
-                        </div>
-                      {%- endcomment -%}
-                     
-                      <div class="filter-group__price-range-to">
-                        <label for="Filter-{{ filter.label }}-{{ forloop.index }}" class="visually-hidden">Price</label>
-                        <input name="{{ filter.max_value.param_name }}"
-                               id="Filter-{{ filter.label }}-{{ forloop.index }}"
-                               value="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
-                               type="range"
-                               placeholder="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
-                               min="{{ minPrice[0].price_min | times: 0.01 | round }}"
-                               max="{{ filter.range_max | money_without_currency | replace: ',', '' }}">
-                        <div class="filter-group__price-range-wrapper f jcb aic">
+                          <div class="filter-group__price-range-wrapper f jcb aic">
                           <span class="filter-group__price-range-min">
                             {{ cart.currency.symbol }}
                             <span class="filter-group__price-range-min-value">
                               {{ minPrice[0].price_min | times: 0.01 }}0
                             </span>
                           </span>
-                          <span class="filter-group__price-range-max">
+                            <span class="filter-group__price-range-max">
                             {{ cart.currency.symbol }}
                             <span class="filter-group__price-range-max-value">
                               {{ filter.range_max | money_without_currency | replace: ',', ''  }}
                             </span>
                           </span>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  {%- endcase -%}
+                    {%- endcase -%}
+                  </div>
                 </div>
               </div>
+            {%- endfor -%}
+          </div>
+        </form>
+      </div>
+      <div class='collection__products rel'>
+        <div class="collection__products-filter-results"></div>
+        <div class="collection__products-results">
+          {%- assign collection_product_types = '' -%}
+          {% for product in collection.products %}
+            {%- assign collection_product_types = collection_product_types | append: '|#|' | append: product.type -%}
+          {% endfor %}
+
+          {%- assign uniq_collection_product_types = collection_product_types | split: '|#|' | uniq | join: '|#|' -%}
+          {%- assign uniq_collection_product_types_array = uniq_collection_product_types | split: '|#|' -%}
+
+          <div class="collection__products-type">
+            {% comment %}
+              {%- for collection_product_type in uniq_collection_product_types_array -%}
+                {%- if collection_product_type != blank -%}
+                  {%- assign collection_product_type_handleize = collection_product_type | handleize -%}
+                  <h3 class="collection__products-type-heading">{{ collection_product_type }}</h3>
+                  <div class="subcollection__products one-third">
+                    {% for product in collection.products %}
+                      {%- assign product_type_handleize = product.type | handleize -%}
+                      {%- if product_type_handleize == collection_product_type_handleize -%}
+                        {% include 'product-card', product_image: product.images[product_image_index] %}
+                      {%- endif -%}
+                    {%- endfor -%}
+                  </div>
+                {%- endif -%}
+              {%- endfor -%}
+            {% endcomment %}
+            <div class="subcollection__products one-third">
+              {% for product in collection.products %}
+                {%- assign gift_product_handleize = 'Gift product' | handleize -%}
+                {%- assign gift_box_handleize = 'Gift box' | handleize -%}
+                {%- assign product_type_handleize = product.type | handleize -%}
+                {%- unless product_type_handleize == gift_product_handleize or product_type_handleize == gift_box_handleize -%}
+                  {% include 'product-card', product_image: product.images[product_image_index] %}
+                {%- endunless -%}
+              {%- endfor -%}
             </div>
-          {%- endfor -%}
-        </div>
-      </form>
-    </div>
-    <div class='collection__products rel'>
-      <div class="collection__products-filter-results"></div>
-      <div class="collection__products-results">
-        {%- assign collection_product_types = '' -%}
-        {% for product in collection.products %}
-          {%- assign collection_product_types = collection_product_types | append: '|#|' | append: product.type -%}
-        {% endfor %}
-
-        {%- assign uniq_collection_product_types = collection_product_types | split: '|#|' | uniq | join: '|#|' -%}
-        {%- assign uniq_collection_product_types_array = uniq_collection_product_types | split: '|#|' -%}
-
-        <div class="collection__products-type">
-          {% comment %}
-            {%- for collection_product_type in uniq_collection_product_types_array -%}
-              {%- if collection_product_type != blank -%}
-                {%- assign collection_product_type_handleize = collection_product_type | handleize -%}
-                <h3 class="collection__products-type-heading">{{ collection_product_type }}</h3>
-                <div class="subcollection__products one-third">
-                  {% for product in collection.products %}
-                    {%- assign product_type_handleize = product.type | handleize -%}
-                    {%- if product_type_handleize == collection_product_type_handleize -%}
-                      {% include 'product-card', product_image: product.images[product_image_index] %}
-                    {%- endif -%}
-                  {%- endfor -%}
-                </div>
-              {%- endif -%}
-            {%- endfor -%}
-          {% endcomment %}
-          <div class="subcollection__products one-third">
-            {% for product in collection.products %}
-              {%- assign gift_product_handleize = 'Gift product' | handleize -%}
-              {%- assign gift_box_handleize = 'Gift box' | handleize -%}
-              {%- assign product_type_handleize = product.type | handleize -%}
-              {%- unless product_type_handleize == gift_product_handleize or product_type_handleize == gift_box_handleize -%}
-                {% include 'product-card', product_image: product.images[product_image_index] %}
-              {%- endunless -%}
-            {%- endfor -%}
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class='f fw'>
-    <div class='col-lg-12'>
-      {% if paginate.pages > 1 %}
-        {% include 'pagination' %}
-      {% endif %}
+    <div class='f fw'>
+      <div class='col-lg-12'>
+        {% if paginate.pages > 1 %}
+          {% include 'pagination' %}
+        {% endif %}
+      </div>
     </div>
-  </div>
-
-  {%- if collection.metafields.custom_fields["show_collection_module"] == 1 -%}
-    {%- assign collection_module_bg = collection.metafields.custom_fields["collection_module_background"] | default:  '#FFF9E5' -%}
-    {%- assign collection_module_image = collection.metafields.custom_fields["collection_module_image"] -%}
-    {%- assign collection_module_image_mobile = collection.metafields.custom_fields["collection_module_mobile_image"] -%}
-    {%- assign collection_module_title = collection.metafields.custom_fields["collection_module_title"] -%}
-    {% if collection.metafields.custom_fields["collection_module_arrow"] == 1 %}
-      {%- assign enable_arrow = true -%}
-    {% endif %}
-    {%- assign collection_module_btn_text = collection.metafields.custom_fields["collection_module_button_text"] | default:  'Shop Now' -%}
-    {%- assign collection_module_btn_url = collection.metafields.custom_fields["collection_module_button_url"] -%}
-
-    <div class="collectionModule" style="background-color: {{ collection_module_bg }}">
-      {%- if collection_module_image != blank -%}
-        {%- assign desctop_image_class = 'image image-abs-contain' -%}
-
-        {%- if collection_module_image_mobile != blank -%}
-          {%- assign desctop_image_class = 'image image-abs-contain hide-tablet' -%}
-        {%- endif -%}
-        <div class="collectionModule__media rel">
-          {%
-            include 'component-image' with
-            src: collection_module_image,
-            alt: collection_module_title,
-            className: desctop_image_class,
-            absolute: true,
-            fill: true
-          %}
-          {%- if collection_module_image_mobile != blank -%}
-            {%
-              include 'component-image' with
-              src: collection_module_image_mobile,
-              alt: collection_module_title,
-              className: 'image image-abs-contain hide-tablet-desk',
-              absolute: true,
-              fill: true
-            %}
-          {%- endif -%}
-        </div>
-      {%- endif -%}
-      {%- if collection_module_title != blank or collection_module_btn_url != blank -%}
-        <div class="collectionModule__content rel">
-          {%- if enable_arrow -%}
-            <div class="collectionModule__content-arrow hide-tablet">
-              {%- render 'icon' with 'collection-arrow' -%}
-            </div>
-            <div class="collectionModule__content-arrow hide-tablet-desk">
-              {%- render 'icon' with 'collection-arrow-mobile' -%}
-            </div>
-          {%- endif -%}
-          {%- if collection_module_title != blank -%}
-            <h3 class="collectionModule__contentTitle">
-              {{ collection_module_title }}
-            </h3>
-          {%- endif -%}
-          {%- if collection_module_btn_url != blank -%}
-            <a href="{{ collection_module_btn_url }}"
-               class="collectionModule__contentLink btn--dark">
-              {{ collection_module_btn_text }}
-            </a>
-          {%- endif -%}
-        </div>
-      {%- endif -%}
-    </div>
-  {%- endif -%}
-
-</section>
+  </section>
 
 {% endpaginate %}
 
 {% schema %}
-  {
-    "name": {
-      "de": "Kategorie",
-      "en": "Collection",
-      "es": "Colección",
-      "fr": "Collection",
-      "it": "Collezione",
-      "ja": "コレクション",
-      "pt-BR": "Coleção"
-    },
-    "settings": [
-      {
-        "type": "checkbox",
-        "id": "show_breadcrumbs",
-        "label": "Show breadcrumbs",
-        "default": true
-      }
-    ]
-  }
+{
+  "name": {
+    "de": "Kategorie",
+    "en": "Collection",
+    "es": "Colección",
+    "fr": "Collection",
+    "it": "Collezione",
+    "ja": "コレクション",
+    "pt-BR": "Coleção"
+  },
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_breadcrumbs",
+      "label": "Show breadcrumbs",
+      "default": true
+    }
+  ]
+}
 {% endschema %}

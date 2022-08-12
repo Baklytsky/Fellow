@@ -1,0 +1,62 @@
+{%- if collection.metafields.custom_fields["show_collection_iwt"] == 1 -%}
+  {%- assign collection_iwt_bg = collection.metafields.custom_fields["collection_iwt_background"] | default: 'transparent' -%}
+  {%- assign collection_iwt_image = collection.metafields.custom_fields["collection_iwt_image"] -%}
+  {%- assign collection_iwt_image_mobile = collection.metafields.custom_fields["collection_iwt_image_mobile"] -%}
+  {%- assign collection_iwt_image_position = collection.metafields.custom_fields["collection_iwt_image_position"] -%}
+  {%- assign collection_iwt_title = collection.metafields.custom_fields["collection_iwt_title"] -%}
+  {%- assign collection_iwt_description = collection.metafields.custom_fields["collection_iwt_description"] -%}
+  {%- assign collection_iwt_btn_text = collection.metafields.custom_fields["collection_iwt_button_text"] | default:  'Shop Now' -%}
+  {%- assign collection_iwt_btn_url = collection.metafields.custom_fields["collection_iwt_button_url"] -%}
+
+  <div class="collectionIWT" style="background-color: {{ collection_iwt_bg }}">
+    <div class="collectionIWT__wrapper {% if collection_iwt_image_position == 'Right' %}row-reverse{% endif %}">
+      {%- if collection_iwt_image != blank -%}
+        {%- assign image_class = 'image image-abs-cover' -%}
+
+        {%- if collection_iwt_image_mobile != blank -%}
+          {%- assign image_class = 'image image-abs-cover hide-tablet' -%}
+        {%- endif -%}
+        <div class="collectionIWT__media rel">
+          {%
+            include 'component-image' with
+            src: collection_iwt_image,
+            alt: collection_iwt_title,
+            className: image_class,
+            absolute: true,
+            fill: true
+          %}
+          {%- if collection_iwt_image_mobile != blank -%}
+            {%
+              include 'component-image' with
+              src: collection_iwt_image_mobile,
+              alt: collection_iwt_title,
+              className: 'image image-abs-cover hide-tablet-desk',
+              absolute: true,
+              fill: true
+            %}
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+      {%- if collection_iwt_title != blank or collection_iwt_description != blank or collection_iwt_btn_url != blank -%}
+        <div class="collectionIWT__content rel">
+          {%- if collection_iwt_title != blank -%}
+            <h3 class="collectionIWT__contentTitle">
+              {{ collection_iwt_title }}
+            </h3>
+          {%- endif -%}
+          {%- if collection_iwt_description != blank -%}
+            <p class="collectionIWT__contentDescription">
+              {{ collection_iwt_description }}
+            </p>
+          {%- endif -%}
+          {%- if collection_iwt_btn_url != blank -%}
+            <a href="{{ collection_iwt_btn_url }}"
+               class="collectionIWT__contentLink btn--dark">
+              {{ collection_iwt_btn_text }}
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+{%- endif -%}

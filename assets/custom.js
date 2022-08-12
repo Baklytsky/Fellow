@@ -31,6 +31,10 @@ theme.enableScroll = function () {
   $('body').css('overflow', '');
 }
 
+theme.handleize = function (str) {
+  return str.toLowerCase().replace(/[^\w\u00C0-\u024f]+/g, "-").replace(/^-+|-+$/g, "");
+};
+
 theme.openModal = function () {
   $('#modal').attr('aria-hidden', 'false').fadeIn();
   theme.disableScroll();
@@ -131,15 +135,12 @@ theme.header = function () {
     }
   })
 
-  $('.mobileMenu .newHeader__link').on('click', function () {
+  $('.mobileMenu .newHeader__link').on('click', function (e) {
+    if (this.classList.contains('newHeader__button')) e.preventDefault();
     if ($(this).parents('.mobileMenu')) {
       $(this).siblings('.subMenuList').slideToggle();
       $(this).toggleClass('active')
     }
-    // mega hack pico sidestep on mobile
-    // if (window.innerWidth < 500 && this.hasAttribute('href')){
-    //   window.location.href = this.getAttribute('href');
-    // }
   })
 
   theme.countdownTimer = function () {
@@ -319,11 +320,6 @@ theme.quickView = function (URL, innerContainer) {
     }
   });
 }
-
-
-theme.handleize = function (str) {
-  return str.toLowerCase().replace(/[^\w\u00C0-\u024f]+/g, "-").replace(/^-+|-+$/g, "");
-};
 
 theme.variantPreOrderCheck = function (variantId) {
   var id = $('#selectid option[value="'+variantId+'"]').data("variant-preorder");
@@ -1830,8 +1826,8 @@ theme.GLOBAL = function () {
 
          // ======================================== Neels code starts here ========================================
         var selectedColor = $('.pdp__options-main [data-option-label="Color"] [data-option-current]').text();
-        var selectedSize = $('.pdp__options-main [data-option-label="Size"] [data-option-current]').text();
-        var selectedQuantity = $('.pdp__options-main [data-option-label="Quantity"] [data-option-current]').text();
+        var selectedSize = theme.handleize($('.pdp__options-main [data-option-label="Size"] [data-option-current]').text());
+        var selectedQuantity = theme.handleize($('.pdp__options-main [data-option-label="Quantity"] [data-option-current]').text());
         var qvDescription = $('.pdpQuickView__description');
         var all_colors = [];
         var all_sizes = [];
@@ -1842,163 +1838,173 @@ theme.GLOBAL = function () {
           selectedColor = selectedColor.split(':')[1].trim();
         }
 
-        // Enable all sizes and return to default styling now that a new variant option has been selected
-        $('input[name^="Color"]').each(function(){
-          var colorhandle = theme.handleize($(this).attr('title'));
-          $('#' + colorhandle.toString()).removeAttr('disabled','disabled');
-          $('div[data-color^="' + colorhandle + '"]').css('opacity','');
-        });
-
-        // Enable all sizes and return to default styling now that a new variant option has been selected
-        $('input[name^="Size"]').each(function(){
-          var sizevar = $(this).attr('title');
-          var sizehandle = theme.handleize(sizevar);
-          $('#' + sizehandle.toString()).removeAttr('disabled','disabled');
-          $('div[data-size^="' + sizehandle + '"]').css('opacity','');
-          $('span[data-size^="' + sizevar + '"]').css('text-decoration','');
-        });
-
-        // Enable all quantities and return to default styling now that a new variant option has been selected
-        $('input[name^="Quantity"]').each(function(){
-          var quantityvar = $(this).attr('title');
-          var quantityhandle = theme.handleize(quantityvar);
-          $('#' + quantityhandle.toString()).removeAttr('disabled','disabled');
-          $('div[data-quantity^="' + quantityhandle + '"]').css('color','');
-          $('span[data-quantity^="' + quantityvar + '"]').css('text-decoration','');
-        });
-
-        // Add all colors to the all_colors array list
-        $('span[data-color]').each(function(){
-          if (all_colors.indexOf($(this).data('color')) === -1) {
-            all_colors.push($(this).data('color'));
-          }
-        });
-        // Add all sizes to the all_sizes array list
-        $('span[data-size]').each(function(){
-          if (all_sizes.indexOf($(this).data('size')) === -1) {
-            all_sizes.push($(this).data('size'));
-          }
-        });
-        // Add all quantities to the all_quantities array list
-        $('span[data-quantity]').each(function(){
-          if (all_quantities.indexOf($(this).data('quantity')) === -1) {
-            all_quantities.push($(this).data('quantity'));
-          }
-        });
-
-        // Create hasQuantities variable if the quantities array is populated, else we know the product only has color and size options
-        if (all_quantities.length){
-          var hasQuantities = true;
+        if (selectedColor) {
+          selectedColor = theme.handleize(selectedColor)
         }
 
-        // Loop all variants of the selected product
-        for (i=0; i<json_product.variants.length; i++) {
-          var variant = json_product.variants[i];
-          var color = variant.option1;
-          // If the color option contains the string ":" we need to strip this
-          if (color.indexOf(":") > -1) {
-            color = color.split(':')[1].trim();
-          }
-          var size  = variant.option2;
-          var quantity  = variant.option3;
+        if (selectedColor && selectedSize) {
+          // Enable all sizes and return to default styling now that a new variant option has been selected
+          $('.pdp__options-main input[name^="Color"]').each(function () {
+            var colorhandle = theme.handleize($(this).attr('title'));
+            qvDescription.find('#' + colorhandle.toString()).removeAttr('disabled', 'disabled');
+            qvDescription.find('div[data-color^="' + colorhandle + '"]').css('opacity', '');
+          });
 
-          // Check if the product has 3 options of color, size and quantity
-          if (hasQuantities){
-            // Check if the color and size selected by the customer is the current loop index color and size values
-            if (color.indexOf(selectedColor) >= 0 && size.indexOf(selectedSize) >= 0) {
-              if (all_quantities.length && all_quantities.indexOf(quantity) !== -1) {
-                const index = all_quantities.indexOf(quantity);
-                if (index > -1) {
-                  all_quantities.splice(index, 1);
-                }
-              }
-            }
-            // Check if the color and quantity selected by the customer is the current loop index color and quantity values
-            if (color.indexOf(selectedColor) >= 0 && quantity.indexOf(selectedQuantity) >= 0) {
-              if (all_sizes.indexOf(size) !== -1) {
-                const index = all_sizes.indexOf(size);
-                if (index > -1) {
-                  all_sizes.splice(index, 1);
-                }
-              }
-            }
-            // Check if the size and quantity selected by the customer is the current loop index size and quantity values
-            if (size.indexOf(selectedSize) >= 0 && quantity.indexOf(selectedQuantity) >= 0) {
-              if (all_colors.indexOf(color) !== -1) {
-                const index = all_colors.indexOf(color);
-                if (index > -1) {
-                  all_colors.splice(index, 1);
-                }
-              }
-            }
-          }
-          // Product only has 2 options of color and size
-          else {
-            // Check if the color selected by the customer is the current loop index color
-            if (color.indexOf(selectedColor) >= 0) {
-              // Check if the current variant size exists in the all_sizes array and if so, remove it from the array
-              if (all_sizes.indexOf(size) !== -1) {
-                const index = all_sizes.indexOf(size);
-                if (index > -1) {
-                  all_sizes.splice(index, 1);
-                }
-              }
-            }
-            // Check if the size selected by the customer is the current loop index size
-            if (size.indexOf(selectedSize) >= 0) {
-              // Check if the current variant color exists in the all_colors array and if so, remove it from the array
-              if (all_colors.indexOf(color) !== -1) {
-                const index = all_colors.indexOf(color);
-                if (index > -1) {
-                  all_colors.splice(index, 1);
-                }
-              }
-            }
-          }
-        }
-
-        // Check if there are any colors left in the all_colors array and if so, disable these color buttons as they are unavailable colors for the selected variant
-        if (popup_is_size_selected) {
-          if (all_colors.length) {
-            /// Loop all the color input elements
-            $('input[name^="Color"]').each(function(){
-              var colorvar = $(this).attr('title');
-              var colorhandle = theme.handleize(colorvar);
-              // If the color element is found in the all_colors list we need to disable this element as it is not an available color option
-              if (all_colors.indexOf(colorvar) > -1) {
-                qvDescription.find('#' + colorhandle).attr('disabled','disabled');
-                qvDescription.find('div[data-color^="' + colorhandle + '"]').css('opacity','0.2');
-              }
-            });
-          }
-
-          // Check if there are any quantities left in the all_quantities array and if so, disable these quantity buttons as they are unavailable quantities for the selected variant color
-          if (all_quantities.length) {
-            $('input[name^="Quantity"]').each(function(){
-              var quantityvar = $(this).attr('title');
-              var quantityhandle = theme.handleize(quantityvar);
-              // If the quantity element is found in the all_quantities list we need to disable this element as it is not an available quantity option
-              if (all_quantities.indexOf(quantityvar) > -1) {
-                qvDescription.find('#' + quantityhandle).attr('disabled','disabled');
-                qvDescription.find('div[data-quantity^="' + quantityhandle + '"]').css('color','#ABABAB');
-                qvDescription.find('span[data-quantity^="' + quantityvar + '"]').css('text-decoration','line-through');
-              }
-            });
-          }
-        }
-
-        // Check if there are any sizes left in the all_sizes array and if so, disable these size buttons as they are unavailable sizes for the selected variant color
-        if (all_sizes.length) {
-          $('input[name^="Size"]').each(function(){
+          // Enable all sizes and return to default styling now that a new variant option has been selected
+          $('.pdp__options-main input[name^="Size"]').each(function () {
             var sizevar = $(this).attr('title');
             var sizehandle = theme.handleize(sizevar);
-            // If the size element is found in the all_sizes list we need to disable this element as it is not an available size option
-            if (all_sizes.indexOf(sizevar) > -1) {
-              qvDescription.find('#' + sizehandle).attr('disabled','disabled');
-              qvDescription.find('div[data-size^="' + sizehandle + '"]').css('opacity','0.5');
-              qvDescription.find('span[data-size^="' + sizevar + '"]').css('text-decoration','line-through');
+            qvDescription.find('#' + sizehandle.toString()).removeAttr('disabled', 'disabled');
+            qvDescription.find('div[data-size^="' + sizehandle + '"]').css('opacity', '');
+            qvDescription.find('span[data-size^="' + sizevar + '"]').css('text-decoration', '');
+          });
+
+          // Enable all quantities and return to default styling now that a new variant option has been selected
+          $('.pdp__options-main input[name^="Quantity"]').each(function () {
+            var quantityvar = $(this).attr('title');
+            var quantityhandle = theme.handleize(quantityvar);
+            qvDescription.find('#' + quantityhandle.toString()).removeAttr('disabled', 'disabled');
+            qvDescription.find('div[data-quantity^="' + quantityhandle + '"]').css('color', '');
+            qvDescription.find('span[data-quantity^="' + quantityvar + '"]').css('text-decoration', '');
+          });
+
+          // Add all colors to the all_colors array list
+          $('.pdp__options-main span[data-color]').each(function () {
+            if (all_colors.indexOf(theme.handleize($(this).data('color'))) === -1) {
+              all_colors.push(theme.handleize($(this).data('color')));
             }
           });
+          // Add all sizes to the all_sizes array list
+          $('.pdp__options-main span[data-size]').each(function () {
+            if (all_sizes.indexOf(theme.handleize($(this).data('size'))) === -1) {
+              all_sizes.push(theme.handleize($(this).data('size')));
+            }
+          });
+          // Add all quantities to the all_quantities array list
+          $('.pdp__options-main span[data-quantity]').each(function () {
+            if (all_quantities.indexOf(theme.handleize($(this).data('quantity'))) === -1) {
+              all_quantities.push(theme.handleize($(this).data('quantity')));
+            }
+          });
+
+          // Create hasQuantities variable if the quantities array is populated, else we know the product only has color and size options
+          if (all_quantities.length) {
+            var hasQuantities = true;
+          }
+
+          // Loop all variants of the selected product
+          for (i = 0; i < json_product.variants.length; i++) {
+            var variant = json_product.variants[i];
+            if (selectedColor) {
+              var color = variant.option1;
+              // If the color option contains the string ":" we need to strip this
+              if (color.indexOf(":") > -1) {
+                color = color.split(':')[1].trim();
+              }
+              if (color) color = theme.handleize(color)
+            }
+
+            if (variant.option2) var size = theme.handleize(variant.option2);
+            if (variant.option3) var quantity = theme.handleize(variant.option3);
+
+            // Check if the product has 3 options of color, size and quantity
+            if (hasQuantities) {
+              // Check if the color and size selected by the customer is the current loop index color and size values
+              if (color.indexOf(selectedColor) >= 0 && size.indexOf(selectedSize) >= 0) {
+                if (all_quantities.length && all_quantities.indexOf(quantity) !== -1) {
+                  const index = all_quantities.indexOf(quantity);
+                  if (index > -1) {
+                    all_quantities.splice(index, 1);
+                  }
+                }
+              }
+              // Check if the color and quantity selected by the customer is the current loop index color and quantity values
+              if (color.indexOf(selectedColor) >= 0 && quantity.indexOf(selectedQuantity) >= 0) {
+                if (all_sizes.indexOf(size) !== -1) {
+                  const index = all_sizes.indexOf(size);
+                  if (index > -1) {
+                    all_sizes.splice(index, 1);
+                  }
+                }
+              }
+              // Check if the size and quantity selected by the customer is the current loop index size and quantity values
+              if (size.indexOf(selectedSize) >= 0 && quantity.indexOf(selectedQuantity) >= 0) {
+                if (all_colors.indexOf(color) !== -1) {
+                  const index = all_colors.indexOf(color);
+                  if (index > -1) {
+                    all_colors.splice(index, 1);
+                  }
+                }
+              }
+            }
+            // Product only has 2 options of color and size
+            else {
+              // Check if the color selected by the customer is the current loop index color
+              if (color.indexOf(selectedColor) >= 0) {
+                // Check if the current variant size exists in the all_sizes array and if so, remove it from the array
+                if (all_sizes.indexOf(size) !== -1) {
+                  const index = all_sizes.indexOf(size);
+                  if (index > -1) {
+                    all_sizes.splice(index, 1);
+                  }
+                }
+              }
+              // Check if the size selected by the customer is the current loop index size
+              if (size.indexOf(selectedSize) >= 0) {
+                // Check if the current variant color exists in the all_colors array and if so, remove it from the array
+                if (all_colors.indexOf(color) !== -1) {
+                  const index = all_colors.indexOf(color);
+                  if (index > -1) {
+                    all_colors.splice(index, 1);
+                  }
+                }
+              }
+            }
+          }
+
+          // Check if there are any colors left in the all_colors array and if so, disable these color buttons as they are unavailable colors for the selected variant
+          if (popup_is_size_selected) {
+            if (all_colors.length) {
+              /// Loop all the color input elements
+              $('.pdp__options-main input[name^="Color"]').each(function () {
+                var colorvar = $(this).attr('title');
+                var colorhandle = theme.handleize(colorvar);
+                // If the color element is found in the all_colors list we need to disable this element as it is not an available color option
+                if (all_colors.indexOf(colorhandle) > -1) {
+                  qvDescription.find('#' + colorhandle).attr('disabled', 'disabled');
+                  qvDescription.find('div[data-color^="' + colorhandle + '"]').css('opacity', '0.2');
+                }
+              });
+            }
+
+            // Check if there are any quantities left in the all_quantities array and if so, disable these quantity buttons as they are unavailable quantities for the selected variant color
+            if (all_quantities.length) {
+              $('.pdp__options-main input[name^="Quantity"]').each(function () {
+                var quantityvar = $(this).attr('title');
+                var quantityhandle = theme.handleize(quantityvar);
+                // If the quantity element is found in the all_quantities list we need to disable this element as it is not an available quantity option
+                if (all_quantities.indexOf(quantityhandle) > -1) {
+                  qvDescription.find('#' + quantityhandle).attr('disabled', 'disabled');
+                  qvDescription.find('div[data-quantity^="' + quantityhandle + '"]').css('color', '#ABABAB');
+                  qvDescription.find('span[data-quantity^="' + quantityvar + '"]').css('text-decoration', 'line-through');
+                }
+              });
+            }
+          }
+
+          // Check if there are any sizes left in the all_sizes array and if so, disable these size buttons as they are unavailable sizes for the selected variant color
+          if (all_sizes.length) {
+            $('.pdp__options-main input[name^="Size"]').each(function () {
+              var sizevar = $(this).attr('title');
+              var sizehandle = theme.handleize(sizevar);
+              // If the size element is found in the all_sizes list we need to disable this element as it is not an available size option
+              if (all_sizes.indexOf(sizehandle) > -1) {
+                qvDescription.find('#' + sizehandle).attr('disabled', 'disabled');
+                qvDescription.find('div[data-size^="' + sizehandle + '"]').css('opacity', '0.5');
+                qvDescription.find('span[data-size^="' + sizevar + '"]').css('text-decoration', 'line-through');
+              }
+            });
+          }
         }
         // ======================================== Neels code ends here ========================================
 
@@ -2264,3 +2270,64 @@ class ModalOpener extends HTMLElement {
   }
 }
 customElements.define('modal-opener', ModalOpener);
+// Dropdown
+document.addEventListener('click', (e) => {
+  document.querySelectorAll('[data-dropdown]').forEach((item) => {
+    if (item.contains(e.target) && !e.target.closest('[data-dropdown-content]')) {
+      e.target.closest('[data-dropdown]').classList.toggle('active')
+    } else {
+      item.classList.remove('active')
+    }
+  })
+})
+// End dropdown
+
+// Slide toggle
+class SlideToggle extends HTMLElement {
+  constructor() {
+    super();
+    this.duration = this.dataset.duration || 200;
+    this.slideTargetName = this.getAttribute('data-slide-toggle');
+    this.slideTarget = document.querySelector('[data-slide-target="'+ this.slideTargetName + '"]')
+    if (this.slideTarget) {
+      this.addEventListener('click', (e) => {
+        e.preventDefault();
+        this.slideToggle()
+      });
+    }
+  }
+
+  slideToggle () {
+    (!this.slideTarget.classList.contains('active')) ? this.slideToggleOpen() : this.slideToggleClose()
+  }
+
+  slideToggleOpen() {
+    this.slideTarget.classList.add('active');
+    this.slideTarget.style.height = 'auto';
+    let height = this.slideTarget.clientHeight + "px";
+    this.slideTarget.style.height = '0px';
+    setTimeout( () => this.slideTarget.style.height = height, 0);
+    setTimeout( () => {
+      this.slideTarget.style.removeProperty('height');
+      this.slideTarget.style.overflow = 'auto';
+      this.classList.add('active');
+    }, this.duration);
+  }
+
+  slideToggleClose() {
+    this.slideTarget.style.overflow = 'hidden';
+    this.slideTarget.animate({
+      height: [this.slideTarget.clientHeight + 'px', '0px']
+    }, {
+      duration: this.duration,
+      easing: 'linear'
+    });
+    setTimeout( () => {
+      this.slideTarget.classList.remove('active');
+      this.classList.remove('active');
+    }, this.duration)
+  }
+}
+
+customElements.define('slide-toggle', SlideToggle);
+// End Slide toggle
