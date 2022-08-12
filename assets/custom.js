@@ -4,6 +4,18 @@ theme.setAttributes = function (el, attrObj) {
   Object.keys(attrObj).forEach(key => el.setAttribute(key, attrObj[key]));
 }
 
+theme.addScripts = function (scriptObj) {
+  return Promise.all(Object.keys(scriptObj).map(key => {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src = scriptObj[key];
+      document.getElementsByTagName("body")[0].appendChild(script);
+      script.addEventListener('load', () => resolve());
+    })
+  }))
+}
+
 theme.serializeObject = function (form) {
   const formData = new FormData(form),
         bodyObj = {};
