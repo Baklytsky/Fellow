@@ -264,11 +264,22 @@ class collectionFacets extends HTMLElement {
           searchParams = new URLSearchParams(window.location.search);
 
     for (let param of searchParams) {
-      facets.push({
-        name: param[0],
-        options: param[1].split(' ')
-      });
+      const [key, value] = param
+      const facetsList = this.facets.reduce((accum, item) => [...accum, ...Object.keys(item)], ['sort_by'])
+      
+      if (facetsList.includes(key)) {
+        facets.push({
+          name: key,
+          options: value.split(' ')
+        });
+      }
     }
+    
+    if (!facets.length) {
+      this.sortBy(this.data, this.defaultSortByAction, this.defaultSortByOrder)
+      this.renderResults(this.data)
+    }
+    
     this.selectFacetByParams(facets)
   }
 
