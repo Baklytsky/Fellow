@@ -13,22 +13,31 @@ class collectionFacets extends HTMLElement {
     this.selectedFacetsCount = this.querySelector('.selected-facets-count')
     this.resultsCount = this.querySelector('.facet-header-results-count')
     this.defaultSortBy = this.querySelector('[data-default-sort-by]')
-    this.defaultSortByAction = this.defaultSortBy.title
-    this.defaultSortByOrder = this.defaultSortBy.getAttribute('data-sort-order')
+    this.defaultSortByAction = this.defaultSortBy.value
 
     this.facetsForm.addEventListener('change', () => this.getSelectedFacets())
     this.clearAll.addEventListener('click', () => this.clearFacets())
+  }
+
+  mergeBestSellingAndManual(collectionUrl) {
+    const urlArr = [collectionUrl + '?sort_by=best-selling&view=ajax-obj', collectionUrl + '?sort_by=manual&view=ajax']
+    return Promise.all(urlArr.map(url => {
+      return fetch(`${url}`).then(resp => resp.json())
+    })).then(values => {
+      values[0].products.forEach(el => {
+        const manual_order = values[1].products.find(product => product.id === el.id)['manual_order']
+        el.variants.forEach(variant => variant['manual_order'] = manual_order)
+        el['manual_order'] = manual_order
+      })
+      return values[0]
+    })
   }
 
   getSubCollections() {
     this.subCollectionData = []
     const subCollections = JSON.parse(this.subcollections.textContent).subcollections;
     Promise.all(subCollections.map(collection => {
-      const url = collection.url + '?sort_by=best-selling&view=ajax-obj'
-      return fetch(`${url}`)
-          .then(resp => {
-            return resp.json()
-          })
+      return this.mergeBestSellingAndManual(collection.url)
           .then(data => {
             const products = data.products;
             let shopByUseNames = this.getSetOfValues(products, ['facets', 'shop_by_use', 'names']),
@@ -79,26 +88,24 @@ class collectionFacets extends HTMLElement {
     }, []))]
   }
 
-  getProducts () {
-    const url = window.location.pathname + '?sort_by=best-selling&view=ajax-obj'
-    fetch(`${url}`)
-        .then(resp => {return resp.json()})
-        .then(data => {
-          this.originalData = data
-          if (this.subCollectionData && this.subCollectionData.length) {
-            this.originalData.products.push(...this.subCollectionData)
-          }
-          this.resetData(data)
-          this.renderFacets(this.facets)
-          this.facetsForm.style.pointerEvents = 'auto'
-          this.resultsCount.innerHTML = `(${this.variants.length})`
-          if (window.location.search) {
-            this.parseUrlParams()
-          } else {
-            this.sortBy(this.data, this.defaultSortByAction, this.defaultSortByOrder)
-            this.renderResults(this.data)
-          }
-        })
+  getProducts() {
+    this.mergeBestSellingAndManual(window.location.pathname).then((data) => {
+      this.originalData = data
+      if (this.subCollectionData && this.subCollectionData.length) {
+        this.originalData['products'].push(...this.subCollectionData)
+      }
+      console.log(this.originalData)
+      this.resetData(data)
+      this.renderFacets(this.facets)
+      this.facetsForm.style.pointerEvents = 'auto'
+      this.resultsCount.innerHTML = `(${this.variants.length})`
+      if (window.location.search) {
+        this.parseUrlParams()
+      } else {
+        this.sortBy(this.data, this.defaultSortByAction)
+        this.renderResults(this.data)
+      }
+    })
   }
 
   resetData(data) {
@@ -171,9 +178,8 @@ class collectionFacets extends HTMLElement {
     const checkedInputs = this.facetsForm.querySelectorAll('.facet-group-wrapper input:checked'),
           facetGroup = this.facetsForm.querySelectorAll('.facet-group'),
           sortByInput = this.facetsForm.querySelector('.facet-header-sort-by input:checked'),
-          sortByAction = sortByInput.title,
-          sortByOrder = sortByInput.getAttribute('data-sort-order');
-    let urlParams = '?sort_by=' + sortByInput.value;
+          sortByAction = sortByInput.value;
+    this.urlParams = '?sort_by=' + sortByInput.value;
 
     if (checkedInputs.length) {
       this.clearAll.classList.remove('is-hidden')
@@ -210,15 +216,15 @@ class collectionFacets extends HTMLElement {
       }
 
      const groupValuesStr = groupValues.join('+');
-      urlParams+= '&' + groupName + '=' + groupValuesStr
+      this.urlParams+= '&' + groupName + '=' + groupValuesStr
     })
 
-    this.sortBy(allSelectedItems, sortByAction, sortByOrder)
+    this.sortBy(allSelectedItems, sortByAction)
     this.renderResults(allSelectedItems)
     this.resultsCount.innerHTML = (this.template.includes('by-product'))
         ? `(${allSelectedVariants.length})`
         : `(${allSelectedItems.length})`
-    history.replaceState(null, null, urlParams)
+    history.replaceState(null, null, this.urlParams)
   }
 
   filterResults (items, groupName, groupValues) {
@@ -231,30 +237,28 @@ class collectionFacets extends HTMLElement {
     });
   }
 
-  sortBy (data, sortBy, order) {
+  sortBy(data, sortBy) {
     switch (sortBy) {
-      case 'best_sellers':
+      case 'manual':
+        data.sort((a, b) => a['manual_order'] - b['manual_order'])
+        break
+      case 'best-selling':
         data.sort((a, b) => a[sortBy] - b[sortBy])
         break
-      case 'price':
-        if (order === 'ascending') {
-          data.sort((a, b) => a[sortBy] - b[sortBy])
-          if (this.template.includes('by-product')) {
-            data.forEach(product => product.variants.sort((a, b) => a[sortBy] - b[sortBy]))
-          }
-        } else {
-          data.sort((a, b) => b[sortBy] - a[sortBy])
-          if (this.template.includes('by-product')) {
-            data.forEach(product => product.variants.sort((a, b) => b[sortBy] - a[sortBy]))
-          }
+      case 'price-ascending':
+        data.sort((a, b) => a['price'] - b['price'])
+        if (this.template.includes('by-product')) {
+          data.forEach(product => product.variants.sort((a, b) => a['price'] - b['price']))
         }
         break
-      case 'date':
-        if (order === 'ascending') {
-          data.sort((a, b) => new Date(b[sortBy]) -  new Date (a[sortBy]))
-        } else {
-          data.sort((a, b) => new Date(a[sortBy]) -  new Date (b[sortBy]))
+      case 'price-descending':
+        data.sort((a, b) => b['price'] - a['price'])
+        if (this.template.includes('by-product')) {
+          data.forEach(product => product.variants.sort((a, b) => b['price'] - a['price']))
         }
+        break
+      case 'created-descending':
+        data.sort((a, b) => new Date(a['date']) - new Date(b['date']))
         break
     }
   }
@@ -276,7 +280,7 @@ class collectionFacets extends HTMLElement {
     }
     
     if (!facets.length) {
-      this.sortBy(this.data, this.defaultSortByAction, this.defaultSortByOrder)
+      this.sortBy(this.data, this.defaultSortByAction)
       this.renderResults(this.data)
     }
     

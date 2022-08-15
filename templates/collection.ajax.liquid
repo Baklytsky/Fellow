@@ -1,0 +1,18 @@
+{% layout none %}
+{% paginate collection.products by 1000 %}
+{%- assign product_counter = 0 -%}
+{
+"products": [
+{%- for product in collection.products -%}
+  {%- assign best_selling_order = forloop.index -%}
+  {%- if product_type_handle != "gift-product" or product_type_handle != "gift-box" or product_type_handle != "personalization-fee" -%}
+    {%- assign product_counter = product_counter | plus: 1 -%}
+    {%- if product_counter != 1 -%},{%- endif -%}{
+      "id": {{ product.id }},
+      "manual_order": {{ forloop.index }}
+    }
+  {%- endif -%}
+{%- endfor -%}
+  ]
+}
+{% endpaginate %}

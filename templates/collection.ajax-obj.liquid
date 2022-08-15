@@ -467,7 +467,7 @@
       "published_date": "{{ product.published_at }}",
       "url": "{{ product.url }}",
       "link_text": "{{ 'products.product.link_text' | t }}",
-      "best_sellers": {{ best_selling_order }},
+      "best-selling": {{ best_selling_order }},
       "inventory": {{ product.selected_or_first_available_variant.inventory_quantity }},
       "date": "{{ product.published_at }}",
       "facets": {
@@ -592,7 +592,7 @@
         "options_in_card": {{ options_in_card | json }},
         "price": "{{ variant_price }}",
         "price_money": "{{ variant_price | money_without_trailing_zeros }}",
-        "best_sellers": {{ best_selling_order }},
+        "best-selling": {{ best_selling_order }},
         "inventory": {{ variant.inventory_quantity }},
         "date": "{{ product.published_at }}",
         "badge": {{ show_badge }},
