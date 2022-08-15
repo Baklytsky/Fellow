@@ -327,7 +327,7 @@
           "menu_right": "new-right-menu",
           "mobile_menu": "mobile-navigation-q3-2022",
           "show_announcement": true,
-          "announcement_text": "Free US shipping on orders over $99 <u id=\"freeShipPopup\" class=\"ml05\" style=\"cursor:pointer;\"> Learn more -&gt;<\/u>",
+          "announcement_text": "Free US shipping on orders over $99 <u class=\"ml05\" style=\"cursor:pointer;\"> Shop now -&gt;<\/u>",
           "announcement_link": "shopify:\/\/collections\/all-products",
           "enable_timer": false,
           "end_date": "Sep 30, 2021 07:30:00 GMT-08:00"
@@ -371,15 +371,15 @@
               "mobileAlignment": "center",
               "heroSlide__header": "Pick A Winner",
               "heroSlide__subheader": "Discover precision brewing gear recognized as the best of the best.",
-              "subSlide__bgColor": "#fff4bc",
-              "subSlide__textColor": "#231f20",
+              "subSlide__bgColor": "#76998b",
+              "subSlide__textColor": "#FFFFFF",
               "heroSlide__ctaURL": "shopify:\/\/collections\/award-winners",
               "heroSlide__ctaCopy": "Shop Award Winners",
-              "heroSlide__ctaColor": "black",
+              "heroSlide__ctaColor": "white",
               "heroSlide__ctaURL2": "",
               "heroSlide__ctaCopy2": "",
               "heroSlide__ctaColor2": "black",
-              "heroSlide__ctaSubtext": "<img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0057\/6235\/1219\/files\/Award_Winning_Clara_Award_Logos.png?v=1659977584\" alt=\"Logos of awards Fellow has received for their products including the Clara French Press and the Ode Brew Grinder\" style=\"padding:0;max-width: 327px;object-fit:contain;height:auto;\">"
+              "heroSlide__ctaSubtext": "<img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0057\/6235\/1219\/files\/AWARD_WINNING_CLARA_AWARD_LOGOS_WHITE.png?v=1660321385\" alt=\"Logos of awards Fellow has received for their products including the Clara French Press and the Ode Brew Grinder\" style=\"padding:0;max-width: 327px;object-fit:contain;height:auto;\">"
             }
           },
           "58ee7397-6079-412a-9acd-d453a0cf281c": {
@@ -393,7 +393,7 @@
               "heroSlide__subheader": "The new Carter collection has arrived. New colors, new lids, new ways to move.",
               "subSlide__bgColor": "#000000",
               "subSlide__textColor": "#FFFFFF",
-              "heroSlide__ctaURL": "shopify:\/\/collections\/serve",
+              "heroSlide__ctaURL": "shopify:\/\/collections\/travel-mugs",
               "heroSlide__ctaCopy": "Shop Travel Mugs",
               "heroSlide__ctaColor": "white",
               "heroSlide__ctaURL2": "shopify:\/\/pages\/carter-mugs",
@@ -931,7 +931,7 @@
           "description": "<p>Our new Carter collection has landed. New colors, new lids, new ways to move.<\/p>",
           "bg_color": "rgba(0,0,0,0)",
           "text_color": "",
-          "cta_url": "shopify:\/\/collections\/wedding-gifts",
+          "cta_url": "shopify:\/\/products\/carter-move-mug",
           "cta_copy": "Shop Carter",
           "cta_color": "btn--dark"
         }
