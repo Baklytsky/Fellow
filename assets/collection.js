@@ -159,19 +159,12 @@ class collectionFacets extends HTMLElement {
   }
 
   renderResults (data) {
-    if (this.subcollections) this.checkSubCollectionOrder(data)
     const resultSource = this.resultSourse.innerHTML,
           template = Handlebars.compile(resultSource);
     this.resultWrapper.innerHTML = template({items: data})
     const allCards = this.querySelectorAll('.productCard');
     if (allCards.length) allCards.forEach((card) => theme.updateSwatches(card));
     if (typeof window.yotpo !== "undefined") window.yotpo.initWidgets();
-  }
-
-  checkSubCollectionOrder (data) {
-    data.forEach((item, i) => {
-      if (item['subCollection']) data.splice(item['order'] - 1,0,data.splice(i,1)[0]);
-    })
   }
 
   getSelectedFacets () {

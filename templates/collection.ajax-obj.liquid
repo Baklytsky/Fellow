@@ -24,14 +24,14 @@
   {% endfor %}
 {% endif %}
 
-{%- comment -%} /// Hidden "sizes" in filters  /// {%- endcomment -%}
-{% if collection.metafields["custom_fields"]["hidden_sizes"] != blank %}
-  {%- assign hidden_sizes_arr = collection.metafields["custom_fields"]["hidden_sizes"] | split: ',' -%}
+{%- comment -%} /// Shown "sizes" in filters  /// {%- endcomment -%}
+{% if collection.metafields["custom_fields"]["shown_sizes"] != blank %}
+  {%- assign shown_sizes_arr = collection.metafields["custom_fields"]["shown_sizes"] | split: ',' -%}
 {% endif %}
 
-{%- comment -%} /// Hidden "shop by use" in filters  /// {%- endcomment -%}
-{% if collection.metafields["custom_fields"]["hidden_shop_by_use_tags"] != blank %}
-  {%- assign hidden_shop_by_use_arr = collection.metafields["custom_fields"]["hidden_shop_by_use_tags"] | split: ',' -%}
+{%- comment -%} /// Shown "shop by use" in filters  /// {%- endcomment -%}
+{% if collection.metafields["custom_fields"]["shown_shop_by_use_tags"] != blank %}
+  {%- assign shown_shop_by_use_arr = collection.metafields["custom_fields"]["shown_shop_by_use_tags"] | split: ',' -%}
 {% endif %}
 
 {% paginate collection.products by 1000 %}
@@ -172,15 +172,15 @@
         {%- endif -%}
 
         {%- if option_size_index != blank -%}
-          {%- assign skip_size = false -%}
+          {%- assign skip_size = true -%}
           {%- assign name = variant.options[option_size_index] -%}
           {%- assign val = name | handleize -%}
 
-          {%- if hidden_sizes_arr.size > 0 -%}
-            {%- for hidden_size in hidden_sizes_arr -%}
-              {%- assign hidden_size_val = hidden_size | handleize -%}
-              {%- if hidden_size_val == val -%}
-                {%- assign skip_size = true -%}
+          {%- if shown_sizes_arr.size > 0 -%}
+            {%- for shown_size in shown_sizes_arr -%}
+              {%- assign shown_size_val = shown_size | handleize -%}
+              {%- if shown_size_val == val -%}
+                {%- assign skip_size = false -%}
                 {%- break -%}
               {%- endif -%}
             {%- endfor -%}
@@ -199,15 +199,15 @@
 
     {%- for tag in product.tags -%}
       {%- if tag contains 'Use:' -%}
-        {%- assign skip_tag = false -%}
+        {%- assign skip_tag = true -%}
         {%- assign use_name = tag | split: 'Use:' | last | strip -%}
         {%- assign use_name_handle = use_name | handleize -%}
 
-        {%- if hidden_shop_by_use_arr.size > 0 -%}
-          {%- for hidden_shop_by_use in hidden_shop_by_use_arr -%}
-            {%- assign hidden_shop_by_use_handle = hidden_shop_by_use | handleize -%}
-            {%- if hidden_shop_by_use_handle == use_name_handle -%}
-              {%- assign skip_tag = true -%}
+        {%- if shown_shop_by_use_arr.size > 0 -%}
+          {%- for shown_shop_by_use in shown_shop_by_use_arr -%}
+            {%- assign shown_shop_by_use_handle = shown_shop_by_use | handleize -%}
+            {%- if shown_shop_by_use_handle == use_name_handle -%}
+              {%- assign skip_tag = false -%}
               {%- break -%}
             {%- endif -%}
           {%- endfor -%}
@@ -342,15 +342,15 @@
                 {%- endif -%}
 
                 {%- if option_size_index != blank -%}
-                  {%- assign skip_size = false -%}
+                  {%- assign skip_size = true -%}
                   {%- assign name = variant.options[option_size_index] -%}
                   {%- assign val = name | handleize -%}
 
-                  {%- if hidden_sizes_arr.size > 0 -%}
-                    {%- for hidden_size in hidden_sizes_arr -%}
-                      {%- assign hidden_size_val = hidden_size | handleize -%}
-                      {%- if hidden_size_val == val -%}
-                        {%- assign skip_size = true -%}
+                  {%- if shown_sizes_arr.size > 0 -%}
+                    {%- for shown_size in shown_sizes_arr -%}
+                      {%- assign shown_size_val = shown_size | handleize -%}
+                      {%- if shown_size_val == val -%}
+                        {%- assign skip_size = false -%}
                         {%- break -%}
                       {%- endif -%}
                     {%- endfor -%}

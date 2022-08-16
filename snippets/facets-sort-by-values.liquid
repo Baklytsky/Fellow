@@ -4,10 +4,29 @@
 
 {%- assign default_sort_by = collection.default_sort_by -%}
 
+{%- if default_sort_by == 'title-ascending'
+  or default_sort_by == 'title-descending'
+  or default_sort_by == 'created-ascending' -%}
+  {%- assign default_sort_by = 'manual' -%}
+{%- endif -%}
+
 {%- for option in collection.sort_options -%}
   {%- unless option.value == 'title-ascending'
     or option.value == 'title-descending'
     or option.value == 'created-ascending' -%}
+
+    {%- case option.value -%}
+    {%- when 'best-selling' -%}
+    {%- assign title = 'Best Sellers' -%}
+    {%- when 'price-ascending' -%}
+    {%- assign title = 'Price (small to big)' -%}
+    {%- when 'price-descending' -%}
+    {%- assign title = 'Price (big to small)' -%}
+    {%- when 'created-descending' -%}
+    {%- assign title = 'Recently Added' -%}
+      {%- else -%}
+    {%- assign title = option.name -%}
+    {%- endcase -%}
 
     <li class="facet-group__list-item">
       <input id="facet-sort-by-{{ option.value }}"
@@ -15,13 +34,13 @@
              name="sort_by"
              class="facet-group-input"
              value="{{ option.value }}"
-             title="{{ option.name }}"
+             title="{{ title }}"
               {% if default_sort_by == option.value %}
                 data-default-sort-by checked="checked"
               {% endif %}/>
       <label class="facet-group-radio f aic"
              for="facet-sort-by-{{ option.value }}">
-        {{ option.name }}
+        {{ title }}
       </label>
     </li>
   {%- endunless -%}
