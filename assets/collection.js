@@ -41,7 +41,7 @@ class collectionFacets extends HTMLElement {
           .then(data => {
             const products = data.products;
             let shopByUseNames = this.getSetOfValues(products, ['facets', 'shop_by_use', 'names']),
-                sizesNames = this.getSetOfValues(products, ['facets', 'sizes', 'names']);
+                sizesNames = this.getSetOfValues(products, ['facets', 'size', 'names']);
 
             if (collection['hidden_shop_by_use_arr']) {
               shopByUseNames = this.checkHiddenOptions(shopByUseNames, collection['hidden_shop_by_use_arr'])
@@ -62,7 +62,7 @@ class collectionFacets extends HTMLElement {
                   names: this.getSetOfValues(products, ['facets', 'color', 'names'])
                 },
                 shop_by_use: {names: shopByUseNames},
-                sizes: {names: sizesNames}
+                size: {names: sizesNames}
               },
               shop_by_use: {value: this.getSetOfValues(products, ['shop_by_use', 'value'])},
               size: {value: this.getSetOfValues(products, ['size', 'value'])},
@@ -94,11 +94,12 @@ class collectionFacets extends HTMLElement {
       if (this.subCollectionData && this.subCollectionData.length) {
         this.originalData['products'].push(...this.subCollectionData)
       }
-      console.log(this.originalData)
       this.resetData(data)
       this.renderFacets(this.facets)
       this.facetsForm.style.pointerEvents = 'auto'
-      this.resultsCount.innerHTML = `(${this.variants.length})`
+      this.resultsCount.innerHTML = (this.template.includes('by-variant'))
+          ? `(${this.variants.length})`
+          : `(${this.products.length})`
       if (window.location.search) {
         this.parseUrlParams()
       } else {
@@ -129,7 +130,7 @@ class collectionFacets extends HTMLElement {
     const facetsToRender = {
           facetsArr: [
             {title: 'Shop By Use', handle: 'shop_by_use', shop_by_use: true, facets: this.getFacetsArr(facets, 'shop_by_use')},
-            {title: 'Size', handle: 'size', size: true, facets: this.getFacetsArr(facets, 'sizes')},
+            {title: 'Size', handle: 'size', size: true, facets: this.getFacetsArr(facets, 'size')},
             {title: 'Color', handle: 'color',  color: true, facets: this.getFacetsArr(facets, 'color')}
           ]
         },
@@ -204,8 +205,8 @@ class collectionFacets extends HTMLElement {
           }
           return productClone
         })
-        allSelectedItems = [...productSelectedVariants]
-        allSelectedVariants = allSelectedItems.reduce((arr, product) => arr.concat(product.variants), []);
+        allSelectedItems = [...productSelectedVariants].filter(product => product.variants.length)
+        allSelectedVariants = allSelectedItems.reduce((arr, product) => arr.concat(product.variants), [])
       }
 
      const groupValuesStr = groupValues.join('+');
@@ -215,7 +216,7 @@ class collectionFacets extends HTMLElement {
     this.sortBy(allSelectedItems, sortByAction)
     this.renderResults(allSelectedItems)
     this.resultsCount.innerHTML = (this.template.includes('by-product'))
-        ? `(${allSelectedVariants.length})`
+        ? `(${allSelectedVariants.length || 0})`
         : `(${allSelectedItems.length})`
     history.replaceState(null, null, this.urlParams)
   }
@@ -262,8 +263,8 @@ class collectionFacets extends HTMLElement {
 
     for (let param of searchParams) {
       const [key, value] = param
-      const facetsList = this.facets.reduce((accum, item) => [...accum, ...Object.keys(item)], ['sort_by'])
-      
+      const facetsList = [...new Set(this.facets.reduce((accum, item) => [...accum, ...Object.keys(item)], ['sort_by']))]
+
       if (facetsList.includes(key)) {
         facets.push({
           name: key,
