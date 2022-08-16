@@ -251,15 +251,13 @@ class cartDrawerItem extends HTMLElement {
 
 customElements.define('cart-drawer-item', cartDrawerItem);
 
-class cartRecommendedProduct extends HTMLElement {
+class cartRecommendedProduct extends ProductCard {
   constructor() {
     super();
-    this.radios = this.querySelectorAll('.js-productCard-option')
     this.atcBtn = this.querySelector('[data-action="add-to-cart-recommended"]')
 
-    this.radios.forEach(option => {
-      option.addEventListener('click', (e) => {
-        e.preventDefault()
+    this.colorSelectors.forEach(option => {
+      option.addEventListener('click', () => {
         this.atcBtn.setAttribute('data-variant-id', option.getAttribute('data-variant-id'))
       })
     })
@@ -267,8 +265,6 @@ class cartRecommendedProduct extends HTMLElement {
     this.atcBtn.addEventListener('click', (e) => {
       this.addRecommendedProduct(e)
     })
-
-    theme.updateSwatches(this)
   }
 
   addRecommendedProduct(e) {
@@ -277,18 +273,18 @@ class cartRecommendedProduct extends HTMLElement {
       id: this.atcBtn.getAttribute('data-variant-id'),
       quantity: 1
     };
-    function errorCallback(error) {
-      const errorMessage = document.querySelector('#CartRecommendedErrorMessage')
-      errorMessage.innerHTML = error.responseJSON.description
-      errorMessage.style.display = 'block'
-      setTimeout(() => {
-        errorMessage.style.display = 'none'
-        errorMessage.innerHTML = ''
-      }, 3500);
-    }
-    theme.cart.cartEvent('/cart/add.js', bodyObj, true, errorCallback)
+    theme.cart.cartEvent('/cart/add.js', bodyObj, true, this.errorCallback)
   }
 
+  errorCallback(error) {
+    const errorMessage = document.querySelector('#CartRecommendedErrorMessage')
+    errorMessage.innerHTML = error.responseJSON.description
+    errorMessage.style.display = 'block'
+    setTimeout(() => {
+      errorMessage.style.display = 'none'
+      errorMessage.innerHTML = ''
+    }, 3500);
+  }
 }
 
 customElements.define('cart-recommended-product', cartRecommendedProduct);

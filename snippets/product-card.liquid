@@ -37,7 +37,7 @@
   {{ className }}
 {%- endcapture -%}
 
-<div class='productCard productCard--{{ product.title | handleize }} {{ cx }}' data-component='productCard'>
+<product-card class='productCard productCard--{{ product.title | handleize }} {{ cx }}'>
   <div class='productCard__content y {{ content_cx }}' data-image-url="{{ image_url }}">
     {% include 'product-card-image',
       hide_variants: hide_variants,
@@ -54,7 +54,7 @@
       {{ bottom_content }}
     {% endif %}
   </div>
-</div>
+</product-card>
 
 {% comment %} Reset {% endcomment %}
 {% assign className = blank %}

@@ -273,10 +273,6 @@ theme.header = function () {
       $(this).siblings('.subMenuList').slideToggle();
       $(this).toggleClass('active')
     }
-    // mega hack pico sidestep on mobile
-    // if (window.innerWidth < 500 && this.hasAttribute('href')){
-    //   window.location.href = this.getAttribute('href');
-    // }
   })
 
   theme.countdownTimer = function () {
@@ -2179,6 +2175,83 @@ class YoutubeVimeoVideo extends HTMLElement {
 }
 
 customElements.define('video-section', YoutubeVimeoVideo);
+
+class ProductCard extends HTMLElement {
+  constructor() {
+    super();
+    this.options = this.querySelector('.productCard__options')
+    this.colorSelectors = this.querySelectorAll('.js-color-update input')
+    this.productLinks = this.querySelectorAll('.js-product-link')
+    this.productView = this.querySelector('.js-product-view')
+    this.productPrice = this.querySelector('.productCard__price-wrapper')
+    this.variantImages = this.querySelectorAll('.js-variant-image')
+
+   if (this.options) this.options.addEventListener('change', () => this.cardOptionChange())
+  }
+
+  cardOptionChange() {
+    this.currentOpt = this.options.querySelector('input:checked')
+    this.currentOptID = this.currentOpt.dataset.variantId
+    this.currentOptLink = this.currentOpt.dataset.variantUrl
+    this.currentOptPrice = this.currentOpt.dataset.variantPrice
+    this.currentOptComparePrice = this.currentOpt.dataset.variantComparePrice
+
+    this.colorSelectors.forEach(i => i.classList.remove('active'))
+    this.currentOpt.classList.add('active')
+
+    if (this.currentOptPrice) this.cardPriceChange()
+    this.cardLinksChange()
+    this.cardImageChange()
+  }
+
+  cardPriceChange() {
+    let priceInner =
+        `<h2 class="ml1 pdpCopy__header-price">
+          ${theme.formatMoney(this.currentOptPrice, '${{amount_no_decimals}}')}
+        </h2>`
+
+    if (this.currentOptComparePrice > this.currentOptPrice) {
+      priceInner =
+        `<div class="pdpCopy__price f aic">
+          <span class="strike card__price--regular ml1 pdpCopy__header-price rel">
+            ${theme.formatMoney(this.currentOptComparePrice, '${{amount_no_decimals}}')}
+            <div class="price-round-arrow">
+              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="14" viewBox="0 0 25 14" fill="none">
+                <path d="M21.8717 2.55273L22.064 7.23249L17.2605 7.54226" stroke="black" stroke-width="1.5" 
+                stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M21 6.49951C21 6.49951 16.3627 1.55385 10.0543 3.38802C3.74592 5.22219 1.9372 10.8949 1.9372 10.8949" 
+                stroke="black" stroke-width="1.5" stroke-linecap="round"></path>
+              </svg>
+            </div>
+          </span>
+          <h2 class="card__price--sale ml1 pdpCopy__header-price">
+            ${theme.formatMoney(this.currentOptPrice, '${{amount_no_decimals}}')}
+          </h2>
+        </div>`
+    }
+    this.productPrice.innerHTML = priceInner
+  }
+
+  cardLinksChange() {
+    this.productLinks.forEach(link => {
+      link.setAttribute('href', this.currentOptLink);
+    })
+
+    if (!this.productView) return
+    const searchParam = (!this.currentOptLink.includes('variant=')) ? '?view=quick-view' : '&view=quick-view',
+        viewLink = this.currentOptLink + searchParam;
+    this.productView.setAttribute('data-quick-view', viewLink);
+  }
+
+  cardImageChange() {
+    this.currentOptionImage = this.querySelector('.productCard__img [data-variant-id="'+ this.currentOptID +'"]')
+    if (!this.currentOptionImage) return
+    this.variantImages.forEach(image => image.classList.remove('is-visible'))
+    this.currentOptionImage.classList.add('is-visible')
+  }
+}
+
+customElements.define('product-card', ProductCard);
 
 class bundleMixMultiple extends HTMLElement {
   constructor() {

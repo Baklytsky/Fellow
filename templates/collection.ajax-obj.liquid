@@ -110,6 +110,7 @@
                     <span class='u-sr-only'>Label for {{ product.title }} {{ option_name }}</span>
                     <input
                             type='radio'
+                            name='color'
                             id='{{ product.title | handleize }}-{{ option_name }}__{{ value | handleize }}{{ block_id }}'
                             data-value-handle='{{ value | handleize }}'
                             {% if option_name == 'color' %}
@@ -118,13 +119,14 @@
                             {% endif %}
                             {% if option_name == 'material' %}data-material='{{ value | handleize }}'{% endif %}
                             value='{{ value }}'
-                            data-option-selector>
+                            data-option-selector
+                            data-variant-url='{{ variant.url }}'
+                            data-variant-id='{{ variant.id }}'
+                            data-variant-price='{{ variant.price }}'
+                            data-variant-compare-price='{{ variant.compare_at_price }}'>
                     <div class='radio__title js-productCard-option js-color-update {% if color_swatch_image != blank %}radio__title-bg-image{% endif %}'
                          {% if option_name == 'color' %}data-color='{{ color_name | handleize }}'{% endif %}
                             {% if option_name == 'material' %}data-material='{{ value | handleize }}'{% endif %}
-                         data-variant-url='{{ variant.url }}'
-                         data-variant-id='{{ variant.id }}'
-                         data-variant-price='{{ variant.price }}'
                             {% if color_swatch_image != blank %}style='background: url({{ color_swatch_image | img_url: '64x64' }}) no-repeat center center / cover; color: transparent; border-color: white'{% endif %}>
                     </div>
                   </label>
@@ -428,8 +430,8 @@
     {% endif %}
 
     {%- assign product_compare_at_price_is_more_than_price = false -%}
-    {%- assign product_compare_at_price = product.compare_at_price -%}
-    {%- assign product_price = product.price -%}
+    {%- assign product_compare_at_price = product.selected_or_first_available_variant.compare_at_price -%}
+    {%- assign product_price = product.selected_or_first_available_variant.price -%}
 
     {%- if product_compare_at_price > product_price and product_compare_at_price != blank -%}
       {%- assign product_compare_at_price_is_more_than_price = true -%}
@@ -453,8 +455,8 @@
       "badge": {{ show_product_badge }},
       "badge_text": "{{ product_badge_text }}",
       "reviews_count": {{ reviews_count }},
-      "price_money": "{{ product.price | money_without_trailing_zeros }}",
-      "price" : {{ product.price }},
+      "price_money": "{{ product.selected_or_first_available_variant.price | money_without_trailing_zeros }}",
+      "price" : {{ product.selected_or_first_available_variant.price }},
       "price_min": {{ product.price_min }},
       "compare_at_price_is_more_than_price": {{ product_compare_at_price_is_more_than_price }},
       "compare_at_price": "{{ product_compare_at_price }}",

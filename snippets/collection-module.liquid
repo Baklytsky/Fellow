@@ -23,14 +23,14 @@
             class_name: desctop_image_class,
             alt: collection_module_title,
             size: 'medium',
-            loader: true %}
+            loader: false %}
           {%- if collection_module_image_mobile != blank -%}
             {% render 'image-lazy-metafields',
               image: collection_module_image_mobile,
               class_name: 'image image-abs-contain hide-tablet-desk',
               alt: collection_module_title,
               size: 'medium',
-              loader: true %}
+              loader: false %}
           {%- endif -%}
         </div>
       {%- endif -%}

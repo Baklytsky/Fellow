@@ -5532,6 +5532,10 @@ ul.list {
   text-transform: capitalize;
 }
 
+.productCard {
+  display: block;
+}
+
 .productCard__content {
   width: 100%;
   overflow: hidden;
@@ -8221,19 +8225,23 @@ input[name=product_search_field] {
   }
 }
 
-.subcollection__products>div {
+.subcollection__products>div,
+.subcollection__products>product-card {
   width: 100%;
   margin-bottom: 16px
 }
 
 .subcollection__products.one-third>div,
-.subcollection__products.one-fourth>div {
+.subcollection__products.one-fourth>div,
+.subcollection__products.one-third>product-card,
+.subcollection__products.one-fourth>product-card {
   margin: 0 12px 16px;
   width: calc(50% - 24px)
 }
 
 @media screen and (min-width: 992px) {
-  .subcollection__products.one-fourth>div {
+  .subcollection__products.one-fourth>div,
+  .subcollection__products.one-fourth>product-card {
     margin-left: 12px;
     margin-right: 12px;
     margin-bottom: 64px;
@@ -8242,7 +8250,8 @@ input[name=product_search_field] {
 }
 
 @media screen and (min-width: 992px) {
-  .subcollection__products.one-third>div {
+  .subcollection__products.one-third>div,
+  .subcollection__products.one-third>product-card {
     width: calc((100% / 3) - 24px);
     margin-left: 12px;
     margin-right: 12px;
@@ -8251,7 +8260,8 @@ input[name=product_search_field] {
 }
 
 @media screen and (min-width: 1200px) {
-  .subcollection__products.one-fourth>div {
+  .subcollection__products.one-fourth>div,
+  .subcollection__products.one-fourth>product-card {
     width: calc(25% - 24px);
     margin-left: 12px;
     margin-right: 12px
