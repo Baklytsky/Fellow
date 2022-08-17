@@ -213,7 +213,7 @@ class collectionFacets extends HTMLElement {
       this.urlParams+= '&' + groupName + '=' + groupValuesStr
     })
 
-    if (this.externalUrlParams.length) this.urlParams+= '&' + this.externalUrlParams
+    if (this.externalUrlParams && this.externalUrlParams.length) this.urlParams+= '&' + this.externalUrlParams
 
     this.sortBy(allSelectedItems, sortByAction)
     this.renderResults(allSelectedItems)
