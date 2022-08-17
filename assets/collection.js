@@ -213,6 +213,8 @@ class collectionFacets extends HTMLElement {
       this.urlParams+= '&' + groupName + '=' + groupValuesStr
     })
 
+    if (this.externalUrlParams.length) this.urlParams+= '&' + this.externalUrlParams
+
     this.sortBy(allSelectedItems, sortByAction)
     this.renderResults(allSelectedItems)
     this.resultsCount.innerHTML = (this.template.includes('by-product'))
@@ -260,6 +262,7 @@ class collectionFacets extends HTMLElement {
   parseUrlParams() {
     const facets = [],
           searchParams = new URLSearchParams(window.location.search);
+    this.externalUrlParams = ''
 
     for (let param of searchParams) {
       const [key, value] = param
@@ -270,6 +273,8 @@ class collectionFacets extends HTMLElement {
           name: key,
           options: value.split(' ')
         });
+      } else {
+        this.externalUrlParams+= key + '=' + value.split(' ').join('+')
       }
     }
     
