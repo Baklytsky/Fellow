@@ -14,7 +14,7 @@ class collectionFacets extends HTMLElement {
     this.resultsCount = this.querySelector('.facet-header-results-count')
     this.defaultSortBy = this.querySelector('[data-default-sort-by]')
     this.defaultSortByAction = this.defaultSortBy.title
-    this.defaultSortByOrder = this.defaultSortBy.getAttribute('[data-sort-order]')
+    this.defaultSortByOrder = this.defaultSortBy.getAttribute('data-sort-order')
 
     this.facetsForm.addEventListener('change', () => this.getSelectedFacets())
     this.clearAll.addEventListener('click', () => this.clearFacets())
@@ -262,11 +262,22 @@ class collectionFacets extends HTMLElement {
           searchParams = new URLSearchParams(window.location.search);
 
     for (let param of searchParams) {
-      facets.push({
-        name: param[0],
-        options: param[1].split(' ')
-      });
+      const [key, value] = param
+      const facetsList = this.facets.reduce((accum, item) => [...accum, ...Object.keys(item)], ['sort_by'])
+      
+      if (facetsList.includes(key)) {
+        facets.push({
+          name: key,
+          options: value.split(' ')
+        });
+      }
     }
+    
+    if (!facets.length) {
+      this.sortBy(this.data, this.defaultSortByAction, this.defaultSortByOrder)
+      this.renderResults(this.data)
+    }
+    
     this.selectFacetByParams(facets)
   }
 

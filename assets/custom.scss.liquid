@@ -95,7 +95,6 @@ button {
   font-weight: bold;
   background: none;
   padding: 0;
-  cursor: default;
 }
 #header .mobileMenu .newHeader__button {
   font-weight: bold;
@@ -8989,7 +8988,7 @@ modal-opener {
 
 .facet-group {
   width: 100%;
-  max-width: calc(100%/3);
+  //max-width: calc(100%/3);
   padding: 0 5px;
 
   .facet-group-name {
@@ -9112,6 +9111,7 @@ modal-opener {
 
 .facet-group-wrapper {
   display: flex;
+  flex: 1 1 0;
   padding-bottom: 26px;
   border-bottom: 1px solid #C2C2C2;
   max-height: calc(100vh - var(--header-height) - 100px);
@@ -9119,6 +9119,7 @@ modal-opener {
   scrollbar-width: none;
 
   @media screen and (max-width: $tablet) {
+    flex: unset;
     flex-direction: column;
   }
 }
@@ -9448,7 +9449,7 @@ modal-opener {
 
 .collection__product-title {
   padding-right: 24px;
-  margin: 0 0 30px 0;
+  margin: 0 0 15px 0;
   font-weight: 500;
   font-size: 38px;
   line-height: 100%;
@@ -9483,9 +9484,17 @@ modal-opener {
   width: 21%;
   padding-right: 15px;
 
+  .productCard_ratings {
+    margin: 15px 0;
+  }
+
   @media screen and (max-width: $large_desk) {
     width: 100%;
     padding-right: 0;
+
+    .productCard_ratings {
+      margin: 8px 0;
+    }
   }
 }
 

@@ -8,6 +8,10 @@
     {%- assign color_hex = item["color_hex"] -%}
     {%- assign color_includes = item["includes_color"] -%}
 
+    {%- if item["color_image"] != blank -%}
+      {%- assign color_hex = "url('" | append: item["color_image"] | append: "') no-repeat center center / cover" -%}
+    {%- endif -%}
+
     {% if color_name != blank and color_hex != blank and color_includes != blank %}
       {%- assign color_group_arr = item["includes_color"] | split: ',' -%}
 
@@ -563,7 +567,7 @@
 
         {% endif %}
 
-        {%- assign options_in_card = false -%}
+        {%- assign options_in_card = blank -%}
         {%- assign separator = blank -%}
 
         {%- if color_name != blank or variant_size != blank -%}
