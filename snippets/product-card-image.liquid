@@ -51,9 +51,16 @@
       {% endif %}
     {% endfor %}
   {% endif %}
-  <div class="productCardImg__QuickView" {% if product.template_suffix contains 'bundle' %}style="display:none;"{% endif %}>
-    <button class="productCardImg__QuickViewButton js-product-view" data-quick-view="{{ url }}?view=quick-view" type="button">{{ 'products.product.quick_view' | t }}</button>
-  </div>
+
+  {%- unless product.template_suffix contains 'bundle' -%}
+    <modal-opener class="productCardImg__QuickView" data-modal="#PopupModal--quick-add">
+      <button class="productCardImg__QuickViewButton js-product-view"
+              data-quick-view="{{ url }}?view=quick-view" type="button" aria-haspopup="dialog">
+        {{ 'products.product.quick_view' | t }}
+      </button>
+    </modal-opener>
+  {%- endunless -%}
+
   <a class='productCardImg__ProductLink abs fill z2 js-product-link' href='{{ product.url }}' title="{{ product.title }}">
     {%- if product.metafields.custom_fields["product_alternative_image"] != blank -%}
       {%- assign alternative_url = product.metafields.custom_fields["product_alternative_image"] -%}

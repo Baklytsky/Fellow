@@ -6776,7 +6776,12 @@ h3.productCard__title {
   display: block;
 }
 
+.js-video-wrapper iframe {
+  opacity: 0;
+}
+
 .js-video-wrapper.is-playing iframe {
+  opacity: 1;
   z-index: 2
 }
 

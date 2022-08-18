@@ -29,11 +29,6 @@
           Add to Cart
         {% endif %}
       </span>
-      {%- comment -%}
-        <span> | </span>
-        <span data-selected-var-price>{{ current_variant.price | money }}</span>
-      {%- endcomment -%}
-
       {%- assign disableVal = false -%}
     {% else %}
       {% if product.tags contains 'discontinued' %}

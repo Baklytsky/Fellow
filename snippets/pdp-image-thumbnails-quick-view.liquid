@@ -1,6 +1,35 @@
 {% assign badge_text = product.metafields.custom_fields.card_badge %}
+  {%- capture 'slick-thumbnail-config' -%}
+    {
+    "slidesToShow": 6,
+    "slidesToScroll": 1,
+    "vertical": true,
+    "verticalSwiping": true,
+    "arrows": false,
+    "dots": false,
+    "autoplay": false,
+    "infinite": false,
+    "adaptiveHeight": true,
+    "focusOnSelect": true,
+    "asNavFor": "#PopupModal--quick-add .pdpMain__gallery-wrapper"
+    }
+  {%- endcapture -%}
+  {%- capture 'slick-gallery-config' -%}
+    {
+    "slidesToShow": 1,
+    "slidesToScroll": 1,
+    "arrows": false,
+    "dots": false,
+    "autoplay": false,
+    "infinite": false,
+    "fade": true,
+    "adaptiveHeight": true,
+    "asNavFor": "#PopupModal--quick-add .pdpMain__gallery-thumbnails"
+    }
+  {%- endcapture -%}
 <div class='pdpMain__gallery x rel f'>
-  <div class='pdpMain__gallery-thumbnails'>
+  <div class='pdpMain__gallery-thumbnails'
+       data-slick-config='{{- slick-thumbnail-config -}}'>
     {% for image in product.images %}
       {% if image.variants.size > 0 %}
         {% for variant in image.variants %}
@@ -28,7 +57,8 @@
       {%- endfor -%}
     {% endfor %}
   </div>
-  <div class='pdpMain__gallery-wrapper x f rel'>
+  <div class='pdpMain__gallery-wrapper x f rel'
+       data-slick-config='{{- slick-gallery-config -}}'>
     {% for image in product.images %}
       {% if image.variants.size > 0 %}
         {% for variant in image.variants %}

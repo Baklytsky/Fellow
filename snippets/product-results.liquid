@@ -52,12 +52,12 @@
                          class="productCard__image image image-abs-cover">
                   </div>
                   {{#unless bundle}}
-                  <div class="productCardImg__QuickView">
+                  <modal-opener class="productCardImg__QuickView" data-modal="#PopupModal--quick-add">
                     <button class="productCardImg__QuickViewButton js-product-view"
-                            data-quick-view="{{ variant_url }}&view=quick-view" type="button">
+                            data-quick-view="{{ variant_url }}&view=quick-view" type="button" aria-haspopup="dialog">
                       + Quick Add
                     </button>
-                  </div>
+                  </modal-opener>
                   {{/unless }}
                   <a class='productCardImg__ProductLink abs fill z2 js-product-link'
                      href='{{ variant_url }}'

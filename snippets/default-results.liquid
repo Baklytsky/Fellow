@@ -20,12 +20,12 @@
           {{#if product_images}}
             {{{ product_images }}}
           {{/if}}
-          <div class="productCardImg__QuickView">
+          <modal-opener class="productCardImg__QuickView" data-modal="#PopupModal--quick-add">
             <button class="productCardImg__QuickViewButton js-product-view"
-                    data-quick-view="{{ url }}?view=quick-view" type="button">
+                    data-quick-view="{{ url }}?view=quick-view" type="button" aria-haspopup="dialog">
               + Quick Add
             </button>
-          </div>
+          </modal-opener>
           {{/unless }}
           <a class='productCardImg__ProductLink abs fill z2 js-product-link'
              href='{{ url }}'

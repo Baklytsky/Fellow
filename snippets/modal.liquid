@@ -1,11 +1,18 @@
-<div id="modal" class="z10" aria-hidden="true" tabindex="-1">
+<modal-dialog id="PopupModal--quick-add">
 
-  <section class='Modal'>
-    <button id="closeModal" aria-label="close modal" type="button">{% include 'icon-close' %}</button>
+  <section class='modal-quick-add'
+           role="dialog"
+           aria-label="Quick add modal"
+           aria-modal="true"
+           aria-hidden='true'
+           tabindex="-1">
+    <button id="ModalClose--quick-add"
+            class="closeModal"
+            aria-label="{{ 'general.accessibility.close' | t }}"
+            type="button">
+      {% include 'icon-close' %}
+    </button>
     <div id='modalContent'></div>
-    {%- comment -%}
-      <div id="emptyModal">{% include 'fellow-logo' %}</div>
-    {%- endcomment -%}
     <div id="emptyQvModal">
       <div class="emptyQvModal__Gallery f">
         <div class="emptyQvModal__GalleryThumbnailWrapper">
@@ -28,6 +35,5 @@
         <div class="emptyQvModal__ContentDescription skeleton" style="width: 30%"></div>
       </div>
     </div>
-
   </section>
-</div>
+</modal-dialog>

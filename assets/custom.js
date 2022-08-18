@@ -58,19 +58,6 @@ theme.handleize = function (str) {
   return str.toLowerCase().replace(/[^\w\u00C0-\u024f]+/g, "-").replace(/^-+|-+$/g, "");
 };
 
-theme.openModal = function () {
-  $('#modal').attr('aria-hidden', 'false').fadeIn();
-  theme.disableScroll();
-}
-
-theme.closeModal = function (clean) {
-  $('#modal').attr('aria-hidden', 'true').fadeOut();
-  $('#modalContent').fadeOut().html('').text('');
-  $('#emptyQvModal').show(800);
-  theme.enableScroll();
-  $(document).off('mousedown.QvClose')
-}
-
 theme.slickSlider = function () {
   $('[data-section-type="slick-slideshow"]').each(function () {
     const $slider = $(this).find('.jsSlickSlider');
@@ -348,87 +335,6 @@ theme.toggleTab = function ($this) {
       }
     })
   }
-}
-
-theme.qvChangeSlide = function () {
-  let modalVariantId = $('#ProductQuickView #quickAdd').attr('data-add-id'),
-      $modalSelectedVariantThumbnail = $('#modalContent').find('[data-variant-img="' + modalVariantId + '"]');
-  if ($modalSelectedVariantThumbnail.length) {$modalSelectedVariantThumbnail.trigger('click')}
-
-}
-
-theme.quickView = function (URL, innerContainer) {
-  theme.openModal();
-
-  $.ajax({
-    url: URL,
-    method: 'GET',
-    success: function (data) {
-      innerContainer.html($(data).find('.pdpTemplate'));
-      if ($('#ProductQuickView .pdpMain__variant-image').length) {
-        theme.pdpQuickView();
-      }
-      theme.qvChangeColorGroupName();
-      $('#emptyQvModal').hide();
-      innerContainer.fadeIn(1000);
-      theme.qvVariantChange()
-
-
-    }
-  });
-}
-
-theme.pdpQuickView = function () {
-  // Remove all $(document) Events
-  // clicks:
-  $(document).off('click.pdpQvSelectSize')
-  $(document).off('mousedown.QvClose')
-
-
-  $(document).on('mousedown.QvClose', function (e) {
-    var $container = $('.Modal');
-    if (!$container.is(e.target) && $container.has(e.target).length === 0) {
-      theme.closeModal();
-    }
-  })
-
-  $(document).on('click.pdpQvSelectSize', '#ProductQuickView [data-option-size] .radio', function () {
-    var $attrToRemove = $('#ProductQuickView [data-disabled-size="true"]')
-    $attrToRemove.map((index, element) => $(element).removeAttr('data-disabled-size'))
-  })
-
-  function modalGallerySlider() {
-    let $gallerySlider = $('#ProductQuickView .pdpMain__gallery-wrapper'),
-        $thumbnailsSlider = $('#ProductQuickView .pdpMain__gallery-thumbnails');
-
-    $gallerySlider.slick({
-      slidesToShow: 1,
-      slidesToScroll: 1,
-      arrows: false,
-      dots: false,
-      autoplay: false,
-      infinite: false,
-      fade: true,
-      asNavFor: $thumbnailsSlider
-    });
-
-    $thumbnailsSlider.slick({
-      slidesToShow: 6,
-      slidesToScroll: 1,
-      vertical: true,
-      verticalSwiping: true,
-      arrows: false,
-      dots: false,
-      autoplay: false,
-      infinite: false,
-      adaptiveHeight: true,
-      focusOnSelect: true,
-      asNavFor: $gallerySlider,
-    });
-  }
-
-  setTimeout(modalGallerySlider, 0);
-  setTimeout(theme.qvChangeSlide, 0);
 }
 
 theme.collectionAndSearch = function (isSearchPage) {
@@ -861,389 +767,6 @@ theme.GLOBAL = function () {
     })
   }
 
-  $(document).on('click.closeModal', '#closeModal', function () {
-    theme.closeModal();
-  });
-
-  $(document).on('click.closeQvFullPage', '.QuickView__FullPageLink', function () {
-    theme.closeModal();
-  });
-
-  $(document).on('click.dataQuickView', '[data-quick-view]', function () {
-    let viewURL = $(this).attr('data-quick-view');
-    theme.quickView(viewURL, $('#modalContent'));
-  });
-
-  $(document).on('click.quickViewATC', '#ProductQuickView .js-counter-add', function () {
-    qvChangeQTY(1);
-    theme.qvVariantChange ();
-  })
-
-  $(document).on('click.jsCounterRemove', '#ProductQuickView .js-counter-remove', function () {
-    qvChangeQTY(-1);
-    theme.qvVariantChange ();
-  })
-
-  $(document).on('click.radioGroup', '#ProductQuickView .radio-group label', function () {
-    let optionName = $($(this).find('input')).attr('name');
-    let optionValue = $($(this).find('input')).attr('value');
-    let $currentOption = $('[data-option-current]');
-
-      // ======================================== Neels code starts here ========================================
-    // Create variable isDisabled if the input field is disabled so that the qvVariantChange function is not called when clicked
-    // This is required as even with the HTML disabled attribute the variant is still changed in the quick add popup
-    if ($($(this).find('input')).is(':disabled')) {
-      var isDisabled = true;
-    }
-
-    $currentOption.each(function () {
-      if ($(this).attr('data-option-current') == optionName) {
-        if(!(isDisabled)){
-          $(this).text(optionValue);
-          theme.qvVariantChange();
-        }
-      }
-    })
-    // ======================================== Neels code ends here ========================================
-
-
-    setTimeout(theme.qvChangeSlide, 0)
-  });
-
-
-  function qvChangeQTY (point) {
-    let currentValue = parseInt($('.js-counter-quantity').val(), 10);
-    let setValue = currentValue + point;
-    if (setValue < 1) {
-      setValue = 1;
-    }
-
-    $('.js-counter-quantity').val(setValue);
-  }
-
-  theme.qvChangeColorGroupName = function () {
-    if ($('#ProductQuickView .option-group-title').length) {
-      var QuickViewColor = $('#ProductQuickView .pdp__options-main [data-option-label="Color"] [data-option-current]').text();
-      if (QuickViewColor.indexOf(':') >= 0) {
-        QuickViewColor = QuickViewColor.split(':')[1];
-      }
-      $('#ProductQuickView .option-group-title-value').html('')
-      $('#ProductQuickView .pdp__options-main [data-option-color] input').each(function () {
-        if ($(this).is(':checked')) {
-          $(this).parents('#ProductQuickView .option-groups__group').find('.option-group-title-value').html(QuickViewColor)
-        }
-      })
-    }
-  }
-
-    // ======================================== Neels code starts here ========================================
-  var popup_is_size_selected = false;
-  $(document).on('click', '.pdpQuickView__description input[name^="Size"]', () => {
-    popup_is_size_selected = true
-  })
-  // ======================================== Neels code ends here ========================================
-
-
-  theme.qvVariantChange = function () {
-
-
-    let selectedOption = $('#ProductQuickView .radio-group input:checked');
-
-    var currentOptions = $.map(selectedOption, function(element, index) {
-      var $element = $(element);
-      var currentOption = {};
-
-        currentOption.value = $element.val();
-        currentOption.index = `option${index + 1}`;
-        return currentOption;
-    });
-
-    if (selectedOption.length <= 3) {
-      $('#ProductQuickView #quickAdd').attr('disabled', 'disabled');
-      let selectedOption1 = $(selectedOption[0]).attr('value');
-      let selectedOption2 = $(selectedOption[1]).attr('value');
-      let selectedOption3 = $(selectedOption[2]).attr('value');
-
-      let innerJSON = $('#productJson-' + $($('#ProductQuickView').closest('[data-product-id]')).attr('data-product-id')).html();
-      let productJSON  = $.parseJSON(innerJSON)['product'];
-      let variants = productJSON['variants'];
-
-      var selectedVariant = function() {
-        var selectedValues = currentOptions;
-        var found = false;
-
-        variants.forEach(function(variant) {
-          var satisfied = true;
-
-          selectedValues.forEach(function(option) {
-            if (satisfied) {
-              satisfied = (option.value === variant[option.index]);
-            }
-          });
-
-          if (satisfied) {
-            found = variant;
-          }
-        });
-
-        return found || null;
-      };
-
-      if (selectedVariant()) {
-
-         // ======================================== Neels code starts here ========================================
-        var selectedColor = $('.pdp__options-main [data-option-label="Color"] [data-option-current]').text();
-        var selectedSize = theme.handleize($('.pdp__options-main [data-option-label="Size"] [data-option-current]').text());
-        var selectedQuantity = theme.handleize($('.pdp__options-main [data-option-label="Quantity"] [data-option-current]').text());
-        var qvDescription = $('.pdpQuickView__description');
-        var all_colors = [];
-        var all_sizes = [];
-        var all_quantities = [];
-
-        // In the quick add popup the product color titles have the ":" text appended to them so we need to splice this
-        if (selectedColor.includes(":")) {
-          selectedColor = selectedColor.split(':')[1].trim();
-        }
-
-        if (selectedColor) {
-          selectedColor = theme.handleize(selectedColor)
-        }
-
-        if (selectedColor && selectedSize) {
-          // Enable all sizes and return to default styling now that a new variant option has been selected
-          $('.pdp__options-main input[name^="Color"]').each(function () {
-            var colorhandle = theme.handleize($(this).attr('title'));
-            qvDescription.find('#' + colorhandle.toString()).removeAttr('disabled', 'disabled');
-            qvDescription.find('div[data-color^="' + colorhandle + '"]').css('opacity', '');
-          });
-
-          // Enable all sizes and return to default styling now that a new variant option has been selected
-          $('.pdp__options-main input[name^="Size"]').each(function () {
-            var sizevar = $(this).attr('title');
-            var sizehandle = theme.handleize(sizevar);
-            qvDescription.find('#' + sizehandle.toString()).removeAttr('disabled', 'disabled');
-            qvDescription.find('div[data-size^="' + sizehandle + '"]').css('opacity', '');
-            qvDescription.find('span[data-size^="' + sizevar + '"]').css('text-decoration', '');
-          });
-
-          // Enable all quantities and return to default styling now that a new variant option has been selected
-          $('.pdp__options-main input[name^="Quantity"]').each(function () {
-            var quantityvar = $(this).attr('title');
-            var quantityhandle = theme.handleize(quantityvar);
-            qvDescription.find('#' + quantityhandle.toString()).removeAttr('disabled', 'disabled');
-            qvDescription.find('div[data-quantity^="' + quantityhandle + '"]').css('color', '');
-            qvDescription.find('span[data-quantity^="' + quantityvar + '"]').css('text-decoration', '');
-          });
-
-          // Add all colors to the all_colors array list
-          $('.pdp__options-main span[data-color]').each(function () {
-            if (all_colors.indexOf(theme.handleize($(this).data('color'))) === -1) {
-              all_colors.push(theme.handleize($(this).data('color')));
-            }
-          });
-          // Add all sizes to the all_sizes array list
-          $('.pdp__options-main span[data-size]').each(function () {
-            if (all_sizes.indexOf(theme.handleize($(this).data('size'))) === -1) {
-              all_sizes.push(theme.handleize($(this).data('size')));
-            }
-          });
-          // Add all quantities to the all_quantities array list
-          $('.pdp__options-main span[data-quantity]').each(function () {
-            if (all_quantities.indexOf(theme.handleize($(this).data('quantity'))) === -1) {
-              all_quantities.push(theme.handleize($(this).data('quantity')));
-            }
-          });
-
-          // Create hasQuantities variable if the quantities array is populated, else we know the product only has color and size options
-          if (all_quantities.length) {
-            var hasQuantities = true;
-          }
-
-          // Loop all variants of the selected product
-          for (i = 0; i < json_product.variants.length; i++) {
-            var variant = json_product.variants[i];
-            if (selectedColor) {
-              var color = variant.option1;
-              // If the color option contains the string ":" we need to strip this
-              if (color.indexOf(":") > -1) {
-                color = color.split(':')[1].trim();
-              }
-              if (color) color = theme.handleize(color)
-            }
-
-            if (variant.option2) var size = theme.handleize(variant.option2);
-            if (variant.option3) var quantity = theme.handleize(variant.option3);
-
-            // Check if the product has 3 options of color, size and quantity
-            if (hasQuantities) {
-              // Check if the color and size selected by the customer is the current loop index color and size values
-              if (color.indexOf(selectedColor) >= 0 && size.indexOf(selectedSize) >= 0) {
-                if (all_quantities.length && all_quantities.indexOf(quantity) !== -1) {
-                  const index = all_quantities.indexOf(quantity);
-                  if (index > -1) {
-                    all_quantities.splice(index, 1);
-                  }
-                }
-              }
-              // Check if the color and quantity selected by the customer is the current loop index color and quantity values
-              if (color.indexOf(selectedColor) >= 0 && quantity.indexOf(selectedQuantity) >= 0) {
-                if (all_sizes.indexOf(size) !== -1) {
-                  const index = all_sizes.indexOf(size);
-                  if (index > -1) {
-                    all_sizes.splice(index, 1);
-                  }
-                }
-              }
-              // Check if the size and quantity selected by the customer is the current loop index size and quantity values
-              if (size.indexOf(selectedSize) >= 0 && quantity.indexOf(selectedQuantity) >= 0) {
-                if (all_colors.indexOf(color) !== -1) {
-                  const index = all_colors.indexOf(color);
-                  if (index > -1) {
-                    all_colors.splice(index, 1);
-                  }
-                }
-              }
-            }
-            // Product only has 2 options of color and size
-            else {
-              // Check if the color selected by the customer is the current loop index color
-              if (color.indexOf(selectedColor) >= 0) {
-                // Check if the current variant size exists in the all_sizes array and if so, remove it from the array
-                if (all_sizes.indexOf(size) !== -1) {
-                  const index = all_sizes.indexOf(size);
-                  if (index > -1) {
-                    all_sizes.splice(index, 1);
-                  }
-                }
-              }
-              // Check if the size selected by the customer is the current loop index size
-              if (size.indexOf(selectedSize) >= 0) {
-                // Check if the current variant color exists in the all_colors array and if so, remove it from the array
-                if (all_colors.indexOf(color) !== -1) {
-                  const index = all_colors.indexOf(color);
-                  if (index > -1) {
-                    all_colors.splice(index, 1);
-                  }
-                }
-              }
-            }
-          }
-
-          // Check if there are any colors left in the all_colors array and if so, disable these color buttons as they are unavailable colors for the selected variant
-          if (popup_is_size_selected) {
-            if (all_colors.length) {
-              /// Loop all the color input elements
-              $('.pdp__options-main input[name^="Color"]').each(function () {
-                var colorvar = $(this).attr('title');
-                var colorhandle = theme.handleize(colorvar);
-                // If the color element is found in the all_colors list we need to disable this element as it is not an available color option
-                if (all_colors.indexOf(colorhandle) > -1) {
-                  qvDescription.find('#' + colorhandle).attr('disabled', 'disabled');
-                  qvDescription.find('div[data-color^="' + colorhandle + '"]').css('opacity', '0.2');
-                }
-              });
-            }
-
-            // Check if there are any quantities left in the all_quantities array and if so, disable these quantity buttons as they are unavailable quantities for the selected variant color
-            if (all_quantities.length) {
-              $('.pdp__options-main input[name^="Quantity"]').each(function () {
-                var quantityvar = $(this).attr('title');
-                var quantityhandle = theme.handleize(quantityvar);
-                // If the quantity element is found in the all_quantities list we need to disable this element as it is not an available quantity option
-                if (all_quantities.indexOf(quantityhandle) > -1) {
-                  qvDescription.find('#' + quantityhandle).attr('disabled', 'disabled');
-                  qvDescription.find('div[data-quantity^="' + quantityhandle + '"]').css('color', '#ABABAB');
-                  qvDescription.find('span[data-quantity^="' + quantityvar + '"]').css('text-decoration', 'line-through');
-                }
-              });
-            }
-          }
-
-          // Check if there are any sizes left in the all_sizes array and if so, disable these size buttons as they are unavailable sizes for the selected variant color
-          if (all_sizes.length) {
-            $('.pdp__options-main input[name^="Size"]').each(function () {
-              var sizevar = $(this).attr('title');
-              var sizehandle = theme.handleize(sizevar);
-              // If the size element is found in the all_sizes list we need to disable this element as it is not an available size option
-              if (all_sizes.indexOf(sizehandle) > -1) {
-                qvDescription.find('#' + sizehandle).attr('disabled', 'disabled');
-                qvDescription.find('div[data-size^="' + sizehandle + '"]').css('opacity', '0.5');
-                qvDescription.find('span[data-size^="' + sizevar + '"]').css('text-decoration', 'line-through');
-              }
-            });
-          }
-        }
-        // ======================================== Neels code ends here ========================================
-
-
-        for (let i = 0; i < variants.length; i++) {
-          if (variants[i].option1 == selectedOption1 && variants[i].option2 == selectedOption2 && variants[i].option3 == selectedOption3) {
-            if ($('#ProductQuickView #selectid').find('[selected]').length) {
-              $($('#ProductQuickView #selectid').find('[selected]')).removeAttr('selected');
-            }
-
-            $('#ProductQuickView #selectid').val(variants[i].id);
-
-
-
-            $($('#ProductQuickView #selectid').find('[value="' + variants[i].id + '"]')).attr('selected', 'selected');
-            $('[data-selected-var-price]').text($($('#ProductQuickView #selectid').find('[value="' + variants[i].id + '"]')).attr('data-variant-price'))
-
-
-            if ($('.js-counter-quantity').val() < 1) {
-              $('.js-counter-quantity').val(1)
-            }
-
-            $('#ProductQuickView #quickAdd').attr('data-add-qty', $('.js-counter-quantity').val());
-
-            if (variants[i].available) {
-              $($('#ProductQuickView #quickAdd').find('[data-atc-copy]')).text(window.theme.strings.addToCart);
-              $('#ProductQuickView #quickAdd').attr('data-add-id', variants[i].id).removeAttr('disabled');
-            } else {
-              $($('#ProductQuickView #quickAdd').find('[data-atc-copy]')).text(window.theme.strings.soldOut);
-              $('#ProductQuickView #quickAdd').attr('data-add-id', variants[i].id)
-            }
-
-            var id = $('#ProductQuickView #selectid').find('[value="' + variants[i].id + '"]').data('variant-preorder');
-            if(id == true){
-               $('#quickAdd .js-atc-copy').text("Pre-order");
-              if ($("#ProductQuickView input[name='properties[pre-order]']").length === 0) {
-                $('#ProductQuickView form').append(`<input type="hidden" data-preorder="true" name="properties[pre-order]" value="true">`)
-              }
-            } else {
-              $('#ProductQuickView [data-preorder]').remove();
-            }
-          }
-        }
-      } else {
-        $($('#ProductQuickView #quickAdd').find('[data-atc-copy]')).text(window.theme.strings.unavailable);
-      }
-    }
-
-    theme.qvChangeColorGroupName()
-  }
-
-  if (window.location.search.indexOf("contact") > -1) {
-    $([document.documentElement, document.body]).animate({
-      scrollTop: $('.footerInner__Left').offset().top + 500
-    }, 100);
-  }
-
-  document.addEventListener('click', function (e) {
-    if (e.target.closest('[data-add-id]')) {
-      e.preventDefault();
-      let form = e.target.closest('form'),
-          bodyObj = theme.serializeObject(form);
-
-      theme.cart.cartEvent('/cart/add.js', bodyObj, true, theme.pdpErrorMessage)
-      theme.closeModal();
-    }
-  })
-
-  // if ($('[data-section-type]').attr('data-section-type') == 'slick-slideshow') {
-  //   theme.slickSlider()
-  // }
-
   if ($('.collection').length || $('.searchMain').length) {
     if ($('.searchMain').length) {
       var isSearchPage = true;
@@ -1343,9 +866,7 @@ class dynamicRecommendations extends HTMLElement {
         const html = new DOMParser().parseFromString(text, 'text/html'),
               recommendedContent = html.querySelector('[data-product-row]');
         if (recommendedContent) this.recommendationContainer.innerHTML = recommendedContent.innerHTML;
-        const recommendedProducts = this.querySelectorAll('.productCard');
         if (typeof window.yotpo !== "undefined") window.yotpo.initWidgets();
-        recommendedProducts.forEach((Card) => theme.updateSwatches(Card));
       });
   }
 }
@@ -1428,6 +949,13 @@ class ModalDialog extends HTMLElement {
     theme.setAttributes(this.content, attributes)
     this.removeAttribute('open')
     this.content.blur()
+
+    if (this.id === 'PopupModal--quick-add') this.closeQuickAdd()
+  }
+
+  closeQuickAdd() {
+    this.querySelector('#modalContent').innerHTML = ''
+    this.querySelector('#emptyQvModal').classList.remove('is-hidden')
   }
 }
 customElements.define('modal-dialog', ModalDialog);
@@ -1620,6 +1148,82 @@ class PdpHelper extends HTMLElement {
       if (optionTitle) optionTitle.innerHTML = `${option.title}`
     })
   }
+
+  checkSizeSelected() {
+    if (this.sizeSelected) return
+    this.querySelectorAll('[data-disabled-size="true"]').forEach(el => {
+      el.removeAttribute('data-disabled-size')
+    })
+    if (this.personalizeBtn) this.personalizeBtn.querySelector('.customize-btn').style.display = 'block'
+    this.sizeSelected = true
+  }
+
+  toggleAddButton(buttonsArr) {
+    const preOrder = this.select.hasAttribute('data-selected-variant-preorder');
+
+    if (theme.isHidden(this.atc) && this.klaviyoOOS) {
+      this.atc.classList.remove('is-hidden')
+      this.klaviyoOOS.parentElement.classList.add('is-hidden')
+    }
+
+    buttonsArr.forEach(btn => {
+      if (!btn) return
+      if (!this.selectedVariant) {
+        theme.changeBtnState(btn, 'disabled', 'Unavailable')
+      } else if (preOrder) {
+        theme.changeBtnState(btn, 'active', 'Pre-order')
+      } else if (!this.selectedVariant.available) {
+        theme.changeBtnState(btn, 'disabled', 'Out Of Stock')
+        if (this.klaviyoOOS) this.outOfStock()
+      }  else {
+        theme.changeBtnState(btn, 'active', 'Add to Cart')
+      }
+    })
+  }
+
+  outOfStock() {
+    if (this.stickyAtc) this.stickyAtc.removeAttribute('disabled')
+    this.atc.classList.add('is-hidden')
+    this.klaviyoOOS.parentElement.classList.remove('is-hidden')
+  }
+
+  addToCart(e) {
+    e.preventDefault()
+    const bodyObj = theme.serializeObject(this.form),
+        prop = {};
+    if (window.theme.product_is_recommended) prop["_recommended_product"] = true
+    if (this.select.hasAttribute('data-selected-variant-preorder')) prop["pre-order"] = true
+    if (Object.keys(prop).length) bodyObj.properties = prop
+    theme.cart.cartEvent('/cart/add.js', bodyObj, true, theme.pdpErrorMessage)
+  }
+
+  priceChange() {
+    let priceInner =
+        `<h2 class="ml1 pdpCopy__header-price">
+          ${theme.formatMoney(this.currentPrice, '${{amount_no_decimals}}')}
+        </h2>`
+
+    if (this.currentComparePrice > this.currentPrice) {
+      priceInner =
+          `<div class="pdpCopy__price f aic">
+          <span class="strike card__price--regular ml1 pdpCopy__header-price rel">
+            ${theme.formatMoney(this.currentComparePrice, '${{amount_no_decimals}}')}
+            <div class="price-round-arrow">
+              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="14" viewBox="0 0 25 14" fill="none">
+                <path d="M21.8717 2.55273L22.064 7.23249L17.2605 7.54226" stroke="black" stroke-width="1.5" 
+                stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M21 6.49951C21 6.49951 16.3627 1.55385 10.0543 3.38802C3.74592 5.22219 1.9372 10.8949 1.9372 10.8949" 
+                stroke="black" stroke-width="1.5" stroke-linecap="round"></path>
+              </svg>
+            </div>
+          </span>
+          <h2 class="card__price--sale ml1 pdpCopy__header-price">
+            ${theme.formatMoney(this.currentPrice, '${{amount_no_decimals}}')}
+          </h2>
+        </div>`
+    }
+    this.productPrice.innerHTML = priceInner
+  }
 }
 customElements.define('pdp-helper', PdpHelper);
 
@@ -1716,18 +1320,9 @@ class PdpMain extends PdpHelper {
     this.changeSelectedOption()
     this.disableUnavailableVariants()
     this.checkVariantTitle()
-    this.toggleAddButton()
+    this.toggleAddButton([this.atc, this.stickyAtc])
     if (this.personalizeBtn) this.setVariantForPersonalize()
     if (this.stickyBar) this.stickyBar.stickyBarVariantChange(this.selectedOptions)
-  }
-
-  checkSizeSelected() {
-    if (this.sizeSelected) return
-    this.querySelectorAll('[data-disabled-size="true"]').forEach(el => {
-      el.removeAttribute('data-disabled-size')
-    })
-    if (this.personalizeBtn) this.personalizeBtn.querySelector('.customize-btn').style.display = 'block'
-    this.sizeSelected = true
   }
 
   changeUrl() {
@@ -1754,46 +1349,6 @@ class PdpMain extends PdpHelper {
           this.upsell.innerHTML = (upsell.hasChildNodes()) ? upsell.innerHTML : ''
           theme.slickSlider()
         })
-  }
-
-  toggleAddButton() {
-    const preOrder = this.select.hasAttribute('data-selected-variant-preorder'),
-          buttonsArr = [this.atc, this.stickyAtc];
-
-    if (theme.isHidden(this.atc)) {
-      this.atc.classList.remove('is-hidden')
-      this.klaviyoOOS.parentElement.classList.add('is-hidden')
-    }
-
-    buttonsArr.forEach(btn => {
-      if (!btn) return
-      if (!this.selectedVariant) {
-        theme.changeBtnState(btn, 'disabled', 'Unavailable')
-      } else if (preOrder) {
-        theme.changeBtnState(btn, 'active', 'Pre-order')
-      } else if (!this.selectedVariant.available) {
-        theme.changeBtnState(btn, 'disabled', 'Out Of Stock')
-        this.outOfStock()
-      }  else {
-        theme.changeBtnState(btn, 'active', 'Add to Cart')
-      }
-    })
-  }
-
-  outOfStock() {
-    if (this.stickyAtc) this.stickyAtc.removeAttribute('disabled')
-    this.atc.classList.add('is-hidden')
-    this.klaviyoOOS.parentElement.classList.remove('is-hidden')
-  }
-
-  addToCart(e) {
-    e.preventDefault()
-    const bodyObj = theme.serializeObject(this.form),
-          prop = {};
-    if (window.theme.product_is_recommended) prop["_recommended_product"] = true
-    if (this.select.hasAttribute('data-selected-variant-preorder')) prop["pre-order"] = true
-    if (Object.keys(prop).length) bodyObj.properties = prop
-    theme.cart.cartEvent('/cart/add.js', bodyObj, true, theme.pdpErrorMessage)
   }
 }
 customElements.define('pdp-main', PdpMain);
@@ -1874,7 +1429,7 @@ class bundleMixCard extends PdpHelper {
     this.disableUnavailableVariants()
     this.checkVariantTitle()
     this.changeBundleMedia()
-    this.toggleAddButton()
+    this.toggleBundleAddButton()
     this.checkBundlePrice()
   }
 
@@ -1899,7 +1454,7 @@ class bundleMixCard extends PdpHelper {
     imageToShow.classList.add('visible');
   }
 
-  toggleAddButton() {
+  toggleBundleAddButton() {
     const disabledOptions = this.pdpContainer.querySelectorAll('.js-bundle-variant option:disabled'),
           disabled = Array.from(disabledOptions).filter((i) => i.hasAttribute('selected')),
           unavailable = Array.from(this.pdpContainer.querySelectorAll('.js-bundle-variant select[data-unavailable]')),
@@ -2030,7 +1585,7 @@ class UpsellProduct extends PdpHelper {
     this.checkVariantTitle()
     this.changePrice()
     this.changeSelectedOption()
-    this.toggleUpsellAddButton()
+    this.toggleAddButton([this.atc])
   }
 
   changeUpsellImage() {
@@ -2043,21 +1598,6 @@ class UpsellProduct extends PdpHelper {
   changePrice() {
     if (!this.selectedVariant) return
     this.price.innerHTML = theme.formatMoney(this.selectedVariant.price, '${{amount_no_decimals}}')
-  }
-
-  toggleUpsellAddButton() {
-    const preOrder = this.select.hasAttribute('data-selected-variant-preorder');
-
-    if (theme.isHidden(this.atc)) this.atc.classList.remove('is-hidden')
-    if (!this.selectedVariant) {
-      theme.changeBtnState(this.atc, 'disabled', 'Unavailable')
-    } else if (preOrder) {
-      theme.changeBtnState(this.atc, 'active', 'Pre-order')
-    } else if (!this.selectedVariant.available) {
-      theme.changeBtnState(this.atc, 'disabled', 'Out Of Stock')
-    }  else {
-      theme.changeBtnState(this.atc, 'active', 'Add to Cart')
-    }
   }
 
   upsellAddToCart(e) {
@@ -2189,7 +1729,7 @@ class YoutubeVimeoVideo extends HTMLElement {
 
 customElements.define('video-section', YoutubeVimeoVideo);
 
-class ProductCard extends HTMLElement {
+class ProductCard extends PdpHelper {
   constructor() {
     super();
     this.options = this.querySelector('.productCard__options')
@@ -2200,49 +1740,22 @@ class ProductCard extends HTMLElement {
     this.variantImages = this.querySelectorAll('.js-variant-image')
 
    if (this.options) this.options.addEventListener('change', () => this.cardOptionChange())
+    if (this.productView) this.productView.addEventListener('click', () => this.quickAdd())
   }
 
   cardOptionChange() {
     this.currentOpt = this.options.querySelector('input:checked')
     this.currentOptID = this.currentOpt.dataset.variantId
     this.currentOptLink = this.currentOpt.dataset.variantUrl
-    this.currentOptPrice = this.currentOpt.dataset.variantPrice
-    this.currentOptComparePrice = this.currentOpt.dataset.variantComparePrice
+    this.currentPrice = this.currentOpt.dataset.variantPrice
+    this.currentComparePrice = this.currentOpt.dataset.variantComparePrice
 
     this.colorSelectors.forEach(i => i.classList.remove('active'))
     this.currentOpt.classList.add('active')
 
-    if (this.currentOptPrice) this.cardPriceChange()
+    this.priceChange()
     this.cardLinksChange()
     this.cardImageChange()
-  }
-
-  cardPriceChange() {
-    let priceInner =
-        `<h2 class="ml1 pdpCopy__header-price">
-          ${theme.formatMoney(this.currentOptPrice, '${{amount_no_decimals}}')}
-        </h2>`
-
-    if (this.currentOptComparePrice > this.currentOptPrice) {
-      priceInner =
-        `<div class="pdpCopy__price f aic">
-          <span class="strike card__price--regular ml1 pdpCopy__header-price rel">
-            ${theme.formatMoney(this.currentOptComparePrice, '${{amount_no_decimals}}')}
-            <div class="price-round-arrow">
-              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="14" viewBox="0 0 25 14" fill="none">
-                <path d="M21.8717 2.55273L22.064 7.23249L17.2605 7.54226" stroke="black" stroke-width="1.5" 
-                stroke-linecap="round" stroke-linejoin="round"></path>
-                <path d="M21 6.49951C21 6.49951 16.3627 1.55385 10.0543 3.38802C3.74592 5.22219 1.9372 10.8949 1.9372 10.8949" 
-                stroke="black" stroke-width="1.5" stroke-linecap="round"></path>
-              </svg>
-            </div>
-          </span>
-          <h2 class="card__price--sale ml1 pdpCopy__header-price">
-            ${theme.formatMoney(this.currentOptPrice, '${{amount_no_decimals}}')}
-          </h2>
-        </div>`
-    }
-    this.productPrice.innerHTML = priceInner
   }
 
   cardLinksChange() {
@@ -2262,9 +1775,91 @@ class ProductCard extends HTMLElement {
     this.variantImages.forEach(image => image.classList.remove('is-visible'))
     this.currentOptionImage.classList.add('is-visible')
   }
+
+  quickAdd() {
+    const quickAddUrl = this.productView.dataset.quickView,
+        quickAddModal = document.querySelector('#PopupModal--quick-add'),
+        quickAddContent = quickAddModal.querySelector('#modalContent'),
+        quickAddSkeleton = quickAddModal.querySelector('#emptyQvModal');
+
+    fetch(quickAddUrl)
+        .then(response => response.text())
+        .then(html => {
+          quickAddSkeleton.classList.add('is-hidden')
+          quickAddContent.innerHTML = html
+        })
+  }
 }
 
 customElements.define('product-card', ProductCard);
+
+class ProductQuickView extends PdpHelper {
+  constructor() {
+    super();
+    this.product = JSON.parse(this.querySelector('[type="application/json"]').textContent)
+    this.productVariants = this.product['variants']
+    this.thumbnails = this.querySelector('.pdpMain__gallery-thumbnails')
+    this.gallery = this.querySelector('.pdpMain__gallery-wrapper')
+    this.productPrice = this.querySelector('.QuickView__Price')
+    this.form = this.querySelector('form')
+    this.optionTitles = this.form.querySelectorAll('.option-title-value')
+    this.quantity = this.form.querySelector('[name="quantity"]')
+    this.sizeOptions = this.form.querySelectorAll('[data-option-size] .radio')
+    this.select = this.form.querySelector('.select-wrapper select')
+    this.options = this.select.querySelectorAll('option')
+    this.radioGroups = Array.from(this.form.querySelectorAll('[data-option-radio]'))
+    this.radios = this.form.querySelectorAll('.radio')
+    this.atc = this.form.querySelector('.js-add-to-cart')
+
+    this.initGallery().then(() => this.quickViewVariantChange())
+
+    this.form.addEventListener('change', () => {
+      this.quickViewVariantChange()
+    })
+
+    if (this.sizeOptions.length) {
+      this.sizeOptions.forEach(radio => radio.addEventListener('click', () => this.checkSizeSelected()))
+    }
+
+    this.atc.addEventListener('click', (e) => {
+      this.addToCart(e)
+      this.closest('#PopupModal--quick-add').hide()
+    })
+  }
+
+  initGallery() {
+    return new Promise(resolve => {
+      $(this.thumbnails).slick(JSON.parse(this.thumbnails.dataset.slickConfig));
+      resolve()
+    }).then(() => {
+      $(this.gallery).slick(JSON.parse(this.gallery.dataset.slickConfig));
+    })
+  }
+
+  quickViewVariantChange() {
+    this.selectedOptions = this.getOptions()
+    this.selectedVariant = this.getSelectedVariant(this.selectedOptions)
+    this.currentPrice = this.selectedVariant['price']
+    this.currentComparePrice = this.selectedVariant['compare_at_price']
+    this.changeSelectedOption()
+    this.disableUnavailableVariants()
+    this.checkVariantTitle()
+    this.priceChange()
+    this.toggleAddButton([this.atc])
+    this.quickViewSlideChange()
+  }
+
+  quickViewSlideChange() {
+    if (!this.selectedVariant) return
+    const currentImage = this.thumbnails.querySelector('[data-variant-img="'+ this.selectedVariant.id +'"]')
+    if (currentImage) {
+      const index = currentImage.dataset.slickIndex
+      $(this.thumbnails).slick('slickGoTo', index)
+    }
+  }
+}
+
+customElements.define('product-quick-view', ProductQuickView);
 
 class bundleMixMultiple extends HTMLElement {
   constructor() {
