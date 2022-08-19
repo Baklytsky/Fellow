@@ -22,7 +22,7 @@
     {%- assign display_order = product.metafields.custom_fields["compare_products_order"] %}
 
     <pdp-compare class='pdpCompare {% if display_order != blank %} o-{{ display_order }}{% endif %}'>
-      <div class="pdpCompare__wrapper">
+      <toggle-tabs class="pdpCompare__wrapper">
         {%- if compare_products_heading != blank -%}
           <h3 class="pdpCompare__heading">{{ compare_products_heading }}</h3>
         {%- endif -%}
@@ -144,7 +144,7 @@
           {%- endfor -%}
         </div>
 
-      </div>
+      </toggle-tabs>
     </pdp-compare>
   {% endif %}
 {% endif %}

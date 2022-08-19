@@ -169,17 +169,6 @@ theme.headerHeight = function () {
   document.documentElement.style.setProperty('--header-height', document.getElementById('MainHeader').offsetHeight + 'px');
 }
 
-theme.horizontalScroll = function (list, elements, offset) {
-  for (var i=0; i < elements.length; i++) {
-    elements[i].onclick = function(){
-      list.scroll({
-        left: this.offsetLeft - offset,
-        behavior: 'smooth'
-      });
-    }
-  }
-}
-
 theme.header = function () {
 
 //-----------------------Header navigation----------------------------------
@@ -320,32 +309,7 @@ theme.header = function () {
 //-----------------------End Header navigation----------------------------------
 }
 
-theme.toggleTab = function ($this) {
-  // Required button element: data-selected='true/false'; aria-controls='TAB_ID'; data-action='toggle-tab'
-  // Required tab element: data-selected='true/false'; data-tab='TAB_ID'
-
-  if ($this.attr('data-selected') !== 'true') {
-    $('[data-action="toggle-tab"]').attr('data-selected', 'false');
-    $this.attr('data-selected', 'true');
-
-    $('[data-tab]').attr('data-selected', 'false').each(function () {
-      if ($(this).attr('data-tab') == $this.attr('aria-controls')) {
-        $(this).attr('data-selected', 'true');
-        return false;
-      }
-    })
-  }
-}
-
 theme.collectionAndSearch = function (isSearchPage) {
-  // Remove all $(document) Events
-  $(document).off('keypress.dropdownFilters click.dropdownFilters')
-  $(document).off('click.deleteFilterResult')
-  $(document).off('click.mobileFilterBar')
-  $(document).off('click.mobileClearAll')
-  $(document).off('change.inputFilters')
-  $(document).off('input.changeRange')
-  $(document).off('resize.filter')
 
   if ($('.collectionFilters').length) {
 
@@ -511,14 +475,6 @@ theme.collectionAndSearch = function (isSearchPage) {
 }
 
 theme.searchBar = function () {
-  $(document).off('click.searchBarToggle');
-  $(document).off('mouseover.searchBarOpen');
-  $(document).off('mousedown.searchBarClose');
-  $(document).off('input.onInput');
-  $(document).off('click.resetSearch');
-  $(document).off('submit.headerSearchForm');
-
-
   var $searchBar = $('.headerSearch'),
       $searchInput = $('.headerSearch__input'),
       $searchBarToggle = $('[data-action="toggle-search"]'),
@@ -686,10 +642,6 @@ theme.searchBar = function () {
 }
 
 theme.searchPage = function () {
-  $(document).off('click.resetMainSearchInput');
-  $(document).off('input.onInputMain');
-  $(document).off('submit.mainSearchForm');
-
   var $searchInput = $('.searchForm__inputMain');
   var $searchInputReset = $('.searchForm__mainResetLabel');
 
@@ -742,30 +694,6 @@ $(document).ready(function () {
 })
 
 theme.GLOBAL = function () {
-
-  $(document).on('click.toggleTab', '[data-action="toggle-tab"]', function () {
-    theme.toggleTab($(this));
-
-    if ($('.FeaturedCollections__CollectionLink').length) {
-      let $parentElement = $(this).closest('.FeaturedCollections__TabsHeader');
-      $($parentElement.find('.FeaturedCollections__CollectionLink')).attr('href', $(this).attr('data-link-url')).text($(this).attr('data-link-title'));
-
-      let $tabList = $('.FeaturedCollections__TabsList')[0];
-      let $elements = $('.FeaturedCollections__TabButton');
-
-      theme.horizontalScroll($tabList, $elements, 50);
-    }
-  })
-
-  if ($('.FeaturedCollections__ProductsTabs').length) {
-    $('.FeaturedCollections__ScrollNext').on('click', function () {
-      $(this).parent().animate({scrollLeft: $(this).parent().width()}, 600);
-    })
-
-    $('.FeaturedCollections__ScrollPrev').on('click', function () {
-      $(this).parent().animate({scrollLeft: 0}, 300);
-    })
-  }
 
   if ($('.collection').length || $('.searchMain').length) {
     if ($('.searchMain').length) {
@@ -1035,6 +963,34 @@ class SlideToggle extends HTMLElement {
 
 customElements.define('slide-toggle', SlideToggle);
 // End Slide toggle
+
+// Toggle tabs
+class ToggleTabs extends HTMLElement {
+  // Required button element: data-selected='true/false'; aria-controls='TAB_ID'; data-action='toggle-tab'
+  // Required tab element: data-selected='true/false'; data-tab='TAB_ID'
+  constructor() {
+    super();
+    this.buttons = this.querySelectorAll('[data-action="toggle-tab"]')
+    this.tabs = this.querySelectorAll('[data-tab]')
+
+    this.buttons.forEach(button => {
+      button.addEventListener('click', ()=> this.toggleTab(button))
+    })
+  }
+
+  toggleTab(button) {
+    if (button.dataset.selected === 'true') return
+    const tabId = button.getAttribute('aria-controls'),
+          tabToShow = Array.from(this.tabs).filter(tab => tab.dataset.tab === tabId)[0];
+      this.buttons.forEach(el => el.dataset.selected = 'false')
+      this.tabs.forEach(tab => tab.dataset.selected = 'false')
+      button.dataset.selected = 'true'
+      tabToShow.dataset.selected = 'true'
+  }
+}
+
+customElements.define('toggle-tabs', ToggleTabs);
+// End Toggle tabs
 
 class StickyScrolling extends HTMLElement {
   constructor() {
@@ -1860,6 +1816,35 @@ class ProductQuickView extends PdpHelper {
 }
 
 customElements.define('product-quick-view', ProductQuickView);
+
+class FeaturedCollections extends HTMLElement {
+  constructor() {
+    super();
+    this.tabs = this.querySelectorAll('[data-action="toggle-tab"]')
+    this.link = this.querySelector('.FeaturedCollections__CollectionLink')
+    this.arrows = this.querySelectorAll('[data-scroll]')
+
+    this.tabs.forEach(tab => {
+      tab.addEventListener('click', ()=> this.changeCollectionLink(tab))
+    })
+    this.arrows.forEach(arrow => {
+      arrow.addEventListener('click', ()=> this.scrollArrows(arrow))
+    })
+  }
+
+  changeCollectionLink(tab) {
+    this.link.setAttribute('href', tab.dataset.linkUrl)
+    this.link.innerHTML = tab.dataset.linkTitle
+  }
+
+  scrollArrows(arrow) {
+    const action = arrow.dataset.scroll,
+          wrapper = arrow.closest('.FeaturedCollections__ProductsTabs');
+    (action === 'next') ? wrapper.scrollLeft = wrapper.offsetWidth : wrapper.scrollLeft = 0;
+  }
+}
+
+customElements.define('featured-collections', FeaturedCollections);
 
 class bundleMixMultiple extends HTMLElement {
   constructor() {

@@ -78,7 +78,6 @@
     {% section 'footer' %}
     {% include 'cloak' %}
 
-    {{ 'jquery-1.11.0.min.js' | asset_url | script_tag }}
     {{ 'libs.min.js' | asset_url | script_tag }}
 
     <script src="{{ 'custom.js' | asset_url }}" defer='defer'></script>
@@ -88,9 +87,6 @@
       <script src="{{ 'collection.js' | asset_url }}" defer='defer'></script>
     {%- endif -%}
 
-    {%- comment -%}
-      <script src="{{ 'index.js' | asset_url }}" defer='defer'></script>
-    {%- endcomment -%}
     <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
 
     {% include 'component-customize-js' %}
