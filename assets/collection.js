@@ -254,7 +254,7 @@ class collectionFacets extends HTMLElement {
         }
         break
       case 'created-descending':
-        data.sort((a, b) => new Date(a['date']) - new Date(b['date']))
+        data.sort((a, b) => new Date(b['date']) - new Date(a['date']))
         break
     }
   }
