@@ -59,20 +59,22 @@
         },
         "7fecf956-0f71-4724-8110-5147421afac4": {
           "type": "product",
+          "disabled": true,
           "settings": {
-            "product": "bird-rock-anderacha",
+            "product": "karamo",
             "title_1": "Roasted In",
             "description_1": "San Diego, California",
             "title_2": "Grown In",
-            "description_2": "Jimma, Ethiopia",
+            "description_2": "Sidama, Ethiopia",
             "title_3": "We Tasted",
-            "description_3": "{{ block.settings.product.metafields.coffee.attribute_3.value }}",
+            "description_3": "Cherry, Honey Melon, Lime, Brown Sugar",
             "title_4": "Why Try It?",
-            "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
+            "description_4": "A perfectly balanced natural process by an award-winning roaster."
           }
         },
         "4becf74e-5449-4496-a177-124d68b00aec": {
           "type": "product",
+          "disabled": true,
           "settings": {
             "product": "ethiopia-fresh-crop-bundle",
             "title_1": "Can't Decide?",
