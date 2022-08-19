@@ -1846,6 +1846,43 @@ class FeaturedCollections extends HTMLElement {
 
 customElements.define('featured-collections', FeaturedCollections);
 
+class MP4Video extends HTMLElement {
+  constructor() {
+    super();
+    this.video = this.querySelector('.media-video')
+    this.pauseBtn = this.querySelector('.pause-button')
+    this.playBtn = this.querySelector('.play-button')
+    this.muteBtn = this.querySelector('.mute-video')
+
+    this.playBtn.addEventListener('click', ()=> this.videoPlay())
+    this.pauseBtn.addEventListener('click', ()=> this.videoPause())
+    this.muteBtn.addEventListener('click', ()=> this.videoMute())
+    this.video.addEventListener('click', ()=> this.checkVideoState())
+  }
+
+  checkVideoState() {
+    (this.video.paused) ? this.videoPlay() : this.videoPause()
+  }
+
+  videoPlay() {
+    this.video.play()
+    this.playBtn.classList.add('hidden')
+    if (this.pauseBtn) this.pauseBtn.classList.remove('hidden')
+  }
+
+  videoPause() {
+    this.video.pause()
+    this.playBtn.classList.remove('hidden')
+    this.pauseBtn.classList.add('hidden')
+  }
+
+  videoMute() {
+
+  }
+}
+
+//customElements.define('mp4-video', MP4Video);
+
 class bundleMixMultiple extends HTMLElement {
   constructor() {
     super();

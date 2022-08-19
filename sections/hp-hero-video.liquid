@@ -1,4 +1,3 @@
-{%- assign enable_section = section.settings.enable_section -%}
 {%- assign section_bg = section.settings.section_bg -%}
 {%- assign video_mp4 = section.settings.video_mp4 -%}
 {%- assign video_poster = section.settings.video_poster -%}
@@ -20,8 +19,8 @@
 {%- assign btn_type = section.settings.btn_type -%}
 {%- assign image_class_name = 'landing__hero-image' -%}
 
-{%- if enable_section and image != blank or enable_section and video_mp4 != blank -%}
-  <section id="landing__hero-{{ section.id }}"
+{%- if image != blank or video_mp4 != blank -%}
+  <mp4-video id="landing__hero-{{ section.id }}"
            class="landing__hero landing__hero--{{ content_position }} {% if show_hide_video == 'mobile' %}landing__hero-hide-video-on-mobile{% endif %} {% if section.settings.show_mute_button %}landing__hero-show-volume-btn{% endif %}"
            style="background-color: {{ section_bg }}; color: {{ text_color }};">
     {%- if image_mobile != blank -%}
@@ -104,7 +103,7 @@
         </div>
       </div>
     {%- endif -%}
-  </section>
+  </mp4-video>
 
   {%- if overlay_opacity != blank -%}
     <style>
@@ -122,15 +121,10 @@
   "name": "Hero video",
   "settings": [
     {
-      "type": "checkbox",
-      "id": "enable_section",
-      "label": "Enable section"
-    },
-    {
       "type": "color",
       "id": "section_bg",
       "label": "Section background color",
-      "default": "#FFFFFF"
+      "default": "#000000"
     },
     {
       "type": "header",
@@ -198,7 +192,7 @@
       "step": 10,
       "unit": "%",
       "label": "Overlay opacity",
-      "default": 70
+      "default": 10
     },
     {
       "type": "header",
