@@ -719,57 +719,10 @@ theme.GLOBAL = function () {
             bodyObj = theme.serializeObject(form);
 
         theme.cart.cartEvent('/cart/add.js', bodyObj, true, theme.pdpErrorMessage)
-        theme.closeModal();
+        //theme.closeModal();
       }
     })
   }
-
-  /* Video play & pause button */
-
-  $(document).on('click', '.mute-video', function () {
-    let $videos = $(this).parent().find("video.landing__hero-video");
-    if ($videos.length <= 0) return
-    if ($videos.prop('muted')) {
-      $videos.prop('muted', false);
-      $(this).removeClass('unmute-video');
-    } else {
-      $videos.prop('muted', true);
-      $(this).addClass('unmute-video');
-    }
-  });
-
-  $(document).on('click', '.media-video', function () {
-    let $videos = $(this).parent().find(".landing__hero-video");
-    if (this.paused) {
-      $videos.each(function () {$(this)[0].play()})
-      $(this).parent().find(".play-button").fadeOut()
-      if ($(this).parent().find(".pause-button").length) {
-        $(this).parent().find(".pause-button").removeClass('hidden').fadeIn()
-      }
-    } else {
-      $videos.each(function () {$(this)[0].pause()})
-      $(this).parent().find(".play-button").removeClass('hidden').fadeIn()
-      if ($(this).parent().find(".pause-button").length) {
-        $(this).parent().find(".pause-button").fadeOut()
-      }
-    }
-  });
-
-  $(document).on('click', '.play-button', function () {
-    let $videos = $(this).parent().find('.media-video');
-    $videos.each(function () {$(this)[0].play()})
-    $(this).parent().find(".play-button").fadeOut()
-    if ($(this).parent().find(".pause-button").length) {
-      $(this).parent().find(".pause-button").removeClass('hidden').fadeIn()
-    }
-  });
-
-  $(document).on('click', '.pause-button', function () {
-    let $videos = $(this).parent().find('.media-video');
-    $videos.each(function () {$(this)[0].pause()})
-    $(this).parent().find(".play-button").removeClass('hidden').fadeIn()
-    $(this).parent().find(".pause-button").fadeOut()
-  });
 
   if ($('form[action^="htpps://www.facebook.com"]').length) {
     $('form[action^="htpps://www.facebook.com"]').attr('aria-hidden', 'true')
@@ -1685,6 +1638,47 @@ class YoutubeVimeoVideo extends HTMLElement {
 
 customElements.define('video-section', YoutubeVimeoVideo);
 
+class MP4Video extends HTMLElement {
+  constructor() {
+    super();
+    this.video = this.querySelector('.media-video')
+    this.pauseBtn = this.querySelector('.pause-button')
+    this.playBtn = this.querySelector('.play-button')
+    this.muteBtn = this.querySelector('.mute-video')
+
+    this.playBtn.addEventListener('click', ()=> this.videoPlay())
+    this.pauseBtn.addEventListener('click', ()=> this.videoPause())
+    this.muteBtn.addEventListener('click', ()=> this.videoMute())
+    this.video.addEventListener('click', ()=> this.checkVideoState())
+  }
+
+  checkVideoState() {
+    (this.video.paused) ? this.videoPlay() : this.videoPause()
+  }
+
+  videoPlay() {
+    this.video.play()
+    this.playBtn.classList.add('hidden')
+    if (this.pauseBtn) this.pauseBtn.classList.remove('hidden')
+  }
+
+  videoPause() {
+    this.video.pause()
+    this.playBtn.classList.remove('hidden')
+    this.pauseBtn.classList.add('hidden')
+  }
+
+  videoMute() {
+    const muted = this.video.hasAttribute('muted');
+    (muted)
+        ? this.video.removeAttribute('muted')
+        : this.video.setAttribute('muted', '')
+    this.muteBtn.classList.toggle('unmute-video')
+  }
+}
+
+customElements.define('mp4-video', MP4Video);
+
 class ProductCard extends PdpHelper {
   constructor() {
     super();
@@ -1845,43 +1839,6 @@ class FeaturedCollections extends HTMLElement {
 }
 
 customElements.define('featured-collections', FeaturedCollections);
-
-class MP4Video extends HTMLElement {
-  constructor() {
-    super();
-    this.video = this.querySelector('.media-video')
-    this.pauseBtn = this.querySelector('.pause-button')
-    this.playBtn = this.querySelector('.play-button')
-    this.muteBtn = this.querySelector('.mute-video')
-
-    this.playBtn.addEventListener('click', ()=> this.videoPlay())
-    this.pauseBtn.addEventListener('click', ()=> this.videoPause())
-    this.muteBtn.addEventListener('click', ()=> this.videoMute())
-    this.video.addEventListener('click', ()=> this.checkVideoState())
-  }
-
-  checkVideoState() {
-    (this.video.paused) ? this.videoPlay() : this.videoPause()
-  }
-
-  videoPlay() {
-    this.video.play()
-    this.playBtn.classList.add('hidden')
-    if (this.pauseBtn) this.pauseBtn.classList.remove('hidden')
-  }
-
-  videoPause() {
-    this.video.pause()
-    this.playBtn.classList.remove('hidden')
-    this.pauseBtn.classList.add('hidden')
-  }
-
-  videoMute() {
-
-  }
-}
-
-//customElements.define('mp4-video', MP4Video);
 
 class bundleMixMultiple extends HTMLElement {
   constructor() {
