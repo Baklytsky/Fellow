@@ -44,10 +44,10 @@ class collectionFacets extends HTMLElement {
                 sizesNames = this.getSetOfValues(products, ['facets', 'size', 'names']);
 
             if (collection['hidden_shop_by_use_arr']) {
-              shopByUseNames = this.checkHiddenOptions(shopByUseNames, collection['hidden_shop_by_use_arr'])
+              shopByUseNames = this.checkHiddenOptions(shopByUseNames, collection['shown_shop_by_use_arr'])
             }
             if (collection['hidden_sizes_arr']) {
-              sizesNames = this.checkHiddenOptions(sizesNames, collection['hidden_sizes_arr'])
+              sizesNames = this.checkHiddenOptions(sizesNames, collection['shown_sizes_arr'])
             }
             return {
               subCollection: true,
@@ -76,8 +76,8 @@ class collectionFacets extends HTMLElement {
     })).then(() => this.getProducts())
   }
 
-  checkHiddenOptions (optArr, hiddenOptArr) {
-    return optArr.filter(opt => !hiddenOptArr.includes(opt))
+  checkHiddenOptions (optArr, shownOptArr) {
+    return optArr.filter(opt => shownOptArr.includes(opt))
   }
 
   getSetOfValues (arrToReduce, keyArr) {

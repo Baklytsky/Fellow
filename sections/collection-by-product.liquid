@@ -13,13 +13,13 @@
 
 {%- comment -%} /// Hidden "sizes" in filters  /// {%- endcomment -%}
 {%- assign hidden_sizes_arr = false -%}
-{%- if collection.metafields["custom_fields"]["hidden_sizes"] != blank -%}
-{%- assign hidden_sizes_arr = collection.metafields["custom_fields"]["hidden_sizes"] | split: ',' | strip -%}
+{%- if collection.metafields["custom_fields"]["shown_sizes"] != blank -%}
+{%- assign shown_sizes_arr = collection.metafields["custom_fields"]["shown_sizes"] | split: ',' | strip -%}
 {%- endif -%}
 {%- comment -%} /// Hidden "shop by use" in filters  /// {%- endcomment -%}
 {%- assign hidden_shop_by_use_arr = false -%}
-{%- if collection.metafields["custom_fields"]["hidden_shop_by_use_tags"] != blank -%}
-{%- assign hidden_shop_by_use_arr = collection.metafields["custom_fields"]["hidden_shop_by_use_tags"] | split: ',' | strip -%}
+{%- if collection.metafields["custom_fields"]["shown_shop_by_use_tags"] != blank -%}
+{%- assign shown_shop_by_use_tags_arr = collection.metafields["custom_fields"]["shown_shop_by_use_tags"] | split: ',' | strip -%}
 {%- endif -%}
 
 <section class='collection'>
@@ -60,8 +60,8 @@
                   "order": "{{ order | minus: 2 }}",
                   "url": "{{ subcollection.url }}",
                   "link_text": "{{'collections.general.link_text' | t }}",
-                  "hidden_sizes_arr": {{ hidden_sizes_arr | json }},
-                  "hidden_shop_by_use_arr": {{ hidden_shop_by_use_arr | json }}
+                  "shown_sizes_arr": {{ shown_sizes_arr | json }},
+                  "shown_shop_by_use_arr": {{ shown_shop_by_use_tags_arr | json }}
                 }
                 {%- endif -%}
               {%- endfor -%}
