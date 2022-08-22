@@ -42,6 +42,7 @@
     {%- if template.suffix == 'by-product-with-subcollection'
       and collection.metafields["custom_fields"]["subcollection_list"] != blank -%}
       {%- assign subcollection_counter = 0 -%}
+      {%- assign subcollection_template = true -%}
 
       <script type="application/ld+json" data-subcollections>
           {
@@ -56,7 +57,7 @@
                 {%- if subcollection_counter != 1 -%},{%- endif -%}{
                   "title": "{{ title }}",
                   "description": {{ description | newline_to_br | json }},
-                  "order": "{{ order }}",
+                  "order": "{{ order | minus: 2 }}",
                   "url": "{{ subcollection.url }}",
                   "link_text": "{{'collections.general.link_text' | t }}",
                   "hidden_sizes_arr": {{ hidden_sizes_arr | json }},
@@ -73,7 +74,8 @@
     {%- render 'facets' collection: collection -%}
     <div class='collection__products-wrapper rel'>
       <div class="collection__products-results">
-        <div id="collection__result-wrapper" class="collection__product-results">
+        <div id="collection__result-wrapper"
+             class="collection__product-results {% if subcollection_template %}subcollection__product-results{% endif %}">
           {%- for i in (1..4) -%}
             <div class="collection__product-item">
               <div class="collection__product-content">
