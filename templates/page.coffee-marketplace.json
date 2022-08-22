@@ -57,18 +57,17 @@
             "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
           }
         },
-        "7fecf956-0f71-4724-8110-5147421afac4": {
+        "ff74dfa8-c318-4201-a637-0f3ac14eb93c": {
           "type": "product",
-          "disabled": true,
           "settings": {
             "product": "karamo",
-            "title_1": "Roasted In",
+            "title_1": "Roasted In:",
             "description_1": "San Diego, California",
-            "title_2": "Grown In",
+            "title_2": "Grown In:",
             "description_2": "Sidama, Ethiopia",
-            "title_3": "We Tasted",
+            "title_3": "We Tasted:",
             "description_3": "Cherry, Honey Melon, Lime, Brown Sugar",
-            "title_4": "Why Try It?",
+            "title_4": "Why Try It?:",
             "description_4": "A perfectly balanced natural process by an award-winning roaster."
           }
         },
@@ -98,7 +97,7 @@
       "block_order": [
         "06c75fc8-9b5f-49ae-a22b-8796612ea27a",
         "00563b8d-ad99-4b88-9b82-e5c9727ad9d6",
-        "7fecf956-0f71-4724-8110-5147421afac4",
+        "ff74dfa8-c318-4201-a637-0f3ac14eb93c",
         "4becf74e-5449-4496-a177-124d68b00aec",
         "51ba94f5-6e31-41eb-bd2f-d78575777b2b"
       ],
