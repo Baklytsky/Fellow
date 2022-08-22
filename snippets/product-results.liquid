@@ -5,7 +5,7 @@
   {% raw %}
   {{#if items.length}}
     {{#each items}}
-      <div class="collection__product-item">
+      <div class="collection__product-item" style="order: {{#if order}}{{ order }}{{ else }}{{ @index }}{{/if}}">
         <div class="collection__product-content">
           <h3 class="collection__product-title">
             <a href="{{ url }}">{{ title }}</a>
