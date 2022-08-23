@@ -15,7 +15,7 @@
 
 {%- assign count_cart = cart.item_count -%}
 
-<header id='header' data-component='header' class="newHeader">
+<header-nav id='header' class="newHeader">
   <div id="MainHeader">
 
     {%- if right_menu != blank or left_menu != blank or text_bar != blank -%}
@@ -61,10 +61,10 @@
 
             {%- if section.settings.enable_timer and section.settings.end_date != blank -%}
               <div class="announcement-bar__timer" data-end-date="{{ section.settings.end_date }}">
-                <span class="announcement-bar__timer-days"></span>
-                <span class="announcement-bar__timer-hours"></span>
-                <span class="announcement-bar__timer-minutes"></span>
-                <span class="announcement-bar__timer-seconds"></span>
+                <span class="announcement-bar__timer-days days"></span>
+                <span class="announcement-bar__timer-hours hours"></span>
+                <span class="announcement-bar__timer-minutes minutes"></span>
+                <span class="announcement-bar__timer-seconds seconds"></span>
               </div>
             {%- endif -%}
           </a>
@@ -265,7 +265,7 @@
     {%- endif -%}
   </div>
 
-  <div class="newHeader__openedBlock">
+  <div class="newHeader__openedBlock" aria-hidden="true">
     <div class="newHeader__openedBlockContainer">
     {%- if left_menu != blank -%}
       {%- render 'generate-menu',mobile_menu: false, menu: left_menu, section: section -%}
@@ -321,7 +321,7 @@
       </nav>
     {%- endif -%}
   </div>
-</header>
+</header-nav>
 
 
 {% schema %}

@@ -169,144 +169,69 @@ theme.headerHeight = function () {
   document.documentElement.style.setProperty('--header-height', document.getElementById('MainHeader').offsetHeight + 'px');
 }
 
-theme.header = function () {
+theme.slideUp = function (target, duration= 500) {
+  target.classList.remove('active')
+  target.style.transitionProperty = 'height, margin, padding';
+  target.style.transitionDuration = duration + 'ms';
+  target.style.boxSizing = 'border-box';
+  target.style.height = target.offsetHeight + 'px';
+  target.offsetHeight;
+  target.style.overflow = 'hidden';
+  target.style.height = 0;
+  target.style.paddingTop = 0;
+  target.style.paddingBottom = 0;
+  target.style.marginTop = 0;
+  target.style.marginBottom = 0;
+  window.setTimeout( () => {
+    target.style.display = 'none';
+    target.style.removeProperty('height');
+    target.style.removeProperty('padding-top');
+    target.style.removeProperty('padding-bottom');
+    target.style.removeProperty('margin-top');
+    target.style.removeProperty('margin-bottom');
+    target.style.removeProperty('overflow');
+    target.style.removeProperty('transition-duration');
+    target.style.removeProperty('transition-property');
+  }, duration);
+}
 
-//-----------------------Header navigation----------------------------------
-  const $newHeader = $(".newHeader"),
-      $openedBlock = $(".newHeader__openedBlock"),
-      $burger = $('.burgerMenu'),
-      $body = $('body'),
-      $mobileMenu = $('.mobileMenu'),
-      $mobileItem = $('.mobileMenu__item'),
-      $megaMenu = $('.megaMenu');
+theme.slideDown = function (target, duration= 500) {
 
-  let closeOpenedBlock = function () {
-    $openedBlock.slideUp();
-    $openedBlock.attr('aria-hidden', 'true');
-    $('.newHeader__link').attr('data-selected', 'false');
-  };
-  let burgerFunction = function () {
-    $burger.toggleClass('active');
-    $mobileMenu.toggleClass('active');
-    $body.toggleClass('fixed');
-    if (!$burger.hasClass('active')) {
-      $mobileMenu.find('.active').removeClass('active')
-      $mobileMenu.find('.subMenuList').slideUp();
-    }
-  };
+  target.classList.add('active')
+  target.style.removeProperty('display');
+  let display = window.getComputedStyle(target).display;
+  if (display === 'none') display = 'block';
+  target.style.display = display;
+  let height = target.offsetHeight;
+  target.style.overflow = 'hidden';
+  target.style.height = 0;
+  target.style.paddingTop = 0;
+  target.style.paddingBottom = 0;
+  target.style.marginTop = 0;
+  target.style.marginBottom = 0;
+  target.offsetHeight;
+  target.style.boxSizing = 'border-box';
+  target.style.transitionProperty = "height, margin, padding";
+  target.style.transitionDuration = duration + 'ms';
+  target.style.height = height + 'px';
+  target.style.removeProperty('padding-top');
+  target.style.removeProperty('padding-bottom');
+  target.style.removeProperty('margin-top');
+  target.style.removeProperty('margin-bottom');
+  window.setTimeout( () => {
+    target.style.removeProperty('height');
+    target.style.removeProperty('overflow');
+    target.style.removeProperty('transition-duration');
+    target.style.removeProperty('transition-property');
+  }, duration);
+}
 
-  $(window).on('resize', () => {
-    if ($(window).width() < 992) {
-      closeOpenedBlock ();
-    }
-  })
-
-  $burger.on('click', function () {
-    burgerFunction();
-  })
-
-  $(document).on('click', "a", function (e) {
-      closeOpenedBlock();
-
-   // if($burger.hasClass('active')){
-   //    burgerFunction();
-   //  }
-  })
-
-  $(document).on('mouseover', '.newHeader__MainLink', function () {
-    theme.closeSearch();
-
-    if ($(this).attr('data-target')) {
-      let target = $(this).attr('data-target'),
-          findDataId = $(`[data-id=${target}]`);
-
-      if ($openedBlock.attr('aria-hidden') == 'false') {
-        findDataId.attr('data-visible', 'true');
-        $(target).attr('data-visible', 'true');
-      }
-
-      $newHeader.find($('[data-selected]')).attr('data-selected', 'false');
-      $(this).attr('data-selected', 'true');
-      findDataId.attr('data-selected', 'true');
-
-      if ($openedBlock.find(findDataId).length > 0) {
-        $openedBlock.slideDown();
-        $openedBlock.attr('aria-hidden', 'false');
-      } else {
-        $('.newHeader__link').attr('data-selected', 'false');
-        $openedBlock.slideUp();
-        $openedBlock.attr('aria-hidden', 'true');
-      }
-    } else {
-      closeOpenedBlock()
-    }
-  })
-
-  $(document).on('mouseleave', '.newHeader', function () {
-    if ($openedBlock.attr('data-selected', 'false')) {
-      closeOpenedBlock()
-    }
-  });
-
-  $mobileItem.on('click', function (e) {
-    if (!$(this).find($megaMenu).hasClass('active') && !$(this).find($megaMenu).hasClass('megaMenu__blank')) {
-      $(this).find($megaMenu).addClass('active');
-    } else if ($(e.target).hasClass('megaMenu__itemHeading') || $(e.target).parent().hasClass('megaMenu__itemHeading')) {
-      $(this).find($megaMenu).removeClass('active');
-    }
-  })
-
-  $('.mobileMenu .newHeader__link').on('click', function (e) {
-    if (this.classList.contains('newHeader__button')) e.preventDefault();
-    if ($(this).parents('.mobileMenu')) {
-      $(this).siblings('.subMenuList').slideToggle();
-      $(this).toggleClass('active')
-    }
-  })
-
-  theme.countdownTimer = function () {
-    const second = 1000,
-        minute = second * 60,
-        hour = minute * 60,
-        day = hour * 24;
-
-    function timerText(period, periodName) {
-      let number = (period < 10) ? '0' + period : period,
-          separator = (periodName !== 'seconds') ? ' :' : '',
-          text = number + ' ' + periodName + separator;
-      return ((number === '00' && periodName === 'days') ? '' : text)
-    }
-
-    let endDate = $('.announcement-bar__timer').data('end-date'),
-        countDown = new Date(endDate).getTime(),
-        x = setInterval(function () {
-
-          let now = new Date().getTime(),
-              distance = countDown - now,
-              days = Math.floor(distance / (day)),
-              hours = Math.floor((distance % (day)) / (hour)),
-              minutes = Math.floor((distance % (hour)) / (minute)),
-              seconds = Math.floor((distance % (minute)) / second);
-
-          $('.announcement-bar__timer-days').text(timerText(days, 'days'));
-          $('.announcement-bar__timer-hours').text(timerText(hours, 'hours'));
-          $('.announcement-bar__timer-minutes').text(timerText(minutes, 'minutes'));
-          $('.announcement-bar__timer-seconds').text(timerText(seconds, 'seconds'));
-
-          //do something later when date is reached
-          if (distance < 0) {
-            $('.announcement-bar__timer').fadeOut();
-            clearInterval(x);
-          }
-          //seconds
-        }, 1000)
-    $('.announcement-bar__timer').css('visibility', 'visible');
+theme.slideToggle = function (target, duration = 250) {
+  if (!target.classList.contains('active')) {
+    return theme.slideDown(target, duration);
+  } else {
+    return theme.slideUp(target, duration);
   }
-
-  if ($('.announcement-bar__timer').length) {
-    theme.countdownTimer();
-  }
-//-----------------------End Header navigation----------------------------------
 }
 
 theme.collectionAndSearch = function (isSearchPage) {
@@ -680,54 +605,25 @@ theme.searchPage = function () {
 
 }
 
-$(document).ready(function () {
-  theme.header()
-
-  theme.GLOBAL()
-
-  theme.headerHeight();
-
-  $(window).on('resize', $.debounce(300, function () {
-    theme.headerHeight();
-  }));
-
-})
-
-theme.GLOBAL = function () {
-
+document.addEventListener("DOMContentLoaded", ()=> {
   if ($('.collection').length || $('.searchMain').length) {
     if ($('.searchMain').length) {
       var isSearchPage = true;
     }
-
     theme.collectionAndSearch(isSearchPage);
   }
 
-  if ($('.headerSearch').length) {
-    theme.searchBar();
-  }
+  if ($('.headerSearch').length) theme.searchBar();
 
-  if ($('.searchMain').length) {
-    theme.searchPage();
-  }
-
-  if ($('.cmProducts__card').length) {
-    document.addEventListener('click', function (e) {
-      if (e.target.closest('[data-marketplace-atc]')) {
-        e.preventDefault();
-        let form = e.target.closest('form'),
-            bodyObj = theme.serializeObject(form);
-
-        theme.cart.cartEvent('/cart/add.js', bodyObj, true, theme.pdpErrorMessage)
-        //theme.closeModal();
-      }
-    })
-  }
+  if ($('.searchMain').length) theme.searchPage();
 
   if ($('form[action^="htpps://www.facebook.com"]').length) {
     $('form[action^="htpps://www.facebook.com"]').attr('aria-hidden', 'true')
   }
-}
+
+  theme.headerHeight();
+  window.addEventListener('resize', theme.headerHeight)
+})
 
 class dynamicRecommendations extends HTMLElement {
   constructor() {
@@ -877,40 +773,10 @@ class SlideToggle extends HTMLElement {
     if (this.slideTarget) {
       this.addEventListener('click', (e) => {
         e.preventDefault();
-        this.slideToggle()
+        this.classList.toggle('active')
+        theme.slideToggle(this.slideTarget, this.duration)
       });
     }
-  }
-
-  slideToggle () {
-    (!this.slideTarget.classList.contains('active')) ? this.slideToggleOpen() : this.slideToggleClose()
-  }
-
-  slideToggleOpen() {
-    this.slideTarget.classList.add('active');
-    this.slideTarget.style.height = 'auto';
-    let height = this.slideTarget.clientHeight + "px";
-    this.slideTarget.style.height = '0px';
-    setTimeout( () => this.slideTarget.style.height = height, 0);
-    setTimeout( () => {
-      this.slideTarget.style.removeProperty('height');
-      this.slideTarget.style.overflow = 'auto';
-      this.classList.add('active');
-    }, this.duration);
-  }
-
-  slideToggleClose() {
-    this.slideTarget.style.overflow = 'hidden';
-    setTimeout( () => {
-      this.slideTarget.classList.remove('active');
-      this.classList.remove('active');
-    }, this.duration - 50)
-    this.slideTarget.animate({
-      height: [this.slideTarget.clientHeight + 'px', '0px']
-    }, {
-      duration: this.duration,
-      easing: 'ease-in-out'
-    });
   }
 }
 
@@ -1839,6 +1705,150 @@ class FeaturedCollections extends HTMLElement {
 }
 
 customElements.define('featured-collections', FeaturedCollections);
+
+class MarketplaceCard extends HTMLElement {
+  constructor() {
+    super()
+    this.form = this.querySelector('form')
+    this.atc = this.querySelector('[data-marketplace-atc]')
+
+    this.atc.addEventListener('click', (e)=> this.marketplaceATC(e))
+  }
+
+  marketplaceATC(e) {
+    e.preventDefault()
+    const bodyObj = theme.serializeObject(this.form);
+    theme.cart.cartEvent('/cart/add.js', bodyObj, true, theme.pdpErrorMessage)
+  }
+}
+
+customElements.define('marketplace-card', MarketplaceCard);
+
+class header extends HTMLElement {
+  constructor() {
+    super()
+    this.megamenuWrapper = this.querySelector('.newHeader__openedBlock')
+    this.links = this.querySelectorAll('.newHeader__link')
+    this.burger = this.querySelector('.burgerMenu')
+    this.mobileMenu = this.querySelector('.mobileMenu')
+    this.mobileItem = this.querySelectorAll('.mobileMenu__item')
+    this.megamenuLinks = this.querySelectorAll('.newHeader__MainLink')
+    this.search = this.querySelector('.headerSearch')
+    this.timer = this.querySelector('.announcement-bar__timer')
+
+    document.addEventListener('resize', ()=> this.closeMenu())
+    this.burger.addEventListener('click', ()=> this.toggleBurger())
+    this.addEventListener('mouseleave', ()=> this.closeMenu())
+
+    this.megamenuLinks.forEach(link => {
+      link.addEventListener('mouseover', ()=> {
+        if (this.search.getAttribute('aria-hidden') === 'false') {
+          theme.closeSearch()
+        }
+        (link.hasAttribute('data-target'))
+            ? this.openMenu(link)
+            : this.closeMenu()
+      })
+    })
+
+    this.mobileItem.forEach(link => {
+      link.addEventListener('click', (e)=> this.toggleMobileMenu(e, link))
+    })
+
+    if (this.timer) this.countdownTimer()
+  }
+
+  closeMenu() {
+    theme.slideUp(this.megamenuWrapper)
+    this.megamenuWrapper.setAttribute('aria-hidden', 'true')
+    this.links.forEach(link => link.setAttribute('data-selected', 'false'))
+  }
+
+  toggleBurger() {
+    this.burger.classList.toggle('active')
+    this.mobileMenu.classList.toggle('active')
+    document.body.classList.toggle('fixed');
+    if (!this.burger.classList.contains('active')) {
+      this.mobileMenu.querySelectorAll('.active').forEach(el => {
+        el.classList.remove('active')
+      })
+      this.mobileMenu.querySelectorAll('.subMenuList').forEach(el => {
+        theme.slideUp(el)
+      })
+    }
+  }
+
+  openMenu(link) {
+    const targetID = link.getAttribute('data-target'),
+          target = this.querySelector(`[data-id=${targetID}]`),
+          allMenus = this.querySelectorAll('[data-id]');
+
+    if (!target) {
+      this.closeMenu()
+      return
+    }
+
+    allMenus.forEach(menu => menu.dataset.selected = 'false')
+    this.links.forEach(link => link.setAttribute('data-selected', 'false'))
+    link.setAttribute('data-selected', 'true')
+    target.setAttribute('data-selected', 'true')
+
+    if (this.megamenuWrapper.getAttribute('aria-hidden') === 'true') {
+      this.megamenuWrapper.setAttribute('aria-hidden', 'false')
+      theme.slideDown(this.megamenuWrapper)
+    }
+  }
+
+  toggleMobileMenu(e, link) {
+    const menu = link.querySelector('.megaMenu')
+    if (!menu && !menu.classList.contains('megaMenu__blank')) return
+    menu.classList.add('active')
+    if (e.target.closest('.megaMenu__itemHeading') || e.target.classList.contains('megaMenu__itemHeading')) {
+      menu.classList.remove('active')
+    }
+  }
+
+  countdownTimer() {
+    const second = 1000,
+        minute = second * 60,
+        hour = minute * 60,
+        day = hour * 24;
+
+    function timerText(period, periodName) {
+      const number = (period < 10) ? '0' + period : period,
+          separator = (periodName !== 'seconds') ? ' :' : '',
+          text = number + ' ' + periodName + separator;
+      return ((number === '00' && periodName === 'days') ? '' : text)
+    }
+
+    const endDate = this.timer.dataset.endDate,
+        countDown = new Date(endDate).getTime(),
+        x = setInterval(() => {
+
+          const now = new Date().getTime(),
+              distance = countDown - now,
+              days = Math.floor(distance / (day)),
+              hours = Math.floor((distance % (day)) / (hour)),
+              minutes = Math.floor((distance % (hour)) / (minute)),
+              seconds = Math.floor((distance % (minute)) / second);
+
+          this.timer.querySelector('.days').innerHTML = timerText(days, 'days')
+          this.timer.querySelector('.hours').innerHTML = timerText(hours, 'hours')
+          this.timer.querySelector('.minutes').innerHTML = timerText(minutes, 'minutes')
+          this.timer.querySelector('.seconds').innerHTML = timerText(seconds, 'seconds')
+
+          //do something later when date is reached
+          if (distance < 0) {
+            this.timer.style.display = 'none';
+            clearInterval(x);
+          }
+          //seconds
+        }, 1000)
+    this.timer.style.visibility = 'visible'
+  }
+}
+
+customElements.define('header-nav', header);
 
 class bundleMixMultiple extends HTMLElement {
   constructor() {
