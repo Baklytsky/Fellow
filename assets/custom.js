@@ -681,8 +681,8 @@ class quantityStepper extends HTMLElement {
     const min = Number(this.quantityInput.min),
           max = Number(this.quantityInput.max);
     let val = Number(this.quantityInput.value);
-    if (max && (val >= max)) this.quantityInput.value = max
-    if (val <= min) this.quantityInput.value = min
+    if (max && (val > max)) this.quantityInput.value = max
+    if (val < min) this.quantityInput.value = min
   }
 }
 
@@ -751,16 +751,24 @@ class ModalOpener extends HTMLElement {
   }
 }
 customElements.define('modal-opener', ModalOpener);
+
 // Dropdown
-document.addEventListener('click', (e) => {
-  document.querySelectorAll('[data-dropdown]').forEach((item) => {
-    if (item.contains(e.target) && !e.target.closest('[data-dropdown-content]')) {
+class Dropdown extends HTMLElement {
+  constructor() {
+    super();
+    document.addEventListener('click', (e) => this.dropdownToggle(e))
+  }
+
+  dropdownToggle(e) {
+    if (this.contains(e.target) && !e.target.closest('[data-dropdown-content]')) {
       e.target.closest('[data-dropdown]').classList.toggle('active')
     } else {
-      item.classList.remove('active')
+      this.classList.remove('active')
     }
-  })
-})
+  }
+}
+
+customElements.define('dropdown-toggle', Dropdown);
 // End dropdown
 
 // Slide toggle
@@ -800,7 +808,7 @@ class ToggleTabs extends HTMLElement {
   toggleTab(button) {
     if (button.dataset.selected === 'true') return
     const tabId = button.getAttribute('aria-controls'),
-          tabToShow = Array.from(this.tabs).filter(tab => tab.dataset.tab === tabId)[0];
+          tabToShow = Array.from(this.tabs).find(tab => tab.dataset.tab === tabId);
       this.buttons.forEach(el => el.dataset.selected = 'false')
       this.tabs.forEach(tab => tab.dataset.selected = 'false')
       button.dataset.selected = 'true'

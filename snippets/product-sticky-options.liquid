@@ -4,7 +4,7 @@
     <div {% if product.has_only_default_variant or product.variants.size <= 1 %}style='display:none'{% else %} class="pdp__sticky-options" {% endif %}>
       {% for option in product.options_with_values %}
         {%- assign option_name_handle = option.name | handleize -%}
-        <div class='pdp__sticky-options-item {% if option_name_handle == 'size' %} stickySize{% endif %} rel{% if option.values.size <= 1 %} hide{% endif %}'
+        <dropdown-toggle class='pdp__sticky-options-item {% if option_name_handle == 'size' %} stickySize{% endif %} rel{% if option.values.size <= 1 %} hide{% endif %}'
              data-index='{{ forloop.index0 }}'
              data-options-count='{{ option.values.size }}'
              {% if option_name_handle == 'size' %}data-dropdown{% endif %}>
@@ -73,7 +73,7 @@
               </div>
             {% endfor %}
           </div>
-        </div>
+        </dropdown-toggle>
       {% endfor %}
     </div>
   {%- endunless -%}
