@@ -4544,7 +4544,7 @@ textarea {
 }
 
 .radio-group:not([data-option-color]):not([data-option-material]) input:checked+.radio__title:not(.radio__title-size-image) {
-  border: 2px solid #C2C2C2;
+  /*border: 2px solid #C2C2C2;*/
   border-radius: 8px;
 }
 

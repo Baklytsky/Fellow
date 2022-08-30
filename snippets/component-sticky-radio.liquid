@@ -1,6 +1,6 @@
 <label class='radio {% if checked %}checked{% endif %}' for='{{ label | handleize }}'>
   <span class='u-sr-only'>{{ value | escape }}</span>
-  <input type="hidden" value="{{ label | handleize }}">
+  <input type="hidden" value="{{ label | handleize }}" title="{{ label }}">
   <span class="radio__title f aic jcc" data-{{ name }}='{{ label | handleize }}'><span>{{label}}</span></span>
 </label>
 

@@ -39,20 +39,25 @@
             {%- endif -%}
             <div class="pdpBundleInclude__dropdown-content" data-slide-target="{{ id }}">
               {%- if bundle_include_product != blank -%}
-                {%- if bundle_include_product_image != blank -%}
-                  {%- assign bundle_image = bundle_include_product_image -%}
-                {%- else -%}
-                  {%- assign bundle_image = bundle_include_product.featured_image.src -%}
-                {%- endif -%}
-
                 <div class="pdpBundleInclude__imageWrapper">
                   <a href="{{ bundle_include_product.url }}" class="pdpBundleInclude__image block rel x">
-                    {% render 'image-lazy-metafields',
-                      image: bundle_image,
-                      class_name: 'image image-abs-cover',
-                      alt: bundle_include_product_title,
-                      size: 'medium',
-                      loader: true %}
+                    {%- if bundle_include_product_image != blank -%}
+                      {%- assign bundle_image = bundle_include_product_image -%}
+                      {% render 'image-lazy-metafields',
+                        image: bundle_image,
+                        class_name: 'image image-abs-cover',
+                        alt: bundle_include_product_title,
+                        size: 'medium',
+                        loader: true %}
+                    {%- else -%}
+                      {%- assign bundle_image = bundle_include_product.featured_image -%}
+                      {% render 'image-lazy',
+                        image: bundle_image,
+                        class_name: 'image image-abs-cover',
+                        alt: bundle_include_product_title,
+                        size: 'medium',
+                        loader: true %}
+                    {%- endif -%}
                   </a>
                 </div>
 

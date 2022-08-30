@@ -61,9 +61,9 @@
 
             {%- if section.settings.enable_timer and section.settings.end_date != blank -%}
               <div class="announcement-bar__timer" data-end-date="{{ section.settings.end_date }}">
-                <span class="announcement-bar__timer-days days"></span>
-                <span class="announcement-bar__timer-hours hours"></span>
-                <span class="announcement-bar__timer-minutes minutes"></span>
+                <span class="announcement-bar__timer-days days pr025"></span>
+                <span class="announcement-bar__timer-hours hours pr025"></span>
+                <span class="announcement-bar__timer-minutes minutes pr025"></span>
                 <span class="announcement-bar__timer-seconds seconds"></span>
               </div>
             {%- endif -%}
@@ -103,11 +103,10 @@
             {%- endfor -%}
 
             {%- if show_search != false -%}
-              <li class="rightMenu__search">
+              <li class="rightMenu__search newHeader__MainLink" data-target="search-bar">
                 <a role="button"
                    id="search-bar-button"
                    href="/search"
-                   data-action="toggle-search"
                    aria-expanded="false"
                    aria-haspopup="true">
                   <p>{{ 'general.search.submit' | t }}</p>
@@ -241,12 +240,12 @@
                 {{ settings.search_heading }}
               </p>
             {%- endif -%}
-            
+
             <div class="headerSearch__popularSearches">
               {% for i in (1..3) %}
                 {%- assign popular_searches = 'popular_searches_product_' | append: forloop.index -%}
                 {%- assign popular_searches_products = all_products[settings[popular_searches]] -%}
-    
+
                 <a href="{{ popular_searches_products.url }}" class="headerSearch__item">{{ popular_searches_products.title }}</a>
               {% endfor %}
             </div>
@@ -278,6 +277,59 @@
     {%- if main_menu != blank -%}
       {%- render 'generate-menu',mobile_menu: false, menu: main_menu, section: section -%}
     {%- endif -%}
+
+    {%- if show_search -%}
+        <div data-id="search-bar"
+             class="topMenu__megaMenu megaMenu headerSearch">
+
+          <form action="{{ routes.search_url }}" name="GET" role="search" class="searchForm headerSearch__form">
+            <label for='header-search-input'>
+              <span class='visually-hidden'>Search</span>
+            </label>
+            <input type="search" id="header-search-input" class="searchForm__input headerSearch__input" name="q" autocomplete="off" autocorrect="off" autocapitalize="off" aria-label="{{ 'header_search.input_placeholder' | t }}" placeholder="{{ 'header_search.input_placeholder' | t }}" autofocus>
+            <input type="reset" id="header-search-reset" value="reset" class="searchForm__resetInput">
+            <label for="header-search-reset" class="searchForm__resetLabel headerSearch__resetLabel">
+              <span class='visually-hidden'>Search Reset</span>
+              {% render 'icon' with 'x' %}
+            </label>
+            <button type='submit' class="searchForm__Submit">
+              {% render 'icon' with 'arrow-next' %}
+              <span class='visually-hidden'>Submit Search</span>
+            </button>
+            <input type="hidden" name="type" value="product">
+          </form>
+          <div class="headerSearch__results">
+            <div class="headerSearch__emptyResults">
+              {{ settings.search_no_result_text | default: 'Sorry, no results' }}
+            </div>
+            <div class="headerSearch__resultsHeader">
+              {%- if settings.search_heading != blank -%}
+                <p class="headerSearch__resultsText">
+                  {{ settings.search_heading }}
+                </p>
+              {%- endif -%}
+
+              <div class="headerSearch__popularSearches">
+                {% for i in (1..3) %}
+                  {%- assign popular_searches = 'popular_searches_product_' | append: forloop.index -%}
+                  {%- assign popular_searches_products = all_products[settings[popular_searches]] -%}
+
+                  <a href="{{ popular_searches_products.url }}" class="headerSearch__item">{{ popular_searches_products.title }}</a>
+                {% endfor %}
+              </div>
+            </div>
+
+            <div class="headerSearch__results__loadingState">
+              {% render 'icon' with 'spinner' %}
+            </div>
+            <ul class="headerSearch__resultsContent"></ul>
+
+            {%- if settings.popular_section_enable -%}
+              {% render 'search-grid-popular', class_name: 'search__popular--header' %}
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endif -%}
     </div>
   </div>
 

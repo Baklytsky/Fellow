@@ -421,14 +421,14 @@ theme.searchBar = function () {
 
   theme.closeSearch = function () {
     $searchBar.attr('aria-hidden', 'true');
-    $searchBar.slideUp();
+    $searchBar.slideUp(0);
     $searchBarToggle.attr('aria-expanded', 'false');
     $searchBar.removeClass('loading');
   }
 
   function openSearch () {
     $searchBar.attr('aria-hidden', 'false');
-    $searchBar.slideDown();
+    $searchBar.slideDown(200);
     $searchBarToggle.attr('aria-expanded', 'true');
     inputFocus();
   }
@@ -1019,6 +1019,8 @@ class PdpStickyBar extends PdpHelper {
     this.radioGroups = this.querySelectorAll('.option-groups')
     this.radios = this.querySelectorAll('.radio')
     this.selectSizeBtn = this.querySelector('.cart__button--select-size')
+    this.sizeLabel = this.querySelector('[data-option-label="Size"] .option-title strong')
+    this.sizeCheckedLabel = this.querySelector('[data-option-size] label.checked')
 
     document.addEventListener('scroll', () => this.showStickyBar())
     if (this.selectSizeBtn) {
@@ -1026,11 +1028,17 @@ class PdpStickyBar extends PdpHelper {
     }
   }
 
-  stickyBarVariantChange(selectedOptions) {
+  stickyBarVariantChange(selectedOptions, sizeSelected) {
     this.selectedOptions = selectedOptions
     this.selectedVariant = this.getSelectedVariant(this.selectedOptions)
     this.checkActiveRadios()
     this.disableUnavailableVariants()
+    if (sizeSelected) this.changeSizeLabel()
+  }
+
+  changeSizeLabel() {
+    this.sizeCheckedLabel = this.querySelector('[data-option-size] label.checked')
+    this.sizeLabel.innerHTML = this.sizeCheckedLabel.querySelector('input').title
   }
 
   checkActiveRadios() {
@@ -1093,7 +1101,10 @@ class PdpMain extends PdpHelper {
       theme.isHidden(this.atc) ? this.klaviyoOOS.click() : this.addToCart(e)
     })
     if (this.sizeOptions.length) {
-      this.sizeOptions.forEach(radio => radio.addEventListener('click', () => this.checkSizeSelected()))
+      this.sizeOptions.forEach(radio => radio.addEventListener('click', () => {
+        this.checkSizeSelected()
+        if (this.stickyBar) this.stickyBar.stickyBarVariantChange(this.selectedOptions, this.sizeSelected)
+      }))
     }
   }
 
@@ -1105,7 +1116,7 @@ class PdpMain extends PdpHelper {
     this.checkVariantTitle()
     this.toggleAddButton([this.atc, this.stickyAtc])
     if (this.personalizeBtn) this.setVariantForPersonalize()
-    if (this.stickyBar) this.stickyBar.stickyBarVariantChange(this.selectedOptions)
+    if (this.stickyBar) this.stickyBar.stickyBarVariantChange(this.selectedOptions, this.sizeSelected)
   }
 
   changeUrl() {
@@ -1750,9 +1761,9 @@ class header extends HTMLElement {
 
     this.megamenuLinks.forEach(link => {
       link.addEventListener('mouseover', ()=> {
-        if (this.search.getAttribute('aria-hidden') === 'false') {
-          theme.closeSearch()
-        }
+        // if (this.search.getAttribute('aria-hidden') === 'false') {
+        //   theme.closeSearch()
+        // }
         (link.hasAttribute('data-target'))
             ? this.openMenu(link)
             : this.closeMenu()
@@ -1767,7 +1778,7 @@ class header extends HTMLElement {
   }
 
   closeMenu() {
-    theme.slideUp(this.megamenuWrapper)
+    theme.slideUp(this.megamenuWrapper, 200)
     this.megamenuWrapper.setAttribute('aria-hidden', 'true')
     this.links.forEach(link => link.setAttribute('data-selected', 'false'))
   }
@@ -1781,7 +1792,7 @@ class header extends HTMLElement {
         el.classList.remove('active')
       })
       this.mobileMenu.querySelectorAll('.subMenuList').forEach(el => {
-        theme.slideUp(el)
+        theme.slideUp(el, 200)
       })
     }
   }
@@ -1803,7 +1814,7 @@ class header extends HTMLElement {
 
     if (this.megamenuWrapper.getAttribute('aria-hidden') === 'true') {
       this.megamenuWrapper.setAttribute('aria-hidden', 'false')
-      theme.slideDown(this.megamenuWrapper)
+      theme.slideDown(this.megamenuWrapper, 200)
     }
   }
 

@@ -88,6 +88,11 @@ button {
   z-index: 2;
 }
 
+slide-toggle,
+toggle-tabs {
+  display: block;
+}
+
 
 //-----------------------Header navigation----------------------------------
 #header .newHeader__openedBlock .newHeader__button {
@@ -446,6 +451,7 @@ button {
   }
 
   .megaMenu__bar {
+    text-align: center;
     padding: 0;
     margin: 0 auto;
   }
@@ -573,7 +579,7 @@ button {
     width: 100%;
     background: $color-white;
     padding: 24px 25px 22px 32px;
-    box-shadow: inset 0px 35px 5px -30px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 35px 5px -30px rgba(0, 0, 0, 0.1);
   }
 }
 
@@ -846,7 +852,7 @@ button {
   overflow: hidden;
 }
 
-.linkWhite[data-selected="true"], .linkWhite[data-selected="false"] {
+.linkWhite[data-selected="true"], .linkWhite[data-selected="false"], #search-bar-button {
   position: relative;
   display: inline-block;
 
@@ -864,7 +870,12 @@ button {
   }
 }
 
-.linkWhite[data-selected="false"] {
+#search-bar-button {
+  display: flex;
+}
+
+.linkWhite[data-selected="false"],
+#search-bar-button {
   position: relative;
 
   &::after {
@@ -1057,6 +1068,10 @@ button {
 
   li.slick-active button {
     background-color: #000000;
+  }
+
+  li:only-child {
+    display: none;
   }
 }
 
@@ -3182,11 +3197,11 @@ h2.pdpCopy__header-price,
   }
 
   .dropdownHeader-icon--rotate {
-    transform: rotate(180deg);
+    transform: rotate(0);
   }
 
   .dropdownHeader.active .dropdownHeader-icon--rotate {
-    transform: rotate(0);
+    transform: rotate(180deg);
   }
 }
 
@@ -3684,8 +3699,8 @@ h2.pdpCopy__header-price,
   .option-groups-size[data-disabled-size="true"] {
     .radio.checked {
       .radio__title {
-        color: #fff;
-        background-color: #585858;
+        color: #000;
+        background-color: transparent;
         cursor: pointer;
       }
     }
@@ -6314,7 +6329,6 @@ h2.pdpCopy__header-price,
 .bundle-product {
   flex-direction: column;
   align-items: unset;
-  background-color: #F5F5F5;
 
   .bundle-product__header {
     margin: 0 0 16px 0;
@@ -6575,7 +6589,7 @@ input[type="search"]::-webkit-search-results-decoration {
   opacity: 0;
   transform: translateY(-100px);
   transition: transform .15s ease-in-out,opacity .15s ease-in-out,visibility .15s ease-in-out;
-  z-index: -1;
+  //z-index: -1;
   max-height: calc(100vh - var(--header-height));
   overflow-y: auto;
   -ms-overflow-style: none;
@@ -6592,7 +6606,9 @@ input[type="search"]::-webkit-search-results-decoration {
   }
 }
 
+.headerSearch.megaMenu[data-selected=true],
 .headerSearch[aria-hidden=false] {
+  display: block;
   visibility: visible;
   opacity: 1;
   pointer-events: auto;
