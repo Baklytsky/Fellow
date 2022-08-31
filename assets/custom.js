@@ -1761,9 +1761,6 @@ class header extends HTMLElement {
 
     this.megamenuLinks.forEach(link => {
       link.addEventListener('mouseover', ()=> {
-        // if (this.search.getAttribute('aria-hidden') === 'false') {
-        //   theme.closeSearch()
-        // }
         (link.hasAttribute('data-target'))
             ? this.openMenu(link)
             : this.closeMenu()
@@ -1814,7 +1811,7 @@ class header extends HTMLElement {
 
     if (this.megamenuWrapper.getAttribute('aria-hidden') === 'true') {
       this.megamenuWrapper.setAttribute('aria-hidden', 'false')
-      theme.slideDown(this.megamenuWrapper, 200)
+      setTimeout(()=> theme.slideDown(this.megamenuWrapper, 200), 400)
     }
   }
 
