@@ -163,7 +163,7 @@ class collectionFacets extends HTMLElement {
     const resultSource = this.resultSourse.innerHTML,
           template = Handlebars.compile(resultSource);
     this.resultWrapper.innerHTML = template({items: data})
-    if (window.Yotpo) window.yotpoWidgetsContainer.initWidgets();
+    if (typeof window.yotpo !== "undefined") window.yotpo.initWidgets();
   }
 
   getSelectedFacets () {
