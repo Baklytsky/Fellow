@@ -13,9 +13,10 @@
     "gift_wrapping_message": "Is this a gift?",
     "gift_wrapping_result_message": "Your order will be sent in a gift box",
     "gift_wrapping_heading": "Gift Box + Gift Note",
-    "enable_gwp": false,
-    "gwp_threshold": 200,
-    "gwp_product": "coava-s-o-blend",
+    "enable_gwp": true,
+    "gwp_threshold": 150,
+    "gwp_product": "donotlook",
+    "gwp_1_success_message": "You've got a mystery coffee on your way!",
     "second_gwp_threshold": 0,
     "second_gwp_product": "",
     "personalization_product": "personalization-add-on",
@@ -327,10 +328,10 @@
           "menu_right": "new-right-menu",
           "mobile_menu": "mobile-navigation-q3-2022",
           "show_announcement": true,
-          "announcement_text": "The Labor Day Weekend Sale! 15% off with code WEEKEND15 <u class=\"ml05\" style=\"cursor:pointer;\"> Shop now -&gt;<\/u>",
+          "announcement_text": "Spend $150 and get free coffee from one of our favorite roasters <u class=\"ml05\" style=\"cursor:pointer;\"> Shop now -&gt;<\/u>",
           "announcement_link": "shopify:\/\/collections\/bestsellers",
           "enable_timer": false,
-          "end_date": "Sep 30, 2021 07:30:00 GMT-08:00"
+          "end_date": "Sep 05, 2022 23:59:00 GMT-08:00"
         }
       },
       "footer": {
@@ -366,20 +367,20 @@
             "type": "splitSlide",
             "settings": {
               "splitSlide__layout": "right",
-              "heroSlide": "shopify:\/\/shop_images\/Labor_Day_9.2-9.4_HP_Banner__2x_962e37cc-d175-4315-a717-83f095bd1ea0.png",
+              "heroSlide": "shopify:\/\/shop_images\/Award_Winning_Clara_HeroImage_Desktop__2x_918b2caa-a5e5-4f3a-90cb-bac16ee7adf1.png",
               "desktopAlignment": "center",
               "mobileAlignment": "center",
-              "heroSlide__header": "Labor Day Weekend Sale!",
-              "heroSlide__subheader": "For a limited time, take 15% off all gear with code WEEKEND15.*",
-              "subSlide__bgColor": "#000000",
+              "heroSlide__header": "Pick A Winner",
+              "heroSlide__subheader": "Discover precision brewing gear recognized as the best of the best.",
+              "subSlide__bgColor": "#76998b",
               "subSlide__textColor": "#FFFFFF",
-              "heroSlide__ctaURL": "shopify:\/\/collections\/bestsellers",
+              "heroSlide__ctaURL": "shopify:\/\/collections\/award-winners",
               "heroSlide__ctaCopy": "Shop Now",
               "heroSlide__ctaColor": "white",
               "heroSlide__ctaURL2": "",
               "heroSlide__ctaCopy2": "",
               "heroSlide__ctaColor2": "white",
-              "heroSlide__ctaSubtext": "<u id=\"kl_promo_terms\" style=\"cursor:pointer;\">*Terms &amp; Conditions<\/u>"
+              "heroSlide__ctaSubtext": "<img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0057\/6235\/1219\/files\/AWARD_WINNING_CLARA_AWARD_LOGOS_WHITE.png?v=1660321385\" alt=\"Logos of awards Fellow has received for their products including the Clara French Press and the Ode Brew Grinder\" style=\"padding:0;max-width: 327px;object-fit:contain;height:auto;\">"
             }
           },
           "1f457594-c59c-4edd-800a-a9f7662f319e": {
@@ -925,6 +926,7 @@
       },
       "164970109872b4e7fa": {
         "type": "hp-iwt",
+        "disabled": true,
         "settings": {
           "enable_section": true,
           "image": "shopify:\/\/shop_images\/Labor_Day_9.2-9.4_HP_Module_1__2x_98861b91-2186-4052-9a2e-c5819d0b3622.png",
