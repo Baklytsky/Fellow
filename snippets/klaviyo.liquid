@@ -53,8 +53,7 @@
         ns.fetch = function () {
           const response = fetch.apply(this, arguments);
           response.then(res => {
-            if (`${window.location.origin}/cart/add.js`
-                .includes(res.url)) {
+            if (res && `${window.location.origin}/cart/add.js`.includes(res.url)) {
               addedToCart()
             }
           });
@@ -62,7 +61,7 @@
         }
       }(window, window.fetch))
       $(document).ajaxComplete(function (event, request, settings) {
-        if (settings.url == "/cart/add.js") {
+        if (settings && settings.url === "/cart/add.js") {
           addedToCart()
         }
       })</script>
