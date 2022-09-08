@@ -365,6 +365,7 @@
         "blocks": {
           "e6275e05-4fc2-4478-85db-37e4aceedf86": {
             "type": "splitSlide",
+            "disabled": true,
             "settings": {
               "splitSlide__layout": "right",
               "heroSlide": "shopify:\/\/shop_images\/Award_Winning_Clara_HeroImage_Desktop__2x_918b2caa-a5e5-4f3a-90cb-bac16ee7adf1.png",
@@ -385,23 +386,22 @@
           },
           "1f457594-c59c-4edd-800a-a9f7662f319e": {
             "type": "splitSlide",
-            "disabled": true,
             "settings": {
               "splitSlide__layout": "right",
-              "heroSlide": "shopify:\/\/shop_images\/Award_Winning_Clara_HeroImage_Desktop__2x_918b2caa-a5e5-4f3a-90cb-bac16ee7adf1.png",
+              "heroSlide": "shopify:\/\/shop_images\/HP_HeroImage_NewKettleColors_Sept22.jpg",
               "desktopAlignment": "center",
               "mobileAlignment": "center",
-              "heroSlide__header": "Pick A Winner",
-              "heroSlide__subheader": "Discover precision brewing gear recognized as the best of the best.",
-              "subSlide__bgColor": "#76998b",
-              "subSlide__textColor": "#FFFFFF",
-              "heroSlide__ctaURL": "shopify:\/\/collections\/award-winners",
-              "heroSlide__ctaCopy": "Shop Award Winners",
-              "heroSlide__ctaColor": "white",
+              "heroSlide__header": "Meet The New Neutrals",
+              "heroSlide__subheader": "Understated hues with elevated accents, three new electric kettle colors are here.",
+              "subSlide__bgColor": "#ede3d2",
+              "subSlide__textColor": "#231f20",
+              "heroSlide__ctaURL": "https:\/\/fellowproducts.com\/products\/stagg-ekg-electric-pour-over-kettle?variant=40594389532772",
+              "heroSlide__ctaCopy": "Shop Stagg EKG",
+              "heroSlide__ctaColor": "black",
               "heroSlide__ctaURL2": "",
               "heroSlide__ctaCopy2": "",
               "heroSlide__ctaColor2": "black",
-              "heroSlide__ctaSubtext": "<img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0057\/6235\/1219\/files\/AWARD_WINNING_CLARA_AWARD_LOGOS_WHITE.png?v=1660321385\" alt=\"Logos of awards Fellow has received for their products including the Clara French Press and the Ode Brew Grinder\" style=\"padding:0;max-width: 327px;object-fit:contain;height:auto;\">"
+              "heroSlide__ctaSubtext": ""
             }
           },
           "58ee7397-6079-412a-9acd-d453a0cf281c": {
