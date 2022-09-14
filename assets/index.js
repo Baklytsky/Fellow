@@ -14114,6 +14114,8 @@
             return t.id === parseInt(r.elements.id.value)
           }))[0];
           r.querySelectorAll("[name*=properties]");
+          const sellingPlan = r.querySelector('[name="selling_plan"]') ? r.querySelector('[name="selling_plan"]').value : '';
+          console.log(sellingPlan)
           let propInputs = r.querySelectorAll("[name*=properties]");
           if (!a.available) throw new Error("Selected item not available. You probably shouldn't have been able to even try to add this to your cart.");
           ! function(t, e) {
@@ -14129,10 +14131,11 @@
               }
               // Add property (_recommended_product) if product is recommended
               if (window.location.search.indexOf('pr_prod_strat') !== -1) n._recommended_product = true;
-              let bodyObj = {
+              const bodyObj = {
                 id: t.id,
                 quantity: e,
-                properties: n
+                properties: n,
+                selling_plan: sellingPlan
               }
               return theme.cart.cartEvent('/cart/add.js', bodyObj, true)
             }))
