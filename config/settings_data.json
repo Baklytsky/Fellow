@@ -19,6 +19,8 @@
     "gwp_1_success_message": "You've got a mystery coffee on your way!",
     "second_gwp_threshold": 0,
     "second_gwp_product": "",
+    "gwp_2_success_message": "",
+    "finally_gwp_success_message": "",
     "personalization_product": "personalization-add-on",
     "enable_search": true,
     "search_no_result_text": "Sorry, no results",
@@ -328,8 +330,8 @@
           "menu_right": "new-right-menu",
           "mobile_menu": "mobile-navigation-q3-2022",
           "show_announcement": true,
-          "announcement_text": "Spend $150 and get free coffee from one of our favorite roasters <u class=\"ml05\" style=\"cursor:pointer;\"> Shop now -&gt;<\/u>",
-          "announcement_link": "shopify:\/\/collections\/bestsellers",
+          "announcement_text": "🌎 Introducing Fellow Rebrew. Refurbished, like new kettles for 20% off. <u class=\"ml05\" style=\"cursor:pointer;\"> Shop now -&gt;<\/u>",
+          "announcement_link": "shopify:\/\/collections\/refurbished-gear",
           "enable_timer": false,
           "end_date": "Sep 05, 2022 23:59:00 GMT-08:00"
         }
@@ -523,9 +525,8 @@
         "type": "logo-text",
         "settings": {
           "enable_section": true,
-          "text": "The best brew gear in the business. Shop Best Sellers.",
-          "url": "shopify:\/\/collections\/bestsellers",
-          "icon": "shopify:\/\/shop_images\/Fellow-altIcon-black_50x50_0e6456f9-e7c3-4d7a-a84a-276b63301d34.webp"
+          "text": "Get free shipping + a free bag of coffee from one of our favorite roasters on orders over $99!",
+          "url": "shopify:\/\/collections\/bestsellers"
         }
       },
       "162997622949d3f8ee": {
@@ -972,6 +973,12 @@
       "page-template-raf": {
         "type": "page-template-raf",
         "settings": {}
+      },
+      "collection-by-variant": {
+        "type": "collection-by-variant",
+        "settings": {
+          "show_breadcrumbs": true
+        }
       }
     },
     "content_for_index": [
