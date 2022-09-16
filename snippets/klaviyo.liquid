@@ -49,8 +49,61 @@
     });
   }
 </script>
+<script type="text/javascript">
+  let ca_prop_65 = document.querySelector("#ca_prop_65");
+  if (ca_prop_65) {
+    ca_prop_65.addEventListener('click', function () {
+      var _klOnsite = window._klOnsite || []
+      _klOnsite.openForm('V4BEQe', () => console.log("you triggered the form!"))
+    });
+  }
+</script>
+<script type="text/javascript">
+  var klElecWrnty = document.querySelector("#kl_elec_wrnty");
+  if (klElecWrnty) {
+    klElecWrnty.addEventListener('click',function (){
+      var _klOnsite = window._klOnsite || []
+      _klOnsite.openForm('XDf9kc', () => console.log("you triggered the form!"))
+    });
+  }
+</script>
+<script type="text/javascript">
+  document.querySelector("#freeShipPopup").addEventListener('click',function (){
+    var _klOnsite = window._klOnsite || []
+    _klOnsite.openForm('WP99kU', () => console.log("you triggered the form!"))
+  });
+</script>
 {%- comment -%} Klaviyo add to cart event {%- endcomment -%}
   {%- if product -%}
+    <script text="text/javascript">
+      var _learnq = _learnq || [];
+
+      var item = {
+        Name: {{ product.title|json }},
+        ProductID: {{ product.id|json }},
+        Categories: {{ product.collections|map:'title'|json }},
+        ImageURL: "https:{{ product.featured_image.src|img_url:'grande' }}",
+        URL: "{{ shop.secure_url }}{{ product.url }}",
+        Brand: {{ product.vendor|json }},
+        Price: {{ product.price|money|json }},
+        CompareAtPrice: {{ product.compare_at_price_max|money|json }}
+      };
+
+      _learnq.push(['track', 'Viewed Product', item]);
+      _learnq.push(['trackViewedItem', {
+        Title: item.Name,
+        ItemId: item.ProductID,
+        Categories: item.Categories,
+        ImageUrl: item.ImageURL,
+        Url: item.URL,
+        Metadata: {
+          Brand: item.Brand,
+          Price: item.Price,
+          CompareAtPrice: item.CompareAtPrice
+        }
+      }]);
+    </script>
+
     <script type="text/javascript">
       var _learnq = _learnq || [];
 
@@ -75,8 +128,7 @@
         ns.fetch = function () {
           const response = fetch.apply(this, arguments);
           response.then(res => {
-            if (`${window.location.origin}/cart/add.js`
-                .includes(res.url)) {
+            if (res && `${window.location.origin}/cart/add.js`.includes(res.url)) {
               addedToCart()
             }
           });
@@ -84,7 +136,7 @@
         }
       }(window, window.fetch))
       $(document).ajaxComplete(function (event, request, settings) {
-        if (settings.url == "/cart/add.js") {
+        if (settings && settings.url === "/cart/add.js") {
           addedToCart()
         }
       })</script>

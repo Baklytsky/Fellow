@@ -9108,7 +9108,7 @@ html {
   color: #977459
 }
 
-    [data-color=stone-blue-maple],
+[data-color=stone-blue-maple],
 [data-material=stone-blue-maple] {
   color: #2B3C4D
 }
@@ -9118,7 +9118,7 @@ html {
   color: #edc890
 }
 
-        [data-color=matte-white-maple],
+[data-color=matte-white-maple],
 [data-material=matte-white-maple] {
   color: #FFFFFF
 }
@@ -9126,4 +9126,54 @@ html {
 [data-color=matte-white-maple]:after,
 [data-material=matte-white-maple]:after {
   color: #edc890
+}
+
+[data-color=maple],
+[data-material=maple] {
+  color: #edc890;
+}
+
+[data-color=walnut],
+[data-material=walnut] {
+  color: #977459;
+}
+
+[data-color=cherry],
+[data-material=cherry] {
+  color: #895732;
+}
+
+[data-color=matte-black-cherry],
+[data-material=matte-black-cherry] {
+  color: #000000;
+}
+
+[data-color=matte-black-cherry]:after,
+[data-material=matte-black-cherry]:after {
+  color: #895732;
+}
+
+[data-color=cream-maple],
+[data-material=cream-maple] {
+  color: #EFE5D4;
+}
+
+[data-color=cream-maple]:after,
+[data-material=cream-maple]:after {
+  color: #edc890;
+}
+
+[data-color=slate-grey-maple],
+[data-material=slate-grey-maple] {
+  color: #848484;
+}
+
+[data-color=slate-grey-maple]:after,
+[data-material=slate-grey-maple]:after {
+  color: #edc890;
+}
+
+[data-color=cream],
+[data-material=cream] {
+  color: #EFE5D4;
 }

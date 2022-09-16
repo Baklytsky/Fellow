@@ -1,0 +1,131 @@
+{
+  "sections": {
+    "1663281100201fcd18": {
+      "type": "hero-slider",
+      "blocks": {
+        "e1802372-9bb4-4386-b5d8-954d7bc987d2": {
+          "type": "splitSlide",
+          "settings": {
+            "splitSlide__layout": "right",
+            "heroSlide": "shopify:\/\/shop_images\/HP_HeroImage_NewKettleColors_Sept22.jpg",
+            "desktopAlignment": "center",
+            "mobileAlignment": "center",
+            "heroSlide__header": "Promos",
+            "heroSlide__subheader": "All the ways that you can save.",
+            "subSlide__bgColor": "#76998b",
+            "subSlide__textColor": "#231f20",
+            "heroSlide__ctaURL": "",
+            "heroSlide__ctaCopy": "",
+            "heroSlide__ctaColor": "black",
+            "heroSlide__ctaURL2": "",
+            "heroSlide__ctaCopy2": "",
+            "heroSlide__ctaColor2": "black",
+            "heroSlide__ctaSubtext": ""
+          }
+        }
+      },
+      "block_order": [
+        "e1802372-9bb4-4386-b5d8-954d7bc987d2"
+      ],
+      "settings": {
+        "addMargin": false
+      }
+    },
+    "1663280452dbd72753": {
+      "type": "value-prop",
+      "settings": {
+        "noticeModule__eyebrow": "",
+        "noticeModule__header": "<span style=\"text-transform:none;\">Get a free bag of Coffee on orders 99+<\/span>",
+        "subheader__text": "Limited time only",
+        "noticeModule__textColor": "u-cb",
+        "ctaURL": "shopify:\/\/collections\/bestsellers",
+        "ctaCopy": "Shop Now",
+        "ctaStyle": "button",
+        "bgColor": "#ffcc4e",
+        "showImage": false
+      }
+    },
+    "166328060964430831": {
+      "type": "coffee-marketplace-iwt",
+      "settings": {
+        "heading": "Free Shipping",
+        "description": "Enjoy free shipping on orders of $99 or more to anywhere in the continental US.\n<br><br><span style=\"font-size:14px;\">Excludes Hawaii, Alaska, American Samoa, Guam, the Northern Mariana Islands, Puerto Rico, and the U.S. Virgin Islands.<\/span>",
+        "cta_text": "",
+        "cta_link": "",
+        "image": "shopify:\/\/shop_images\/Stagg-EKG-08-Stone-Blue-Maple-02_74e54b1b-46d4-4ac6-ab24-c5a786ad1f6d.jpg",
+        "image_position": "left"
+      }
+    },
+    "1663281098cdb2c956": {
+      "type": "featured-collections",
+      "blocks": {
+        "6d5f3544-b007-4a00-a020-29777a083cd8": {
+          "type": "collection",
+          "settings": {
+            "tab_text": "Kits + Bundles",
+            "collection": "coffee-products-kits-bundles",
+            "button_text": "",
+            "button_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "6d5f3544-b007-4a00-a020-29777a083cd8"
+      ],
+      "settings": {
+        "enable_section": true,
+        "heading": "Bundle + Save",
+        "limit": 4,
+        "show_view_all": true
+      }
+    },
+    "16632817291f59a3d6": {
+      "type": "coffee-marketplace-cards",
+      "blocks": {
+        "0614fe76-5fae-46b2-bd87-6e4579c27722": {
+          "type": "Card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Stagg-EKG-03-Matte-Black-Walnut-03_5c532d35-a07a-4fd1-bd85-8d796a56fe6d.jpg",
+            "heading": "Free shipping on orders over $99",
+            "description": "Enjoy free shipping on orders of $99 or more to anywhere in the continental US.",
+            "link": ""
+          }
+        },
+        "bb79ef6a-202f-4090-9517-79ec75590a93": {
+          "type": "Card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Stagg-EKG-09-Matte-White-Maple-02_752b48fb-a10d-4396-845c-e106dfda73aa.jpg",
+            "heading": "10% off your first purchase",
+            "description": "Everyone needs a little incentive, so here's 10% off.",
+            "link": "shopify:\/\/pages\/email-subscribe"
+          }
+        },
+        "269ba8f8-801e-4b4d-a14c-7cb84db70e3b": {
+          "type": "Card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Stagg-EKG-02-Matte-White-06.jpg",
+            "heading": "Refer A Friend",
+            "description": "Get a free mug for every friend that you refer!",
+            "link": "shopify:\/\/pages\/refer-a-friend"
+          }
+        }
+      },
+      "block_order": [
+        "0614fe76-5fae-46b2-bd87-6e4579c27722",
+        "bb79ef6a-202f-4090-9517-79ec75590a93",
+        "269ba8f8-801e-4b4d-a14c-7cb84db70e3b"
+      ],
+      "settings": {
+        "heading": "Ongoing Promos",
+        "description": "Ones that we always have to make your life the best it can be."
+      }
+    }
+  },
+  "order": [
+    "1663281100201fcd18",
+    "1663280452dbd72753",
+    "166328060964430831",
+    "1663281098cdb2c956",
+    "16632817291f59a3d6"
+  ]
+}
