@@ -142,7 +142,7 @@ theme.formatMoney = function (cents, format) {
 
     const parts = number.split('.');
     const dollarsAmount = parts[0].replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1' + thousands);
-    const centsAmount = parts[1] ? (decimal + parts[1]) : '';
+    const centsAmount = (parts[1] !== '00') ? (decimal + parts[1]) : '';
 
     return dollarsAmount + centsAmount;
   }
@@ -983,14 +983,14 @@ class PdpHelper extends HTMLElement {
   priceChange() {
     let priceInner =
         `<h2 class="ml1 pdpCopy__header-price">
-          ${theme.formatMoney(this.currentPrice, '${{amount_no_decimals}}')}
+          ${theme.formatMoney(this.currentPrice, '${{amount}}')}
         </h2>`
 
     if (this.currentComparePrice > this.currentPrice) {
       priceInner =
           `<div class="pdpCopy__price f aic">
           <span class="strike card__price--regular ml1 pdpCopy__header-price rel">
-            ${theme.formatMoney(this.currentComparePrice, '${{amount_no_decimals}}')}
+            ${theme.formatMoney(this.currentComparePrice, '${{amount}}')}
             <div class="price-round-arrow">
               <svg xmlns="http://www.w3.org/2000/svg" width="25" height="14" viewBox="0 0 25 14" fill="none">
                 <path d="M21.8717 2.55273L22.064 7.23249L17.2605 7.54226" stroke="black" stroke-width="1.5" 
@@ -1001,7 +1001,7 @@ class PdpHelper extends HTMLElement {
             </div>
           </span>
           <h2 class="card__price--sale ml1 pdpCopy__header-price">
-            ${theme.formatMoney(this.currentPrice, '${{amount_no_decimals}}')}
+            ${theme.formatMoney(this.currentPrice, '${{amount}}')}
           </h2>
         </div>`
     }
@@ -1761,9 +1761,15 @@ class header extends HTMLElement {
 
     this.megamenuLinks.forEach(link => {
       link.addEventListener('mouseover', ()=> {
-        (link.hasAttribute('data-target'))
-            ? this.openMenu(link)
-            : this.closeMenu()
+        link.setAttribute('data-mouseover', 'true')
+        if (link.hasAttribute('data-target')) {
+          this.openMenu(link)
+        } else {
+          this.closeMenu()
+        }
+      })
+      link.addEventListener('mouseleave', ()=> {
+        link.removeAttribute('data-mouseover')
       })
     })
 
@@ -1809,10 +1815,12 @@ class header extends HTMLElement {
     link.setAttribute('data-selected', 'true')
     target.setAttribute('data-selected', 'true')
 
-    if (this.megamenuWrapper.getAttribute('aria-hidden') === 'true') {
-      this.megamenuWrapper.setAttribute('aria-hidden', 'false')
-      setTimeout(()=> theme.slideDown(this.megamenuWrapper, 200), 400)
-    }
+    setTimeout(()=> {
+      if (link.hasAttribute('data-mouseover') && this.megamenuWrapper.getAttribute('aria-hidden') === 'true') {
+        theme.slideDown(this.megamenuWrapper, 200)
+        this.megamenuWrapper.setAttribute('aria-hidden', 'false')
+      }
+    }, 1000)
   }
 
   toggleMobileMenu(e, link) {

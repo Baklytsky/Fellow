@@ -5827,9 +5827,11 @@ h3.productCard__title {
 
 .productCard__price {
   display: flex;
+  justify-content: flex-end;
   align-items: flex-start;
   font-family: 'Inter', sans-serif;
   max-height: 1.5rem;
+  min-width: 80px;
 }
 
 .productCard .productCard__details .productCard__price-wrapper h3,
@@ -5956,6 +5958,7 @@ h3.productCard__title {
   }
 
   .productCard__price {
+    min-width: unset;
     padding-top: 3px;
   }
 

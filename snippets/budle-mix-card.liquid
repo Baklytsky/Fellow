@@ -120,6 +120,9 @@
         {%- endfor -%}
       {%- endif -%}
     </div>
+  </div>
+
+  <div class="bundle-product__description">
     <div class="bundle-product__title-wrapper">
       <h3 class="bundle-product__title">
         <a href="{{ bundle_product.url }}">{{ bundle_product.title }}</a>
@@ -130,9 +133,6 @@
         </p>
       {%- endif -%}
     </div>
-  </div>
-
-  <div class="bundle-product__description">
     <div class="bundle-product__option-wrapper f fdc">
       {%- if bundle_option_name_1 != blank -%}
         {% include 'product-options-bundle' with
