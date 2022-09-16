@@ -68,10 +68,13 @@
   }
 </script>
 <script type="text/javascript">
-  document.querySelector("#freeShipPopup").addEventListener('click',function (){
-    var _klOnsite = window._klOnsite || []
-    _klOnsite.openForm('WP99kU', () => console.log("you triggered the form!"))
-  });
+  var freeShipPopup = document.querySelector("#freeShipPopup")
+  if (freeShipPopup) {
+    document.querySelector("#freeShipPopup").addEventListener('click',function (){
+      var _klOnsite = window._klOnsite || []
+      _klOnsite.openForm('WP99kU', () => console.log("you triggered the form!"))
+    });
+  }
 </script>
 {%- comment -%} Klaviyo add to cart event {%- endcomment -%}
   {%- if product -%}

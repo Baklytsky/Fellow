@@ -5827,11 +5827,9 @@ h3.productCard__title {
 
 .productCard__price {
   display: flex;
-  justify-content: flex-end;
   align-items: flex-start;
   font-family: 'Inter', sans-serif;
   max-height: 1.5rem;
-  min-width: 80px;
 }
 
 .productCard .productCard__details .productCard__price-wrapper h3,
@@ -5958,7 +5956,6 @@ h3.productCard__title {
   }
 
   .productCard__price {
-    min-width: unset;
     padding-top: 3px;
   }
 
@@ -6054,11 +6051,13 @@ h3.productCard__title {
   margin-right: 5px;
 }
 
-.productCard.productCard__recommended .productCard__price-wrapper h3 {
+.productCard.productCard__recommended .productCard__price-wrapper h3,
+.productCard.productCard__recommended .productCard__price-wrapper h2 {
+  font-family: Inter, sans-serif;
   font-size: 14px;
   line-height: 1;
   font-weight: 400;
-  /*margin-left: 5px;*/
+  margin: 0;
 }
 
 .productCard.productCard__recommended .productCardVariants__CountButton {

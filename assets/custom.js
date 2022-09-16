@@ -660,7 +660,7 @@ class quantityStepper extends HTMLElement {
 
     if (this.minusBtn) this.minusBtn.addEventListener('click', () => this.quantityStepper('minus'))
     if (this.plusBtn) this.plusBtn.addEventListener('click', () => this.quantityStepper('plus'))
-    this.quantityInput.addEventListener('change', () => this.quantityCheck())
+    if (this.quantityInput) this.quantityInput.addEventListener('change', () => this.quantityCheck())
   }
 
   quantityStepper(action) {

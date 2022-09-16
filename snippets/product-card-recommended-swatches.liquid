@@ -37,7 +37,9 @@
                     value='{{ value }}'
                     data-option-selector
                     data-variant-url='{{ variant.url }}'
-                    data-variant-id='{{ variant.id }}'>
+                    data-variant-id='{{ variant.id }}'
+                    data-variant-price='{{ variant.price }}'
+                    data-variant-compare-price='{{ variant.compare_at_price }}'>
                   <div class="radio__title js-productCard-option js-color-update {% if color_swatch_image != blank %}radio__title-bg-image{% endif %}"
                     {% if option_name == 'color' %}data-color='{{ color_name | handleize }}'{% endif %}
                     {% if option_name == 'material' %}data-material='{{ value | handleize }}'{% endif %}
