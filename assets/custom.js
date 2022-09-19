@@ -127,7 +127,7 @@ theme.formatMoney = function (cents, format) {
 
   let value = '';
   const placeholderRegex = /\{\{\s*(\w+)\s*\}\}/;
-  const formatString = (format || moneyFormat);
+  const formatString = (format || theme.moneyFormat);
 
   function formatWithDelimiters(number, precision, thousands, decimal) {
     precision = defaultTo(precision, 2);
@@ -1747,7 +1747,6 @@ class header extends HTMLElement {
   constructor() {
     super()
     this.megamenuWrapper = this.querySelector('.newHeader__openedBlock')
-    this.links = this.querySelectorAll('.newHeader__link')
     this.burger = this.querySelector('.burgerMenu')
     this.mobileMenu = this.querySelector('.mobileMenu')
     this.mobileItem = this.querySelectorAll('.mobileMenu__item')
@@ -1783,7 +1782,7 @@ class header extends HTMLElement {
   closeMenu() {
     theme.slideUp(this.megamenuWrapper, 200)
     this.megamenuWrapper.setAttribute('aria-hidden', 'true')
-    this.links.forEach(link => link.setAttribute('data-selected', 'false'))
+    this.megamenuLinks.forEach(link => link.setAttribute('data-selected', 'false'))
   }
 
   toggleBurger() {
@@ -1811,16 +1810,20 @@ class header extends HTMLElement {
     }
 
     allMenus.forEach(menu => menu.dataset.selected = 'false')
-    this.links.forEach(link => link.setAttribute('data-selected', 'false'))
-    link.setAttribute('data-selected', 'true')
+    this.megamenuLinks.forEach(link => link.setAttribute('data-selected', 'false'))
     target.setAttribute('data-selected', 'true')
+
+    if (link.hasAttribute('data-mouseover') && this.megamenuWrapper.getAttribute('aria-hidden') !== 'true') {
+      link.setAttribute('data-selected', 'true')
+    }
 
     setTimeout(()=> {
       if (link.hasAttribute('data-mouseover') && this.megamenuWrapper.getAttribute('aria-hidden') === 'true') {
         theme.slideDown(this.megamenuWrapper, 200)
         this.megamenuWrapper.setAttribute('aria-hidden', 'false')
+        link.setAttribute('data-selected', 'true')
       }
-    }, 1000)
+    }, theme.header.navigationDelay)
   }
 
   toggleMobileMenu(e, link) {

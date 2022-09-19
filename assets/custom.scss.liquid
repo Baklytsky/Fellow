@@ -852,7 +852,7 @@ toggle-tabs {
   overflow: hidden;
 }
 
-.linkWhite[data-selected="true"], .linkWhite[data-selected="false"], #search-bar-button {
+.linkWhite[data-selected="true"], .linkWhite[data-selected="false"], [data-target="search-bar"] {
   position: relative;
   display: inline-block;
 
@@ -860,7 +860,7 @@ toggle-tabs {
     position: absolute;
     bottom: -5px;
     left: 50%;
-    width: 100%;
+    width: 0;
     height: 1px;
     content: "";
     transform: translateX(-50%);
@@ -874,16 +874,12 @@ toggle-tabs {
   display: flex;
 }
 
-.linkWhite[data-selected="false"],
-#search-bar-button {
+.linkWhite[data-selected="true"],
+[data-target="search-bar"][data-selected="true"] {
   position: relative;
 
   &::after {
-    width: 0;
-  }
-
-  &:hover {
-    &::after {
+    @media screen and (min-width: $tablet) {
       width: 100%;
     }
   }
@@ -897,7 +893,7 @@ toggle-tabs {
     position: absolute;
     bottom: -5px;
     left: 50%;
-    width: 100%;
+    width: 0;
     height: 2px;
     content: "";
     transform: translateX(-50%);
@@ -911,16 +907,10 @@ toggle-tabs {
   }
 }
 
-.linkBlack[data-selected="false"] {
+.linkBlack[data-selected="true"] {
   &::after {
-    width: 0;
-  }
-
-  &:hover {
-    &::after {
-      @media screen and (min-width: $tablet) {
-        width: 100%;
-      }
+    @media screen and (min-width: $tablet) {
+      width: 100%;
     }
   }
 }

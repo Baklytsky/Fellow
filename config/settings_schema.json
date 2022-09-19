@@ -8,6 +8,21 @@
     "theme_support_url": "https:\/\/wearemage.com"
   },
   {
+    "name": "Header",
+    "settings": [
+      {
+        "type": "range",
+        "id": "navigation_dropdown_delay",
+        "min": 0,
+        "max": 2000,
+        "step": 100,
+        "unit": "ms",
+        "label": "Navigation dropdown delay (Desktop)",
+        "default": 0
+      }
+    ]
+  },
+  {
     "name": "Cart",
     "settings": [
       {
