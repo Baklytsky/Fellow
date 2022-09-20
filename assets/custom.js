@@ -1823,7 +1823,7 @@ class header extends HTMLElement {
         this.megamenuWrapper.setAttribute('aria-hidden', 'false')
         link.setAttribute('data-selected', 'true')
       }
-    }, theme.header.navigationDelay)
+    }, 300)
   }
 
   toggleMobileMenu(e, link) {
