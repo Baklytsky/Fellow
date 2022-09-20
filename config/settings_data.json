@@ -13,7 +13,7 @@
     "gift_wrapping_message": "Is this a gift?",
     "gift_wrapping_result_message": "Your order will be sent in a gift box",
     "gift_wrapping_heading": "Gift Box + Gift Note",
-    "enable_gwp": true,
+    "enable_gwp": false,
     "gwp_threshold": 150,
     "gwp_product": "donotlook",
     "gwp_1_success_message": "You've got a mystery coffee on your way!",
@@ -525,7 +525,7 @@
         "type": "logo-text",
         "settings": {
           "enable_section": true,
-          "text": "Get free shipping + a free bag of coffee from one of our favorite roasters on orders over $99!",
+          "text": "Get free shipping on orders over $99!",
           "url": "shopify:\/\/collections\/bestsellers"
         }
       },
