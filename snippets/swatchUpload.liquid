@@ -1,0 +1,25 @@
+{%- if shop.metafields["custom_fields"]["colors_and_materials"] != blank -%}
+  {%- style -%}
+    {%- for item in shop.metafields["custom_fields"]["colors_and_materials"] -%}
+      {%- assign name = item["name"] | handleize -%}
+      {%- assign hex = item["hex"] -%}
+      {%- assign hex_secondary = item["hex_secondary"] -%}
+      {%- assign image = item["image"] -%}
+      {%- if name != blank and hex != blank or name != blank and image != blank -%}
+        {%- if hex != blank %}
+            [data-color={{ name }}], [data-material={{ name }}] {color: {{ hex }}}
+        {%- endif %}
+        {%- if hex_secondary != blank %}
+            [data-color={{ name }}]:after, [data-material={{ name }}]:after {color: {{ hex_secondary }}}
+        {%- endif %}
+        {%- if name != blank and image != blank %}
+            .radio-group[data-option-color] .radio [data-color={{ name }}]:before,
+            .radio-group[data-option-material] .radio [data-material={{ name }}]:before {
+              clip: unset;
+              background: url('{{ image }}') no-repeat center/cover;
+            }
+        {%- endif %}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endstyle -%}
+{%- endif -%}
