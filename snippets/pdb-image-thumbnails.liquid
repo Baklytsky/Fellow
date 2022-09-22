@@ -104,16 +104,25 @@
             {%- assign metafield_key =  'variant_image_' | append: i -%}
             {%- assign metafield_variant_image = variant.metafields.my_fields[metafield_key] -%}
             {%- if metafield_variant_image != blank -%}
+              {%- assign media = metafield_variant_image.value -%}
               <div class="x">
                 <div class='pdpMain__variant-image rel x f aic'
                      data-variant-media='{{ selected_variant.id | append: forloop.index  }}'>
                   {%- if selected_variant.image == blank and forloop.first and badge_text != blank -%}
                     <span class="productCard__badge abs z3 xsmall cb bg-xlightgrey">{{ badge_text }}</span>
                   {%- endif -%}
-                  <img src="{{ metafield_variant_image | img_url: '900x' }}"
-                       class='x' alt='{{ metafield_variant_image.alt }}'
-                       role='img'
-                       loading='lazy'/>
+                  {%- if media.media_type == 'video' -%}
+                    <video class='x' loop muted autoplay controls playsinline poster="{{ metafield_variant_image | img_url: "900x" }}">
+                      {%- for source in media.sources -%}
+                        <source src="{{ source.url }}" type="{{ source.mime_type }}">
+                      {%- endfor -%}
+                    </video>
+                  {%- else -%}
+                    <img src="{{ metafield_variant_image | img_url: '900x' }}"
+                         class='x' alt='{{ metafield_variant_image.alt }}'
+                         role='img'
+                         loading='lazy'/>
+                  {%- endif -%}
                 </div>
               </div>
             {%- endif -%}
