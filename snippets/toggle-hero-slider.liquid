@@ -1,0 +1,58 @@
+{%- assign section_order = page.metafields["custom_fields_family"]["section_order"] | default: 100 -%}
+{%- assign section_title = page.metafields["custom_fields_family"]["heading"] -%}
+{%- assign section_subtitle = page.metafields["custom_fields_family"]["subtitle"] -%}
+{%- assign section_description = page.metafields["custom_fields_family"]["description"] -%}
+
+{% if page.metafields["custom_fields"]["family_slides"] != blank %}
+  {%- capture 'slick-config' -%}
+  {
+    "slidesToShow": 1,
+    "arrows": false,
+    "dots": false,
+    "speed": 500,
+    "fade": true
+  }
+  {%- endcapture -%}
+
+  <div class="slide-tab-section"
+       data-section-type="slick-slideshow"
+       data-slick-config='{{- slick-config -}}'>
+
+    {% for item in page.metafields["custom_fields"]["family_slides"] %}
+      {%- assign bg_color = item["background_color"] | default: '#FFF' -%}
+      {%- assign bg_image = item["background_image"] -%}
+      {%- assign bg_image_mobile = item["background_image_mobile"] -%}
+      {%- assign text_color = item["text_color"] | default: '#000' -%}
+      {%- assign tab_style = item["tab__button_style"] | default: 'Light' -%}
+      {%- assign tab_name = item["tab_name"] | default: 'Tab name' -%}
+      {%- assign slide_title = tem["title"] -%}
+      {%- assign slide_description = tem["description"] -%}
+      {%- assign slide_btn_text = item["button_text"] | default: 'Shop now' -%}
+      {%- assign slide_btn_url = item["button_link"] -%}
+      {%- assign slide_image = item["image"] -%}
+      {%- assign slide_image_on_the_left = item["image_on_the_left"] -%}
+
+      {%- if tab_name != blank or slide_title != blank or slide_description != blank or slide_btn_text != blank -%}
+        <div class="slide-tab slide-tab-{{ forloop.index }}" style="background-color: {{ bg_color }}">
+          <div class="slide-tab__wrapper">
+
+          </div>
+        </div>
+      {%- endif -%}
+
+      {%- capture background -%}
+        {%- if bg_image != blank -%}
+
+        {%- endif -%}
+      {%- endcapture -%}
+
+      <style>
+        @media screen and (max-width: 750px) {
+          .slide-tab-{{ forloop.index }} {
+
+          }
+        }
+      </style>
+    {% endfor %}
+  </div>
+{% endif %}
