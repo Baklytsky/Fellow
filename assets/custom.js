@@ -1877,6 +1877,23 @@ class header extends HTMLElement {
 
 customElements.define('header-nav', header);
 
+class SlideTabSection extends HTMLElement {
+  constructor() {
+    super();
+    this.slider = this.querySelector('.jsSlickSlider')
+    this.tabs = this.querySelectorAll('.slide-tab__inner-tab')
+
+    if (this.slider) {
+      this.tabs.forEach(tab => {
+        const slideIndex = tab.dataset.slideIndex
+        tab.addEventListener('click', ()=> $(this.slider).slick('slickGoTo', slideIndex))
+      })
+    }
+  }
+}
+
+customElements.define('slide-tab-section', SlideTabSection);
+
 class bundleMixMultiple extends HTMLElement {
   constructor() {
     super();
