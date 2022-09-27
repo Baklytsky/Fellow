@@ -1,0 +1,267 @@
+{%- assign section_title = section.settings.section_title -%}
+{%- assign section_subtitle = section.settings.section_subtitle -%}
+{%- assign section_description = section.settings.section_description -%}
+
+{% if section.blocks.size > 0 %}
+  {%- capture 'slick-config' -%}
+    {
+    "slidesToShow": 1,
+    "arrows": false,
+    "dots": false,
+    "speed": 300,
+    "fade": true,
+    "adaptiveHeight": true,
+    "draggable": false,
+    "swipe": false,
+    "touchMove": false
+    }
+  {%- endcapture -%}
+
+  <slide-tab-section class="slide-tab-section block"
+                     data-section-type="slick-slideshow"
+                     data-slick-config='{{- slick-config -}}'>
+
+    <div class="jsSlickSlider">
+      {%- assign tabs_size = section.blocks.size -%}
+
+      {% for block in section.blocks %}
+        {%- assign breadcrumb_name = block.settings.breadcrumb_name -%}
+        {%- assign breadcrumb_url = block.settings.breadcrumb_url -%}
+        {%- assign bg_color = block.settings.bg_color -%}
+        {%- assign bg_image = block.settings.bg_image -%}
+        {%- assign bg_image_mobile = block.settings.bg_image_mobile -%}
+        {%- assign text_color = block.settings.text_color -%}
+        {%- assign tab_style = block.settings.tab_btn_style -%}
+        {%- assign tab_name = block.settings.tab_name | default: 'Tab name' -%}
+        {%- assign slide_title = block.settings.title -%}
+        {%- assign slide_description = block.settings.description -%}
+        {%- assign slide_btn_text = block.settings.btn_text -%}
+        {%- assign slide_btn_url = block.settings.btn_url -%}
+        {%- assign slide_image = block.settings.image -%}
+        {%- assign slide_image_on_the_left = block.settings.image_on_the_left -%}
+        {%- assign slideCounter = forloop.index0 -%}
+
+        {%- capture image -%}
+          <div class="slide-tab__inner-image-wrapper rel">
+            {%- if slide_image != blank -%}
+              {%- assign alt = slide_image.alt | default: slide_title -%}
+              {% render 'image-lazy',
+                image: slide_image,
+                class_name: 'image-abs-contain',
+                alt: alt,
+                size: 'medium' %}
+            {%- endif -%}
+          </div>
+        {%- endcapture -%}
+
+        <div class="slide-tab rel"
+             style="background-color: {{ bg_color }}; color: {{ text_color }}" {{ block.shopify_attributes }}>
+          <div class="slide-tab__wrapper page-wrapper">
+
+            {%- if breadcrumb_name != blank and breadcrumb_url != blank -%}
+              <div class="slide-tab__breadcrumbs f aic hide-mobile">
+                <a href="/">Home</a>
+                <span>/</span>
+                <a href="{{ breadcrumb_url }}">{{ breadcrumb_name }}</a>
+              </div>
+            {%- endif -%}
+
+            <div class="slide-tab__inner {% if slide_image_on_the_left %}slide-tab__inner--reverse{% endif %}">
+              <div class="slide-tab__inner-content">
+                {%- if section_title != blank -%}
+                  <h2 class="slide-tab__inner-title">{{ section_title }}</h2>
+                {%- endif -%}
+                {%- if section_subtitle != blank -%}
+                  <h3 class="slide-tab__inner-subtitle">{{ section_subtitle }}</h3>
+                {%- endif -%}
+                {%- if section_description != blank -%}
+                  <div class="slide-tab__inner-description">{{ section_description }}</div>
+                {%- endif -%}
+
+                <div class="slide-tab__inner-tabs slide-tab__inner-tabs--{{ tab_style }} slide-tab__inner-tabs--{{ tabs_size }}">
+                  {% for block in section.blocks %}
+                    {%- assign tab_name = block.settings.tab_name | default: 'Tab name' -%}
+                    <button class="slide-tab__inner-tab {% if slideCounter == forloop.index0 %}active{% endif %}"
+                            data-slide-index="{{ forloop.index0 }}">
+                      {{ tab_name }}
+                    </button>
+                  {% endfor %}
+                </div>
+
+                <div class="slide-tab__inner-image hide-desktop">
+                  {{ image }}
+                </div>
+
+                {%- if slide_title != blank or slide_description != blank or slide_btn_url != blank -%}
+                  <div class="slide-tab__inner-block">
+                    {%- if slide_title != blank -%}
+                      <h4 class="slide-tab__inner-block-title">{{ slide_title | newline_to_br }}</h4>
+                    {%- endif -%}
+                    {%- if slide_description != blank -%}
+                      <div class="slide-tab__inner-block-description">{{ slide_description | newline_to_br }}</div>
+                    {%- endif -%}
+                    {%- if slide_btn_url != blank -%}
+                      <a href="{{ slide_btn_url }}"
+                         class="slide-tab__inner-block-btn btn btn--{{ tab_style | handleize }}">
+                        {{ slide_btn_text }}
+                      </a>
+                    {%- endif -%}
+                  </div>
+                {%- endif -%}
+              </div>
+
+              <div class="slide-tab__inner-image hide-mobile">
+                {{ image }}
+              </div>
+            </div>
+          </div>
+
+          {%- assign desktop_image_class_name = 'image-abs-cover z-1' -%}
+
+          {%- if bg_image_mobile != blank -%}
+            {%- assign alt = slide_image.alt | default: slide_title -%}
+            {%- assign desktop_image_class_name = 'image-abs-cover hide-mobile z-1' -%}
+            {% render 'image-lazy',
+              image: bg_image_mobile,
+              class_name: 'image-abs-cover hide-desktop z-1',
+              alt: alt,
+              size: 'medium' %}
+          {%- endif -%}
+
+          {%- if bg_image != blank -%}
+            {%- assign alt = slide_image.alt | default: slide_title -%}
+            {% render 'image-lazy',
+              image: bg_image,
+              class_name: desktop_image_class_name,
+              alt: alt,
+              size: 'medium' %}
+          {%- endif -%}
+        </div>
+      {% endfor %}
+    </div>
+  </slide-tab-section>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Hero slider with tabs",
+  "max_blocks": 3,
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "section_subtitle",
+      "label": "Subtitle"
+    },
+    {
+      "type": "textarea",
+      "id": "section_description",
+      "label": "Description"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "text",
+          "id": "breadcrumb_name",
+          "label": "Breadcrumb name"
+        },
+        {
+          "type": "url",
+          "id": "breadcrumb_url",
+          "label": "Breadcrumb url"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "default": "#FFFFFF",
+          "label": "Background color"
+        },
+        {
+          "type": "image_picker",
+          "id": "bg_image",
+          "label": "Background image"
+        },
+        {
+          "type": "image_picker",
+          "id": "bg_image_mobile",
+          "label": "Background image mobile"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "default": "#000000",
+          "label": "Text color"
+        },
+        {
+          "type": "select",
+          "id": "tab_btn_style",
+          "label": "Tab & Button style",
+          "options": [
+            {
+              "value": "light",
+              "label": "Light"
+            },
+            {
+              "value": "dark",
+              "label": "Dark"
+            }
+          ],
+          "default": "dark"
+        },
+        {
+          "type": "text",
+          "id": "tab_name",
+          "info": "*Required field",
+          "default": "Tab name",
+          "label": "Tab name"
+        },
+        {
+          "type": "textarea",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description"
+        },
+        {
+          "type": "text",
+          "id": "btn_text",
+          "label": "Button text"
+        },
+        {
+          "type": "url",
+          "id": "btn_url",
+          "label": "Button url"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "checkbox",
+          "id": "image_on_the_left",
+          "label": "Image on the left"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero slider with tabs"
+    }
+  ],
+  "templates": ["page"]
+}
+{% endschema %}

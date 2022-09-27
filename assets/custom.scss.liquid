@@ -1093,7 +1093,7 @@ toggle-tabs {
   transform: translateY(-50%);
   color: inherit;
   background-color: transparent;
-  z-index: 1;
+  z-index: 2;
 }
 
 .jsPrevSlide {
@@ -9549,6 +9549,11 @@ modal-opener {
 }
 
 /*  Family pages */
+
+/* ----------------------
+ Slider with tabs
+  ----------------------- */
+
 .slide-tab {
   .hide-mobile {
     @media screen and (max-width: 991.98px) {
@@ -9740,6 +9745,168 @@ modal-opener {
 
 .slide-tab__inner-block-btn.btn--light:hover {
   border: 2px solid #FFF;
+}
+
+/* ----------------------
+ Features
+  ----------------------- */
+
+.features {
+  padding: 60px 30px;
+  text-align: center;
+
+  .jsNextSlide {
+    right: 10px;
+    display: none;
+  }
+
+  .jsPrevSlide {
+    left: 10px;
+    display: none;
+  }
+
+  @media screen and (max-width: $tablet) {
+    padding: 40px 0;
+
+    .jsNextSlide,
+    .jsPrevSlide {
+      display: block;
+    }
+  }
+}
+
+.features__heading {
+  margin: 0 auto 10px;
+  max-width: 650px;
+  font-size: 38px;
+  line-height: 100%;
+
+  @media screen and (max-width: $tablet) {
+    margin: 0 auto 4px;
+    font-size: 26px;
+  }
+}
+
+.features__description {
+  font-size: 18px;
+  margin: 0 auto;
+  max-width: 550px;
+}
+
+.features__list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  .slick-dots {
+    padding: 40px 16px 0;
+  }
+
+  .slick-dots li,
+  .slick-dots li button {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+.features__list-item {
+  margin: 40px 0 0;
+  padding: 0 8px;
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  @media screen and (max-width: $large_desk) {
+    width: calc(100% / 3);
+  }
+
+  @media screen and (max-width: $tablet) {
+    width: 100%;
+  }
+}
+
+.features__list-item-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 12px;
+}
+
+.features__list-item-title {
+  margin: 0 auto 2px;
+  max-width: 500px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 120%;
+}
+
+.features__list-item-description {
+  margin: 0 auto;
+  max-width: 500px;
+  font-size: 14px;
+  line-height: 120%;
+}
+
+/* ----------------------
+ FAQ
+  ----------------------- */
+
+.faq {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  text-align: center;
+}
+
+.faq__heading {
+  margin: 0 auto 3px;
+  max-width: 650px;
+  font-size: 38px;
+  line-height: 100%;
+
+  @media screen and (max-width: $tablet) {
+    margin: 0 auto 2px;
+    font-size: 26px;
+  }
+}
+
+.faq__description {
+  font-size: 18px;
+  margin: 0 auto;
+  max-width: 550px;
+}
+
+.faq__list {
+  margin: 40px 0 0;
+}
+
+.faq__list-item {
+  background-color: #F5F5F5;
+  margin-bottom: 16px;
+}
+
+.faq__list-header {
+  padding: 24px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.faq__list-title {
+  text-align: left;
+}
+
+.faq__list-header.active {
+  .dropdownHeader-icon {
+    transform: rotate(180deg);
+  }
+}
+
+.faq__list-content {
+  padding: 0 24px 24px;
+  max-width: 880px;
+  text-align: left;
+  font-size: 16px;
+  line-height: 130%;
 }
 
 

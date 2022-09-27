@@ -84,6 +84,12 @@ theme.checkSlickResponse = function (selector, config, response, maxMedia) {
   function checkSlider() {
     const condition = (maxMedia) ? $(window).width() < response : $(window).width() > response;
     if (condition) {
+      if (config['arrows']) {
+        const prevArrow = $(selector).parent().find('.jsPrevSlide');
+        const nextArrow = $(selector).parent().find('.jsNextSlide');
+        if (prevArrow.length) config.prevArrow =  prevArrow;
+        if (nextArrow.length) config.nextArrow =  nextArrow;
+      }
       $(selector).not('.slick-initialized').slick(config)
     } else {
       if ($(selector).hasClass('slick-initialized')) {
@@ -1531,10 +1537,10 @@ class MP4Video extends HTMLElement {
     this.playBtn = this.querySelector('.play-button')
     this.muteBtn = this.querySelector('.mute-video')
 
-    this.playBtn.addEventListener('click', ()=> this.videoPlay())
-    this.pauseBtn.addEventListener('click', ()=> this.videoPause())
-    this.muteBtn.addEventListener('click', ()=> this.videoMute())
-    this.video.addEventListener('click', ()=> this.checkVideoState())
+    if (this.playBtn) this.playBtn.addEventListener('click', ()=> this.videoPlay())
+    if (this.pauseBtn) this.pauseBtn.addEventListener('click', ()=> this.videoPause())
+    if (this.muteBtn) this.muteBtn.addEventListener('click', ()=> this.videoMute())
+    if (this.video) this.video.addEventListener('click', ()=> this.checkVideoState())
   }
 
   checkVideoState() {
