@@ -995,7 +995,7 @@ class PdpHelper extends HTMLElement {
     if (this.currentComparePrice > this.currentPrice) {
       priceInner =
           `<div class="pdpCopy__price f aic">
-          <span class="strike card__price--regular ml1 pdpCopy__header-price rel">
+          <span class="strike card__price--regular ml1 pdpCopy__header-price rel pr025">
             ${theme.formatMoney(this.currentComparePrice, '${{amount}}')}
             <div class="price-round-arrow">
               <svg xmlns="http://www.w3.org/2000/svg" width="25" height="14" viewBox="0 0 25 14" fill="none">
@@ -1434,14 +1434,33 @@ customElements.define('pdp-learn-more', PdpLearnMore);
 class PdpCompare extends HTMLElement {
   constructor() {
     super();
+    this.wrapper = this.querySelector('.pdpCompare__wrapper')
     this.tableHead = this.querySelector('.pdpCompare__table thead')
-    this.th = this.querySelectorAll('.pdpCompare__table-th')
+    this.tableBody = this.querySelector('.pdpCompare__table tbody')
+    this.tableHeadMobile = this.querySelector('.pdpCompare__table-mobile-title')
+    this.th = this.querySelectorAll('.pdpCompare__table .pdpCompare__table-th')
     this.changeTableHeight()
+    window.addEventListener('resize', ()=> this.changeTableHeight())
+    if (this.tableHeadMobile) this.checkStickyHeadMobile()
   }
 
   changeTableHeight() {
+    this.th.forEach(th => th.style.removeProperty('min-height'))
     const thHeight = this.tableHead.clientHeight - 24;
     this.th.forEach(th => th.style.minHeight = thHeight + 'px')
+  }
+
+  checkStickyHeadMobile() {
+    window.addEventListener('scroll', ()=> {
+      this.tableBodyPosition = this.tableBody.getBoundingClientRect();
+      (this.tableBodyPosition.top < 100 && this.tableBodyPosition.bottom > 200)
+          ? this.tableHeadMobile.classList.remove('is-hidden')
+          : this.tableHeadMobile.classList.add('is-hidden')
+    })
+
+    this.wrapper.addEventListener('scroll', (e)=> {
+      this.tableHeadMobile.style.transform = `translateX(-${e.target.scrollLeft}px)`
+    })
   }
 }
 

@@ -1,0 +1,203 @@
+{%- assign compare_products_heading = section.settings.heading -%}
+{%- assign compare_product_array_size = 0 -%}
+
+{%- for block in section.blocks -%}
+  {%- if block.settings.compare_product != blank -%}
+    {%- assign compare_product_array_size = compare_product_array_size | plus: 1 -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- case compare_product_array_size -%}
+{%- when 1 -%}
+{%- assign table_style_class = 'pdpCompare__table-half' -%}
+{%- when 2 -%}
+{%- assign table_style_class = 'pdpCompare__table-third' -%}
+{%- when 3 -%}
+{%- assign table_style_class = 'pdpCompare__table-four' -%}
+{%- when 4 -%}
+{%- assign table_style_class = 'pdpCompare__table-five' -%}
+{%- endcase -%}
+
+<div class="comparison__wrapper page-wrapper">
+  {%- if compare_products_heading != blank -%}
+    <h3 class="pdpCompare__heading">{{ compare_products_heading }}</h3>
+  {%- endif -%}
+
+  {% if compare_product_array_size > 0 %}
+    <pdp-compare class='pdpCompare'>
+      <table class="pdpCompare__table-mobile-title {{ table_style_class }} is-hidden">
+        <thead>
+        <tr>
+          <th style="visibility:hidden; border: none;">Characteristics</th>
+          {%- for block in section.blocks -%}
+            {%- if block.settings.compare_product != blank -%}
+              {%- assign _product = all_products[block.settings.compare_product] -%}
+              <th>
+                <div class="pdpCompare__table-th">
+                  {{ _product.title }}
+                </div>
+              </th>
+            {%- endif -%}
+          {%- endfor -%}
+        </tr>
+        </thead>
+      </table>
+      <div class="pdpCompare__wrapper rel">
+        <table class="pdpCompare__table rel {{ table_style_class }}">
+          <thead>
+          <tr>
+            <th style="visibility:hidden;">Characteristics</th>
+            {%- for block in section.blocks -%}
+              {%- if block.settings.compare_product != blank -%}
+                {%- assign _product = all_products[block.settings.compare_product] -%}
+                <th>
+                  <div class="pdpCompare__table-th">
+                    {% include 'product-card', product: _product %}
+                  </div>
+                </th>
+              {%- endif -%}
+            {%- endfor -%}
+          </tr>
+          </thead>
+          <tbody>
+          {%- for i in (1..8) -%}
+            {%- assign key_name = "comparison_" | append: i -%}
+            {%- assign characteristic_name = section.settings[key_name] -%}
+            {%- if characteristic_name != blank -%}
+              <tr>
+                <th>{{ characteristic_name }}</th>
+                {%- for block in section.blocks -%}
+                  {%- if block.settings.compare_product != blank -%}
+                    {%- assign product_key_name = "comparison_" | append: i -%}
+                    {%- assign characteristic_text = block.settings[product_key_name] -%}
+                    <td>
+                      <div class="pdpCompare__table-td">
+                        <div class="pdpCompare__mobile-characteristic">{{ characteristic_name }}</div>
+                        {{ characteristic_text }}
+                      </div>
+                    </td>
+                  {%- endif -%}
+                {%- endfor -%}
+              </tr>
+            {%- endif -%}
+          {%- endfor -%}
+          </tbody>
+        </table>
+      </div>
+    </pdp-compare>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Comparison table",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Comparison table",
+      "label": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "comparison_1",
+      "label": "Comparison title (1)"
+    },
+    {
+      "type": "text",
+      "id": "comparison_2",
+      "label": "Comparison title (2)"
+    },
+    {
+      "type": "text",
+      "id": "comparison_3",
+      "label": "Comparison title (3)"
+    },
+    {
+      "type": "text",
+      "id": "comparison_4",
+      "label": "Comparison title (4)"
+    },
+    {
+      "type": "text",
+      "id": "comparison_5",
+      "label": "Comparison title (5)"
+    },
+    {
+      "type": "text",
+      "id": "comparison_6",
+      "label": "Comparison title (6)"
+    },
+    {
+      "type": "text",
+      "id": "comparison_7",
+      "label": "Comparison title (7)"
+    },
+    {
+      "type": "text",
+      "id": "comparison_8",
+      "label": "Comparison title (8)"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "product",
+          "id": "compare_product",
+          "label": "Product"
+        },
+        {
+          "type": "richtext",
+          "id": "comparison_1",
+          "label": "Comparison (1)"
+        },
+        {
+          "type": "richtext",
+          "id": "comparison_2",
+          "label": "Comparison (2)"
+        },
+        {
+          "type": "richtext",
+          "id": "comparison_3",
+          "label": "Comparison (3)"
+        },
+        {
+          "type": "richtext",
+          "id": "comparison_4",
+          "label": "Comparison (4)"
+        },
+        {
+          "type": "richtext",
+          "id": "comparison_5",
+          "label": "Comparison (5)"
+        },
+        {
+          "type": "richtext",
+          "id": "comparison_6",
+          "label": "Comparison (6)"
+        },
+        {
+          "type": "richtext",
+          "id": "comparison_7",
+          "label": "Comparison (7)"
+        },
+        {
+          "type": "richtext",
+          "id": "comparison_8",
+          "label": "Comparison (8)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Comparison table"
+    }
+  ]
+}
+{% endschema %}
