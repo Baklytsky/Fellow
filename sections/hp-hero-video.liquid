@@ -1,3 +1,4 @@
+{%- assign full_width_section = section.settings.full_width_section -%}
 {%- assign section_bg = section.settings.section_bg -%}
 {%- assign video_mp4 = section.settings.video_mp4 -%}
 {%- assign video_poster = section.settings.video_poster -%}
@@ -20,8 +21,11 @@
 {%- assign image_class_name = 'landing__hero-image' -%}
 
 {%- if image != blank or video_mp4 != blank -%}
+  {%- unless full_width_section -%}
+    <div class="landing__hero--wrapper" style="background-color: {{ section_bg }}; color: {{ text_color }};">
+  {%- endunless -%}
   <mp4-video id="landing__hero-{{ section.id }}"
-           class="landing__hero landing__hero--{{ content_position }} {% if show_hide_video == 'mobile' %}landing__hero-hide-video-on-mobile{% endif %} {% if section.settings.show_mute_button %}landing__hero-show-volume-btn{% endif %}"
+           class="landing__hero landing__hero--{{ content_position }} {% unless full_width_section %}page-wrapper{% endunless %} {% if show_hide_video == 'mobile' %}landing__hero-hide-video-on-mobile{% endif %} {% if section.settings.show_mute_button %}landing__hero-show-volume-btn{% endif %}"
            style="background-color: {{ section_bg }}; color: {{ text_color }};">
     {%- if image_mobile != blank -%}
       {%- assign image_class_name = 'landing__hero-image desktop-image' -%}
@@ -104,6 +108,9 @@
       </div>
     {%- endif -%}
   </mp4-video>
+  {%- unless full_width_section -%}
+    </div>
+  {%- endunless -%}
 
   {%- if overlay_opacity != blank -%}
     <style>
@@ -120,6 +127,12 @@
 {
   "name": "Hero video",
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "full_width_section",
+      "label": "Full width",
+      "default": true
+    },
     {
       "type": "color",
       "id": "section_bg",

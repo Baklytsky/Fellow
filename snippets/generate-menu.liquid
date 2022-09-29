@@ -24,8 +24,9 @@
   {%- if render_menu -%}
     {%- assign title = item.title | handleize -%}
 
+    {%- if item.links != blank or image_block != blank -%}
     <div data-id="{{ menu.title | handleize }}__{{ title }}" data-selected="false"
-         class="topMenu__megaMenu megaMenu {% if item.links == blank and image_block != blank %} megaMenu__onlyImagesBlock {% elsif item.links == blank and image_block == blank %} megaMenu__blank {% endif %}">
+         class="topMenu__megaMenu megaMenu {% if item.links == blank and image_block != blank %} megaMenu__onlyImagesBlock {% endif %}">
       {%- if item.links != blank -%}
         <ul class="megaMenu__list">
           {%- for mega_item in item.links -%}
@@ -106,5 +107,6 @@
         </div>
       {%- endif -%}
     </div>
+    {%- endif -%}
   {%- endif -%}
 {%- endfor -%}

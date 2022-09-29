@@ -20,19 +20,30 @@
   {% if dataAttr %}data-component='{{ dataAttr }}'{% endif %}
   class='{{ cx | strip }}'
 >
-  {% if img and imgMobile == blank %}
-    {% render 'image-lazy-metafields',
-      image: img,
-      class_name: 'image-abs-cover',
-      alt: img_alt,
-      loader: true %}
-  {% elsif img and imgMobile != blank %}
-    <picture class='image fill abs x y is-visible is-loaded'>
-      {% if imgMobile %}<source class='x y' media='(max-width: 991px)' srcset='{{ imgMobile }}'>{% endif %}
-      <source class='x y' media='(min-width: 992px)' srcset='{{ img }}'>
-      <img alt='{{ page.title }}' class='x y' src='{{ img }}'>
-    </picture>
+  {%- assign desktop_image_class = 'image-abs-cover' -%}
+
+  {%- if imgMobile != blank -%}
+    {%- assign desktop_image_class = 'image-abs-cover hide-tablet' -%}
+  {%- endif -%}
+
+  {% if img %}
+    <div class="{{ desktop_image_class }}">
+      {% render 'image-lazy-metafields',
+        image: img,
+        class_name: desktop_image_class,
+        alt: img_alt,
+        loader: true %}
+    </div>
   {% endif %}
+  {%- if imgMobile -%}
+    <div class="image-abs-cover hide-tablet-desk">
+      {% render 'image-lazy-metafields',
+        image: imgMobile,
+        class_name: 'image-abs-cover hide-tablet-desk',
+        alt: img_alt,
+        loader: true %}
+    </div>
+  {%- endif -%}
   {% if copy %}
     <div class='abs x bottom left z2'>
       <div class='rel container--l'>

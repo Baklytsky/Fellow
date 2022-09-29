@@ -417,13 +417,13 @@ theme.searchBar = function () {
       $resultsWrapper = $('.headerSearch__resultsHeader'),
       $resetBtn = $('.headerSearch__resetLabel');
 
-  function toggleSearch () {
-    if ($searchBar.attr('aria-hidden') === 'false') {
-      theme.closeSearch();
-    } else {
-      openSearch();
-    }
-  }
+  // function toggleSearch () {
+  //   if ($searchBar.attr('aria-hidden') === 'false') {
+  //     theme.closeSearch();
+  //   } else {
+  //     openSearch();
+  //   }
+  // }
 
   theme.closeSearch = function () {
     $searchBar.attr('aria-hidden', 'true');
@@ -432,12 +432,12 @@ theme.searchBar = function () {
     $searchBar.removeClass('loading');
   }
 
-  function openSearch () {
-    $searchBar.attr('aria-hidden', 'false');
-    $searchBar.slideDown(200);
-    $searchBarToggle.attr('aria-expanded', 'true');
-    inputFocus();
-  }
+  // function openSearch () {
+  //   $searchBar.attr('aria-hidden', 'false');
+  //   $searchBar.slideDown(200);
+  //   $searchBarToggle.attr('aria-expanded', 'true');
+  //   inputFocus();
+  // }
 
   function inputFocus () {
     setTimeout(function () {
@@ -536,18 +536,18 @@ theme.searchBar = function () {
 
   });
 
-  $(document).on('click.searchBarToggle', '.mobileMenu__link[data-action="toggle-search"]', function (event) {
-    event.preventDefault();
-    toggleSearch();
-  });
+  // $(document).on('click.searchBarToggle', '.mobileMenu__link[data-action="toggle-search"]', function (event) {
+  //   event.preventDefault();
+  //   toggleSearch();
+  // });
 
-  $(document).on('mouseover.searchBarOpen', '#search-bar-button[data-action="toggle-search"]', function (event) {
-    event.preventDefault();
-    openSearch();
-    $('.newHeader__openedBlock[aria-hidden="false"]').slideUp();
-    $('.newHeader__openedBlock[aria-hidden="false"]').attr('aria-hidden', 'true');
-    $('.newHeader__link[data-selected="true"]').attr('data-selected', 'false');
-  });
+  // $(document).on('mouseover.searchBarOpen', '#search-bar-button[data-action="toggle-search"]', function (event) {
+  //   event.preventDefault();
+  //   openSearch();
+  //   $('.newHeader__openedBlock[aria-hidden="false"]').slideUp();
+  //   $('.newHeader__openedBlock[aria-hidden="false"]').attr('aria-hidden', 'true');
+  //   $('.newHeader__link[data-selected="true"]').attr('data-selected', 'false');
+  // });
 
   $(document).on('input.onInput', '.headerSearch__input[type="search"]', $.debounce(250, function (event) {
     onInput(event);
@@ -564,11 +564,11 @@ theme.searchBar = function () {
     inputFocus();
   });
 
-  $(document).on('mousedown.searchBarClose', function (e) {
-    if (!$searchBar.is(e.target) && $searchBar.has(e.target).length === 0 && $searchBarToggle.has(e.target).length === 0) {
-      theme.closeSearch();
-    }
-  })
+  // $(document).on('mousedown.searchBarClose', function (e) {
+  //   if (!$searchBar.is(e.target) && $searchBar.has(e.target).length === 0 && $searchBarToggle.has(e.target).length === 0) {
+  //     theme.closeSearch();
+  //   }
+  // })
 
 }
 
@@ -1397,7 +1397,7 @@ class UpsellProduct extends PdpHelper {
 
   changePrice() {
     if (!this.selectedVariant) return
-    this.price.innerHTML = theme.formatMoney(this.selectedVariant.price, '${{amount_no_decimals}}')
+    this.price.innerHTML = theme.formatMoney(this.selectedVariant.price, '${{amount}}')
   }
 
   upsellAddToCart(e) {
@@ -1459,7 +1459,8 @@ class PdpCompare extends HTMLElement {
     })
 
     this.wrapper.addEventListener('scroll', (e)=> {
-      this.tableHeadMobile.style.transform = `translateX(-${e.target.scrollLeft}px)`
+      const translateX = (e.target.scrollLeft > 5) ? e.target.scrollLeft : 0
+      this.tableHeadMobile.style.transform = `translateX(-${translateX}px)`
     })
   }
 }
@@ -1777,6 +1778,8 @@ class header extends HTMLElement {
     this.mobileItem = this.querySelectorAll('.mobileMenu__item')
     this.megamenuLinks = this.querySelectorAll('.newHeader__MainLink')
     this.search = this.querySelector('.headerSearch')
+    this.searchLink = this.querySelector('#search-bar-button')
+    this.mobileSearchBarOpener = this.querySelector('.mobileMenu__link[data-action="toggle-search"]')
     this.timer = this.querySelector('.announcement-bar__timer')
 
     document.addEventListener('resize', ()=> this.closeMenu())
@@ -1801,7 +1804,26 @@ class header extends HTMLElement {
       link.addEventListener('click', (e)=> this.toggleMobileMenu(e, link))
     })
 
+    this.mobileSearchBarOpener.addEventListener('click', (e)=> {
+      e.preventDefault()
+      this.openMobileSearch()
+    })
+
     if (this.timer) this.countdownTimer()
+  }
+
+  openMobileSearch() {
+    this.search.setAttribute('aria-hidden', 'false');
+    theme.slideDown(this.search, 200)
+    this.mobileSearchBarOpener.setAttribute('aria-expanded', 'true');
+    setTimeout(()=> {
+      this.search.querySelector('.headerSearch__input').focus();
+    }, 100)
+  }
+
+  closeMobileSearch() {
+    this.search.setAttribute('aria-hidden', 'true')
+    this.mobileSearchBarOpener.setAttribute('aria-expanded', 'false');
   }
 
   closeMenu() {
@@ -1821,6 +1843,7 @@ class header extends HTMLElement {
       this.mobileMenu.querySelectorAll('.subMenuList').forEach(el => {
         theme.slideUp(el, 200)
       })
+      if (this.search.getAttribute('aria-hidden') === 'false') this.closeMobileSearch()
     }
   }
 
@@ -1853,7 +1876,7 @@ class header extends HTMLElement {
 
   toggleMobileMenu(e, link) {
     const menu = link.querySelector('.megaMenu')
-    if (!menu && !menu.classList.contains('megaMenu__blank')) return
+    if (!menu) return
     menu.classList.add('active')
     if (e.target.closest('.megaMenu__itemHeading') || e.target.classList.contains('megaMenu__itemHeading')) {
       menu.classList.remove('active')

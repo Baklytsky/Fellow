@@ -25,8 +25,6 @@
       {%- assign tabs_size = section.blocks.size -%}
 
       {% for block in section.blocks %}
-        {%- assign breadcrumb_name = block.settings.breadcrumb_name -%}
-        {%- assign breadcrumb_url = block.settings.breadcrumb_url -%}
         {%- assign bg_color = block.settings.bg_color -%}
         {%- assign bg_image = block.settings.bg_image -%}
         {%- assign bg_image_mobile = block.settings.bg_image_mobile -%}
@@ -57,14 +55,6 @@
         <div class="slide-tab rel"
              style="background-color: {{ bg_color }}; color: {{ text_color }}" {{ block.shopify_attributes }}>
           <div class="slide-tab__wrapper page-wrapper">
-
-            {%- if breadcrumb_name != blank and breadcrumb_url != blank -%}
-              <div class="slide-tab__breadcrumbs f aic hide-mobile">
-                <a href="/">Home</a>
-                <span>/</span>
-                <a href="{{ breadcrumb_url }}">{{ breadcrumb_name }}</a>
-              </div>
-            {%- endif -%}
 
             <div class="slide-tab__inner {% if slide_image_on_the_left %}slide-tab__inner--reverse{% endif %}">
               <div class="slide-tab__inner-content">
@@ -169,16 +159,6 @@
       "type": "slide",
       "name": "Slide",
       "settings": [
-        {
-          "type": "text",
-          "id": "breadcrumb_name",
-          "label": "Breadcrumb name"
-        },
-        {
-          "type": "url",
-          "id": "breadcrumb_url",
-          "label": "Breadcrumb url"
-        },
         {
           "type": "color",
           "id": "bg_color",

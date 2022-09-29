@@ -1,3 +1,20 @@
+{%- comment -%}
+  {%
+    include 'product-card',
+    product: product,
+    hide_variants: true,
+    cx: 'y',
+    content_cx: 'f fdc',
+    bottom_content: text,
+    product_image: ,
+    block_id: id,
+    product_image_url: url,
+    large_title: true,
+    transparent_image: true,
+    reviews: true
+  %}
+{%- endcomment -%}
+
 {% assign url = '/products/' | append: product.handle %}
 {% assign price = product.price | money %}
 {% assign comparePrice = product.compare_at_price | money %}
@@ -6,6 +23,12 @@
 {% if image_url == blank or image_url.size < 1 %}
   {% assign image_url = product_image | default: product.featured_image | img_url: '500x' %}
 {% endif %}
+
+{%- assign show_reviews = true -%}
+
+{%- unless reviews -%}
+  {%- assign show_reviews = false -%}
+{%- endunless -%}
 
 {% assign alt = product.featured_image.alt | default: product.title | escape %}
 
@@ -46,7 +69,7 @@
       transparent_image: true,
       url: url
     %}
-    {% include 'product-card-details', large_title: large_title %}
+    {% include 'product-card-details', large_title: large_title, show_reviews: show_reviews %}
     {% if product.options and hide_variants != true %}
       {% include 'product-card-swatches', block_id: block_id %}
     {% endif %}

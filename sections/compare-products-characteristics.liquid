@@ -52,7 +52,7 @@
                 {%- assign _product = all_products[block.settings.compare_product] -%}
                 <th>
                   <div class="pdpCompare__table-th">
-                    {% include 'product-card', product: _product %}
+                    {% include 'product-card', product: _product, reviews: false %}
                   </div>
                 </th>
               {%- endif -%}
@@ -60,7 +60,7 @@
           </tr>
           </thead>
           <tbody>
-          {%- for i in (1..8) -%}
+          {%- for i in (1..10) -%}
             {%- assign key_name = "comparison_" | append: i -%}
             {%- assign characteristic_name = section.settings[key_name] -%}
             {%- if characteristic_name != blank -%}
@@ -138,6 +138,16 @@
       "type": "text",
       "id": "comparison_8",
       "label": "Comparison title (8)"
+    },
+    {
+      "type": "text",
+      "id": "comparison_9",
+      "label": "Comparison title (9)"
+    },
+    {
+      "type": "text",
+      "id": "comparison_10",
+      "label": "Comparison title (10)"
     }
   ],
   "blocks": [
@@ -190,6 +200,16 @@
           "type": "richtext",
           "id": "comparison_8",
           "label": "Comparison (8)"
+        },
+        {
+          "type": "richtext",
+          "id": "comparison_9",
+          "label": "Comparison (9)"
+        },
+        {
+          "type": "richtext",
+          "id": "comparison_10",
+          "label": "Comparison (10)"
         }
       ]
     }
