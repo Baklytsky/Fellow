@@ -74,6 +74,14 @@ theme.slickSlider = function () {
     }
 
     if ($slider.length) $slider.not('.slick-initialized').slick(config);
+
+    if ($slider[0].hasAttribute('data-toggle-arrows')) {
+      const prevArrow = $slider.find('.jsPrevSlide');
+      const nextArrow = $slider.find('.jsNextSlide');
+      if ($(prevArrow).length && $(nextArrow).length) {
+        theme.toggleSlickArrows($slider, $(prevArrow), $(nextArrow))
+      }
+    }
   });
 }
 
@@ -81,16 +89,21 @@ theme.slickSlider()
 
 theme.checkSlickResponse = function (selector, config, response, maxMedia) {
   if (!$(selector).length) return
+
   function checkSlider() {
     const condition = (maxMedia) ? $(window).width() < response : $(window).width() > response;
     if (condition) {
+      const prevArrow = $(selector).parent().find('.jsPrevSlide');
+      const nextArrow = $(selector).parent().find('.jsNextSlide');
       if (config['arrows']) {
-        const prevArrow = $(selector).parent().find('.jsPrevSlide');
-        const nextArrow = $(selector).parent().find('.jsNextSlide');
-        if (prevArrow.length) config.prevArrow =  prevArrow;
-        if (nextArrow.length) config.nextArrow =  nextArrow;
+        if (prevArrow.length) config.prevArrow = prevArrow;
+        if (nextArrow.length) config.nextArrow = nextArrow;
       }
       $(selector).not('.slick-initialized').slick(config)
+
+      if ($(selector)[0].hasAttribute('data-toggle-arrows') && $(prevArrow).length && $(prevArrow).length) {
+        theme.toggleSlickArrows($(selector), $(prevArrow), $(nextArrow))
+      }
     } else {
       if ($(selector).hasClass('slick-initialized')) {
         $(selector).slick('unslick')
@@ -102,6 +115,14 @@ theme.checkSlickResponse = function (selector, config, response, maxMedia) {
   $(window).resize(function () {
     checkSlider();
   });
+}
+
+theme.toggleSlickArrows = function (slider, prevArrow, nextArrow) {
+  slider.on('afterChange', (event, slick, currentSlide) => {
+    (currentSlide === 0) ? prevArrow.addClass('is-hidden') : prevArrow.removeClass('is-hidden');
+    (currentSlide === slick.slideCount - 1) ? nextArrow.addClass('is-hidden') : nextArrow.removeClass('is-hidden');
+    console.log(prevArrow)
+  })
 }
 
 theme.checkAllSlidersResponse = function () {
@@ -1930,12 +1951,21 @@ class SlideTabSection extends HTMLElement {
   constructor() {
     super();
     this.slider = this.querySelector('.jsSlickSlider')
+    this.tabsSwitcher = this.querySelectorAll('.slide-tab__inner-switcher')
     this.tabs = this.querySelectorAll('.slide-tab__inner-tab')
 
     if (this.slider) {
       this.tabs.forEach(tab => {
-        const slideIndex = tab.dataset.slideIndex
-        tab.addEventListener('click', ()=> $(this.slider).slick('slickGoTo', slideIndex))
+
+        tab.addEventListener('click', (e)=> {
+          const slideSize = e.target.dataset.slideSize
+          const slideIndex = e.target.dataset.slideIndex
+          const switcherPosition = 100 / Number(slideSize) * Number(slideIndex)
+          $(this.slider).slick('slickGoTo', slideIndex)
+          this.tabsSwitcher.forEach(switcher => {
+            switcher.style.left = `${switcherPosition}%`
+          })
+        })
       })
     }
   }

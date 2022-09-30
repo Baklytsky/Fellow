@@ -69,10 +69,11 @@
                 {%- endif -%}
 
                 <div class="slide-tab__inner-tabs slide-tab__inner-tabs--{{ tab_style }} slide-tab__inner-tabs--{{ tabs_size }}">
+                  <div class="slide-tab__inner-switcher" style="width: calc(100% / {{ tabs_size }})"></div>
                   {% for block in section.blocks %}
                     {%- assign tab_name = block.settings.tab_name | default: 'Tab name' -%}
                     <button class="slide-tab__inner-tab {% if slideCounter == forloop.index0 %}active{% endif %}"
-                            data-slide-index="{{ forloop.index0 }}">
+                            data-slide-index="{{ forloop.index0 }}" data-slide-size="{{ tabs_size }}">
                       {{ tab_name }}
                     </button>
                   {% endfor %}

@@ -13,7 +13,7 @@
         "slidesToShow": 1,
         "arrows": {{ show_arrows }},
         "dots": {{ show_dots }},
-        "infinite": true
+        "infinite": false
       }
     {%- endcapture -%}
 
@@ -31,7 +31,7 @@
     <div class="features__wrapper page-wrapper rel">
 
       {%- if show_arrows -%}
-        <button type="button" class="jsPrevSlide">{% render 'icon' with 'chevron-left' %}</button>
+        <button type="button" class="jsPrevSlide is-hidden">{% render 'icon' with 'chevron-left' %}</button>
         <button type="button" class="jsNextSlide">{% render 'icon' with 'chevron-right' %}</button>
       {%- endif -%}
 
@@ -44,7 +44,7 @@
       {%- endif -%}
 
       {%- if section.blocks.size > 0 -%}
-        <ul class="features__list rel" data-check-slick-response='{{- slick-response -}}'>
+        <ul class="features__list rel" data-check-slick-response='{{- slick-response -}}' data-toggle-arrows>
           {%- for block in section.blocks -%}
             {%- assign title = block.settings.title -%}
             {%- assign description = block.settings.description -%}

@@ -153,7 +153,7 @@
                   {%- endif -%}
                   {%- assign media_alt = metafield_variant_image.alt | default: variant.title | append: ' - media' -%}
                   {%- if media.media_type == 'video' -%}
-                    <video class='x image-abs-cover' loop muted autoplay controls poster="{{ metafield_variant_image | img_url: "900x" }}">
+                    <video class='x image-abs-cover' loop muted autoplay playsinline controls poster="{{ metafield_variant_image | img_url: "900x" }}">
                       {%- for source in media.sources -%}
                         <source src="{{ source.url }}" type="{{ source.mime_type }}">
                       {%- endfor -%}
@@ -211,7 +211,7 @@
                    role='img'
                    loading='lazy'/>
             {%- elsif media.media_type == 'video' -%}
-              <video class='x image-abs-cover' loop muted autoplay controls poster="{{ media.preview_image | img_url: "900x" }}">
+              <video class='x image-abs-cover' loop muted autoplay playsinline controls poster="{{ media.preview_image | img_url: "900x" }}">
                 {%- for source in media.sources -%}
                   <source src="{{ source.url }}" type="{{ source.mime_type }}">
                 {%- endfor -%}
