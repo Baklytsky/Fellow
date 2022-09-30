@@ -4461,6 +4461,8 @@ textarea {
   letter-spacing: normal;
   outline: none !important;
   padding: 12px 16px;
+  border-radius: 8px;
+  border: 2px solid transparent;
 }
 
 .radio-group:not([data-option-color]):not([data-option-material]) .radio {
@@ -4552,12 +4554,14 @@ textarea {
   border-radius: 8px;
 }
 
-[data-disabled-size="true"] .radio-group:not([data-option-color]):not([data-option-material]) input:checked+.radio__title:not(.radio__title-size-image) {
-  border: none;
-  border-radius: unset;
+[data-disabled-size="true"] .radio-group:not([data-option-color]):not([data-option-material]) input:checked+.radio__title:not(.radio__title-size-image),
+[data-disabled-size="true"] .radio-group:not([data-option-color]):not([data-option-material]) input:checked+.radio__title-size-image,
+.radio-group:not([data-option-color]):not([data-option-material]) .upsell-radio input:checked+.radio__title:not(.radio__title-size-image) {
+  border: 2px solid transparent;
+  /*border-radius: unset;*/
 }
 
-.radio-group:not([data-option-color]):not([data-option-material]) input:checked+.radio__title-size-image .size__wrapper {
+.radio-group:not([data-option-color]):not([data-option-material]) input:checked+.radio__title:not(.radio__title-size-image) {
   border: 2px solid #C2C2C2;
 }
 

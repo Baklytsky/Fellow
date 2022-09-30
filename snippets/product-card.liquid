@@ -9,9 +9,9 @@
     product_image: ,
     block_id: id,
     product_image_url: url,
-    large_title: true,
-    transparent_image: true,
-    reviews: true
+    large_title: false,
+    transparent_image: false,
+    hide_reviews: false
   %}
 {%- endcomment -%}
 
@@ -23,12 +23,6 @@
 {% if image_url == blank or image_url.size < 1 %}
   {% assign image_url = product_image | default: product.featured_image | img_url: '500x' %}
 {% endif %}
-
-{%- assign show_reviews = true -%}
-
-{%- unless reviews -%}
-  {%- assign show_reviews = false -%}
-{%- endunless -%}
 
 {% assign alt = product.featured_image.alt | default: product.title | escape %}
 
@@ -69,7 +63,7 @@
       transparent_image: true,
       url: url
     %}
-    {% include 'product-card-details', large_title: large_title, show_reviews: show_reviews %}
+    {% include 'product-card-details', large_title: large_title, hide_reviews: hide_reviews %}
     {% if product.options and hide_variants != true %}
       {% include 'product-card-swatches', block_id: block_id %}
     {% endif %}
@@ -88,3 +82,4 @@
 {% assign available_variant_prices = blank %}
 {% assign large_title = false %}
 {% assign transparent_image = false %}
+{% assign hide_reviews = false %}

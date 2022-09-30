@@ -43,7 +43,7 @@
   <a href='{{ product.url }}' class='abs fill z2 js-product-link' aria-label='{{ product.title }}'></a>
 </div>
 
-{%- if show_reviews -%}
+{%- unless hide_reviews -%}
 {%- assign reviews_count = product.metafields.yotpo.reviews_count | plus: 0 -%}
 <div class="productCard_ratings f fdr aie mb05 mt05 rel"
      {% if reviews_count == 0 %}style="display:none;"{% endif %}>
@@ -52,6 +52,6 @@
   <a href="{{ product.url }}#pdp-reviews" class="abs x y z2"
      aria-label="{{ product.title }} rating stars"></a>
 </div>
-{%- endif -%}
+{%- endunless -%}
 
 

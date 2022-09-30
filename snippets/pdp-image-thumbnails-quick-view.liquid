@@ -30,17 +30,36 @@
 <div class='pdpMain__gallery x rel f'>
   <div class='pdpMain__gallery-thumbnails'
        data-slick-config='{{- slick-thumbnail-config -}}'>
-    {% for image in product.images %}
-      {% if image.variants.size > 0 %}
-        {% for variant in image.variants %}
-          {%- assign variantId = variant.id -%}
-        {% endfor %}
-      {% else %}
+    {%- for media in product.media -%}
+      {%- assign variant_has_media = false -%}
+
+      {%- if media.media_type == 'image' -%}
+        {%- for variant in product.variants -%}
+          {%- if variant.featured_media.id == media.id -%}
+            {%- assign variantId = variant.id -%}
+            {%- assign variant_has_media = true -%}
+            {%- break -%}
+          {%- endif -%}
+        {%- endfor -%}
+
+        {%- unless variant_has_media -%}
+          {%- assign variantId = product.id | append: forloop.index -%}
+        {%- endunless -%}
+      {%- endif -%}
+
+      {%- if media.media_type == 'video' -%}
         {%- assign variantId = product.id | append: forloop.index -%}
-      {% endif %}
-      {%- assign imageSrc = image.src | img_url: '200x' -%}
+      {%- endif -%}
+
+      {%- assign media_alt = media.preview_image.alt | default: product.title | append: ' - media' -%}
+      {%- assign imageSrc = media.preview_image | img_url: '200x' -%}
       <div class='pdpMain__gallery-thumbnails-item rel x' data-variant-img='{{ variantId }}'>
-        <img src='{{ imageSrc }}' class='image-abs-cover x' alt='{{ image.alt }}' role='img' loading='lazy'/>
+        {%- if media.media_type == 'video' -%}
+          <div class="pdpMain__gallery-thumbnails-video-icon">
+            {% render 'icon' with 'play-btn-mp4' %}
+          </div>
+        {%- endif -%}
+        <img src='{{ imageSrc }}' class='image-abs-cover x' alt='{{ media_alt }}' role='img' loading='lazy'/>
       </div>
       {%- for variant in product.variants -%}
         {%- if variant.id == variantId -%}
@@ -48,8 +67,15 @@
             {%- assign metafield_key =  'variant_image_' | append: i -%}
             {%- assign metafield_variant_image = variant.metafields.my_fields[metafield_key] -%}
             {%- if metafield_variant_image != blank -%}
+              {%- assign media_metafield = metafield_variant_image.value -%}
+              {%- assign media_alt = metafield_variant_image.alt | default: variant.title | append: ' - media' -%}
               <div class='pdpMain__gallery-thumbnails-item rel x' data-variant-img='{{ variantId | append: forloop.index }}'>
-                <img src='{{ metafield_variant_image | img_url: '200x' }}' class='image-abs-cover x' alt='{{ image.alt }}' role='img' loading='lazy'/>
+                {%- if media_metafield.media_type == 'video' -%}
+                  <div class="pdpMain__gallery-thumbnails-video-icon">
+                    {% render 'icon' with 'play-btn-mp4' %}
+                  </div>
+                {%- endif -%}
+                <img src='{{ metafield_variant_image | img_url: '200x' }}' class='image-abs-cover x' alt='{{ media_alt }}' role='img' loading='lazy'/>
               </div>
             {%- endif -%}
           {%- endfor -%}
@@ -59,15 +85,28 @@
   </div>
   <div class='pdpMain__gallery-wrapper x f rel'
        data-slick-config='{{- slick-gallery-config -}}'>
-    {% for image in product.images %}
-      {% if image.variants.size > 0 %}
-        {% for variant in image.variants %}
-          {%- assign variantId = variant.id -%}
-        {% endfor %}
-      {% else %}
+    {%- for media in product.media -%}
+      {%- assign variant_has_media = false -%}
+
+      {%- if media.media_type == 'image' -%}
+        {%- for variant in product.variants -%}
+          {%- if variant.featured_media.id == media.id -%}
+            {%- assign variantId = variant.id -%}
+            {%- assign variant_has_media = true -%}
+            {%- break -%}
+          {%- endif -%}
+        {%- endfor -%}
+
+        {%- unless variant_has_media -%}
         {%- assign variantId = product.id | append: forloop.index -%}
-      {% endif %}
-      {%- assign imageSrc = image.src | img_url: '600x' -%}
+        {%- endunless -%}
+      {%- endif -%}
+
+      {%- if media.media_type == 'video' -%}
+        {%- assign variantId = product.id | append: forloop.index -%}
+      {%- endif -%}
+
+      {%- assign media_alt = media.preview_image.alt | default: product.title | append: ' - media' -%}
       <div class="x">
         <div class='pdpMain__variant-image rel x rel'
              data-variant-media='{{ variantId }}'>
@@ -79,7 +118,20 @@
             <span class="productCard__badge abs z3 xsmall cb bg-xlightgrey">{{ image_custom_tag }}</span>
           {%- endif -%}
 
-          <img src="{{ imageSrc }}" class='x image-abs-cover' alt='{{ image.alt }}' role='img' loading='lazy'/>
+          {%- assign media_alt = media.alt | default: product.title | append: ' - media' -%}
+
+          {%- if media.media_type == 'image' -%}
+            <img src="{{ media.preview_image | img_url: '600x' }}"
+                 class='x image-abs-cover' alt='{{ media_alt }}'
+                 role='img'
+                 loading='lazy'/>
+            {%- elsif media.media_type == 'video' -%}
+            <video class='x image-abs-cover' loop muted autoplay controls poster="{{ media.preview_image | img_url: "600x" }}">
+              {%- for source in media.sources -%}
+                <source src="{{ source.url }}" type="{{ source.mime_type }}">
+              {%- endfor -%}
+            </video>
+          {%- endif -%}
         </div>
       </div>
       {%- for variant in product.variants -%}
@@ -88,10 +140,25 @@
             {%- assign metafield_key =  'variant_image_' | append: i -%}
             {%- assign metafield_variant_image = variant.metafields.my_fields[metafield_key] -%}
             {%- if metafield_variant_image != blank -%}
+              {%- assign media_metafield = metafield_variant_image.value -%}
               <div class="x">
                 <div class='pdpMain__variant-image rel x f aic'
                      data-variant-media='{{ variantId | append: forloop.index }}'>
-                  <img src="{{ metafield_variant_image | img_url: '600x' }}" class='x image-abs-cover' alt='{{ image.alt }}' role='img' loading='lazy'/>
+
+                  {%- assign media_alt = metafield_variant_image.alt | default: variant.title | append: ' - media' -%}
+
+                  {%- if media_metafield.media_type == 'video' -%}
+                    <video class='x image-abs-cover' loop muted autoplay controls poster="{{ metafield_variant_image | img_url: "600x" }}">
+                      {%- for source in media_metafield.sources -%}
+                        <source src="{{ source.url }}" type="{{ source.mime_type }}">
+                      {%- endfor -%}
+                    </video>
+                  {%- else -%}
+                    <img src="{{ metafield_variant_image | img_url: '600x' }}"
+                         class='x image-abs-cover' alt='{{ media_alt }}'
+                         role='img'
+                         loading='lazy'/>
+                  {%- endif -%}
                 </div>
               </div>
             {%- endif -%}

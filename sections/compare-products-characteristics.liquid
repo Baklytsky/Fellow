@@ -52,7 +52,7 @@
                 {%- assign _product = all_products[block.settings.compare_product] -%}
                 <th>
                   <div class="pdpCompare__table-th">
-                    {% include 'product-card', product: _product, reviews: false %}
+                    {% include 'product-card', product: _product, hide_reviews: true %}
                   </div>
                 </th>
               {%- endif -%}

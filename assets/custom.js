@@ -1166,7 +1166,8 @@ class PdpGallery extends HTMLElement {
     this.thumbnails.forEach(thumbnail => {
       thumbnail.addEventListener('click', () => this.thumbnailScrollOnClick(thumbnail))
     })
-    document.addEventListener('scroll', () => {
+    document.addEventListener('scroll', (e) => {
+      if (event.cancelable) e.preventDefault();
       setTimeout(() => this.changeActiveThumbnail(), 400)
     })
   }
