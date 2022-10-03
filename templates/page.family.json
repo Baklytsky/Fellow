@@ -2,11 +2,360 @@
   "sections": {
     "main": {
       "type": "toggle-hero-slider",
+      "blocks": {
+        "7ae1cacd-4567-4b52-8951-0a398e52c371": {
+          "type": "slide",
+          "settings": {
+            "bg_color": "#000000",
+            "text_color": "#ffffff",
+            "tab_btn_style": "light",
+            "tab_name": "Pro",
+            "title": "Stagg EKG Pro",
+            "description": "A world of features for ultimate control.",
+            "btn_text": "Shop Now",
+            "btn_url": "shopify:\/\/products\/carter-everywhere-mug",
+            "image": "shopify:\/\/shop_images\/FamilyPage_EKGPro.png",
+            "image_on_the_left": false
+          }
+        },
+        "e11cf429-b3b8-45d3-afee-2d19059179be": {
+          "type": "slide",
+          "settings": {
+            "bg_color": "#ffffff",
+            "text_color": "#000000",
+            "tab_btn_style": "dark",
+            "tab_name": "Pro Studio Edition",
+            "title": "Stagg EKG Pro Studio Edition",
+            "description": "All the new features, premium materials.",
+            "btn_text": "Shop Now",
+            "btn_url": "shopify:\/\/products\/stagg-ekg-electric-pour-over-kettle",
+            "image": "shopify:\/\/shop_images\/FamilyPage_EKGProStudio.png",
+            "image_on_the_left": false
+          }
+        }
+      },
+      "block_order": [
+        "7ae1cacd-4567-4b52-8951-0a398e52c371",
+        "e11cf429-b3b8-45d3-afee-2d19059179be"
+      ],
       "settings": {
+        "section_title": "Even Icons Evolve",
+        "section_subtitle": "",
+        "section_description": "We're raising the bar again. Introducing Stagg EKG Pro and Stagg EKG Pro Studio Edition: the undisputed new standard for electric pour-over kettles."
+      }
+    },
+    "1664270553aee121f2": {
+      "type": "hp-hero-video",
+      "settings": {
+        "full_width_section": false,
+        "mobile_format_16_9": true,
+        "section_bg": "#000000",
+        "video_mp4": "https:\/\/cdn.shopify.com\/videos\/c\/o\/v\/b04f163dd8a94eb68c109c827484fbaa.mp4",
+        "video_autoplay": true,
+        "video_muted": true,
+        "show_mute_button": true,
+        "show_default_controls": true,
+        "show_hide_video": "show_on_all",
+        "overlay_opacity": 10,
+        "content_position": "middleCenter",
+        "text_color": "#ffffff",
+        "heading": "",
+        "image_heading_width": 70,
+        "text": "",
+        "link": "",
+        "button_text": "",
+        "btn_type": "btn--light"
+      }
+    },
+    "166427647891f49e65": {
+      "type": "features",
+      "blocks": {
+        "5d3695c6-1d88-47cd-9a82-7052f2f754c4": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/FamilyPage_Schedule.png",
+            "title": "Schedule",
+            "description": "Schedule your boil so you can steal a few extra minutes in bed."
+          }
+        },
+        "24a69457-ad47-464d-bba3-f60d501f830e": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/FamilyPage_Guide_Mode.png",
+            "title": "Guide Mode",
+            "description": "Preset temps for different coffee brewing styles and types of tea."
+          }
+        },
+        "3bca0e43-64c4-47b6-be69-da1fcec88a0f": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/FamilyPage_Hold.png",
+            "title": "Adjustable Hold Mode",
+            "description": "Keep your water hot of 15, 30, 45, or 60 minutes."
+          }
+        },
+        "d33150b7-5595-4d16-8868-763d2bcf7000": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/FamilyPage_Altitude.png",
+            "title": "Altitude",
+            "description": "Denver or Des Moines? Set your altitude to avoid boiling over."
+          }
+        },
+        "127fd793-65c9-4a33-b22e-2ba5962c43af": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/FamilyPage_Updates_over_Wifi.png",
+            "title": "Updates Over Wifi",
+            "description": "Get the latest features through WiFI upgrades using the Fellow app."
+          }
+        }
+      },
+      "block_order": [
+        "5d3695c6-1d88-47cd-9a82-7052f2f754c4",
+        "24a69457-ad47-464d-bba3-f60d501f830e",
+        "3bca0e43-64c4-47b6-be69-da1fcec88a0f",
+        "d33150b7-5595-4d16-8868-763d2bcf7000",
+        "127fd793-65c9-4a33-b22e-2ba5962c43af"
+      ],
+      "settings": {
+        "bg_color": "#fff9e5",
+        "text_color": "#000000",
+        "heading": "Customizable brew settings",
+        "description": "Use the high resolution full color screen to access a stacked menu of features to perfect your brew.",
+        "show_arrows": true,
+        "show_dots": true
+      }
+    },
+    "1664355544406e6554": {
+      "type": "compare-products-characteristics",
+      "blocks": {
+        "2db5c370-dedf-490f-9b22-bb02e5898ff4": {
+          "type": "product",
+          "settings": {
+            "compare_product": "stagg-ekg-electric-pour-over-kettle",
+            "comparison_1": "<p>✔️<\/p>",
+            "comparison_2": "<p>✔️<\/p>",
+            "comparison_3": "",
+            "comparison_4": "",
+            "comparison_5": "<p>60 minutes<\/p>",
+            "comparison_6": "<p>Black and white LCD screen<\/p>",
+            "comparison_7": "<p>Standard<\/p>",
+            "comparison_8": "<p>✔️<\/p>",
+            "comparison_9": "",
+            "comparison_10": "",
+            "comparison_11": "",
+            "comparison_12": "",
+            "comparison_13": "",
+            "comparison_14": "",
+            "comparison_15": "",
+            "comparison_16": "",
+            "comparison_17": "",
+            "comparison_18": "",
+            "comparison_19": "",
+            "comparison_20": ""
+          }
+        },
+        "4cf663b0-811b-4c56-9e8c-aa07ed325f3f": {
+          "type": "product",
+          "settings": {
+            "compare_product": "refurbished-stagg-ekg-electric-kettle",
+            "comparison_1": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing<\/p>",
+            "comparison_2": "<p>✖️<\/p>",
+            "comparison_3": "<p>Cras ultricies ligula sed magna dictum porta.<\/p>",
+            "comparison_4": "<p>Pellentesque in ipsum id orci porta dapibus.<\/p>",
+            "comparison_5": "<p>Cras ultricies ligula sed magna dictum porta.<\/p>",
+            "comparison_6": "<p>Pellentesque in ipsum id orci porta dapibus.<\/p>",
+            "comparison_7": "",
+            "comparison_8": "",
+            "comparison_9": "",
+            "comparison_10": "",
+            "comparison_11": "",
+            "comparison_12": "",
+            "comparison_13": "",
+            "comparison_14": "",
+            "comparison_15": "",
+            "comparison_16": "",
+            "comparison_17": "",
+            "comparison_18": "",
+            "comparison_19": "",
+            "comparison_20": ""
+          }
+        },
+        "d509c253-5da9-4c69-baba-eeca202449c0": {
+          "type": "product",
+          "settings": {
+            "compare_product": "precision-electric-set",
+            "comparison_1": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing<\/p>",
+            "comparison_2": "<p>✔️<\/p>",
+            "comparison_3": "<p>Quisque velit nisi, pretium ut lacinia in, elementum id enim.<\/p>",
+            "comparison_4": "<p>Donec sollicitudin molestie malesuada.<\/p>",
+            "comparison_5": "<p>Quisque velit nisi, pretium ut lacinia in, elementum id enim.<\/p>",
+            "comparison_6": "<p>Quisque velit nisi, pretium ut lacinia in, elementum id enim.<\/p>",
+            "comparison_7": "",
+            "comparison_8": "",
+            "comparison_9": "",
+            "comparison_10": "",
+            "comparison_11": "",
+            "comparison_12": "",
+            "comparison_13": "",
+            "comparison_14": "",
+            "comparison_15": "",
+            "comparison_16": "",
+            "comparison_17": "",
+            "comparison_18": "",
+            "comparison_19": "",
+            "comparison_20": ""
+          }
+        },
+        "54f6dba7-1a80-48ce-b43b-75901f6af1b9": {
+          "type": "product",
+          "settings": {
+            "compare_product": "corvo-ekg",
+            "comparison_1": "",
+            "comparison_2": "",
+            "comparison_3": "",
+            "comparison_4": "",
+            "comparison_5": "",
+            "comparison_6": "",
+            "comparison_7": "",
+            "comparison_8": "",
+            "comparison_9": "",
+            "comparison_10": "",
+            "comparison_11": "",
+            "comparison_12": "",
+            "comparison_13": "",
+            "comparison_14": "",
+            "comparison_15": "",
+            "comparison_16": "",
+            "comparison_17": "",
+            "comparison_18": "",
+            "comparison_19": "",
+            "comparison_20": ""
+          }
+        }
+      },
+      "block_order": [
+        "2db5c370-dedf-490f-9b22-bb02e5898ff4",
+        "4cf663b0-811b-4c56-9e8c-aa07ed325f3f",
+        "d509c253-5da9-4c69-baba-eeca202449c0",
+        "54f6dba7-1a80-48ce-b43b-75901f6af1b9"
+      ],
+      "settings": {
+        "heading": "Compare Kettles",
+        "comparison_1": "To-The-Degree Temperature Control",
+        "comparison_2": "Precision Pour Spout",
+        "comparison_3": "Scheduling",
+        "comparison_4": "Guide Mode",
+        "comparison_5": "Hold Duration",
+        "comparison_6": "Screen",
+        "comparison_7": "Materials",
+        "comparison_8": "Brew Stopwatch",
+        "comparison_9": "Altitude Adjustment",
+        "comparison_10": "Chime + Volume Adjustment",
+        "comparison_11": "",
+        "comparison_12": "",
+        "comparison_13": "",
+        "comparison_14": "",
+        "comparison_15": "",
+        "comparison_16": "",
+        "comparison_17": "",
+        "comparison_18": "",
+        "comparison_19": "",
+        "comparison_20": ""
+      }
+    },
+    "16642717231d856327": {
+      "type": "featured-collections",
+      "blocks": {
+        "bf8b078a-5bce-4b74-9647-97d580285e1b": {
+          "type": "collection",
+          "settings": {
+            "tab_text": "Kettles",
+            "collection": "kettles",
+            "button_text": "",
+            "button_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "bf8b078a-5bce-4b74-9647-97d580285e1b"
+      ],
+      "settings": {
+        "enable_section": true,
+        "heading": "The full lineup, from stovetop to countertop",
+        "limit": 6,
+        "show_view_all": true
+      }
+    },
+    "1664286931317058a0": {
+      "type": "faq",
+      "blocks": {
+        "1a670074-334c-4963-8931-28ce7221fd8c": {
+          "type": "faq-block",
+          "settings": {
+            "title": "How do I use and care for my Stagg EKG Pro or Pro Studio Edition?",
+            "description": "<p>Ready to start using your Stagg EKG Pro or Pro Studio Edition? Download the Get to Know You Guide that will walk you through all of your kettles features, how to use the menu, as well as how to brew a pour-over.<\/p>"
+          }
+        },
+        "eb66113a-5455-4ece-a487-fb3ca3caf9ae": {
+          "type": "faq-block",
+          "settings": {
+            "title": "Is the Stagg EKG Pro or Pro Studio Edition Electric Kettle stovetop safe?",
+            "description": "<p>No. Please do not use your electric kettle on your stovetop! The kettle is designed for use with its electric base ONLY.  By putting the kettle on your stovetop or induction surface, you risk melting functional parts in the kettle and paint.  <\/p><p>If you're looking for a pour-over kettle that's stovetop safe, please check out our <a href=\"https:\/\/fellowproducts.com\/collections\/stovetop-kettles\"><span style=\"text-decoration:underline\">stovetop kettles<\/span><\/a>.<\/p>"
+          }
+        },
+        "1940777b-e34c-4a03-af5e-80274e652c72": {
+          "type": "faq-block",
+          "settings": {
+            "title": "How do I register my Stagg EKG Pro or Pro Studio Edition kettle?",
+            "description": "<p>In order to register your Fellow electric product please <a href=\"https:\/\/register.fellowproducts.com\/\"><span style=\"text-decoration:underline\">submit this form<\/span><\/a>. After registering, you will receive an email from Fellow containing your registration perks like extended warranty and priority support! Please save this email for future reference. <\/p><p>If you run into any difficulty when registering or you would like to check the status of your warranty and perks please <a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/requests\/new\"><span style=\"text-decoration:underline\">contact us<\/span><\/a> – we’re happy to help.<\/p>"
+          }
+        },
+        "6cab98e1-ee91-4b19-988f-d076aa10f541": {
+          "type": "faq-block",
+          "settings": {
+            "title": "How do I make great pour-over with my Stagg EKG Pro or Pro Studio Edition?",
+            "description": "<p>Ready to brew like a pro? Head over to our Gear Guide – your one-stop shop for using and caring for your new Stagg EKG, Stagg EKG Pro, or Pro Studio Edition kettle. You can access everything from detailed instructions for how to use your kettle and its features as well as recipes and videos.<\/p>"
+          }
+        },
+        "8b7a18c8-b99e-4b1c-9d6e-4a5f666471fe": {
+          "type": "faq-block",
+          "settings": {
+            "title": "What does the Fellow Updater app do and why do I need it?",
+            "description": "<p>Although it’s not needed to use the product, we will occasionally provide updates to the firmware in your Stagg EKG Pro or Pro Studio Edition to ensure everything is running optimally and that your kettle has the latest features. Please note not using the app does not diminish the usefulness of your kettle, as the updates are not needed for the Pro or Studio Edition to work. <\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "1a670074-334c-4963-8931-28ce7221fd8c",
+        "eb66113a-5455-4ece-a487-fb3ca3caf9ae",
+        "1940777b-e34c-4a03-af5e-80274e652c72",
+        "6cab98e1-ee91-4b19-988f-d076aa10f541",
+        "8b7a18c8-b99e-4b1c-9d6e-4a5f666471fe"
+      ],
+      "settings": {
+        "heading": "Have Questions?",
+        "description": "We’ve got answers."
+      }
+    },
+    "1664388097345cae2b": {
+      "type": "seo-block",
+      "settings": {
+        "bg_color": "#ffffff",
+        "text_color": "#000000",
+        "heading": "Travel Mugs",
+        "text": "<p>Take everything on the move always.Functional Elegance Meets Design, Fellow Coffee Products Elevate Your Coffee Experience. Fellow’s Award-Winning Coffee Products Turn Anyone Into A Coffee Connoisseur. <\/p>"
       }
     }
   },
   "order": [
-    "main"
+    "main",
+    "1664270553aee121f2",
+    "166427647891f49e65",
+    "1664355544406e6554",
+    "16642717231d856327",
+    "1664286931317058a0",
+    "1664388097345cae2b"
   ]
 }
