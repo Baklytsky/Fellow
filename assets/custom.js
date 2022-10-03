@@ -59,15 +59,23 @@ theme.handleize = function (str) {
 };
 
 theme.toggleSlickVideoPlay = function (slider, videoSlides) {
-  function togglePlay() {
+  function togglePlay(firstLoad) {
     videoSlides.each((i, video) => {
-      ($(video).parents('.slick-slide').hasClass('slick-active')) ? video.play() : video.pause()
+      if ($(video).parents('.slick-slide').hasClass('slick-active')) {
+        video.play()
+      } else {
+        if (firstLoad) {
+          setTimeout(()=> video.pause(), 500)
+        } else {
+          video.pause()
+        }
+      }
     })
   }
-  togglePlay()
+  togglePlay(true)
 
   slider.on('afterChange', (event, slick, currentSlide) => {
-    togglePlay()
+    togglePlay(false)
   })
 }
 
