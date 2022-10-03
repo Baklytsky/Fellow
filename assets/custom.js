@@ -58,6 +58,34 @@ theme.handleize = function (str) {
   return str.toLowerCase().replace(/[^\w\u00C0-\u024f]+/g, "-").replace(/^-+|-+$/g, "");
 };
 
+theme.toggleSlickVideoPlay = function (slider, videoSlides) {
+  function togglePlay(firstLoad) {
+    videoSlides.each((i, video) => {
+      if ($(video).parents('.slick-slide').hasClass('slick-active')) {
+        video.play()
+      } else {
+        if (firstLoad) {
+          setTimeout(()=> video.pause(), 500)
+        } else {
+          video.pause()
+        }
+      }
+    })
+  }
+  togglePlay(true)
+
+  slider.on('afterChange', (event, slick, currentSlide) => {
+    togglePlay(false)
+  })
+}
+
+theme.toggleSlickArrows = function (slider, prevArrow, nextArrow) {
+  slider.on('afterChange', (event, slick, currentSlide) => {
+    (currentSlide === 0) ? prevArrow.addClass('is-hidden') : prevArrow.removeClass('is-hidden');
+    (currentSlide === slick.slideCount - 1) ? nextArrow.addClass('is-hidden') : nextArrow.removeClass('is-hidden');
+  })
+}
+
 theme.slickSlider = function () {
   $('[data-section-type="slick-slideshow"]').each(function () {
     const $slider = $(this).find('.jsSlickSlider');
@@ -74,6 +102,17 @@ theme.slickSlider = function () {
     }
 
     if ($slider.length) $slider.not('.slick-initialized').slick(config);
+
+    if ($slider[0].hasAttribute('data-toggle-arrows')) {
+      const prevArrow = $slider.find('.jsPrevSlide');
+      const nextArrow = $slider.find('.jsNextSlide');
+      if ($(prevArrow).length && $(nextArrow).length) {
+        theme.toggleSlickArrows($slider, $(prevArrow), $(nextArrow))
+      }
+    }
+
+    const videoSlides = $slider.find('video')
+    if (videoSlides.length) theme.toggleSlickVideoPlay($slider, videoSlides)
   });
 }
 
@@ -81,13 +120,29 @@ theme.slickSlider()
 
 theme.checkSlickResponse = function (selector, config, response, maxMedia) {
   if (!$(selector).length) return
+
   function checkSlider() {
+    const videoSlides = $(selector).find('video')
     const condition = (maxMedia) ? $(window).width() < response : $(window).width() > response;
     if (condition) {
+      const prevArrow = $(selector).parent().find('.jsPrevSlide');
+      const nextArrow = $(selector).parent().find('.jsNextSlide');
+      if (config['arrows']) {
+        if (prevArrow.length) config.prevArrow = prevArrow;
+        if (nextArrow.length) config.nextArrow = nextArrow;
+      }
       $(selector).not('.slick-initialized').slick(config)
+
+      if ($(selector)[0].hasAttribute('data-toggle-arrows') && $(prevArrow).length && $(prevArrow).length) {
+        theme.toggleSlickArrows($(selector), $(prevArrow), $(nextArrow))
+      }
+
+      if (videoSlides.length) theme.toggleSlickVideoPlay($(selector), videoSlides)
+
     } else {
       if ($(selector).hasClass('slick-initialized')) {
         $(selector).slick('unslick')
+        if (videoSlides.length) videoSlides.each((i, video) => video.play())
       }
     }
   }
@@ -411,13 +466,13 @@ theme.searchBar = function () {
       $resultsWrapper = $('.headerSearch__resultsHeader'),
       $resetBtn = $('.headerSearch__resetLabel');
 
-  function toggleSearch () {
-    if ($searchBar.attr('aria-hidden') === 'false') {
-      theme.closeSearch();
-    } else {
-      openSearch();
-    }
-  }
+  // function toggleSearch () {
+  //   if ($searchBar.attr('aria-hidden') === 'false') {
+  //     theme.closeSearch();
+  //   } else {
+  //     openSearch();
+  //   }
+  // }
 
   theme.closeSearch = function () {
     $searchBar.attr('aria-hidden', 'true');
@@ -426,12 +481,12 @@ theme.searchBar = function () {
     $searchBar.removeClass('loading');
   }
 
-  function openSearch () {
-    $searchBar.attr('aria-hidden', 'false');
-    $searchBar.slideDown(200);
-    $searchBarToggle.attr('aria-expanded', 'true');
-    inputFocus();
-  }
+  // function openSearch () {
+  //   $searchBar.attr('aria-hidden', 'false');
+  //   $searchBar.slideDown(200);
+  //   $searchBarToggle.attr('aria-expanded', 'true');
+  //   inputFocus();
+  // }
 
   function inputFocus () {
     setTimeout(function () {
@@ -530,18 +585,18 @@ theme.searchBar = function () {
 
   });
 
-  $(document).on('click.searchBarToggle', '.mobileMenu__link[data-action="toggle-search"]', function (event) {
-    event.preventDefault();
-    toggleSearch();
-  });
+  // $(document).on('click.searchBarToggle', '.mobileMenu__link[data-action="toggle-search"]', function (event) {
+  //   event.preventDefault();
+  //   toggleSearch();
+  // });
 
-  $(document).on('mouseover.searchBarOpen', '#search-bar-button[data-action="toggle-search"]', function (event) {
-    event.preventDefault();
-    openSearch();
-    $('.newHeader__openedBlock[aria-hidden="false"]').slideUp();
-    $('.newHeader__openedBlock[aria-hidden="false"]').attr('aria-hidden', 'true');
-    $('.newHeader__link[data-selected="true"]').attr('data-selected', 'false');
-  });
+  // $(document).on('mouseover.searchBarOpen', '#search-bar-button[data-action="toggle-search"]', function (event) {
+  //   event.preventDefault();
+  //   openSearch();
+  //   $('.newHeader__openedBlock[aria-hidden="false"]').slideUp();
+  //   $('.newHeader__openedBlock[aria-hidden="false"]').attr('aria-hidden', 'true');
+  //   $('.newHeader__link[data-selected="true"]').attr('data-selected', 'false');
+  // });
 
   $(document).on('input.onInput', '.headerSearch__input[type="search"]', $.debounce(250, function (event) {
     onInput(event);
@@ -558,11 +613,11 @@ theme.searchBar = function () {
     inputFocus();
   });
 
-  $(document).on('mousedown.searchBarClose', function (e) {
-    if (!$searchBar.is(e.target) && $searchBar.has(e.target).length === 0 && $searchBarToggle.has(e.target).length === 0) {
-      theme.closeSearch();
-    }
-  })
+  // $(document).on('mousedown.searchBarClose', function (e) {
+  //   if (!$searchBar.is(e.target) && $searchBar.has(e.target).length === 0 && $searchBarToggle.has(e.target).length === 0) {
+  //     theme.closeSearch();
+  //   }
+  // })
 
 }
 
@@ -989,7 +1044,7 @@ class PdpHelper extends HTMLElement {
     if (this.currentComparePrice > this.currentPrice) {
       priceInner =
           `<div class="pdpCopy__price f aic">
-          <span class="strike card__price--regular ml1 pdpCopy__header-price rel">
+          <span class="strike card__price--regular ml1 pdpCopy__header-price rel pr025">
             ${theme.formatMoney(this.currentComparePrice, '${{amount}}')}
             <div class="price-round-arrow">
               <svg xmlns="http://www.w3.org/2000/svg" width="25" height="14" viewBox="0 0 25 14" fill="none">
@@ -1160,7 +1215,8 @@ class PdpGallery extends HTMLElement {
     this.thumbnails.forEach(thumbnail => {
       thumbnail.addEventListener('click', () => this.thumbnailScrollOnClick(thumbnail))
     })
-    document.addEventListener('scroll', () => {
+    document.addEventListener('scroll', (e) => {
+      if (event.cancelable) e.preventDefault();
       setTimeout(() => this.changeActiveThumbnail(), 400)
     })
   }
@@ -1391,7 +1447,7 @@ class UpsellProduct extends PdpHelper {
 
   changePrice() {
     if (!this.selectedVariant) return
-    this.price.innerHTML = theme.formatMoney(this.selectedVariant.price, '${{amount_no_decimals}}')
+    this.price.innerHTML = theme.formatMoney(this.selectedVariant.price, '${{amount}}')
   }
 
   upsellAddToCart(e) {
@@ -1428,14 +1484,34 @@ customElements.define('pdp-learn-more', PdpLearnMore);
 class PdpCompare extends HTMLElement {
   constructor() {
     super();
+    this.wrapper = this.querySelector('.pdpCompare__wrapper')
     this.tableHead = this.querySelector('.pdpCompare__table thead')
-    this.th = this.querySelectorAll('.pdpCompare__table-th')
+    this.tableBody = this.querySelector('.pdpCompare__table tbody')
+    this.tableHeadMobile = this.querySelector('.pdpCompare__table-mobile-title')
+    this.th = this.querySelectorAll('.pdpCompare__table .pdpCompare__table-th')
     this.changeTableHeight()
+    window.addEventListener('resize', ()=> this.changeTableHeight())
+    if (this.tableHeadMobile) this.checkStickyHeadMobile()
   }
 
   changeTableHeight() {
+    this.th.forEach(th => th.style.removeProperty('min-height'))
     const thHeight = this.tableHead.clientHeight - 24;
     this.th.forEach(th => th.style.minHeight = thHeight + 'px')
+  }
+
+  checkStickyHeadMobile() {
+    window.addEventListener('scroll', ()=> {
+      this.tableBodyPosition = this.tableBody.getBoundingClientRect();
+      (this.tableBodyPosition.top < 100 && this.tableBodyPosition.bottom > 200)
+          ? this.tableHeadMobile.classList.remove('is-hidden')
+          : this.tableHeadMobile.classList.add('is-hidden')
+    })
+
+    this.wrapper.addEventListener('scroll', (e)=> {
+      const translateX = (e.target.scrollLeft > 5) ? e.target.scrollLeft : 0
+      this.tableHeadMobile.style.transform = `translateX(-${translateX}px)`
+    })
   }
 }
 
@@ -1531,26 +1607,27 @@ class MP4Video extends HTMLElement {
     this.playBtn = this.querySelector('.play-button')
     this.muteBtn = this.querySelector('.mute-video')
 
-    this.playBtn.addEventListener('click', ()=> this.videoPlay())
-    this.pauseBtn.addEventListener('click', ()=> this.videoPause())
-    this.muteBtn.addEventListener('click', ()=> this.videoMute())
-    this.video.addEventListener('click', ()=> this.checkVideoState())
+    if (this.playBtn) this.playBtn.addEventListener('click', ()=> this.videoPlay())
+    if (this.pauseBtn) this.pauseBtn.addEventListener('click', ()=> this.videoPause())
+    if (this.muteBtn) this.muteBtn.addEventListener('click', ()=> this.videoMute())
+    if (this.pauseBtn || this.playBtn) this.video.addEventListener('click', (e)=> this.checkVideoState(e))
   }
 
-  checkVideoState() {
+  checkVideoState(e) {
+    e.preventDefault();
     (this.video.paused) ? this.videoPlay() : this.videoPause()
   }
 
   videoPlay() {
     this.video.play()
-    this.playBtn.classList.add('hidden')
+    if (this.playBtn) this.playBtn.classList.add('hidden')
     if (this.pauseBtn) this.pauseBtn.classList.remove('hidden')
   }
 
   videoPause() {
     this.video.pause()
-    this.playBtn.classList.remove('hidden')
-    this.pauseBtn.classList.add('hidden')
+    if (this.playBtn) this.playBtn.classList.remove('hidden')
+    if (this.pauseBtn) this.pauseBtn.classList.add('hidden')
   }
 
   videoMute() {
@@ -1558,7 +1635,7 @@ class MP4Video extends HTMLElement {
     (muted)
         ? this.video.removeAttribute('muted')
         : this.video.setAttribute('muted', '')
-    this.muteBtn.classList.toggle('unmute-video')
+    if (this.muteBtn) this.muteBtn.classList.toggle('unmute-video')
   }
 }
 
@@ -1752,6 +1829,8 @@ class header extends HTMLElement {
     this.mobileItem = this.querySelectorAll('.mobileMenu__item')
     this.megamenuLinks = this.querySelectorAll('.newHeader__MainLink')
     this.search = this.querySelector('.headerSearch')
+    this.searchLink = this.querySelector('#search-bar-button')
+    this.mobileSearchBarOpener = this.querySelector('.mobileMenu__link[data-action="toggle-search"]')
     this.timer = this.querySelector('.announcement-bar__timer')
 
     document.addEventListener('resize', ()=> this.closeMenu())
@@ -1776,7 +1855,26 @@ class header extends HTMLElement {
       link.addEventListener('click', (e)=> this.toggleMobileMenu(e, link))
     })
 
+    this.mobileSearchBarOpener.addEventListener('click', (e)=> {
+      e.preventDefault()
+      this.openMobileSearch()
+    })
+
     if (this.timer) this.countdownTimer()
+  }
+
+  openMobileSearch() {
+    this.search.setAttribute('aria-hidden', 'false');
+    theme.slideDown(this.search, 200)
+    this.mobileSearchBarOpener.setAttribute('aria-expanded', 'true');
+    setTimeout(()=> {
+      this.search.querySelector('.headerSearch__input').focus();
+    }, 100)
+  }
+
+  closeMobileSearch() {
+    this.search.setAttribute('aria-hidden', 'true')
+    this.mobileSearchBarOpener.setAttribute('aria-expanded', 'false');
   }
 
   closeMenu() {
@@ -1796,6 +1894,7 @@ class header extends HTMLElement {
       this.mobileMenu.querySelectorAll('.subMenuList').forEach(el => {
         theme.slideUp(el, 200)
       })
+      if (this.search.getAttribute('aria-hidden') === 'false') this.closeMobileSearch()
     }
   }
 
@@ -1828,7 +1927,7 @@ class header extends HTMLElement {
 
   toggleMobileMenu(e, link) {
     const menu = link.querySelector('.megaMenu')
-    if (!menu && !menu.classList.contains('megaMenu__blank')) return
+    if (!menu) return
     menu.classList.add('active')
     if (e.target.closest('.megaMenu__itemHeading') || e.target.classList.contains('megaMenu__itemHeading')) {
       menu.classList.remove('active')
@@ -1876,6 +1975,32 @@ class header extends HTMLElement {
 }
 
 customElements.define('header-nav', header);
+
+class SlideTabSection extends HTMLElement {
+  constructor() {
+    super();
+    this.slider = this.querySelector('.jsSlickSlider')
+    this.tabsSwitcher = this.querySelectorAll('.slide-tab__inner-switcher')
+    this.tabs = this.querySelectorAll('.slide-tab__inner-tab')
+
+    if (this.slider) {
+      this.tabs.forEach(tab => {
+
+        tab.addEventListener('click', (e)=> {
+          const slideSize = e.target.dataset.slideSize
+          const slideIndex = e.target.dataset.slideIndex
+          const switcherPosition = 100 / Number(slideSize) * Number(slideIndex)
+          $(this.slider).slick('slickGoTo', slideIndex)
+          this.tabsSwitcher.forEach(switcher => {
+            switcher.style.left = `${switcherPosition}%`
+          })
+        })
+      })
+    }
+  }
+}
+
+customElements.define('slide-tab-section', SlideTabSection);
 
 class bundleMixMultiple extends HTMLElement {
   constructor() {

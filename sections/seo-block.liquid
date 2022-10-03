@@ -1,0 +1,53 @@
+{%- assign heading = section.settings.heading -%}
+{%- assign text = section.settings.text -%}
+{%- assign bg_color = section.settings.bg_color -%}
+{%- assign text_color = section.settings.text_color -%}
+
+{%- if heading != blank or text != blank -%}
+  <div class="seo" style="background-color: {{ bg_color }}; color: {{ text_color }}">
+    <div class="seo-wrapper page-wrapper">
+      {%- if heading != blank -%}
+        <h3 class="seo-heading">{{ heading }}</h3>
+      {%- endif -%}
+      {%- if text != blank -%}
+        <div class="seo-text">{{ text }}</div>
+      {%- endif -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+  {
+    "name": "SEO block",
+    "tag": "section",
+    "settings": [
+      {
+        "type": "color",
+        "id": "bg_color",
+        "label": "Background color",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text color",
+        "default": "#000000"
+      },
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading"
+      },
+      {
+        "type": "richtext",
+        "id": "text",
+        "label": "Text"
+      }
+    ],
+    "presets": [
+      {
+        "name": "SEO block"
+      }
+    ]
+  }
+{% endschema %}

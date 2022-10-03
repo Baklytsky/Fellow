@@ -5,6 +5,11 @@
       soldOut: "{{ 'products.product.sold_out' | t }}",
       unavailable: "{{ 'products.product.unavailable' | t }}"
     },
+    giftWrapping: {
+      giftWrappingEnable: "{{ settings.enable_gift_wrapping }}",
+      giftWrappingAvailable: "{{ all_products[settings.gift_box_product].available }}",
+      giftWrappingProductID: "{{ all_products[settings.gift_box_product].selected_or_first_available_variant.id  }}"
+    },
     {% if template.name == 'product' %}
     product: {{ product | json }},
     product_is_recommended: window.location.search.indexOf('pr_prod_strat') !== -1,

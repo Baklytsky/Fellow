@@ -17,7 +17,7 @@
   {%- assign table_style_class = 'pdpCompare__table-four' -%}
   {%- endcase -%}
 
-  {% if compare_product_array_size > 1 %}
+  {% if compare_product_array_size > 0 %}
     {%- assign compare_products_heading = product.metafields.custom_fields["compare_products_heading"] %}
     {%- assign display_order = product.metafields.custom_fields["compare_products_order"] %}
 

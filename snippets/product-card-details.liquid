@@ -17,7 +17,7 @@
             Product is available and on sale
           {% endcomment %}
           <div class="pdpCopy__price f aic">
-              <span class="strike card__price--regular ml1 pdpCopy__header-price rel">
+              <span class="strike card__price--regular ml1 pdpCopy__header-price rel pr025">
                 {{ product.selected_or_first_available_variant.compare_at_price | money_without_trailing_zeros }}
                 <div class="price-round-arrow">{% render 'icon' with 'round-arrow' %}</div>
               </span>
@@ -43,6 +43,7 @@
   <a href='{{ product.url }}' class='abs fill z2 js-product-link' aria-label='{{ product.title }}'></a>
 </div>
 
+{%- unless hide_reviews -%}
 {%- assign reviews_count = product.metafields.yotpo.reviews_count | plus: 0 -%}
 <div class="productCard_ratings f fdr aie mb05 mt05 rel"
      {% if reviews_count == 0 %}style="display:none;"{% endif %}>
@@ -51,5 +52,6 @@
   <a href="{{ product.url }}#pdp-reviews" class="abs x y z2"
      aria-label="{{ product.title }} rating stars"></a>
 </div>
+{%- endunless -%}
 
 

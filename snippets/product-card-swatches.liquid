@@ -1,7 +1,7 @@
 {%- assign reviews_count = product.metafields.yotpo.reviews_count | plus: 0 -%}
 {%- assign color_count = 0 -%}
 
-<div class='productCard__variants rel {% if reviews_count == 0 %}mt1{% endif %}'>
+<div class='productCard__variants rel {% if reviews_count == 0 or hide_reviews %}mt1{% endif %}'>
   <div class='productCard__options'>
     {% for product_option in product.options_with_values %}
       {% assign option_name = product_option.name | handleize %}
