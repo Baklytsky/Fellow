@@ -58,6 +58,26 @@ theme.handleize = function (str) {
   return str.toLowerCase().replace(/[^\w\u00C0-\u024f]+/g, "-").replace(/^-+|-+$/g, "");
 };
 
+theme.toggleSlickVideoPlay = function (slider, videoSlides) {
+  function togglePlay() {
+    videoSlides.each((i, video) => {
+      ($(video).parents('.slick-slide').hasClass('slick-active')) ? video.play() : video.pause()
+    })
+  }
+  togglePlay()
+
+  slider.on('afterChange', (event, slick, currentSlide) => {
+    togglePlay()
+  })
+}
+
+theme.toggleSlickArrows = function (slider, prevArrow, nextArrow) {
+  slider.on('afterChange', (event, slick, currentSlide) => {
+    (currentSlide === 0) ? prevArrow.addClass('is-hidden') : prevArrow.removeClass('is-hidden');
+    (currentSlide === slick.slideCount - 1) ? nextArrow.addClass('is-hidden') : nextArrow.removeClass('is-hidden');
+  })
+}
+
 theme.slickSlider = function () {
   $('[data-section-type="slick-slideshow"]').each(function () {
     const $slider = $(this).find('.jsSlickSlider');
@@ -82,6 +102,9 @@ theme.slickSlider = function () {
         theme.toggleSlickArrows($slider, $(prevArrow), $(nextArrow))
       }
     }
+
+    const videoSlides = $slider.find('video')
+    if (videoSlides.length) theme.toggleSlickVideoPlay($slider, videoSlides)
   });
 }
 
@@ -91,6 +114,7 @@ theme.checkSlickResponse = function (selector, config, response, maxMedia) {
   if (!$(selector).length) return
 
   function checkSlider() {
+    const videoSlides = $(selector).find('video')
     const condition = (maxMedia) ? $(window).width() < response : $(window).width() > response;
     if (condition) {
       const prevArrow = $(selector).parent().find('.jsPrevSlide');
@@ -104,9 +128,13 @@ theme.checkSlickResponse = function (selector, config, response, maxMedia) {
       if ($(selector)[0].hasAttribute('data-toggle-arrows') && $(prevArrow).length && $(prevArrow).length) {
         theme.toggleSlickArrows($(selector), $(prevArrow), $(nextArrow))
       }
+
+      if (videoSlides.length) theme.toggleSlickVideoPlay($(selector), videoSlides)
+
     } else {
       if ($(selector).hasClass('slick-initialized')) {
         $(selector).slick('unslick')
+        if (videoSlides.length) videoSlides.each((i, video) => video.play())
       }
     }
   }
@@ -115,14 +143,6 @@ theme.checkSlickResponse = function (selector, config, response, maxMedia) {
   $(window).resize(function () {
     checkSlider();
   });
-}
-
-theme.toggleSlickArrows = function (slider, prevArrow, nextArrow) {
-  slider.on('afterChange', (event, slick, currentSlide) => {
-    (currentSlide === 0) ? prevArrow.addClass('is-hidden') : prevArrow.removeClass('is-hidden');
-    (currentSlide === slick.slideCount - 1) ? nextArrow.addClass('is-hidden') : nextArrow.removeClass('is-hidden');
-    console.log(prevArrow)
-  })
 }
 
 theme.checkAllSlidersResponse = function () {
@@ -1582,23 +1602,24 @@ class MP4Video extends HTMLElement {
     if (this.playBtn) this.playBtn.addEventListener('click', ()=> this.videoPlay())
     if (this.pauseBtn) this.pauseBtn.addEventListener('click', ()=> this.videoPause())
     if (this.muteBtn) this.muteBtn.addEventListener('click', ()=> this.videoMute())
-    if (this.video) this.video.addEventListener('click', ()=> this.checkVideoState())
+    if (this.pauseBtn || this.playBtn) this.video.addEventListener('click', (e)=> this.checkVideoState(e))
   }
 
-  checkVideoState() {
+  checkVideoState(e) {
+    e.preventDefault();
     (this.video.paused) ? this.videoPlay() : this.videoPause()
   }
 
   videoPlay() {
     this.video.play()
-    this.playBtn.classList.add('hidden')
+    if (this.playBtn) this.playBtn.classList.add('hidden')
     if (this.pauseBtn) this.pauseBtn.classList.remove('hidden')
   }
 
   videoPause() {
     this.video.pause()
-    this.playBtn.classList.remove('hidden')
-    this.pauseBtn.classList.add('hidden')
+    if (this.playBtn) this.playBtn.classList.remove('hidden')
+    if (this.pauseBtn) this.pauseBtn.classList.add('hidden')
   }
 
   videoMute() {
@@ -1606,7 +1627,7 @@ class MP4Video extends HTMLElement {
     (muted)
         ? this.video.removeAttribute('muted')
         : this.video.setAttribute('muted', '')
-    this.muteBtn.classList.toggle('unmute-video')
+    if (this.muteBtn) this.muteBtn.classList.toggle('unmute-video')
   }
 }
 

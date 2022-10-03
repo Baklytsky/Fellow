@@ -60,7 +60,7 @@
           </tr>
           </thead>
           <tbody>
-          {%- for i in (1..10) -%}
+          {%- for i in (1..20) -%}
             {%- assign key_name = "comparison_" | append: i -%}
             {%- assign characteristic_name = section.settings[key_name] -%}
             {%- if characteristic_name != blank -%}

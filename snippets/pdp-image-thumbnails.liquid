@@ -26,10 +26,6 @@
 }
 {%- endcapture -%}
 
-<script>
-  console.log({{ product | json }})
-</script>
-
 {%- for variant in product.variants -%}
   {%- if variant.id == selected_variant.id -%}
     {%- for i in (1..10) -%}
@@ -153,7 +149,7 @@
                   {%- endif -%}
                   {%- assign media_alt = metafield_variant_image.alt | default: variant.title | append: ' - media' -%}
                   {%- if media.media_type == 'video' -%}
-                    <video class='x image-abs-cover' loop muted autoplay playsinline controls poster="{{ metafield_variant_image | img_url: "900x" }}">
+                    <video class='x image-abs-cover' loop muted autoplay playsinline controls preload="metadata" poster="{{ metafield_variant_image | img_url: "900x" }}">
                       {%- for source in media.sources -%}
                         <source src="{{ source.url }}" type="{{ source.mime_type }}">
                       {%- endfor -%}
