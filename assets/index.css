@@ -4340,12 +4340,16 @@ textarea {
 
 /*! purgecss start ignore */
 
-.slater-input {
-  border: 1px solid #000
+.input-wrapper__input {
+  border: 1px solid #B8B8B8;
+  border-radius: 5px;
 }
 
-.slater-input label {
-  display: none
+.input-wrapper__label {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 120%;
+  margin: 0 0 7px;
 }
 
 .radio-group[data-option-color] label:not(:last-child) .radio__title,
@@ -7881,20 +7885,56 @@ input[name=product_search_field] {
 }
 
 .account-wrapper {
-  min-height: 100vh;
-  padding-bottom: 5.33em;
-  padding-top: 120px
+  min-height: 40.6vh;
+  display: flex;
+  justify-content: center;
+}
+
+.account-wrapper .page-wrapper {
+  padding-top: 110px;
+  padding-bottom: 180px;
+  height: 100%;
+  display: flex;
 }
 
 .account-dialog {
-  max-width: 800px;
+  max-width: 50%;
   width: 100%;
-  padding: 5rem
+  padding: 0;
+}
+
+.account-login__login {
+  position: relative;
+}
+
+.account-login__login:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translateX(50%);
+  width: 1px;
+  height: 100%;
+  border: 1px solid #B9B9B8;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.account-heading {
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 100%;
+  margin: 0 0 26px;
 }
 
 @media screen and (min-width: 992px) {
   .account-dialog {
-    padding: 6rem
+    padding: 0 130px;
+  }
+
+  .account-heading {
+    font-size: 38px;
+    margin: 0 0 18px;
   }
 }
 

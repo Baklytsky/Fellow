@@ -23,10 +23,11 @@
   {{ className }}
 {%- endcapture -%}
 
-<div class='{{ cx }} slater-input' data-component='input-text'>
+<div class='{{ cx }}'>
+  <label for='{{ id }}' class='input-wrapper__label x'>{{ label }}</label>
   <input
     id='{{ id }}'
-    class='sans p x'
+    class='input-wrapper__input x'
     type='{{ type }}'
     name='{{ name }}'
     placeholder='{{ placeholder }}'
@@ -36,6 +37,4 @@
     spellcheck='{{ spellcheck }}'
     required='{{ required }}'
   />
-  <label for='{{ id }}' class='sans caps small track medium hide'>{{ label }}</label>
-  <span></span>
 </div>

@@ -1,6 +1,6 @@
-<div class='account-login x y account-wrapper bg-p ac f aic jcc' data-component='accountLogin'>
-  <div class='outer x'>
-    <div class='account-login__recover account-dialog px2 ma js-recover-dialog' style='display: none;'>
+<div class='account-wrapper'>
+  <div class='page-wrapper'>
+    <div class='account-login__recover account-dialog js-recover-dialog' style='display: none;'>
       <h2 class='h3 serif mb05'>Forgot your password?</h2>
       <p class='h6'>Enter your email and we will send you a password reset link.</p>
 
@@ -43,8 +43,8 @@
       <a href='/accounts/login' class='block mt1 link--underline small cg js-recover-cancel no-ajax'>Cancel</a>
     </div>
 
-    <div class='account-login__login account-dialog ma p2 js-login-dialog'>
-      <h1 class='serif mb05'>Sign In</h1>
+    <div class='account-login__login account-dialog js-login-dialog'>
+      <h1 class='account-heading'>Sign In</h1>
 
       {% form 'customer_login', class: 'ma' %}
         <div class='mb1 pb05'>
