@@ -175,11 +175,17 @@
       "title": "Login",
       "email": "Email",
       "password": "Password",
-      "forgot_password": "Forgot your password?",
+      "forgot_password": "Forgot password?",
       "sign_in": "Sign In",
-      "cancel": "Return to Store",
+      "create": "Create Account",
+      "log_out": "Log Out",
+      "log_in": "Log In",
+      "cancel": "Cancel",
       "guest_title": "Continue as a guest",
-      "guest_continue": "Continue"
+      "guest_continue": "Continue",
+      "create_title": "Create an Account",
+      "create_description": "First time here? Create an account for a delightfully seamless experience. Keep track of all your orders, save your shipping info, and more.",
+      "input_error": "Something went wrong. Please try again!"
     },
     "orders": {
       "title": "Order History",
@@ -219,11 +225,12 @@
       "success": "We've sent you an email with a link to update your password."
     },
     "reset_password": {
-      "title": "Reset account password",
-      "subtext": "Enter a new password for {{ email }}",
+      "title": "Reset Your Password",
+      "subtext": "Enter your email address to reset your password.",
       "password": "Password",
       "password_confirm": "Confirm Password",
-      "submit": "Reset Password"
+      "submit": "Send Email",
+      "cancel": "back to sign in"
     },
     "register": {
       "title": "Create Account",

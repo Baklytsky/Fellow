@@ -2002,6 +2002,55 @@ class SlideTabSection extends HTMLElement {
 
 customElements.define('slide-tab-section', SlideTabSection);
 
+class account extends HTMLElement {
+  constructor() {
+    super();
+    this.dialog = this.querySelectorAll('[data-dialog]')
+    this.toggleDialogBtn = this.querySelectorAll('[data-toggle-dialog]')
+    this.inputs = this.querySelectorAll('.input-wrapper')
+    this.errorMeseges = this.querySelectorAll('.account-error')
+    this.toglePassBtn = this.querySelectorAll('[data-togle-pass-visibility]')
+
+    this.toggleDialogBtn.forEach(btn => btn.addEventListener('click', (e)=> {
+      e.preventDefault()
+      this.toggleDialog()
+    }))
+
+    this.inputs.forEach(input => input.addEventListener('keyup', ()=> {
+      this.removeErrorStatus(input)
+    }))
+
+    this.toglePassBtn.forEach(btn => btn.addEventListener('click', ()=> {
+      this.togglePassVisibility(btn)
+    }))
+  }
+
+  toggleDialog() {
+    this.dialog.forEach(dialog => dialog.classList.toggle('active'))
+  }
+
+  removeErrorStatus (input) {
+    if (input.classList.contains('input-error')) {
+      this.inputs.forEach(input => input.classList.remove('input-error'))
+      this.errorMeseges.forEach(error => error.remove())
+    }
+  }
+
+  togglePassVisibility (btn) {
+    const input = btn.parentElement.querySelector('input')
+    btn.classList.toggle('show')
+    if (btn.classList.contains('show')) {
+      input.type = 'text'
+      btn.innerHTML = 'Hide'
+    } else {
+      input.type = 'password'
+      btn.innerHTML = 'Show'
+    }
+  }
+}
+
+customElements.define('account-element', account);
+
 class bundleMixMultiple extends HTMLElement {
   constructor() {
     super();

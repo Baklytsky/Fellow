@@ -130,5 +130,17 @@
     <polyline points="15 6 9 12 15 18"></polyline>
   </svg>
 
+{%- when 'customer-logo' -%}
+  <svg xmlns="http://www.w3.org/2000/svg" width="23" height="22" viewBox="0 0 23 22" fill="none">
+    <path d="M12 11C14.7614 11 17 8.76142 17 6C17 3.23858 14.7614 1 12 1C9.23858 1 7 3.23858 7 6C7 8.76142 9.23858 11 12 11Z" stroke="black" stroke-width="2" stroke-miterlimit="10"/>
+    <path d="M22 21C22 18.9497 21.7657 16.5867 20.0004 15.4515C18.5694 14.5314 16.1325 14 12 14C7.86752 14 5.43092 14.5314 4 15.4515C2.23466 16.5867 2 18.9497 2 21" stroke="black" stroke-width="2" stroke-miterlimit="10" stroke-linecap="square"/>
+  </svg>
+
+{%- when 'error' -%}
+  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
+    <circle cx="14" cy="14" r="9" stroke="#D0331F" stroke-width="2"/>
+    <line x1="14" y1="10" x2="14" y2="14" stroke="#D0331F" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="14" cy="17" r="1" fill="#D0331F"/>
+  </svg>
 
 {% endcase %}

@@ -355,6 +355,15 @@
         "type": "url",
         "id": "social_linkedin_link",
         "label": "LinkedIn link"
+      },
+      {
+        "type": "header",
+        "content": "Contact Us"
+      },
+      {
+        "type": "url",
+        "id": "contact_us_link",
+        "label": "Contact Us link"
       }
     ]
   },

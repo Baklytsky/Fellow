@@ -4337,19 +4337,89 @@ textarea {
   border: 1px solid var(--black)
 }
 
+.input-wrapper {
+  margin-bottom: 18px;
+}
 
-/*! purgecss start ignore */
+.input-wrapper__error {
+  margin: 9px 0 5px;
+  display: none;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  text-transform: capitalize;
+  color: #D0331F;
+}
+
+.input-wrapper.input-error .input-wrapper__error {
+  display: inline-block;
+}
 
 .input-wrapper__input {
   border: 1px solid #B8B8B8;
   border-radius: 5px;
 }
 
+.input-wrapper.input-error .input-wrapper__input {
+  border: 1px solid #C20000;
+}
+
 .input-wrapper__label {
+  display: block;
   font-weight: 400;
   font-size: 14px;
   line-height: 120%;
   margin: 0 0 7px;
+}
+
+.input-wrapper.input-error .input-wrapper__label {
+  color: #D0331F;
+}
+
+.js-recover-trigger,
+.input-wrapper__password-toggle {
+  display: block;
+  padding: 0;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  text-decoration-line: underline;
+  border: none;
+  background-color: transparent;
+}
+
+.input-wrapper__password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 5px;
+  transform: translate(0, -50%);
+  font-size: 14px;
+  background-color: white;
+  padding: 5px;
+}
+
+.button.account-btn {
+  margin: 40px 0 18px;
+  padding: 16px;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  text-align: center;
+  text-transform: capitalize;
+  display: block;
+}
+
+.account-subtitle {
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.account-subtitle a {
+  text-decoration: underline;
+  font-weight: 500;
+  margin-left: 5px;
 }
 
 .radio-group[data-option-color] label:not(:last-child) .radio__title,
@@ -7894,47 +7964,154 @@ input[name=product_search_field] {
   padding-top: 110px;
   padding-bottom: 180px;
   height: 100%;
+}
+
+.account-login__login-wrapper {
+  display: flex;
+}
+
+.account-login__recover-wrapper {
+  width: 100%;
+  margin-bottom: 130px;
   display: flex;
 }
 
 .account-dialog {
   max-width: 50%;
   width: 100%;
-  padding: 0;
+  padding: 0 130px;
 }
 
-.account-login__login {
-  position: relative;
-}
-
-.account-login__login:after {
+.account-login__create:after {
   content: '';
   display: block;
   position: absolute;
   top: 0;
-  right: 0;
+  left: 0;
   transform: translateX(50%);
   width: 1px;
   height: 100%;
-  border: 1px solid #B9B9B8;
+  background-color: #B9B9B8;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .account-heading {
   font-weight: 500;
-  font-size: 26px;
+  font-size: 38px;
+  margin: 0 0 18px;
   line-height: 100%;
-  margin: 0 0 26px;
+  display: inline-block;
+  width: 100%;
 }
 
-@media screen and (min-width: 992px) {
+.account-text {
+  margin: 18px 0 0;
+  line-height: 130%;
+  font-size: 16px;
+  display: inline-block;
+  width: 100%;
+}
+
+.account-login__recover-wrapper .account-text {
+  margin: 0 0 18px;
+}
+.js-recover-cancel {
+  display: block;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  border: none;
+  background-color: transparent;
+}
+
+.js-recover-cancel span {
+  text-decoration: underline;
+}
+
+.js-recover-dialog,
+.js-login-dialog {
+  display: none;
+}
+
+.js-recover-dialog.active,
+.js-login-dialog.active {
+  display: flex;
+}
+
+.account-error {
+  margin-bottom: 26px;
+  width: 100%;
+  display: flex;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 120%;
+  color: #D0331F;
+}
+
+.account-error button {
+  display: inline;
+}
+
+.account-error svg {
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+@media screen and (max-width: 1199px) {
   .account-dialog {
-    padding: 0 130px;
+    padding: 0 50px;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .account-login__login-wrapper {
+    flex-direction: column;
+  }
+
+  .account-wrapper .page-wrapper {
+    padding-top: 50px;
+    padding-bottom: 94px;
+  }
+
+  .account-login__login.account-dialog {
+    padding-bottom: 42px;
+  }
+
+  .account-login__create.account-dialog {
+    padding-top: 42px;
+  }
+
+  .account-login__create:after {
+    content: '';
+    transform: translate(0, -50%);
+    width: 100%;
+    height: 1px;
+    background-color: #B9B9B8;
+    box-shadow: none;
+  }
+
+  .account-dialog {
+    padding: 0;
+    max-width: 100%;
   }
 
   .account-heading {
-    font-size: 38px;
-    margin: 0 0 18px;
+    font-size: 26px;
+    margin: 0 0 26px;
+  }
+
+  .button.account-btn {
+    margin: 40px auto 18px;
+  }
+
+  .account-subtitle {
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .button.account-btn {
+    max-width: 100%;
   }
 }
 

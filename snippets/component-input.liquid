@@ -25,16 +25,27 @@
 
 <div class='{{ cx }}'>
   <label for='{{ id }}' class='input-wrapper__label x'>{{ label }}</label>
-  <input
-    id='{{ id }}'
-    class='input-wrapper__input x'
-    type='{{ type }}'
-    name='{{ name }}'
-    placeholder='{{ placeholder }}'
-    value='{{ value }}'
-    autocomplete='{{ autocomplete }}'
-    autocapitalize='{{ autocapitalize }}'
-    spellcheck='{{ spellcheck }}'
-    required='{{ required }}'
-  />
+  <div class="rel">
+    <input
+            id='{{ id }}'
+            class='input-wrapper__input x'
+            type='{{ type }}'
+            name='{{ name }}'
+            placeholder='{{ placeholder }}'
+            value='{{ value }}'
+            autocomplete='{{ autocomplete }}'
+            autocapitalize='{{ autocapitalize }}'
+            spellcheck='{{ spellcheck }}'
+            required='{{ required }}'
+            {% if type == 'password' %}style="padding-right: 60px"{% endif %}
+    />
+    {%- if type == 'password' -%}
+      <button type="button"
+              class="input-wrapper__password-toggle"
+              data-togle-pass-visibility>
+        Show
+      </button>
+    {%- endif -%}
+  </div>
+  <p class="input-wrapper__error">{{ 'customer.login.input_error' | t }}</p>
 </div>
