@@ -6,15 +6,14 @@
       flex-direction: {{ section.settings.layout }};
     }
   </style>
-  {% assign image_url = section.settings.image | img_url: '1000x' %}
   <div class="news-module__image {% if section.settings.image_fit %} is-scaled{% endif %}">
-    {%
-      include 'component-image' with
-      src: image_url,
-      alt: alt,
-      className: 'image',
-      fill: true
-    %}
+    <div class="image">
+      {% render 'image-lazy',
+        image: section.settings.image,
+        size: 'medium',
+        alt: alt,
+        loader: true %}
+    </div>
   </div>
 
   {% if section.settings.cta_url != blank and section.settings.cta_text != blank %}

@@ -2,17 +2,14 @@
 {% comment %} Always include product-options, product.js:20 reads from it for ATC {% endcomment %}
 {% include 'product-options' %}
 
-<div class='pb15' {% if section.settings.show_quantity_selector !=true or product.tags contains 'gift' %}style='display:none'{% endif %}>
-  {% include 'component-counter' %}
+<div class='pb15' {% if section.settings.show_quantity_selector != true or product.tags contains 'gift' %}style='display:none'{% endif %}>
+  <div class="counter-wrapper rel">
+    <label for="productQuantity" class='py025'>
+      <span class='caps small mb05 block'><strong>Quantity</strong></span>
+    </label>
+    {%- include 'component-counter' id: 'productQuantity', class: 'counter', single: false, val: 1, min: 1, max: 50 -%}
+  </div>
 </div>
-
-{% comment %}
-Uncomment to include
-<div class='f aic py1'>
-  <span data-selected-var-price>{{ current_variant.price | money }}</span>
-  <s data-compare-price style='display: none'>{{ current_variant.compare_at_price | money }}</s>
-</div>
-{% endcomment %}
 
 {% if template contains 'gift_card' %}
   <div class='f fdc jcb' id='atc-wrapper'>
@@ -32,11 +29,6 @@ Uncomment to include
           Add to Cart
         {% endif %}
       </span>
-      {%- comment -%}
-        <span> | </span>
-        <span data-selected-var-price>{{ current_variant.price | money }}</span>
-      {%- endcomment -%}
-
       {%- assign disableVal = false -%}
     {% else %}
       {% if product.tags contains 'discontinued' %}

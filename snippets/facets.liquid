@@ -20,7 +20,7 @@
         <span class="selected-facets-count"></span>
         {% render 'icon' with 'filter' %}
       </slide-toggle>
-      <div class="facet-header-sort-by rel" data-dropdown data-group-name="sort_by">
+      <dropdown-toggle class="facet-header-sort-by rel" data-dropdown data-group-name="sort_by">
         <button type="button"
                 class="facet-header-sort-by-opener rel">
           {{'collections.general.facet_sort_by' | t }} {% render 'icon' with 'dropdown-small' %}
@@ -29,7 +29,7 @@
             data-dropdown-content>
           {%- render 'facets-sort-by-values' collection: collection -%}
         </ul>
-      </div>
+      </dropdown-toggle>
     </div>
     <div id="facet-group-wrapper" class="facet-group-wrapper" data-slide-target="facets">
       <script id="facet-group-template" type="text/x-handlebars-template">

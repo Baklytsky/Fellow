@@ -22,6 +22,7 @@
       name='{{ name | default: label | strip }}'
       value='{{ value }}'
       title='{{ selTitle }}'
+      class="js-select"
       {{ attributes }}
       {% if ariaHidden %}aria-hidden='true'{% endif %}
       {% if required %}required{% endif %}

@@ -1,4 +1,4 @@
-{%- assign enable_section = section.settings.enable_section -%}
+{%- assign full_width_section = section.settings.full_width_section -%}
 {%- assign section_bg = section.settings.section_bg -%}
 {%- assign video_mp4 = section.settings.video_mp4 -%}
 {%- assign video_poster = section.settings.video_poster -%}
@@ -19,10 +19,15 @@
 {%- assign button_text = section.settings.button_text -%}
 {%- assign btn_type = section.settings.btn_type -%}
 {%- assign image_class_name = 'landing__hero-image' -%}
+{%- assign show_default_controls = section.settings.show_default_controls -%}
+{%- assign mobile_format_16_9 = section.settings.mobile_format_16_9 -%}
 
-{%- if enable_section and image != blank or enable_section and video_mp4 != blank -%}
-  <section id="landing__hero-{{ section.id }}"
-           class="landing__hero landing__hero--{{ content_position }} {% if show_hide_video == 'mobile' %}landing__hero-hide-video-on-mobile{% endif %} {% if section.settings.show_mute_button %}landing__hero-show-volume-btn{% endif %}"
+{%- if image != blank or video_mp4 != blank -%}
+  {%- unless full_width_section -%}
+    <div class="landing__hero--wrapper" style="background-color: {{ section_bg }}; color: {{ text_color }};">
+  {%- endunless -%}
+  <mp4-video id="landing__hero-{{ section.id }}"
+           class="landing__hero landing__hero--{{ content_position }} {% unless full_width_section %}page-wrapper{% endunless %} {% if mobile_format_16_9 %}landing__hero-mobile-16-9{% endif %} {% if show_hide_video == 'mobile' %}landing__hero-hide-video-on-mobile{% endif %} {% if section.settings.show_mute_button %}landing__hero-show-volume-btn{% endif %}"
            style="background-color: {{ section_bg }}; color: {{ text_color }};">
     {%- if image_mobile != blank -%}
       {%- assign image_class_name = 'landing__hero-image desktop-image' -%}
@@ -37,6 +42,7 @@
       </noscript>
     {%- endif -%}
     {%- if video_mp4 != blank -%}
+      {%- unless show_default_controls -%}
       {%- assign image_class_name = image_class_name | append: ' landing__hero-image-with-video' -%}
       <div class="pause-button
         {% if section.settings.video_autoplay == false or section.settings.video_muted == false %} hidden {% endif %}">
@@ -45,13 +51,15 @@
       <div class="play-button {% if section.settings.video_autoplay and section.settings.video_muted %} hidden {% endif %}">
         {% render 'icon' with 'play-btn-mp4' %}
       </div>
+      {%- endunless -%}
       <video class="landing__hero-video media-video {% if show_hide_video == 'mobile' %}hide-on-mobile{% endif %}"
              id="videos" loop {% if section.settings.video_muted %} muted
              {% endif %}playsinline {% if section.settings.video_autoplay and section.settings.video_muted %} autoplay {% endif %}
-             {% if video_poster != blank %} poster="{{ video_poster | img_url: "2048x" }}" {% endif %}>
+             {% if video_poster != blank %} poster="{{ video_poster | img_url: "2048x" }}" {% endif %}
+              {% if show_default_controls %} controls {% endif %}>
         <source src="{{ video_mp4 }}" type="video/mp4">
       </video>
-      {%- if section.settings.show_mute_button -%}
+      {%- if section.settings.show_mute_button and show_default_controls == false -%}
         <button class="mute-video {% if section.settings.video_muted == true %}unmute-video{% endif %}">
           {% render 'icon' with 'mic' %}
           {% render 'icon' with 'mic-off' %}
@@ -104,7 +112,10 @@
         </div>
       </div>
     {%- endif -%}
-  </section>
+  </mp4-video>
+  {%- unless full_width_section -%}
+    </div>
+  {%- endunless -%}
 
   {%- if overlay_opacity != blank -%}
     <style>
@@ -123,14 +134,21 @@
   "settings": [
     {
       "type": "checkbox",
-      "id": "enable_section",
-      "label": "Enable section"
+      "id": "full_width_section",
+      "label": "Full width",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_format_16_9",
+      "label": "Mobile format 16/9",
+      "default": false
     },
     {
       "type": "color",
       "id": "section_bg",
       "label": "Section background color",
-      "default": "#FFFFFF"
+      "default": "#000000"
     },
     {
       "type": "header",
@@ -167,6 +185,12 @@
       "default": false
     },
     {
+      "type": "checkbox",
+      "id": "show_default_controls",
+      "label": "Show default video controls",
+      "default": false
+    },
+    {
       "type": "select",
       "id": "show_hide_video",
       "options": [
@@ -198,7 +222,7 @@
       "step": 10,
       "unit": "%",
       "label": "Overlay opacity",
-      "default": 70
+      "default": 10
     },
     {
       "type": "header",

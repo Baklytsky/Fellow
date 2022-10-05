@@ -17,24 +17,29 @@
                 <section class='addlFeature__details'>
                   {% if iconSrc != blank %}
                     <div class="addlFeature__icon addlFeature__icon-desktop">
-                      {% include 'component-image' with
-                        src: iconSrc,
-                        alt: alt,
-                        className: 'image',
-                        fill: true,
-                        centered: false %}
+                      <div class="addlFeature__icon-wrapper x y f rel fill rel">
+                        {% render 'image-lazy-metafields',
+                          image: iconSrc,
+                          class_name: '',
+                          alt: addl_feature_title,
+                          size: 'small',
+                          loader: true  %}
+                      </div>
                     </div>
                   {% endif %}
-                  <div class="pdpAdditionalFeatures__mobile-dropdown x" data-dropdown>
+                  <slide-toggle class="pdpAdditionalFeatures__mobile-dropdown x"
+                       data-slide-toggle="{{ addl_feature_title | handleize }}-{{ forloop.index0 }}">
                     {%- if iconSrc != blank or addl_feature_title != blank -%}
                       {% if iconSrc != blank %}
                         <div class="addlFeature__icon">
-                          {% include 'component-image' with
-                            src: iconSrc,
-                            alt: alt,
-                            className: 'image',
-                            fill: true,
-                            centered: false %}
+                          <div class="addlFeature__icon-wrapper rel">
+                            {% render 'image-lazy-metafields',
+                              image: iconSrc,
+                              class_name: '',
+                              alt: addl_feature_title,
+                              size: 'small',
+                              loader: true  %}
+                          </div>
                         </div>
                       {% endif %}
                       {%- if addl_feature_title != blank -%}
@@ -46,16 +51,15 @@
                         {% render 'icon' with 'dropdown' %}
                       </div>
                     {%- endif -%}
-                  </div>
-                  <div class="addlFeature__copy hide-mobile" data-dropdown-list>
-                    <div class="dropdownContent--animate-block">
+                  </slide-toggle>
+                  <div class="addlFeature__copy hide-mobile"
+                       data-slide-target="{{ addl_feature_title | handleize }}-{{ forloop.index0 }}">
                       <h3 class="addlFeature__title hide-mobile">
                         {{ addl_feature_title }}
                       </h3>
                       <p>
                         {{ addl_feature_copy }}
                       </p>
-                    </div>
                   </div>
                 </section>
               </div>

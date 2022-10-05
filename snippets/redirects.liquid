@@ -4,3 +4,11 @@
   or request.path == '/products' -%}
   <script>window.location = '/'</script>
 {%- endif -%}
+
+<script>
+  window.onpageshow = function(event) {
+    if (event.persisted) {
+      window.location.reload()
+    }
+  };
+</script>

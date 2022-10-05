@@ -3,10 +3,24 @@
 
 {%- if _blocks.size > 1 -%}
   {%- assign init_slider = true -%}
+  {%- capture 'slick-config' -%}
+    {
+    "slidesToShow": 1,
+    "slidesToScroll": 1,
+    "dots": true,
+    "arrows": false,
+    "autoplay": true,
+    "speed": 500,
+    "autoplaySpeed": 7000,
+    "adaptiveHeight": true
+    }
+  {%- endcapture -%}
 {%- endif -%}
 
-<div class='hero__module f fw jcc aic rel z2 x{% if section.settings.addMargin == true %} is-marginBottom{% endif %}' data-component='heroSlider'>
-  <div class='hero__slider x y'{% if init_slider %} data-heroSlider{% else %} style="opacity: 1; visibility: visible;"{% endif %}>
+<div class='hero__module f fw jcc aic rel z2 x{% if section.settings.addMargin == true %} is-marginBottom{% endif %}'
+        {% if init_slider %} data-section-type='slick-slideshow' data-slick-config='{{- slick-config -}}'{% endif %}>
+  <div class='hero__slider x y {% if init_slider %}jsSlickSlider{% endif %}'
+          {% unless init_slider %} style="opacity: 1; visibility: visible;"{% endunless %}>
     {%- assign aspect_ratio = blank -%}
     {% for block in section.blocks %}
       {% assign header = block.settings.heroSlide__header %}
@@ -40,74 +54,6 @@
 
         {% include 'split-slide-single' %}
       {% endif %}
-    {% endfor %}
-  </div>
-  {% assign firstBg = 0 %}
-  {% for block in section.blocks %}
-    {% if forloop.first == true %}
-      {% assign firstBg = block.settings.subSlide__bgColor %}
-      {% assign firstColor = block.settings.subSlide__textColor %}
-    {% endif %}
-  {% endfor %}
-  <div class='hero__mobile_subslide x y js-mobile-subslide'
-       style="display: none; background-color: {{ firstBg }}; color: {{ firstColor }}">
-    {% for block in section.blocks %}
-      {% assign subheader = block.settings.heroSlide__subheader %}
-      {% assign ctaCopy = block.settings.heroSlide__ctaCopy %}
-      {% assign ctaURL = block.settings.heroSlide__ctaURL %}
-      {% assign ctaSubtext = block.settings.heroSlide__ctaSubtext %}
-      {% assign ctaCopy2 = block.settings.heroSlide__ctaCopy2 %}
-      {% assign ctaURL2 = block.settings.heroSlide__ctaURL2 %}
-      {% assign ctaColor2 = block.settings.heroSlide__ctaColor2 %}
-      {% assign ghostBtn = block.settings.heroSlide__ghostBtn %}
-      {% comment %} Define First Block {% endcomment %}
-      {% assign firstBlock = false %}
-      {% if forloop.first == true %}
-        {% assign firstBlock = true %}
-      {% else %}
-        {% assign firstBlock = false %}
-      {% endif %}
-      {% comment %} Define Subslide CTA Color based on Text Color {% endcomment %}
-      {% if block.settings.subSlide__textColor == '#FFFFFF' %}
-        {% assign ctaClasses = 'btn btn--lg btn--light' %}
-      {% else %}
-        {% assign ctaClasses = 'btn btn--lg btn--dark' %}
-      {% endif %}
-
-      {% if ctaColor2 == 'white' %}
-        {%  assign ctaClasses2 = 'btn btn--lg btn--light mt05' %}
-      {% else %}
-        {% assign ctaClasses2 = 'btn btn--lg btn--dark mt05' %}
-      {% endif %}
-
-      <div id='hero__text--{{ block.id }}' class='hero__subheader--mobile f fdc aic jcc ac js-mobile-subslide-slide{% if firstBlock == true %} is-visible active{% endif %}' data-color='{{ block.settings.subSlide__textColor }}' data-bg-color='{{ block.settings.subSlide__bgColor }}'>
-        {% if subheader != blank %}
-          <span class='h3 f aic caps'>{{ subheader }}</span>
-        {% else %}
-          <div class='pt3rem'></div>
-        {% endif %}
-        {% if ctaCopy != blank %}
-          {%
-            include 'component-button' with
-            tag: 'a',
-            cta: ctaCopy,
-            href: ctaURL,
-            className: ctaClasses
-          %}
-        {% endif %}
-        {% if ctaCopy2 != blank %}
-          {%
-            include 'component-button' with
-            tag: 'a',
-            cta: ctaCopy2,
-            href: ctaURL2,
-            className: ctaClasses2
-          %}
-        {% endif %}
-        {% if ctaSubtext != blank %}
-          <p class='hero__ctaSubtext'>{{ ctaSubtext }}</p>
-        {% endif %}
-      </div>
     {% endfor %}
   </div>
 </div>

@@ -12,29 +12,29 @@
   <div class="collectionModule" style="background-color: {{ collection_module_bg }}">
     <div class="collectionModule__wrapper">
       {%- if collection_module_image != blank -%}
-        {%- assign desctop_image_class = 'image image-abs-contain' -%}
+        {%- assign desktop_image_class = 'image image-abs-contain' -%}
 
         {%- if collection_module_image_mobile != blank -%}
-          {%- assign desctop_image_class = 'image image-abs-contain hide-tablet' -%}
+          {%- assign desktop_image_class = 'image image-abs-contain hide-tablet' -%}
         {%- endif -%}
         <div class="collectionModule__media rel">
-          {%
-            include 'component-image' with
-            src: collection_module_image,
-            alt: collection_module_title,
-            className: desctop_image_class,
-            absolute: true,
-            fill: true
-          %}
-          {%- if collection_module_image_mobile != blank -%}
-            {%
-              include 'component-image' with
-              src: collection_module_image_mobile,
+          <div class="{{ desktop_image_class }}">
+            {% render 'image-lazy-metafields',
+              image: collection_module_image,
+              class_name: desctop_image_class,
               alt: collection_module_title,
-              className: 'image image-abs-contain hide-tablet-desk',
-              absolute: true,
-              fill: true
-            %}
+              size: 'medium',
+              loader: true %}
+          </div>
+          {%- if collection_module_image_mobile != blank -%}
+            <div class="image image-abs-contain hide-tablet-desk">
+              {% render 'image-lazy-metafields',
+                image: collection_module_image_mobile,
+                class_name: 'image image-abs-contain hide-tablet-desk',
+                alt: collection_module_title,
+                size: 'medium',
+                loader: true %}
+            </div>
           {%- endif -%}
         </div>
       {%- endif -%}

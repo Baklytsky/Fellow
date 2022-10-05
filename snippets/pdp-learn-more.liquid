@@ -8,36 +8,38 @@
   {% endif %}
 
   {% if product.metafields.custom_fields["learn_more"] != blank %}
-    <section class='pdpLearnMore {% if display_order %} o-{{ display_order }}{% endif %}'>
+    <pdp-learn-more class='pdpLearnMore {% if display_order %} o-{{ display_order }}{% endif %}'>
       <h3 class="pdpLearnMore__heading">Learn More</h3>
       <div class="pdpLearnMore__wrapper">
         {% for item in product.metafields.custom_fields["learn_more"] %}
           <div class="pdpLearnMore__dropdown-wrapper">
-            <div class="pdpLearnMore__dropdown pdpLearnMore__dropdown--{{ forloop.index0 }} dropdown">
+            <div class="pdpLearnMore__dropdown">
               {% if item["learn_more_block_title"] != blank %}
-                <div class="pdpLearnMore__dropdown-header f jcb aic" data-dropdown>
+                <slide-toggle class="pdpLearnMore__dropdown-header f jcb aic"
+                     data-slide-toggle="{{ item["learn_more_block_title"] | handleize }}-{{ forloop.index0 }}">
                   <div class="pdpLearnMore__dropdown-title">
                     {{ item["learn_more_block_title"] }}
                   </div>
                   <div class="dropdownHeader-icon">
                     {% render 'icon' with 'dropdown' %}
                   </div>
-                </div>
+                </slide-toggle>
               {% endif %}
               {% if item["learn_more_links"] != blank %}
-                <div class="pdpLearnMore__dropdown-content" data-dropdown-list style="display: none">
-                  <div class="dropdownContent--animate-block">
+                <div class="pdpLearnMore__dropdown-content"
+                     data-slide-target="{{ item["learn_more_block_title"] | handleize }}-{{ forloop.index0 }}">
+                  <div class="pdpLearnMore__dropdown-content-wrapper">
                     {% for learn_more_links_item in item["learn_more_links"] %}
                       {%- if forloop.index <= 4 -%}
                         <div class="pdpLearnMore__dropdown-link-item">
                           {% if learn_more_links_item["link_title"] != blank and learn_more_links_item["link_url"] != blank %}
-                            <a href="{{ learn_more_links_item["link_url"] }}" class="">{{ learn_more_links_item["link_title"] }}</a>
+                            <a href="{{ learn_more_links_item["link_url"] }}">{{ learn_more_links_item["link_title"] }}</a>
                           {% endif %}
                         </div>
                       {%- else -%}
                         <div class="pdpLearnMore__dropdown-link-item" style="display: none">
                           {% if learn_more_links_item["link_title"] != blank and learn_more_links_item["link_url"] != blank %}
-                            <a href="{{ learn_more_links_item["link_url"] }}" class="">{{ learn_more_links_item["link_title"] }}</a>
+                            <a href="{{ learn_more_links_item["link_url"] }}">{{ learn_more_links_item["link_title"] }}</a>
                           {% endif %}
                         </div>
                       {%- endif -%}
@@ -55,7 +57,7 @@
           </div>
         {% endfor %}
       </div>
-    </section>
+    </pdp-learn-more>
   {% endif %}
 
 {% endif %}

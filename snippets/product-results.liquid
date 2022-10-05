@@ -15,7 +15,7 @@
                {{#unless reviews_count }}style="display:none;"{{/unless}}>
             <div class="yotpo bottomLine" style="display:inline-block;" data-product-id="{{ id }}"></div>
             <span class="productCard__reviewNum">({{ reviews_count }})</span>
-            <a href="{{ url }}#pdp-reviews" class="abs x y z5" aria-label="{{ title }} rating stars"></a>
+            <a href="{{ url }}#pdp-reviews" class="abs x y z2" aria-label="{{ title }} rating stars"></a>
           </div>
           {{/unless}}
           <div class="collection__product-info">
@@ -40,7 +40,7 @@
         <div class="collection__product-variants">
           {{#if variants.length}}
             {{#each variants}}
-            <div class='productCard'>
+            <product-card class='productCard'>
               <div class='productCard__content y'>
                 <div aria-label='Image of {{ title }}' class='productCard__img rel z0'>
                 {{#if badge}}
@@ -52,12 +52,12 @@
                          class="productCard__image image image-abs-cover">
                   </div>
                   {{#unless bundle}}
-                  <div class="productCardImg__QuickView">
+                  <modal-opener class="productCardImg__QuickView" data-modal="#PopupModal--quick-add">
                     <button class="productCardImg__QuickViewButton js-product-view"
-                            data-quick-view="{{ variant_url }}&view=quick-view" type="button">
+                            data-quick-view="{{ variant_url }}&view=quick-view" type="button" aria-haspopup="dialog">
                       + Quick Add
                     </button>
-                  </div>
+                  </modal-opener>
                   {{/unless }}
                   <a class='productCardImg__ProductLink abs fill z2 js-product-link'
                      href='{{ variant_url }}'
@@ -102,7 +102,7 @@
                      {{#unless reviews_count }}style="display:none;"{{/unless}}>
                   <div class="yotpo bottomLine" style="display:inline-block;" data-product-id="{{ product_id }}"></div>
                   <span class="productCard__reviewNum">({{ reviews_count }})</span>
-                  <a href="{{ product_url }}#pdp-reviews" class="abs x y z5" aria-label="{{ title }} rating stars"></a>
+                  <a href="{{ product_url }}#pdp-reviews" class="abs x y z2" aria-label="{{ title }} rating stars"></a>
                 </div>
                 {{/if}}
 
@@ -112,7 +112,7 @@
                 {{/if}}
               {{/unless }}
               </div>
-            </div>
+            </product-card>
             {{/each }}
           {{/if}}
         </div>

@@ -2,7 +2,7 @@
   <h3 class='productCard__title js-product-card-title'>{{ title }}</h3>
   <div class="productCard__price js-product-card-price">
     {% if product.available %}
-      {% if product.price_varies and product.compare_at_price == blank %}
+      {% if product.price_varies and product.selected_or_first_available_variant.compare_at_price == blank %}
         <p class='productCard__from eyebrow'>{{ 'products.product.from_text' | t }}</p>
       {% else %}
         <p class='productCard__eyebrow--placeholder'></p>
@@ -12,44 +12,46 @@
     {% endif %}
     <div class="ar productCard__price-wrapper">
       {% if product.available %}
-        {% if product.compare_at_price > product.price %}
+        {% if product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price %}
           {% comment %}
             Product is available and on sale
           {% endcomment %}
           <div class="pdpCopy__price f aic">
-              <span class="inline-block strike card__price--regular ml1 pdpCopy__header-price pdpCopy__header-price-small rel">
-                {{ product.compare_at_price | money_without_trailing_zeros }}
+              <span class="strike card__price--regular ml1 pdpCopy__header-price rel pr025">
+                {{ product.selected_or_first_available_variant.compare_at_price | money_without_trailing_zeros }}
                 <div class="price-round-arrow">{% render 'icon' with 'round-arrow' %}</div>
               </span>
             <span class="visually-hidden">{{ 'products.current_variant.regular_price' | t }}</span>
-            <h2 class="inline-block card__price--sale ml1 pdpCopy__header-price">
-              {{ product.price | money_without_trailing_zeros }}
+            <h2 class="card__price--sale ml1 pdpCopy__header-price">
+              {{ product.selected_or_first_available_variant.price | money_without_trailing_zeros }}
             </h2>
           </div>
         {% else %}
           {% comment %}
             Product is available and not on sale
           {% endcomment %}
-          <h2 class="ml1 pdpCopy__header-price">{{ product.price | money | remove: '.00' }}</h2>
+          <h2 class="ml1 pdpCopy__header-price">{{ product.selected_or_first_available_variant.price | money | remove: '.00' }}</h2>
         {% endif %}
       {% else %}
         {% comment %}
           Sold Out
         {% endcomment %}
-        <h2 class='strike'>{{ product.price | money_without_trailing_zeros }}</h2>
+        <h2 class='strike'>{{ product.selected_or_first_available_variant.price | money_without_trailing_zeros }}</h2>
       {% endif %}
     </div>
   </div>
   <a href='{{ product.url }}' class='abs fill z2 js-product-link' aria-label='{{ product.title }}'></a>
 </div>
 
+{%- unless hide_reviews -%}
 {%- assign reviews_count = product.metafields.yotpo.reviews_count | plus: 0 -%}
 <div class="productCard_ratings f fdr aie mb05 mt05 rel"
      {% if reviews_count == 0 %}style="display:none;"{% endif %}>
   <div class="yotpo bottomLine" style="display:inline-block;" data-product-id="{{ product.id }}"></div>
   <span class="productCard__reviewNum">({{ reviews_count }})</span>
-  <a href="{{ product.url }}#pdp-reviews" class="abs x y z5"
+  <a href="{{ product.url }}#pdp-reviews" class="abs x y z2"
      aria-label="{{ product.title }} rating stars"></a>
 </div>
+{%- endunless -%}
 
 

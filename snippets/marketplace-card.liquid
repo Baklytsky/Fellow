@@ -2,7 +2,7 @@
 {% render 'marketplace-card', product: , class_name: , block: , uniq_id:  %}
 {% endcomment %}
 
-<div class="cmProducts__card {{ class_name }}">
+<marketplace-card class="cmProducts__card {{ class_name }}">
   <a href="{{ product.url }}" class="cmProducts__cardImage rel">
     {% render 'image', image: product.featured_image, class_name: 'image-abs-cover', %}
   </a>
@@ -46,4 +46,4 @@
     {%- endfor -%}
   </ul>
   {% render 'marketplace-card-form', product: product, uniq_id: uniq_id %}
-</div>
+</marketplace-card>

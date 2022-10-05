@@ -2,13 +2,13 @@
 {% if article.image %}
   {%- assign imgSrc = article.image | img_url: '500x' -%}
   <div class='col'>
-    {%
-      include 'component-image' with
-      src: imgSrc,
-      alt: alt,
-      className: 'image',
-      fill: false
-    %}
+    <div class="image">
+      {% render 'image-lazy',
+        image: article.image,
+        size: 'medium',
+        alt: alt,
+        loader: true %}
+    </div>
   </div>
 {% endif %}
 <div class='col-lg-7'>

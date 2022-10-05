@@ -85,17 +85,12 @@
               {%- if slide != blank -%}
                 <div class="pdpImgCollection__slide">
                   <div class="pdpImgCollection__slide-image rel">
-                    {%
-                      include 'component-image' with
-                      src: slide,
+                    {% render 'image-lazy-metafields',
+                      image: slide,
+                      class_name: 'image-abs-cover',
                       alt: heading,
-                      className: 'image',
-                      absolute: true,
-                      fill: true
-                    %}
-                    {%- comment -%}
-                      {{ slide }}
-                    {%- endcomment -%}
+                      size: 'medium',
+                      loader: true %}
                   </div>
                 </div>
               {%- endif -%}

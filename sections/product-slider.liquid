@@ -39,18 +39,16 @@
           {%- assign link_url = block.settings.link_url | default: product.url -%}
 
           {%- if product or image or header or description -%}
-            <div class="ProductInfoSlider__ItemWrapper">
+            <div class="ProductInfoSlider__ItemWrapper px025">
               <div class="ProductInfoSlider__Item">
                 {%- if image -%}
                   <div class="ProductInfoSlider__ImageWrapper AspectRatio AspectRatio--square">
-                    <img class="ProductInfoSlider__Image"
-                         src='{{ image | img_url: "100x" }}'
-                         loading="lazy"
-                         srcset='{{ image | img_url: "450x" }} 450w,
-                                           {{ image | img_url: "560x" }} 560w,
-                                           {{ image | img_url: "650x" }} 650w,
-                                           {{ image | img_url: "900x" }} 900w'
-                         alt="{{ image.alt | default: header | escape }}">
+                    {% render 'image-lazy',
+                      image: image,
+                      class_name: 'ProductInfoSlider__Image',
+                      size: 'medium',
+                      alt: header,
+                      loader: true %}
                   </div>
                 {%- endif -%}
 

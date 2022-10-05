@@ -1,14 +1,16 @@
-{% comment %}
-/components/counter.css
-{% endcomment %}
+{%- comment -%}
+  {%- include 'component-counter', id: , class: , single: , val: , min: , max:  -%}
+{%- endcomment -%}
 
-<div class="counter-wrapper rel" data-component="productCounter">
-  <label for="productQuantity" class='py025'>
-    <span class='caps small mb05 block'><strong>Quantity</strong></span>
-  </label>
-  <div class="counter rel f aic">
-    <button type="button" class="js-counter-remove">-</button>
-    <input id="productQuantity" type="number" name="quantity" value="1" min="1" max="10" class="js-counter-quantity">
-    <button type="button" class="js-counter-add">+</button>
-  </div>
-</div>
+<quantity-stepper class="{{ class }} f aic" data-single-stepper="{{ single }}">
+  <button type="button" class="cart-stepper js-minus">-</button>
+  <input id="{{ id }}"
+         type="number"
+         name="quantity"
+         value="{{ val | default: 1 }}"
+         min="{{ min | default: 0 }}"
+         {% if max != blank %}max="{{ max }}{% endif %}"
+         title="Quantity selector for - {{ product.title }}"
+         class="cart-quantity js-quantity">
+  <button type="button" class="cart-stepper js-plus">+</button>
+</quantity-stepper>

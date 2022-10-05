@@ -20,13 +20,18 @@
   {%- assign color_swatch_image = images[color_swatch_name] -%}
 {%- endif -%}
 
+{%- assign option_value = value -%}
+{%- if value contains ':' -%}
+  {%- assign option_value = value | split: ':' | last | strip -%}
+{%- endif -%}
+
 <label class='radio {% if has_size_image %}radio__label-size-image{% endif %}' for='{{ label | handleize }}'>
   <span class='u-sr-only'>{{ value | escape }}</span>
   <input
     id='{{ label | handleize }}'
     type=radio
     name='{{ name | escape}}'
-    value='{{ value | escape }}'
+    value='{{ option_value | handleize }}'
     title='{{ label | escape }}'
     data-value-handle='{{ value | handleize }}'
     data-total-available

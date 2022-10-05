@@ -8,7 +8,6 @@
 {% else %}
   {% assign btnBgColor = 'btn--dark' %}
 {% endif %}
-{% assign imgSrc = section.settings.image | img_url: '1080x' %}
 
 <style>
   @media (min-width: 992px) {
@@ -38,25 +37,21 @@
 
         <div class='featuredSection__image rel{% if section.settings.layout == "right" %} is-right{% endif %}{% if section.settings.overlap == true %} is-overlap{% endif %}{% if section.settings.fullbleed == true %} is-fullbleed{% endif %}'>
           {% if section.settings.fullbleed == true %}
-            {%
-              include 'component-image' with
-              src: imgSrc,
-              alt: section.settings.title,
-              className: 'image',
-              absolute: false,
-              fill: true,
-              scaleDown: true
-            %}
+            <div class="image">
+              {% render 'image-lazy',
+                image: section.settings.image,
+                size: 'medium',
+                alt: section.settings.title,
+                loader: true %}
+            </div>
           {% else %}
-            {%
-              include 'component-image' with
-              src: imgSrc,
-              alt: section.settings.title,
-              className: 'image',
-              absolute: false,
-              fill: true,
-              scaleDown: false
-            %}
+            <div class="image">
+              {% render 'image-lazy',
+                image: section.settings.image,
+                size: 'medium',
+                alt: section.settings.title,
+                loader: true %}
+            </div>
           {% endif %}
         </div>
 

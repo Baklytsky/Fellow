@@ -1,0 +1,224 @@
+{%- comment -%}
+  {%- include 'budle-mix-card' -%}
+{%- endcomment -%}
+
+<bundle-mix-card class="bundle-product {% if custom_class != blank %}{{ custom_class }}{% endif %}">
+  {%- assign uniq_id = bundle_product.id | append: '-' | append: forloop.index -%}
+
+  {%- if bundle_product.tags contains 'preorder' -%}
+    {%- assign hasPreorderTag = true -%}
+  {%- endif -%}
+
+  {%- assign bundle_variant_option1 = '' -%}
+  {%- assign bundle_variant_option2 = '' -%}
+  {%- assign bundle_variant_option3 = '' -%}
+  {%- assign bundle_option_name_1 = '' -%}
+  {%- assign bundle_option_name_2 = '' -%}
+  {%- assign bundle_option_name_3 = '' -%}
+  {%- assign bundle_variants_min_price = '' -%}
+  {%- assign preselected_variant = '' -%}
+
+  {%- for option in bundle_product.options_with_values -%}
+    {%- case forloop.index -%}
+    {%- when 1 -%}
+    {%- assign bundle_option_name_1 = option.name -%}
+    {%- when 2 -%}
+    {%- assign bundle_option_name_2 = option.name -%}
+    {%- when 3 -%}
+    {%- assign bundle_option_name_3 = option.name -%}
+    {%- endcase -%}
+  {%- endfor -%}
+
+  {%- for variant in bundle_product.variants -%}
+    {%- assign show_variant = true -%}
+
+    {%- if bundle_product_variants_id != blank -%}
+      {%- assign show_variant = false -%}
+
+      {%- for bundle_variant_id in bundle_product_variants_id -%}
+        {%- assign bundle_variant_id_num = bundle_variant_id | plus: 0 -%}
+        {%- if bundle_variant_id_num == variant.id -%}
+          {%- assign show_variant = true -%}
+
+          {%- comment -%}
+            Get min price of bundle product variants
+          {%- endcomment -%}
+
+          {%- if forloop.first -%}
+            {%- assign bundle_variants_min_price = variant.price -%}
+          {%- else -%}
+            {%- if bundle_variants_min_price > variant.price -%}
+              {%- assign bundle_variants_min_price = variant.price -%}
+            {%- endif -%}
+          {%- endif -%}
+
+          {%- break -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- else -%}
+
+      {%- comment -%}
+        Get min price of bundle product variants
+      {%- endcomment -%}
+
+      {%- assign bundle_variants_min_price = bundle_product.price_min -%}
+    {%- endif -%}
+
+    {%- if show_variant -%}
+      {%- for i in (1..3) -%}
+        {%- assign option_key = "option" | append: i -%}
+        {%- case i -%}
+        {%- when 1 -%}
+        {%- assign bundle_variant_option1 = bundle_variant_option1 | append: variant[option_key] | append: '|#|' -%}
+        {%- when 2 -%}
+        {%- assign bundle_variant_option2 = bundle_variant_option2 | append: variant[option_key] | append: '|#|' -%}
+        {%- when 3 -%}
+        {%- assign bundle_variant_option3 = bundle_variant_option3 | append: variant[option_key] | append: '|#|' -%}
+        {%- endcase -%}
+      {%- endfor -%}
+
+      {%- if bundle_product_selected_variant_id != blank -%}
+        {%- assign preselected_variant_id = bundle_product_selected_variant_id | plus: 0 -%}
+        {%- if preselected_variant_id == variant.id -%}
+          {%- assign preselected_variant = variant -%}
+        {%- endif -%}
+      {%- endif -%}
+    {%- endif -%}
+
+  {%- endfor -%}
+
+  {%- assign bundle_variant_options1_arr = bundle_variant_option1 | split: '|#|' | uniq -%}
+  {%- assign bundle_variant_options2_arr = bundle_variant_option2 | split: '|#|' | uniq -%}
+  {%- assign bundle_variant_options3_arr = bundle_variant_option3 | split: '|#|' | uniq -%}
+
+  <div class="bundle-product__header">
+    <div class="bundle-product__icon-wrapper rel">
+      {%- if bundle_product_icon -%}
+        <img src="{{ bundle_product_icon }}"
+             class="image-abs-cover visible"
+             alt="{{ bundle_product.title }}">
+      {%- else -%}
+        {%- for variant in bundle_product.variants -%}
+          {%- assign image = variant.featured_media | default: bundle_product.featured_media -%}
+          {%- assign variant_img = image | img_url: '200x' -%}
+          {%- assign visible = false -%}
+
+          {%- if preselected_variant != blank -%}
+            {%- if preselected_variant.id == variant.id -%}
+              {%- assign visible = true -%}
+            {%- endif -%}
+          {%- else -%}
+            {%- if forloop.first -%}
+              {%- assign visible = true -%}
+            {%- endif -%}
+          {%- endif -%}
+
+          <img src="{{ variant_img }}"
+               class="image-abs-cover {% if visible %}visible{% endif %}"
+               data-mix-card-media-id="{{ variant.id }}"
+               alt="{{ variant.title }}">
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+
+  <div class="bundle-product__description">
+    <div class="bundle-product__title-wrapper">
+      <h3 class="bundle-product__title">
+        <a href="{{ bundle_product.url }}">{{ bundle_product.title }}</a>
+      </h3>
+      {%- if bundle_product_subtitle != blank -%}
+        <p class="bundle-product__option-info">
+          {{ bundle_product_subtitle }}
+        </p>
+      {%- endif -%}
+    </div>
+    <div class="bundle-product__option-wrapper f fdc">
+      {%- if bundle_option_name_1 != blank -%}
+        {% include 'product-options-bundle' with
+          bundle_product: bundle_product,
+          options_array: bundle_variant_options1_arr,
+          option_name: bundle_option_name_1
+          preselected_variant_option: preselected_variant.option1 %}
+      {%- endif -%}
+
+      {%- if bundle_option_name_2 != blank -%}
+        {% include 'product-options-bundle' with
+          bundle_product: bundle_product,
+          options_array: bundle_variant_options2_arr,
+          option_name: bundle_option_name_2
+          preselected_variant_option: preselected_variant.option2 %}
+      {%- endif -%}
+
+      {%- if bundle_option_name_3 != blank -%}
+        {% include 'product-options-bundle' with
+          bundle_product: bundle_product,
+          options_array: bundle_variant_options3_arr,
+          option_name: bundle_option_name_3
+          preselected_variant_option: preselected_variant.option3 %}
+      {%- endif -%}
+    </div>
+
+    {%- capture options -%}
+      {%- for variant in bundle_product.variants -%}
+
+        {%- if variant.available == false and forloop.first -%}
+          {%- assign bundle_available = false -%}
+        {%- endif -%}
+
+        {%- assign options = '' -%}
+        {%- assign variant_title_arr = variant.title | split: '/' -%}
+        {%- for variant_title in variant_title_arr -%}
+
+          {%- if variant_title contains ':' -%}
+            {%- assign variant_title_hand = variant_title | split: ':' | last | strip | handleize -%}
+          {%- else -%}
+            {%- assign variant_title_hand = variant_title | handleize -%}
+          {%- endif -%}
+
+          {%- if forloop.last -%}
+            {%- assign options = options | append: variant_title_hand -%}
+          {%- else -%}
+            {%- assign options = options | append: variant_title_hand | append: '/' -%}
+          {%- endif -%}
+        {%- endfor -%}
+
+        {%- assign bundle_price_difference = variant.price | minus: bundle_variants_min_price -%}
+        {%- assign variant_preorder = variant.metafields.my_fields.preorder -%}
+
+        <option value='{{ variant.id }}'
+                data-variant-options-title='{{ options }}'
+                data-variant-uniq_id='{{ variant.id | append: '-' | append: uniq_id }}'
+                data-variant-price='{{ variant.price | money | remove: ".00" }}'
+                data-variant-origin-price='{{ variant.price | times: 0.01 }}'
+                data-bundle-price-difference='{{ bundle_price_difference | times: 0.01 }}'
+                {% unless variant.available %}disabled="disabled"{% endunless %}
+                {% if hasPreorderTag or variant_preorder %}data-variant-preorder='true'{% endif %}
+                {% if forloop.first %}selected{% endif %}>
+          {{ variant.title }}
+        </option>
+      {%- endfor -%}
+    {%- endcapture -%}
+
+    {%- capture selectTitle -%}Options for {{ bundle_product.title }}{%- endcapture -%}
+    {%- assign selectName = 'bundle-select-' | append: forloop.index -%}
+
+    {% include 'component-select' with
+      name: selectName,
+      options: options,
+      selectTitle: selectTitle,
+      className: 'js-bundle-variant is-hidden',
+      placeholder: false,
+      value: bundle_product.selected_or_first_available_variant.id
+      required: true,
+      ariaHidden: true,
+      attributes: 'data-option-main',
+      index: forloop.index %}
+
+  </div>
+
+  <script type="application/json">
+                {{ bundle_product | json }}
+              </script>
+
+</bundle-mix-card>

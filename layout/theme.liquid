@@ -12,7 +12,6 @@
   <link rel="preload" href="{{ 'index.css' | asset_url }}" as="style">
   <link rel="preload" href="{{ 'custom.scss.css' | asset_url }}" as="style">
 
-  <link rel="preload" href="{{ 'index.js' | asset_url }}" as="script">
   <link rel="preload" href="{{ 'custom.js' | asset_url }}" as="script">
 
   {%- if template contains 'collection' -%}
@@ -79,9 +78,7 @@
     {% section 'footer' %}
     {% include 'cloak' %}
 
-    {{ 'jquery-1.11.0.min.js' | asset_url | script_tag }}
-    {{ 'jquery.ba-throttle-debounce.min.js' | asset_url | script_tag }}
-    {{ 'custom-additional-vendor.js' | asset_url | script_tag }}
+    {{ 'libs.min.js' | asset_url | script_tag }}
 
     <script src="{{ 'custom.js' | asset_url }}" defer='defer'></script>
 
@@ -90,7 +87,6 @@
       <script src="{{ 'collection.js' | asset_url }}" defer='defer'></script>
     {%- endif -%}
 
-    <script src="{{ 'index.js' | asset_url }}" defer='defer'></script>
     <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
 
     {% include 'component-customize-js' %}

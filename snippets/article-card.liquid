@@ -1,7 +1,4 @@
 {% capture date %}{{ article.published_at | time_tag: format: 'month_day_year' }}{% endcapture %}
-{% if article.image %}
-  {%- assign imgSrc = article | img_url: '600x' -%}
-{% endif %}
 {% if article.metafields.custom_fields["author_name"] != blank %}
   {%- assign author_name = article.metafields.custom_fields["author_name"] -%}
 {% else %}
@@ -13,12 +10,12 @@
 <article class='articleCard'>
   {% if article.image %}
     <a href="{{ article.url }}" class='articleCard__image' aria-label="{{ altText }}">
-      {%
-        include 'component-image' with
-        src: imgSrc,
+      {% render 'image-lazy',
+        image: article.image,
+        class_name: 'image-abs-cover',
+        size: 'medium',
         alt: altText,
-        className: 'image'
-      %}
+        loader: true %}
     </a>
   {% endif %}
   <section class="articleCard__content">

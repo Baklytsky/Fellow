@@ -7,9 +7,11 @@
         {%- assign product_upsell = variant.metafields.my_fields.upsell_product.value -%}
         {%- assign product_upsell_variant = variant.metafields.my_fields.upsell_product_variant.value -%}
         {%- assign has_upsell_variant = false -%}
-        {%- assign uniq_id = 'product_upsell' | append: '-' | append: product_upsell.id -%}
 
         {%- if product_upsell.available -%}
+          {%- if bundle_product.tags contains 'preorder' -%}
+            {%- assign hasPreorderTag = true -%}
+          {%- endif -%}
 
           {%- for upsell_variant in product_upsell.variants -%}
             {%- if upsell_variant.id == product_upsell_variant.id -%}
@@ -18,31 +20,37 @@
             {%- endif -%}
           {%- endfor -%}
 
-        <div class="upsell-product__wrapper">
+        <upsell-product class="upsell-product__wrapper">
           <a href="{{ product_upsell.url }}" class="upsell-product__image-wrapper rel">
             {%- if product_upsell.variants.size > 1 -%}
               {% for upsell_variant in product_upsell.variants %}
                 {%- assign imageSrc = upsell_variant.image.src | img_url: '300x' -%}
+                {%- assign visible = false -%}
+
+                {%- if has_upsell_variant %}
+                  {%- if upsell_variant.id == product_upsell_variant.id -%}
+                    {%- assign visible = true -%}
+                  {%- endif -%}
+                {%- else -%}
+                  {%- if forloop.first %}
+                    {%- assign visible = true -%}
+                  {%- endif -%}
+                {%- endif -%}
+
                   <img src="{{ imageSrc }}"
-                       class='image-abs-cover'
+                       class='image-abs-cover {% if visible %}visible{% endif %}'
                        alt='{{ upsell_variant.title }}'
                        role='img'
                        loading='lazy'
-                       data-upsell-variant-media='{{ upsell_variant.id | append: '-' | append: uniq_id }}'
-                      {%- if has_upsell_variant %}
-                        {%- if upsell_variant.id == product_upsell_variant.id %} style="visibility: visible" {% endif %}
-                      {% else %}
-                        {%- if forloop.first %} style="visibility: visible" {% endif %}
-                      {% endif %}/>
+                       data-upsell-variant-media='{{ upsell_variant.id }}'/>
               {% endfor %}
             {%- else -%}
               <img src="{{ product_upsell.featured_image | img_url: '300x' }}"
-                   class='image-abs-cover'
+                   class='image-abs-cover visible'
                    alt='{{ product_upsell.title }}'
-                   style="visibility: visible"
                    role='img'
                    loading='lazy'
-                   data-upsell-variant-media='{{ product_upsell.selected_or_first_available_variant.id | append: '-' | append: uniq_id }}'/>
+                   data-upsell-variant-media='{{ product_upsell.selected_or_first_available_variant.id }}'/>
             {%- endif -%}
           </a>
           <div class="upsell-product__content">
@@ -161,14 +169,13 @@
                     {%- endif -%}
                   {%- endfor -%}
 
+                  {%- assign variant_preorder = upsell_variant.metafields.my_fields.preorder -%}
+
                   <option value='{{ upsell_variant.id }}'
-                          data-upsell-variant-options='{{ options }}'
-                          data-variant-uniq_id='{{ upsell_variant.id | append: '-' | append: uniq_id }}'
                           data-variant-price='{{ upsell_variant.price | money | remove: ".00" }}'
                           data-variant-inventory-quantity='{{ upsell_variant.inventory_quantity }}'
-                          data-variant-inventory-policy='{{ upsell_variant.inventory_policy }}'
-                          data-variant-inventory-management='{{ upsell_variant.inventory_management }}'
                           {% unless upsell_variant.available %}disabled{% endunless %}
+                          {% if hasPreorderTag or variant_preorder %}data-variant-preorder='true'{% endif %}
                           {%- if has_upsell_variant -%}
                             {%- if upsell_variant.id == product_upsell_variant.id -%}
                               selected
@@ -227,7 +234,10 @@
             </div>
             <div id="PdpUpsellErrorMessage">error</div>
           </div>
-        </div>
+          <script type="application/json">
+            {{ product_upsell | json }}
+          </script>
+        </upsell-product>
         {%- endif -%}
 
       {%- endif -%}

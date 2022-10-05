@@ -4,7 +4,10 @@
     <div {% if product.has_only_default_variant or product.variants.size <= 1 %}style='display:none'{% else %} class="pdp__sticky-options" {% endif %}>
       {% for option in product.options_with_values %}
         {%- assign option_name_handle = option.name | handleize -%}
-        <div class='pdp__sticky-options-item {% if option_name_handle == 'size' %} stickySize{% endif %} rel{% if option.values.size <= 1 %} hide{% endif %}' data-index='{{ forloop.index0 }}' data-options-count='{{ option.values.size }}'>
+        <{% if option_name_handle == 'size' %}dropdown-toggle{% else %}div{% endif %} class='pdp__sticky-options-item {% if option_name_handle == 'size' %} stickySize{% endif %} rel{% if option.values.size <= 1 %} hide{% endif %}'
+             data-index='{{ forloop.index0 }}'
+             data-options-count='{{ option.values.size }}'
+             {% if option_name_handle == 'size' %}data-dropdown{% endif %}>
           <label class='pdp__sticky-options-label' data-option-label='{{ option.name }}'>
             {% include 'assign_option_label', value: option.selected_value %}
             <span class='option-title  {% if option_name_handle == 'size' %}f aic rel{% endif %}'>
@@ -14,7 +17,6 @@
               {% render 'icon' with 'dropdown' %}
             </div>
             {%- endif -%}
-            <span data-option-current='{{ option.name }}' style="display: none">{{ option_value_label }}</span>
           </span>
           </label>
 
@@ -33,7 +35,9 @@
             {%- assign product_has_size_option = true -%}
           {%- endif -%}
 
-          <div class="option-groups {% if option_name_handle != 'size' %}f aic fw rel{% else %} option-groups-size{% endif %}" {% if product_has_size_option %}data-disabled-size="true"{% endif %}>
+          <div class="option-groups {% if option_name_handle != 'size' %}f aic fw rel{% else %} option-groups-size{% endif %}"
+               {% if product_has_size_option %}data-disabled-size="true"{% endif %}
+               {% if option_name_handle == 'size' %}data-dropdown-content{% endif %}>
             {% for group in option_group_names %}
               <div class="option-groups__group">
                 {%- comment -%}
@@ -44,7 +48,8 @@
                   {% endif %}
                 {%- endcomment -%}
 
-                <div class='radio-group {% if option_name_handle != 'size' %}f aic{% else %} radio-group-size{% endif %}' data-option-{{ option.name | handleize }}>
+                <div class='radio-group {% if option_name_handle != 'size' %}f aic{% else %} radio-group-size{% endif %}'
+                     data-option-{{ option.name | handleize }}>
                   {% for value in option.values %}
                     {% include 'assign_option_label', option: option, value: value %}
                     {% if option_value_group == group %}
@@ -67,7 +72,7 @@
               </div>
             {% endfor %}
           </div>
-        </div>
+        </{% if option_name_handle == 'size' %}dropdown-toggle{% else %}div{% endif %}>
       {% endfor %}
     </div>
   {%- endunless -%}
@@ -81,27 +86,31 @@
 
   <div class="pdpCopy__price">
     {% if product.available %}
-    {% if current_variant.compare_at_price > current_variant.price %}
-    {% comment %}
-      Product is available and on sale
-    {% endcomment %}
-    {% comment %} <strong> tag added to satisfy compliance concern -ae 03.23.21 {% endcomment %}
-      <span class="inline-block strike card__price--regular pdpCopy__header-price" data-compare-at-price><span>{{ current_variant.compare_at_price | money_without_trailing_zeros }}</span></span>
-      <span class="visually-hidden">{{ 'products.current_variant.regular_price' | t }}</span>
-      <h2 class="inline-block card__price--sale pdpCopy__header-price" data-product-price>
-        {{ current_variant.price | money_without_trailing_zeros }}
-      </h2>
+      {% if current_variant.compare_at_price > current_variant.price %}
+        {% comment %}
+          Product is available and on sale
+        {% endcomment %}
+        <div class="f aic">
+        <span class="inline-block strike card__price--regular ml1 pdpCopy__header-price pdpCopy__header-price-small rel">
+          {{ current_variant.compare_at_price | money_without_trailing_zeros }}
+          <div class="price-round-arrow">{% render 'icon' with 'round-arrow' %}</div>
+        </span>
+          <span class="visually-hidden">{{ 'products.current_variant.regular_price' | t }}</span>
+          <h2 class="inline-block card__price--sale ml1 pdpCopy__header-price">
+            {{ current_variant.price | money_without_trailing_zeros }}
+          </h2>
+        </div>
       {% else %}
         {% comment %}
           Product is available and not on sale
         {% endcomment %}
-        <h2 data-selected-var-price class="pdpCopy__header-price" data-product-price>{{ current_variant.price | money | remove: '.00' }}</h2>
+        <h2 data-selected-var-price class="ml1 pdpCopy__header-price">{{ current_variant.price | money | remove: '.00' }}</h2>
       {% endif %}
-      {% else %}
-        {% comment %}
-          Sold Out
-        {% endcomment %}
-        <h2 class='strike pdpCopy__header-price' data-product-price>{{ current_variant.price | money_without_trailing_zeros }}</h2>
-      {% endif %}
+    {% else %}
+      {% comment %}
+        Sold Out
+      {% endcomment %}
+      <h2 class='strike'>{{ current_variant.price | money_without_trailing_zeros }}</h2>
+    {% endif %}
   </div>
 </div>

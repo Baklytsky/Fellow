@@ -1,5 +1,36 @@
-{% comment %}
-  <script src="https://a.klaviyo.com/media/js/onsite/onsite.js"></script> {% endcomment %}
+<script src="https://a.klaviyo.com/media/js/onsite/onsite.js"></script>
+<script>
+  var klaviyo = klaviyo || [];
+  klaviyo.init({
+    account: "JrFJuf",
+    platform: "shopify",
+    exclude_on_tag: "limited-edition"
+  });
+  klaviyo.enable("backinstock",{
+    modal: {
+      headline: "{product_name}",
+      body_content: "Register to receive a notification when this item comes back in stock.",
+      email_field_label: "Email",
+      button_label: "Notify me",
+      subscription_success_label: "You're in! We'll let you know when it's back.",
+      footer_content: "",
+      close_label: "Close",
+      additional_styles: "@import url('https://rsms.me/inter/inter.css');body.klaviyo-bis-close{ display: flex; align-items: center; justify-content: center;}#klaviyo-bis-modal{ display: flex; }@media only screen and (max-width:991.92px) { #klaviyo-bis-modal { max-width: calc(100% - 4rem); } }#container { margin-top: 0 !important; }.close{ right: 12px; }.modal-title { text-transform: uppercase; font-weight: 400;}.btn { text-transform: uppercase; font-size: 1.25em; font-family: 'Inter';}",
+      font_family: 'Inter',
+      drop_background_color: "#000",
+      background_color: "#fff",
+      text_color: "#222",
+      button_text_color: "#fff",
+      button_background_color: "#231f20",
+      close_button_color: "#ccc",
+      error_background_color: "#fcd6d7",
+      error_text_color: "#C72E2F",
+      success_background_color: "#d3efcd",
+      success_text_color: "#1B9500"
+    }
+  });
+</script>
+
 <script type="text/javascript">
   let kl_promo_terms = document.querySelector("#kl_promo_terms");
   if (kl_promo_terms) {
@@ -37,10 +68,13 @@
   }
 </script>
 <script type="text/javascript">
-  document.querySelector("#freeShipPopup").addEventListener('click',function (){
-    var _klOnsite = window._klOnsite || []
-    _klOnsite.openForm('WP99kU', () => console.log("you triggered the form!"))
-  });
+  var freeShipPopup = document.querySelector("#freeShipPopup")
+  if (freeShipPopup) {
+    document.querySelector("#freeShipPopup").addEventListener('click',function (){
+      var _klOnsite = window._klOnsite || []
+      _klOnsite.openForm('WP99kU', () => console.log("you triggered the form!"))
+    });
+  }
 </script>
 {%- comment -%} Klaviyo add to cart event {%- endcomment -%}
   {%- if product -%}

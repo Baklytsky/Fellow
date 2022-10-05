@@ -1,7 +1,4 @@
 {% capture date %}{{ article.published_at | time_tag: format: 'month_day_year' }}{% endcapture %}
-{% if article.image %}
-  {%- assign imgSrc = article | img_url: '320x' -%}
-{% endif %}
 {% if article.metafields.custom_fields["author_name"] != blank %}
   {%- assign author_name = article.metafields.custom_fields["author_name"] -%}
 {% else %}
@@ -14,14 +11,13 @@
   </a>
   {% if article.image %}
     <div class='additionalPost__thumb rel z0'>
-      {%
-        include 'component-image' with
-        src: imgSrc,
-        alt: article.title,
-        className: 'image ais',
-        centered: false,
-        fill: true
-      %}
+      <div class="image ais">
+        {% render 'image-lazy',
+          image: article.image,
+          size: 'medium',
+          alt: article.title,
+          loader: true %}
+      </div>
     </div>
   {% endif %}
   <div class='additionalPost__copy'>

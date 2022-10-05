@@ -27,14 +27,14 @@
   {% assign ctaClasses2 = 'btn btn--lg btn--dark mt05 second--cta' %}
 {% endif %}
 
-<div id='hero__slide--{{ block.id }}' class='hero__slide' data-color='{{ dataColor }}'
+<div class='hero__slide hero__slide--{{ block.id }}' data-color='{{ dataColor }}'
      style="background-color: {{ backgroundColor }}; color: {{ textColor }};">
   <div class="hero__slideWrapper hero__slide--split">
     {% if block.settings.mobileAlignment != 'center' or block.settings.desktopAlignment or layout != blank %}
       <style>
         {% if layout == 'right' %}
         @media (min-width: 992px) {
-          #hero__slide--{{ block.id }} .hero__slide--split {
+          .hero__slide--{{ block.id }} .hero__slide--split {
             flex-direction: row-reverse;
           }
         }
@@ -89,13 +89,11 @@
     {% endif %}
 
     <div class="hero__slide--img-wrapper AspectRatio" style="--aspect-ratio: {{ aspect_ratio }};">
-      <img src='{{ block.settings.heroSlide | img_url: "600x" }}'
-           loading="lazy"
-           srcset='{{ block.settings.heroSlide | img_url: "600x" }} 600w,
-            {{ block.settings.heroSlide | img_url: "1000x" }} 991w,
-            {{ block.settings.heroSlide | img_url: "1280x" }} 1280w,
-            {{ block.settings.heroSlide | img_url: "1440x" }} 1400w'
-           alt='{{ block.settings.heroSlide__header | default: block.settings.heroSlide__header }}'>
+      {% render 'image-lazy',
+        image: block.settings.heroSlide,
+        size: 'medium',
+        alt: block.settings.heroSlide__header,
+        loader: true %}
     </div>
   </div>
 </div>

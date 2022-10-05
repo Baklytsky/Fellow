@@ -16,11 +16,20 @@
   }
   {%- endcapture -%}
 
+  {%- capture 'slick-response' -%}
+    {
+    "response": 992,
+    "maxMedia": true,
+    "selector": ".mediaProof__items",
+    "config": {{- slick-config -}}
+    }
+  {%- endcapture -%}
+
   <section class='pdpMediaProof mediaProof rel f jcc aic{% if display_order %} o-{{ display_order }}{% endif %}'
            data-section-type="slick-slideshow"
            data-slick-config='{{- slick-config -}}'>
     <div class='x pdpMediaProof__wrapper'>
-      <div class='mediaProof__items f fw jca jsSlickSlider'>
+      <div class='mediaProof__items f fw jca jsSlickSlider' data-check-slick-response='{{- slick-response -}}'>
         {% for item in product.metafields.custom_fields["media_proof_items_new"] %}
           {% assign index = i | plus: 0 %}
           {% assign imageSrc = item["media_proof_item_image_new"] %}

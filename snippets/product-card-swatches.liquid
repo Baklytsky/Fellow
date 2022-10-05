@@ -1,7 +1,7 @@
 {%- assign reviews_count = product.metafields.yotpo.reviews_count | plus: 0 -%}
 {%- assign color_count = 0 -%}
 
-<form class='productCard__variants rel {% if reviews_count == 0 %}mt1{% endif %}'>
+<div class='productCard__variants rel {% if reviews_count == 0 or hide_reviews %}mt1{% endif %}'>
   <div class='productCard__options'>
     {% for product_option in product.options_with_values %}
       {% assign option_name = product_option.name | handleize %}
@@ -27,6 +27,7 @@
                   <span class='u-sr-only'>Label for {{ product.title }} {{ option_name }}</span>
                   <input
                     type='radio'
+                    name='color'
                     id='{{ product.title | handleize }}-{{ option_name }}__{{ value | handleize }}{{ block_id }}'
                     data-value-handle='{{ value | handleize }}'
                     {% if option_name == 'color' %}
@@ -35,18 +36,16 @@
                     {% endif %}
                     {% if option_name == 'material' %}data-material='{{ value | handleize }}'{% endif %}
                     value='{{ value }}'
-                    data-option-selector>
-                  <div class="radio__title js-productCard-option js-color-update {% if color_swatch_image != blank %}radio__title-bg-image{% endif %}"
-                    {% if option_name == 'color' %}data-color='{{ color_name | handleize }}'{% endif %}
-                    {% if option_name == 'material' %}data-material='{{ value | handleize }}'{% endif %}
+                    data-option-selector
                     data-variant-url='{{ variant.url }}'
                     data-variant-id='{{ variant.id }}'
                     data-variant-price='{{ variant.price }}'
+                    data-variant-compare-price='{{ variant.compare_at_price }}'>
+                  <div class="radio__title js-productCard-option js-color-update {% if color_swatch_image != blank %}radio__title-bg-image{% endif %}"
+                    {% if option_name == 'color' %}data-color='{{ color_name | handleize }}'{% endif %}
+                    {% if option_name == 'material' %}data-material='{{ value | handleize }}'{% endif %}
                     {% if color_swatch_image != blank %}style="background: url({{ color_swatch_image | img_url: '64x64' }}) no-repeat center center / cover; color: transparent; border-color: white"{% endif %}>
                   </div>
-                  {% comment %}
-                    <a href="{{ variant.url }}" class='fill abs x y z2' aria-label='{{ product.title }} / {{ variant.title }}'></a>
-                  {% endcomment %}
                 </label>
                 {% break %}
               {% endif %}
@@ -57,11 +56,6 @@
     {% endfor %}
   </div>
 
-
-
-
-
-
   {%- if color_count > 0 -%}
     <div class="productCardVariants__ColorCount">
       <a class="productCardVariants__CountButton" href="{{ product.url }}" title="{{ product.title }}" role="button">
@@ -69,22 +63,4 @@
       </a>
     </div>
   {%- endif -%}
-
-  {% for product_option in product.options_with_values %}
-    {% assign option_name = product_option.name | handleize %}
-    {% if option_name == 'color' or option_name == 'material' %}
-      {% comment %}Found Color/Swatch, now loop through those{% endcomment %}
-      <select name='id' title='{{ product.title | handleize }}_{{ option_name }}' class='is-hidden' aria-label="Product variants select">
-        {% for value in product_option.values %}
-          {% for variant in product.variants %}
-            {% if variant.option1 == value or variant.option2 == value %}
-              <option value='{{ variant.id }}' data-inventory-policy='{{ variant.inventory_policy }}' data-inventory-quantity='{{ variant.inventory_quantity }}' data-variant-url='{{ variant.url }}'>{{ value }}</option>
-              {% break %}
-            {% endif %}
-          {% endfor %}
-        {% endfor %}
-      </select>
-    {% endif %}
-  {% endfor %}
-  <button type="submit" style="display: none">Submit</button>
-</form>
+</div>

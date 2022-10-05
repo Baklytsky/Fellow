@@ -15,24 +15,22 @@
         {% else %}
           {% if imageSrc != blank %}
             <section class='keyFeature__image{% if secondaryImageSrc != blank %} keyFeature__image--primary{% endif %} rel x y fill'>
-              {%
-                include 'component-image' with
-                src: imageSrc,
+              {% render 'image-lazy-metafields',
+                image: imageSrc,
+                class_name: 'image-abs-cover',
                 alt: alt,
-                className: classList,
-                fill: true
-              %}
+                size: 'medium',
+                loader: true %}
             </section>
           {% endif %}
           {% if secondaryImageSrc != blank %}
             <section class='keyFeature__image keyFeature__image--secondary abs x y fill'>
-              {%
-                include 'component-image' with
-                src: secondaryImageSrc,
+              {% render 'image-lazy-metafields',
+                image: secondaryImageSrc,
+                class_name: 'image-abs-cover',
                 alt: alt,
-                className: classList,
-                fill: true
-              %}
+                size: 'medium',
+                loader: false %}
             </section>
           {% endif %}
         {% endif %}
@@ -43,14 +41,13 @@
       <section class='keyFeature__details'>
         {% if iconSrc != blank %}
         <div class='keyFeatureDetails__icon'>
-          {%
-            include 'component-image' with
-            src: iconSrc,
-            alt: key_feature_title,
-            className: 'image',
-            fill: true,
-            centered: false,
-          %}
+          <div class="image">
+            {% render 'image-lazy-metafields',
+              image: iconSrc,
+              alt: key_feature_title,
+              size: 'small',
+              loader: false %}
+          </div>
         </div>
         {% endif %}
         <div class='keyFeatureDetails__copy'>

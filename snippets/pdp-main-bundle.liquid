@@ -1,17 +1,11 @@
 {% assign current_variant = product.selected_or_first_available_variant %}
-{% if product.metafields.custom_fields["desktop_masthead_image"] or product.metafields.custom_fields["mobile_masthead_image"] != blank %}
-  {%- assign masthead_exists = true -%}
-{% endif %}
-<section class='full pdpMain__container' data-component='pdpMain'>
-  <div class='pdpMain row no-gutters'>
+<section class='full pdpMain__container'>
+  <sticky-scrolling class='pdpMain row no-gutters'>
     <div class='pdpMain__Media order-lg-1 rel x'>
-      {% include 'pdb-image-thumbnails.liquid' %}
-      {%- comment -%}
-        {% include 'pdp-images' %}
-      {%- endcomment -%}
+      {% include 'pdp-image-thumbnails.liquid' %}
     </div>
     <div class='pdpMain__Content order-lg-2 rel x'>
       {% include 'pdp-details-bundle' %}
     </div>
-  </div>
+  </sticky-scrolling>
 </section>

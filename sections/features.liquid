@@ -1,0 +1,147 @@
+{%- assign bg_color = section.settings.bg_color -%}
+{%- assign text_color = section.settings.text_color -%}
+{%- assign heading = section.settings.heading -%}
+{%- assign description = section.settings.description -%}
+{%- assign show_arrows = section.settings.show_arrows -%}
+{%- assign show_dots = section.settings.show_dots -%}
+
+{%- if heading != blank or description != blank or section.blocks.size > 0 -%}
+
+  {%- if section.blocks.size > 0 -%}
+    {%- capture 'slick-config' -%}
+      {
+        "slidesToShow": 1,
+        "arrows": {{ show_arrows }},
+        "dots": {{ show_dots }},
+        "infinite": false
+      }
+    {%- endcapture -%}
+
+    {%- capture 'slick-response' -%}
+      {
+        "response": 992,
+        "maxMedia": true,
+        "selector": ".features__list",
+        "config": {{- slick-config -}}
+      }
+    {%- endcapture -%}
+  {%- endif -%}
+
+  <div class="features" style="background-color: {{ bg_color }}; color: {{ text_color }}">
+    <div class="features__wrapper page-wrapper rel">
+
+      {%- if show_arrows -%}
+        <button type="button" class="jsPrevSlide is-hidden">{% render 'icon' with 'chevron-left' %}</button>
+        <button type="button" class="jsNextSlide">{% render 'icon' with 'chevron-right' %}</button>
+      {%- endif -%}
+
+      {%- if heading != blank -%}
+        <h3 class="features__heading">{{ heading }}</h3>
+      {%- endif -%}
+
+      {%- if description != blank -%}
+        <p class="features__description">{{ description }}</p>
+      {%- endif -%}
+
+      {%- if section.blocks.size > 0 -%}
+        <ul class="features__list rel" data-check-slick-response='{{- slick-response -}}' data-toggle-arrows>
+          {%- for block in section.blocks -%}
+            {%- assign title = block.settings.title -%}
+            {%- assign description = block.settings.description -%}
+            {%- assign icon = block.settings.icon -%}
+
+            {%- if icon != blank or title != blank or description != blank -%}
+              <li class='features__list-item' {{ block.shopify_attributes }}>
+                {%- if icon != blank -%}
+                  <div class="features__list-item-icon rel">
+                    {%- assign alt = icon.alt | default: title -%}
+                    <img src="{{ icon | img_url: '160x' }}" class="image-abs-contain" alt="alt">
+                  </div>
+                {%- endif -%}
+                {%- if title != blank -%}
+                  <h4 class="features__list-item-title">{{ title }}</h4>
+                {%- endif -%}
+                {%- if description != blank -%}
+                  <p class="features__list-item-description">{{ description }}</p>
+                {%- endif -%}
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Features",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "default": "#FFF9E5",
+      "label": "Background color"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "default": "#000000",
+      "label": "Text color"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Headline Goes Here",
+      "label": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "default": "Lorem ipsum dolor sit amet",
+      "label": "Description"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrows",
+      "default": true,
+      "label": "Show arrows on mobile"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_dots",
+      "default": true,
+      "label": "Show dots on mobile"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "feature",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Logo icon"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Features"
+    }
+  ]
+}
+{% endschema %}

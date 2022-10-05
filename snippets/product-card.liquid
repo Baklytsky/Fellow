@@ -1,3 +1,20 @@
+{%- comment -%}
+  {%
+    include 'product-card',
+    product: product,
+    hide_variants: true,
+    cx: 'y',
+    content_cx: 'f fdc',
+    bottom_content: text,
+    product_image: ,
+    block_id: id,
+    product_image_url: url,
+    large_title: false,
+    transparent_image: false,
+    hide_reviews: false
+  %}
+{%- endcomment -%}
+
 {% assign url = '/products/' | append: product.handle %}
 {% assign price = product.price | money %}
 {% assign comparePrice = product.compare_at_price | money %}
@@ -37,7 +54,7 @@
   {{ className }}
 {%- endcapture -%}
 
-<div class='productCard productCard--{{ product.title | handleize }} {{ cx }}' data-component='productCard'>
+<product-card class='productCard productCard--{{ product.title | handleize }} {{ cx }}'>
   <div class='productCard__content y {{ content_cx }}' data-image-url="{{ image_url }}">
     {% include 'product-card-image',
       hide_variants: hide_variants,
@@ -46,15 +63,15 @@
       transparent_image: true,
       url: url
     %}
-    {% include 'product-card-details', large_title: large_title %}
+    {% include 'product-card-details', large_title: large_title, hide_reviews: hide_reviews %}
     {% if product.options and hide_variants != true %}
-      {% include 'product-card-swatches', block_id: block_id %}
+      {% include 'product-card-swatches', block_id: block_id, hide_reviews: hide_reviews %}
     {% endif %}
     {% if bottom_content != blank %}
       {{ bottom_content }}
     {% endif %}
   </div>
-</div>
+</product-card>
 
 {% comment %} Reset {% endcomment %}
 {% assign className = blank %}
@@ -65,3 +82,4 @@
 {% assign available_variant_prices = blank %}
 {% assign large_title = false %}
 {% assign transparent_image = false %}
+{% assign hide_reviews = false %}

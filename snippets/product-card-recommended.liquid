@@ -37,7 +37,7 @@
   {{ className }}
 {%- endcapture -%}
 
-<cart-recommended-product class='productCard productCard__recommended productCard--{{ product.title | handleize }} {{ cx }}' data-component='productCard'>
+<cart-recommended-product class='productCard productCard__recommended productCard--{{ product.title | handleize }} {{ cx }}'>
   <div class='productCard__content f' data-image-url="{{ image_url }}">
     <div class="productCard__image-wrapper">
       {% include 'product-card-recommended-image',

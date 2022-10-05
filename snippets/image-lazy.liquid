@@ -1,0 +1,80 @@
+{% comment %}
+{% render 'image-lazy',
+  image: ,
+  class_name: 'image-abs-cover',
+  size: 'medium',
+  image_attr: ,
+  id: ,
+  alt: alt,
+  preload: boolean,
+  loader: true,
+  loader_alt: boolean %}
+{% endcomment %}
+
+{%- if size == blank -%}
+  {%- assign size = 'large' -%}
+{%- endif -%}
+
+{%- case size -%}
+{%- when 'small' -%}
+  {%- capture image_size -%}
+    {{ image | img_url: '50x' }} 25w,
+    {{ image | img_url: '72x' }} 36w,
+    {{ image | img_url: '144x' }} 72w,
+    {{ image | img_url: '288x' }} 144w
+  {%- endcapture -%}
+{%- when 'medium' -%}
+  {%- capture image_size -%}
+    {{ image | img_url: '50x' }} 25w,
+    {{ image | img_url: '72x' }} 36w,
+    {{ image | img_url: '144x' }} 72w,
+    {{ image | img_url: '288x' }} 144w,
+    {{ image | img_url: '480x' }} 240w,
+    {{ image | img_url: '720x' }} 360w,
+    {{ image | img_url: '1080x' }} 540w
+  {%- endcapture -%}
+  {%- else -%}
+  {%- capture image_size -%}
+    {{ image | img_url: '50x' }} 25w,
+    {{ image | img_url: '72x' }} 36w,
+    {{ image | img_url: '144x' }} 72w,
+    {{ image | img_url: '288x' }} 144w,
+    {{ image | img_url: '480x' }} 240w,
+    {{ image | img_url: '720x' }} 360w,
+    {{ image | img_url: '1080x' }} 540w,
+    {{ image | img_url: '1296x' }} 720w,
+    {{ image | img_url: '1350x' }} 900w",
+    {{ image | img_url: '1512x' }} 1080w,
+    {{ image | img_url: '1728x' }} 1296w,
+    {{ image | img_url: '1920x' }} 1350w,
+    {{ image | img_url: '1980x' }} 1728w,
+    {{ image | img_url: '2160x' }} 1920w,
+    {{ image | img_url: '2560x' }} 2560w
+  {%- endcapture -%}
+{%- endcase -%}
+
+{%- if preload -%}
+  <link rel="preload" href="{{ image | img_url: '1x' }}" as="image" imagesrcset="{{ image_size }}">
+{%- endif -%}
+
+{%- assign alt = alt | default: image.alt | escape -%}
+
+<img {% if id != balnk %}id="{{ id }}"{% endif %}
+     data-srcset="{{ image_size }}"
+     class="lazyload {{ class_name }}"
+     data-optimumx="auto"
+     data-sizes="auto"
+     data-src="{{ image | img_url: '1x' }}"
+     data-parent-fit="contain"
+     alt="{{ alt }}"
+     width="100%"
+     height="100%"
+        {{ image_attr }}>
+
+{%- if loader -%}
+  <span class="image-loader skeleton f jcc aic">
+    {%- if loader_alt -%}
+      {{ alt }}
+    {%- endif -%}
+  </span>
+{%- endif -%}

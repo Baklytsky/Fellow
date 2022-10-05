@@ -349,8 +349,7 @@
           "youtube": true,
           "pinterest": false,
           "linkedin": false,
-          "bigfooter_marquee": false,
-          "bigfoot_url": "",
+          "enable_marquee": true,
           "show_newsletter": false,
           "newsletter_heading": "Sign up for updates + 10% off your first order",
           "newsletter_subheading": ""
@@ -513,14 +512,6 @@
           "product_limit": 8
         }
       },
-      "collection-subcollection-template": {
-        "type": "collection-subcollection-template",
-        "settings": {
-          "show_tagline": true,
-          "show_collection_card": true,
-          "show_collection_copy": true
-        }
-      },
       "1629968785d9d2e1c7": {
         "type": "logo-text",
         "settings": {
@@ -636,6 +627,15 @@
               "button_text": "Shop Our Coffee Collection",
               "button_url": "shopify:\/\/pages\/curated-coffee-collection"
             }
+          },
+          "a40458b2-1409-4f4a-94fe-4a7dbf54b847": {
+            "type": "collection",
+            "settings": {
+              "tab_text": "",
+              "collection": "test-collection",
+              "button_text": "",
+              "button_url": ""
+            }
           }
         },
         "block_order": [
@@ -649,7 +649,8 @@
           "a739270d-13fd-4aaf-9bd0-c54e753ab0a7",
           "db2a2a28-0b9f-4295-9b8c-60c865322da2",
           "0bc35052-fa24-4ee9-8955-ae08bee2e924",
-          "9c56b143-db73-45f6-a837-924726f66341"
+          "9c56b143-db73-45f6-a837-924726f66341",
+          "a40458b2-1409-4f4a-94fe-4a7dbf54b847"
         ],
         "settings": {
           "enable_section": true,
@@ -889,13 +890,15 @@
         "type": "hp-hero-video",
         "disabled": true,
         "settings": {
-          "enable_section": true,
+          "full_width_section": true,
+          "mobile_format_16_9": false,
           "section_bg": "#000000",
           "video_mp4": "https:\/\/cdn.shopify.com\/s\/files\/1\/0057\/6235\/1219\/files\/Jack_Fusco_-Website_Banner_Loop-v2_2.mp4?v=1648115627",
           "video_poster": "shopify:\/\/shop_images\/Rectangle_1.jpg",
           "video_autoplay": true,
           "video_muted": true,
           "show_mute_button": false,
+          "show_default_controls": false,
           "show_hide_video": "show_on_all",
           "image": "shopify:\/\/shop_images\/Rectangle_1.jpg",
           "image_mobile": "shopify:\/\/shop_images\/Rectangle_2.jpg",
@@ -979,10 +982,34 @@
         "settings": {
           "show_breadcrumbs": true
         }
+      },
+      "1664296876ed335022": {
+        "type": "hp-hero-video",
+        "settings": {
+          "full_width_section": false,
+          "mobile_format_16_9": false,
+          "section_bg": "#000000",
+          "video_mp4": "https:\/\/cdn.shopify.com\/videos\/c\/o\/v\/b04f163dd8a94eb68c109c827484fbaa.mp4",
+          "video_autoplay": true,
+          "video_muted": true,
+          "show_mute_button": false,
+          "show_default_controls": false,
+          "show_hide_video": "show_on_all",
+          "overlay_opacity": 0,
+          "content_position": "bottomRight",
+          "text_color": "#ffffff",
+          "heading": "<span style=\"font-size:42px\">Even Icons Evolve<\/span>",
+          "image_heading_width": 0,
+          "text": "",
+          "link": "shopify:\/\/pages\/ekg-family",
+          "button_text": "Explore More",
+          "btn_type": "btn--light"
+        }
       }
     },
     "content_for_index": [
       "1648114115d10a8d6a",
+      "1664296876ed335022",
       "1565155576930",
       "1629968785d9d2e1c7",
       "1648464189e55630c9",

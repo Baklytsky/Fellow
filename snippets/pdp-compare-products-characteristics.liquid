@@ -17,12 +17,12 @@
   {%- assign table_style_class = 'pdpCompare__table-four' -%}
   {%- endcase -%}
 
-  {% if compare_product_array_size > 1 %}
+  {% if compare_product_array_size > 0 %}
     {%- assign compare_products_heading = product.metafields.custom_fields["compare_products_heading"] %}
     {%- assign display_order = product.metafields.custom_fields["compare_products_order"] %}
 
-    <section class='pdpCompare {% if display_order != blank %} o-{{ display_order }}{% endif %}'>
-      <div class="pdpCompare__wrapper">
+    <pdp-compare class='pdpCompare {% if display_order != blank %} o-{{ display_order }}{% endif %}'>
+      <toggle-tabs class="pdpCompare__wrapper">
         {%- if compare_products_heading != blank -%}
           <h3 class="pdpCompare__heading">{{ compare_products_heading }}</h3>
         {%- endif -%}
@@ -47,13 +47,13 @@
                   <div class="pdpCompare__table-th">
                     <a href="{{ _product.url }}" target='_blank' class="pdpCompare__table-productTitle">{{ _product_title }}</a>
                     <div class="pdpCompare__table-productImage rel">
-                      {% include 'component-image' with
-                        src: _product_image,
+                      {% render 'image-lazy-metafields',
+                        image: _product_image,
+                        class_name: 'image image-abs-cover',
                         alt: _product.title,
-                        href: _product.url,
-                        className: 'image image-abs-cover',
-                        absolute: true,
-                        fill: true %}
+                        size: 'medium',
+                        loader: true  %}
+                      <a href="{{ _product.url }}" class="x y fill abs z2" aria-label="{{ _product.title }}"></a>
                     </div>
                   </div>
                 </th>
@@ -120,13 +120,13 @@
                 {%- endif -%}
 
                 <div class="pdpCompare__tabsProductsImage rel">
-                  {% include 'component-image' with
-                    src: _product_image,
+                  {% render 'image-lazy-metafields',
+                    image: _product_image,
+                    class_name: 'image image-abs-cover',
                     alt: _product.title,
-                    href: _product.url,
-                    className: 'image image-abs-cover',
-                    absolute: true,
-                    fill: true %}
+                    size: 'medium',
+                    loader: true  %}
+                  <a href="{{ _product.url }}" class="x y fill abs z2" aria-label="{{ _product.title }}"></a>
                 </div>
                 <h2><a href="{{ _product.url }}" target='_blank' class="pdpCompare__tabsProductsTitle">{{ _product_title }}</a></h2>
                 {%- for i in (1..6) -%}
@@ -142,10 +142,9 @@
               </div>
             {%- endif -%}
           {%- endfor -%}
-
         </div>
 
-      </div>
-    </section>
+      </toggle-tabs>
+    </pdp-compare>
   {% endif %}
 {% endif %}

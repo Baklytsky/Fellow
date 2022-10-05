@@ -7,8 +7,6 @@
 
 <section class='pdpMain__details pdpMain-bundle__details z2 rel'>
 
-
-  {% comment %} <form action='/cart/add' method='post' enctype='multipart/form-data' data-component='productForm'> {% endcomment %}
   {% form 'product', product, data-product-form: dataProductForm, class: 'shopify-product-form pdpForm' %}
     <div class='pdpCopy__header'>
       <div class=' f jcb aic'>
@@ -20,7 +18,6 @@
           {% comment %}
             Product is available and on sale
           {% endcomment %}
-          {% comment %} <strong> tag added to satisfy compliance concern -ae 03.23.21 {% endcomment %}
             <span class="inline-block strike card__price--regular ml1 pdpCopy__header-price pdpCopy__header-price-small rel">
               {{ current_variant.compare_at_price | money_without_trailing_zeros }}
               <div class="price-round-arrow">{% render 'icon' with 'round-arrow' %}</div>
@@ -69,7 +66,6 @@
         {% comment %}
           Product is available and on sale
         {% endcomment %}
-        {% comment %} <strong> tag added to satisfy compliance concern -ae 03.23.21 {% endcomment %}
           <span class="inline-block strike card__price--regular ml1 pdpCopy__header-price pdpCopy__header-price-small rel">
               {{ current_variant.compare_at_price | money_without_trailing_zeros }}
               <div class="price-round-arrow">{% render 'icon' with 'round-arrow' %}</div>

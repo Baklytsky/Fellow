@@ -4,13 +4,13 @@
   {%- assign show_view_all = section.settings.show_view_all -%}
 
   {%- if blocks.size > 0 or heading -%}
-    <section class="FeaturedCollections">
+    <featured-collections class="FeaturedCollections">
       {%- if heading -%}
         <h2 class="FeaturedCollections__Heading m0">{{ heading }}</h2>
       {%- endif -%}
 
       {%- if blocks.size > 0 -%}
-        <div class="FeaturedCollections__TabsWrapper">
+        <toggle-tabs class="FeaturedCollections__TabsWrapper">
           <div class="FeaturedCollections__TabsHeader">
             <ul class="FeaturedCollections__TabsList">
               {%- for block in blocks -%}
@@ -46,10 +46,7 @@
 
             {%- if show_view_all -%}
               <a class="FeaturedCollections__CollectionLink"
-                 href="{{ first_button_link }}"
-                 title="{{ first_button_text }}"
-                 aria-label="{{ first_button_text }}"
-                 role="button">
+                 href="{{ first_button_link }}">
                 {{ first_button_text }}
               </a>
             {%- endif -%}
@@ -76,16 +73,24 @@
                   {% endfor %}
 
                   {%- if collection.products_count  > 3 -%}
-                    <button type="button" class="FeaturedCollections__ScrollPrev" aria-label="Scroll Prev">{% render 'icon' with 'arrow-prev' %}</button>
-                    <button type="button" class="FeaturedCollections__ScrollNext" aria-label="Scroll Next">{% render 'icon' with 'arrow-next' %}</button>
+                    <button type="button"
+                            class="FeaturedCollections__ScrollPrev"
+                            aria-label="Scroll Prev" data-scroll="prev">
+                      {% render 'icon' with 'arrow-prev' %}
+                    </button>
+                    <button type="button"
+                            class="FeaturedCollections__ScrollNext"
+                            aria-label="Scroll Next" data-scroll="next">
+                      {% render 'icon' with 'arrow-next' %}
+                    </button>
                   {%- endif -%}
                 </div>
               {%- endif -%}
             {%- endfor -%}
           </div>
-        </div>
+        </toggle-tabs>
       {%- endif -%}
-    </section>
+    </featured-collections>
   {%- endif -%}
 
 {%- endif -%}
