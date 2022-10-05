@@ -14,9 +14,9 @@
     "gift_wrapping_result_message": "Your order will be sent in a gift box",
     "gift_wrapping_heading": "Gift Box + Gift Note",
     "enable_gwp": false,
-    "gwp_threshold": 150,
+    "gwp_threshold": 98,
     "gwp_product": "donotlook",
-    "gwp_1_success_message": "You've got a mystery coffee on your way!",
+    "gwp_1_success_message": "We've added a free mystery coffee to your cart!",
     "second_gwp_threshold": 0,
     "second_gwp_product": "",
     "gwp_2_success_message": "",
@@ -330,8 +330,8 @@
           "menu_right": "new-right-menu",
           "mobile_menu": "mobile-navigation-q3-2022",
           "show_announcement": true,
-          "announcement_text": "🌎 Introducing Fellow Rebrew. Refurbished, like new kettles for 20% off. <u class=\"ml05\" style=\"cursor:pointer;\"> Shop now -&gt;<\/u>",
-          "announcement_link": "shopify:\/\/collections\/refurbished-gear",
+          "announcement_text": "Meet NEW Stagg EKG Pro and Pro Studio Edition 🔥",
+          "announcement_link": "shopify:\/\/pages\/compare-stagg-ekg-kettles",
           "enable_timer": false,
           "end_date": "Sep 05, 2022 23:59:00 GMT-08:00"
         }
@@ -389,16 +389,16 @@
             "type": "splitSlide",
             "settings": {
               "splitSlide__layout": "right",
-              "heroSlide": "shopify:\/\/shop_images\/HP_HeroImage_NewKettleColors_Sept22.jpg",
+              "heroSlide": "shopify:\/\/shop_images\/EKG_Pro_Homepage_Hero.png",
               "desktopAlignment": "center",
               "mobileAlignment": "center",
-              "heroSlide__header": "Meet The New Neutrals",
-              "heroSlide__subheader": "Understated hues with elevated accents, three new electric kettle colors are here.",
-              "subSlide__bgColor": "#ede3d2",
-              "subSlide__textColor": "#231f20",
-              "heroSlide__ctaURL": "https:\/\/fellowproducts.com\/products\/stagg-ekg-electric-pour-over-kettle?variant=40594389532772",
-              "heroSlide__ctaCopy": "Shop Stagg EKG",
-              "heroSlide__ctaColor": "black",
+              "heroSlide__header": "EVEN ICONS EVOLVE",
+              "heroSlide__subheader": "Introducing Stagg EKG Pro and Pro Studio Edition. We set the undisputed standard for electric kettles. Again.",
+              "subSlide__bgColor": "#000000",
+              "subSlide__textColor": "#FFFFFF",
+              "heroSlide__ctaURL": "shopify:\/\/pages\/compare-stagg-ekg-kettles",
+              "heroSlide__ctaCopy": "Shop Now",
+              "heroSlide__ctaColor": "white",
               "heroSlide__ctaURL2": "",
               "heroSlide__ctaCopy2": "",
               "heroSlide__ctaColor2": "black",
@@ -517,7 +517,8 @@
         "settings": {
           "enable_section": true,
           "text": "Get free shipping on orders over $99!",
-          "url": "shopify:\/\/collections\/bestsellers"
+          "url": "shopify:\/\/collections\/bestsellers",
+          "icon": "shopify:\/\/shop_images\/FP-icon-Homepage-AltIcon-black_1.png"
         }
       },
       "162997622949d3f8ee": {
@@ -630,6 +631,7 @@
           },
           "a40458b2-1409-4f4a-94fe-4a7dbf54b847": {
             "type": "collection",
+            "disabled": true,
             "settings": {
               "tab_text": "",
               "collection": "test-collection",
@@ -985,6 +987,7 @@
       },
       "1664296876ed335022": {
         "type": "hp-hero-video",
+        "disabled": true,
         "settings": {
           "full_width_section": false,
           "mobile_format_16_9": false,
@@ -1001,7 +1004,7 @@
           "heading": "<span style=\"font-size:42px\">Even Icons Evolve<\/span>",
           "image_heading_width": 0,
           "text": "",
-          "link": "shopify:\/\/pages\/ekg-family",
+          "link": "shopify:\/\/pages\/compare-stagg-ekg-kettles",
           "button_text": "Explore More",
           "btn_type": "btn--light"
         }
