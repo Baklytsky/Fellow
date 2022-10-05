@@ -42,8 +42,7 @@
     "main": {
       "type": "product-template-bundle",
       "settings": {
-        "show_breadcrumbs": true,
-        "show_quantity_selector": false
+        "show_breadcrumbs": true
       }
     }
   },
