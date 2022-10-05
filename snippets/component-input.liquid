@@ -13,6 +13,9 @@
 {% if required == blank %}
   {% assign required = 'false' %}
 {% endif %}
+{%- if inputErrorMessage == blank -%}
+  {% assign inputErrorMessage = 'customer.login.input_error' | t %}
+{%- endif -%}
 
 {%- capture id -%}
 {{type}}{{name}}{{ className | replace: ' ', '' }}
@@ -47,5 +50,5 @@
       </button>
     {%- endif -%}
   </div>
-  <p class="input-wrapper__error">{{ 'customer.login.input_error' | t }}</p>
+  <p class="input-wrapper__error">{{ inputErrorMessage }}</p>
 </div>

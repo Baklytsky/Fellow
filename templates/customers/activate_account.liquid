@@ -1,29 +1,58 @@
-<h1>{{ 'customer.activate_account.title' | t }}</h1>
-<p>{{ 'customer.activate_account.subtext' | t }}</p>
+<account-element class="account-wrapper">
+  <div class="page-wrapper">
+    <div class="account-login__reset-pass account-dialog">
+      <h2 class="account-heading">{{ 'customer.activate_account.title' | t }}</h2>
+      <div class="account-text">{{ 'customer.activate_account.subtext' | t }}</div>
 
-{% form 'activate_customer_password' %}
-  {{ form.errors | default_errors }}
+      {% form 'activate_customer_password' %}
+      {%- assign inputClassName = blank -%}
 
-  <p>
-    <label for="CustomerPassword" class="label-hidden">
-      {{ 'customer.activate_account.password' | t }}
-    </label>
-    <input type="password"
-      name="customer[password]"
-      id="CustomerPassword"
-      placeholder="{{ 'customer.activate_account.password' | t }}">
-  </p>
+        {% if form.errors %}
+          <div class='account-error'>
+            {%- render 'icon' with 'error' -%}
+            <span>{{ form.errors | default_errors }}</span>
+          </div>
+          {%- assign inputClassName = 'input-error' -%}
+        {% endif %}
 
-  <p>
-    <label for="CustomerPasswordConfirmation" class="label-hidden">
-      {{ 'customer.activate_account.password_confirm' | t }}
-    </label>
-    <input type="password"
-      name="customer[password_confirmation]"
-      id="CustomerPasswordConfirmation"
-      placeholder="{{ 'customer.activate_account.password_confirm' | t }}">
-  </p>
+      {%- assign activate_password_label = 'customer.activate_account.password' | t -%}
 
-  <input type="submit" class="btn" value="{{ 'customer.activate_account.submit' | t }}">
-  <input type="submit" class="btn btn--secondary" name="decline" value="{{ 'customer.activate_account.cancel' | t }}">
-{% endform %}
+        {% include 'component-input' with
+          label: activate_password_label,
+          name: 'customer[password]',
+          type: 'password',
+          className: inputClassName %}
+
+      {%- assign activate_confirm_password_label = 'customer.activate_account.password_confirm' | t -%}
+
+        {% include 'component-input' with
+          label: activate_confirm_password_label,
+          name: 'customer[password_confirmation]',
+          type: 'password',
+          className: inputClassName %}
+
+      {%- assign activate_accepts_marketing_label = 'customer.activate_account.accepts_marketing' | t -%}
+
+        {% include 'component-input' with
+          label: activate_accepts_marketing_label,
+          name: 'customer[accepts_marketing]',
+          type: 'checkbox',
+          className: inputClassName %}
+
+      {%- assign activate_btn_cta = 'customer.activate_account.submit' | t -%}
+
+        {% include 'component-button' with
+          tag: 'button',
+          type: 'submit',
+          cta: activate_btn_cta,
+          className: 'account-btn btn btn--lg btn--dark' %}
+
+        {%- if settings.contact_us_link != blank -%}
+          <div class='account-subtitle f aic'>
+            Need help? <a href="{{ settings.contact_us_link }}" target="_blank">Contact Us</a>
+          </div>
+        {%- endif -%}
+      {% endform %}
+    </div>
+  </div>
+</account-element>

@@ -1,48 +1,60 @@
 <account-element class='account-wrapper'>
   <div class='page-wrapper'>
-    <div class="account-login__recover-wrapper js-recover-dialog" data-dialog>
+    <div id="recover" class="account-login__recover-wrapper" data-dialog>
       <div class='account-login__recover account-dialog'>
-        <h2 class='account-heading'>{{ 'customer.reset_password.title' | t }}</h2>
-        <div class='account-text'>{{ 'customer.reset_password.subtext' | t }}</div>
+        <h2 class='account-heading'>{{ 'customer.recover_password.title' | t }}</h2>
+        <div class='account-text'>{{ 'customer.recover_password.subtext' | t }}</div>
 
         {% form 'recover_customer_password' %}
+          {%- assign inputClassName = blank -%}
+          {%- assign inputErrorMessage = blank -%}
+
+          {% if form.errors %}
+            <div class='account-error'>
+              {%- render 'icon' with 'error' -%}
+              <span>
+                  That email address does not match our records. Please try again or
+                  <a href="{{ routes.account_register_url }}">create an account</a>.
+                </span>
+            </div>
+            {%- assign inputClassName = 'input-error' -%}
+            {%- assign inputErrorMessage = 'customer.recover_password.error_message' | t -%}
+          {% endif %}
 
           {% if form.posted_successfully? %}
-            <span class='js-recover-success'>Success! Check your email for a link to reset your password.</span>
+            <span class='recover-success'>{{ 'customer.recover_password.success' | t }}</span>
           {% else %}
+
+            {%- assign recover_email_label = 'customer.recover_password.email' | t -%}
+
             {%
               include 'component-input' with
-              label: 'Email',
+              label: recover_email_label,
               name: 'email',
-              type: 'email'
+              type: 'email',
+              className: inputClassName,
+              inputErrorMessage: inputErrorMessage,
+              autocomplete: 'on'
             %}
 
-            {% if form.errors %}
-              {% for field in form.errors %}
-                {% if field == 'form' %}
-                  <p class='small cg'>{{ form.errors.messages[field] }}</p>
-                {% else %}
-                  <p class='small cg'>{{ form.errors.translated_fields[field] | capitalize }} {{ form.errors.messages[field] }}.</p>
-                {% endif %}
-              {% endfor %}
-            {% endif %}
+            {%- assign reset_btn_cta = 'customer.recover_password.submit' | t -%}
 
             {%
               include 'component-button' with
               tag: 'button',
               type: 'submit',
-              cta: 'Reset password',
+              cta: reset_btn_cta,
               className: 'account-btn btn btn--lg btn--dark'
             %}
         {% endif %}
 
         {% endform %}
 
-        <button type="button" class='js-recover-cancel' data-toggle-dialog>or <span>{{ 'customer.reset_password.cancel' | t }}</span></button>
+        <button type="button" class='js-recover-cancel' data-toggle-dialog="login_form">or <span>{{ 'customer.reset_password.cancel' | t }}</span></button>
       </div>
     </div>
 
-    <div class="account-login__login-wrapper js-login-dialog active" data-dialog>
+    <div id="login_form" class="account-login__login-wrapper" data-dialog>
       <div class='account-login__login account-dialog'>
         <h2 class='account-heading'>{{ 'customer.login.sign_in' | t }}</h2>
 
@@ -54,35 +66,42 @@
               {%- render 'icon' with 'error' -%}
               <span>
                 The email and/or password provided don't match our records. Try again or
-                <button type="button" class='js-recover-trigger' data-toggle-dialog>reset your password</button>.
+                <button type="button" class='js-recover-trigger' data-toggle-dialog="recover">reset your password</button>.
               </span>
             </div>
             {%- assign inputClassName = 'input-error' -%}
           {% endif %}
 
-          {%
-            include 'component-input' with
-            label: 'Email',
-            name: 'customer[email]',
-            type: 'email',
-            className: inputClassName
-          %}
+        {%- assign login_email_label = 'customer.login.email' | t -%}
 
           {%
             include 'component-input' with
-            label: 'Password',
+            label: login_email_label,
+            name: 'customer[email]',
+            type: 'email',
+            className: inputClassName,
+            autocomplete: 'on'
+          %}
+
+        {%- assign login_password_label = 'customer.login.password' | t -%}
+
+          {%
+            include 'component-input' with
+            label: login_password_label,
             name: 'customer[password]',
             type: 'password',
             className: inputClassName
           %}
 
-          <button type="button" class='js-recover-trigger' data-toggle-dialog>{{ 'customer.login.forgot_password' | t }}</button>
+          <button type="button" class='js-recover-trigger' data-toggle-dialog="recover">{{ 'customer.login.forgot_password' | t }}</button>
+
+        {%- assign login_submit_cta = 'customer.login.sign_in' | t -%}
 
           {%
             include 'component-button' with
             tag: 'button',
             type: 'submit',
-            cta: 'Sign in',
+            cta: login_submit_cta,
             className: 'account-btn btn btn--lg btn--dark'
           %}
         {% endform %}
@@ -118,7 +137,7 @@
         {%- assign create_account_cta = 'customer.login.create' | t -%}
 
         {% include 'component-button' with
-          href: '/account/register'
+          href: routes.account_register_url,
           cta: create_account_cta,
           className: 'account-btn btn btn--lg btn--dark' %}
       </div>

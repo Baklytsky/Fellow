@@ -2008,12 +2008,13 @@ class account extends HTMLElement {
     this.dialog = this.querySelectorAll('[data-dialog]')
     this.toggleDialogBtn = this.querySelectorAll('[data-toggle-dialog]')
     this.inputs = this.querySelectorAll('.input-wrapper')
+    this.checkbox = this.querySelectorAll('input[type=checkbox]')
     this.errorMeseges = this.querySelectorAll('.account-error')
     this.toglePassBtn = this.querySelectorAll('[data-togle-pass-visibility]')
 
     this.toggleDialogBtn.forEach(btn => btn.addEventListener('click', (e)=> {
       e.preventDefault()
-      this.toggleDialog()
+      this.toggleDialog(btn)
     }))
 
     this.inputs.forEach(input => input.addEventListener('keyup', ()=> {
@@ -2023,10 +2024,18 @@ class account extends HTMLElement {
     this.toglePassBtn.forEach(btn => btn.addEventListener('click', ()=> {
       this.togglePassVisibility(btn)
     }))
+
+    this.checkbox.forEach(checkbox => checkbox.addEventListener('change', ()=> {
+      this.toggleCheckboxState(checkbox)
+    }))
   }
 
-  toggleDialog() {
-    this.dialog.forEach(dialog => dialog.classList.toggle('active'))
+  toggleDialog(btn) {
+    this.dialog.forEach(dialog => {
+      (dialog.id === btn.dataset.toggleDialog)
+          ? dialog.style.display = 'flex'
+          : dialog.style.display = 'none'
+    })
   }
 
   removeErrorStatus (input) {
@@ -2046,6 +2055,10 @@ class account extends HTMLElement {
       input.type = 'password'
       btn.innerHTML = 'Show'
     }
+  }
+
+  toggleCheckboxState(checkbox) {
+    (checkbox.checked) ? checkbox.value = 'true' : checkbox.value = 'false'
   }
 }
 

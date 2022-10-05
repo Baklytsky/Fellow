@@ -142,11 +142,12 @@
     },
     "activate_account": {
       "title": "Activate Account",
-      "subtext": "Create your password to activate your account.",
+      "subtext": "Set a password to activate your account.",
       "password": "Password",
       "password_confirm": "Confirm Password",
-      "submit": "Activate Account",
-      "cancel": "Decline Invitation"
+      "submit": "Save",
+      "cancel": "Cancel",
+      "accepts_marketing": "Sign up for emails and be the first to hear about new gear, exclusive promotions, delicious coffees, and brewing tips from the best."
     },
     "addresses": {
       "title": "Your Addresses",
@@ -217,29 +218,36 @@
       "subtotal": "Subtotal"
     },
     "recover_password": {
-      "title": "Reset your password",
+      "title": "Reset Your Password",
       "email": "Email",
-      "submit": "Submit",
+      "submit": "Send Email",
       "cancel": "Cancel",
-      "subtext": "We will send you an email to reset your password.",
-      "success": "We've sent you an email with a link to update your password."
+      "subtext": "Enter your email address to reset your password.",
+      "success": "Thank you! We've sent you an email to reset your password. The email may take a few minutes and may land in your spam folder.",
+      "error_message": "Oops! Something went wrong."
     },
     "reset_password": {
-      "title": "Reset Your Password",
-      "subtext": "Enter your email address to reset your password.",
+      "title": "Password Reset",
+      "subtext": "Enter a new password for {{ email }}",
       "password": "Password",
       "password_confirm": "Confirm Password",
-      "submit": "Send Email",
-      "cancel": "back to sign in"
+      "submit": "Save",
+      "success": "Thank you! We've sent you an email to reset your password. The email may take a few minutes and may land in your spam folder.",
+      "cancel": "back to sign in",
+      "error_message": "Oops! Something went wrong."
     },
     "register": {
       "title": "Create Account",
-      "first_name": "First Name",
-      "last_name": "Last Name",
-      "email": "Email",
-      "password": "Password",
-      "submit": "Create",
-      "cancel": "Return to Store"
+      "subtext": "Please fill out the form below and click Create Account. If you’ve ordered from Fellow before, use the same email address to see past purchases.",
+      "required": "*Required",
+      "first_name": "First Name*",
+      "last_name": "Last Name*",
+      "email": "Email Address*",
+      "phone_number": "Phone Number",
+      "password": "Password*",
+      "submit": "Create Account",
+      "cancel": "Return to Store",
+      "accepts_marketing": "Sign up for emails and be the first to hear about new gear, exclusive promotions, delicious coffees, and brewing tips from the best."
     }
   },
   "homepage": {

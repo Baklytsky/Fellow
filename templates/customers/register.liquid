@@ -1,63 +1,88 @@
-<div class='account-register x y account-wrapper bg-p ac f aic jcc'>
-  <div class='outer x'>
-    <div class='account-dialog p2 ma'>
-      <h1 class='serif'>{{ 'customer.register.title' | t }}</h1>
+<account-element class="account-wrapper">
+  <div class="page-wrapper">
+    <div class="account-register account-dialog">
+      <h2 class="account-heading">{{ 'customer.register.title' | t }}</h2>
+      <div class="account-text">{{ 'customer.register.subtext' | t }}</div>
+      <div class="account-text required">{{ 'customer.register.required' | t }}</div>
 
       {% form 'create_customer' %}
-        {{ form.errors | default_errors }}
+      {%- assign inputClassName = blank -%}
+
+        {% if form.errors %}
+          <div class='account-error'>
+            {%- render 'icon' with 'error' -%}
+            <span>{{ form.errors | default_errors }}</span>
+          </div>
+          {%- assign inputClassName = 'input-error' -%}
+        {% endif %}
+
+      {%- assign register_first_name_label = 'customer.register.first_name' | t -%}
 
         {%
           include 'component-input' with
-          placeholder: 'First Name',
+          label: register_first_name_label,
           name: 'customer[first_name]',
           value: form.first_name,
           type: 'text',
-          className: 'mb1'
+          autocapitalize: "on",
+          className: inputClassName
         %}
+
+      {%- assign register_last_name_label = 'customer.register.last_name' | t -%}
+
         {%
           include 'component-input' with
-          placeholder: 'Last Name',
+          label: register_last_name_label,
           name: 'customer[last_name]',
           type: 'text',
-          className: 'mb1'
+          autocapitalize: "on",
+          className: inputClassName
         %}
+
+      {%- assign register_email_label = 'customer.register.email' | t -%}
+
         {%
           include 'component-input' with
-          placeholder: 'Email',
+          label: register_email_label,
           name: 'customer[email]',
           type: 'email',
           value: form.email,
-          spellcheck: "off",
-          autocapitalize: "off",
-          className: 'mb1'
+          autocapitalize: "on",
+          className: inputClassName
         %}
+
+      {%- assign register_password_label = 'customer.register.password' | t -%}
 
         {%
           include 'component-input' with
-          placeholder: 'Password',
+          label: register_password_label,
           name: 'customer[password]',
           type: 'password',
-          className: 'mb1'
+          className: inputClassName
         %}
 
-        <div class='mt2'>
-          <div class='mt1'>
-            {%
-            include 'component-button' with
-            tag: 'button',
-            type: 'submit',
-            cta: 'Sign Up',
-            className: 'btn btn__blue'
-            %}
-          </div>
-        </div>
-        <div class='pt1 f aic small jcc'>
-          <div class='small cgm'>
-            <a href="{{ shop.url }}" class="mt1 cgm underline--gm underline no-ajax">{{ 'customer.register.cancel' | t }}</a><br />
-            Already have an account? <a class='mt1 cgm underline--gm underline no-ajax' href='/account/login'>Login</a>
-          </div>
+      {%- assign register_accepts_marketing_label = 'customer.register.accepts_marketing' | t -%}
+
+        {% include 'component-input' with
+          label: register_accepts_marketing_label,
+          name: 'customer[accepts_marketing]',
+          type: 'checkbox',
+          className: inputClassName %}
+
+      {%- assign register_btn_cta = 'customer.register.submit' | t -%}
+
+        {%
+          include 'component-button' with
+          tag: 'button',
+          type: 'submit',
+          cta: register_btn_cta,
+          className: 'account-btn btn btn--lg btn--dark'
+        %}
+
+        <div class='account-subtitle f aic'>
+          Already have an account? <a href='{{ routes.account_login_url }}'>Login</a>
         </div>
       {% endform %}
     </div>
   </div>
-</div>
+</account-element>
