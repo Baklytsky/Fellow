@@ -21,15 +21,13 @@
             image: collection_iwt_image,
             class_name: image_class,
             alt: collection_iwt_title,
-            size: 'medium',
-            loader: true %}
+            size: 'medium' %}
           {%- if collection_iwt_image_mobile != blank -%}
             {% render 'image-lazy-metafields',
               image: collection_iwt_image_mobile,
               class_name: 'image image-abs-cover hide-tablet-desk',
               alt: collection_iwt_title,
-              size: 'medium',
-              loader: true %}
+              size: 'medium' %}
           {%- endif -%}
         </div>
       {%- endif -%}
