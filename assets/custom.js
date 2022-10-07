@@ -289,6 +289,51 @@ theme.slideToggle = function (target, duration = 250) {
   }
 }
 
+theme.objToStrUrlEncode = function(obj) {
+  const str = [];
+  for (var key in obj) {
+    if (obj.hasOwnProperty(key) && typeof obj[key] !== 'undefined') {
+      str.push(encodeURIComponent(key) + "=" + encodeURIComponent(obj[key]))
+    }
+  }
+  return str.join('&')
+}
+
+theme.klaviyoTrigger = function (form, listID = '') {
+  const email = form.querySelector('input[type=email]');
+  const phone = form.querySelector('input[type=tel]');
+
+  const data = {
+    g: listID,
+    '$fields': '$source,$email,$phone,$consent_method',
+    '$list_fields': '',
+    '$timezone_offset': Math.abs(new Date().getTimezoneOffset() / 60),
+    '$source': (form.id) ? form.id : 'Shopify',
+    '$email': (email) ? email.value : '',
+    '$phone_number': (phone) ? phone.value : '',
+    '$consent_method': 'Klaviyo Form',
+    '$origin': 'origin'
+  }
+
+  fetch("https://a.klaviyo.com/ajax/subscriptions/subscribe", {
+    "headers": {
+      "accept": "*/*",
+      "accept-language": "en-US,en;q=0.9",
+      "content-type": "application/x-www-form-urlencoded",
+    },
+    "body": theme.objToStrUrlEncode(data),
+    "method": "POST",
+    "mode": "cors",
+    "credentials": "omit"
+  }).then(response => response.json())
+      .then(response => {
+        console.log(response)
+      })
+      .catch(err => {
+        console.error(err)
+      });
+}
+
 theme.collectionAndSearch = function (isSearchPage) {
 
   if ($('.collectionFilters').length) {
@@ -2011,6 +2056,7 @@ class account extends HTMLElement {
     this.checkbox = this.querySelectorAll('input[type=checkbox]')
     this.errorMeseges = this.querySelectorAll('.account-error')
     this.toglePassBtn = this.querySelectorAll('[data-togle-pass-visibility]')
+    this.forms = this.querySelectorAll('form')
 
     this.toggleDialogBtn.forEach(btn => btn.addEventListener('click', (e)=> {
       e.preventDefault()
@@ -2028,6 +2074,23 @@ class account extends HTMLElement {
     this.checkbox.forEach(checkbox => checkbox.addEventListener('change', ()=> {
       this.toggleCheckboxState(checkbox)
     }))
+
+    this.forms.forEach(form => {
+      const KlaviyoCheckboxes = form.querySelectorAll('input[type=checkbox][data-klaviyo-list-id]')
+
+      if (KlaviyoCheckboxes.length) {
+        form.addEventListener('submit', (e)=> {
+          e.preventDefault()
+           Promise.all(Array.from(KlaviyoCheckboxes).map(checkbox => {
+             const listID = checkbox.dataset.klaviyoListId || null
+             if (checkbox.checked && listID) return new Promise(() => theme.klaviyoTrigger(form, listID))
+           })).then((data)=> {
+             console.log(data)
+           })
+        })
+      }
+
+    })
   }
 
   toggleDialog(btn) {

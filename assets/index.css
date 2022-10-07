@@ -4398,6 +4398,45 @@ textarea {
   padding: 5px;
 }
 
+.input-wrapper.checkbox .input-wrapper__label {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.input-wrapper.checkbox input {
+  display: none;
+}
+
+.input-wrapper.checkbox .input-wrapper__label:before {
+  content:'';
+  -webkit-appearance: none;
+  background-color: transparent;
+  border: 1px solid #B8B8B8;
+  border-radius: 5px;
+  padding: 10px;
+  display: block;
+  position: relative;
+  vertical-align: middle;
+  cursor: pointer;
+  margin-right: 14px;
+}
+
+.input-wrapper.checkbox input:checked + .input-wrapper__label:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 2px;
+  left: 9px;
+  width: 6px;
+  height: 14px;
+  border: solid #000;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
 .button.account-btn {
   margin: 40px 0 18px;
   padding: 16px;

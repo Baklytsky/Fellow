@@ -17,7 +17,7 @@
 
       {%- assign activate_password_label = 'customer.activate_account.password' | t -%}
 
-        {% include 'component-input' with
+        {% render 'component-input'
           label: activate_password_label,
           name: 'customer[password]',
           type: 'password',
@@ -25,7 +25,7 @@
 
       {%- assign activate_confirm_password_label = 'customer.activate_account.password_confirm' | t -%}
 
-        {% include 'component-input' with
+        {% render 'component-input'
           label: activate_confirm_password_label,
           name: 'customer[password_confirmation]',
           type: 'password',
@@ -33,7 +33,7 @@
 
       {%- assign activate_accepts_marketing_label = 'customer.activate_account.accepts_marketing' | t -%}
 
-        {% include 'component-input' with
+        {% render 'component-input'
           label: activate_accepts_marketing_label,
           name: 'customer[accepts_marketing]',
           type: 'checkbox',
@@ -41,7 +41,7 @@
 
       {%- assign activate_btn_cta = 'customer.activate_account.submit' | t -%}
 
-        {% include 'component-button' with
+        {% render 'component-button'
           tag: 'button',
           type: 'submit',
           cta: activate_btn_cta,

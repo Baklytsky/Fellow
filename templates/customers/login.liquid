@@ -28,7 +28,7 @@
             {%- assign recover_email_label = 'customer.recover_password.email' | t -%}
 
             {%
-              include 'component-input' with
+              render 'component-input'
               label: recover_email_label,
               name: 'email',
               type: 'email',
@@ -40,7 +40,7 @@
             {%- assign reset_btn_cta = 'customer.recover_password.submit' | t -%}
 
             {%
-              include 'component-button' with
+              render 'component-button'
               tag: 'button',
               type: 'submit',
               cta: reset_btn_cta,
@@ -75,7 +75,7 @@
         {%- assign login_email_label = 'customer.login.email' | t -%}
 
           {%
-            include 'component-input' with
+            render 'component-input'
             label: login_email_label,
             name: 'customer[email]',
             type: 'email',
@@ -86,7 +86,7 @@
         {%- assign login_password_label = 'customer.login.password' | t -%}
 
           {%
-            include 'component-input' with
+            render 'component-input'
             label: login_password_label,
             name: 'customer[password]',
             type: 'password',
@@ -98,7 +98,7 @@
         {%- assign login_submit_cta = 'customer.login.sign_in' | t -%}
 
           {%
-            include 'component-button' with
+            render 'component-button'
             tag: 'button',
             type: 'submit',
             cta: login_submit_cta,
@@ -136,7 +136,7 @@
 
         {%- assign create_account_cta = 'customer.login.create' | t -%}
 
-        {% include 'component-button' with
+        {% render 'component-button'
           href: routes.account_register_url,
           cta: create_account_cta,
           className: 'account-btn btn btn--lg btn--dark' %}

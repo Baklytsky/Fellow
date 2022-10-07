@@ -377,5 +377,20 @@
         "info": "Will be scaled down to 32 x 32px"
       }
     ]
+  },
+  {
+    "name": "Account",
+    "settings": [
+      {
+        "type": "text",
+        "id": "email_klaviyo_list_id",
+        "label": "Klaviyo email list ID"
+      },
+      {
+        "type": "text",
+        "id": "sms_klaviyo_list_id",
+        "label": "Klaviyo SMS list ID"
+      }
+    ]
   }
 ]

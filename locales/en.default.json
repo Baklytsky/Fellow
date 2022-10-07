@@ -247,7 +247,8 @@
       "password": "Password*",
       "submit": "Create Account",
       "cancel": "Return to Store",
-      "accepts_marketing": "Sign up for emails and be the first to hear about new gear, exclusive promotions, delicious coffees, and brewing tips from the best."
+      "accepts_marketing": "Sign up for emails and be the first to hear about new gear, exclusive promotions, delicious coffees, and brewing tips from the best.",
+      "accepts_sms_marketing": "Sign up for SMS text messages and get the scoop on new products, exclusive sales, and more. (Message and data rates may apply.)"
     }
   },
   "homepage": {

@@ -19,60 +19,96 @@
       {%- assign register_first_name_label = 'customer.register.first_name' | t -%}
 
         {%
-          include 'component-input' with
+          render 'component-input'
           label: register_first_name_label,
           name: 'customer[first_name]',
           value: form.first_name,
           type: 'text',
-          autocapitalize: "on",
+          required: 'true',
+          autocomplete: "on",
           className: inputClassName
         %}
 
       {%- assign register_last_name_label = 'customer.register.last_name' | t -%}
 
         {%
-          include 'component-input' with
+          render 'component-input'
           label: register_last_name_label,
           name: 'customer[last_name]',
           type: 'text',
-          autocapitalize: "on",
+          required: 'true',
+          autocomplete: "on",
           className: inputClassName
         %}
 
       {%- assign register_email_label = 'customer.register.email' | t -%}
 
         {%
-          include 'component-input' with
+          render 'component-input'
           label: register_email_label,
           name: 'customer[email]',
           type: 'email',
           value: form.email,
-          autocapitalize: "on",
+          required: 'true',
+          autocomplete: "on",
+          className: inputClassName
+        %}
+
+      {%- assign register_phone_label = 'customer.register.phone_number' | t -%}
+
+        {%
+          render 'component-input'
+          label: register_phone_label,
+          name: 'customer[note][Phone]',
+          type: 'tel',
+          autocomplete: "on",
           className: inputClassName
         %}
 
       {%- assign register_password_label = 'customer.register.password' | t -%}
 
         {%
-          include 'component-input' with
+          render 'component-input'
           label: register_password_label,
           name: 'customer[password]',
           type: 'password',
+          required: 'true',
           className: inputClassName
         %}
 
       {%- assign register_accepts_marketing_label = 'customer.register.accepts_marketing' | t -%}
+        {%- if settings.email_klaviyo_list_id != blank -%}
+          {%- assign accepts_email_marketing_attr = 'data-klaviyo-list-id=' | append:'"' | append: settings.email_klaviyo_list_id | append:'"'  -%}
+        {%- endif -%}
 
-        {% include 'component-input' with
+        {% render 'component-input'
           label: register_accepts_marketing_label,
           name: 'customer[accepts_marketing]',
           type: 'checkbox',
-          className: inputClassName %}
+          value: 'false',
+          className: inputClassName,
+          attr: accepts_email_marketing_attr
+        %}
+
+      {%- assign register_accepts_sms_marketing_label = 'customer.register.accepts_sms_marketing' | t -%}
+        {%- if settings.sms_klaviyo_list_id != blank -%}
+          {%- assign accepts_sms_marketing_attr = 'data-klaviyo-list-id=' | append:'"' | append: settings.sms_klaviyo_list_id | append:'"'  -%}
+        {%- endif -%}
+
+      {% render 'component-input'
+          label: register_accepts_sms_marketing_label,
+          name: 'customer[sms_marketing_consent]',
+          type: 'checkbox',
+          value: 'false',
+          className: inputClassName,
+          attr: accepts_sms_marketing_attr
+      %}
+
 
       {%- assign register_btn_cta = 'customer.register.submit' | t -%}
 
         {%
-          include 'component-button' with
+          render 'component-button'
           tag: 'button',
           type: 'submit',
           cta: register_btn_cta,
@@ -80,8 +116,17 @@
         %}
 
         <div class='account-subtitle f aic'>
-          Already have an account? <a href='{{ routes.account_login_url }}'>Login</a>
+          Already have an account? <a href='{{ routes.account_login_url }}'>Sign in here</a>
         </div>
+
+        {%- if settings.email_klaviyo_list_id != blank or settings.sms_klaviyo_list_id != blank -%}
+          <script type="application/ld+json" data-customer-settings>
+            {
+              "email_klaviyo_list_id": "{{ settings.email_klaviyo_list_id }}",
+              "sms_klaviyo_list_id": "{{ settings.sms_klaviyo_list_id }}"
+            }
+        </script>
+        {%- endif -%}
       {% endform %}
     </div>
   </div>
