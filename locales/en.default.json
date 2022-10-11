@@ -135,10 +135,16 @@
   },
   "customer": {
     "account": {
-      "title": "My Account",
+      "title": "Hi, {{ name }}",
+      "header_title": "My Account",
+      "overview": "Account Overview",
+      "sign_out": "Sign Out",
       "details": "Account Details",
       "view_addresses": "View Addresses",
       "return": "Return to Account Details"
+    },
+    "info": {
+      "title": "My Information"
     },
     "activate_account": {
       "title": "Activate Account",
@@ -150,27 +156,30 @@
       "accepts_marketing": "Sign up for emails and be the first to hear about new gear, exclusive promotions, delicious coffees, and brewing tips from the best."
     },
     "addresses": {
-      "title": "Your Addresses",
+      "title": "Address Book",
       "default": "Default",
-      "add_new": "Add a New Address",
-      "edit_address": "Edit address",
-      "first_name": "First Name",
-      "last_name": "Last Name",
-      "company": "Company",
-      "address1": "Address1",
+      "add_new": "+ Add Address",
+      "edit": "Edit",
+      "change_password": "Change Password",
+      "return": "Return to Account Overview",
+      "first_name": "First Name*",
+      "last_name": "Last Name*",
+      "address1": "Address*",
       "address2": "Address2",
-      "city": "City",
-      "country": "Country",
-      "province": "Province",
-      "zip": "Postal\/Zip Code",
-      "phone": "Phone",
+      "city": "City*",
+      "country": "Country*",
+      "province": "State",
+      "zip": "Zip \/ Postal Code*",
+      "phone": "Phone Number",
       "set_default": "Set as default address",
       "add": "Add Address",
       "update": "Update Address",
       "cancel": "Cancel",
-      "edit": "Edit",
       "delete": "Delete",
-      "delete_confirm": "Are you sure you wish to delete this address?"
+      "delete_confirm_btn": "Yes",
+      "delete_reject_btn": "No",
+      "delete_confirm": "Are you sure you wish to delete this address?",
+      "contact_preferences": "Contact Preferences"
     },
     "login": {
       "title": "Login",
@@ -189,7 +198,7 @@
       "input_error": "Something went wrong. Please try again!"
     },
     "orders": {
-      "title": "Order History",
+      "title": "Orders",
       "order_number": "Order",
       "date": "Date",
       "payment_status": "Payment Status",

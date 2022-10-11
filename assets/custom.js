@@ -315,7 +315,7 @@ theme.klaviyoTrigger = function (form, listID = '') {
     '$origin': 'origin'
   }
 
-  fetch("https://a.klaviyo.com/ajax/subscriptions/subscribe", {
+  return fetch("https://a.klaviyo.com/ajax/subscriptions/subscribe", {
     "headers": {
       "accept": "*/*",
       "accept-language": "en-US,en;q=0.9",
@@ -793,10 +793,10 @@ class ModalDialog extends HTMLElement {
   constructor() {
     super();
     this.content = this.querySelector('[role="dialog"]')
-    this.querySelector('[id^="ModalClose-"]').addEventListener(
+    this.querySelectorAll('[id^="ModalClose-"]').forEach(el => el.addEventListener(
         'click',
         this.hide.bind(this)
-    );
+    ));
     this.addEventListener('keyup', (event) => {
       if (event.code.toUpperCase() === 'ESCAPE') this.hide()
     });
@@ -2057,17 +2057,25 @@ class account extends HTMLElement {
     this.errorMeseges = this.querySelectorAll('.account-error')
     this.toglePassBtn = this.querySelectorAll('[data-togle-pass-visibility]')
     this.forms = this.querySelectorAll('form')
+    this.deleteAddressBtns = this.querySelectorAll('[data-delete-address]')
+    this.toggleAddressBtns = this.querySelectorAll('[data-toggle-address]')
+    this.accountPageContent = this.querySelector('[data-account-content]')
+    this.sidebarAcoountOverview = this.querySelector('[data-acoount-overview]')
 
-    this.toggleDialogBtn.forEach(btn => btn.addEventListener('click', (e)=> {
-      e.preventDefault()
-      this.toggleDialog(btn)
-    }))
+    this.toggleDialogBtn.forEach(btn => {
+      btn.addEventListener('click', (e)=> {
+        e.preventDefault()
+        this.toggleDialog(btn)
+      })
+      if (btn.hasAttribute('data-click-trigger')) btn.click()
+    })
 
     this.inputs.forEach(input => input.addEventListener('keyup', ()=> {
       this.removeErrorStatus(input)
     }))
 
-    this.toglePassBtn.forEach(btn => btn.addEventListener('click', ()=> {
+    this.toglePassBtn.forEach(btn => btn.addEventListener('click', (e)=> {
+      e.preventDefault()
       this.togglePassVisibility(btn)
     }))
 
@@ -2075,22 +2083,35 @@ class account extends HTMLElement {
       this.toggleCheckboxState(checkbox)
     }))
 
-    this.forms.forEach(form => {
-      const KlaviyoCheckboxes = form.querySelectorAll('input[type=checkbox][data-klaviyo-list-id]')
+    this.forms.forEach(form => this.checkKlaviyoEvents(form))
 
-      if (KlaviyoCheckboxes.length) {
-        form.addEventListener('submit', (e)=> {
-          e.preventDefault()
-           Promise.all(Array.from(KlaviyoCheckboxes).map(checkbox => {
-             const listID = checkbox.dataset.klaviyoListId || null
-             if (checkbox.checked && listID) return new Promise(() => theme.klaviyoTrigger(form, listID))
-           })).then((data)=> {
-             console.log(data)
-           })
+    this.deleteAddressBtns.forEach(btn => btn.addEventListener('click', (e)=> {
+      e.preventDefault()
+      const addressID = btn.getAttribute('data-delete-address')
+      this.removeAddress(addressID)
+    }))
+
+    this.toggleAddressBtns.forEach(btn => btn.addEventListener('click', (e)=> {
+      e.preventDefault()
+      const id = btn.getAttribute('data-toggle-address')
+      this.toggleAddress(id)
+    }))
+  }
+
+  checkKlaviyoEvents (form) {
+    const KlaviyoCheckboxes = form.querySelectorAll('input[type=checkbox][data-klaviyo-list-id]')
+
+    if (KlaviyoCheckboxes.length) {
+      form.addEventListener('submit', (e)=> {
+        e.preventDefault()
+        Promise.all(Array.from(KlaviyoCheckboxes).map(checkbox => {
+          const listID = checkbox.dataset.klaviyoListId || null
+          if (checkbox.checked && listID) return theme.klaviyoTrigger(form, listID)
+        })).then(()=> {
+          form.submit()
         })
-      }
-
-    })
+      })
+    }
   }
 
   toggleDialog(btn) {
@@ -2122,6 +2143,37 @@ class account extends HTMLElement {
 
   toggleCheckboxState(checkbox) {
     (checkbox.checked) ? checkbox.value = 'true' : checkbox.value = 'false'
+  }
+
+  removeAddress (id) {
+    if (!id) return
+    const form = document.createElement('form')
+    const input = document.createElement('input');
+
+    form.setAttribute('method', 'post')
+    form.setAttribute('action', '/account/addresses/' + id)
+
+    input.setAttribute('type', 'hidden')
+    input.setAttribute('name', '_method')
+    input.setAttribute('value', 'delete')
+
+    form.appendChild(input)
+
+    document.body.appendChild(form)
+    form.submit()
+    document.body.removeChild(form)
+  }
+
+  toggleAddress (id) {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+
+    const form = document.getElementById('form_' + id)
+    form.style.display = form.style.display === 'none' ? '' : 'none'
+    this.accountPageContent.style.display = this.accountPageContent.style.display === 'none' ? '' : 'none'
+    this.sidebarAcoountOverview.classList.toggle('current-page')
   }
 }
 

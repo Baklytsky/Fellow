@@ -1,0 +1,18 @@
+{%- comment -%}
+{%- render 'account-info', customer: customer  -%}
+{%- endcomment -%}
+
+<h2 class="account-heading">{{ 'customer.info.title' | t }}</h2>
+<p class="account-title">{{ customer.first_name }} {{ customer.last_name }}</p>
+<p class="account-title">{{ customer.email }}</p>
+{%- if customer.phone != blank -%}
+  <p class="account-title">{{ customer.phone }}</p>
+{%- endif -%}
+
+{%- comment -%}
+  <div class="account-action-wrapper f aic">
+    <button type="button" class="account-action-btn">{{ 'customer.addresses.edit' | t }}</button>
+    <a href="customers/reset_password" class="account-action-btn">{{ 'customer.addresses.change_password' | t }}</a>
+  </div>
+{%- endcomment -%}
+

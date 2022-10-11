@@ -1,11 +1,17 @@
 <account-element class='account-wrapper'>
+  {%- assign show_recover = false -%}
+
   <div class='page-wrapper'>
     <div id="recover" class="account-login__recover-wrapper" data-dialog>
       <div class='account-login__recover account-dialog'>
         <h2 class='account-heading'>{{ 'customer.recover_password.title' | t }}</h2>
-        <div class='account-text'>{{ 'customer.recover_password.subtext' | t }}</div>
 
         {% form 'recover_customer_password' %}
+
+          {%- unless form.posted_successfully? -%}
+            <div class='account-text'>{{ 'customer.recover_password.subtext' | t }}</div>
+          {%- endunless -%}
+
           {%- assign inputClassName = blank -%}
           {%- assign inputErrorMessage = blank -%}
 
@@ -22,7 +28,8 @@
           {% endif %}
 
           {% if form.posted_successfully? %}
-            <span class='recover-success'>{{ 'customer.recover_password.success' | t }}</span>
+            {%- assign show_recover = true -%}
+            <div class='account-text account-text-recover'>{{ 'customer.recover_password.success' | t }}</div>
           {% else %}
 
             {%- assign recover_email_label = 'customer.recover_password.email' | t -%}
@@ -48,13 +55,15 @@
             %}
         {% endif %}
 
-        {% endform %}
+          {%- unless form.posted_successfully? -%}
+            <button type="button" class='js-recover-cancel' data-toggle-dialog="login_form">or <span>{{ 'customer.reset_password.cancel' | t }}</span></button>
+          {%- endunless -%}
 
-        <button type="button" class='js-recover-cancel' data-toggle-dialog="login_form">or <span>{{ 'customer.reset_password.cancel' | t }}</span></button>
+        {% endform %}
       </div>
     </div>
 
-    <div id="login_form" class="account-login__login-wrapper" data-dialog>
+    <div id="login_form" class="account-login__login-wrapper" data-dialog {% if show_recover %}style="display: none" {% endif %}>
       <div class='account-login__login account-dialog'>
         <h2 class='account-heading'>{{ 'customer.login.sign_in' | t }}</h2>
 
@@ -93,7 +102,9 @@
             className: inputClassName
           %}
 
-          <button type="button" class='js-recover-trigger' data-toggle-dialog="recover">{{ 'customer.login.forgot_password' | t }}</button>
+          <button type="button"
+                  class='js-recover-trigger'
+                  data-toggle-dialog="recover" {% if show_recover %}data-click-trigger{% endif %}>{{ 'customer.login.forgot_password' | t }}</button>
 
         {%- assign login_submit_cta = 'customer.login.sign_in' | t -%}
 

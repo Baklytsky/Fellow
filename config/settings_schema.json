@@ -390,6 +390,21 @@
         "type": "text",
         "id": "sms_klaviyo_list_id",
         "label": "Klaviyo SMS list ID"
+      },
+      {
+        "type": "url",
+        "id": "terms_of_service_link",
+        "label": "Terms of service link"
+      },
+      {
+        "type": "url",
+        "id": "privacy_policy_link",
+        "label": "Privacy policy link"
+      },
+      {
+        "type": "richtext",
+        "id": "empty_orders_text",
+        "label": "Empty orders text"
       }
     ]
   }

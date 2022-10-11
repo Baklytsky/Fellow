@@ -32,12 +32,18 @@
           className: inputClassName %}
 
       {%- assign activate_accepts_marketing_label = 'customer.activate_account.accepts_marketing' | t -%}
+        {%- if settings.email_klaviyo_list_id != blank -%}
+          {%- assign accepts_email_marketing_attr = 'data-klaviyo-list-id=' | append:'"' | append: settings.email_klaviyo_list_id | append:'"'  -%}
+        {%- endif -%}
 
-        {% render 'component-input'
-          label: activate_accepts_marketing_label,
-          name: 'customer[accepts_marketing]',
-          type: 'checkbox',
-          className: inputClassName %}
+      {% render 'component-input'
+        label: activate_accepts_marketing_label,
+        name: 'customer[accepts_marketing]',
+        type: 'checkbox',
+        value: 'false',
+        className: inputClassName,
+        attr: accepts_email_marketing_attr
+      %}
 
       {%- assign activate_btn_cta = 'customer.activate_account.submit' | t -%}
 

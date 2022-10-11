@@ -104,6 +104,12 @@
           attr: accepts_sms_marketing_attr
       %}
 
+      {%- if settings.privacy_policy_link != blank and settings.terms_of_service_link != blank -%}
+        <div class="account-policy">
+          By creating an account, you agree to our <a href='{{ settings.terms_of_service_link }}'>Terms & Conditions</a>
+          and have read and acknowledge our <a href='{{ settings.privacy_policy_link }}'>Privacy Policy</a>.
+        </div>
+      {%- endif -%}
 
       {%- assign register_btn_cta = 'customer.register.submit' | t -%}
 
@@ -118,15 +124,6 @@
         <div class='account-subtitle f aic'>
           Already have an account? <a href='{{ routes.account_login_url }}'>Sign in here</a>
         </div>
-
-        {%- if settings.email_klaviyo_list_id != blank or settings.sms_klaviyo_list_id != blank -%}
-          <script type="application/ld+json" data-customer-settings>
-            {
-              "email_klaviyo_list_id": "{{ settings.email_klaviyo_list_id }}",
-              "sms_klaviyo_list_id": "{{ settings.sms_klaviyo_list_id }}"
-            }
-        </script>
-        {%- endif -%}
       {% endform %}
     </div>
   </div>

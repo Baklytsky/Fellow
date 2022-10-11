@@ -1,0 +1,63 @@
+{%- comment -%}
+{%- render 'account-orders', customer: customer -%}
+{%- endcomment -%}
+
+<h2 class="account-heading">{{ 'customer.orders.title' | t }}</h2>
+
+{% if customer.orders.size != 0 %}
+  {% paginate customer.orders by 4 %}
+
+    <ul class='account-home__orders-list'>
+      {% for order in customer.orders %}
+
+        <script>
+          console.log({{ order.line_items | json }})
+        </script>
+
+        <li class='account-home__order'>
+          <div class="account-home__order-img-wrapper">
+            <a href="{{ order.customer_url }}" class="account-home__order-img rel" aria-label="{{ order.name }}">
+              {% render 'image-lazy',
+                image: order.line_items.first.image,
+                class_name: 'image-abs-cover',
+                size: 'small',
+                alt: alt,
+                loader: true %}
+            </a>
+            {%- assign quantity_string = order.item_count | append: ' item' | prepend: '+ ' -%}
+            {%- if order.quantity > 1 -%}
+              {%- assign quantity_string = order.item_count | append: ' items' | prepend: '+ ' -%}
+            {%- endif -%}
+            <p class="account-home__order-quantity">{{ quantity_string }}</p>
+          </div>
+
+          <div class="account-home__order-table">
+            <div class="account-home__order-table-item">
+              <h4>Order #</h4>
+              <a href='{{ order.customer_url }}'>{{ order.name }}</a>
+            </div>
+            <div class="account-home__order-table-item">
+              <h4>Total</h4>
+              <p>{{ order.total_price | money }}</p>
+            </div>
+            <div class="account-home__order-table-item">
+              <h4>Date</h4>
+              <p>{{ order.created_at | date: '%b %d, %Y' }}</p>
+            </div>
+            <div class="account-home__order-table-item">
+              <h4>Status</h4>
+              <p>{{ order.fulfillment_status_label }}</p>
+            </div>
+          </div>
+      {% endfor %}
+    </ul>
+
+  {%- render 'default-pagination', paginate: paginate -%}
+  {% endpaginate %}
+{% else %}
+  {%- if settings.empty_orders_text != blank -%}
+    <div class="account-empty-orders">
+      {{ settings.empty_orders_text }}
+    </div>
+  {%- endif -%}
+{% endif %}

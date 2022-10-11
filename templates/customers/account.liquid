@@ -1,55 +1,122 @@
-<div class='container--l x ac px1'>
+<account-element class='account-page page-wrapper' tabindex="0">
   <div class='account-wrapper'>
-    {%
-    include 'account-titles' with
-    title: 'My Account'
-    %}
+    <div class="account-sidebar">
+      <h2 class="account-heading hide-mobile">{{ 'customer.account.title' | t: name: customer.first_name }}</h2>
+      <div class="account-sidebar-menu">
+        <a href="{{ routes.account_url }}"
+           class="account-sidebar-menu-item f aic current-page" data-acoount-overview>
+          {%- render 'icon' with 'customer-logo' -%}
+          {{ 'customer.account.overview' | t }}
+        </a>
+        <a href="{{ routes.account_logout_url }}" class="account-sidebar-menu-item f aic hide-mobile">
+          {%- render 'icon' with 'sign-out' -%}
+          {{ 'customer.account.sign_out' | t }}
+        </a>
+      </div>
+    </div>
 
-    <section class='account-home outer mt2'>
-      <div class='container--s mxa'>
-        <h2 class='h5 mt0 caps medium'>Order History</h2>
+    <section class='account-home rel'>
+      {%
+        include 'account-address-form' with
+        id: 'new',
+        formClassName: 'account-address-form',
+        action: customer.new_address,
+        title: 'Add New Address',
+        cta: 'Save'
+      %}
 
-        <hr class='cgm mb1 mt025'>
+      {%- unless customer.addresses_count == 0 -%}
+        {%- for address in customer.addresses -%}
+          {%
+            render 'account-address-form',
+            id: address.id,
+            action: address,
+            formClassName: 'account-address-form',
+            title: 'Edit Shipping Address',
+            cta: 'Save'
+          %}
+        {%- endfor -%}
+      {%- endunless -%}
 
-        {% paginate customer.orders by 99 %}
+      <div class="account-home-content" data-account-content>
+        <div class='account-orders'>
+          {%- render 'account-orders', customer: customer -%}
+        </div>
 
-          {% if customer.orders.size != 0 %}
+        <div class="account-info">
+          {%- render 'account-info', customer: customer -%}
+        </div>
 
-            <ul class='account-home__orders'>
-              {% for order in customer.orders %}
-                <li class='account-home__order block mb1'>
-                  <div class='x f aic jcb h5 mb05'>
-                    <a href='{{ order.customer_url }}' class='link--underline mr1 medium'>
-                      {{order.name}}
-                    </a>
+        <div class="account-address">
+          <h2 class="account-heading">{{ 'customer.addresses.title' | t }}</h2>
 
-                    <span class='cg h6'>{{order.created_at | date: '%b %d, %Y'}}</span>
-                  </div>
+          <div class="account-action-wrapper f aic account-action-add-address">
+            <button type="button" class="account-action-btn" data-toggle-address="new">
+              {{ 'customer.addresses.add_new' | t }}
+            </button>
+          </div>
 
-                  <div class='h6'>
-                    <div>
-                      <span class='medium mr05'>Payment:</span><span>{{order.financial_status_label}}</span>
-                    </div>
-                    <div>
-                      <span class='medium mr05'>Shipping:</span><span>{{order.fulfillment_status_label}}</span>
-                    </div>
-                  </div>
+          {%- unless customer.addresses_count == 0 -%}
+            {%- for address in customer.addresses -%}
+              {% assign default_addy = false %}
 
-                  <div class='h6 bold mt05'>
-                    <span>Total:</span><span>{{order.total_price | money}}</span>
-                  </div>
-                </li>
-              {% endfor %}
-            </ul>
+              {% if customer.default_address == address %}
+                {% assign default_addy = true %}
+              {% endif %}
 
-          {% else %}
-            <p class='align-c px2 bg-cg1'>You don't have any orders yet!</p>
-          {% endif %}
+              {%
+                render 'account-address',
+                address: address,
+                default: default_addy,
+                edit: true
+              %}
+            {%- endfor -%}
+          {%- endunless -%}
 
-          {% include 'pagination' %}
-        {% endpaginate %}
+        </div>
+
+        {%- unless customer.accepts_marketing -%}
+
+          <div class="account-contact-preferences">
+            <h2 class="account-heading">{{ 'customer.addresses.contact_preferences' | t }}</h2>
+            <form action="/">
+              {%- assign register_accepts_marketing_label = 'customer.register.accepts_marketing' | t -%}
+                {%- if settings.email_klaviyo_list_id != blank -%}
+                  {%- assign accepts_email_marketing_attr = 'data-klaviyo-list-id=' | append:'"' | append: settings.email_klaviyo_list_id | append:'"' -%}
+                {%- endif -%}
+
+              {% render 'component-input'
+                label: register_accepts_marketing_label,
+                name: 'customer[accepts_marketing]',
+                type: 'checkbox',
+                value: 'false',
+                className: inputClassName,
+                attr: accepts_email_marketing_attr %}
+
+              {%- assign register_accepts_sms_marketing_label = 'customer.register.accepts_sms_marketing' | t -%}
+                {%- if settings.sms_klaviyo_list_id != blank -%}
+                  {%- assign accepts_sms_marketing_attr = 'data-klaviyo-list-id=' | append:'"' | append: settings.sms_klaviyo_list_id | append:'"' -%}
+                {%- endif -%}
+
+              {% render 'component-input'
+                label: register_accepts_sms_marketing_label,
+                name: 'customer[sms_marketing_consent]',
+                type: 'checkbox',
+                value: 'false',
+                className: inputClassName,
+                attr: accepts_sms_marketing_attr %}
+
+              {% render 'component-button'
+                tag: 'button',
+                type: 'submit',
+                cta: 'Save',
+                className: 'account-btn btn btn--lg btn--dark' %}
+            </form>
+          </div>
+
+        {%- endunless -%}
       </div>
     </section>
   </div>
 
-</div>
+</account-element>
