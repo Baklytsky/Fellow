@@ -9,10 +9,8 @@
   <p class="account-title">{{ customer.phone }}</p>
 {%- endif -%}
 
-{%- comment -%}
-  <div class="account-action-wrapper f aic">
-    <button type="button" class="account-action-btn">{{ 'customer.addresses.edit' | t }}</button>
-    <a href="customers/reset_password" class="account-action-btn">{{ 'customer.addresses.change_password' | t }}</a>
-  </div>
-{%- endcomment -%}
+<div class="account-action-wrapper f aic">
+  <button type="button" class="account-action-btn" data-toggle-address="update">{{ 'customer.addresses.edit' | t }}</button>
+  <button type="button" class="account-action-btn">{{ 'customer.addresses.change_password' | t }}</button>
+</div>
 

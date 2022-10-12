@@ -16,14 +16,16 @@
     </div>
 
     <section class='account-home rel'>
-      {%
-        include 'account-address-form' with
+      {%- render 'account-update',
+        customer: customer,
+        formClassName: 'account-address-form'  -%}
+
+      {% render 'account-address-form',
         id: 'new',
         formClassName: 'account-address-form',
         action: customer.new_address,
         title: 'Add New Address',
-        cta: 'Save'
-      %}
+        cta: 'Save' %}
 
       {%- unless customer.addresses_count == 0 -%}
         {%- for address in customer.addresses -%}

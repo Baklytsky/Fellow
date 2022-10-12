@@ -1,0 +1,76 @@
+{%- comment -%}
+{%- render 'account-update', customer: customer, formClassName: formClassName  -%}
+{%- endcomment -%}
+
+<form id="form_update" class='{{formClassName}}' style='display: none'>
+  <input type="hidden" name="customer[id]" value="{{ customer.id }}"/>
+
+  {%- assign register_first_name_label = 'customer.register.first_name' | t -%}
+
+  {%
+    render 'component-input'
+    label: register_first_name_label,
+    name: 'customer[first_name]',
+    value: customer.first_name,
+    type: 'text',
+    required: 'true',
+    autocomplete: "on",
+    className: inputClassName
+  %}
+
+  {%- assign register_last_name_label = 'customer.register.last_name' | t -%}
+
+  {%
+    render 'component-input'
+    label: register_last_name_label,
+    name: 'customer[last_name]',
+    value: customer.last_name,
+    type: 'text',
+    required: 'true',
+    autocomplete: "on",
+    className: inputClassName
+  %}
+
+  {%- assign register_email_label = 'customer.register.email' | t -%}
+
+  {%
+    render 'component-input'
+    label: register_email_label,
+    name: 'customer[email]',
+    type: 'email',
+    value: customer.email,
+    required: 'true',
+    autocomplete: "on",
+    className: inputClassName
+  %}
+
+  {%- assign register_btn_cta = 'customer.register.submit' | t -%}
+
+  {%
+    render 'component-button'
+    tag: 'button',
+    type: 'submit',
+    cta: register_btn_cta,
+    className: 'account-btn btn btn--lg btn--dark'
+  %}
+</form>
+
+<script type="text/javascript">
+  window.customer = {
+    first_name: {{ customer.first_name | json }},
+    last_name: {{ customer.last_name | json }},
+    email: {{ customer.email | json }}
+  };
+
+  window.addEventListener('DOMContentLoaded', () => {
+    Accentuate(jQuery("#form_update"), function (data) {
+      if (data.status == 'ERROR') {
+        console.log(data.message)
+        console.log(data)
+      } else if (data.status == 'OK') {
+        console.log(data)
+        location.reload();
+      }
+    });
+  });
+</script>
