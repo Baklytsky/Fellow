@@ -26,7 +26,7 @@
             "tab_btn_style": "dark",
             "tab_name": "Pro Studio Edition",
             "title": "Stagg EKG Pro Studio Edition",
-            "description": "All the new features, premium materials.",
+            "description": "All the new features, with premium metal and glass.",
             "btn_text": "Shop Now",
             "btn_url": "shopify:\/\/products\/stagg-ekg-pro-electric-kettle-studio-edition",
             "image": "shopify:\/\/shop_images\/FamilyPage_EKGProStudiov2.png",
@@ -47,6 +47,7 @@
     "1664270553aee121f2": {
       "type": "hp-hero-video",
       "settings": {
+        "enable_section_padding": true,
         "full_width_section": false,
         "mobile_format_16_9": true,
         "section_bg": "#000000",
@@ -149,8 +150,8 @@
             "comparison_12": "<p>English<\/p>",
             "comparison_13": "",
             "comparison_14": "",
-            "comparison_15": "<p><a href=\"\/products\/stagg-ekg-electric-pour-over-kettle\" title=\"Stagg EKG Electric Kettle\"><strong>Shop Now -&gt; <\/strong><\/a><\/p>",
-            "comparison_16": "",
+            "comparison_15": "<p>1 year <a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/115001709811-Fellow-s-Product-Warranties\" target=\"_blank\" title=\"Fellow Product and Service Warranty Policy\"><span style=\"text-decoration:underline\">standard<\/span><\/a>, 2 years with <a href=\"https:\/\/register.fellowproducts.com\/\" target=\"_blank\" title=\"Register your Fellow products\"><span style=\"text-decoration:underline\">product registration<\/span><\/a><\/p>",
+            "comparison_16": "<p><a href=\"\/products\/stagg-ekg-electric-pour-over-kettle\" title=\"Stagg EKG Electric Kettle\"><strong>Shop Now -&gt; <\/strong><\/a><\/p>",
             "comparison_17": "",
             "comparison_18": "",
             "comparison_19": "",
@@ -175,8 +176,8 @@
             "comparison_12": "<p>English, French, Spanish<\/p>",
             "comparison_13": "<p>✔️<\/p>",
             "comparison_14": "<p>✔️<\/p>",
-            "comparison_15": "<p>Shop Now -&gt;<\/p>",
-            "comparison_16": "",
+            "comparison_15": "<p>2 years <a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/115001709811-Fellow-s-Product-Warranties\" target=\"_blank\" title=\"Fellow Product and Service Warranty Policy\"><span style=\"text-decoration:underline\">standard<\/span><\/a>, 3 years with <a href=\"https:\/\/register.fellowproducts.com\/\" target=\"_blank\" title=\"Register your Fellow products\"><span style=\"text-decoration:underline\">product registration<\/span><\/a><\/p>",
+            "comparison_16": "<p>Shop Now -&gt;<\/p>",
             "comparison_17": "",
             "comparison_18": "",
             "comparison_19": "",
@@ -193,7 +194,7 @@
             "comparison_4": "<p>✔️<\/p>",
             "comparison_5": "<p>Adjustable: Off, 15, 30, 45, or 60 minutes<\/p>",
             "comparison_6": "<p>High resolution full color LCD screen<\/p>",
-            "comparison_7": "<p>Premium<\/p>",
+            "comparison_7": "<p>Premium (metal + glass)<\/p>",
             "comparison_8": "<p>✔️<\/p>",
             "comparison_9": "<p>✔️<\/p>",
             "comparison_10": "<p>✔️<\/p>",
@@ -201,8 +202,8 @@
             "comparison_12": "<p>English, French, Spanish<\/p>",
             "comparison_13": "<p>✔️<\/p>",
             "comparison_14": "<p>✔️<\/p>",
-            "comparison_15": "<p>Shop Now -&gt;<\/p>",
-            "comparison_16": "",
+            "comparison_15": "<p>2 years <a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/115001709811-Fellow-s-Product-Warranties\" target=\"_blank\" title=\"Fellow Product and Service Warranty Policy\"><span style=\"text-decoration:underline\">standard<\/span><\/a>, 3 years with <a href=\"https:\/\/register.fellowproducts.com\/\" target=\"_blank\" title=\"Register your Fellow products\"><span style=\"text-decoration:underline\">product registration<\/span><\/a><\/p>",
+            "comparison_16": "<p>Shop Now -&gt;<\/p>",
             "comparison_17": "",
             "comparison_18": "",
             "comparison_19": "",
@@ -211,6 +212,7 @@
         },
         "54f6dba7-1a80-48ce-b43b-75901f6af1b9": {
           "type": "product",
+          "disabled": true,
           "settings": {
             "compare_product": "corvo-ekg",
             "comparison_1": "<p>✔️<\/p>",
@@ -258,7 +260,7 @@
         "comparison_12": "Language",
         "comparison_13": "Clock",
         "comparison_14": "Future updates over WiFi",
-        "comparison_15": "",
+        "comparison_15": "Warranty",
         "comparison_16": "",
         "comparison_17": "",
         "comparison_18": "",
@@ -292,6 +294,13 @@
     "1664286931317058a0": {
       "type": "faq",
       "blocks": {
+        "6e07b7b0-8104-487b-b26d-994b00046a3b": {
+          "type": "faq-block",
+          "settings": {
+            "title": "What are the differences between the Stagg EKG Pro and Stagg EKG Pro Studio Edition?",
+            "description": "<p>Stagg EKG Pro and Pro Studio Edition both feature a full color LCD screen, powerful features like Scheduling in advance and Guide Mode, the option to customize elements like altitude, hold time, or units, and firmware updates available over WiFi to take your brewing to the next level.<\/p><p><\/p><p>In addition to Stagg EKG Pro’s features, Stagg EKG Pro Studio Edition has a stunning glass top and aluminum base, zinc frame, and a metal cap on the end of the handle.<\/p>"
+          }
+        },
         "1a670074-334c-4963-8931-28ce7221fd8c": {
           "type": "faq-block",
           "settings": {
@@ -329,6 +338,7 @@
         }
       },
       "block_order": [
+        "6e07b7b0-8104-487b-b26d-994b00046a3b",
         "1a670074-334c-4963-8931-28ce7221fd8c",
         "eb66113a-5455-4ece-a487-fb3ca3caf9ae",
         "1940777b-e34c-4a03-af5e-80274e652c72",

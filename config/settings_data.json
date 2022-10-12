@@ -51,7 +51,7 @@
     "social_twitter_link": "",
     "social_youtube_link": "https:\/\/www.youtube.com\/channel\/UCrtS-B4xQtbNVnyqC4lSSHg",
     "social_pinterest_link": "",
-    "favicon": "shopify:\/\/shop_images\/favicon.png",
+    "favicon": "shopify:\/\/shop_images\/fellowfavicon.png",
     "checkout_header_image": "",
     "checkout_logo_image": "shopify:\/\/shop_images\/Fellow-Logo-black_b1dd77c0-05ce-4fe0-a402-efa5219057d0.png",
     "checkout_logo_position": "left",
@@ -753,10 +753,10 @@
       "163041601834c99057": {
         "type": "featured-blog-v2",
         "blocks": {
-          "243f1fe7-12cb-4b51-b5ac-6897c8af25d9": {
+          "55c828e0-6568-40ab-8326-d86837340614": {
             "type": "article",
             "settings": {
-              "article": "learn\/2022-wormy-world-championships"
+              "article": "learn\/which-electric-kettle-is-right-for-me"
             }
           },
           "8034bca3-6535-40a1-83ce-613a916266d4": {
@@ -771,6 +771,13 @@
               "article": "learn\/the-golden-ratio-for-brewing-coffee"
             }
           },
+          "243f1fe7-12cb-4b51-b5ac-6897c8af25d9": {
+            "type": "article",
+            "disabled": true,
+            "settings": {
+              "article": "learn\/2022-wormy-world-championships"
+            }
+          },
           "3b78c804-955a-454f-b8d7-af7b4271d9a4": {
             "type": "article",
             "disabled": true,
@@ -780,9 +787,10 @@
           }
         },
         "block_order": [
-          "243f1fe7-12cb-4b51-b5ac-6897c8af25d9",
+          "55c828e0-6568-40ab-8326-d86837340614",
           "8034bca3-6535-40a1-83ce-613a916266d4",
           "b89badb0-2f13-4dfd-b834-29780dfc72cd",
+          "243f1fe7-12cb-4b51-b5ac-6897c8af25d9",
           "3b78c804-955a-454f-b8d7-af7b4271d9a4"
         ],
         "settings": {
@@ -892,6 +900,7 @@
         "type": "hp-hero-video",
         "disabled": true,
         "settings": {
+          "enable_section_padding": false,
           "full_width_section": true,
           "mobile_format_16_9": false,
           "section_bg": "#000000",
@@ -989,6 +998,7 @@
         "type": "hp-hero-video",
         "disabled": true,
         "settings": {
+          "enable_section_padding": false,
           "full_width_section": false,
           "mobile_format_16_9": false,
           "section_bg": "#000000",
