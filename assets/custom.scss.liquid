@@ -7981,8 +7981,8 @@ ul.pdp_details__feature_list > li {
 //-----------------------Video section-----------------------------
 
 .landing__hero.page-wrapper {
-  max-width: 1440px;
-  min-height: calc((100vw - (100vw - 1440px)) * 0.5625);
+  max-width: 1374px;
+  min-height: calc((100vw - (100vw - 1374px)) * 0.5625);
 
   @media screen and (max-width: 1440px) {
     min-height: calc(100vw * 0.5625);
@@ -7994,6 +7994,16 @@ ul.pdp_details__feature_list > li {
     &.landing__hero-mobile-16-9 {
       min-height: calc(100vw * 0.5625);
     }
+  }
+}
+
+.landing__hero--wrapper.landing__hero-with-padding {
+  padding-top: 80px;
+  padding-bottom: 80px;
+  margin-top: -5px;
+
+  @media screen and (max-width: $mobile) {
+    padding: 40px 15px;
   }
 }
 

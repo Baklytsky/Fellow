@@ -3,18 +3,33 @@
     "main": {
       "type": "toggle-hero-slider",
       "blocks": {
+        "91440d17-d6b6-424b-88f3-ff8450a9bf93": {
+          "type": "slide",
+          "settings": {
+            "bg_color": "#ffffff",
+            "text_color": "#000000",
+            "tab_btn_style": "dark",
+            "tab_name": "Subscription",
+            "title": "Subscription",
+            "description": "Description",
+            "btn_text": "Subscribe",
+            "btn_url": "shopify:\/\/products\/360-sip-lid",
+            "image": "shopify:\/\/shop_images\/Group_258_1.png",
+            "image_on_the_left": false
+          }
+        },
         "7ae1cacd-4567-4b52-8951-0a398e52c371": {
           "type": "slide",
           "settings": {
             "bg_color": "#000000",
             "text_color": "#ffffff",
             "tab_btn_style": "light",
-            "tab_name": "Pro",
-            "title": "Stagg EKG Pro",
-            "description": "A world of features for ultimate control.",
+            "tab_name": "Marketplace",
+            "title": "Marketplace",
+            "description": "COPY",
             "btn_text": "Shop Now",
             "btn_url": "shopify:\/\/products\/stagg-ekg-pro-electric-kettle",
-            "image": "shopify:\/\/shop_images\/FamilyPage_EKGPro.png",
+            "image": "shopify:\/\/shop_images\/section_2_mobile_1.jpg",
             "image_on_the_left": false
           }
         },
@@ -24,247 +39,82 @@
             "bg_color": "#ffffff",
             "text_color": "#000000",
             "tab_btn_style": "dark",
-            "tab_name": "Pro Studio Edition",
-            "title": "Stagg EKG Pro Studio Edition",
-            "description": "All the new features, premium materials.",
-            "btn_text": "Shop Now",
+            "tab_name": "Drops",
+            "title": "Fellow Drops",
+            "description": "Copy about Drops",
+            "btn_text": "Sign Up",
             "btn_url": "shopify:\/\/products\/stagg-ekg-pro-electric-kettle-studio-edition",
-            "image": "shopify:\/\/shop_images\/FamilyPage_EKGProStudiov2.png",
+            "image": "shopify:\/\/shop_images\/2021-11-2_fellow_drops12791_copy-min_1.jpg",
             "image_on_the_left": false
           }
         }
       },
       "block_order": [
+        "91440d17-d6b6-424b-88f3-ff8450a9bf93",
         "7ae1cacd-4567-4b52-8951-0a398e52c371",
         "e11cf429-b3b8-45d3-afee-2d19059179be"
       ],
       "settings": {
-        "section_title": "Even Icons Evolve",
+        "section_title": "Coffee At Fellow",
         "section_subtitle": "",
-        "section_description": "Introducing Stagg EKG Pro and Stagg EKG Pro Studio Edition: the undisputed new standard for electric pour-over kettles. We're raising the bar again."
+        "section_description": "Copy about coffee and how we pick great ones"
       }
     },
-    "1664270553aee121f2": {
-      "type": "hp-hero-video",
-      "settings": {
-        "full_width_section": false,
-        "mobile_format_16_9": true,
-        "section_bg": "#000000",
-        "video_mp4": "https:\/\/cdn.shopify.com\/videos\/c\/o\/v\/8419f96469e2444e925949d3704746c0.mp4",
-        "video_poster": "shopify:\/\/shop_images\/efbe078a53bd--HeroImage-EKG-Pro_1920x1080.progressive_22e43369-c040-47d6-9c9c-e6b13b879826.webp",
-        "video_autoplay": false,
-        "video_muted": false,
-        "show_mute_button": false,
-        "show_default_controls": true,
-        "show_hide_video": "show_on_all",
-        "overlay_opacity": 0,
-        "content_position": "middleCenter",
-        "text_color": "#ffffff",
-        "heading": "",
-        "image_heading_width": 70,
-        "text": "",
-        "link": "",
-        "button_text": "",
-        "btn_type": "btn--light"
-      }
-    },
-    "166427647891f49e65": {
-      "type": "features",
+    "fa47f458-1111-4f7c-821f-db6981ce0ffc": {
+      "type": "coffee-marketplace-cards",
       "blocks": {
-        "5d3695c6-1d88-47cd-9a82-7052f2f754c4": {
-          "type": "feature",
+        "ededcdcd-de5c-40da-b45e-49d60e971562": {
+          "type": "Card",
           "settings": {
-            "icon": "shopify:\/\/shop_images\/FamilyPage_Schedule.png",
-            "title": "Schedule",
-            "description": "Schedule your boil so you can steal a few extra minutes in bed."
+            "image": "shopify:\/\/shop_images\/FamilyPage_EKGProStudiov2.png",
+            "heading": "Hailie",
+            "description": "Hailie is Store Lead at the Fellow Store + Playground in San Francisco. She loves coffee science, socially responsible production, and calling \"espresso\" 'spro.",
+            "link": ""
           }
         },
-        "24a69457-ad47-464d-bba3-f60d501f830e": {
-          "type": "feature",
+        "6a8e579e-0c52-471c-b018-a87839d9c934": {
+          "type": "Card",
           "settings": {
-            "icon": "shopify:\/\/shop_images\/FamilyPage_Guide_Mode.png",
-            "title": "Guide Mode",
-            "description": "Preset temps for different coffee brewing styles and types of tea."
+            "image": "shopify:\/\/shop_images\/5_MB_Studio_PDP.png",
+            "heading": "Eric",
+            "description": "Eric is the Customer Experience Supervisor at Fellow and has a boundless obsession with coffee. He once ran a heavy-metal themed pop-up coffee bar called Grindpour.",
+            "link": ""
           }
         },
-        "3bca0e43-64c4-47b6-be69-da1fcec88a0f": {
-          "type": "feature",
+        "c17f33cd-cd29-40f8-8d09-dd2a3c6ba6a1": {
+          "type": "Card",
           "settings": {
-            "icon": "shopify:\/\/shop_images\/FamilyPage_Hold.png",
-            "title": "Adjustable Hold Mode",
-            "description": "Keep your water hot for 15, 30, 45, or 60 minutes."
-          }
-        },
-        "d33150b7-5595-4d16-8868-763d2bcf7000": {
-          "type": "feature",
-          "settings": {
-            "icon": "shopify:\/\/shop_images\/FamilyPage_Altitude.png",
-            "title": "Altitude",
-            "description": "Denver or Des Moines? Set your altitude to avoid boiling over."
-          }
-        },
-        "127fd793-65c9-4a33-b22e-2ba5962c43af": {
-          "type": "feature",
-          "settings": {
-            "icon": "shopify:\/\/shop_images\/FamilyPage_Updates_over_Wifi.png",
-            "title": "Updates Over WiFi",
-            "description": "Get the latest features through WiFi upgrades using the Fellow app."
+            "image": "shopify:\/\/shop_images\/ClaraFrenchPress_Aplus_StandardImage_01.jpg",
+            "heading": "Nick",
+            "description": "Nick is Fellow's Director of Mechanical Engineering and Head of R&D. He's also been a professional barista, roaster, and espresso machine repair technician.",
+            "link": ""
           }
         }
       },
       "block_order": [
-        "5d3695c6-1d88-47cd-9a82-7052f2f754c4",
-        "24a69457-ad47-464d-bba3-f60d501f830e",
-        "3bca0e43-64c4-47b6-be69-da1fcec88a0f",
-        "d33150b7-5595-4d16-8868-763d2bcf7000",
-        "127fd793-65c9-4a33-b22e-2ba5962c43af"
+        "ededcdcd-de5c-40da-b45e-49d60e971562",
+        "6a8e579e-0c52-471c-b018-a87839d9c934",
+        "c17f33cd-cd29-40f8-8d09-dd2a3c6ba6a1"
       ],
       "settings": {
-        "bg_color": "#fff9e5",
-        "text_color": "#000000",
-        "heading": "Customizable brew settings",
-        "description": "Use the high resolution full color screen to access a stacked menu of features to perfect your brew.",
-        "show_arrows": true,
-        "show_dots": true
+        "heading": "Tasting Panel",
+        "description": "copy copy"
       }
     },
-    "1664355544406e6554": {
-      "type": "compare-products-characteristics",
+    "1665104018064a51ce": {
+      "type": "apps",
       "blocks": {
-        "2db5c370-dedf-490f-9b22-bb02e5898ff4": {
-          "type": "product",
+        "22d324e2-e41c-4b57-978e-be00ab7839a6": {
+          "type": "shopify:\/\/apps\/klaviyo-email-marketing-sms\/blocks\/form-embed-block\/2632fe16-c075-4321-a88b-50b567f42507",
           "settings": {
-            "compare_product": "stagg-ekg-electric-pour-over-kettle",
-            "comparison_1": "<p>✔️<\/p>",
-            "comparison_2": "<p>✔️<\/p>",
-            "comparison_3": "",
-            "comparison_4": "",
-            "comparison_5": "<p>60 minutes<\/p>",
-            "comparison_6": "<p>Black and white LCD screen<\/p>",
-            "comparison_7": "<p>Standard<\/p>",
-            "comparison_8": "<p>✔️<\/p>",
-            "comparison_9": "",
-            "comparison_10": "",
-            "comparison_11": "<p>✔️<\/p>",
-            "comparison_12": "<p>English<\/p>",
-            "comparison_13": "",
-            "comparison_14": "",
-            "comparison_15": "<p><a href=\"\/products\/stagg-ekg-electric-pour-over-kettle\" title=\"Stagg EKG Electric Kettle\"><strong>Shop Now -&gt; <\/strong><\/a><\/p>",
-            "comparison_16": "",
-            "comparison_17": "",
-            "comparison_18": "",
-            "comparison_19": "",
-            "comparison_20": ""
-          }
-        },
-        "4cf663b0-811b-4c56-9e8c-aa07ed325f3f": {
-          "type": "product",
-          "settings": {
-            "compare_product": "stagg-ekg-pro-electric-kettle",
-            "comparison_1": "<p>✔️<\/p>",
-            "comparison_2": "<p>✔️<\/p>",
-            "comparison_3": "<p>✔️<\/p>",
-            "comparison_4": "<p>✔️<\/p>",
-            "comparison_5": "<p>Adjustable: Off, 15, 30, 45, or 60 minutes<\/p>",
-            "comparison_6": "<p>High resolution full color LCD screen<\/p>",
-            "comparison_7": "<p>Standard<\/p>",
-            "comparison_8": "<p>✔️<\/p>",
-            "comparison_9": "<p>✔️<\/p>",
-            "comparison_10": "<p>✔️<\/p>",
-            "comparison_11": "<p>✔️<\/p>",
-            "comparison_12": "<p>English, French, Spanish<\/p>",
-            "comparison_13": "<p>✔️<\/p>",
-            "comparison_14": "<p>✔️<\/p>",
-            "comparison_15": "<p>Shop Now -&gt;<\/p>",
-            "comparison_16": "",
-            "comparison_17": "",
-            "comparison_18": "",
-            "comparison_19": "",
-            "comparison_20": ""
-          }
-        },
-        "d509c253-5da9-4c69-baba-eeca202449c0": {
-          "type": "product",
-          "settings": {
-            "compare_product": "stagg-ekg-pro-electric-kettle-studio-edition",
-            "comparison_1": "<p>✔️<\/p>",
-            "comparison_2": "<p>✔️<\/p>",
-            "comparison_3": "<p>✔️<\/p>",
-            "comparison_4": "<p>✔️<\/p>",
-            "comparison_5": "<p>Adjustable: Off, 15, 30, 45, or 60 minutes<\/p>",
-            "comparison_6": "<p>High resolution full color LCD screen<\/p>",
-            "comparison_7": "<p>Premium<\/p>",
-            "comparison_8": "<p>✔️<\/p>",
-            "comparison_9": "<p>✔️<\/p>",
-            "comparison_10": "<p>✔️<\/p>",
-            "comparison_11": "<p>✔️<\/p>",
-            "comparison_12": "<p>English, French, Spanish<\/p>",
-            "comparison_13": "<p>✔️<\/p>",
-            "comparison_14": "<p>✔️<\/p>",
-            "comparison_15": "<p>Shop Now -&gt;<\/p>",
-            "comparison_16": "",
-            "comparison_17": "",
-            "comparison_18": "",
-            "comparison_19": "",
-            "comparison_20": ""
-          }
-        },
-        "54f6dba7-1a80-48ce-b43b-75901f6af1b9": {
-          "type": "product",
-          "settings": {
-            "compare_product": "corvo-ekg",
-            "comparison_1": "<p>✔️<\/p>",
-            "comparison_2": "",
-            "comparison_3": "",
-            "comparison_4": "",
-            "comparison_5": "<p>60 minutes<\/p>",
-            "comparison_6": "<p>Black and white LCD screen<\/p>",
-            "comparison_7": "<p>Standard<\/p>",
-            "comparison_8": "<p>✔️<\/p>",
-            "comparison_9": "",
-            "comparison_10": "",
-            "comparison_11": "<p>✔️<\/p>",
-            "comparison_12": "<p>English<\/p>",
-            "comparison_13": "",
-            "comparison_14": "",
-            "comparison_15": "<p>Shop Now -&gt;<\/p>",
-            "comparison_16": "",
-            "comparison_17": "",
-            "comparison_18": "",
-            "comparison_19": "",
-            "comparison_20": ""
+            "formId": "S3iMz4"
           }
         }
       },
       "block_order": [
-        "2db5c370-dedf-490f-9b22-bb02e5898ff4",
-        "4cf663b0-811b-4c56-9e8c-aa07ed325f3f",
-        "d509c253-5da9-4c69-baba-eeca202449c0",
-        "54f6dba7-1a80-48ce-b43b-75901f6af1b9"
+        "22d324e2-e41c-4b57-978e-be00ab7839a6"
       ],
-      "settings": {
-        "heading": "Compare Kettles",
-        "comparison_1": "To-The-Degree Temperature Control",
-        "comparison_2": "Precision Pour Spout",
-        "comparison_3": "Scheduling",
-        "comparison_4": "Guide Mode",
-        "comparison_5": "Hold Duration",
-        "comparison_6": "Screen",
-        "comparison_7": "Materials",
-        "comparison_8": "Brew Stopwatch",
-        "comparison_9": "Altitude Adjustment",
-        "comparison_10": "Chime + Volume Adjustment",
-        "comparison_11": "Units (F°\/C°)",
-        "comparison_12": "Language",
-        "comparison_13": "Clock",
-        "comparison_14": "Future updates over WiFi",
-        "comparison_15": "",
-        "comparison_16": "",
-        "comparison_17": "",
-        "comparison_18": "",
-        "comparison_19": "",
-        "comparison_20": ""
-      }
+      "settings": {}
     },
     "16642717231d856327": {
       "type": "featured-collections",
@@ -272,21 +122,68 @@
         "bf8b078a-5bce-4b74-9647-97d580285e1b": {
           "type": "collection",
           "settings": {
-            "tab_text": "Kettles",
-            "collection": "ekg-family-kettles",
+            "tab_text": "Best Selling Coffee Beans",
+            "collection": "coffee-best-sellers",
             "button_text": "",
             "button_url": "shopify:\/\/collections\/kettles"
+          }
+        },
+        "2280d5e1-b120-4a46-8194-180b93b14306": {
+          "type": "collection",
+          "settings": {
+            "tab_text": "",
+            "collection": "bright-floral",
+            "button_text": "",
+            "button_url": ""
           }
         }
       },
       "block_order": [
-        "bf8b078a-5bce-4b74-9647-97d580285e1b"
+        "bf8b078a-5bce-4b74-9647-97d580285e1b",
+        "2280d5e1-b120-4a46-8194-180b93b14306"
       ],
       "settings": {
         "enable_section": true,
-        "heading": "The full lineup, from stovetop to countertop",
+        "heading": "All the beans! Copy Copy",
         "limit": 6,
         "show_view_all": true
+      }
+    },
+    "b1380a23-d39c-4a02-8657-51a920127c54": {
+      "type": "featured-blog-v2",
+      "blocks": {
+        "a85a98a9-b7a5-4398-b09d-928bded19704": {
+          "type": "article",
+          "settings": {
+            "article": "learn\/anaerobic-fermentation-distinguishing-the-difference-in-your-cup"
+          }
+        },
+        "e5ef00c8-ffb8-424d-a74d-1f33145462a0": {
+          "type": "article",
+          "settings": {
+            "article": "learn\/northern-lights-drop"
+          }
+        },
+        "0856c472-9f39-4e8d-a675-83a12b8f905c": {
+          "type": "article",
+          "settings": {
+            "article": "learn\/why-temperature-matters-for-your-french-press"
+          }
+        }
+      },
+      "block_order": [
+        "a85a98a9-b7a5-4398-b09d-928bded19704",
+        "e5ef00c8-ffb8-424d-a74d-1f33145462a0",
+        "0856c472-9f39-4e8d-a675-83a12b8f905c"
+      ],
+      "settings": {
+        "heading": "Read about brewing coffee and stuff",
+        "description": "<p>copy copy<\/p>",
+        "cta_title": "Brew Guides",
+        "cta_url": "shopify:\/\/blogs\/brew-guides",
+        "cta_color": "btn--light",
+        "bg_color": "#000000",
+        "text_color": "#ffffff"
       }
     },
     "1664286931317058a0": {
@@ -349,15 +246,66 @@
         "heading": "Travel Mugs",
         "text": "<p>Take everything on the move always.Functional Elegance Meets Design, Fellow Coffee Products Elevate Your Coffee Experience. Fellow’s Award-Winning Coffee Products Turn Anyone Into A Coffee Connoisseur. <\/p>"
       }
+    },
+    "56d3321d-afc9-408f-ae0c-863d7d78dd69": {
+      "type": "featured-post-blog",
+      "disabled": true,
+      "settings": {
+        "title": "The Blog",
+        "eyebrow": "",
+        "title_location": "left_top",
+        "featuredPost": "",
+        "blog": "",
+        "post_limit": 3,
+        "show_author": false,
+        "show_date": true,
+        "show_view_all": false
+      }
+    },
+    "f0d1bd49-b440-4899-a287-63f6c6ad214a": {
+      "type": "product-slider",
+      "blocks": {
+        "d92b3b04-275a-40c1-90db-bfabebe1dbb9": {
+          "type": "image",
+          "settings": {
+            "product": "black-and-white-halo-hartume",
+            "header": "YUM DELICIOUS",
+            "description": "<p>INFO INFO<\/p>",
+            "link_text": "Buy now",
+            "link_url": ""
+          }
+        },
+        "a7f0d5f9-475d-4d2f-aa6d-e62b883c6b34": {
+          "type": "image",
+          "settings": {
+            "product": "tropical-weather",
+            "header": "",
+            "description": "",
+            "link_text": "",
+            "link_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "d92b3b04-275a-40c1-90db-bfabebe1dbb9",
+        "a7f0d5f9-475d-4d2f-aa6d-e62b883c6b34"
+      ],
+      "settings": {
+        "enable_section": true,
+        "show_dots": true,
+        "show_arrows": false
+      }
     }
   },
   "order": [
     "main",
-    "1664270553aee121f2",
-    "166427647891f49e65",
-    "1664355544406e6554",
+    "fa47f458-1111-4f7c-821f-db6981ce0ffc",
+    "1665104018064a51ce",
     "16642717231d856327",
+    "b1380a23-d39c-4a02-8657-51a920127c54",
     "1664286931317058a0",
-    "1664388097345cae2b"
+    "1664388097345cae2b",
+    "56d3321d-afc9-408f-ae0c-863d7d78dd69",
+    "f0d1bd49-b440-4899-a287-63f6c6ad214a"
   ]
 }
