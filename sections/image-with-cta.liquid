@@ -1,0 +1,196 @@
+{%- assign image = section.settings.image -%}
+{%- assign image_mobile = section.settings.image_mobile -%}
+{%- assign layout = section.settings.layout -%}
+{%- assign bg_color = section.settings.bg_color -%}
+{%- assign text_color = section.settings.text_color -%}
+{%- assign heading = section.settings.heading -%}
+{%- assign heading_size = section.settings.heading_size -%}
+{%- assign text = section.settings.text -%}
+{%- assign cta_url = section.settings.cta_url -%}
+{%- assign cta_copy = section.settings.cta_copy -%}
+{%- assign cta_color = section.settings.cta_color -%}
+
+{%- assign desktop_image_class = 'image-abs-cover' -%}
+
+{%- if image_mobile != blank -%}
+  {%- assign desktop_image_class = 'image-abs-cover hide-mobile' -%}
+{%- endif -%}
+
+<section class="ImageWithCta">
+  <div class="collectionHero ImageWithCta__Wrapper ImageWithCta__Image--{{ layout }}">
+    {%- if image != blank -%}
+      <div class="collectionHero__media ImageWithCta__Media rel">
+        <div class="image {{ desktop_image_class }}">
+          {% render 'image-lazy',
+            image: image,
+            class_name: desktop_image_class,
+            size: 'medium',
+            loader: true %}
+        </div>
+        
+        {%- if image_mobile != blank -%}
+          <div class="image image-abs-cover hide-desktop">
+            {% render 'image-lazy',
+              image: image_mobile,
+              class_name: 'image-abs-cover',
+              size: 'medium',
+              loader: true %}
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  
+    {%- if heading != blank or text != blank or btn_url != blank -%}
+      <div class="collectionHero__content ImageWithCta__Content" style="background-color: {{ bg_color }}; color: {{ text_color }};">
+        {%- if heading != blank -%}
+          
+          {%- case heading_size -%}
+          {%- when 'h1' -%}
+            <h1 class="ImageWithCta__Heading h1">{{ heading }}</h1>
+          {%- when 'h2' -%}
+            <h2 class="ImageWithCta__Heading h2">{{ heading }}</h2>
+          {%- when 'h3' -%}
+            <h3 class="ImageWithCta__Heading h3">{{ heading }}</h3>
+          {%- when 'h4' -%}
+            <h4 class="ImageWithCta__Heading h4">{{ heading }}</h4>
+          {%- endcase -%}
+        {%- endif -%}
+      
+        {%- if text != blank -%}
+          <p class="collectionHero__contentDescription ImageWithCta__Text">{{ text }}</p>
+        {%- endif -%}
+      
+        {%- if cta_url != blank and cta_copy != blank -%}
+          <a class="btn btn--lg {{ cta_color }}"
+             href="{{ cta_url }}"
+             title="{{ cta_copy }}"
+             role="button">
+            {{ cta_copy }}
+          </a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+
+
+{% schema %}
+{
+  "name": "Image with CTA",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Image mobile"
+    },
+    {
+      "type": "radio",
+      "id": "layout",
+      "label": "Image alignment",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "default": "h1",
+      "options": [
+        {
+          "value": "h1",
+          "label": "H1"
+        },
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        },
+        {
+          "value": "h4",
+          "label": "H4"
+        }
+      ]
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA URL"
+    },
+    {
+      "type": "text",
+      "id": "cta_copy",
+      "label": "CTA Copy"
+    },
+    {
+      "type": "radio",
+      "id": "cta_color",
+      "label": "CTA color",
+      "options": [
+        {
+          "value": "btn--light",
+          "label": "White"
+        },
+        {
+          "value": "btn--dark",
+          "label": "Black"
+        }
+      ],
+      "default": "btn--dark"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image with CTA",
+      "category": "Image"
+    }
+  ]
+}
+{% endschema %}

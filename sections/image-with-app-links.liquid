@@ -1,0 +1,230 @@
+{%- assign image = section.settings.image -%}
+{%- assign image_mobile = section.settings.image_mobile -%}
+{%- assign layout = section.settings.layout -%}
+{%- assign bg_color = section.settings.bg_color -%}
+{%- assign text_color = section.settings.text_color -%}
+{%- assign heading = section.settings.heading -%}
+{%- assign text = section.settings.text -%}
+{%- assign scan_instruction = section.settings.scan_instruction -%}
+{%- assign qr_code = section.settings.qr_code -%}
+{%- assign decorative_image = section.settings.decorative_image -%}
+{%- assign app_store_image = section.settings.app_store_image -%}
+{%- assign app_store_url = section.settings.app_store_url -%}
+{%- assign google_play_image = section.settings.google_play_image -%}
+{%- assign google_play_url = section.settings.google_play_url -%}
+
+
+{%- assign desktop_image_class = 'image image-abs-cover' -%}
+
+{%- if image_mobile != blank -%}
+  {%- assign desktop_image_class = 'image image-abs-cover hide-mobile' -%}
+{%- endif -%}
+
+<section class="ImageWithAppLinks rel" style="background-color: {{ bg_color }}; color: {{ text_color }};">
+  <div class="ImageWithAppLinks__Wrapper ImageWithAppLinks__Image--{{ layout }}">
+    {%- if image != blank -%}
+      <div class="ImageWithAppLinks__Media rel">
+        <div class="image {{ desktop_image_class }}">
+          {% render 'image-lazy',
+            image: image,
+            class_name: desktop_image_class,
+            size: 'medium',
+            loader: true %}
+        </div>
+        
+        {%- if image_mobile != blank -%}
+          <div class="image image-abs-cover hide-desktop">
+            {% render 'image-lazy',
+              image: image_mobile,
+              class_name: 'image-abs-cover',
+              size: 'medium',
+              loader: true %}
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+    
+    <div class="ImageWithAppLinks__Content">
+      {%- if heading != blank -%}
+          <h2 class="ImageWithAppLinks__Heading">{{ heading }}</h2>
+      {%- endif -%}
+    
+      {%- if text != blank -%}
+        <p class="ImageWithAppLinks__Text">{{ text }}</p>
+      {%- endif -%}
+  
+      {%- if scan_instruction != blank -%}
+        <p class="ImageWithAppLinks__Text hide-mobile">{{ scan_instruction }}</p>
+      {%- endif -%}
+  
+      {%- if qr_code != blank -%}
+        <div class="ImageWithAppLinks__QRWrapper hide-mobile">
+          <div class="ImageWithAppLinks__QR">
+            <div class="image rel">
+              {% render 'image-lazy',
+                image: qr_code,
+                class_name: 'image-abs-cover',
+                size: 'medium',
+                loader: true %}
+            </div>
+          </div>
+  
+          {%- if decorative_image != blank -%}
+            <div class="ImageWithAppLinks__DecImage">
+              {% render 'image-lazy',
+                image: decorative_image,
+                size: 'medium',
+                loader: true %}
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+  
+      {%- if app_store_image != blank or google_play_image != blank -%}
+        <div class="ImageWithAppLinks__Links">
+          {%- if app_store_image != blank -%}
+            <div class="ImageWithAppLinks__Item">
+              <div class="image ImageWithAppLinks__ItemImage">
+                {% render 'image-lazy',
+                  image: app_store_image,
+                  size: 'medium',
+                  loader: true %}
+              </div>
+  
+              {%- if app_store_url != blank -%}
+                <a href="{{ app_store_url }}" target="_blank"><span class="visually-hidden">{{ app_store_image.alt | default: 'App link' }}</span></a>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+  
+          {%- if google_play_image != blank -%}
+            <div class="ImageWithAppLinks__Item rel">
+              <div class="image ImageWithAppLinks__ItemImage">
+                {% render 'image-lazy',
+                  image: google_play_image,
+                  size: 'medium',
+                  loader: true %}
+              </div>
+      
+              {%- if google_play_url != blank -%}
+                <a href="{{ google_play_url }}" target="_blank"><span class="visually-hidden">{{ google_play_image.alt | default: 'App link' }}</span></a>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+      
+    </div>
+  </div>
+</section>
+
+
+
+{% schema %}
+{
+  "name": "Image with app links",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#FFF9E5"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Image mobile"
+    },
+    {
+      "type": "radio",
+      "id": "layout",
+      "label": "Image alignment",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "textarea",
+      "id": "scan_instruction",
+      "label": "Scan instruction"
+    },
+    {
+      "type": "image_picker",
+      "id": "qr_code",
+      "label": "QR Code"
+    },
+    {
+      "type": "image_picker",
+      "id": "decorative_image",
+      "label": "Decorative image"
+    },
+    {
+      "type": "header",
+      "content": "App links"
+    },
+    {
+      "type": "image_picker",
+      "id": "app_store_image",
+      "label": "App store image"
+    },
+    {
+      "type": "url",
+      "id": "app_store_url",
+      "label": "App store URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "google_play_image",
+      "label": "Google play image"
+    },
+    {
+      "type": "url",
+      "id": "google_play_url",
+      "label": "Google play URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image with app links",
+      "category": "Image"
+    }
+  ]
+}
+{% endschema %}
