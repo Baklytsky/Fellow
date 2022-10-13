@@ -1018,6 +1018,112 @@
           "button_text": "Explore More",
           "btn_type": "btn--light"
         }
+      },
+      "f3cf046c-7e16-4d4f-b4f5-73d22d8ac53e": {
+        "type": "image-with-cta",
+        "settings": {
+          "image": "shopify:\/\/shop_images\/Rectangle_1650.png",
+          "image_mobile": "shopify:\/\/shop_images\/Rectangle_1650_2.png",
+          "layout": "left",
+          "bg_color": "#000000",
+          "text_color": "#ffffff",
+          "heading": "Gear Guide",
+          "heading_size": "h1",
+          "text": "Stagg EKG Pro and Pro Studio Edition",
+          "cta_url": "\/",
+          "cta_copy": "Learn More",
+          "cta_color": "btn--light"
+        }
+      },
+      "ef612dc0-9a99-4e40-85f3-0f266f839f9d": {
+        "type": "image-with-app-links",
+        "settings": {
+          "bg_color": "#fff9e5",
+          "text_color": "#000000",
+          "image": "shopify:\/\/shop_images\/Rectangle_23_1.png",
+          "image_mobile": "shopify:\/\/shop_images\/Rectangle_23_2.png",
+          "layout": "left",
+          "heading": "It keeps getting better...",
+          "text": "Get the latest features for Stagg EKG Pro and  Pro Studio Edition with the Fellow Updater App.",
+          "scan_instruction": "Scan the code with your phone or visit Fellowproducts.com\/app",
+          "qr_code": "shopify:\/\/shop_images\/Rectangle_23.png",
+          "decorative_image": "shopify:\/\/shop_images\/1_0ec37334-9717-4fa6-966d-da1464fd94b5.png",
+          "app_store_image": "shopify:\/\/shop_images\/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917_1.png",
+          "app_store_url": "https:\/\/www.apple.com\/app-store\/",
+          "google_play_image": "shopify:\/\/shop_images\/Frame.png",
+          "google_play_url": "https:\/\/play.google.com\/store\/games"
+        }
+      },
+      "686756fc-2883-4b61-9116-c423f8c24313": {
+        "type": "banner-with-cta",
+        "settings": {
+          "full_width_container": false,
+          "image": "shopify:\/\/shop_images\/image_56.png",
+          "content_position": "TopCenter",
+          "content_position_mobile": "TopCenter",
+          "text_color": "#ffffff",
+          "heading": "The Rookie Kit",
+          "heading_size": "h1",
+          "text": "Everything you need for a pour-over party.",
+          "cta_url": "shopify:\/\/collections\/bestsellers",
+          "cta_copy": "Shop Now",
+          "cta_color": "btn--light"
+        }
+      },
+      "f5fbfa4c-fec5-4654-8651-8f4a1c8aa1ec": {
+        "type": "banner-blocks",
+        "blocks": {
+          "9c0f1fcc-9d1d-46ec-b676-38a626b05866": {
+            "type": "banner",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/image_51.png",
+              "content_position": "TopCenter",
+              "text_color": "#ffffff",
+              "heading": "Shop Best Sellers",
+              "heading_size": "h2",
+              "text": "All the best for your brewing",
+              "cta_url": "shopify:\/\/collections\/bestsellers",
+              "cta_copy": "Shop Now",
+              "cta_color": "btn--light"
+            }
+          },
+          "e34e63e9-48a8-4027-ac73-6a60963e3618": {
+            "type": "banner",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/image_51_31e1f6ce-5742-48e3-9fcf-6be369f8a903.png",
+              "content_position": "TopCenter",
+              "text_color": "#000000",
+              "heading": "Kettles",
+              "heading_size": "h2",
+              "text": "The coolest way to make water hot",
+              "cta_url": "shopify:\/\/collections\/kettles",
+              "cta_copy": "Show Now",
+              "cta_color": "btn--dark"
+            }
+          },
+          "88195829-5cd3-4d41-a8d2-a91c82ce99c5": {
+            "type": "banner",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/image_51_31e1f6ce-5742-48e3-9fcf-6be369f8a903.png",
+              "content_position": "TopCenter",
+              "text_color": "#ffffff",
+              "heading": "test",
+              "heading_size": "h2",
+              "text": "test",
+              "cta_url": "shopify:\/\/collections\/bestsellers",
+              "cta_copy": "test",
+              "cta_color": "btn--dark"
+            }
+          }
+        },
+        "block_order": [
+          "9c0f1fcc-9d1d-46ec-b676-38a626b05866",
+          "e34e63e9-48a8-4027-ac73-6a60963e3618",
+          "88195829-5cd3-4d41-a8d2-a91c82ce99c5"
+        ],
+        "settings": {
+          "full_width_container": false
+        }
       }
     },
     "content_for_index": [
@@ -1036,7 +1142,11 @@
       "16342252676e2388c3",
       "1630069783d5517455",
       "163041601834c99057",
-      "163040772842cf0e69"
+      "163040772842cf0e69",
+      "f3cf046c-7e16-4d4f-b4f5-73d22d8ac53e",
+      "ef612dc0-9a99-4e40-85f3-0f266f839f9d",
+      "686756fc-2883-4b61-9116-c423f8c24313",
+      "f5fbfa4c-fec5-4654-8651-8f4a1c8aa1ec"
     ]
   },
   "presets": {
