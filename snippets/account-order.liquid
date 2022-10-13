@@ -1,0 +1,142 @@
+{%- comment -%}
+{%- render 'account-order', order: order -%}
+{%- endcomment -%}
+
+<div class="account-order">
+  <h2 class="account-heading">{{ 'customer.order.heading' | t }}</h2>
+
+  <a href="{{ routes.account_url }}"
+     class="account-cancel-btn">
+    {{ 'customer.order.return' | t }}
+  </a>
+
+  <div class="account-order-info">
+    <p><span class="fwb">{{ 'customer.order.name' | t }}</span> {{ order.name }}</p>
+    <p><span class="fwb">{{ 'customer.order.date' | t }}</span> {{ order.created_at | date: '%B %e, %Y' }}</p>
+  </div>
+
+  <div class="account-order-details">
+    <div class="account-order-details-shipping">
+      <div class="account-order-details-item">
+        <h4 class="account-order-subtitle">{{ 'customer.order.shipping_address' | t }}</h4>
+        {%- render 'default-address', address: order.shipping_address -%}
+      </div>
+    </div>
+
+    <div class="account-order-details-payment">
+      <div class="account-order-details-item">
+        <h4 class="account-order-subtitle">{{ 'customer.order.payment_status' | t }}</h4>
+        <p class="account-title">{{ order.financial_status_label }}</p>
+        <div class="hide-desktop">
+          {%- render 'default-address', address: order.billing_address -%}
+        </div>
+      </div>
+
+      <div class="account-order-details-item hide-mobile">
+        <h4 class="account-order-subtitle">{{ 'customer.order.billing_address' | t }}</h4>
+        {%- render 'default-address', address: order.billing_address -%}
+      </div>
+    </div>
+  </div>
+
+  <div class="account-order-status">
+    {%- capture order_status -%}
+      {%- case order.fulfillment_status_label -%}
+      {%- when 'Complete' -%}
+        <p>Delivered</p>
+      {%- when 'Fulfilled' -%}
+        <p>Delivered</p>
+      {%- when 'Partial' -%}
+        <p>Shipped</p>
+        <a href="{{ order.order_status_url }}">Track Order</a>
+      {%- when 'Restocked' -%}
+        <p>In Progress</p>
+      {%- when 'unfulfilled' -%}
+        <p>In Progress</p>
+        {%- else -%}
+        <p>{{ order.fulfillment_status_label }}</p>
+      {%- endcase -%}
+    {%- endcapture -%}
+    <div class="f aic">
+      <span class="fwb account-order-status-title">{{ 'customer.order.status' | t }}</span>
+      <span class="hide-mobile">{{ order_status }}</span>
+    </div>
+    <span class="block hide-desktop">{{ order_status }}</span>
+  </div>
+  
+  <ul class="account-order-list">
+    {%- for item in order.line_items -%}
+      <li class="account-order-list-item f">
+        <a href="{{ item.variant.url }}" class="account-order-list-item-img-wrapper rel">
+          {% render 'image-lazy',
+            image: item.image,
+            class_name: 'image-abs-cover',
+            size: 'small',
+            alt: item.product.title,
+            loader: true %}
+        </a>
+
+        <div class="account-order-list-item-details account-order-list-text">
+          <a href="{{ item.variant.url }}" class="fwb">{{ item.product.title }}</a>
+          {%- unless item.variant.title == 'Default Title' -%}
+            <p>{{ item.variant.title }}</p>
+          {%- endunless -%}
+          <p class="hide-desktop">Qty {{ item.quantity }}</p>
+        </div>
+
+        <div class="account-order-list-item-price account-order-list-text hide-mobile">
+          {%- if item.original_line_price != item.final_line_price -%}
+            <span class="strike">{{ item.original_line_price | money_without_trailing_zeros }}</span>
+            <span>{{ item.final_line_price | money_without_trailing_zeros }}</span>
+          {%- else -%}
+            <span>{{ item.final_line_price | money_without_trailing_zeros }}</span>
+          {%- endif -%}
+        </div>
+
+        <div class="account-order-list-item-qty account-order-list-text hide-mobile">
+          <p>Qty {{ item.quantity }}</p>
+        </div>
+
+        <div class="account-order-list-item-price-total account-order-list-text">
+          {%- if item.original_price != item.final_price -%}
+            <span class="strike">{{ item.original_price | money_without_trailing_zeros }}</span>
+            <span>{{ item.final_price | money_without_trailing_zeros }}</span>
+          {%- else -%}
+            <span>{{ item.final_price | money_without_trailing_zeros }}</span>
+          {%- endif -%}
+        </div>
+      </li>
+    {%- endfor -%}
+  </ul>
+
+  <ul class="account-order-total">
+    {%- if order.discounts.size > 0 -%}
+      <li class="account-order-total-item">
+        <span class="pr-1">{{ 'customer.order.discount' | t }}</span>
+        <div class="account-order-total-item-discounts f fdc aie">
+          {%- for discount in order.discounts -%}
+            <span>{{ discount.code }}</span>
+            <span>{{ discount.savings | money }}</span>
+          {%- endfor -%}
+        </div>
+      </li>
+    {%- endif -%}
+    <li class="account-order-total-item">
+      <span class="pr-3">{{ 'customer.order.subtotal' | t }}</span>
+      <span>{{ order.subtotal_price | money }}</span>
+    </li>
+    <li class="account-order-total-item">
+      <span class="pr-3">{{ 'customer.order.shipping' | t }}</span>
+      <span>{{ order.shipping_price | money }}</span>
+    </li>
+    <li class="account-order-total-item">
+      <span class="pr-3">{{ 'customer.order.tax' | t }}</span>
+      <span>{{ order.tax_price | money }}</span>
+    </li>
+    <li class="account-order-total-item">
+      <span class="fwb pr-3">{{ 'customer.order.total' | t }}</span>
+      <span class="fwb">{{ order.total_price | money }}</span>
+    </li>
+  </ul>
+
+</div>

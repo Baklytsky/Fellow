@@ -1,5 +1,7 @@
 <div id='form_{{id}}' class='{{formClassName}}' style='display: none'>
-  <h2 class="account-heading">{{ title }}</h2>
+  {%- if title != blank -%}
+    <h2 class="account-heading">{{ title }}</h2>
+  {%- endif -%}
 
   {%- capture return_btn_attr -%}
     data-toggle-address="{{id}}"

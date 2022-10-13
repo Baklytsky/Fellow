@@ -88,17 +88,24 @@
             label: login_email_label,
             name: 'customer[email]',
             type: 'email',
+            required: 'true',
             className: inputClassName,
             autocomplete: 'on'
           %}
 
         {%- assign login_password_label = 'customer.login.password' | t -%}
 
+          {%- capture pass_min_length -%}
+            minlength="5"
+          {%- endcapture -%}
+
           {%
             render 'component-input'
             label: login_password_label,
             name: 'customer[password]',
             type: 'password',
+            required: 'true',
+            attr: pass_min_length,
             className: inputClassName
           %}
 

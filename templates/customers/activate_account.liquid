@@ -17,10 +17,16 @@
 
       {%- assign activate_password_label = 'customer.activate_account.password' | t -%}
 
-        {% render 'component-input'
+        {%- capture pass_min_length -%}
+          minlength="5"
+        {%- endcapture -%}
+
+      {% render 'component-input'
           label: activate_password_label,
           name: 'customer[password]',
           type: 'password',
+          required: 'true',
+          atrr: pass_min_length,
           className: inputClassName %}
 
       {%- assign activate_confirm_password_label = 'customer.activate_account.password_confirm' | t -%}
@@ -29,6 +35,8 @@
           label: activate_confirm_password_label,
           name: 'customer[password_confirmation]',
           type: 'password',
+          required: 'true',
+          atrr: pass_min_length,
           className: inputClassName %}
 
       {%- assign activate_accepts_marketing_label = 'customer.activate_account.accepts_marketing' | t -%}

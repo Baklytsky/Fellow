@@ -17,8 +17,14 @@
 
     <section class='account-home rel'>
       {%- render 'account-update',
+        title: 'Edit my information',
         customer: customer,
         formClassName: 'account-address-form'  -%}
+
+      {%- render 'account-update-pass',
+        customer: customer,
+        formClassName: 'account-address-form'
+        title: 'Change Password' -%}
 
       {% render 'account-address-form',
         id: 'new',
@@ -78,45 +84,18 @@
         </div>
 
         {%- unless customer.accepts_marketing -%}
-
           <div class="account-contact-preferences">
-            <h2 class="account-heading">{{ 'customer.addresses.contact_preferences' | t }}</h2>
-            <form action="/">
-              {%- assign register_accepts_marketing_label = 'customer.register.accepts_marketing' | t -%}
-                {%- if settings.email_klaviyo_list_id != blank -%}
-                  {%- assign accepts_email_marketing_attr = 'data-klaviyo-list-id=' | append:'"' | append: settings.email_klaviyo_list_id | append:'"' -%}
-                {%- endif -%}
-
-              {% render 'component-input'
-                label: register_accepts_marketing_label,
-                name: 'customer[accepts_marketing]',
-                type: 'checkbox',
-                value: 'false',
-                className: inputClassName,
-                attr: accepts_email_marketing_attr %}
-
-              {%- assign register_accepts_sms_marketing_label = 'customer.register.accepts_sms_marketing' | t -%}
-                {%- if settings.sms_klaviyo_list_id != blank -%}
-                  {%- assign accepts_sms_marketing_attr = 'data-klaviyo-list-id=' | append:'"' | append: settings.sms_klaviyo_list_id | append:'"' -%}
-                {%- endif -%}
-
-              {% render 'component-input'
-                label: register_accepts_sms_marketing_label,
-                name: 'customer[sms_marketing_consent]',
-                type: 'checkbox',
-                value: 'false',
-                className: inputClassName,
-                attr: accepts_sms_marketing_attr %}
-
-              {% render 'component-button'
-                tag: 'button',
-                type: 'submit',
-                cta: 'Save',
-                className: 'account-btn btn btn--lg btn--dark' %}
-            </form>
+            {%- render 'account-contact-preferences' -%}
           </div>
-
         {%- endunless -%}
+
+        <div class="account-sign-out hide-desktop">
+          <a href="{{ routes.account_logout_url }}" class="f aic">
+            {{ 'customer.account.sign_out' | t }}
+          </a>
+        </div>
+
+
       </div>
     </section>
   </div>

@@ -80,6 +80,11 @@
 
     {{ 'libs.min.js' | asset_url | script_tag }}
 
+    {% if template contains 'customers/account' or template contains 'customers/register' or template == 'index' %}
+      <script src="https://app.accentuate.io/dist/proxy.js" defer="defer"></script>
+      {%- render 'accenture-set-phone' -%}
+    {% endif %}
+
     <script src="{{ 'custom.js' | asset_url }}" defer='defer'></script>
 
     {%- if template contains 'collection' -%}

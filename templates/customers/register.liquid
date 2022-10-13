@@ -19,7 +19,7 @@
       {%- assign register_first_name_label = 'customer.register.first_name' | t -%}
 
         {%
-          render 'component-input'
+          render 'component-input',
           label: register_first_name_label,
           name: 'customer[first_name]',
           value: form.first_name,
@@ -32,7 +32,7 @@
       {%- assign register_last_name_label = 'customer.register.last_name' | t -%}
 
         {%
-          render 'component-input'
+          render 'component-input',
           label: register_last_name_label,
           name: 'customer[last_name]',
           type: 'text',
@@ -44,7 +44,7 @@
       {%- assign register_email_label = 'customer.register.email' | t -%}
 
         {%
-          render 'component-input'
+          render 'component-input',
           label: register_email_label,
           name: 'customer[email]',
           type: 'email',
@@ -57,9 +57,9 @@
       {%- assign register_phone_label = 'customer.register.phone_number' | t -%}
 
         {%
-          render 'component-input'
+          render 'component-input',
           label: register_phone_label,
-          name: 'customer[note][Phone]',
+          name: 'customer[Phone]',
           type: 'tel',
           autocomplete: "on",
           className: inputClassName
@@ -67,12 +67,17 @@
 
       {%- assign register_password_label = 'customer.register.password' | t -%}
 
+        {%- capture pass_min_length -%}
+          minlength="5"
+        {%- endcapture -%}
+
         {%
-          render 'component-input'
+          render 'component-input',
           label: register_password_label,
           name: 'customer[password]',
           type: 'password',
           required: 'true',
+          attr: pass_min_length,
           className: inputClassName
         %}
 
@@ -81,7 +86,7 @@
           {%- assign accepts_email_marketing_attr = 'data-klaviyo-list-id=' | append:'"' | append: settings.email_klaviyo_list_id | append:'"'  -%}
         {%- endif -%}
 
-        {% render 'component-input'
+        {% render 'component-input',
           label: register_accepts_marketing_label,
           name: 'customer[accepts_marketing]',
           type: 'checkbox',
@@ -90,19 +95,21 @@
           attr: accepts_email_marketing_attr
         %}
 
-      {%- assign register_accepts_sms_marketing_label = 'customer.register.accepts_sms_marketing' | t -%}
-        {%- if settings.sms_klaviyo_list_id != blank -%}
-          {%- assign accepts_sms_marketing_attr = 'data-klaviyo-list-id=' | append:'"' | append: settings.sms_klaviyo_list_id | append:'"'  -%}
-        {%- endif -%}
+        {%- comment -%}
+        {%- assign register_accepts_sms_marketing_label = 'customer.register.accepts_sms_marketing' | t -%}
+          {%- if settings.sms_klaviyo_list_id != blank -%}
+            {%- assign accepts_sms_marketing_attr = 'data-klaviyo-list-id=' | append:'"' | append: settings.sms_klaviyo_list_id | append:'"'  -%}
+          {%- endif -%}
 
-      {% render 'component-input'
+        {% render 'component-input',
           label: register_accepts_sms_marketing_label,
           name: 'customer[sms_marketing_consent]',
           type: 'checkbox',
           value: 'false',
           className: inputClassName,
           attr: accepts_sms_marketing_attr
-      %}
+        %}
+        {%- endcomment -%}
 
       {%- if settings.privacy_policy_link != blank and settings.terms_of_service_link != blank -%}
         <div class="account-policy">
@@ -114,7 +121,7 @@
       {%- assign register_btn_cta = 'customer.register.submit' | t -%}
 
         {%
-          render 'component-button'
+          render 'component-button',
           tag: 'button',
           type: 'submit',
           cta: register_btn_cta,

@@ -743,7 +743,9 @@ class dynamicRecommendations extends HTMLElement {
         const html = new DOMParser().parseFromString(text, 'text/html'),
               recommendedContent = html.querySelector('[data-product-row]');
         if (recommendedContent) this.recommendationContainer.innerHTML = recommendedContent.innerHTML;
-        if (typeof window.yotpo !== "undefined") window.yotpo.initWidgets();
+        //if (typeof window.yotpo !== "undefined") window.yotpo.initWidgets();
+        const api = new Yotpo.API(yotpo);
+        api.refreshWidgets();
       });
   }
 }
@@ -2057,11 +2059,20 @@ class account extends HTMLElement {
     this.errorMeseges = this.querySelectorAll('.account-error')
     this.toglePassBtn = this.querySelectorAll('[data-togle-pass-visibility]')
     this.forms = this.querySelectorAll('form')
+    this.registerForm = this.querySelector('#create_customer')
+    if (this.registerForm) this.phoneInput = this.registerForm.querySelector('input[name="customer[Phone]"]')
+    this.customerUpdateForm = this.querySelector('#form_update')
+    this.customerUpdatePassForm = this.querySelector('#form_update-pass')
+    this.customerContactPreferencesForm = this.querySelector('#form_contact-preferences')
     this.deleteAddressBtns = this.querySelectorAll('[data-delete-address]')
     this.toggleAddressBtns = this.querySelectorAll('[data-toggle-address]')
     this.accountPageContent = this.querySelector('[data-account-content]')
     this.sidebarAcoountOverview = this.querySelector('[data-acoount-overview]')
 
+    this.eventListener()
+  }
+
+  eventListener () {
     this.toggleDialogBtn.forEach(btn => {
       btn.addEventListener('click', (e)=> {
         e.preventDefault()
@@ -2073,6 +2084,12 @@ class account extends HTMLElement {
     this.inputs.forEach(input => input.addEventListener('keyup', ()=> {
       this.removeErrorStatus(input)
     }))
+
+    if (this.phoneInput) {
+      this.phoneInput.addEventListener('change', ()=> {
+        window.sessionStorage.setItem("Customer_phone", this.phoneInput.value);
+      })
+    }
 
     this.toglePassBtn.forEach(btn => btn.addEventListener('click', (e)=> {
       e.preventDefault()
@@ -2095,6 +2112,58 @@ class account extends HTMLElement {
       e.preventDefault()
       const id = btn.getAttribute('data-toggle-address')
       this.toggleAddress(id)
+    }))
+
+    if (this.customerUpdateForm) this.accentureEventListener(this.customerUpdateForm)
+    if (this.customerUpdatePassForm) this.accentureEventListener(this.customerUpdatePassForm)
+    if (this.customerContactPreferencesForm) this.accentureEventListener(this.customerContactPreferencesForm)
+  }
+
+  accentureEventListener(form) {
+    const submitBtn = form.querySelector('button[type=submit]')
+    const errorsContainer = form.querySelector('.account-error')
+    const errorsInner = form.querySelector('.account-error-inner')
+    const allInputs = form.querySelectorAll('input')
+
+    Accentuate(jQuery('#' + form.id), function (data) {
+      if (data.errors !== undefined) {
+        submitBtn.disabled = true;
+
+        if (data.errors.email !== undefined && data.errors.email[0] === 'is invalid') {
+          const message = 'Please enter a valid email address.';
+          if (errorsInner) errorsInner.innerHTML += message;
+          if (errorsContainer) errorsContainer.classList.remove('is-hidden');
+
+        } else if (data.errors.email !== undefined && data.errors.email[0] === 'already has an account') {
+          const message = 'This email is already associated with an account';
+          if (errorsInner) errorsInner.innerHTML += message;
+          if (errorsContainer) errorsContainer.classList.remove('is-hidden');
+
+        } else if (data.errors.email !== undefined && data.errors.email[0] === 'contains an invalid domain name') {
+          const message = 'Please enter a valid email address.';
+          if (errorsInner) errorsInner.innerHTML += message;
+          if (errorsContainer) errorsContainer.classList.remove('is-hidden');
+
+        } else if (data.errors.password !== undefined && data.errors.password[0] === 'is too short (minimum is 5 characters)') {
+          const message = 'Your password must be at least 5 characters long';
+          if (errorsInner) errorsInner.innerHTML += message;
+          if (errorsContainer) errorsContainer.classList.remove('is-hidden');
+
+        } else if (data.errors.password_confirmation !== undefined && data.errors.password_confirmation[0] === 'must match the provided password') {
+          const message = 'Password and confirmation password do not match';
+          if (errorsInner) errorsInner.innerHTML += message;
+          if (errorsContainer) errorsContainer.classList.remove('is-hidden');
+        }
+      } else if (data.status === "OK") {
+        location.reload();
+      }
+    });
+
+    allInputs.forEach(input => input.addEventListener('keyup', ()=> {
+      if (errorsContainer) {
+        if (!errorsContainer.classList.contains('is-hidden')) errorsContainer.classList.add('is-hidden')
+      }
+      if (submitBtn.disabled) submitBtn.removeAttribute('disabled')
     }))
   }
 

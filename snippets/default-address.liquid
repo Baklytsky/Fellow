@@ -1,0 +1,18 @@
+{%- comment -%}
+{%- render 'default-address', address: address -%}
+{%- endcomment -%}
+
+{%- if address.first_name != blank or address.last_name != blank -%}
+  <p class="account-title">{{ address.first_name }} {{ address.last_name }}</p>
+{%- endif -%}
+{%- if address.city != blank or address.province_code != blank or address.zip != blank -%}
+  <p class="account-title">
+    {% if address.city != blank %}{{ address.city }}, {% endif %}{{ address.province_code }} {{ address.zip }}
+  </p>
+{%- endif -%}
+{%- if address.country != bank -%}
+  <p class="account-title">{{ address.country }}</p>
+{%- endif -%}
+{%- if address.phone != blank -%}
+  <p class="account-title">{{ address.phone }}</p>
+{%- endif -%}

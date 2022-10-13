@@ -245,6 +245,10 @@ textarea {
   text-align: justify
 }
 
+.fwb {
+  font-weight: 700;
+}
+
 .mxa,
 .ma {
   margin-left: auto
@@ -4395,7 +4399,8 @@ textarea {
 
 .js-recover-trigger,
 .input-wrapper__password-toggle,
-.button.account-cancel-btn {
+.button.account-cancel-btn,
+.account-cancel-btn {
   display: block;
   padding: 0;
   font-weight: 500;
@@ -8167,6 +8172,10 @@ account-element.account-page {
   padding-bottom: 120px;
 }
 
+.account-page .account-wrapper {
+  min-height: unset;
+}
+
 .account-sidebar {
   width: 325px;
   padding: 15px 30px 0 15px;
@@ -8387,9 +8396,89 @@ account-element.account-page {
   justify-content: flex-end;
 }
 
+.account-sign-out {
+  margin-top: 42px;
+  padding: 42px 0 69px;
+  border-top: 1px solid #B8B8B8;
+  font-size: 14px;
+}
+
+.account-order-status {
+  padding: 40px 0;
+  border-bottom: 1px solid #B8B8B8;
+}
+
+.account-order-status p {
+  margin: 0;
+  line-height: normal;
+}
+
+.account-order-status span {
+  padding-right: 5px;
+  line-height: normal;
+}
+
+.account-order-list-item {
+  padding: 40px 0 24px;
+  border-bottom: 1px solid #B8B8B8;
+}
+
+.account-order-list-item-img-wrapper {
+  width: 120px;
+  height: 120px;
+  flex-shrink: 0;
+  background: #F5F5F5;
+  border-radius: 7px;
+}
+
+.account-order-list-item-details {
+  width: calc(55% - 120px);
+}
+
+.account-order-list-item-qty,
+.account-order-list-item-price,
+.account-order-list-item-price-total {
+  width: 15%;
+  text-align: right;
+  padding: 0 12px;
+}
+
+.account-order-list-item-price-total {
+  padding: 0 0 0 12px;
+}
+
+.account-order-list-item-details {
+  padding: 0 42px;
+}
+
+.account-order-list-text p,
+.account-order-list-text a {
+  margin: 0;
+}
+
+.account-order-total {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  min-width: 170px;
+  display: flex;
+  flex-direction: column;
+  margin: 40px 0 0 auto;
+}
+
+.account-order-total-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
 @media screen and (max-width: 1199px) {
   .account-dialog {
     padding: 0 50px;
+  }
+
+  .account-order-list-item-details {
+    padding: 0 12px;
   }
 }
 
@@ -8560,6 +8649,14 @@ account-element.account-page {
     top: 8px;
     right: 8px;
   }
+
+  .account-orders .default-pagination__list {
+    justify-content: flex-start;
+  }
+
+  .account-order-list-item-details {
+    width: calc(85% - 120px);
+  }
 }
 
 @media screen and (max-width: 749px) {
@@ -8616,7 +8713,7 @@ account-element.account-page {
 .account-home__order-img-wrapper {
   width: 100%;
   max-width: 220px;
-  padding-right: 20px;
+  padding-right: 10px;
 }
 
 .account-home__order-img {
@@ -8666,6 +8763,146 @@ account-element.account-page {
 
 .account-home__order-table-item a {
   text-decoration: underline;
+}
+
+.account-order .account-cancel-btn {
+  margin-bottom: 40px;
+}
+
+.account-order-subtitle {
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 100%;
+  margin: 0 0 20px;
+}
+
+.account-order-info {
+  padding-bottom: 40px;
+  border-bottom: 1px solid #B9B9B8;
+}
+
+.account-order-info p {
+  margin: 0;
+}
+
+.account-order-details {
+  display: flex;
+  padding-top: 40px;
+  border-bottom: 1px solid #B9B9B8;
+}
+
+.account-order-details-shipping,
+.account-order-details-payment {
+  width: 50%;
+}
+
+.account-order-details-item {
+  padding-bottom: 40px;
+}
+
+@media screen and (max-width: 1199px) {
+  .account-home__order-img-wrapper {
+    width: unset;
+    max-width: unset;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .account-order-subtitle {
+    font-size: 16px;
+    margin: 0 0 10px;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .account-orders .account-heading {
+    margin: 0 0 18px;
+  }
+
+  .account-home__order {
+    margin-bottom: 0;
+  }
+
+  .account-home__order-table {
+    flex-wrap: wrap;
+  }
+
+  .account-home__order-table-item {
+    width: 50%;
+  }
+
+  .account-home__order-table .account-home__order-table-item:nth-child(3),
+  .account-home__order-table .account-home__order-table-item:nth-child(4) {
+    padding-top: 24px;
+  }
+
+
+  .account-order-details {
+    flex-direction: column;
+    padding: 0;
+    border: none;
+  }
+
+  .account-order-details .account-title {
+    margin: 0 0 10px;
+  }
+
+  .account-order-details-item {
+    padding: 0;
+  }
+
+  .account-order-details-shipping,
+  .account-order-details-payment {
+    width: 100%;
+    padding: 30px 0;
+    border-bottom: 1px solid #B9B9B8;
+  }
+
+  .account-order-status {
+    padding: 30px 0;
+  }
+
+  .account-order-status-title {
+    font-size: 16px;
+    line-height: 120%;
+    margin: 0 0 10px;
+  }
+
+  .account-order-list {
+    margin-top: 5px;
+  }
+
+  .account-order-list-item {
+    padding: 24px 0;
+  }
+
+  .account-order-list-item-qty,
+  .account-order-list-item-price,
+  .account-order-list-item-price-total {
+    width: 20%;
+  }
+
+  .account-order-list-item-img-wrapper {
+    width: 90px;
+    height: 90px;
+  }
+
+  .account-order-list-item-details {
+    width: calc(80% - 90px);
+  }
+
+  .account-order-list-item-details a,
+  .account-order-list-item-price-total {
+    font-size: 14px;
+  }
+
+  .account-order-list-item-details p {
+    font-size: 12px;
+  }
+
+  .account-order-total {
+    margin: 40px 0 80px auto;
+  }
 }
 
 @media screen and (min-width: 992px) {
