@@ -10215,14 +10215,13 @@ modal-opener {
 
 .faq__list-content {
   padding: 0 24px 24px;
-  max-width: 880px;
   text-align: left;
   font-size: 16px;
   line-height: 130%;
 
   p {
     font-size: inherit;
-    margin: 4px 0;
+    margin: 8px 0;
   }
 
   a {
@@ -10301,6 +10300,7 @@ modal-opener {
 
 .ImageWithAppLinks__Wrapper {
   display: flex;
+  justify-content: center;
   max-width: 1440px;
   margin: 0 auto;
   
@@ -10320,11 +10320,22 @@ modal-opener {
 
 .ImageWithAppLinks__Media {
   width: 53%;
-  height: 26.5vw;
+  max-width: 613px;
 
   @media screen and (max-width: $tablet) {
     width: 100%;
-    height: 102vw;
+    max-width: none;
+  }
+
+  .image {
+    width: 100%;
+    height: 0;
+    padding-bottom: 62.2%;
+    position: relative;
+
+    @media screen and (max-width: $tablet) {
+      padding-bottom: 102%;
+    }
   }
 }
 
@@ -10605,4 +10616,12 @@ modal-opener {
 .BannerBlocks .BannerWithCta__Wrapper--Narrow {
   height: auto;
   max-height: none;
+}
+
+.SectionMargin {
+  margin: 32px auto;
+
+  @media screen and (max-width: $tablet) {
+    margin: 16px auto;
+  }
 }

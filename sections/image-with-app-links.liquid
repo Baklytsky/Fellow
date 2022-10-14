@@ -1,3 +1,4 @@
+{%- assign top_bottom_margin = section.settings.top_bottom_margin -%}
 {%- assign image = section.settings.image -%}
 {%- assign image_mobile = section.settings.image_mobile -%}
 {%- assign layout = section.settings.layout -%}
@@ -20,14 +21,14 @@
   {%- assign desktop_image_class = 'image image-abs-cover hide-mobile' -%}
 {%- endif -%}
 
-<section class="ImageWithAppLinks rel" style="background-color: {{ bg_color }}; color: {{ text_color }};">
+<section class="ImageWithAppLinks rel {% if top_bottom_margin %}SectionMargin{% endif %}" style="background-color: {{ bg_color }}; color: {{ text_color }};">
   <div class="ImageWithAppLinks__Wrapper ImageWithAppLinks__Image--{{ layout }}">
     {%- if image != blank -%}
       <div class="ImageWithAppLinks__Media rel">
         <div class="image {{ desktop_image_class }}">
           {% render 'image-lazy',
             image: image,
-            class_name: desktop_image_class,
+            class_name: 'image-abs-cover',
             size: 'medium',
             loader: true %}
         </div>
@@ -122,8 +123,13 @@
 
 {% schema %}
 {
-  "name": "Image with app links",
+  "name": "App | Download",
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "top_bottom_margin",
+      "label": "Top and bottom margin"
+    },
     {
       "type": "color",
       "id": "bg_color",
@@ -222,7 +228,7 @@
   ],
   "presets": [
     {
-      "name": "Image with app links",
+      "name": "App | Download",
       "category": "Image"
     }
   ]

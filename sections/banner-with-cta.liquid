@@ -1,4 +1,5 @@
 {%- assign full_width_container = section.settings.full_width_container -%}
+{%- assign top_bottom_margin = section.settings.top_bottom_margin -%}
 {%- assign image = section.settings.image -%}
 {%- assign image_mobile = section.settings.image_mobile -%}
 {%- assign content_position = section.settings.content_position -%}
@@ -18,7 +19,9 @@
 {%- endif -%}
 
 <section class="BannerWithCta">
-  <div class="BannerWithCta__Wrapper rel Content--{{ content_position }} ContentMobile--{{ content_position_mobile }} {% unless full_width_container %}BannerWithCta__Wrapper--Narrow{% endunless %}">
+  <div class="BannerWithCta__Wrapper rel Content--{{ content_position }} ContentMobile--{{ content_position_mobile }}
+{% unless full_width_container %}BannerWithCta__Wrapper--Narrow{% endunless %}
+{% if top_bottom_margin %}SectionMargin{% endif %}">
     {%- if image != blank -%}
       <div class="{{ desktop_image_class }}">
         {% render 'image-lazy',
@@ -75,12 +78,17 @@
 
 {% schema %}
 {
-  "name": "Banner with CTA",
+  "name": "Images | Landscape",
   "settings": [
     {
       "type": "checkbox",
       "id": "full_width_container",
       "label": "Full width container"
+    },
+    {
+      "type": "checkbox",
+      "id": "top_bottom_margin",
+      "label": "Top and bottom margin"
     },
     {
       "type": "header",
@@ -233,7 +241,7 @@
   ],
   "presets": [
     {
-      "name": "Banner with CTA",
+      "name": "Images | Landscape",
       "category": "Image"
     }
   ]

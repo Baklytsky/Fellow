@@ -1,3 +1,4 @@
+{%- assign top_bottom_margin = section.settings.top_bottom_margin -%}
 {%- assign image = section.settings.image -%}
 {%- assign image_mobile = section.settings.image_mobile -%}
 {%- assign layout = section.settings.layout -%}
@@ -16,7 +17,7 @@
   {%- assign desktop_image_class = 'image-abs-cover hide-mobile' -%}
 {%- endif -%}
 
-<section class="ImageWithCta">
+<section class="ImageWithCta {% if top_bottom_margin %}SectionMargin{% endif %}">
   <div class="collectionHero ImageWithCta__Wrapper ImageWithCta__Image--{{ layout }}">
     {%- if image != blank -%}
       <div class="collectionHero__media ImageWithCta__Media rel">
@@ -77,8 +78,13 @@
 
 {% schema %}
 {
-  "name": "Image with CTA",
+  "name": "Hero | Split Side Banner",
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "top_bottom_margin",
+      "label": "Top and bottom margin"
+    },
     {
       "type": "header",
       "content": "Image"
@@ -188,7 +194,7 @@
   ],
   "presets": [
     {
-      "name": "Image with CTA",
+      "name": "Hero | Split Side Banner",
       "category": "Image"
     }
   ]

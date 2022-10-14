@@ -1,7 +1,9 @@
-{%- assign full_width_container = section.settings.full_width_container -%}
 
 {%- if section.blocks.size > 0 -%}
-  <section class="BannerWithCta BannerBlocks">
+  {%- assign full_width_container = section.settings.full_width_container -%}
+  {%- assign top_bottom_margin = section.settings.top_bottom_margin -%}
+  
+  <section class="BannerWithCta BannerBlocks {% if top_bottom_margin %}SectionMargin{% endif %}">
     <div class="BannerWithCta__Wrapper BannerBlocks__Wrapper {% unless full_width_container %}BannerWithCta__Wrapper--Narrow{% endunless %}">
       {%- for block in section.blocks -%}
         {%- assign image = block.settings.image -%}
@@ -79,12 +81,17 @@
 
 {% schema %}
 {
-  "name": "Banner blocks",
+  "name": "Images | Blocks",
   "settings": [
     {
       "type": "checkbox",
       "id": "full_width_container",
       "label": "Full width container"
+    },
+    {
+      "type": "checkbox",
+      "id": "top_bottom_margin",
+      "label": "Top and bottom margin"
     }
   ],
   "blocks": [
@@ -197,7 +204,7 @@
   ],
   "presets": [
     {
-      "name": "Banner blocks",
+      "name": "Images | Blocks",
       "category": "Image"
     }
   ]
