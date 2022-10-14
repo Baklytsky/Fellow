@@ -10287,7 +10287,11 @@ modal-opener {
 .ImageWithCta__Heading {
   margin: 0 0 8px;
   font-weight: 500;
-  line-height: 100%;
+  line-height: 100%; 
+   
+  @media screen and (max-width: $tablet) {
+    text-align: center;
+  }
 }
 
 .ImageWithAppLinks {
@@ -10623,5 +10627,11 @@ modal-opener {
 
   @media screen and (max-width: $tablet) {
     padding: 16px 0;
+  }
+}
+
+.ImageWithCta.SectionPadding {
+    @media screen and (max-width: $tablet) {
+    padding: 0;
   }
 }
