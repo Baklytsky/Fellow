@@ -17,7 +17,7 @@
   {%- assign desktop_image_class = 'image-abs-cover hide-mobile' -%}
 {%- endif -%}
 
-<section class="ImageWithCta {% if top_bottom_margin %}SectionMargin{% endif %}">
+<section class="ImageWithCta {% if top_bottom_margin %}SectionPadding{% endif %}">
   <div class="collectionHero ImageWithCta__Wrapper ImageWithCta__Image--{{ layout }}">
     {%- if image != blank -%}
       <div class="collectionHero__media ImageWithCta__Media rel">
@@ -83,7 +83,7 @@
     {
       "type": "checkbox",
       "id": "top_bottom_margin",
-      "label": "Top and bottom margin"
+      "label": "Top and bottom padding"
     },
     {
       "type": "header",

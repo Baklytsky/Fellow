@@ -18,10 +18,8 @@
   {%- assign desktop_image_class = 'BannerWithCta__Image image image-abs-cover hide-mobile' -%}
 {%- endif -%}
 
-<section class="BannerWithCta">
-  <div class="BannerWithCta__Wrapper rel Content--{{ content_position }} ContentMobile--{{ content_position_mobile }}
-{% unless full_width_container %}BannerWithCta__Wrapper--Narrow{% endunless %}
-{% if top_bottom_margin %}SectionMargin{% endif %}">
+<section class="BannerWithCta {% if top_bottom_margin %}SectionPadding{% endif %}">
+  <div class="BannerWithCta__Wrapper rel Content--{{ content_position }} ContentMobile--{{ content_position_mobile }} {% unless full_width_container %}BannerWithCta__Wrapper--Narrow{% endunless %}">
     {%- if image != blank -%}
       <div class="{{ desktop_image_class }}">
         {% render 'image-lazy',
@@ -88,7 +86,7 @@
     {
       "type": "checkbox",
       "id": "top_bottom_margin",
-      "label": "Top and bottom margin"
+      "label": "Top and bottom padding"
     },
     {
       "type": "header",

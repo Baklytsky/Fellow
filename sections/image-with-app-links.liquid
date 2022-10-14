@@ -20,105 +20,105 @@
 {%- if image_mobile != blank -%}
   {%- assign desktop_image_class = 'image image-abs-cover hide-mobile' -%}
 {%- endif -%}
-
-<section class="ImageWithAppLinks rel {% if top_bottom_margin %}SectionMargin{% endif %}" style="background-color: {{ bg_color }}; color: {{ text_color }};">
-  <div class="ImageWithAppLinks__Wrapper ImageWithAppLinks__Image--{{ layout }}">
-    {%- if image != blank -%}
-      <div class="ImageWithAppLinks__Media rel">
-        <div class="image {{ desktop_image_class }}">
-          {% render 'image-lazy',
-            image: image,
-            class_name: 'image-abs-cover',
-            size: 'medium',
-            loader: true %}
-        </div>
-        
-        {%- if image_mobile != blank -%}
-          <div class="image image-abs-cover hide-desktop">
+<section class="{% if top_bottom_margin %}SectionPadding{% endif %}">
+  <div class="ImageWithAppLinks rel" style="background-color: {{ bg_color }}; color: {{ text_color }};">
+    <div class="ImageWithAppLinks__Wrapper ImageWithAppLinks__Image--{{ layout }}">
+      {%- if image != blank -%}
+        <div class="ImageWithAppLinks__Media rel">
+          <div class="image {{ desktop_image_class }}">
             {% render 'image-lazy',
-              image: image_mobile,
+              image: image,
               class_name: 'image-abs-cover',
               size: 'medium',
               loader: true %}
           </div>
-        {%- endif -%}
-      </div>
-    {%- endif -%}
-    
-    <div class="ImageWithAppLinks__Content">
-      {%- if heading != blank -%}
-          <h2 class="ImageWithAppLinks__Heading">{{ heading }}</h2>
-      {%- endif -%}
-    
-      {%- if text != blank -%}
-        <p class="ImageWithAppLinks__Text">{{ text }}</p>
-      {%- endif -%}
-  
-      {%- if scan_instruction != blank -%}
-        <p class="ImageWithAppLinks__Text hide-mobile">{{ scan_instruction }}</p>
-      {%- endif -%}
-  
-      {%- if qr_code != blank -%}
-        <div class="ImageWithAppLinks__QRWrapper hide-mobile">
-          <div class="ImageWithAppLinks__QR">
-            <div class="image rel">
+          
+          {%- if image_mobile != blank -%}
+            <div class="image image-abs-cover hide-desktop">
               {% render 'image-lazy',
-                image: qr_code,
+                image: image_mobile,
                 class_name: 'image-abs-cover',
                 size: 'medium',
                 loader: true %}
             </div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+      
+      <div class="ImageWithAppLinks__Content">
+        {%- if heading != blank -%}
+          <h2 class="ImageWithAppLinks__Heading">{{ heading }}</h2>
+        {%- endif -%}
+        
+        {%- if text != blank -%}
+          <p class="ImageWithAppLinks__Text">{{ text }}</p>
+        {%- endif -%}
+        
+        {%- if scan_instruction != blank -%}
+          <p class="ImageWithAppLinks__Text hide-mobile">{{ scan_instruction }}</p>
+        {%- endif -%}
+        
+        {%- if qr_code != blank -%}
+          <div class="ImageWithAppLinks__QRWrapper hide-mobile">
+            <div class="ImageWithAppLinks__QR">
+              <div class="image rel">
+                {% render 'image-lazy',
+                  image: qr_code,
+                  class_name: 'image-abs-cover',
+                  size: 'medium',
+                  loader: true %}
+              </div>
+            </div>
+            
+            {%- if decorative_image != blank -%}
+              <div class="ImageWithAppLinks__DecImage">
+                {% render 'image-lazy',
+                  image: decorative_image,
+                  size: 'medium',
+                  loader: true %}
+              </div>
+            {%- endif -%}
           </div>
-  
-          {%- if decorative_image != blank -%}
-            <div class="ImageWithAppLinks__DecImage">
-              {% render 'image-lazy',
-                image: decorative_image,
-                size: 'medium',
-                loader: true %}
-            </div>
-          {%- endif -%}
-        </div>
-      {%- endif -%}
-  
-      {%- if app_store_image != blank or google_play_image != blank -%}
-        <div class="ImageWithAppLinks__Links">
-          {%- if app_store_image != blank -%}
-            <div class="ImageWithAppLinks__Item">
-              <div class="image ImageWithAppLinks__ItemImage">
-                {% render 'image-lazy',
-                  image: app_store_image,
-                  size: 'medium',
-                  loader: true %}
+        {%- endif -%}
+        
+        {%- if app_store_image != blank or google_play_image != blank -%}
+          <div class="ImageWithAppLinks__Links">
+            {%- if app_store_image != blank -%}
+              <div class="ImageWithAppLinks__Item">
+                <div class="image ImageWithAppLinks__ItemImage">
+                  {% render 'image-lazy',
+                    image: app_store_image,
+                    size: 'medium',
+                    loader: true %}
+                </div>
+                
+                {%- if app_store_url != blank -%}
+                  <a href="{{ app_store_url }}" target="_blank"><span class="visually-hidden">{{ app_store_image.alt | default: 'App link' }}</span></a>
+                {%- endif -%}
               </div>
-  
-              {%- if app_store_url != blank -%}
-                <a href="{{ app_store_url }}" target="_blank"><span class="visually-hidden">{{ app_store_image.alt | default: 'App link' }}</span></a>
-              {%- endif -%}
-            </div>
-          {%- endif -%}
-  
-          {%- if google_play_image != blank -%}
-            <div class="ImageWithAppLinks__Item rel">
-              <div class="image ImageWithAppLinks__ItemImage">
-                {% render 'image-lazy',
-                  image: google_play_image,
-                  size: 'medium',
-                  loader: true %}
+            {%- endif -%}
+            
+            {%- if google_play_image != blank -%}
+              <div class="ImageWithAppLinks__Item rel">
+                <div class="image ImageWithAppLinks__ItemImage">
+                  {% render 'image-lazy',
+                    image: google_play_image,
+                    size: 'medium',
+                    loader: true %}
+                </div>
+                
+                {%- if google_play_url != blank -%}
+                  <a href="{{ google_play_url }}" target="_blank"><span class="visually-hidden">{{ google_play_image.alt | default: 'App link' }}</span></a>
+                {%- endif -%}
               </div>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
       
-              {%- if google_play_url != blank -%}
-                <a href="{{ google_play_url }}" target="_blank"><span class="visually-hidden">{{ google_play_image.alt | default: 'App link' }}</span></a>
-              {%- endif -%}
-            </div>
-          {%- endif -%}
-        </div>
-      {%- endif -%}
-      
+      </div>
     </div>
   </div>
 </section>
-
 
 
 {% schema %}
@@ -128,7 +128,7 @@
     {
       "type": "checkbox",
       "id": "top_bottom_margin",
-      "label": "Top and bottom margin"
+      "label": "Top and bottom padding"
     },
     {
       "type": "color",
