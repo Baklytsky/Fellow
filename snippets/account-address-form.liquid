@@ -4,7 +4,7 @@
   {%- endif -%}
 
   {%- capture return_btn_attr -%}
-    data-toggle-address="{{id}}"
+    data-toggle-address="{{id}}" data-breadcrumbs-title="{{ title }}"
   {%- endcapture -%}
 
   {%- assign return_cta = 'customer.addresses.return' | t -%}
@@ -34,31 +34,35 @@
   {% render 'component-input',
     label: first_name_lable,
     name: 'address[first_name]',
-    required: true,
-    value: form.first_name %}
+    required: 'true',
+    value: form.first_name,
+    unique_id: id %}
 
   {%- assign last_name_lable = 'customer.addresses.last_name' | t -%}
 
   {% render 'component-input',
     label: last_name_lable,
     name: 'address[last_name]',
-    required: true,
-    value: form.last_name %}
+    required: 'true',
+    value: form.last_name,
+    unique_id: id %}
 
   {%- assign address1_lable = 'customer.addresses.address1' | t -%}
 
   {% render 'component-input',
     label: address1_lable,
     name: 'address[address1]',
-    required: true,
-    value: form.address1 %}
+    required: 'true',
+    value: form.address1,
+    unique_id: id %}
 
   {%- assign address2_lable = 'customer.addresses.address2' | t -%}
 
   {% render 'component-input',
     label: address2_lable,
     name: 'address[address2]',
-    value: form.address2 %}
+    value: form.address2,
+    unique_id: id %}
 
   {%- assign city_lable = 'customer.addresses.city' | t -%}
 
@@ -66,7 +70,8 @@
     label: city_lable,
     name: 'address[city]',
     value: form.city,
-    required: true %}
+    required: true,
+    unique_id: id %}
 
     {%- capture attr -%}
       data-default="{{ form.country }}"
@@ -78,7 +83,7 @@
     label: country_lable,
     id: form_country_id,
     name: 'address[country]',
-    required: true,
+    required: 'true',
     options: country_option_tags,
     attributes: attr %}
 
@@ -105,7 +110,8 @@
           label: zip_lable,
           name: 'address[zip]',
           value: form.zip,
-          required: true %}
+          required: 'true',
+          unique_id: id %}
       </div>
     </div>
 
@@ -115,7 +121,8 @@
     label: phone_lable,
     name: 'address[phone]',
     value: form.phone,
-    type: 'tel' %}
+    type: 'tel',
+    unique_id: id %}
 
   {%- assign set_as_default_lable = 'customer.addresses.set_default' | t -%}
 
@@ -123,7 +130,8 @@
     label: set_as_default_lable,
     type: 'checkbox'
     name: 'address[default]',
-    value: 'false' %}
+    value: 'false',
+    unique_id: id  %}
 
   {% render 'component-button',
     tag: 'button',

@@ -2,7 +2,7 @@
   <div class="page-wrapper">
     <div class="account-register account-dialog">
       <h2 class="account-heading">{{ 'customer.register.title' | t }}</h2>
-      <div class="account-text">{{ 'customer.register.subtext' | t }}</div>
+      <div class="account-text title">{{ 'customer.register.subtext' | t }}</div>
       <div class="account-text required">{{ 'customer.register.required' | t }}</div>
 
       {% form 'create_customer' %}
@@ -42,6 +42,7 @@
         %}
 
       {%- assign register_email_label = 'customer.register.email' | t -%}
+      {%- assign email_error_message = 'customer.login.email_error_message' | t -%}
 
         {%
           render 'component-input',
@@ -51,10 +52,12 @@
           value: form.email,
           required: 'true',
           autocomplete: "on",
+          inputErrorMessage: email_error_message,
           className: inputClassName
         %}
 
       {%- assign register_phone_label = 'customer.register.phone_number' | t -%}
+      {%- assign phone_error_message = 'customer.register.phone_error_message' | t -%}
 
         {%
           render 'component-input',
@@ -62,10 +65,12 @@
           name: 'customer[Phone]',
           type: 'tel',
           autocomplete: "on",
+          inputErrorMessage: phone_error_message,
           className: inputClassName
         %}
 
       {%- assign register_password_label = 'customer.register.password' | t -%}
+      {%- assign pass_error_message = 'customer.login.pass_error_message' | t -%}
 
         {%- capture pass_min_length -%}
           minlength="5"
@@ -78,6 +83,7 @@
           type: 'password',
           required: 'true',
           attr: pass_min_length,
+          inputErrorMessage: pass_error_message,
           className: inputClassName
         %}
 
@@ -95,11 +101,21 @@
           attr: accepts_email_marketing_attr
         %}
 
-        {%- comment -%}
-        {%- assign register_accepts_sms_marketing_label = 'customer.register.accepts_sms_marketing' | t -%}
-          {%- if settings.sms_klaviyo_list_id != blank -%}
-            {%- assign accepts_sms_marketing_attr = 'data-klaviyo-list-id=' | append:'"' | append: settings.sms_klaviyo_list_id | append:'"'  -%}
-          {%- endif -%}
+        {%- capture register_accepts_sms_marketing_label -%}
+          <div>
+            {{ 'customer.register.accepts_sms_marketing' | t }}
+            <div class="account-sms-marketing-info">
+              By checking this box, you agree to receive promotional and personalized text messages
+              (e.g. cart reminders) from Fellow to the cell number provided. Msg frequency varies.
+              <span class="fwb">Reply STOP to cancel at any time, and reply HELP for help.</span> Msg & data rates may apply.
+              Consent is not a condition of any purchase.
+            </div>
+          </div>
+        {%- endcapture -%}
+
+        {%- if settings.sms_klaviyo_list_id != blank -%}
+          {%- assign accepts_sms_marketing_attr = 'data-klaviyo-list-id=' | append:'"' | append: settings.sms_klaviyo_list_id | append:'"'  -%}
+        {%- endif -%}
 
         {% render 'component-input',
           label: register_accepts_sms_marketing_label,
@@ -109,7 +125,6 @@
           className: inputClassName,
           attr: accepts_sms_marketing_attr
         %}
-        {%- endcomment -%}
 
       {%- if settings.privacy_policy_link != blank and settings.terms_of_service_link != blank -%}
         <div class="account-policy">

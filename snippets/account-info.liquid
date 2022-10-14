@@ -10,7 +10,15 @@
 {%- endif -%}
 
 <div class="account-action-wrapper f aic">
-  <button type="button" class="account-action-btn" data-toggle-address="update">{{ 'customer.addresses.edit' | t }}</button>
-  <button type="button" class="account-action-btn" data-toggle-address="update-pass">{{ 'customer.addresses.change_password' | t }}</button>
+  <button type="button" class="account-action-btn"
+          data-toggle-address="update"
+          data-breadcrumbs-title="{{ 'customer.info.edit_information' | t }}">
+    {{ 'customer.addresses.edit' | t }}
+  </button>
+  <button type="button" class="account-action-btn"
+          data-toggle-address="update-pass"
+          data-breadcrumbs-title="{{ 'customer.addresses.change_password' | t }}">
+    {{ 'customer.addresses.change_password' | t }}
+  </button>
 </div>
 

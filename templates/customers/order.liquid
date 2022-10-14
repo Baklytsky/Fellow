@@ -1,4 +1,13 @@
 <account-element class='account-page page-wrapper' tabindex="0">
+  <div class="account-breadcrumbs hide-mobile">
+    <nav class="breadcrumbs" role="navigation" aria-label="breadcrumbs">
+      <ol>
+        <li><a href="/" title="Home">Home</a></li>
+        <li><a href="{{ routes.account_url }}" aria-current="page">Account Overview</a></li>
+        <li aria-current="page">Order Details</li>
+      </ol>
+    </nav>
+  </div>
   <div class='account-wrapper'>
     <div class="account-sidebar">
       <h2 class="account-heading hide-mobile">{{ 'customer.account.title' | t: name: customer.first_name }}</h2>

@@ -64,6 +64,10 @@
 
         {% else %}
 
+        {%- if page_title == 'Account' -%}
+          {%- assign page_title = 'Account Overview' -%}
+        {%- endif -%}
+
         <li aria-current="page">
           <a href="{{ request.path }}" aria-current="page">{{ page_title }}</a>
         </li>

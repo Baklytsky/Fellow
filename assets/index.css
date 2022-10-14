@@ -3198,10 +3198,12 @@ body.is-masthead--empty main {
   right: 0;
   transform: translateX(100%);
   transition: all .25s ease-in-out;
+  visibility: hidden;
 }
 
 .cart-drawer-outer.is-visible {
-  transform: translateX(0)
+  transform: translateX(0);
+  visibility: visible;
 }
 
 #js-cart-drawer-overlay {
@@ -4368,7 +4370,7 @@ textarea {
   font-weight: 500;
   font-size: 14px;
   line-height: 16px;
-  text-transform: capitalize;
+  text-transform: none;
   color: #D0331F;
 }
 
@@ -4413,9 +4415,9 @@ textarea {
   color: inherit;
 }
 
-.button.account-cancel-btn {
-  margin-top: 10px;
-}
+/*.button.account-cancel-btn {*/
+/*  margin-top: 10px;*/
+/*}*/
 
 .input-wrapper__password-toggle {
   position: absolute;
@@ -4424,14 +4426,16 @@ textarea {
   transform: translate(0, -50%);
   font-size: 14px;
   background-color: white;
-  padding: 5px;
+  padding: 0 5px;
+  line-height: 26px;
+  height: 26px;
 }
 
 .input-wrapper.checkbox .input-wrapper__label {
   position: relative;
   display: flex;
   align-items: flex-start;
-  font-size: 16px;
+  font-size: 14px;
   cursor: pointer;
 }
 
@@ -4481,12 +4485,16 @@ textarea {
   text-align: center;
   text-transform: capitalize;
   display: block;
+  letter-spacing: normal;
 }
 
-.account-subtitle,
-.account-policy {
+.account-subtitle {
   font-weight: 400;
   font-size: 16px;
+}
+
+.account-policy {
+  font-size: 14px;
 }
 
 .account-policy a {
@@ -4499,6 +4507,13 @@ textarea {
   margin-left: 5px;
 }
 
+.account-sms-marketing-info {
+  margin-top: 10px;
+  font-size: 10px;
+  color: #767676;
+  line-height: normal;
+}
+
 @media screen and (max-width: 991.98px) {
   .input-wrapper.checkbox {
     margin: 0 0 25px 0;
@@ -4507,6 +4522,10 @@ textarea {
   .input-wrapper.checkbox .input-wrapper__label,
   .account-policy {
     font-size: 12px;
+  }
+
+  .button.account-cancel-btn {
+    font-size: 14px;
   }
 }
 
@@ -8050,7 +8069,7 @@ input[name=product_search_field] {
 
 .account-wrapper .page-wrapper {
   padding-top: 110px;
-  padding-bottom: 180px;
+  padding-bottom: 100px;
   height: 100%;
 }
 
@@ -8117,6 +8136,10 @@ input[name=product_search_field] {
   font-size: 14px;
 }
 
+.account-login__recover .account-heading {
+  margin: 0 0 40px;
+}
+
 .account-login__recover-wrapper .account-text,
 .account-login__reset-pass .account-text {
   margin: 0 0 18px;
@@ -8145,7 +8168,7 @@ input[name=product_search_field] {
   width: 100%;
   display: flex;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 120%;
   color: #D0331F;
 }
@@ -8168,17 +8191,32 @@ account-element.account-page {
 }
 
 .account-page.page-wrapper {
-  padding-top: 95px;
-  padding-bottom: 120px;
+  padding-top: 40px;
+  padding-bottom: 100px;
 }
 
 .account-page .account-wrapper {
   min-height: unset;
+  padding-top: 95px;
+}
+
+.account-breadcrumbs .breadcrumbs {
+  padding: 0;
+  font-size: 14px;
+}
+
+.account-breadcrumbs .breadcrumbs ol li:last-child {
+  font-weight: 700;
 }
 
 .account-sidebar {
   width: 325px;
-  padding: 15px 30px 0 15px;
+  padding: 15px 30px 15px 0;
+  flex-shrink: 0;
+}
+
+.account-sidebar .account-heading {
+  margin: 0 0 30px;
 }
 
 .account-sidebar-menu-item {
@@ -8222,6 +8260,11 @@ account-element.account-page {
 .account-empty-orders,
 .account-contact-preferences {
   max-width: 665px;
+}
+
+
+.account-contact-preferences .input-wrapper.checkbox label {
+  font-size: 16px;
 }
 
 .account-empty-orders p,
@@ -8321,6 +8364,7 @@ account-element.account-page {
 
 .account-delete-popup__content-wrapper .account-text {
   margin: 12px 0 70px;
+  font-weight: 500;
 }
 
 .account-delete-popup__btn-wrapper {
@@ -8362,7 +8406,7 @@ account-element.account-page {
 
 .account-zip-wrapper input[name="address[zip]"] {
   width: 100%;
-  max-width: 90px;
+  max-width: 140px;
 }
 
 .default-pagination {
@@ -8401,6 +8445,12 @@ account-element.account-page {
   padding: 42px 0 69px;
   border-top: 1px solid #B8B8B8;
   font-size: 14px;
+  font-weight: 500;
+}
+
+.account-sign-out a {
+  text-decoration: underline;
+  display: inline;
 }
 
 .account-order-status {
@@ -8411,11 +8461,20 @@ account-element.account-page {
 .account-order-status p {
   margin: 0;
   line-height: normal;
+  font-size: inherit;
 }
 
 .account-order-status span {
   padding-right: 5px;
   line-height: normal;
+}
+
+.account-order-status a {
+  text-decoration: underline;
+}
+
+.account-order-status-return {
+  margin-top: 20px;
 }
 
 .account-order-list-item {
@@ -8441,6 +8500,7 @@ account-element.account-page {
   width: 15%;
   text-align: right;
   padding: 0 12px;
+  font-size: 14px;
 }
 
 .account-order-list-item-price-total {
@@ -8483,13 +8543,22 @@ account-element.account-page {
 }
 
 @media screen and (max-width: 991px) {
+  .account-error,
+  .account-error .js-recover-trigger {
+    font-size: 14px;
+  }
+
+  .account-text.required {
+    font-size: 12px;
+  }
+
   .account-login__login-wrapper {
     flex-direction: column;
   }
 
   .account-wrapper .page-wrapper {
     padding-top: 50px;
-    padding-bottom: 94px;
+    padding-bottom: 50px;
   }
 
   .account-login__login.account-dialog {
@@ -8519,6 +8588,10 @@ account-element.account-page {
     margin: 0 0 26px;
   }
 
+  .account-login__recover .account-heading {
+    margin: 0 0 18px;
+  }
+
   .button.account-btn {
     margin: 40px auto 18px;
   }
@@ -8543,6 +8616,7 @@ account-element.account-page {
 
   .account-page .account-wrapper {
     flex-direction: column;
+    padding-top: 0;
   }
 
   .account-orders,
@@ -8550,8 +8624,18 @@ account-element.account-page {
     margin-bottom: 40px;
   }
 
+  .account-empty-orders p,
+  .account-empty-orders a {
+    font-size: 12px;
+  }
+
   .account-contact-preferences {
     margin-top: 40px;
+  }
+
+
+  .account-contact-preferences .input-wrapper.checkbox label {
+    font-size: 14px;
   }
 
   .account-sidebar,
@@ -8633,6 +8717,7 @@ account-element.account-page {
   .account-delete-popup__content-wrapper .account-text {
     margin: 0 0 40px;
     font-size: 14px;
+    font-weight: 400;
   }
 
   .account-delete-popup__btn-wrapper {
@@ -8660,6 +8745,18 @@ account-element.account-page {
 }
 
 @media screen and (max-width: 749px) {
+  .account-login__login .button.account-btn {
+    margin: 26px auto 18px;
+  }
+
+  .account-subtitle {
+    font-size: 14px;
+  }
+
+  .account-policy {
+
+  }
+
   .button.account-btn {
     max-width: 100%;
   }
@@ -8670,6 +8767,24 @@ account-element.account-page {
 
   .account-login__create .account-text {
     margin: 0;
+    font-size: 12px;
+  }
+
+  .account-login__recover .account-text {
+    font-size: 12px;
+  }
+
+  .account-login__activate .account-text {
+    margin-bottom: 26px;
+  }
+
+  .account-login__login .js-recover-trigger,
+  .account-login__recover .js-recover-cancel{
+    font-size: 14px;
+  }
+
+  .account-text {
+    font-size: 12px;
   }
 }
 
@@ -8783,6 +8898,7 @@ account-element.account-page {
 
 .account-order-info p {
   margin: 0;
+  font-size: inherit;
 }
 
 .account-order-details {
@@ -8811,6 +8927,11 @@ account-element.account-page {
   .account-order-subtitle {
     font-size: 16px;
     margin: 0 0 10px;
+  }
+
+  .account-order-subtitle {
+    font-family: 'Inter',sans-serif;
+    font-weight: 700;
   }
 }
 
@@ -8862,6 +8983,18 @@ account-element.account-page {
     padding: 30px 0;
   }
 
+  .account-order-status span {
+    font-size: 16px;
+  }
+
+  .account-order-status a {
+    text-decoration: underline;
+  }
+
+  .account-order-status-return {
+    margin-top: 10px;
+  }
+
   .account-order-status-title {
     font-size: 16px;
     line-height: 120%;
@@ -8902,6 +9035,14 @@ account-element.account-page {
 
   .account-order-total {
     margin: 40px 0 80px auto;
+  }
+
+  .account-order-info {
+    font-size: 16px;
+  }
+
+  .account-order .account-cancel-btn {
+    font-size: 14px;
   }
 }
 

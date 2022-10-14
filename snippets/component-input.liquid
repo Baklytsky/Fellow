@@ -7,7 +7,8 @@
   required: 'true',
   autocomplete: "on",
   className: '',
-  attr: '' -%}
+  attr: '',
+  unique_id: '' -%}
 {%- endcomment -%}
 
 {%- assign type = type | default: 'text' -%}
@@ -18,7 +19,7 @@
 {%- endif -%}
 
 {%- capture id -%}
-{{type}}{{name}}{{ className | replace: ' ', '' }}
+{{type}}{{name}}{{ unique_id }}{{ className | replace: ' ', '' }}
 {%- endcapture -%}
 
 {%- capture cx -%}

@@ -144,13 +144,14 @@
       "return": "Return to Account Details"
     },
     "info": {
-      "title": "My Information"
+      "title": "My Information",
+      "edit_information": "Edit My Information"
     },
     "activate_account": {
       "title": "Activate Account",
       "subtext": "Set a password to activate your account.",
-      "password": "Password",
-      "password_confirm": "Confirm Password",
+      "password": "Password*",
+      "password_confirm": "Confirm Password*",
       "submit": "Save",
       "cancel": "Cancel",
       "accepts_marketing": "Sign up for emails and be the first to hear about new gear, exclusive promotions, delicious coffees, and brewing tips from the best."
@@ -165,7 +166,7 @@
       "first_name": "First Name*",
       "last_name": "Last Name*",
       "address1": "Address*",
-      "address2": "Address2",
+      "address2": "Address 2",
       "city": "City*",
       "country": "Country*",
       "province": "State",
@@ -173,7 +174,7 @@
       "phone": "Phone Number",
       "set_default": "Set as default address",
       "add": "Add Address",
-      "update": "Update Address",
+      "update": "Edit Shipping Address",
       "cancel": "Cancel",
       "delete": "Delete",
       "delete_confirm_btn": "Yes",
@@ -195,7 +196,9 @@
       "guest_continue": "Continue",
       "create_title": "Create an Account",
       "create_description": "First time here? Create an account for a delightfully seamless experience. Keep track of all your orders, save your shipping info, and more.",
-      "input_error": "Something went wrong. Please try again!"
+      "input_error": "Something went wrong. Please try again!",
+      "email_error_message": "Please enter a valid email address",
+      "pass_error_message": "Password must be at least 5 characters"
     },
     "orders": {
       "title": "Orders",
@@ -226,7 +229,7 @@
       "sku": "SKU",
       "price": "Price",
       "quantity": "Quantity",
-      "total": "Total",
+      "total": "Total:",
       "fulfilled_at": "Fulfilled {{ date }}",
       "subtotal": "Subtotal:"
     },
@@ -242,8 +245,8 @@
     "reset_password": {
       "title": "Password Reset",
       "subtext": "Enter a new password for {{ email }}",
-      "password": "Password",
-      "password_confirm": "Confirm Password",
+      "password": "New Password",
+      "password_confirm": "Confirm New Password",
       "submit": "Save",
       "success": "Thank you! We've sent you an email to reset your password. The email may take a few minutes and may land in your spam folder.",
       "cancel": "back to sign in",
@@ -261,7 +264,8 @@
       "submit": "Create Account",
       "cancel": "Return to Store",
       "accepts_marketing": "Sign up for emails and be the first to hear about new gear, exclusive promotions, delicious coffees, and brewing tips from the best.",
-      "accepts_sms_marketing": "Sign up for SMS text messages and get the scoop on new products, exclusive sales, and more. (Message and data rates may apply.)"
+      "accepts_sms_marketing": "Sign up for SMS text messages and get the scoop on new products, exclusive sales, and more.",
+      "phone_error_message": "Please enter a valid phone number"
     }
   },
   "homepage": {

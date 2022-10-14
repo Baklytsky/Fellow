@@ -16,7 +16,9 @@
   {{ address_content }}
   <div class="account-action-wrapper f aic">
     <button type="button" class="account-action-btn"
-            data-toggle-address="{{ address.id }}">{{ 'customer.addresses.edit' | t }}</button>
+            data-toggle-address="{{ address.id }}" data-breadcrumbs-title="{{ 'customer.addresses.update' | t }}">
+      {{ 'customer.addresses.edit' | t }}
+    </button>
     <modal-opener data-modal="#PopupModal--{{ address.id }}">
       <button class="account-action-btn"
               type="button"

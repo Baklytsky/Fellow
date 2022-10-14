@@ -10,7 +10,7 @@
   {%- endif -%}
 
   {%- capture return_btn_attr -%}
-    data-toggle-address="update-pass"
+    data-toggle-address="update-pass" data-breadcrumbs-title="{{ title }}"
   {%- endcapture -%}
 
   {%- assign return_cta = 'customer.addresses.return' | t -%}
@@ -29,7 +29,7 @@
     <span class="account-error-inner"></span>
   </div>
 
-  {%- assign register_password_label = 'customer.register.password' | t -%}
+  {%- assign register_password_label = 'customer.activate_account.password' | t -%}
 
   {%- capture pass_min_length -%}
     minlength="5"

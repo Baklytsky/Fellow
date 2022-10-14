@@ -402,6 +402,11 @@
         "label": "Privacy policy link"
       },
       {
+        "type": "url",
+        "id": "return_policy_link",
+        "label": "Return policy link"
+      },
+      {
         "type": "richtext",
         "id": "empty_orders_text",
         "label": "Empty orders text"

@@ -68,6 +68,7 @@
         <h2 class='account-heading'>{{ 'customer.login.sign_in' | t }}</h2>
 
         {% form 'customer_login' %}
+          <input type="hidden" name="checkout_url" value="/">
         {%- assign inputClassName = '' -%}
 
           {% if form.errors %}
@@ -82,18 +83,21 @@
           {% endif %}
 
         {%- assign login_email_label = 'customer.login.email' | t -%}
+        {%- assign email_error_message = 'customer.login.email_error_message' | t -%}
 
-          {%
+        {%
             render 'component-input'
             label: login_email_label,
             name: 'customer[email]',
             type: 'email',
             required: 'true',
             className: inputClassName,
+            inputErrorMessage: email_error_message,
             autocomplete: 'on'
           %}
 
         {%- assign login_password_label = 'customer.login.password' | t -%}
+        {%- assign pass_error_message = 'customer.login.pass_error_message' | t -%}
 
           {%- capture pass_min_length -%}
             minlength="5"
@@ -106,6 +110,7 @@
             type: 'password',
             required: 'true',
             attr: pass_min_length,
+            inputErrorMessage: pass_error_message,
             className: inputClassName
           %}
 
@@ -126,7 +131,7 @@
 
         {%- if settings.contact_us_link != blank -%}
           <div class='account-subtitle f aic'>
-            Need help? <a href="{{ settings.contact_us_link }}" target="_blank">Contact Us</a>
+            Need help? <a href="{{ settings.contact_us_link }}" target="_blank">Contact us</a>
           </div>
         {%- endif -%}
 

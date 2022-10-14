@@ -2052,6 +2052,7 @@ customElements.define('slide-tab-section', SlideTabSection);
 class account extends HTMLElement {
   constructor() {
     super();
+    this.breadcrumbs = this.querySelector('.breadcrumbs')
     this.dialog = this.querySelectorAll('[data-dialog]')
     this.toggleDialogBtn = this.querySelectorAll('[data-toggle-dialog]')
     this.inputs = this.querySelectorAll('.input-wrapper')
@@ -2100,7 +2101,23 @@ class account extends HTMLElement {
       this.toggleCheckboxState(checkbox)
     }))
 
-    this.forms.forEach(form => this.checkKlaviyoEvents(form))
+    this.forms.forEach(form => {
+      form.addEventListener('submit', (e)=> {
+        e.preventDefault()
+        const KlaviyoCheckboxes = form.querySelectorAll('input[type=checkbox][data-klaviyo-list-id]')
+        const checked = Array.from(KlaviyoCheckboxes).map(checkbox => checkbox.value === 'true')
+        const phoneInput = form.querySelector('input[type=tel]')
+
+        if (phoneInput) {
+          if (!this.phoneValidation(phoneInput)) {
+            phoneInput.closest('.input-wrapper').classList.add('input-error')
+            return false
+          }
+        }
+
+        (checked.length) ? this.checkKlaviyoEvents(KlaviyoCheckboxes, form) : form.submit();
+      })
+    })
 
     this.deleteAddressBtns.forEach(btn => btn.addEventListener('click', (e)=> {
       e.preventDefault()
@@ -2111,21 +2128,37 @@ class account extends HTMLElement {
     this.toggleAddressBtns.forEach(btn => btn.addEventListener('click', (e)=> {
       e.preventDefault()
       const id = btn.getAttribute('data-toggle-address')
-      this.toggleAddress(id)
+      const title = btn.getAttribute('data-breadcrumbs-title')
+      this.toggleAddress(id, title)
     }))
 
     if (this.customerUpdateForm) this.accentureEventListener(this.customerUpdateForm)
     if (this.customerUpdatePassForm) this.accentureEventListener(this.customerUpdatePassForm)
     if (this.customerContactPreferencesForm) this.accentureEventListener(this.customerContactPreferencesForm)
+
+    if (window.location.hash === '#recover') {
+      setTimeout(()=> window.scrollTo({top: 0, behavior: 'smooth'}), 0)
+    }
   }
 
   accentureEventListener(form) {
+    const _self = this
     const submitBtn = form.querySelector('button[type=submit]')
     const errorsContainer = form.querySelector('.account-error')
     const errorsInner = form.querySelector('.account-error-inner')
     const allInputs = form.querySelectorAll('input')
+    const phoneInput = form.querySelector('input[type=tel]')
 
     Accentuate(jQuery('#' + form.id), function (data) {
+      if (phoneInput) {
+        if (!_self.phoneValidation(phoneInput)) {
+          phoneInput.closest('.input-wrapper').classList.add('input-error')
+          return false
+        }
+      }
+
+      console.log(data)
+
       if (data.errors !== undefined) {
         submitBtn.disabled = true;
 
@@ -2167,20 +2200,19 @@ class account extends HTMLElement {
     }))
   }
 
-  checkKlaviyoEvents (form) {
-    const KlaviyoCheckboxes = form.querySelectorAll('input[type=checkbox][data-klaviyo-list-id]')
+  phoneValidation(phoneInput) {
+    const phoneValue = phoneInput.value;
+    const re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+    return (phoneValue === '') || re.test(phoneValue)
+  }
 
-    if (KlaviyoCheckboxes.length) {
-      form.addEventListener('submit', (e)=> {
-        e.preventDefault()
-        Promise.all(Array.from(KlaviyoCheckboxes).map(checkbox => {
-          const listID = checkbox.dataset.klaviyoListId || null
-          if (checkbox.checked && listID) return theme.klaviyoTrigger(form, listID)
-        })).then(()=> {
-          form.submit()
-        })
-      })
-    }
+  checkKlaviyoEvents(KlaviyoCheckboxes, form) {
+    Promise.all(Array.from(KlaviyoCheckboxes).map(checkbox => {
+      const listID = checkbox.dataset.klaviyoListId || null
+      if (checkbox.checked && listID) return theme.klaviyoTrigger(form, listID)
+    })).then(() => {
+      form.submit()
+    })
   }
 
   toggleDialog(btn) {
@@ -2233,7 +2265,7 @@ class account extends HTMLElement {
     document.body.removeChild(form)
   }
 
-  toggleAddress (id) {
+  toggleAddress (id, title) {
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
@@ -2243,6 +2275,15 @@ class account extends HTMLElement {
     form.style.display = form.style.display === 'none' ? '' : 'none'
     this.accountPageContent.style.display = this.accountPageContent.style.display === 'none' ? '' : 'none'
     this.sidebarAcoountOverview.classList.toggle('current-page')
+
+    if (title) {
+      const hasBreadcrumbs = this.breadcrumbs.querySelector('[data-breadcrumbs-title="' + title + '"]');
+      const breadcrumbsChild = `<li data-breadcrumbs-title="${title}">${title}</li>`;
+      (!hasBreadcrumbs)
+          ? this.breadcrumbs.querySelector('ol').innerHTML += breadcrumbsChild
+          : hasBreadcrumbs.remove()
+    }
+
   }
 }
 

@@ -10,7 +10,7 @@
   {%- endif -%}
 
   {%- capture return_btn_attr -%}
-    data-toggle-address="update"
+    data-toggle-address="update" data-breadcrumbs-title="{{ 'customer.info.edit_information' | t }}"
   {%- endcapture -%}
 
   {%- assign return_cta = 'customer.addresses.return' | t -%}
@@ -70,7 +70,7 @@
   {%
     render 'component-input',
     label: register_phone_label,
-    name: 'customer[Phone]',
+    name: 'customer[phone]',
     value: customer.phone,
     type: 'tel',
     autocomplete: "on"

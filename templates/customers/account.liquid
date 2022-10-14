@@ -1,4 +1,7 @@
 <account-element class='account-page page-wrapper' tabindex="0">
+  <div class="account-breadcrumbs hide-mobile">
+    {%- render 'breadcrumbs' -%}
+  </div>
   <div class='account-wrapper'>
     <div class="account-sidebar">
       <h2 class="account-heading hide-mobile">{{ 'customer.account.title' | t: name: customer.first_name }}</h2>
@@ -16,31 +19,39 @@
     </div>
 
     <section class='account-home rel'>
+      {%- assign edit_info_title = 'customer.info.edit_information' | t -%}
+
       {%- render 'account-update',
-        title: 'Edit my information',
+        title: edit_info_title,
         customer: customer,
         formClassName: 'account-address-form'  -%}
+
+      {%- assign change_pass_title = 'customer.addresses.change_password' | t -%}
 
       {%- render 'account-update-pass',
         customer: customer,
         formClassName: 'account-address-form'
-        title: 'Change Password' -%}
+        title: change_pass_title -%}
+
+      {%- assign add_address_title = 'customer.addresses.add' | t -%}
 
       {% render 'account-address-form',
         id: 'new',
         formClassName: 'account-address-form',
         action: customer.new_address,
-        title: 'Add New Address',
+        title: add_address_title,
         cta: 'Save' %}
 
       {%- unless customer.addresses_count == 0 -%}
+      {%- assign edit_address_title = 'customer.addresses.update' | t -%}
+
         {%- for address in customer.addresses -%}
           {%
             render 'account-address-form',
             id: address.id,
             action: address,
             formClassName: 'account-address-form',
-            title: 'Edit Shipping Address',
+            title: edit_address_title,
             cta: 'Save'
           %}
         {%- endfor -%}
@@ -59,7 +70,9 @@
           <h2 class="account-heading">{{ 'customer.addresses.title' | t }}</h2>
 
           <div class="account-action-wrapper f aic account-action-add-address">
-            <button type="button" class="account-action-btn" data-toggle-address="new">
+            <button type="button" class="account-action-btn"
+                    data-toggle-address="new"
+                    data-breadcrumbs-title="{{ 'customer.addresses.add' | t }}">
               {{ 'customer.addresses.add_new' | t }}
             </button>
           </div>
@@ -85,7 +98,7 @@
 
         {%- unless customer.accepts_marketing -%}
           <div class="account-contact-preferences">
-            {%- render 'account-contact-preferences' -%}
+            {%- render 'account-contact-preferences' customer: customer -%}
           </div>
         {%- endunless -%}
 
@@ -94,7 +107,6 @@
             {{ 'customer.account.sign_out' | t }}
           </a>
         </div>
-
 
       </div>
     </section>
