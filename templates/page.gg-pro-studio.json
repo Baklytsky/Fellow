@@ -1,0 +1,350 @@
+{
+  "sections": {
+    "main": {
+      "type": "toggle-hero-slider",
+      "blocks": {
+        "91440d17-d6b6-424b-88f3-ff8450a9bf93": {
+          "type": "slide",
+          "settings": {
+            "bg_color": "#ffffff",
+            "text_color": "#000000",
+            "tab_btn_style": "dark",
+            "tab_name": "Gift",
+            "title": "Buy this for someone else as a gift",
+            "description": "Great gifting opportunity!",
+            "btn_text": "Shop now",
+            "btn_url": "shopify:\/\/products\/360-sip-lid",
+            "image": "shopify:\/\/shop_images\/Group_258_1.png",
+            "image_on_the_left": false
+          }
+        },
+        "7ae1cacd-4567-4b52-8951-0a398e52c371": {
+          "type": "slide",
+          "settings": {
+            "bg_color": "#000000",
+            "text_color": "#ffffff",
+            "tab_btn_style": "light",
+            "tab_name": "For you",
+            "title": "Purchase a subscription for yourself",
+            "description": "COPY",
+            "btn_text": "Shop Now",
+            "btn_url": "shopify:\/\/products\/stagg-ekg-pro-electric-kettle",
+            "image": "shopify:\/\/shop_images\/section_2_mobile_1.jpg",
+            "image_on_the_left": false
+          }
+        },
+        "e11cf429-b3b8-45d3-afee-2d19059179be": {
+          "type": "slide",
+          "disabled": true,
+          "settings": {
+            "bg_color": "#ffffff",
+            "text_color": "#000000",
+            "tab_btn_style": "dark",
+            "tab_name": "Drops",
+            "title": "Fellow Drops",
+            "description": "Copy about Drops",
+            "btn_text": "Sign Up",
+            "btn_url": "shopify:\/\/products\/stagg-ekg-pro-electric-kettle-studio-edition",
+            "image": "shopify:\/\/shop_images\/2021-11-2_fellow_drops12791_copy-min_1.jpg",
+            "image_on_the_left": false
+          }
+        }
+      },
+      "block_order": [
+        "91440d17-d6b6-424b-88f3-ff8450a9bf93",
+        "7ae1cacd-4567-4b52-8951-0a398e52c371",
+        "e11cf429-b3b8-45d3-afee-2d19059179be"
+      ],
+      "settings": {
+        "section_title": "Subscription Coffee",
+        "section_subtitle": "",
+        "section_description": "Copy about subscription!"
+      }
+    },
+    "77cbcfdb-78a4-41b6-af70-b8e7a1043ec5": {
+      "type": "features",
+      "blocks": {
+        "fcb8420c-4424-42f2-88ec-8bedfb00bfb2": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/fellowfavicon.png",
+            "title": "Access to exclusive coffees",
+            "description": "info info"
+          }
+        },
+        "917d0ea1-001f-494a-8698-88d3ff5dd8de": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/fellowfavicon.png",
+            "title": "Convenient Subscription",
+            "description": "info info"
+          }
+        },
+        "d9d67551-97df-4995-b8fb-8543c00c98be": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/fellowfavicon.png",
+            "title": "Guidance to brew",
+            "description": "info info"
+          }
+        }
+      },
+      "block_order": [
+        "fcb8420c-4424-42f2-88ec-8bedfb00bfb2",
+        "917d0ea1-001f-494a-8698-88d3ff5dd8de",
+        "d9d67551-97df-4995-b8fb-8543c00c98be"
+      ],
+      "settings": {
+        "bg_color": "#fff9e5",
+        "text_color": "#000000",
+        "heading": "What Makes Subscription Special",
+        "description": "Lorem ipsum dolor sit amet",
+        "show_arrows": true,
+        "show_dots": true
+      }
+    },
+    "e72f496b-1526-419b-8717-28d9f60f82a5": {
+      "type": "coffee-marketplace-cards",
+      "blocks": {
+        "8ad90b2b-62bd-4dc2-96c6-9be43d3c36c2": {
+          "type": "Card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Rectangle_1650_2.png",
+            "heading": "You Personalize",
+            "description": "Copy copy copy",
+            "link": ""
+          }
+        },
+        "4522810f-9940-489e-b812-9e3d5e42c27d": {
+          "type": "Card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Rectangle_1650.png",
+            "heading": "Our Experts Select",
+            "description": "copy copy",
+            "link": ""
+          }
+        },
+        "3c881079-7dc8-4de1-a84b-89cabf9d25f4": {
+          "type": "Card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/efbe078a53bd--HeroImage-EKG-Pro_1920x1080.progressive_22e43369-c040-47d6-9c9c-e6b13b879826.webp",
+            "heading": "You Enjoy",
+            "description": "copy copy",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "8ad90b2b-62bd-4dc2-96c6-9be43d3c36c2",
+        "4522810f-9940-489e-b812-9e3d5e42c27d",
+        "3c881079-7dc8-4de1-a84b-89cabf9d25f4"
+      ],
+      "settings": {
+        "heading": "How it Works",
+        "description": "more copy"
+      }
+    },
+    "c744d7a7-0395-41cf-ad68-67d084f08ea0": {
+      "type": "product-slider",
+      "blocks": {
+        "6ecd3b02-88bd-4000-86e6-2c8646ab2239": {
+          "type": "image",
+          "settings": {
+            "product": "black-and-white-halo-hartume",
+            "header": "A blurb about Halo Hartume",
+            "description": "<p>more info about why this coffee is amazing<\/p>",
+            "link_text": "Shop now",
+            "link_url": ""
+          }
+        },
+        "c914e4ec-8524-44e6-a8a2-539261123f8d": {
+          "type": "image",
+          "settings": {
+            "product": "coava-anbessa-natural",
+            "header": "More about Anbessa",
+            "description": "<p>more info<\/p>",
+            "link_text": "Shop now",
+            "link_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "6ecd3b02-88bd-4000-86e6-2c8646ab2239",
+        "c914e4ec-8524-44e6-a8a2-539261123f8d"
+      ],
+      "settings": {
+        "enable_section": true,
+        "show_dots": false,
+        "show_arrows": false
+      }
+    },
+    "1665104018064a51ce": {
+      "type": "apps",
+      "settings": {}
+    },
+    "fa47f458-1111-4f7c-821f-db6981ce0ffc": {
+      "type": "coffee-marketplace-cards",
+      "blocks": {
+        "ededcdcd-de5c-40da-b45e-49d60e971562": {
+          "type": "Card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/FamilyPage_EKGProStudiov2.png",
+            "heading": "Hailie",
+            "description": "Hailie is Store Lead at the Fellow Store + Playground in San Francisco. She loves coffee science, socially responsible production, and calling \"espresso\" 'spro.",
+            "link": ""
+          }
+        },
+        "6a8e579e-0c52-471c-b018-a87839d9c934": {
+          "type": "Card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/5_MB_Studio_PDP.png",
+            "heading": "Eric",
+            "description": "Eric is the Customer Experience Supervisor at Fellow and has a boundless obsession with coffee. He once ran a heavy-metal themed pop-up coffee bar called Grindpour.",
+            "link": ""
+          }
+        },
+        "c17f33cd-cd29-40f8-8d09-dd2a3c6ba6a1": {
+          "type": "Card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/ClaraFrenchPress_Aplus_StandardImage_01.jpg",
+            "heading": "Nick",
+            "description": "Nick is Fellow's Director of Mechanical Engineering and Head of R&D. He's also been a professional barista, roaster, and espresso machine repair technician.",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "ededcdcd-de5c-40da-b45e-49d60e971562",
+        "6a8e579e-0c52-471c-b018-a87839d9c934",
+        "c17f33cd-cd29-40f8-8d09-dd2a3c6ba6a1"
+      ],
+      "settings": {
+        "heading": "Tasting Panel",
+        "description": "copy copy"
+      }
+    },
+    "1664286931317058a0": {
+      "type": "faq",
+      "blocks": {
+        "1a670074-334c-4963-8931-28ce7221fd8c": {
+          "type": "faq-block",
+          "settings": {
+            "title": "How do I use and care for my Stagg EKG Pro or Pro Studio Edition?",
+            "description": "<p>Ready to start using your Stagg EKG Pro or Pro Studio Edition? Download the <a href=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0057\/6235\/1219\/files\/StaggEKG_Pro_GTKYG_Mech_R4_Use.pdf?v=1664570631\" target=\"_blank\" title=\"Stagg EKG Pro Get To Know You Guide\">Get to Know You Guide<\/a> that will walk you through all of your kettles features, how to use the menu, as well as how to brew a pour-over.<\/p>"
+          }
+        },
+        "eb66113a-5455-4ece-a487-fb3ca3caf9ae": {
+          "type": "faq-block",
+          "settings": {
+            "title": "Is the Stagg EKG Pro or Pro Studio Edition Electric Kettle stovetop safe?",
+            "description": "<p>No. Please do not use your electric kettle on your stovetop! The kettle is designed for use with its electric base ONLY.  By putting the kettle on your stovetop or induction surface, you risk melting functional parts in the kettle and paint.  <\/p><p><\/p><p>If you're looking for a pour-over kettle that's stovetop safe, please check out our <a href=\"https:\/\/fellowproducts.com\/collections\/stovetop-kettles\"><span style=\"text-decoration:underline\">stovetop kettles<\/span><\/a>.<\/p>"
+          }
+        },
+        "1940777b-e34c-4a03-af5e-80274e652c72": {
+          "type": "faq-block",
+          "settings": {
+            "title": "How do I register my Stagg EKG Pro or Pro Studio Edition kettle?",
+            "description": "<p>In order to register your Fellow electric product please <a href=\"https:\/\/register.fellowproducts.com\/\"><span style=\"text-decoration:underline\">submit this form<\/span><\/a>. After registering, you will receive an email from Fellow containing your registration perks like extended warranty and priority support! Please save this email for future reference. <\/p><p><\/p><p>If you run into any difficulty when registering or you would like to check the status of your warranty and perks please <a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/requests\/new\"><span style=\"text-decoration:underline\">contact us<\/span><\/a> – we’re happy to help.<\/p>"
+          }
+        },
+        "6cab98e1-ee91-4b19-988f-d076aa10f541": {
+          "type": "faq-block",
+          "settings": {
+            "title": "How do I make great pour-over with my Stagg EKG Pro or Pro Studio Edition?",
+            "description": "<p>Ready to brew like a pro? Head over to our Gear Guide – your one-stop shop for using and caring for your new Stagg EKG, Stagg EKG Pro, or Pro Studio Edition kettle. You can access everything from detailed instructions for how to use your kettle and its features as well as recipes and videos.<\/p>"
+          }
+        },
+        "8b7a18c8-b99e-4b1c-9d6e-4a5f666471fe": {
+          "type": "faq-block",
+          "settings": {
+            "title": "What does the Fellow Updater app do and why do I need it?",
+            "description": "<p>Although it’s not needed to use the product, we will occasionally provide updates to the firmware in your Stagg EKG Pro or Pro Studio Edition to ensure everything is running optimally and that your kettle has the latest features. Please note not using the app does not diminish the usefulness of your kettle, as the updates are not needed for the Pro or Studio Edition to work. <\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "1a670074-334c-4963-8931-28ce7221fd8c",
+        "eb66113a-5455-4ece-a487-fb3ca3caf9ae",
+        "1940777b-e34c-4a03-af5e-80274e652c72",
+        "6cab98e1-ee91-4b19-988f-d076aa10f541",
+        "8b7a18c8-b99e-4b1c-9d6e-4a5f666471fe"
+      ],
+      "settings": {
+        "heading": "Have Questions?",
+        "description": "We’ve got answers."
+      }
+    },
+    "1664388097345cae2b": {
+      "type": "seo-block",
+      "disabled": true,
+      "settings": {
+        "bg_color": "#ffffff",
+        "text_color": "#000000",
+        "heading": "Travel Mugs",
+        "text": "<p>Take everything on the move always.Functional Elegance Meets Design, Fellow Coffee Products Elevate Your Coffee Experience. Fellow’s Award-Winning Coffee Products Turn Anyone Into A Coffee Connoisseur. <\/p>"
+      }
+    },
+    "56d3321d-afc9-408f-ae0c-863d7d78dd69": {
+      "type": "featured-post-blog",
+      "disabled": true,
+      "settings": {
+        "title": "The Blog",
+        "eyebrow": "",
+        "title_location": "left_top",
+        "featuredPost": "",
+        "blog": "",
+        "post_limit": 3,
+        "show_author": false,
+        "show_date": true,
+        "show_view_all": false
+      }
+    },
+    "f0d1bd49-b440-4899-a287-63f6c6ad214a": {
+      "type": "product-slider",
+      "disabled": true,
+      "blocks": {
+        "d92b3b04-275a-40c1-90db-bfabebe1dbb9": {
+          "type": "image",
+          "settings": {
+            "product": "black-and-white-halo-hartume",
+            "header": "YUM DELICIOUS",
+            "description": "<p>INFO INFO<\/p>",
+            "link_text": "Buy now",
+            "link_url": ""
+          }
+        },
+        "a7f0d5f9-475d-4d2f-aa6d-e62b883c6b34": {
+          "type": "image",
+          "settings": {
+            "product": "tropical-weather",
+            "header": "",
+            "description": "",
+            "link_text": "",
+            "link_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "d92b3b04-275a-40c1-90db-bfabebe1dbb9",
+        "a7f0d5f9-475d-4d2f-aa6d-e62b883c6b34"
+      ],
+      "settings": {
+        "enable_section": true,
+        "show_dots": true,
+        "show_arrows": false
+      }
+    }
+  },
+  "order": [
+    "main",
+    "77cbcfdb-78a4-41b6-af70-b8e7a1043ec5",
+    "e72f496b-1526-419b-8717-28d9f60f82a5",
+    "c744d7a7-0395-41cf-ad68-67d084f08ea0",
+    "1665104018064a51ce",
+    "fa47f458-1111-4f7c-821f-db6981ce0ffc",
+    "1664286931317058a0",
+    "1664388097345cae2b",
+    "56d3321d-afc9-408f-ae0c-863d7d78dd69",
+    "f0d1bd49-b440-4899-a287-63f6c6ad214a"
+  ]
+}

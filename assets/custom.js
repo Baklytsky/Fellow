@@ -698,7 +698,9 @@ class dynamicRecommendations extends HTMLElement {
         const html = new DOMParser().parseFromString(text, 'text/html'),
               recommendedContent = html.querySelector('[data-product-row]');
         if (recommendedContent) this.recommendationContainer.innerHTML = recommendedContent.innerHTML;
-        if (typeof window.yotpo !== "undefined") window.yotpo.initWidgets();
+        //if (typeof window.yotpo !== "undefined") window.yotpo.initWidgets();
+        const api = new Yotpo.API(yotpo);
+        api.refreshWidgets();
       });
   }
 }
