@@ -5,6 +5,7 @@
       <div class="account-text">{{ 'customer.activate_account.subtext' | t }}</div>
 
       {% form 'activate_customer_password' %}
+        <input type="hidden" name="return_to" value="/pages/activate-account-success" />
       {%- assign inputClassName = blank -%}
 
         {% if form.errors %}
@@ -26,7 +27,7 @@
           name: 'customer[password]',
           type: 'password',
           required: 'true',
-          atrr: pass_min_length,
+          attr: pass_min_length,
           className: inputClassName %}
 
       {%- assign activate_confirm_password_label = 'customer.activate_account.password_confirm' | t -%}
@@ -36,7 +37,7 @@
           name: 'customer[password_confirmation]',
           type: 'password',
           required: 'true',
-          atrr: pass_min_length,
+          attr: pass_min_length,
           className: inputClassName %}
 
       {%- assign activate_accepts_marketing_label = 'customer.activate_account.accepts_marketing' | t -%}

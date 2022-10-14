@@ -8365,6 +8365,7 @@ account-element.account-page {
 .account-delete-popup__content-wrapper .account-text {
   margin: 12px 0 70px;
   font-weight: 500;
+  font-size: 18px;
 }
 
 .account-delete-popup__btn-wrapper {
@@ -8532,6 +8533,25 @@ account-element.account-page {
   margin-bottom: 10px;
 }
 
+.activate-success .account-heading {
+  margin: 0 0 30px;
+}
+
+.activate-success .account-text {
+  margin: 0;
+  font-size: 16px;
+}
+
+.activate-success .account-text p {
+  margin: 0;
+  font-size: inherit;
+}
+
+.activate-success .account-text a {
+  text-decoration: underline;
+  font-size: inherit;
+}
+
 @media screen and (max-width: 1199px) {
   .account-dialog {
     padding: 0 50px;
@@ -8543,6 +8563,14 @@ account-element.account-page {
 }
 
 @media screen and (max-width: 991px) {
+  .activate-success .account-heading {
+    margin: 0 0 26px;
+  }
+
+  .activate-success .account-text {
+    font-size: 12px;
+  }
+
   .account-error,
   .account-error .js-recover-trigger {
     font-size: 14px;

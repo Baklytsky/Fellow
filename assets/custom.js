@@ -2157,8 +2157,6 @@ class account extends HTMLElement {
         }
       }
 
-      console.log(data)
-
       if (data.errors !== undefined) {
         submitBtn.disabled = true;
 
@@ -2288,11 +2286,3 @@ class account extends HTMLElement {
 }
 
 customElements.define('account-element', account);
-
-class bundleMixMultiple extends HTMLElement {
-  constructor() {
-    super();
-  }
-}
-
-customElements.define('bundle-mix-multiple', bundleMixMultiple);

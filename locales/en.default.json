@@ -154,7 +154,8 @@
       "password_confirm": "Confirm Password*",
       "submit": "Save",
       "cancel": "Cancel",
-      "accepts_marketing": "Sign up for emails and be the first to hear about new gear, exclusive promotions, delicious coffees, and brewing tips from the best."
+      "accepts_marketing": "Sign up for emails and be the first to hear about new gear, exclusive promotions, delicious coffees, and brewing tips from the best.",
+      "pass_error_message": "Password must be at least 5 characters"
     },
     "addresses": {
       "title": "Address Book",
