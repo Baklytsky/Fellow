@@ -90,7 +90,6 @@
             label: login_email_label,
             name: 'customer[email]',
             type: 'email',
-            required: 'true',
             className: inputClassName,
             inputErrorMessage: email_error_message,
             autocomplete: 'on'
@@ -108,7 +107,6 @@
             label: login_password_label,
             name: 'customer[password]',
             type: 'password',
-            required: 'true',
             attr: pass_min_length,
             inputErrorMessage: pass_error_message,
             className: inputClassName
@@ -116,7 +114,9 @@
 
           <button type="button"
                   class='js-recover-trigger'
-                  data-toggle-dialog="recover" {% if show_recover %}data-click-trigger{% endif %}>{{ 'customer.login.forgot_password' | t }}</button>
+                  data-toggle-dialog="recover" {% if show_recover %}data-click-trigger{% endif %}>
+            {{ 'customer.login.forgot_password' | t }}
+          </button>
 
         {%- assign login_submit_cta = 'customer.login.sign_in' | t -%}
 

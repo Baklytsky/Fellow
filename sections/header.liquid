@@ -199,11 +199,6 @@
 
           <div class="mainMenu__utility-links f aic">
 
-            {%- comment -%}
-              {%- if shop.customer_accounts_enabled -%}
-              {%- endif -%}
-            {%- endcomment -%}
-
             {%- if customer -%}
               <a href="
                     {%- if template.name == 'account' -%}
@@ -214,9 +209,9 @@
                  class="mainMenu__accountWrapper f aic">
 
                 {%- if template.name == 'account' -%}
-                <span class="mainMenu__accountTitle">{{ 'customer.login.log_out' | t }}</span>
+                <span class="mainMenu__accountTitle visually-hidden">{{ 'customer.login.log_out' | t }}</span>
                 {%- else -%}
-                  <span class="mainMenu__accountTitle">{{ 'customer.account.header_title' | t }}</span>
+                  <span class="mainMenu__accountTitle visually-hidden">{{ 'customer.account.header_title' | t }}</span>
                 {%- endif -%}
 
                 {%- render 'icon' with 'customer-logo' -%}
@@ -226,7 +221,7 @@
               <a href="{{ routes.account_login_url }}"
                  class="mainMenu__accountWrapper f aic">
 
-                <span class="mainMenu__accountTitle">{{ 'customer.login.log_in' | t }}</span>
+                <span class="mainMenu__accountTitle visually-hidden">{{ 'customer.login.log_in' | t }}</span>
                 {%- render 'icon' with 'customer-logo' -%}
               </a>
 
@@ -234,7 +229,7 @@
 
             <button class="mainMenu__cardWrapper js-cart-drawer-open"
                     tabindex='0'>
-              <span class="mainMenu__cardTitle">{{ 'cart.general.short_title' | t }}</span>
+              <span class="mainMenu__cardTitle visually-hidden">{{ 'cart.general.short_title' | t }}</span>
 
               <span class="mainMenu__cardIcon">
                 {%- render 'icon' with 'cart' -%}

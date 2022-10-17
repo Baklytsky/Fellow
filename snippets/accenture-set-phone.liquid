@@ -21,7 +21,6 @@
         })
 
         Accentuate(jQuery("#set_customer_phone"), function (data) {
-          console.log(11111)
           if (data.status == 'ERROR') {
             console.log(data.message)
           } else if (data.status == 'OK') {

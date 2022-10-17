@@ -2106,8 +2106,21 @@ class account extends HTMLElement {
         e.preventDefault()
         const KlaviyoCheckboxes = form.querySelectorAll('input[type=checkbox][data-klaviyo-list-id]')
         const checked = Array.from(KlaviyoCheckboxes).map(checkbox => checkbox.value === 'true')
+        const emailInput = form.querySelector('input[type=email]')
+        const passInput = form.querySelector('input[type=password]')
         const phoneInput = form.querySelector('input[type=tel]')
 
+        // Empty email validation
+        if (emailInput && !this.emptyFieldValidation(emailInput, 'Please enter an email address')) {
+         return false
+        }
+
+        // Empty pass validation
+        if (passInput && !this.emptyFieldValidation(passInput, 'Please enter a password')) {
+          return false
+        }
+
+        // Phone validation
         if (phoneInput) {
           if (!this.phoneValidation(phoneInput)) {
             phoneInput.closest('.input-wrapper').classList.add('input-error')
@@ -2202,6 +2215,20 @@ class account extends HTMLElement {
     const phoneValue = phoneInput.value;
     const re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
     return (phoneValue === '') || re.test(phoneValue)
+  }
+
+  emptyFieldValidation (input, errorMessage) {
+    const inputValue = input.value
+    let valid = true
+    if (inputValue === null || inputValue === '') {
+      const inputWrapper = input.closest('.input-wrapper')
+      inputWrapper.classList.add('input-error')
+      if (errorMessage) {
+        inputWrapper.querySelector('.input-wrapper__error').innerHTML = errorMessage
+      }
+      valid = false
+    }
+    return valid
   }
 
   checkKlaviyoEvents(KlaviyoCheckboxes, form) {
