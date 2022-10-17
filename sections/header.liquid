@@ -200,13 +200,7 @@
           <div class="mainMenu__utility-links f aic">
 
             {%- if customer -%}
-              <a href="
-                    {%- if template.name == 'account' -%}
-                      {{ routes.account_logout_url }}
-                    {%- else -%}
-                      {{ routes.account_url }}
-                    {%- endif -%}"
-                 class="mainMenu__accountWrapper f aic">
+              <a href="{{ routes.account_url }}" class="mainMenu__accountWrapper f aic">
 
                 {%- if template.name == 'account' -%}
                 <span class="mainMenu__accountTitle visually-hidden">{{ 'customer.login.log_out' | t }}</span>
