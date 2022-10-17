@@ -274,76 +274,6 @@
         "description": "We’ve got answers."
       }
     },
-    "7b7cfb2c-e3ab-4bd5-bd49-671b9eea9675": {
-      "type": "banner-blocks",
-      "blocks": {
-        "28660793-5449-48df-b521-7795f02202ce": {
-          "type": "banner",
-          "settings": {
-            "image": "shopify:\/\/shop_images\/EKG_Pro_Gear_Guide_Image_3.png",
-            "content_position": "TopCenter",
-            "text_color": "#ffffff",
-            "heading": "Gifts Under $50",
-            "heading_size": "h2",
-            "text": "Copy copy",
-            "cta_copy": "Shop Now",
-            "cta_url": "shopify:\/\/collections\/gifts-under-50",
-            "cta_color": "btn--light"
-          }
-        },
-        "ddc414c8-3252-4350-9101-d20df8f775a9": {
-          "type": "banner",
-          "settings": {
-            "image": "shopify:\/\/shop_images\/EKG_Pro_Gear_Guide_Image_1.png",
-            "content_position": "TopCenter",
-            "text_color": "#ffffff",
-            "heading": "Gifts Under $100",
-            "heading_size": "h2",
-            "text": "",
-            "cta_copy": "",
-            "cta_url": "",
-            "cta_color": "btn--dark"
-          }
-        },
-        "b1c7b8ca-111d-4685-b8bf-87ec5ed19007": {
-          "type": "banner",
-          "settings": {
-            "image": "shopify:\/\/shop_images\/EKG_Pro_Gear_Guide_Banner.png",
-            "content_position": "TopCenter",
-            "text_color": "#ffffff",
-            "heading": "Gifts Under $250",
-            "heading_size": "h2",
-            "text": "",
-            "cta_copy": "",
-            "cta_url": "",
-            "cta_color": "btn--dark"
-          }
-        },
-        "d3c6fa10-a5d8-4aa1-beca-afc1007dbbfe": {
-          "type": "banner",
-          "settings": {
-            "content_position": "TopCenter",
-            "text_color": "#ffffff",
-            "heading": "",
-            "heading_size": "h2",
-            "text": "",
-            "cta_copy": "",
-            "cta_url": "",
-            "cta_color": "btn--dark"
-          }
-        }
-      },
-      "block_order": [
-        "28660793-5449-48df-b521-7795f02202ce",
-        "ddc414c8-3252-4350-9101-d20df8f775a9",
-        "b1c7b8ca-111d-4685-b8bf-87ec5ed19007",
-        "d3c6fa10-a5d8-4aa1-beca-afc1007dbbfe"
-      ],
-      "settings": {
-        "full_width_container": false,
-        "top_bottom_margin": false
-      }
-    },
     "1664388097345cae2b": {
       "type": "seo-block",
       "disabled": true,
@@ -413,7 +343,6 @@
     "1665104018064a51ce",
     "fa47f458-1111-4f7c-821f-db6981ce0ffc",
     "1664286931317058a0",
-    "7b7cfb2c-e3ab-4bd5-bd49-671b9eea9675",
     "1664388097345cae2b",
     "56d3321d-afc9-408f-ae0c-863d7d78dd69",
     "f0d1bd49-b440-4899-a287-63f6c6ad214a"
