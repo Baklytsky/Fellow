@@ -51,7 +51,7 @@
         <a href="{{ order.order_status_url }}">Track Order</a>
       {%- when 'Restocked' -%}
         <span>In Progress</span>
-      {%- when 'unfulfilled' -%}
+      {%- when 'Unfulfilled' -%}
         <span>In Progress</span>
         {%- else -%}
         <span>{{ order.fulfillment_status_label }}</span>

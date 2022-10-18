@@ -11,7 +11,7 @@
           {%- render 'icon' with 'customer-logo' -%}
           {{ 'customer.account.overview' | t }}
         </a>
-        <a href="{{ routes.account_logout_url }}" class="account-sidebar-menu-item f aic hide-mobile">
+        <a href="{{ routes.account_logout_url }}" class="account-sidebar-menu-item f aic hide-mobile" data-sign-out>
           {%- render 'icon' with 'sign-out' -%}
           {{ 'customer.account.sign_out' | t }}
         </a>

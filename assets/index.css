@@ -8227,8 +8227,12 @@ account-element.account-page {
 
 .account-sidebar-menu-item svg {
   flex-shrink: 0;
-  width: 20px;
+  width: 25px;
   margin-right: 10px;
+}
+
+.account-sidebar-menu-item[data-sign-out] svg {
+  padding: 1px;
 }
 
 .account-sidebar-menu-item.current-page {

@@ -170,7 +170,7 @@
       "address2": "Address 2",
       "city": "City*",
       "country": "Country*",
-      "province": "State",
+      "province": "State*",
       "zip": "Zip \/ Postal Code*",
       "phone": "Phone Number",
       "set_default": "Set as default address",

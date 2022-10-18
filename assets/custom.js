@@ -2128,7 +2128,11 @@ class account extends HTMLElement {
           }
         }
 
-        (checked.length) ? this.checkKlaviyoEvents(KlaviyoCheckboxes, form) : form.submit();
+        if (checked.length) {
+          this.checkKlaviyoEvents(KlaviyoCheckboxes, form)
+        } else {
+          if (!form.hasAttribute('data-accenture-form')) form.submit();
+        }
       })
     })
 
@@ -2161,6 +2165,8 @@ class account extends HTMLElement {
     const errorsInner = form.querySelector('.account-error-inner')
     const allInputs = form.querySelectorAll('input')
     const phoneInput = form.querySelector('input[type=tel]')
+
+    form.addEventListener('submit', (e)=> e.preventDefault())
 
     Accentuate(jQuery('#' + form.id), function (data) {
       if (phoneInput) {

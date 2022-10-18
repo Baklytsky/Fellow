@@ -375,8 +375,7 @@ toggle-tabs {
     }
   }
 
-  .mainMenu__cardIcon,
-  .mainMenu__accountWrapper {
+  .mainMenu__cardIcon {
     position: relative;
     transition: 0.3s;
 
@@ -388,6 +387,23 @@ toggle-tabs {
     @media screen and (max-width: $tablet) {
       svg {
         width: 24px;
+        height: 32px;
+      }
+    }
+  }
+
+  .mainMenu__accountWrapper {
+    position: relative;
+    transition: 0.3s;
+
+    svg {
+      width: 40px;
+      height: 42px;
+    }
+
+    @media screen and (max-width: $tablet) {
+      svg {
+        width: 30px;
         height: 32px;
       }
     }

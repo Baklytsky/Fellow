@@ -2,7 +2,7 @@
 {%- render 'account-update', customer: customer, formClassName: formClassName  -%}
 {%- endcomment -%}
 
-<form id="form_update" class='{{formClassName}}' style='display: none'>
+<form id="form_update" class='{{formClassName}}' data-accenture-form style='display: none'>
   <input type="hidden" name="customer[id]" value="{{ customer.id }}"/>
 
   {%- if title != blank -%}

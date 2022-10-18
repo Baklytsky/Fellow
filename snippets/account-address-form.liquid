@@ -70,7 +70,7 @@
     label: city_lable,
     name: 'address[city]',
     value: form.city,
-    required: true,
+    required: 'true',
     unique_id: id %}
 
     {%- capture attr -%}
@@ -98,7 +98,8 @@
         {% render 'component-select',
           label: province_lable,
           id: form_province_id,
-          name: 'address[province]'
+          name: 'address[province]',
+          required: 'true',
           options: '',
           attributes: attr %}
       </div>
@@ -159,7 +160,7 @@
       var provinceContainer = document.getElementById({{form_province_container_id | json}})
       var provinceSelector = document.getElementById({{form_province_id | json}})
       var countryDefault = countrySelector.getAttribute('data-default') ? countrySelector.getAttribute('data-default') : countrySelector.options[0].value
-      var provinceDefault = provinceSelector.getAttribute('data-default')
+      var provinceDefault = provinceSelector.getAttribute('data-default') || ''
 
       /**
        * Select an option within a <select>
@@ -205,6 +206,7 @@
         if (provinceDefault.length > 0) selectOption(provinceDefault, provinceSelector)
 
         // Show provinces
+        provinceSelector.setAttribute('required', '')
         provinceContainer.style.display = 'block'
       }
 
@@ -212,6 +214,8 @@
        * Hide provinces container
        */
       function hideProvinces() {
+        provinceSelector.innerHTML = ''
+        provinceSelector.removeAttribute('required')
         provinceContainer.style.display = 'none'
       }
 
@@ -225,9 +229,9 @@
         if (countryDefault.length < 1) return
 
         var selectedCountry = selectOption(countryDefault, countrySelector)
-        var options = JSON.parse(selectedCountry.getAttribute('data-provinces'))
+        var options = JSON.parse(selectedCountry.getAttribute('data-provinces')) || []
 
-        showProvinces(options)
+        options.length > 0 ? showProvinces(options) : hideProvinces()
       }
 
       /**

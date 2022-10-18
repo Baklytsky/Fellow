@@ -68,7 +68,6 @@
         <h2 class='account-heading'>{{ 'customer.login.sign_in' | t }}</h2>
 
         {% form 'customer_login' %}
-          <input type="hidden" name="checkout_url" value="/">
         {%- assign inputClassName = '' -%}
 
           {% if form.errors %}

@@ -99,6 +99,7 @@
           attr: accepts_email_marketing_attr
         %}
 
+        {%- comment -%}
         {%- capture register_accepts_sms_marketing_label -%}
           <div>
             {{ 'customer.register.accepts_sms_marketing' | t }}
@@ -123,6 +124,7 @@
           className: inputClassName,
           attr: accepts_sms_marketing_attr
         %}
+        {%- endcomment -%}
 
       {%- if settings.privacy_policy_link != blank and settings.terms_of_service_link != blank -%}
         <div class="account-policy">
