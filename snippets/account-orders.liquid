@@ -23,7 +23,13 @@
             {%- assign quantity_string = blank -%}
 
             {%- if order.line_items.size > 1 -%}
-              {%- assign quantity_string = order.line_items.size | append: ' items' | prepend: '+ ' -%}
+              {%- assign append_elemrnt = ' item' -%}
+
+              {%- if order.line_items.size >= 2 -%}
+                {%- assign append_elemrnt = ' items' -%}
+              {%- endif -%}
+
+              {%- assign quantity_string = order.line_items.size | minus: 1 | append: append_elemrnt | prepend: '+ ' -%}
             {%- endif -%}
 
             {%- if quantity_string != blank -%}

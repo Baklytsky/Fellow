@@ -2169,6 +2169,7 @@ class account extends HTMLElement {
     form.addEventListener('submit', (e)=> e.preventDefault())
 
     Accentuate(jQuery('#' + form.id), function (data) {
+
       if (phoneInput) {
         if (!_self.phoneValidation(phoneInput)) {
           phoneInput.closest('.input-wrapper').classList.add('input-error')
@@ -2188,6 +2189,18 @@ class account extends HTMLElement {
           const message = 'This email is already associated with an account';
           if (errorsInner) errorsInner.innerHTML += message;
           if (errorsContainer) errorsContainer.classList.remove('is-hidden');
+
+        } else if (data.errors.phone !== undefined && data.errors.phone[0] === 'Phone has already been taken') {
+          const message = 'Phone has already been taken';
+          if (errorsInner) errorsInner.innerHTML += message;
+          if (errorsContainer) errorsContainer.classList.remove('is-hidden');
+          phoneInput.closest('.input-wrapper').classList.add('input-error')
+
+        } else if (data.errors.phone !== undefined && data.errors.phone[0] === 'Enter a valid phone number to use this delivery method') {
+          const message = 'Please enter a valid phone number';
+          if (errorsInner) errorsInner.innerHTML += message;
+          if (errorsContainer) errorsContainer.classList.remove('is-hidden');
+          phoneInput.closest('.input-wrapper').classList.add('input-error')
 
         } else if (data.errors.email !== undefined && data.errors.email[0] === 'contains an invalid domain name') {
           const message = 'Please enter a valid email address.';
@@ -2220,7 +2233,7 @@ class account extends HTMLElement {
   phoneValidation(phoneInput) {
     const phoneValue = phoneInput.value;
     const re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
-    return (phoneValue === '') || re.test(phoneValue)
+    return (phoneValue === '') ? true : re.test(phoneValue)
   }
 
   emptyFieldValidation (input, errorMessage) {
@@ -2257,7 +2270,10 @@ class account extends HTMLElement {
   removeErrorStatus (input) {
     if (input.classList.contains('input-error')) {
       this.inputs.forEach(input => input.classList.remove('input-error'))
-      this.errorMeseges.forEach(error => error.remove())
+      this.errorMeseges.forEach(error => {
+        if (error.querySelector('.account-error-inner')) error.querySelector('.account-error-inner').innerHTML = ''
+        error.classList.add('is-hidden')
+      })
     }
   }
 

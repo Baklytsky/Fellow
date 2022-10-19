@@ -46,13 +46,20 @@
       {%- assign edit_address_title = 'customer.addresses.update' | t -%}
 
         {%- for address in customer.addresses -%}
+          {% assign default_addy = false %}
+
+          {% if customer.default_address == address %}
+            {% assign default_addy = true %}
+          {% endif %}
+
           {%
             render 'account-address-form',
             id: address.id,
             action: address,
             formClassName: 'account-address-form',
             title: edit_address_title,
-            cta: 'Save'
+            cta: 'Save',
+            default_addy: default_addy
           %}
         {%- endfor -%}
       {%- endunless -%}

@@ -1,3 +1,15 @@
+{%- comment -%}
+{%
+  render 'account-address-form',
+  id: address.id,
+  action: address,
+  formClassName: 'account-address-form',
+  title: edit_address_title,
+  cta: 'Save',
+  default_addy: default_addy
+%}
+{%- endcomment -%}
+
 <div id='form_{{id}}' class='{{formClassName}}' style='display: none'>
   {%- if title != blank -%}
     <h2 class="account-heading">{{ title }}</h2>
@@ -126,12 +138,17 @@
     unique_id: id %}
 
   {%- assign set_as_default_lable = 'customer.addresses.set_default' | t -%}
+  {%- assign set_as_default_addres = 'false' -%}
+
+  {%- if default_addy -%}
+    {%- assign set_as_default_addres = 'true' -%}
+  {%- endif -%}
 
   {% render 'component-input',
     label: set_as_default_lable,
     type: 'checkbox'
     name: 'address[default]',
-    value: 'false',
+    value: set_as_default_addres,
     unique_id: id  %}
 
   {% render 'component-button',

@@ -8,13 +8,14 @@
       {% form 'create_customer' %}
       {%- assign inputClassName = blank -%}
 
-        {% if form.errors %}
-          <div class='account-error'>
-            {%- render 'icon' with 'error' -%}
-            <span>{{ form.errors | default_errors }}</span>
-          </div>
-          {%- assign inputClassName = 'input-error' -%}
-        {% endif %}
+      <div class='account-error {% unless form.errors %} is-hidden{%- endunless -%}' >
+        {%- render 'icon' with 'error' -%}
+        <span>{% if form.errors %}{{ form.errors | default_errors }}{% endif %}</span>
+      </div>
+
+      {% if form.errors %}
+        {%- assign inputClassName = 'input-error' -%}
+      {% endif %}
 
       {%- assign register_first_name_label = 'customer.register.first_name' | t -%}
 

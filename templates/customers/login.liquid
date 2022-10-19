@@ -15,14 +15,15 @@
           {%- assign inputClassName = blank -%}
           {%- assign inputErrorMessage = blank -%}
 
+          <div class='account-error {% unless form.errors %} is-hidden{%- endunless -%}' >
+            {%- render 'icon' with 'error' -%}
+            <span>
+              That email address does not match our records. Please try again or
+              <a href="{{ routes.account_register_url }}">create an account</a>.
+            </span>
+          </div>
+
           {% if form.errors %}
-            <div class='account-error'>
-              {%- render 'icon' with 'error' -%}
-              <span>
-                  That email address does not match our records. Please try again or
-                  <a href="{{ routes.account_register_url }}">create an account</a>.
-                </span>
-            </div>
             {%- assign inputClassName = 'input-error' -%}
             {%- assign inputErrorMessage = 'customer.recover_password.error_message' | t -%}
           {% endif %}
@@ -68,18 +69,19 @@
         <h2 class='account-heading'>{{ 'customer.login.sign_in' | t }}</h2>
 
         {% form 'customer_login' %}
-        {%- assign inputClassName = '' -%}
+        {%- assign inputClassName = blank -%}
 
-          {% if form.errors %}
-            <div class='account-error'>
-              {%- render 'icon' with 'error' -%}
-              <span>
-                The email and/or password provided don't match our records. Try again or
-                <button type="button" class='js-recover-trigger' data-toggle-dialog="recover">reset your password</button>.
-              </span>
-            </div>
-            {%- assign inputClassName = 'input-error' -%}
-          {% endif %}
+        <div class='account-error {% unless form.errors %} is-hidden{%- endunless -%}' >
+          {%- render 'icon' with 'error' -%}
+          <span>
+            The email and/or password provided don't match our records. Try again or
+            <button type="button" class='js-recover-trigger' data-toggle-dialog="recover">reset your password</button>.
+          </span>
+        </div>
+
+        {% if form.errors %}
+          {%- assign inputClassName = 'input-error' -%}
+        {% endif %}
 
         {%- assign login_email_label = 'customer.login.email' | t -%}
         {%- assign email_error_message = 'customer.login.email_error_message' | t -%}

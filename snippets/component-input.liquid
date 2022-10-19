@@ -43,6 +43,7 @@
             {% if required == 'true' %}required{% endif %}
             {% if attr != blank %}{{ attr }}{% endif %}
             {% if type == 'password' %}style="padding-right: 60px"{% endif %}
+            {% if type == 'checkbox' and value == 'true' %}checked{% endif %}
     />
     {%- if type == 'checkbox' -%}
       <label for='{{ id }}' class='input-wrapper__label x'>{{ label }}</label>

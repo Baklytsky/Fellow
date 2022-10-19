@@ -4434,7 +4434,7 @@ textarea {
 .input-wrapper.checkbox .input-wrapper__label {
   position: relative;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   font-size: 14px;
   cursor: pointer;
 }
@@ -8183,6 +8183,7 @@ input[name=product_search_field] {
 
 .account-error svg {
   margin-right: 8px;
+  margin-top: -2px;
   flex-shrink: 0;
 }
 
