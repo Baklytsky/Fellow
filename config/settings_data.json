@@ -53,10 +53,11 @@
     "social_pinterest_link": "",
     "contact_us_link": "https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/requests\/new",
     "favicon": "shopify:\/\/shop_images\/favicon.png",
-    "email_klaviyo_list_id": "Sezyce",
-    "sms_klaviyo_list_id": "T3rDDi",
+    "email_klaviyo_list_id": "PjWd8d",
+    "sms_klaviyo_list_id": "",
     "terms_of_service_link": "shopify:\/\/pages\/terms-and-conditions",
     "privacy_policy_link": "shopify:\/\/policies\/privacy-policy",
+    "return_policy_link": "shopify:\/\/pages\/returns-and-exchanges",
     "empty_orders_text": "<p>You have no previous orders. Things can only get better. Explore our <a href=\"\/collections\/bestsellers\" title=\"Best Sellers\">bestsellers and most-loved products here<\/a>!<\/p>",
     "checkout_header_image": "",
     "checkout_logo_image": "shopify:\/\/shop_images\/Fellow-Logo-black_b1dd77c0-05ce-4fe0-a402-efa5219057d0.png",
@@ -1023,6 +1024,13 @@
           "link": "shopify:\/\/pages\/compare-stagg-ekg-kettles",
           "button_text": "Explore More",
           "btn_type": "btn--light"
+        }
+      },
+      "activate_account_success": {
+        "type": "activate_account_success",
+        "settings": {
+          "heading": "Welcome",
+          "description": "<p>Success! Your account has been created. <a href=\"\/collections\/bestsellers\" title=\"Best Sellers\">Continue shopping<\/a> or return to the <a href=\"\/\" title=\"\/\">home<\/a> page?<\/p>"
         }
       }
     },
