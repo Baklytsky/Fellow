@@ -1,0 +1,206 @@
+{
+  "sections": {
+    "8a02d72a-7e29-4c25-8bc5-9e3a483f5ccf": {
+      "type": "image-with-cta",
+      "settings": {
+        "top_bottom_margin": true,
+        "image": "shopify:\/\/shop_images\/EKG_Pro_Gear_Guide_Banner.png",
+        "layout": "left",
+        "bg_color": "#000000",
+        "text_color": "#ffffff",
+        "heading": "Stagg EKG Pro + Pro Studio Edition<br>Gear Guide",
+        "heading_size": "h1",
+        "text": "",
+        "cta_url": "",
+        "cta_copy": "",
+        "cta_color": "btn--dark"
+      }
+    },
+    "6502bd48-7cbd-4af3-b885-299394e45348": {
+      "type": "coffee-marketplace-cards",
+      "blocks": {
+        "55eb1590-d289-402d-b19b-e3ba6d789743": {
+          "type": "Card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/EKG_Pro_Gear_Guide_Image_1.png",
+            "heading": "How to use your kettle",
+            "description": "The basics to get you brewing<br><a href=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0057\/6235\/1219\/files\/StaggEKG_Pro_GTKYG_Mech_R4_Use.pdf?v=1664570631\" style=\"text-decoration:underline;cursor:pointer;\">Get Started -><\/a>",
+            "link": "https:\/\/cdn.shopify.com\/s\/files\/1\/0057\/6235\/1219\/files\/StaggEKG_Pro_GTKYG_Mech_R4_Use.pdf?v=1664570631"
+          }
+        },
+        "abf4213f-6cfc-47ee-b7c7-f8c54b924fcf": {
+          "type": "Card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/EKG_Pro_Gear_Guide_Image_2.png",
+            "heading": "How to clean your kettle",
+            "description": "The proper care to maintain perfect pours<br><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/115001707911-How-do-I-clean-maintain-and-descale-my-Fellow-electric-kettle-\" style=\"text-decoration:underline;cursor:pointer;\">Learn More -><\/a>",
+            "link": "https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/115001707911-How-do-I-clean-maintain-and-descale-my-Fellow-electric-kettle-"
+          }
+        },
+        "c8b12d5e-f654-4809-be5c-212a15fcbaac": {
+          "type": "Card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/EKG_Pro_Gear_Guide_Image_3.png",
+            "heading": "Register your kettle",
+            "description": "You’ll receive extended warranty when you do!\n<a href=\"https:\/\/Register.fellowproducts.com\" style=\"text-decoration:underline;cursor:pointer;\">Register Now -><\/a>",
+            "link": "https:\/\/Register.fellowproducts.com"
+          }
+        }
+      },
+      "block_order": [
+        "55eb1590-d289-402d-b19b-e3ba6d789743",
+        "abf4213f-6cfc-47ee-b7c7-f8c54b924fcf",
+        "c8b12d5e-f654-4809-be5c-212a15fcbaac"
+      ],
+      "settings": {
+        "heading": "Your one-stop shop to brew like a Pro",
+        "description": "Everything you need to get started with Stagg EKG Pro and Pro Studio Edition."
+      }
+    },
+    "353104b1-9d2f-4355-b6cc-a4554a788789": {
+      "type": "image-with-app-links",
+      "settings": {
+        "top_bottom_margin": false,
+        "bg_color": "#fff9e5",
+        "text_color": "#000000",
+        "image": "shopify:\/\/shop_images\/EKG_Pro_Gear_Guide_Module_Desktop.png",
+        "image_mobile": "shopify:\/\/shop_images\/EKG_Pro_Gear_Guide_Module_Mobile.png",
+        "layout": "left",
+        "heading": "It keeps getting better...",
+        "text": "<style>\n.ImageWithAppLinks__DecImage img {\nmargin-top: -20px;\n}\n<\/style>\nGet the latest features for Stagg EKG Pro and Pro Studio Edition with the Fellow Updater App.",
+        "scan_instruction": "Scan the QR code or visit Fellowproducts.com\/app on your phone.",
+        "qr_code": "shopify:\/\/shop_images\/EKG_Pro___Pro_Studio_Gear_Guide_Code-removebg-preview.png",
+        "decorative_image": "shopify:\/\/shop_images\/Group_308_2_ff7f913b-117a-41e6-b39d-1acb54d77c76.png",
+        "app_store_image": "shopify:\/\/shop_images\/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917_1.png",
+        "app_store_url": "https:\/\/apps.apple.com\/app\/fellow-updater\/id1592355693",
+        "google_play_image": "shopify:\/\/shop_images\/Group_307_2.png",
+        "google_play_url": ""
+      }
+    },
+    "adc0d42e-3d69-4550-8d40-252d3b41254f": {
+      "type": "featured-blog-v2",
+      "blocks": {
+        "9dff12f8-ba1c-4b77-8a3d-28c6aca0844d": {
+          "type": "article",
+          "settings": {
+            "article": "brew-guides\/back-to-brewing-school-pour-over-basics-101"
+          }
+        },
+        "6ec64236-0920-4c6a-9cdb-32cef180d9ff": {
+          "type": "article",
+          "settings": {
+            "article": "learn\/how-to-play-bricky-on-stagg-ekg-pro-and-pro-studio-edition"
+          }
+        },
+        "c24428f3-81e5-46b5-a2c3-994e77c40ea7": {
+          "type": "article",
+          "settings": {
+            "article": "learn\/how-to-decipher-a-bag-of-coffee"
+          }
+        }
+      },
+      "block_order": [
+        "9dff12f8-ba1c-4b77-8a3d-28c6aca0844d",
+        "6ec64236-0920-4c6a-9cdb-32cef180d9ff",
+        "c24428f3-81e5-46b5-a2c3-994e77c40ea7"
+      ],
+      "settings": {
+        "heading": "Learn from a Pro",
+        "description": "<p>Sharing our insider knowledge to make “specialty coffee” a language you can speak.<\/p>",
+        "cta_title": "Fellow Blog",
+        "cta_url": "shopify:\/\/blogs\/learn",
+        "cta_color": "btn--light",
+        "bg_color": "#000000",
+        "text_color": "#ffffff"
+      }
+    },
+    "1e3dd3cb-7c87-4123-bfa6-ef3b22e9af45": {
+      "type": "faq",
+      "blocks": {
+        "74b47985-b86c-44da-b11c-5cd39b9512f6": {
+          "type": "faq-block",
+          "settings": {
+            "title": "FAQs",
+            "description": "<p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313040430235-How-do-I-use-and-care-for-my-Stagg-EKG-Pro-or-Pro-Studio-Edition-\" target=\"_blank\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313040430235-How-do-I-use-and-care-for-my-Stagg-EKG-Pro-or-Pro-Studio-Edition-\">How do I use and care for my Stagg EKG Pro and Pro Studio Edition?<\/a><\/p><p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313036055707-What-are-the-differences-between-the-Stagg-EKG-Stagg-EKG-Pro-and-Stagg-EKG-Pro-Studio-Edition-\" target=\"_blank\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313036055707-What-are-the-differences-between-the-Stagg-EKG-Stagg-EKG-Pro-and-Stagg-EKG-Pro-Studio-Edition-\">What are the differences between Stagg EKG, Stagg EKG Pro, and Stagg EKG Pro Studio Edition?<\/a><\/p><p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313103050907-Is-my-current-Stagg-EKG-Corvo-EKG-kettle-compatible-with-the-Pro-and-Pro-Studio-Edition-base-and-vice-versa-\" target=\"_blank\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313103050907-Is-my-current-Stagg-EKG-Corvo-EKG-kettle-compatible-with-the-Pro-and-Pro-Studio-Edition-base-and-vice-versa-\">Is my current Stagg EKG\/Corvo EKG kettle compatible with the Pro and Pro Studio Edition base (and vice-versa)?<\/a><\/p><p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313141992347-Can-I-buy-a-replacement-kettle-or-base-for-my-Stagg-EKG-Pro-or-Pro-Studio-Edition-\" target=\"_blank\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313141992347-Can-I-buy-a-replacement-kettle-or-base-for-my-Stagg-EKG-Pro-or-Pro-Studio-Edition-\">Can I buy a replacement kettle or base for my Stagg EKG Pro or Pro Studio Edition?<\/a><\/p><p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/sections\/9342737097755-Stagg-EKG-Pro-and-Pro-Studio-Edition\" target=\"_blank\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/sections\/9342737097755-Stagg-EKG-Pro-and-Pro-Studio-Edition\">All Pro + Pro Studio Edition FAQs<\/a><\/p>"
+          }
+        },
+        "0c302609-36d9-4e92-8796-380d58d892e7": {
+          "type": "faq-block",
+          "settings": {
+            "title": "Care + Cleaning",
+            "description": "<p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/115001707851-Can-I-heat-milk-or-other-liquids-in-my-Fellow-electric-kettle-\" target=\"_blank\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/115001707851-Can-I-heat-milk-or-other-liquids-in-my-Fellow-electric-kettle-\">Can I heat milk or other liquids in my Fellow electric kettle?<\/a><\/p><p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/115001707911-How-do-I-clean-maintain-and-descale-my-Fellow-electric-kettle-\" target=\"_blank\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/115001707911-How-do-I-clean-maintain-and-descale-my-Fellow-electric-kettle-\">How do I clean, maintain, and descale my Fellow electric kettle?<\/a><\/p><p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/360040214291-How-do-I-best-care-for-the-wooden-accents-on-my-Fellow-products-\" target=\"_blank\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/360040214291-How-do-I-best-care-for-the-wooden-accents-on-my-Fellow-products-\">How do I best care for the wooden accents on my Fellow products?<\/a><\/p><p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/115001736851-Is-my-Fellow-electric-kettle-stovetop-safe-\" target=\"_blank\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/115001736851-Is-my-Fellow-electric-kettle-stovetop-safe-\">Is my Fellow electric kettle stovetop safe?<\/a><\/p>"
+          }
+        },
+        "07cde849-bba8-45de-9220-2d2e188d3e16": {
+          "type": "faq-block",
+          "settings": {
+            "title": "Product Registration",
+            "description": "<p><a href=\"https:\/\/Register.fellowproducts.com\" target=\"_blank\" title=\"https:\/\/Register.fellowproducts.com\">How do I register my Fellow electric products?<\/a><\/p>"
+          }
+        },
+        "1759bc70-f140-4686-ad63-2abc6194bb4c": {
+          "type": "faq-block",
+          "settings": {
+            "title": "Fellow Updater App",
+            "description": "<p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313502245403-What-does-the-Fellow-Updater-app-do-and-why-do-I-need-it-\" target=\"_blank\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313502245403-What-does-the-Fellow-Updater-app-do-and-why-do-I-need-it-\">What does the Fellow Updater App do and why do I need it?<\/a><\/p><p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313550533019-My-Fellow-Updater-app-says-that-there-is-an-Update-Available-but-has-yet-to-update-what-should-I-do-\" target=\"_blank\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313550533019-My-Fellow-Updater-app-says-that-there-is-an-Update-Available-but-has-yet-to-update-what-should-I-do-\">My Fellow Updater app says that there is an ‘Update Available’ but has yet to update - what should I do?<\/a><\/p><p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313615326363-Will-there-be-any-features-beyond-updates-on-the-Fellow-Updater-app-in-the-future-\" target=\"_blank\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313615326363-Will-there-be-any-features-beyond-updates-on-the-Fellow-Updater-app-in-the-future-\">Will there be any features beyond updates on the Fellow Updater app in the future?<\/a><\/p><p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9593179929115-What-is-the-current-firmware-version-and-what-did-it-update-\" target=\"_blank\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9593179929115-What-is-the-current-firmware-version-and-what-did-it-update-\">What is the current firmware version and what did it update?<\/a><\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "74b47985-b86c-44da-b11c-5cd39b9512f6",
+        "0c302609-36d9-4e92-8796-380d58d892e7",
+        "07cde849-bba8-45de-9220-2d2e188d3e16",
+        "1759bc70-f140-4686-ad63-2abc6194bb4c"
+      ],
+      "settings": {
+        "heading": "Resources",
+        "description": "You’ve got questions. We’ve got answers."
+      }
+    },
+    "c35b14fb-0e6e-43fa-944e-8c762c98b616": {
+      "type": "featured-collections",
+      "blocks": {
+        "eaca97f3-1bdb-46d6-9d6e-7ef7371f809c": {
+          "type": "collection",
+          "settings": {
+            "tab_text": "",
+            "collection": "pair-with-your-pro",
+            "button_text": "",
+            "button_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "eaca97f3-1bdb-46d6-9d6e-7ef7371f809c"
+      ],
+      "settings": {
+        "enable_section": true,
+        "heading": "Pour-Over Essentials",
+        "limit": 6,
+        "show_view_all": true
+      }
+    },
+    "3e986760-8f93-4f13-933f-3b04b97136d1": {
+      "type": "coffee-marketplace-twb",
+      "settings": {
+        "bg_color": "#fff9e5",
+        "text_color": "#000000",
+        "pre_heading": "Stagg EKG Pro and Pro Studio Edition",
+        "heading": "Safety Guides",
+        "description": "Just in case you lost the hard copy from the box.",
+        "cta_text": "View Safety Guides",
+        "cta_link": "https:\/\/cdn.shopify.com\/s\/files\/1\/0057\/6235\/1219\/files\/FELLOW_StaggEKGPro_StudioEdition_SafetyManual_V1_Use.pdf?v=1664570631",
+        "cta_style": "dark"
+      }
+    }
+  },
+  "order": [
+    "8a02d72a-7e29-4c25-8bc5-9e3a483f5ccf",
+    "6502bd48-7cbd-4af3-b885-299394e45348",
+    "353104b1-9d2f-4355-b6cc-a4554a788789",
+    "adc0d42e-3d69-4550-8d40-252d3b41254f",
+    "1e3dd3cb-7c87-4123-bfa6-ef3b22e9af45",
+    "c35b14fb-0e6e-43fa-944e-8c762c98b616",
+    "3e986760-8f93-4f13-933f-3b04b97136d1"
+  ]
+}

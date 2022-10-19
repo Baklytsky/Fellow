@@ -1,0 +1,74 @@
+{
+  "sections": {
+    "72621552-22a2-4653-8939-c09fdbdf0964": {
+      "type": "coffee-marketplace-hero",
+      "settings": {
+        "heading": "Fellow Updater App",
+        "description": "The companion to Stagg EKG Pro and Pro Studio Edition",
+        "text_block_position": "center",
+        "text_color": "#000000",
+        "text_block_bg_color": "#fff9e5"
+      }
+    },
+    "7d05607e-a9b1-4cbc-b629-6797267850a3": {
+      "type": "image-with-app-links",
+      "settings": {
+        "top_bottom_margin": false,
+        "bg_color": "#fff9e5",
+        "text_color": "#000000",
+        "image": "shopify:\/\/shop_images\/EKG_Pro_Gear_Guide_Module_Desktop.png",
+        "image_mobile": "shopify:\/\/shop_images\/EKG_Pro_Gear_Guide_Module_Mobile.png",
+        "layout": "left",
+        "heading": "It keeps getting better...",
+        "text": "Get the latest features for Stagg EKG Pro and Pro Studio Edition with the Fellow Updater App.",
+        "scan_instruction": "Scan the QR code or visit Fellowproducts.com\/app on your phone.",
+        "qr_code": "shopify:\/\/shop_images\/EKG_Pro___Pro_Studio_Gear_Guide_Code-removebg-preview.png",
+        "decorative_image": "shopify:\/\/shop_images\/Group_308_2_ff7f913b-117a-41e6-b39d-1acb54d77c76.png",
+        "app_store_image": "shopify:\/\/shop_images\/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917_1.png",
+        "app_store_url": "https:\/\/apps.apple.com\/app\/fellow-updater\/id1592355693",
+        "google_play_image": "shopify:\/\/shop_images\/Group_307_2.png",
+        "google_play_url": ""
+      }
+    },
+    "546bdbf5-7f8c-4b0b-8dd8-9ec6b498c9b0": {
+      "type": "faq",
+      "blocks": {
+        "592c267b-dbcf-46ed-a435-2305836f1aec": {
+          "type": "faq-block",
+          "settings": {
+            "title": "What does the Fellow Updater app do and why do I need it?",
+            "description": "<p>Although it’s not needed to use the product, we will occasionally provide updates to the firmware in your Stagg EKG Pro or Pro Studio Edition to ensure everything is running optimally and that your kettle has the latest features. Please note not using the app does not diminish the usefulness of your kettle, as the updates are not needed for the Pro or Studio Edition to work.<\/p>"
+          }
+        },
+        "a7dbf660-bf70-4b2a-bcc6-efee4248574e": {
+          "type": "faq-block",
+          "settings": {
+            "title": "Will there be any features beyond updates on the Fellow Updater app in the future?",
+            "description": "<p>We work hard to give our customers the best overall experience when using our products. While we can’t predict what we come up with next, you may want to follow our <a href=\"https:\/\/www.instagram.com\/fellowproducts\/\">social media channels<\/a> and\/or our <a href=\"https:\/\/fellowproducts.com\/pages\/email-subscribe\">email list<\/a> to make sure you are kept up to date on the latest news at Fellow!If you have any specific feature recommendations you would like to see <a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/requests\/new\">please let us know<\/a>!<\/p>"
+          }
+        },
+        "c3443155-800a-4b0c-985e-ebec1d23fa6a": {
+          "type": "faq-block",
+          "settings": {
+            "title": "My Fellow Updater app says that there is an ‘Update Available’ but has yet to update - what should I do?",
+            "description": "<p>If your app is in ‘Update Available’ status this means there’s an update available for your Stagg EKG Pro or Pro Studio Edition and that your kettle has not checked in within the last 24 hours. This could be due to 3 primary reasons:<\/p><p>• Your kettle is unplugged. <\/p><p>• The WiFi on your kettle is off<\/p><p>• Your WiFi network has changed<\/p><p>If one of these reasons applies, please follow these troubleshooting steps:<\/p><p>• <strong>Your kettle is unplugged: <\/strong>leave your kettle plugged in for at least 24 hours<\/p><p>• <strong>The WiFi on your kettle is off: <\/strong>confirm that WiFi is on on your Kettle via the Fellow Updater app menu<\/p><p>• <strong>Your WiFi network has changed:<\/strong> ‘Reset Kettle Name & Wifi’ which will allow you to go through the full set-up process once more.<\/p><p>If you’re still experiencing issues, please delete and re-download the app.  You will need to go back through the initial steps to pair your base to your device listed in our Gear Guide.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "592c267b-dbcf-46ed-a435-2305836f1aec",
+        "a7dbf660-bf70-4b2a-bcc6-efee4248574e",
+        "c3443155-800a-4b0c-985e-ebec1d23fa6a"
+      ],
+      "settings": {
+        "heading": "Have Questions?",
+        "description": "We’ve got answers."
+      }
+    }
+  },
+  "order": [
+    "72621552-22a2-4653-8939-c09fdbdf0964",
+    "7d05607e-a9b1-4cbc-b629-6797267850a3",
+    "546bdbf5-7f8c-4b0b-8dd8-9ec6b498c9b0"
+  ]
+}
