@@ -13,8 +13,8 @@
     "gift_wrapping_message": "Is this a gift?",
     "gift_wrapping_result_message": "Your order will be sent in a gift box",
     "gift_wrapping_heading": "Gift Box + Gift Note",
-    "enable_gwp": false,
-    "gwp_threshold": 98,
+    "enable_gwp": true,
+    "gwp_threshold": 99,
     "gwp_product": "donotlook",
     "gwp_1_success_message": "We've added a free mystery coffee to your cart!",
     "second_gwp_threshold": 0,
@@ -330,8 +330,8 @@
           "menu_right": "new-right-menu",
           "mobile_menu": "mobile-navigation-q3-2022",
           "show_announcement": true,
-          "announcement_text": "Meet NEW Stagg EKG Pro and Pro Studio Edition 🔥",
-          "announcement_link": "shopify:\/\/pages\/compare-stagg-ekg-kettles",
+          "announcement_text": "New to Rebrew 🌎 Fully refurbished Ode Brew Grinders! <u class=\"ml05\" style=\"cursor:pointer;\"> Save 25% -&gt;<\/u>",
+          "announcement_link": "shopify:\/\/products\/rebrew-ode-brew-grinder",
           "enable_timer": false,
           "end_date": "Sep 05, 2022 23:59:00 GMT-08:00"
         }
@@ -516,7 +516,7 @@
         "type": "logo-text",
         "settings": {
           "enable_section": true,
-          "text": "Get free shipping on orders over $99!",
+          "text": "Get free shipping + a free bag of coffee from one of our favorite roasters on orders $99+",
           "url": "shopify:\/\/collections\/bestsellers",
           "icon": "shopify:\/\/shop_images\/FP-icon-Homepage-AltIcon-black_1.png"
         }
