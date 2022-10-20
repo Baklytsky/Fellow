@@ -53,7 +53,7 @@
             <div class="account-home__order-table-item">
               <h4>Status</h4>
               {%- if order.cancelled -%}
-                <p>Cancelled</p>
+                <p>Canceled</p>
                 <p>{{ order.cancel_reason_label }}</p>
               {%- else -%}
               {%- case order.fulfillment_status_label -%}

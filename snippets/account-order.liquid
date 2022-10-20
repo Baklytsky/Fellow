@@ -42,7 +42,7 @@
   <div class="account-order-status">
     {%- capture order_status -%}
     {%- if order.cancelled -%}
-    <span>Cancelled: </span>
+    <span>Canceled: </span>
     <span>{{ order.cancel_reason_label }}</span>
     {%- else -%}
       {%- case order.fulfillment_status_label -%}
