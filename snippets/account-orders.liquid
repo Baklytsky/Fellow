@@ -52,21 +52,27 @@
             </div>
             <div class="account-home__order-table-item">
               <h4>Status</h4>
+              {%- if order.cancelled -%}
+                <p>Cancelled</p>
+                <p>{{ order.cancel_reason_label }}</p>
+              {%- else -%}
               {%- case order.fulfillment_status_label -%}
               {%- when 'Complete' -%}
                 <p>Delivered</p>
               {%- when 'Fulfilled' -%}
-                <p>Delivered</p>
+                <p>Shipped</p>
+                <a href="{{ order.order_status_url }}">Track Order</a>
               {%- when 'Partial' -%}
                 <p>Shipped</p>
                 <a href="{{ order.order_status_url }}">Track Order</a>
               {%- when 'Restocked' -%}
-                <p>In Progress</p>
+                <p>Delivered</p>
               {%- when 'Unfulfilled' -%}
                 <p>In Progress</p>
                 {%- else -%}
                 <p>{{ order.fulfillment_status_label }}</p>
               {%- endcase -%}
+              {%- endif -%}
             </div>
           </div>
       {% endfor %}

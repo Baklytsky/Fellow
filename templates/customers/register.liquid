@@ -14,7 +14,11 @@
       </div>
 
       {% if form.errors %}
-        {%- assign inputClassName = 'input-error' -%}
+        {%- assign error_def = form.errors | default_errors -%}
+
+        {%- unless error_def contains 'This email address is already associated' or error_def contains 'We have sent an email to' -%}
+          {%- assign inputClassName = 'input-error' -%}
+        {%- endunless -%}
       {% endif %}
 
       {%- assign register_first_name_label = 'customer.register.first_name' | t -%}
