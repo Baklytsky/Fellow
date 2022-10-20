@@ -85,14 +85,14 @@
       {%- render 'accenture-set-phone' -%}
     {% endif %}
 
-    <script src="{{ 'custom.js' | asset_url }}" defer='defer'></script>
+    <script src="{{ 'custom.min.js' | asset_url }}" defer='defer'></script>
 
     {%- if template contains 'collection' -%}
       <script src="{{ 'handlebars-v4.7.7.js' | asset_url }}" defer='defer'></script>
-      <script src="{{ 'collection.js' | asset_url }}" defer='defer'></script>
+      <script src="{{ 'collection.min.js' | asset_url }}" defer='defer'></script>
     {%- endif -%}
 
-    <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'cart.min.js' | asset_url }}" defer="defer"></script>
 
     {% include 'component-customize-js' %}
 
