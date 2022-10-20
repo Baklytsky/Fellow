@@ -399,7 +399,7 @@
               "heroSlide": "shopify:\/\/shop_images\/EKG_Pro_Homepage_Hero.png",
               "desktopAlignment": "center",
               "mobileAlignment": "center",
-              "heroSlide__header": "EVEN ICONS EVOLVE",
+              "heroSlide__header": "Even icons evolve",
               "heroSlide__subheader": "Introducing Stagg EKG Pro and Pro Studio Edition. We set the undisputed standard for electric kettles. Again.",
               "subSlide__bgColor": "#000000",
               "subSlide__textColor": "#FFFFFF",
@@ -475,20 +475,19 @@
               "heroSlide__ctaSubtext": ""
             }
           },
-          "3e0796bc-698b-4618-80b6-261185f9fb1a": {
+          "27a91856-bf47-4ce6-97a1-31a3c2cedede": {
             "type": "splitSlide",
-            "disabled": true,
             "settings": {
               "splitSlide__layout": "right",
-              "heroSlide": "shopify:\/\/shop_images\/Hero_Module_Image_1.png",
+              "heroSlide": "shopify:\/\/shop_images\/HP_Hero_desktop_opt_2_63ab38e3-f0cb-4293-9d0d-d7bc28e31d1d.png",
               "desktopAlignment": "center",
               "mobileAlignment": "center",
-              "heroSlide__header": "Sip with Pride",
-              "heroSlide__subheader": "Celebrate Pride with curated coffees  and custom Carters from the LGBTQIA+ community and allies.",
-              "subSlide__bgColor": "#8cbde0",
+              "heroSlide__header": "Your new routine",
+              "heroSlide__subheader": "Begin your brewing journey with our most-loved gear",
+              "subSlide__bgColor": "#c1dbd2",
               "subSlide__textColor": "#231f20",
-              "heroSlide__ctaURL": "shopify:\/\/collections\/pride-mugs-coffee-collection",
-              "heroSlide__ctaCopy": "Shop Pride Collection",
+              "heroSlide__ctaURL": "https:\/\/fellowproducts.com\/collections\/bestsellers",
+              "heroSlide__ctaCopy": "Shop Best-Sellers",
               "heroSlide__ctaColor": "black",
               "heroSlide__ctaURL2": "",
               "heroSlide__ctaCopy2": "",
@@ -503,7 +502,7 @@
           "58ee7397-6079-412a-9acd-d453a0cf281c",
           "91049687-67b8-4bdc-8f37-c74f97e41d00",
           "c15c0d5c-f86c-436e-95b6-2f10cb6c8b20",
-          "3e0796bc-698b-4618-80b6-261185f9fb1a"
+          "27a91856-bf47-4ce6-97a1-31a3c2cedede"
         ],
         "settings": {
           "addMargin": false

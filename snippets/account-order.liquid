@@ -41,6 +41,10 @@
 
   <div class="account-order-status">
     {%- capture order_status -%}
+    {%- if order.cancelled -%}
+    <span>Canceled: </span>
+    <span>{{ order.cancel_reason_label }}</span>
+    {%- else -%}
       {%- case order.fulfillment_status_label -%}
       {%- when 'Complete' -%}
         <span>Delivered</span>
@@ -56,6 +60,7 @@
         {%- else -%}
         <span>{{ order.fulfillment_status_label }}</span>
       {%- endcase -%}
+    {%- endif -%}
     {%- endcapture -%}
     <div class="f aic">
       <span class="fwb account-order-status-title">{{ 'customer.order.status' | t }}</span>
