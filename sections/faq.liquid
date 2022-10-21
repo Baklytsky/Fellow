@@ -21,7 +21,7 @@
           {%- if title != blank -%}
             <li class="faq__list-item">
               <slide-toggle class="faq__list-header f jcb aic"
-                            data-slide-toggle="{{ block.id }}">
+                            data-slide-target="{{ block.id }}">
                 <div class="faq__list-title">
                   {{ title }}
                 </div>
@@ -30,7 +30,7 @@
                 </div>
               </slide-toggle>
               {%- if description != blank -%}
-                <div class="faq__list-content" data-slide-target="{{ block.id }}">
+                <div class="faq__list-content" data-slide-content="{{ block.id }}">
                   {{ description }}
                 </div>
               {%- endif -%}

@@ -1,4 +1,4 @@
-/* Variable */
+/* Colors */
 $color-white: #fff;
 $color-dim-white: #F5F5F5;
 $color-black: #000;
@@ -7,8 +7,10 @@ $color-dim-black: #585858;
 $color-sand: #FFF9E5;
 $color-grey: #F2F2F2;
 
-$font-header: 'PP Right Grotesk', sans-serif;
-$font-base: 'Inter', sans-serif;
+/* Fonts */
+$font-header: var(--font-heading-family);
+$font-base: var(--font-body-family);
+
 /*Breakpoints*/
 $mobile: 768px;
 $mobile-up: 769px;

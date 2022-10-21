@@ -1,11 +1,11 @@
 {% assign current_variant = product.selected_or_first_available_variant %}
 <section class='full pdpMain__container'>
-  <sticky-scrolling class='pdpMain row no-gutters'>
+  <sticky-product-details class='pdpMain row no-gutters'>
     <div class='pdpMain__Media order-lg-1 rel x'>
       {% include 'pdp-images-bundle-pick-mix' %}
     </div>
     <div class='pdpMain__Content order-lg-2 rel x'>
       {% include 'pdp-details-bundle-pick-mix' %}
     </div>
-  </sticky-scrolling>
+  </sticky-product-details>
 </section>

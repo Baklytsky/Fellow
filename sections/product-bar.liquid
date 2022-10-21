@@ -17,7 +17,7 @@
   }
   {%- endcapture -%}
 
-  {%- capture 'slick-response' -%}
+  {%- capture 'slick_responsive' -%}
     {
     "response": 992,
     "maxMedia": true,
@@ -31,7 +31,7 @@
        data-slick-config='{{- slick-config -}}'>
     {%- if section.blocks.size > 0 -%}
     <div class="pdpBar__wrapper f {% if section.blocks < 3 %}jca{% else %}jcb{% endif %} aic"
-         data-check-slick-response='{{- slick-response -}}'>
+         data-slick-responsive='{{- slick_responsive -}}'>
       {%- for block in section.blocks -%}
         {%- assign svg_icon = block.settings.svg_icon -%}
         {%- assign title = block.settings.text -%}

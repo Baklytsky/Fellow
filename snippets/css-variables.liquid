@@ -1,0 +1,41 @@
+  {% style %}
+      @font-face {
+        font-family: 'Inter';
+        font-style: normal;
+        src: url('{{ 'Inter-VariableFont_slnt.ttf' | asset_url }}') format("truetype-variations");
+        font-weight: 300 900;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'PP Right Grotesk';
+        src: url('{{ 'PPRightGrotesk-Regular.woff2' | asset_url }}') format('woff2');
+        font-weight: 400;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: 'PP Right Grotesk';
+        src: url('{{ 'PPRightGrotesk-Medium.woff2' | asset_url }}') format('woff2');
+        font-weight: 500;
+        font-style: normal;
+      }
+
+    :root {
+    --font-body-family: 'Inter', sans-serif;
+    --font-heading-family: 'PP Right Grotesk', sans-serif;
+    }
+  {% endstyle %}
+
+<script>
+  if (!(((window || {}).CSS || {}).supports && window.CSS.supports('(--a: 0)'))) {
+    const script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = 'https://cdn.jsdelivr.net/npm/css-vars-ponyfill@2';
+    script.onload = function () {
+      cssVars({});
+    };
+
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+</script>

@@ -5,12 +5,17 @@
   <meta charset='utf-8'>
   <meta name='viewport' content='width=device-width,initial-scale=1,shrink-to-fit=no'>
   {% include 'no-index-pages' %}
+  {% render 'css-variables' %}
 
   <link rel='canonical' href='{{ canonical_url }}'>
   <link rel='shortcut icon' href='{{ settings.favicon | img_url: "32x32" }}' type='image/png'>
 
-  <link rel="preload" href="{{ 'index.css' | asset_url }}" as="style">
-  <link rel="preload" href="{{ 'custom.scss.css' | asset_url }}" as="style">
+  {%- comment -%}
+    <link rel="preload" href="{{ 'index.css' | asset_url }}" as="style">
+    <link rel="preload" href="{{ 'custom.scss.css' | asset_url }}" as="style">
+  {%- endcomment -%}
+
+  <link rel="preload" href="{{ 'theme.min.css' | asset_url }}" as="style">
 
   <link rel="preload" href="{{ 'global.min.js' | asset_url }}" as="script">
   <link rel="preload" href="{{ 'cart.min.js' | asset_url }}" as="script">
@@ -46,8 +51,13 @@
     {% include 'google-tag-manager' %}
     {% include 'preconnect' %}
 
+  {%- comment -%}
     {{ 'index.css' | asset_url | stylesheet_tag }}
     {{ 'custom.scss.css' | asset_url | stylesheet_tag }}
+  {%- endcomment -%}
+
+  {{ 'theme.min.css' | asset_url | stylesheet_tag }}
+
     {% include 'swatchUpload' %}
 
     {%- if request.path contains 'carter-move-mug' or request.path contains 'carter-everywhere-mug' or product.handle contains 'carter-move-mug-with-360-sip-lid' -%}

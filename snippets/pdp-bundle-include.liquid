@@ -28,7 +28,7 @@
         <div class="pdpBundleInclude__dropdown-wrapper">
           <div class="pdpBundleInclude__dropdown pdpBundleInclude__dropdown--{{ forloop.index0 }}">
             {%- if bundle_include_product != blank -%}
-              <slide-toggle class="pdpBundleInclude__dropdown-header f jcb aic" data-slide-toggle="{{ id }}">
+              <slide-toggle class="pdpBundleInclude__dropdown-header f jcb aic" data-slide-target="{{ id }}">
                 <div class="pdpBundleInclude__dropdown-title">
                   {{ bundle_include_product_title }}
                 </div>
@@ -37,7 +37,7 @@
                 </div>
               </slide-toggle>
             {%- endif -%}
-            <div class="pdpBundleInclude__dropdown-content" data-slide-target="{{ id }}">
+            <div class="pdpBundleInclude__dropdown-content" data-slide-content="{{ id }}">
               {%- if bundle_include_product != blank -%}
                 <div class="pdpBundleInclude__imageWrapper">
                   <a href="{{ bundle_include_product.url }}" class="pdpBundleInclude__image block rel x">

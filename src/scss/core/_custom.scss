@@ -1,47 +1,3 @@
-/* STORE REDESIGN */
-
-/* Font-face */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  src: url('{{ 'Inter-VariableFont_slnt.ttf' | asset_url }}') format("truetype-variations");
-  font-weight: 300 900;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'PP Right Grotesk';
-  src: url('{{ 'PPRightGrotesk-Regular.woff2' | asset_url }}') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'PP Right Grotesk';
-  src: url('{{ 'PPRightGrotesk-Medium.woff2' | asset_url }}') format('woff2');
-  font-weight: 500;
-  font-style: normal;
-}
-
-/* Variable */
-$color-white: #fff;
-$color-dim-white: #F5F5F5;
-$color-black: #000;
-$color-dim-dark: #ABABAB;
-$color-dim-black: #585858;
-$color-sand: #FFF9E5;
-$color-grey: #F2F2F2;
-
-$font-header: 'PP Right Grotesk', sans-serif;
-$font-base: 'Inter', sans-serif;
-/*Breakpoints*/
-$mobile: 768px;
-$mobile-up: 769px;
-$tablet: 992px;
-$tablet-up: 993px;
-$desk: 1140px;
-$large_desk: 1199px;
-$larger_desk: 1300px;
-$widescreen: 1440px;
-
 body {
   font-family: $font-base;
   font-size: 16px;
@@ -619,11 +575,11 @@ toggle-tabs {
   }
 
   .leftMenu {
-   justify-content:flex-start;
+    justify-content:flex-start;
   }
 
   .rightMenu {
-   justify-content:flex-end;
+    justify-content:flex-end;
   }
 
   .newHeader__blockImages {
@@ -1007,165 +963,6 @@ toggle-tabs {
 
 //-----------------------End Header navigation----------------------------------
 
-/* Slick default styles */
-.slick-slider {
-  position: relative;
-  display: block;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-touch-callout: none;
-  -webkit-user-select: text;
-  -khtml-user-select: text;
-  -moz-user-select: text;
-  -ms-user-select: text;
-  user-select: text;
-  -ms-touch-action: pan-y;
-  touch-action: pan-y;
-  -webkit-tap-highlight-color: transparent;
-  z-index: 1;
-  overflow-x: hidden;
-}
-.slick-list {
-  position: relative;
-  overflow: hidden;
-  display: block;
-  margin: 0;
-  padding: 0;
-
-  &:focus {
-    outline: none;
-  }
-
-  &.dragging {
-    cursor: pointer;
-    cursor: hand;
-  }
-
-  &.draggable {
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
-}
-.slick-slider .slick-track,
-.slick-slider .slick-list {
-  -webkit-transform: translate3d(0, 0, 0);
-  -moz-transform: translate3d(0, 0, 0);
-  -ms-transform: translate3d(0, 0, 0);
-  -o-transform: translate3d(0, 0, 0);
-  transform: translate3d(0, 0, 0);
-}
-
-.slick-track {
-  position: relative;
-  left: 0;
-  top: 0;
-  display: flex;
-
-  &:before,
-  &:after {
-    content: "";
-    display: table;
-  }
-
-  &:after {
-    clear: both;
-  }
-
-  .slick-loading & {
-    visibility: hidden;
-  }
-}
-.slick-slide {
-  float: left;
-  height: 100%;
-  min-height: 1px;
-  display: none;
-  [dir="rtl"] & {
-    float: right;
-  }
-  img {
-    display: block;
-  }
-  &.slick-loading img {
-    display: none;
-  }
-  &.dragging img {
-    pointer-events: none;
-  }
-  &:focus {
-    outline: none;
-  }
-
-  .slick-initialized & {
-    display: block;
-  }
-
-  .slick-loading & {
-    visibility: hidden;
-  }
-  .slick-vertical & {
-    display: block;
-    height: auto;
-    border: 1px solid transparent;
-  }
-}
-
-.slick-dots {
-  width: fit-content;
-  width: -moz-fit-content;
-  max-width: 100%;
-  padding: 12px 16px;
-  margin: 0 auto;
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: center;
-  overflow-x: scroll;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-  ::-webkit-scrollbar {
-    display: none;
-  }
-
-  li {
-    margin: 4px;
-    width: 8px;
-    height: 8px;
-    font-size: 0;
-    line-height: 0;
-  }
-
-  li button {
-    width: 8px;
-    height: 8px;
-    padding: 0;
-    display: block;
-    border-radius: 50%;
-    background-color: #DBDBDB;
-    font-size: 0;
-    line-height: 0;
-    outline: none;
-  }
-
-  li.slick-active button {
-    background-color: #000000;
-  }
-
-  li:only-child {
-    display: none;
-  }
-}
-
-.slick-vertical .slick-track {
-  flex-direction: column;
-}
-
 .jsPrevSlide,
 .jsNextSlide {
   position: absolute;
@@ -1420,12 +1217,12 @@ toggle-tabs {
 
 [data-color="stone-blue"],
 [data-material="stone-blue"] {
-    color: #2B3C4D;
+  color: #2B3C4D;
 }
 
 [data-color="matte-grey"],
 [data-material="matte-grey"] {
-    color: #D8D8D8;
+  color: #D8D8D8;
 }
 
 
@@ -1858,9 +1655,9 @@ toggle-tabs {
 
   .btn--light {
     &:hover {
-        background: transparent;
-        border: 2px solid $color-white;
-        color: $color-white;
+      background: transparent;
+      border: 2px solid $color-white;
+      color: $color-white;
     }
   }
 
@@ -1894,7 +1691,7 @@ toggle-tabs {
   }
 
   .splitSlide__Description {
-margin-bottom: 24px;
+    margin-bottom: 24px;
     padding: 0 0;
     font-family: $font-base;
     font-style: normal;
@@ -2994,7 +2791,7 @@ pdp-main {
       object-position: center;
       object-fit: cover;
     }
-    
+
     video {
       background-color: #000;
     }
@@ -3089,8 +2886,8 @@ h2.pdpCopy__header-price,
   font-weight: bold;
   font-size: 16px;
   line-height: 120%;
-@media screen and (max-width: $tablet) {
-  margin: 8px 0;
+  @media screen and (max-width: $tablet) {
+    margin: 8px 0;
   }
 }
 
@@ -3114,7 +2911,7 @@ h2.pdpCopy__header-price,
 
   .pdp__reviews {
     margin-bottom: 1rem;
-   
+
     .yotpo-display-wrapper {
       .yotpo-icon.yotpo-icon-star, .yotpo-icon-half-star {
         margin: 0 10px 0 0;
@@ -3224,9 +3021,9 @@ h2.pdpCopy__header-price,
 }
 
 #ProductQuickView {
- .cart__button--select-size {
-   margin: 0;
- }
+  .cart__button--select-size {
+    margin: 0;
+  }
 }
 
 .dropdown {
@@ -6837,7 +6634,7 @@ h2.pdpCopy__header-price,
   font-weight: normal;
   font-size: 24px;
   line-height: 120%;
-margin-left: 10px;
+  margin-left: 10px;
 
   @media screen and (max-width: $tablet) {
     margin-top: 8px;
@@ -7038,7 +6835,7 @@ input[type="search"]::-webkit-search-results-decoration {
   right: 20px;
 
   .spinner {
-   animation: rotator 1.4s linear infinite;
+    animation: rotator 1.4s linear infinite;
   }
 
   .path {
@@ -7234,9 +7031,9 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 .searchForm {
- @media screen and (max-width: $tablet) {
+  @media screen and (max-width: $tablet) {
     margin: 0 16px;
- }
+  }
 }
 
 .searchMain__resultHeading {
@@ -7314,10 +7111,10 @@ input[type="search"]::-webkit-search-results-decoration {
       animation: animation-loading-line 1.2s ease-in-out infinite;
     }
 
-     .productCard__details {
-       margin-top: 10px;
-       height: 50px;
-     }
+    .productCard__details {
+      margin-top: 10px;
+      height: 50px;
+    }
   }
 }
 
@@ -7368,7 +7165,7 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 ul.pdp_details__feature_list {
-list-style: unset;
+  list-style: unset;
   padding: 0 16px;
 }
 ul.pdp_details__feature_list > li {
@@ -7533,13 +7330,13 @@ ul.pdp_details__feature_list > li {
   }
 
   #pdp-reviews__widget {
-    
+
     .yotpo span, .yotpo p {
-     font-family: Inter,sans-serif;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 130%;
-    color: #000; 
+      font-family: Inter,sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 130%;
+      color: #000;
     }
 
     .yotpo-label,
@@ -8561,7 +8358,7 @@ ul.pdp_details__feature_list > li {
   .radio-group:not([data-option-color]):not([data-option-material]):not([data-option-size]) {
     margin-left: -1rem;
   }
-  
+
   .radio-group[data-option-burrs] label {
     padding-left: 0;
   }
@@ -10325,7 +10122,7 @@ modal-opener {
   margin: 0 0 8px;
   font-weight: 500;
   line-height: 100%;
-  
+
   @media screen and (max-width: $tablet) {
     text-align: center;
   }
@@ -10344,7 +10141,7 @@ modal-opener {
   justify-content: center;
   max-width: 1440px;
   margin: 0 auto;
-  
+
 
   @media screen and (max-width: $tablet) {
     flex-direction: column;
@@ -10427,7 +10224,7 @@ modal-opener {
   width: 100%;
   max-width: 150px;
   flex-shrink: 0;
-  
+
   .image {
     width: 100%;
     height: 0;
@@ -10464,7 +10261,7 @@ modal-opener {
     margin-right: 5px;
     margin-left: 5px;
   }
-  
+
   a {
     position: absolute;
     top: 0;
@@ -10668,7 +10465,7 @@ modal-opener {
 }
 
 .ImageWithCta.SectionPadding {
-    @media screen and (max-width: $tablet) {
+  @media screen and (max-width: $tablet) {
     padding: 0;
   }
 }

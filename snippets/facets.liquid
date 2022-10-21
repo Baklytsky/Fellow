@@ -14,7 +14,7 @@
         <span class="facet-header-results-count"></span>
       </h2>
       <button type="button" data-clear-facets class="is-hidden">{{'collections.general.facet_clear' | t }}</button>
-      <slide-toggle type="button" data-slide-toggle="facets">
+      <slide-toggle type="button" data-slide-target="facets">
         <span class="slide-toggle-active">{{'collections.general.facet_hide' | t }}</span>
         <span class="slide-toggle-inactive">{{'collections.general.facet_show' | t }}</span>
         <span class="selected-facets-count"></span>
@@ -31,7 +31,7 @@
         </ul>
       </dropdown-toggle>
     </div>
-    <div id="facet-group-wrapper" class="facet-group-wrapper" data-slide-target="facets">
+    <div id="facet-group-wrapper" class="facet-group-wrapper" data-slide-content="facets">
       <script id="facet-group-template" type="text/x-handlebars-template">
         {% raw %}
         {{#if facetsArr.length }}

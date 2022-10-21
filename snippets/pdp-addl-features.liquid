@@ -28,7 +28,7 @@
                     </div>
                   {% endif %}
                   <slide-toggle class="pdpAdditionalFeatures__mobile-dropdown x"
-                       data-slide-toggle="{{ addl_feature_title | handleize }}-{{ forloop.index0 }}">
+                                data-slide-target="{{ addl_feature_title | handleize }}-{{ forloop.index0 }}">
                     {%- if iconSrc != blank or addl_feature_title != blank -%}
                       {% if iconSrc != blank %}
                         <div class="addlFeature__icon">
@@ -53,7 +53,7 @@
                     {%- endif -%}
                   </slide-toggle>
                   <div class="addlFeature__copy hide-mobile"
-                       data-slide-target="{{ addl_feature_title | handleize }}-{{ forloop.index0 }}">
+                       ddata-slide-content="{{ addl_feature_title | handleize }}-{{ forloop.index0 }}">
                       <h3 class="addlFeature__title hide-mobile">
                         {{ addl_feature_title }}
                       </h3>

@@ -1,6 +1,8 @@
-@import "helpers/normalize";
-@import "helpers/mixins";
-@import "libs/slick";
+@import "helpers/_normalize";
+@import "helpers/_mixins";
+@import "libs/_slick";
 @import "core/_base";
 @import "core/_buttons";
 @import "core/_typography";
+@import "core/_swatches";
+@import "core/_custom";

@@ -118,7 +118,7 @@ theme.slickSlider = function () {
 
 theme.slickSlider()
 
-theme.checkSlickResponse = function (selector, config, response, maxMedia) {
+theme.slickResponsive = function (selector, config, response, maxMedia) {
   if (!$(selector).length) return
 
   function checkSlider() {
@@ -154,22 +154,16 @@ theme.checkSlickResponse = function (selector, config, response, maxMedia) {
 }
 
 theme.checkAllSlidersResponse = function () {
-  const allResponseSliders = document.querySelectorAll('[data-check-slick-response]')
+  const allResponseSliders = document.querySelectorAll('[data-slick-responsive]')
   allResponseSliders.forEach(slider => {
-    const sliderAttr = slider.getAttribute('data-check-slick-response');
+    const sliderAttr = slider.getAttribute('data-slick-responsive');
     if (!sliderAttr) return
     const settings = JSON.parse(sliderAttr);
-    theme.checkSlickResponse(settings.selector, settings.config, settings.response, settings.maxMedia)
+    theme.slickResponsive(settings.selector, settings.config, settings.response, settings.maxMedia)
   })
 }
 
 theme.checkAllSlidersResponse()
-
-theme.mutation = function updateProductColors ($targetNode, callback) {
-  const config = { attributes: true, childList: true, subtree: true },
-      observer = new MutationObserver(callback);
-  observer.observe($targetNode, config);
-}
 
 theme.formatMoney = function (cents, format) {
   if (typeof cents === 'string') {
@@ -218,10 +212,6 @@ theme.formatMoney = function (cents, format) {
   }
 
   return formatString.replace(placeholderRegex, value);
-}
-
-theme.headerHeight = function () {
-  document.documentElement.style.setProperty('--header-height', document.getElementById('MainHeader').offsetHeight + 'px');
 }
 
 theme.slideUp = function (target, duration= 500) {
@@ -299,16 +289,14 @@ theme.objToStrUrlEncode = function(obj) {
   return str.join('&')
 }
 
-theme.klaviyoTrigger = function (form, listID = '') {
-  const email = form.querySelector('input[type=email]');
-  const phone = form.querySelector('input[type=tel]');
+theme.klaviyoFetch = function (id, email, phone, listID = '') {
 
   const data = {
     g: listID,
     '$fields': '$source,$email,$phone,$consent_method',
     '$list_fields': '',
     '$timezone_offset': Math.abs(new Date().getTimezoneOffset() / 60),
-    '$source': (form.id) ? form.id : 'Shopify',
+    '$source': (id) ? id : 'Shopify',
     '$email': (email) ? email.value : '',
     '$phone_number': (phone) ? phone.value : '',
     '$consent_method': 'Klaviyo Form',
@@ -511,27 +499,12 @@ theme.searchBar = function () {
       $resultsWrapper = $('.headerSearch__resultsHeader'),
       $resetBtn = $('.headerSearch__resetLabel');
 
-  // function toggleSearch () {
-  //   if ($searchBar.attr('aria-hidden') === 'false') {
-  //     theme.closeSearch();
-  //   } else {
-  //     openSearch();
-  //   }
-  // }
-
   theme.closeSearch = function () {
     $searchBar.attr('aria-hidden', 'true');
     $searchBar.slideUp(0);
     $searchBarToggle.attr('aria-expanded', 'false');
     $searchBar.removeClass('loading');
   }
-
-  // function openSearch () {
-  //   $searchBar.attr('aria-hidden', 'false');
-  //   $searchBar.slideDown(200);
-  //   $searchBarToggle.attr('aria-expanded', 'true');
-  //   inputFocus();
-  // }
 
   function inputFocus () {
     setTimeout(function () {
@@ -630,19 +603,6 @@ theme.searchBar = function () {
 
   });
 
-  // $(document).on('click.searchBarToggle', '.mobileMenu__link[data-action="toggle-search"]', function (event) {
-  //   event.preventDefault();
-  //   toggleSearch();
-  // });
-
-  // $(document).on('mouseover.searchBarOpen', '#search-bar-button[data-action="toggle-search"]', function (event) {
-  //   event.preventDefault();
-  //   openSearch();
-  //   $('.newHeader__openedBlock[aria-hidden="false"]').slideUp();
-  //   $('.newHeader__openedBlock[aria-hidden="false"]').attr('aria-hidden', 'true');
-  //   $('.newHeader__link[data-selected="true"]').attr('data-selected', 'false');
-  // });
-
   $(document).on('input.onInput', '.headerSearch__input[type="search"]', $.debounce(250, function (event) {
     onInput(event);
   }))
@@ -657,12 +617,6 @@ theme.searchBar = function () {
     $resultsWrapper.show();
     inputFocus();
   });
-
-  // $(document).on('mousedown.searchBarClose', function (e) {
-  //   if (!$searchBar.is(e.target) && $searchBar.has(e.target).length === 0 && $searchBarToggle.has(e.target).length === 0) {
-  //     theme.closeSearch();
-  //   }
-  // })
 
 }
 
@@ -720,9 +674,6 @@ document.addEventListener("DOMContentLoaded", ()=> {
   if ($('form[action^="htpps://www.facebook.com"]').length) {
     $('form[action^="htpps://www.facebook.com"]').attr('aria-hidden', 'true')
   }
-
-  theme.headerHeight();
-  window.addEventListener('resize', theme.headerHeight)
 })
 
 class dynamicRecommendations extends HTMLElement {
@@ -854,16 +805,15 @@ class ModalOpener extends HTMLElement {
 }
 customElements.define('modal-opener', ModalOpener);
 
-// Dropdown
 class Dropdown extends HTMLElement {
   constructor() {
     super();
-    document.addEventListener('click', (e) => this.dropdownToggle(e))
+    this.addEventListener('click', (e) => this.dropdownToggle(e))
   }
 
   dropdownToggle(e) {
-    if (this.contains(e.target) && !e.target.closest('[data-dropdown-content]')) {
-      e.target.closest('[data-dropdown]').classList.toggle('active')
+    if (!e.target.closest('[data-dropdown-content]')) {
+      this.classList.toggle('active')
     } else {
       this.classList.remove('active')
     }
@@ -871,15 +821,13 @@ class Dropdown extends HTMLElement {
 }
 
 customElements.define('dropdown-toggle', Dropdown);
-// End dropdown
 
-// Slide toggle
 class SlideToggle extends HTMLElement {
   constructor() {
     super();
     this.duration = this.dataset.duration || 250;
-    this.slideTargetName = this.getAttribute('data-slide-toggle');
-    this.slideTarget = document.querySelector('[data-slide-target="'+ this.slideTargetName + '"]')
+    this.slideTargetName = this.getAttribute('data-slide-target');
+    this.slideTarget = document.querySelector('[data-slide-content="'+ this.slideTargetName + '"]')
     if (this.slideTarget) {
       this.addEventListener('click', (e) => {
         e.preventDefault();
@@ -891,9 +839,7 @@ class SlideToggle extends HTMLElement {
 }
 
 customElements.define('slide-toggle', SlideToggle);
-// End Slide toggle
 
-// Toggle tabs
 class ToggleTabs extends HTMLElement {
   // Required button element: data-selected='true/false'; aria-controls='TAB_ID'; data-action='toggle-tab'
   // Required tab element: data-selected='true/false'; data-tab='TAB_ID'
@@ -919,21 +865,21 @@ class ToggleTabs extends HTMLElement {
 }
 
 customElements.define('toggle-tabs', ToggleTabs);
-// End Toggle tabs
 
-class StickyScrolling extends HTMLElement {
+class StickyProductDetails extends HTMLElement {
   constructor() {
     super();
     this.element = this.querySelector('.pdpMain__details')
-    if (!this.element) return false
     this.topSpacer = document.getElementById('MainHeader').offsetHeight + 24
     this.lastScrollPosition = window.scrollY
     this.currentScrollPosition = window.scrollY
     this.elementDetails = {}
 
-    this.init()
-    document.addEventListener('resize', ()=> this.recalculateHeights())
-    document.addEventListener('scroll', ()=> this.updatePosition())
+    if (this.element) {
+      this.init()
+      document.addEventListener('resize', ()=> this.recalculateHeights())
+      document.addEventListener('scroll', ()=> this.updatePosition())
+    }
   }
 
   init () {
@@ -963,18 +909,14 @@ class StickyScrolling extends HTMLElement {
     this.elementDetails.position = position
     this.element.style.top = `${this.topSpacer + position * -1}px`
     this.lastScrollPosition = this.currentScrollPosition
-    this.checkElementHeight()
-  }
-
-  checkElementHeight() {
     if (this.element.offsetHeight === this.elementDetails.height) return
     this.elementDetails.height = this.element.offsetHeight
   }
 }
 
-customElements.define('sticky-scrolling', StickyScrolling);
+customElements.define('sticky-product-details', StickyProductDetails);
 
-class PdpHelper extends HTMLElement {
+class ProductHelper extends HTMLElement {
   constructor() {
     super();
   }
@@ -1046,8 +988,8 @@ class PdpHelper extends HTMLElement {
   toggleAddButton(buttonsArr) {
     const preOrder = this.select.hasAttribute('data-selected-variant-preorder');
 
-    if (theme.isHidden(this.atc) && this.klaviyoOOS) {
-      this.atc.classList.remove('is-hidden')
+    if (theme.isHidden(this.addToCartBtn) && this.klaviyoOOS) {
+      this.addToCartBtn.classList.remove('is-hidden')
       this.klaviyoOOS.parentElement.classList.add('is-hidden')
     }
 
@@ -1068,7 +1010,7 @@ class PdpHelper extends HTMLElement {
 
   outOfStock() {
     if (this.stickyAtc) this.stickyAtc.removeAttribute('disabled')
-    this.atc.classList.add('is-hidden')
+    this.addToCartBtn.classList.add('is-hidden')
     this.klaviyoOOS.parentElement.classList.remove('is-hidden')
   }
 
@@ -1110,9 +1052,8 @@ class PdpHelper extends HTMLElement {
     this.productPrice.innerHTML = priceInner
   }
 }
-customElements.define('pdp-helper', PdpHelper);
 
-class PdpStickyBar extends PdpHelper {
+class PdpStickyBar extends ProductHelper {
   constructor() {
     super();
     this.product = window.theme.product
@@ -1169,7 +1110,7 @@ class PdpStickyBar extends PdpHelper {
 
 customElements.define('pdp-sticky-bar', PdpStickyBar);
 
-class PdpMain extends PdpHelper {
+class PdpMain extends ProductHelper {
   constructor() {
     super();
     this.product = window.theme.product
@@ -1184,7 +1125,7 @@ class PdpMain extends PdpHelper {
     this.options = this.select.querySelectorAll('option')
     this.radioGroups = Array.from(this.form.querySelectorAll('[data-option-radio]'))
     this.radios = this.form.querySelectorAll('.radio')
-    this.atc = this.form.querySelector('.js-add-to-cart')
+    this.addToCartBtn = this.form.querySelector('.js-add-to-cart')
     this.stickyAtc = this.querySelector('#pdp-sticky-atc')
     this.klaviyoOOS = this.querySelector('.klaviyo-bis-trigger')
     this.stickyBar = this.querySelector('pdp-sticky-bar')
@@ -1198,9 +1139,9 @@ class PdpMain extends PdpHelper {
       this.changeContent()
       this.changeUrl()
     })
-    this.atc.addEventListener('click', (e) => this.addToCart(e))
+    this.addToCartBtn.addEventListener('click', (e) => this.addToCart(e))
     if (this.stickyAtc) this.stickyAtc.addEventListener('click', (e) => {
-      theme.isHidden(this.atc) ? this.klaviyoOOS.click() : this.addToCart(e)
+      theme.isHidden(this.addToCartBtn) ? this.klaviyoOOS.click() : this.addToCart(e)
     })
     if (this.sizeOptions.length) {
       this.sizeOptions.forEach(radio => radio.addEventListener('click', () => {
@@ -1216,17 +1157,25 @@ class PdpMain extends PdpHelper {
     this.changeSelectedOption()
     this.disableUnavailableVariants()
     this.checkVariantTitle()
-    this.toggleAddButton([this.atc, this.stickyAtc])
-    if (this.personalizeBtn) this.setVariantForPersonalize()
+    this.toggleAddButton([this.addToCartBtn, this.stickyAtc])
+    if (this.personalizeBtn) this.setVariantForPersonalization()
     if (this.stickyBar) this.stickyBar.stickyBarVariantChange(this.selectedOptions, this.sizeSelected)
   }
 
   changeUrl() {
     if (!this.selectedVariant) return;
-    window.history.replaceState({}, '', `${window.location.origin}/products/${this.product.handle}?variant=${this.selectedVariant.id}`);
+    const searchParams = new URLSearchParams(window.location.search);
+    let url = `${window.location.origin}/products/${this.product.handle}?variant=${this.selectedVariant.id}`
+
+    if (searchParams) {
+      searchParams.delete('variant')
+      url += (searchParams.toString().length) ? `&${searchParams}` : ''
+    }
+
+    window.history.replaceState({}, '', url);
   }
 
-  setVariantForPersonalize() {
+  setVariantForPersonalization() {
     window.localStorage.setItem('changeVariant', 'true');
     window.localStorage.setItem('variantId', this.selectedVariant.id);
   }
@@ -1263,7 +1212,7 @@ class PdpGallery extends HTMLElement {
       thumbnail.addEventListener('click', () => this.thumbnailScrollOnClick(thumbnail))
     })
     document.addEventListener('scroll', (e) => {
-      if (event.cancelable) e.preventDefault();
+      if (e.cancelable) e.preventDefault();
       setTimeout(() => this.changeActiveThumbnail(), 400)
     })
   }
@@ -1295,13 +1244,13 @@ class PdpGallery extends HTMLElement {
 
   mainGallery() {
     const config = JSON.parse(this.gallery.getAttribute('data-slick-config'))
-    theme.checkSlickResponse('.pdpMain__gallery-wrapper', config, 992, true)
+    theme.slickResponsive('.pdpMain__gallery-wrapper', config, 992, true)
   }
 }
 
 customElements.define('pdp-gallery', PdpGallery);
 
-class bundleMixCard extends PdpHelper {
+class bundleMixCard extends ProductHelper {
   constructor() {
     super();
     this.pdpContainer = this.closest('.pdpMain__container')
@@ -1313,7 +1262,7 @@ class bundleMixCard extends PdpHelper {
     this.options = this.select.querySelectorAll('option')
     this.radioGroups = Array.from(this.querySelectorAll('.bundle-product__option-group'));
     this.radios = this.querySelectorAll('.bundle-radio')
-    this.atc = this.pdpContainer.querySelector('.js-pick-mix-add-to-cart')
+    this.addToCartBtn = this.pdpContainer.querySelector('.js-pick-mix-add-to-cart')
 
     this.onCardVariantChange()
     this.addEventListener('change', () => this.onCardVariantChange())
@@ -1358,13 +1307,13 @@ class bundleMixCard extends PdpHelper {
           preOrder = Array.from(this.pdpContainer.querySelectorAll('.js-bundle-variant select[data-selected-variant-preorder]'));
 
     if (unavailable.length) {
-      theme.changeBtnState(this.atc, 'disabled', 'Unavailable')
+      theme.changeBtnState(this.addToCartBtn, 'disabled', 'Unavailable')
     } else if (preOrder.length) {
-      theme.changeBtnState(this.atc, 'active', 'Pre-order')
+      theme.changeBtnState(this.addToCartBtn, 'active', 'Pre-order')
     } else if (disabled.length) {
-      theme.changeBtnState(this.atc, 'disabled', 'Out Of Stock')
+      theme.changeBtnState(this.addToCartBtn, 'disabled', 'Out Of Stock')
     }  else {
-      theme.changeBtnState(this.atc, 'active', 'Add to Cart')
+      theme.changeBtnState(this.addToCartBtn, 'active', 'Add to Cart')
     }
   }
 
@@ -1397,10 +1346,10 @@ class bundle extends HTMLElement {
     super();
     this.pdpContainer = this.closest('.pdpMain')
     this.gallery = this.pdpContainer.querySelector('.pdpMain__bundle-gallery')
-    this.atcButton = this.querySelector('.js-pick-mix-add-to-cart');
-    this.bundleName = this.atcButton.getAttribute('data-bundle-name');
+    this.addToCartBtn = this.querySelector('.js-pick-mix-add-to-cart');
+    this.bundleName = this.addToCartBtn.getAttribute('data-bundle-name');
     this.selects = this.querySelectorAll('.js-bundle-variant .js-select');
-    this.atcButton.addEventListener('click', this.addBundle.bind(this));
+    this.addToCartBtn.addEventListener('click', this.addBundle.bind(this));
     this.variantsId = [];
     this.variantsData = [];
     if (this.gallery) this.bundleGallery()
@@ -1408,7 +1357,7 @@ class bundle extends HTMLElement {
 
   bundleGallery() {
     const config = JSON.parse(this.gallery.getAttribute('data-slick-config'))
-    theme.checkSlickResponse('.pdpMain__bundle-gallery-wrapper', config, 992, true)
+    theme.slickResponsive('.pdpMain__bundle-gallery-wrapper', config, 992, true)
   }
 
   addBundle(e) {
@@ -1455,7 +1404,7 @@ class bundle extends HTMLElement {
 
 customElements.define('bundle-mix', bundle);
 
-class UpsellProduct extends PdpHelper {
+class UpsellProduct extends ProductHelper {
   constructor() {
     super();
     this.product = JSON.parse(this.querySelector('[type="application/json"]').textContent)
@@ -1467,11 +1416,11 @@ class UpsellProduct extends PdpHelper {
     this.options = this.select.querySelectorAll('option')
     this.radioGroups = Array.from(this.querySelectorAll('.upsell-product__option-group'));
     this.radios = this.querySelectorAll('.upsell-radio')
-    this.atc = this.querySelector('.js-upsell-add-to-cart')
+    this.addToCartBtn = this.querySelector('.js-upsell-add-to-cart')
 
     this.onUpsellVariantChange()
     this.addEventListener('change', () => this.onUpsellVariantChange())
-    this.atc.addEventListener('click', (e) => this.upsellAddToCart(e))
+    this.addToCartBtn.addEventListener('click', (e) => this.upsellAddToCart(e))
   }
 
   onUpsellVariantChange() {
@@ -1482,7 +1431,7 @@ class UpsellProduct extends PdpHelper {
     this.checkVariantTitle()
     this.changePrice()
     this.changeSelectedOption()
-    this.toggleAddButton([this.atc])
+    this.toggleAddButton([this.addToCartBtn])
   }
 
   changeUpsellImage() {
@@ -1688,7 +1637,7 @@ class MP4Video extends HTMLElement {
 
 customElements.define('mp4-video', MP4Video);
 
-class ProductCard extends PdpHelper {
+class ProductCard extends ProductHelper {
   constructor() {
     super();
     this.options = this.querySelector('.productCard__options')
@@ -1752,7 +1701,7 @@ class ProductCard extends PdpHelper {
 
 customElements.define('product-card', ProductCard);
 
-class ProductQuickView extends PdpHelper {
+class ProductQuickView extends ProductHelper {
   constructor() {
     super();
     this.product = JSON.parse(this.querySelector('[type="application/json"]').textContent)
@@ -1768,7 +1717,7 @@ class ProductQuickView extends PdpHelper {
     this.options = this.select.querySelectorAll('option')
     this.radioGroups = Array.from(this.form.querySelectorAll('[data-option-radio]'))
     this.radios = this.form.querySelectorAll('.radio')
-    this.atc = this.form.querySelector('.js-add-to-cart')
+    this.addToCartBtn = this.form.querySelector('.js-add-to-cart')
 
     this.initGallery().then(() => this.quickViewVariantChange())
 
@@ -1780,7 +1729,7 @@ class ProductQuickView extends PdpHelper {
       this.sizeOptions.forEach(radio => radio.addEventListener('click', () => this.checkSizeSelected()))
     }
 
-    this.atc.addEventListener('click', (e) => {
+    this.addToCartBtn.addEventListener('click', (e) => {
       this.addToCart(e)
       this.closest('#PopupModal--quick-add').hide()
     })
@@ -1804,7 +1753,7 @@ class ProductQuickView extends PdpHelper {
     this.disableUnavailableVariants()
     this.checkVariantTitle()
     this.priceChange()
-    this.toggleAddButton([this.atc])
+    this.toggleAddButton([this.addToCartBtn])
     this.quickViewSlideChange()
   }
 
@@ -1853,9 +1802,9 @@ class MarketplaceCard extends HTMLElement {
   constructor() {
     super()
     this.form = this.querySelector('form')
-    this.atc = this.querySelector('[data-marketplace-atc]')
+    this.addToCartBtn = this.querySelector('[data-marketplace-atc]')
 
-    this.atc.addEventListener('click', (e)=> this.marketplaceATC(e))
+    this.addToCartBtn.addEventListener('click', (e)=> this.marketplaceATC(e))
   }
 
   marketplaceATC(e) {
@@ -1879,8 +1828,13 @@ class header extends HTMLElement {
     this.searchLink = this.querySelector('#search-bar-button')
     this.mobileSearchBarOpener = this.querySelector('.mobileMenu__link[data-action="toggle-search"]')
     this.timer = this.querySelector('.announcement-bar__timer')
+    this.headerHeight()
 
-    document.addEventListener('resize', ()=> this.closeMenu())
+    window.addEventListener('resize', ()=> {
+      this.headerHeight()
+      this.closeMenu()
+    })
+
     this.burger.addEventListener('click', ()=> this.toggleBurger())
     this.addEventListener('mouseleave', ()=> this.closeMenu())
 
@@ -1908,6 +1862,10 @@ class header extends HTMLElement {
     })
 
     if (this.timer) this.countdownTimer()
+  }
+
+  headerHeight() {
+    document.documentElement.style.setProperty('--header-height', document.getElementById('MainHeader').offsetHeight + 'px');
   }
 
   openMobileSearch() {
@@ -2252,8 +2210,11 @@ class account extends HTMLElement {
 
   checkKlaviyoEvents(KlaviyoCheckboxes, form) {
     Promise.all(Array.from(KlaviyoCheckboxes).map(checkbox => {
+      const formID = form.id;
+      const email = form.querySelector('input[type=email]');
+      const phone = form.querySelector('input[type=tel]');
       const listID = checkbox.dataset.klaviyoListId || null
-      if (checkbox.checked && listID) return theme.klaviyoTrigger(form, listID)
+      if (checkbox.checked && listID) return theme.klaviyoFetch(formID, email, phone, listID)
     })).then(() => {
       form.submit()
     })

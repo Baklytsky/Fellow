@@ -16,7 +16,7 @@
             <div class="pdpLearnMore__dropdown">
               {% if item["learn_more_block_title"] != blank %}
                 <slide-toggle class="pdpLearnMore__dropdown-header f jcb aic"
-                     data-slide-toggle="{{ item["learn_more_block_title"] | handleize }}-{{ forloop.index0 }}">
+                              data-slide-target="{{ item["learn_more_block_title"] | handleize }}-{{ forloop.index0 }}">
                   <div class="pdpLearnMore__dropdown-title">
                     {{ item["learn_more_block_title"] }}
                   </div>
@@ -27,7 +27,7 @@
               {% endif %}
               {% if item["learn_more_links"] != blank %}
                 <div class="pdpLearnMore__dropdown-content"
-                     data-slide-target="{{ item["learn_more_block_title"] | handleize }}-{{ forloop.index0 }}">
+                     data-slide-content="{{ item["learn_more_block_title"] | handleize }}-{{ forloop.index0 }}">
                   <div class="pdpLearnMore__dropdown-content-wrapper">
                     {% for learn_more_links_item in item["learn_more_links"] %}
                       {%- if forloop.index <= 4 -%}

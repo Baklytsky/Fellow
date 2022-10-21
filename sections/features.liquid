@@ -17,7 +17,7 @@
       }
     {%- endcapture -%}
 
-    {%- capture 'slick-response' -%}
+    {%- capture 'slick_responsive' -%}
       {
         "response": 992,
         "maxMedia": true,
@@ -44,7 +44,7 @@
       {%- endif -%}
 
       {%- if section.blocks.size > 0 -%}
-        <ul class="features__list rel" data-check-slick-response='{{- slick-response -}}' data-toggle-arrows>
+        <ul class="features__list rel" data-slick-responsive='{{- slick_responsive -}}' data-toggle-arrows>
           {%- for block in section.blocks -%}
             {%- assign title = block.settings.title -%}
             {%- assign description = block.settings.description -%}
