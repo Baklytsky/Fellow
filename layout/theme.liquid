@@ -43,6 +43,19 @@
   {% include 'head-meta' %}
 
   {% if template.directory == 'customers' %}
+    <script type="text/javascript">
+      const fbq = false;
+      const _fbq = false;
+
+      Object.defineProperty(window, 'fbq', {
+        value: false,
+        writable: false
+      });
+      Object.defineProperty(window, '_fbq', {
+        value: false,
+        writable: false
+      });
+    </script>
     <script src='{{ 'shopify_common.js' | shopify_asset_url }}' defer='defer'></script>
   {% endif %}
 
