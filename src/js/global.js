@@ -27,6 +27,14 @@ theme.showElements = function (elArr) {
   });
 }
 
+theme.debounce = function (func, timeout = 300) {
+  let timer;
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => { func.apply(this, args); }, timeout);
+  };
+};
+
 theme.addScripts = function (scriptObj) {
   return Promise.all(Object.keys(scriptObj).map(key => {
     return new Promise((resolve) => {
@@ -91,37 +99,21 @@ theme.toggleSlickVideoPlay = function (slider, videoSlides) {
   })
 }
 
-theme.toggleSlickArrows = function (slider, prevArrow, nextArrow) {
-  slider.on('afterChange', (event, slick, currentSlide) => {
-    (currentSlide === 0) ? prevArrow.addClass('is-hidden') : prevArrow.removeClass('is-hidden');
-    (currentSlide === slick.slideCount - 1) ? nextArrow.addClass('is-hidden') : nextArrow.removeClass('is-hidden');
-  })
-}
-
 theme.slickSlider = function () {
   $('[data-section-type="slick-slideshow"]').each(function () {
     const $slider = $(this).find('.jsSlickSlider');
-    let config = null;
+    let config = {};
 
     if ($(this).attr('data-slick-config')) {
       config = $.parseJSON($(this).attr('data-slick-config'));
-      if (config) {
-        if (config['arrows']) {
-          config.prevArrow = $(this).find('.jsPrevSlide');
-          config.nextArrow = $(this).find('.jsNextSlide');
-        }
+
+      if (config['arrows']) {
+        config.prevArrow = $(this).find('.jsPrevSlide');
+        config.nextArrow = $(this).find('.jsNextSlide');
       }
     }
 
     if ($slider.length) $slider.not('.slick-initialized').slick(config);
-
-    if ($slider[0].hasAttribute('data-toggle-arrows')) {
-      const prevArrow = $slider.find('.jsPrevSlide');
-      const nextArrow = $slider.find('.jsNextSlide');
-      if ($(prevArrow).length && $(nextArrow).length) {
-        theme.toggleSlickArrows($slider, $(prevArrow), $(nextArrow))
-      }
-    }
 
     const videoSlides = $slider.find('video')
     if (videoSlides.length) theme.toggleSlickVideoPlay($slider, videoSlides)
@@ -144,13 +136,7 @@ theme.slickResponsive = function (selector, config, response, maxMedia) {
         if (nextArrow.length) config.nextArrow = nextArrow;
       }
       $(selector).not('.slick-initialized').slick(config)
-
-      if ($(selector)[0].hasAttribute('data-toggle-arrows') && $(prevArrow).length && $(prevArrow).length) {
-        theme.toggleSlickArrows($(selector), $(prevArrow), $(nextArrow))
-      }
-
       if (videoSlides.length) theme.toggleSlickVideoPlay($(selector), videoSlides)
-
     } else {
       if ($(selector).hasClass('slick-initialized')) {
         $(selector).slick('unslick')
@@ -1698,7 +1684,9 @@ class Header extends HTMLElement {
     if (this.timer) this.countdownTimer()
 
     this.searchInputs.forEach(input => {
-      input.addEventListener('input', ()=> this.searchInputEvent(input))
+      input.addEventListener('input', theme.debounce(()=> {
+        this.searchInputEvent(input)
+      }, 350))
     })
 
     this.searchForms.forEach(form => {
@@ -1757,6 +1745,15 @@ class Header extends HTMLElement {
       theme.showElements(elToShow)
     }
 
+    if (!queryKey) {
+      search.classList.remove('loading')
+      searchResultContent.innerHTML = ''
+      const hideEl = [mobilePopularSearch, resetSearchBtn]
+      theme.showElements([popularSearch])
+      theme.hideElements(hideEl)
+      return
+    }
+
     if (queryKey) {
       if (mobilePopularSearch) mobilePopularSearch.style.display = 'none'
       resetSearchBtn.style.display = 'block'
@@ -1802,12 +1799,6 @@ class Header extends HTMLElement {
             search.classList.remove('loading')
             searchResult.setAttribute('aria-hidden', 'true');
           });
-    } else {
-      search.classList.remove('loading')
-      searchResultContent.innerHTML = ''
-      const hideEl = [mobilePopularSearch, resetSearchBtn]
-      theme.showElements([popularSearch])
-      theme.hideElements(hideEl)
     }
   }
 

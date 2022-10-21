@@ -9915,16 +9915,16 @@ modal-opener {
   .jsPrevSlide {
     width: 40px;
     height: 40px;
-    display: none;
+    display: none !important;
     padding: 0;
   }
 
   @media screen and (max-width: $tablet) {
     padding: 40px 0;
 
-    .jsNextSlide,
-    .jsPrevSlide {
-      display: block;
+    .jsNextSlide:not(.slick-disabled),
+    .jsPrevSlide:not(.slick-disabled) {
+      display: block !important;
     }
   }
 }
