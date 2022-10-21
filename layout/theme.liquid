@@ -12,10 +12,11 @@
   <link rel="preload" href="{{ 'index.css' | asset_url }}" as="style">
   <link rel="preload" href="{{ 'custom.scss.css' | asset_url }}" as="style">
 
-  <link rel="preload" href="{{ 'custom.js' | asset_url }}" as="script">
+  <link rel="preload" href="{{ 'global.min.js' | asset_url }}" as="script">
+  <link rel="preload" href="{{ 'cart.min.js' | asset_url }}" as="script">
 
   {%- if template contains 'collection' -%}
-    <link rel="preload" href="{{ 'collection.js' | asset_url }}" as="script">
+    <link rel="preload" href="{{ 'collection.min.js' | asset_url }}" as="script">
   {%- endif -%}
 
   {% include 'redirects' %}
@@ -37,6 +38,20 @@
   {% include 'head-meta' %}
 
   {% if template.directory == 'customers' %}
+     <script type="text/javascript">
+      const fbq = false;
+      const _fbq = false;
+      
+      Object.defineProperty(window, 'fbq', {
+        value: false,
+        writable: false
+      });
+      Object.defineProperty(window, '_fbq', {
+        value: false,
+        writable: false
+      });
+    </script>
+  
     <script src='{{ 'shopify_common.js' | shopify_asset_url }}' defer='defer'></script>
   {% endif %}
 
@@ -85,14 +100,14 @@
       {%- render 'accenture-set-phone' -%}
     {% endif %}
 
-    <script src="{{ 'custom.js' | asset_url }}" defer='defer'></script>
+    <script src="{{ 'global.min.js' | asset_url }}" defer='defer'></script>
 
     {%- if template contains 'collection' -%}
       <script src="{{ 'handlebars-v4.7.7.js' | asset_url }}" defer='defer'></script>
-      <script src="{{ 'collection.js' | asset_url }}" defer='defer'></script>
+      <script src="{{ 'collection.min.js' | asset_url }}" defer='defer'></script>
     {%- endif -%}
 
-    <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'cart.min.js' | asset_url }}" defer="defer"></script>
 
     {% include 'component-customize-js' %}
 

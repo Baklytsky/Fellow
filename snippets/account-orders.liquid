@@ -54,6 +54,7 @@
               <h4>Status</h4>
               {%- if order.cancelled -%}
                 <p>Canceled</p>
+                <p>{{ order.cancel_reason_label }}</p>
               {%- else -%}
               {%- case order.fulfillment_status_label -%}
               {%- when 'Complete' -%}
