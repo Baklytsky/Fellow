@@ -5727,13 +5727,27 @@ h2.pdpCopy__header-price,
   }
 
   .filter-result-close {
-    display: block;
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     margin-left: 20px;
-    background-image: url("{{ 'close_x.svg' | asset_url }}");
-    background-size: 24px 24px;
     cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:after {
+      content: "\2715";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      font-size: 16px;
+      color: #000;
+      text-align: center;
+
+    }
   }
 }
 

@@ -15,6 +15,18 @@ theme.setAttributes = function (el, attrObj) {
   Object.keys(attrObj).forEach(key => el.setAttribute(key, attrObj[key]));
 }
 
+theme.hideElements = function (elArr) {
+  elArr.forEach(el => {
+    if (el) el.style.display = 'none'
+  });
+}
+
+theme.showElements = function (elArr) {
+  elArr.forEach(el => {
+    if (el) el.style.display = 'block'
+  });
+}
+
 theme.addScripts = function (scriptObj) {
   return Promise.all(Object.keys(scriptObj).map(key => {
     return new Promise((resolve) => {
@@ -487,189 +499,8 @@ theme.collectionAndSearch = function (isSearchPage) {
   }
 }
 
-theme.searchBar = function () {
-  var $searchBar = $('.headerSearch'),
-      $searchInput = $('.headerSearch__input'),
-      $searchBarToggle = $('[data-action="toggle-search"]'),
-      $searchResultWrapper = $('.headerSearch__results'),
-      $popularSearches = $('.headerSearch__popularSearches'),
-      $searchResultContent = $('.headerSearch__resultsContent'),
-      $searchPopular = $searchBar.find('.search__popular'),
-      $searchEmpty = $('.headerSearch__emptyResults'),
-      $resultsWrapper = $('.headerSearch__resultsHeader'),
-      $resetBtn = $('.headerSearch__resetLabel');
-
-  theme.closeSearch = function () {
-    $searchBar.attr('aria-hidden', 'true');
-    $searchBar.slideUp(0);
-    $searchBarToggle.attr('aria-expanded', 'false');
-    $searchBar.removeClass('loading');
-  }
-
-  function inputFocus () {
-    setTimeout(function () {
-      $searchBar.find('.headerSearch__input').focus();
-    }, 100);
-  }
-
-  function hidePopularSearch () {
-    $popularSearches.hide();
-    $searchEmpty.hide();
-    $resultsWrapper.show();
-    $searchPopular.hide();
-  }
-
-  function showPopularSearch () {
-    $searchPopular.show();
-    $popularSearches.show();
-    $resultsWrapper.hide();
-    $searchEmpty.show();
-  }
-
-  function onInput (event) {
-    var _this = $(event.target),
-        value = _this.val().trim(),
-        queryKey = value.toLowerCase(),
-        queryKeyReplace = queryKey.replace(/ /ig, '-');
-
-    $searchBar.addClass('loading');
-    $searchResultWrapper.attr('aria-hidden', 'false');
-    $searchResultContent.empty();
-
-    if (queryKey.length) {
-      $resetBtn.show();
-      $searchPopular.hide();
-
-
-      fetch(`/search/suggest.json?q=${queryKey}&resources[type]=product`)
-        .then((response) => response.json())
-        .then((suggestions) => {
-          const productSuggestions = suggestions.resources.results.products;
-          let hiddenItems = 0;
-          if (productSuggestions.length > 0) {
-            productSuggestions.forEach(function (product) {
-              if (product.type !== "Gift product") {
-                const productTags = product.tags
-                let noSearchTags = [];
-
-
-                // Make array no search terms
-                $.each(productTags,function(index,value){
-                  const nosearchTag = value.toLowerCase().replace(/ /ig, '-').split('nosearch-')[1]
-                  if (nosearchTag) noSearchTags.push(nosearchTag)
-                })
-
-                if (!noSearchTags.includes(queryKeyReplace)) {
-                  var productItem = `<li class="headerSearch__item"><a href="${product.url}">${product.title}</a></li>`
-                  $searchResultContent.append(productItem);
-                } else {
-                  ++hiddenItems
-                }
-              }
-            })
-
-            if (hiddenItems === productSuggestions.length) {
-              showPopularSearch()
-            } else {
-              hidePopularSearch()
-            }
-          } else {
-            showPopularSearch()
-          }
-
-          $searchBar.removeClass('loading');
-        })
-        .catch((error) => {
-          theme.closeSearch();
-          $searchBar.removeClass('loading');
-          $searchResultWrapper.attr('aria-hidden', 'true');
-        });
-    } else {
-      $searchBar.removeClass('loading');
-      $popularSearches.show();
-      $resetBtn.hide();
-      $searchPopular.show();
-    }
-
-  }
-
-  $(document).on('submit.headerSearchForm', '.headerSearch__form', function (event) {
-    event.preventDefault();
-    var value = $searchInput.val().trim(),
-        queryKey = value.toLowerCase();
-
-    var urlToRedirect = '/search?q=' + queryKey + '&options%5Bprefix%5D=last&type=product';
-    window.location.href = urlToRedirect;
-
-  });
-
-  $(document).on('input.onInput', '.headerSearch__input[type="search"]', $.debounce(250, function (event) {
-    onInput(event);
-  }))
-
-  $(document).on('click.resetSearch', '.headerSearch__resetLabel, #header-search-reset', function () {
-    $searchResultWrapper.attr('aria-hidden', 'true');
-    $popularSearches.show();
-    $searchResultContent.empty();
-    $searchPopular.show();
-    $resetBtn.hide();
-    $searchEmpty.hide();
-    $resultsWrapper.show();
-    inputFocus();
-  });
-
-}
-
-theme.searchPage = function () {
-  var $searchInput = $('.searchForm__inputMain');
-  var $searchInputReset = $('.searchForm__mainResetLabel');
-
-  function changeDocumentTitle () {
-    var resultCount = $(document).find('[data-result-count]').attr('data-result-count');
-    var searchTerms = $(document).find('[data-terms]').attr('data-terms');
-    document.title = `Search: ${resultCount} results found for "${searchTerms}" – Fellow`;
-  }
-  changeDocumentTitle();
-
-  function getUrlRequest () {
-    var value = $searchInput.val().trim();
-    var queryKey = value.toLowerCase();
-    var url = '/search?q=' + queryKey + '&options%5Bprefix%5D=last&type=product';
-
-    window.location.href = url;
-  }
-
-  $(document).on('click.resetMainSearchInput', '.searchForm__mainResetLabel, #search-reset',  function () {
-    $searchInput.removeAttr('value');
-    $(this).hide();
-    getUrlRequest();
-  })
-
-  $(document).on('input.onInputMain', '.searchForm__inputMain[type="search"]', $.debounce(250, function () {
-    var value = $(this).val().trim(),
-        queryKey = value.replace(" ", "-").toLowerCase();
-
-    (queryKey.length) ? $searchInputReset.show() : $searchInputReset.hide();
-  }))
-
-  $(document).on('submit.mainSearchForm', '.searchFormMain', function (event) {
-    event.preventDefault();
-    getUrlRequest()
-  });
-
-}
-
 document.addEventListener("DOMContentLoaded", ()=> {
-  if ($('.collection').length || $('.searchMain').length) {
-    if ($('.searchMain').length) {
-      var isSearchPage = true;
-    }
-    theme.collectionAndSearch(isSearchPage);
-  }
-
-  if ($('.headerSearch').length) theme.searchBar();
-
-  if ($('.searchMain').length) theme.searchPage();
+  if ($('.searchMain').length) theme.collectionAndSearch(true);
 
   if ($('form[action^="htpps://www.facebook.com"]').length) {
     $('form[action^="htpps://www.facebook.com"]').attr('aria-hidden', 'true')
@@ -1816,7 +1647,7 @@ class MarketplaceCard extends HTMLElement {
 
 customElements.define('marketplace-card', MarketplaceCard);
 
-class header extends HTMLElement {
+class Header extends HTMLElement {
   constructor() {
     super()
     this.megamenuWrapper = this.querySelector('.newHeader__openedBlock')
@@ -1824,8 +1655,10 @@ class header extends HTMLElement {
     this.mobileMenu = this.querySelector('.mobileMenu')
     this.mobileItem = this.querySelectorAll('.mobileMenu__item')
     this.megamenuLinks = this.querySelectorAll('.newHeader__MainLink')
-    this.search = this.querySelector('.headerSearch')
-    this.searchLink = this.querySelector('#search-bar-button')
+    this.mobileSearch = this.querySelector('#header-search')
+    this.searchInputs = this.querySelectorAll('.headerSearch__input')
+    this.searchForms = this.querySelectorAll('.headerSearch__form')
+    this.searchResetBtns = this.querySelectorAll('.searchForm__resetLabel')
     this.mobileSearchBarOpener = this.querySelector('.mobileMenu__link[data-action="toggle-search"]')
     this.timer = this.querySelector('.announcement-bar__timer')
     this.headerHeight()
@@ -1833,6 +1666,7 @@ class header extends HTMLElement {
     window.addEventListener('resize', ()=> {
       this.headerHeight()
       this.closeMenu()
+      if (window.innerWidth > 992 && this.mobileMenu.classList.contains('active')) this.toggleBurger()
     })
 
     this.burger.addEventListener('click', ()=> this.toggleBurger())
@@ -1862,6 +1696,23 @@ class header extends HTMLElement {
     })
 
     if (this.timer) this.countdownTimer()
+
+    this.searchInputs.forEach(input => {
+      input.addEventListener('input', ()=> this.searchInputEvent(input))
+    })
+
+    this.searchForms.forEach(form => {
+      form.addEventListener('submit', (e)=> {
+        e.preventDefault()
+        this.searchSubmit(form)
+      })
+
+      form.addEventListener('reset', ()=> {
+        const input = form.querySelector('.headerSearch__input')
+        input.value = ''
+        this.searchInputEvent(input)
+      })
+    })
   }
 
   headerHeight() {
@@ -1869,17 +1720,101 @@ class header extends HTMLElement {
   }
 
   openMobileSearch() {
-    this.search.setAttribute('aria-hidden', 'false');
-    theme.slideDown(this.search, 200)
+    this.mobileSearch.setAttribute('aria-hidden', 'false');
+    theme.slideDown(this.mobileSearch, 200)
     this.mobileSearchBarOpener.setAttribute('aria-expanded', 'true');
     setTimeout(()=> {
-      this.search.querySelector('.headerSearch__input').focus();
+      this.mobileSearch.querySelector('.headerSearch__input').focus();
     }, 100)
   }
 
   closeMobileSearch() {
-    this.search.setAttribute('aria-hidden', 'true')
+    this.mobileSearch.setAttribute('aria-hidden', 'true')
     this.mobileSearchBarOpener.setAttribute('aria-expanded', 'false');
+  }
+
+  searchInputEvent(input) {
+    const search = input.closest('.headerSearch'),
+        searchResult = search.querySelector('.headerSearch__results'),
+        searchResultWrapper = search.querySelector('.headerSearch__resultsHeader'),
+        searchResultContent = search.querySelector('.headerSearch__resultsContent'),
+        popularSearch = search.querySelector('.headerSearch__popularSearches'),
+        mobilePopularSearch = search.querySelector('.search__popular'),
+        emptySearch = search.querySelector('.headerSearch__emptyResults'),
+        resetSearchBtn = search.querySelector('.headerSearch__resetLabel'),
+        queryKey = input.value.trim().toLowerCase(),
+        queryKeyReplace = queryKey.replace(/ /ig, '-');
+    search.classList.add('loading')
+
+    function togglePopularSearch(action) {
+      const elToHide = (action === 'hide')
+              ? [popularSearch, emptySearch, mobilePopularSearch]
+              : [searchResultWrapper],
+          elToShow = (action === 'hide')
+              ? [searchResultWrapper]
+              : [popularSearch, emptySearch, mobilePopularSearch];
+      theme.hideElements(elToHide)
+      theme.showElements(elToShow)
+    }
+
+    if (queryKey) {
+      if (mobilePopularSearch) mobilePopularSearch.style.display = 'none'
+      resetSearchBtn.style.display = 'block'
+
+      fetch(`/search/suggest.json?q=${queryKey}&resources[type]=product`)
+          .then((response) => response.json())
+          .then((suggestions) => {
+            searchResultContent.innerHTML = ''
+            const productSuggestions = suggestions.resources.results.products;
+            let hiddenItems = 0;
+            if (productSuggestions.length > 0) {
+              productSuggestions.forEach((product) => {
+                if (product.type !== "Gift product") {
+                  const productTags = product.tags
+                  const noSearchTags = [];
+
+                  // Make array no search terms
+                  productTags.forEach(value => {
+                    const noSearchTag = value.toLowerCase().replace(/ /ig, '-').split('nosearch-')[1]
+                    if (noSearchTag) noSearchTags.push(noSearchTag)
+                  })
+
+                  if (!noSearchTags.includes(queryKeyReplace)) {
+                    const productItem = `<li class="headerSearch__item"><a href="${product.url}">${product.title}</a></li>`
+                    searchResultContent.innerHTML += productItem
+                  } else {
+                    ++hiddenItems
+                  }
+                }
+              })
+
+              if (hiddenItems === productSuggestions.length) {
+                togglePopularSearch()
+              } else {
+                togglePopularSearch('hide')
+              }
+            } else {
+              togglePopularSearch()
+            }
+            search.classList.remove('loading')
+          })
+          .catch((error) => {
+            search.classList.remove('loading')
+            searchResult.setAttribute('aria-hidden', 'true');
+          });
+    } else {
+      search.classList.remove('loading')
+      searchResultContent.innerHTML = ''
+      const hideEl = [mobilePopularSearch, resetSearchBtn]
+      theme.showElements([popularSearch])
+      theme.hideElements(hideEl)
+    }
+  }
+
+  searchSubmit(form) {
+    const value = form.querySelector('input[type=search]').value.trim(),
+        queryKey = value.toLowerCase();
+    window.location.href = '/search?q=' + queryKey + '&options%5Bprefix%5D=last&type=product';
   }
 
   closeMenu() {
@@ -1899,7 +1834,7 @@ class header extends HTMLElement {
       this.mobileMenu.querySelectorAll('.subMenuList').forEach(el => {
         theme.slideUp(el, 200)
       })
-      if (this.search.getAttribute('aria-hidden') === 'false') this.closeMobileSearch()
+      if (this.mobileSearch.getAttribute('aria-hidden') === 'false') this.closeMobileSearch()
     }
   }
 
@@ -1979,7 +1914,44 @@ class header extends HTMLElement {
   }
 }
 
-customElements.define('header-nav', header);
+customElements.define('header-nav', Header);
+
+class SearchPageForm extends HTMLElement {
+  constructor() {
+    super();
+    this.form = this.querySelector('.searchFormMain')
+    this.searchInput = this.querySelector('.searchForm__inputMain')
+    this.searchReset = this.querySelector('.searchForm__mainResetLabel')
+    this.searchInput.addEventListener('input', () => this.searchResetState())
+    this.form.addEventListener('reset', ()=> {
+      this.searchInput.removeAttribute('value')
+      this.searchReset.style.display = 'none'
+      this.getUrlRequest()
+    })
+    this.form.addEventListener('submit', (e)=> {
+      e.preventDefault()
+      this.getUrlRequest()
+    })
+  }
+
+  getUrlRequest() {
+    const queryKey = this.searchInput.value.trim().toLowerCase()
+    window.location.href = '/search?q=' + queryKey + '&options%5Bprefix%5D=last&type=product';
+  }
+
+  searchResetState () {
+    const value = this.searchInput.value.trim(),
+        queryKey = value.replace(" ", "-").toLowerCase();
+
+    (queryKey)
+        ? this.searchReset.style.display = 'block'
+        : this.searchReset.style.display = 'none'
+  }
+}
+
+customElements.define('search-form', SearchPageForm);
+
+
 
 class SlideTabSection extends HTMLElement {
   constructor() {
@@ -2007,7 +1979,7 @@ class SlideTabSection extends HTMLElement {
 
 customElements.define('slide-tab-section', SlideTabSection);
 
-class account extends HTMLElement {
+class Account extends HTMLElement {
   constructor() {
     super();
     this.breadcrumbs = this.querySelector('.breadcrumbs')
@@ -2295,4 +2267,4 @@ class account extends HTMLElement {
   }
 }
 
-customElements.define('account-element', account);
+customElements.define('account-element', Account);
