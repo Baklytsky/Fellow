@@ -487,7 +487,7 @@
               "subSlide__bgColor": "#c1dbd2",
               "subSlide__textColor": "#231f20",
               "heroSlide__ctaURL": "https:\/\/fellowproducts.com\/collections\/bestsellers",
-              "heroSlide__ctaCopy": "Shop Best-Sellers",
+              "heroSlide__ctaCopy": "Shop Best Sellers",
               "heroSlide__ctaColor": "black",
               "heroSlide__ctaURL2": "",
               "heroSlide__ctaCopy2": "",
@@ -867,7 +867,7 @@
         "type": "hp-iwt",
         "settings": {
           "enable_section": true,
-          "image": "shopify:\/\/shop_images\/HP_Module_3_Award_Winning__2x_f6d00937-0152-40bc-ae69-079b15a81458.png",
+          "image": "shopify:\/\/shop_images\/Refer_A_Friend_Homepage_Module.png",
           "layout": "right",
           "header": "Coffee's Better Shared",
           "description": "<p>Refer a friend to Fellow and you’ll both get a free Carter Move Mug.<\/p>",
@@ -1029,7 +1029,7 @@
         "type": "activate_account_success",
         "settings": {
           "heading": "Welcome",
-          "description": "<p>Success! Your account has been created. <a href=\"\/collections\/bestsellers\" title=\"Best Sellers\">Continue shopping<\/a> or return to the <a href=\"\/\" title=\"\/\">home<\/a> page?<\/p>"
+          "description": "<p>Success! Your account has been created. <a href=\"\/collections\/bestsellers\" title=\"Best Sellers\">Continue shopping<\/a>.<\/p>"
         }
       }
     },
