@@ -1,0 +1,27 @@
+<div class="account-wrapper activate-success">
+  <div class="page-wrapper">
+    <h2 class="account-heading">{{ section.settings.heading }}</h2>
+    <div class="account-text">{{ section.settings.description }}</div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Activate success settings",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Welcome",
+      "label": "Heading"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "default": "<p>Success! Your account has been created.</p>",
+      "label": "Description"
+    }
+  ]
+}
+{% endschema %}

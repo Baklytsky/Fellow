@@ -1,0 +1,54 @@
+{%- comment -%}
+{%- render 'account-contact-preferences' customer: customer -%}
+{%- endcomment -%}
+
+<h2 class="account-heading">{{ 'customer.addresses.contact_preferences' | t }}</h2>
+<form id="form_contact-preferences" data-accenture-form>
+  <input type="hidden" name="customer[id]" value="{{ customer.id }}"/>
+
+  {%- assign register_accepts_marketing_label = 'customer.register.accepts_marketing' | t -%}
+  {%- if settings.email_klaviyo_list_id != blank -%}
+    {%- assign accepts_email_marketing_attr = 'data-klaviyo-list-id=' | append:'"' | append: settings.email_klaviyo_list_id | append:'"' -%}
+  {%- endif -%}
+
+  {% render 'component-input'
+    label: register_accepts_marketing_label,
+    name: 'customer[accepts_marketing]',
+    type: 'checkbox',
+    value: 'false',
+    className: inputClassName,
+    attr: accepts_email_marketing_attr %}
+
+  {%- comment -%}
+    {%- capture register_accepts_sms_marketing_label -%}
+      <div>
+        {{ 'customer.register.accepts_sms_marketing' | t }}
+        <div class="account-sms-marketing-info">
+          By checking this box, you agree to receive promotional and personalized text messages
+          (e.g. cart reminders) from Fellow to the cell number provided. Msg frequency varies.
+          <span class="fwb">Reply STOP to cancel at any time, and reply HELP for help.</span> Msg & data rates may apply.
+          Consent is not a condition of any purchase.
+        </div>
+      </div>
+    {%- endcapture -%}
+
+    {%- if settings.sms_klaviyo_list_id != blank -%}
+      {%- assign accepts_sms_marketing_attr = 'data-klaviyo-list-id=' | append:'"' | append: settings.sms_klaviyo_list_id | append:'"' -%}
+    {%- endif -%}
+
+  {% render 'component-input'
+    label: register_accepts_sms_marketing_label,
+    name: 'customer[sms_marketing_consent]',
+    type: 'checkbox',
+    value: 'false',
+    className: inputClassName,
+    attr: accepts_sms_marketing_attr %}
+  {%- endcomment -%}
+
+
+  {% render 'component-button'
+    tag: 'button',
+    type: 'submit',
+    cta: 'Save',
+    className: 'account-btn btn btn--lg btn--dark' %}
+</form>

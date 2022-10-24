@@ -1,0 +1,86 @@
+{%- comment -%}
+{%- render 'account-update', customer: customer, formClassName: formClassName  -%}
+{%- endcomment -%}
+
+<form id="form_update" class='{{formClassName}}' data-accenture-form style='display: none'>
+  <input type="hidden" name="customer[id]" value="{{ customer.id }}"/>
+
+  {%- if title != blank -%}
+    <h2 class="account-heading">{{ title }}</h2>
+  {%- endif -%}
+
+  {%- capture return_btn_attr -%}
+    data-toggle-address="update" data-breadcrumbs-title="{{ 'customer.info.edit_information' | t }}"
+  {%- endcapture -%}
+
+  {%- assign return_cta = 'customer.addresses.return' | t -%}
+
+  {% render 'component-button',
+    tag: 'button',
+    cta: return_cta,
+    type: 'button',
+    dataAttr: return_btn_attr,
+    className: 'account-cancel-btn' %}
+
+  <div class="account-text required">{{ 'customer.register.required' | t }}</div>
+
+  <div class='account-error is-hidden'>
+    {%- render 'icon' with 'error' -%}
+    <span class="account-error-inner"></span>
+  </div>
+
+  {%- assign register_first_name_label = 'customer.register.first_name' | t -%}
+
+  {%
+    render 'component-input'
+    label: register_first_name_label,
+    name: 'customer[first_name]',
+    value: customer.first_name,
+    type: 'text',
+    required: 'true',
+    autocomplete: "on"
+  %}
+
+  {%- assign register_last_name_label = 'customer.register.last_name' | t -%}
+
+  {%
+    render 'component-input'
+    label: register_last_name_label,
+    name: 'customer[last_name]',
+    value: customer.last_name,
+    type: 'text',
+    required: 'true',
+    autocomplete: "on"
+  %}
+
+  {%- assign register_email_label = 'customer.register.email' | t -%}
+
+  {%
+    render 'component-input'
+    label: register_email_label,
+    name: 'customer[email]',
+    type: 'email',
+    value: customer.email,
+    required: 'true',
+    autocomplete: "on"
+  %}
+
+  {%- assign register_phone_label = 'customer.register.phone_number' | t -%}
+
+  {%
+    render 'component-input',
+    label: register_phone_label,
+    name: 'customer[phone]',
+    value: customer.phone,
+    type: 'tel',
+    autocomplete: "on"
+  %}
+
+  {%
+    render 'component-button'
+    tag: 'button',
+    type: 'submit',
+    cta: 'Save',
+    className: 'account-btn btn btn--lg btn--dark'
+  %}
+</form>

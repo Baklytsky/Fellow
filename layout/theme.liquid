@@ -37,6 +37,19 @@
   {% include 'head-meta' %}
 
   {% if template.directory == 'customers' %}
+    <script type="text/javascript">
+      const fbq = false;
+      const _fbq = false;
+
+      Object.defineProperty(window, 'fbq', {
+        value: false,
+        writable: false
+      });
+      Object.defineProperty(window, '_fbq', {
+        value: false,
+        writable: false
+      });
+    </script>
     <script src='{{ 'shopify_common.js' | shopify_asset_url }}' defer='defer'></script>
   {% endif %}
 
@@ -79,6 +92,11 @@
     {% include 'cloak' %}
 
     {{ 'libs.min.js' | asset_url | script_tag }}
+
+    {% if template contains 'customers/account' or template contains 'customers/register' or template == 'index' %}
+      <script src="https://app.accentuate.io/dist/proxy.js" defer="defer"></script>
+      {%- render 'accenture-set-phone' -%}
+    {% endif %}
 
     <script src="{{ 'custom.js' | asset_url }}" defer='defer'></script>
 

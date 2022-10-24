@@ -15,24 +15,22 @@
 {%- endcapture -%}
 
 <div class='{{ cx }}' style='{{ style }}'>
-  <label id='{{ selTitle }}' for='{{ id | default: uid | strip }}' class='hide'>{{ selTitle }}</label>
+  <label id='{{ selTitle }}' for='{{ id | default: uid | strip }}' class="input-wrapper__label">{{ label }}</label>
   <div class='rel' tabindex='-1'>
     <select
       id='{{ id | default: uid | strip }}'
       name='{{ name | default: label | strip }}'
       value='{{ value }}'
-      title='{{ selTitle }}'
+      title='{{ label }}'
       class="js-select"
       {{ attributes }}
       {% if ariaHidden %}aria-hidden='true'{% endif %}
       {% if required %}required{% endif %}
-      tabindex='-1'
-      aria-label="Product variants select"
     >
       {% if placeholder %}<option disabled selected>{{ placeholder }}</option>{% endif %}
       {{ options }}
     </select>
-
+    {% render 'icon' with 'dropdown' %}
   </div>
 </div>
 

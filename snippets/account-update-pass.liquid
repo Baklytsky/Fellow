@@ -1,0 +1,65 @@
+{%- comment -%}
+{%- render 'account-update-pass', customer: customer, formClassName: formClassName, title: title  -%}
+{%- endcomment -%}
+
+<form id="form_update-pass" class='{{formClassName}}' data-accenture-form style='display: none'>
+  <input type="hidden" name="customer[id]" value="{{ customer.id }}"/>
+
+  {%- if title != blank -%}
+    <h2 class="account-heading">{{ title }}</h2>
+  {%- endif -%}
+
+  {%- capture return_btn_attr -%}
+    data-toggle-address="update-pass" data-breadcrumbs-title="{{ title }}"
+  {%- endcapture -%}
+
+  {%- assign return_cta = 'customer.addresses.return' | t -%}
+
+  {% render 'component-button',
+    tag: 'button',
+    cta: return_cta,
+    type: 'button',
+    dataAttr: return_btn_attr,
+    className: 'account-cancel-btn' %}
+
+  <div class="account-text required">{{ 'customer.register.required' | t }}</div>
+
+  <div class='account-error is-hidden'>
+    {%- render 'icon' with 'error' -%}
+    <span class="account-error-inner"></span>
+  </div>
+
+  {%- assign register_password_label = 'customer.activate_account.password' | t -%}
+
+  {%- capture pass_min_length -%}
+    minlength="5"
+  {%- endcapture -%}
+
+  {%
+    render 'component-input'
+    label: register_password_label,
+    name: 'customer[password]',
+    type: 'password',
+    required: 'true',
+    attr: pass_min_length,
+    className: inputClassName
+  %}
+
+  {%- assign activate_confirm_password_label = 'customer.activate_account.password_confirm' | t -%}
+
+  {% render 'component-input'
+    label: activate_confirm_password_label,
+    name: 'customer[password_confirmation]',
+    type: 'password',
+    required: 'true',
+    atrr: pass_min_length,
+    className: inputClassName %}
+
+  {%
+    render 'component-button'
+    tag: 'button',
+    type: 'submit',
+    cta: 'Save',
+    className: 'account-btn btn btn--lg btn--dark'
+  %}
+</form>

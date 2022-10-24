@@ -1,55 +1,122 @@
-<div class='container--l x ac px1'>
+<account-element class='account-page page-wrapper' tabindex="0">
+  <div class="account-breadcrumbs hide-mobile">
+    {%- render 'breadcrumbs' -%}
+  </div>
   <div class='account-wrapper'>
-    {%
-    include 'account-titles' with
-    title: 'My Account'
-    %}
+    <div class="account-sidebar">
+      <h2 class="account-heading hide-mobile">{{ 'customer.account.title' | t: name: customer.first_name }}</h2>
+      <div class="account-sidebar-menu">
+        <a href="{{ routes.account_url }}"
+           class="account-sidebar-menu-item f aic current-page" data-acoount-overview>
+          {%- render 'icon' with 'customer-logo' -%}
+          {{ 'customer.account.overview' | t }}
+        </a>
+        <a href="{{ routes.account_logout_url }}" class="account-sidebar-menu-item f aic hide-mobile" data-sign-out>
+          {%- render 'icon' with 'sign-out' -%}
+          {{ 'customer.account.sign_out' | t }}
+        </a>
+      </div>
+    </div>
 
-    <section class='account-home outer mt2'>
-      <div class='container--s mxa'>
-        <h2 class='h5 mt0 caps medium'>Order History</h2>
+    <section class='account-home rel'>
+      {%- assign edit_info_title = 'customer.info.edit_information' | t -%}
 
-        <hr class='cgm mb1 mt025'>
+      {%- render 'account-update',
+        title: edit_info_title,
+        customer: customer,
+        formClassName: 'account-address-form'  -%}
 
-        {% paginate customer.orders by 99 %}
+      {%- assign change_pass_title = 'customer.addresses.change_password' | t -%}
 
-          {% if customer.orders.size != 0 %}
+      {%- render 'account-update-pass',
+        customer: customer,
+        formClassName: 'account-address-form'
+        title: change_pass_title -%}
 
-            <ul class='account-home__orders'>
-              {% for order in customer.orders %}
-                <li class='account-home__order block mb1'>
-                  <div class='x f aic jcb h5 mb05'>
-                    <a href='{{ order.customer_url }}' class='link--underline mr1 medium'>
-                      {{order.name}}
-                    </a>
+      {%- assign add_address_title = 'customer.addresses.add' | t -%}
 
-                    <span class='cg h6'>{{order.created_at | date: '%b %d, %Y'}}</span>
-                  </div>
+      {% render 'account-address-form',
+        id: 'new',
+        formClassName: 'account-address-form',
+        action: customer.new_address,
+        title: add_address_title,
+        cta: 'Save' %}
 
-                  <div class='h6'>
-                    <div>
-                      <span class='medium mr05'>Payment:</span><span>{{order.financial_status_label}}</span>
-                    </div>
-                    <div>
-                      <span class='medium mr05'>Shipping:</span><span>{{order.fulfillment_status_label}}</span>
-                    </div>
-                  </div>
+      {%- unless customer.addresses_count == 0 -%}
+      {%- assign edit_address_title = 'customer.addresses.update' | t -%}
 
-                  <div class='h6 bold mt05'>
-                    <span>Total:</span><span>{{order.total_price | money}}</span>
-                  </div>
-                </li>
-              {% endfor %}
-            </ul>
+        {%- for address in customer.addresses -%}
+          {% assign default_addy = false %}
 
-          {% else %}
-            <p class='align-c px2 bg-cg1'>You don't have any orders yet!</p>
+          {% if customer.default_address == address %}
+            {% assign default_addy = true %}
           {% endif %}
 
-          {% include 'pagination' %}
-        {% endpaginate %}
+          {%
+            render 'account-address-form',
+            id: address.id,
+            action: address,
+            formClassName: 'account-address-form',
+            title: edit_address_title,
+            cta: 'Save',
+            default_addy: default_addy
+          %}
+        {%- endfor -%}
+      {%- endunless -%}
+
+      <div class="account-home-content" data-account-content>
+        <div class='account-orders'>
+          {%- render 'account-orders', customer: customer -%}
+        </div>
+
+        <div class="account-info">
+          {%- render 'account-info', customer: customer -%}
+        </div>
+
+        <div class="account-address">
+          <h2 class="account-heading">{{ 'customer.addresses.title' | t }}</h2>
+
+          <div class="account-action-wrapper f aic account-action-add-address">
+            <button type="button" class="account-action-btn"
+                    data-toggle-address="new"
+                    data-breadcrumbs-title="{{ 'customer.addresses.add' | t }}">
+              {{ 'customer.addresses.add_new' | t }}
+            </button>
+          </div>
+
+          {%- unless customer.addresses_count == 0 -%}
+            {%- for address in customer.addresses -%}
+              {% assign default_addy = false %}
+
+              {% if customer.default_address == address %}
+                {% assign default_addy = true %}
+              {% endif %}
+
+              {%
+                render 'account-address',
+                address: address,
+                default: default_addy,
+                edit: true
+              %}
+            {%- endfor -%}
+          {%- endunless -%}
+
+        </div>
+
+        {%- unless customer.accepts_marketing -%}
+          <div class="account-contact-preferences">
+            {%- render 'account-contact-preferences' customer: customer -%}
+          </div>
+        {%- endunless -%}
+
+        <div class="account-sign-out hide-desktop">
+          <a href="{{ routes.account_logout_url }}" class="f aic">
+            {{ 'customer.account.sign_out' | t }}
+          </a>
+        </div>
+
       </div>
     </section>
   </div>
 
-</div>
+</account-element>

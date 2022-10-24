@@ -355,6 +355,15 @@
         "type": "url",
         "id": "social_linkedin_link",
         "label": "LinkedIn link"
+      },
+      {
+        "type": "header",
+        "content": "Contact Us"
+      },
+      {
+        "type": "url",
+        "id": "contact_us_link",
+        "label": "Contact Us link"
       }
     ]
   },
@@ -366,6 +375,41 @@
         "id": "favicon",
         "label": "Favicon image",
         "info": "Will be scaled down to 32 x 32px"
+      }
+    ]
+  },
+  {
+    "name": "Account",
+    "settings": [
+      {
+        "type": "text",
+        "id": "email_klaviyo_list_id",
+        "label": "Klaviyo email list ID"
+      },
+      {
+        "type": "text",
+        "id": "sms_klaviyo_list_id",
+        "label": "Klaviyo SMS list ID"
+      },
+      {
+        "type": "url",
+        "id": "terms_of_service_link",
+        "label": "Terms of service link"
+      },
+      {
+        "type": "url",
+        "id": "privacy_policy_link",
+        "label": "Privacy policy link"
+      },
+      {
+        "type": "url",
+        "id": "return_policy_link",
+        "label": "Return policy link"
+      },
+      {
+        "type": "richtext",
+        "id": "empty_orders_text",
+        "label": "Empty orders text"
       }
     ]
   }

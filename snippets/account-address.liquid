@@ -1,21 +1,59 @@
-<div class='address bggl rel px1 {{ className }}'>
+{%- comment -%}
+{% render 'account-address',
+  address: address,
+  default: default_addy,
+  className: '' %}
+{%- endcomment -%}
+
+{%- capture address_content -%}
   {% if default %}
-    <h6 class='address__default pv025 ph05 abs right small bgw caps track'>Default</h6>
+    <p class="account-title">{{ 'customer.addresses.default' | t }}</p>
   {% endif %}
+{%- render 'default-address', address: address -%}
+{%- endcapture -%}
 
-  <h6>
-    <div class='medium mb1'>{{ address.name }}</div>
-    {% if address.company %}{{ address.company }}<br />{% endif %}
-    {{ address.street }}<br />
-    {{ address.city | capitalize }}{% if address.province %}, {{ address.province | upcase }} {% endif %} {{ address.zip | upcase }}<br />
-    {{ address.country }}<br />
-    {% if address.phone != '' %}{{ address.phone }}{% endif %}
-  </h6>
+<div class="account-address-item">
+  {{ address_content }}
+  <div class="account-action-wrapper f aic">
+    <button type="button" class="account-action-btn"
+            data-toggle-address="{{ address.id }}" data-breadcrumbs-title="{{ 'customer.addresses.update' | t }}">
+      {{ 'customer.addresses.edit' | t }}
+    </button>
+    <modal-opener data-modal="#PopupModal--{{ address.id }}">
+      <button class="account-action-btn"
+              type="button"
+              aria-haspopup="dialog">
+        {{ 'customer.addresses.delete' | t }}
+      </button>
+    </modal-opener>
+  </div>
 
-  {% if edit %}
-    <div class='address__footer mt05'>
-      <button class='button--reset link--underline mr05 caps track medium' onclick='slater.toggleForm({{address.id}})'>Edit</button>
-      <button class='button--reset link--underline mr05 caps track medium' onclick='slater.removeAddress({{address.id}})'>Delete</button>
+  <modal-dialog id="PopupModal--{{ address.id }}" class="account-delete-popup">
+    <div class="account-delete-popup__content"
+         role="dialog"
+         aria-label="Delete address {{ address.city }} {{ address.province_code }} {{ address.zip }}"
+         aria-modal="true"
+         aria-hidden='true'
+         tabindex="-1">
+      <button id="ModalClose--{{ address.id }}"
+              type="button"
+              class="modal-close-btn"
+              aria-label="{{ 'customer.addresses.close' | t }}">
+        {% render 'icon-close' %}
+      </button>
+      <div class="account-delete-popup__content-wrapper">
+        <h2 class="account-heading">Confirm Removal</h2>
+        <div class="account-text">Are you sure you would like to remove this address?</div>
+        {{ address_content }}
+
+        <div class="account-delete-popup__btn-wrapper">
+          <button type="button" id="ModalClose--{{ address.id }}-btn"
+                  class="account-btn btn btn--lg btn--light">{{ 'customer.addresses.delete_reject_btn' | t }}</button>
+          <button type="button" class="account-btn btn btn--lg btn--dark"
+                  data-delete-address="{{ address.id }}">{{ 'customer.addresses.delete_confirm_btn' | t }}</button>
+        </div>
+
+      </div>
     </div>
-  {% endif %}
+  </modal-dialog>
 </div>

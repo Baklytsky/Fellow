@@ -1,0 +1,88 @@
+{%- comment -%}
+{%- render 'account-orders', customer: customer -%}
+{%- endcomment -%}
+
+<h2 class="account-heading">{{ 'customer.orders.title' | t }}</h2>
+
+{% if customer.orders.size != 0 %}
+  {% paginate customer.orders by 4 %}
+
+    <ul class='account-home__orders-list'>
+      {% for order in customer.orders %}
+
+        <li class='account-home__order'>
+          <div class="account-home__order-img-wrapper">
+            <a href="{{ order.customer_url }}" class="account-home__order-img rel" aria-label="{{ order.name }}">
+              {% render 'image-lazy',
+                image: order.line_items.first.image,
+                class_name: 'image-abs-cover',
+                size: 'small',
+                alt: alt,
+                loader: true %}
+            </a>
+            {%- assign quantity_string = blank -%}
+
+            {%- if order.line_items.size > 1 -%}
+              {%- assign append_elemrnt = ' item' -%}
+
+              {%- if order.line_items.size >= 2 -%}
+                {%- assign append_elemrnt = ' items' -%}
+              {%- endif -%}
+
+              {%- assign quantity_string = order.line_items.size | minus: 1 | append: append_elemrnt | prepend: '+ ' -%}
+            {%- endif -%}
+
+            {%- if quantity_string != blank -%}
+              <p class="account-home__order-quantity">{{ quantity_string }}</p>
+            {%- endif -%}
+          </div>
+
+          <div class="account-home__order-table">
+            <div class="account-home__order-table-item">
+              <h4>Order #</h4>
+              <a href='{{ order.customer_url }}'>{{ order.name }}</a>
+            </div>
+            <div class="account-home__order-table-item">
+              <h4>Total</h4>
+              <p>{{ order.total_price | money }}</p>
+            </div>
+            <div class="account-home__order-table-item">
+              <h4>Date</h4>
+              <p>{{ order.created_at | date: '%B %e, %Y' }}</p>
+            </div>
+            <div class="account-home__order-table-item">
+              <h4>Status</h4>
+              {%- if order.cancelled -%}
+                <p>Canceled</p>
+              {%- else -%}
+              {%- case order.fulfillment_status_label -%}
+              {%- when 'Complete' -%}
+                <p>Delivered</p>
+              {%- when 'Fulfilled' -%}
+                <p>Shipped</p>
+                <a href="{{ order.order_status_url }}">Track Order</a>
+              {%- when 'Partial' -%}
+                <p>Shipped</p>
+                <a href="{{ order.order_status_url }}">Track Order</a>
+              {%- when 'Restocked' -%}
+                <p>Delivered</p>
+              {%- when 'Unfulfilled' -%}
+                <p>In Progress</p>
+                {%- else -%}
+                <p>{{ order.fulfillment_status_label }}</p>
+              {%- endcase -%}
+              {%- endif -%}
+            </div>
+          </div>
+      {% endfor %}
+    </ul>
+
+  {%- render 'default-pagination', paginate: paginate -%}
+  {% endpaginate %}
+{% else %}
+  {%- if settings.empty_orders_text != blank -%}
+    <div class="account-empty-orders">
+      {{ settings.empty_orders_text }}
+    </div>
+  {%- endif -%}
+{% endif %}

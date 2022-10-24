@@ -1,0 +1,37 @@
+{%- if customer and template == 'index' -%}
+  <form id="set_customer_phone">
+    <input type="hidden" name="customer[id]" value="{{ customer.id }}"/>
+    <input type="submit"/>
+  </form>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      if (window.sessionStorage.getItem('Customer_phone')) {
+        const phoneForm = document.getElementById('set_customer_phone')
+        const phoneInput = document.createElement('input');
+
+        phoneInput.setAttribute('type', 'tel')
+        phoneInput.setAttribute('name', 'customer[phone]')
+        phoneInput.setAttribute('value', window.sessionStorage.getItem('Customer_phone'))
+
+        phoneForm.appendChild(phoneInput)
+        phoneForm.addEventListener('submit', (e) => {
+          e.preventDefault()
+          return false;
+        })
+
+        Accentuate(jQuery("#set_customer_phone"), function (data) {
+          if (data.status == 'ERROR') {
+            console.log(data.message)
+          } else if (data.status == 'OK') {
+            console.log(data)
+            document.body.removeChild(phoneForm)
+            window.sessionStorage.removeItem('Customer_phone')
+          }
+        });
+
+        phoneForm.dispatchEvent(new Event('submit'));
+      }
+    })
+  </script>
+{%- endif -%}

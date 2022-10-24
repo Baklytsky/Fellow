@@ -1,0 +1,24 @@
+{%- comment -%}
+{%- render 'account-info', customer: customer  -%}
+{%- endcomment -%}
+
+<h2 class="account-heading">{{ 'customer.info.title' | t }}</h2>
+<p class="account-title">{{ customer.first_name }} {{ customer.last_name }}</p>
+<p class="account-title">{{ customer.email }}</p>
+{%- if customer.phone != blank -%}
+  <p class="account-title">{{ customer.phone }}</p>
+{%- endif -%}
+
+<div class="account-action-wrapper f aic">
+  <button type="button" class="account-action-btn"
+          data-toggle-address="update"
+          data-breadcrumbs-title="{{ 'customer.info.edit_information' | t }}">
+    {{ 'customer.addresses.edit' | t }}
+  </button>
+  <button type="button" class="account-action-btn"
+          data-toggle-address="update-pass"
+          data-breadcrumbs-title="{{ 'customer.addresses.change_password' | t }}">
+    {{ 'customer.addresses.change_password' | t }}
+  </button>
+</div>
+

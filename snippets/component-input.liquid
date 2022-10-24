@@ -1,41 +1,60 @@
-{% if type == blank %}
-  {% assign type = 'text' %}
-{% endif %}
-{% if autocomplete == blank %}
-  {% assign autocomplete = 'off' %}
-{% endif %}
-{% if autocapitalize == blank %}
-  {% assign autocapitalize = 'off' %}
-{% endif %}
-{% if spellcheck == blank %}
-  {% assign spellcheck = 'false' %}
-{% endif %}
-{% if required == blank %}
-  {% assign required = 'false' %}
-{% endif %}
+{%- comment -%}
+{%- render 'component-input'
+  label: 'Email',
+  name: 'customer[email]',
+  value: '',
+  type: 'text',
+  required: 'true',
+  autocomplete: "on",
+  className: '',
+  attr: '',
+  unique_id: '' -%}
+{%- endcomment -%}
+
+{%- assign type = type | default: 'text' -%}
+{%- assign name = name | default: 'input[name]' -%}
+
+{%- if inputErrorMessage == blank -%}
+  {% assign inputErrorMessage = 'customer.login.input_error' | t %}
+{%- endif -%}
 
 {%- capture id -%}
-{{type}}{{name}}{{ className | replace: ' ', '' }}
+{{type}}{{name}}{{ unique_id }}{{ className | replace: ' ', '' }}
 {%- endcapture -%}
 
 {%- capture cx -%}
-  input-wrapper x
-  {{ className }}
+  input-wrapper x {{ className }} {% if type == 'checkbox' %}checkbox{% endif %}
 {%- endcapture -%}
 
-<div class='{{ cx }} slater-input' data-component='input-text'>
-  <input
-    id='{{ id }}'
-    class='sans p x'
-    type='{{ type }}'
-    name='{{ name }}'
-    placeholder='{{ placeholder }}'
-    value='{{ value }}'
-    autocomplete='{{ autocomplete }}'
-    autocapitalize='{{ autocapitalize }}'
-    spellcheck='{{ spellcheck }}'
-    required='{{ required }}'
-  />
-  <label for='{{ id }}' class='sans caps small track medium hide'>{{ label }}</label>
-  <span></span>
+<div class='{{ cx }}'>
+  {%- unless type == 'checkbox' -%}
+    <label for='{{ id }}' class='input-wrapper__label x'>{{ label }}</label>
+  {%- endunless -%}
+  <div class="rel">
+    <input
+            id='{{ id }}'
+            class='input-wrapper__input x'
+            type='{{ type }}'
+            name='{{ name }}'
+            {% if name != blank %}name='{{ name }}'{% endif %}
+            {% if value != blank %}value='{{ value }}'{% endif %}
+            {% if placeholder != blank %}placeholder='{{ placeholder }}'{% endif %}
+            {% if autocomplete != blank %}autocomplete='{{ autocomplete }}'{% endif %}
+            {% if required == 'true' %}required{% endif %}
+            {% if attr != blank %}{{ attr }}{% endif %}
+            {% if type == 'password' %}style="padding-right: 60px"{% endif %}
+            {% if type == 'checkbox' and value == 'true' %}checked{% endif %}
+    />
+    {%- if type == 'checkbox' -%}
+      <label for='{{ id }}' class='input-wrapper__label x'>{{ label }}</label>
+    {%- endif -%}
+    {%- if type == 'password' -%}
+      <button type="button"
+              class="input-wrapper__password-toggle"
+              data-togle-pass-visibility>
+        Show
+      </button>
+    {%- endif -%}
+  </div>
+  <p class="input-wrapper__error">{{ inputErrorMessage }}</p>
 </div>

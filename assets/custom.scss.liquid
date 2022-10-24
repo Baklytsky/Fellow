@@ -335,6 +335,26 @@ toggle-tabs {
     }
   }
 
+  .mainMenu__utility-links {
+    order: 3;
+  }
+
+  .mainMenu__accountWrapper {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 130%;
+  }
+
+  .mainMenu__accountWrapper svg {
+    margin-left: 9px;
+  }
+
+  .mainMenu__accountTitle {
+    @media screen and (max-width: $tablet) {
+      display: none;
+    }
+  }
+
   .mainMenu__cardWrapper {
     order: 3;
     display: flex;
@@ -367,6 +387,23 @@ toggle-tabs {
     @media screen and (max-width: $tablet) {
       svg {
         width: 24px;
+        height: 32px;
+      }
+    }
+  }
+
+  .mainMenu__accountWrapper {
+    position: relative;
+    transition: 0.3s;
+
+    svg {
+      width: 40px;
+      height: 42px;
+    }
+
+    @media screen and (max-width: $tablet) {
+      svg {
+        width: 30px;
         height: 32px;
       }
     }
@@ -8531,7 +8568,7 @@ ul.pdp_details__feature_list > li {
 }
 
 /* ------------------------------------------------------------ *\
-  Coffe Marketplase Page
+  Coffee Marketplace Page
 \* ------------------------------------------------------------ */
 .cmHeading {
   margin: 0;
@@ -8556,7 +8593,7 @@ ul.pdp_details__feature_list > li {
   }
 }
 
-/* -----------Coffe Marketplase Hero Section------------------- */
+/* -----------Coffee Marketplace Hero Section------------------- */
 
 .cmHero {
   margin: calc(var(--header-height) + 45px) auto 0;
@@ -8656,7 +8693,7 @@ ul.pdp_details__feature_list > li {
   }
 }
 
-/* -----------Coffe Marketplase Cards Section------------------- */
+/* -----------Coffee Marketplace Cards Section------------------- */
 
 .cmCards {
   margin: 0 auto;
@@ -8762,7 +8799,7 @@ ul.pdp_details__feature_list > li {
   line-height: 21px;
 }
 
-/* -----------Coffe Marketplase Products Section------------------- */
+/* -----------Coffee Marketplace Products Section------------------- */
 
 .cmProducts {
   margin: 0 auto;
@@ -8960,7 +8997,7 @@ ul.pdp_details__feature_list > li {
   }
 }
 
-/* -----------Coffe Marketplase IWT Section------------------- */
+/* -----------Coffee Marketplace IWT Section------------------- */
 
 .cmIWT {
   margin: 0 auto;
@@ -9043,7 +9080,7 @@ ul.pdp_details__feature_list > li {
   }
 }
 
-/* -----------Coffe Marketplase TWB Section------------------- */
+/* -----------Coffee Marketplace TWB Section------------------- */
 
 .cmTWB__wrapper {
   margin: 0 auto;

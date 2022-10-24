@@ -1,0 +1,51 @@
+{%- comment -%}
+{%- render 'default-pagination', paginate: paginate -%}
+{%- endcomment -%}
+
+{%- if paginate.pages > 1 -%}
+  <nav role="navigation" class="default-pagination">
+    <ol class="default-pagination__list f aic">
+      {%- if paginate.previous-%}
+        <li class="default-pagination-arrow">
+          <a href="{{ paginate.previous.url }}">
+            <span aria-hidden="true"><</span>
+            <span class="u-sr-only">Previous page</span>
+          </a>
+        </li>
+      {%- else -%}
+        <li class="disabled default-pagination-arrow">
+          <span aria-hidden="true"><</span>
+          <span class="u-sr-only">Previous page</span>
+        </li>
+      {%- endif -%}
+
+      {%- for part in paginate.parts -%}
+        {%- if part.is_link -%}
+          <li>
+            <a href="{{ part.url }}"><span class="u-sr-only">page</span> {{ part.title }}</a>
+          </li>
+        {%- else -%}
+          {%- if part.title == paginate.current_page -%}
+            <li class="active" aria-current="page"><span class="u-sr-only">page</span> {{ part.title }}</li>
+          {%- else -%}
+            <li><span class="u-sr-only">page</span> {{ part.title }}</li>
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+
+      {%- if paginate.next -%}
+        <li class="default-pagination-arrow">
+          <a href="{{ paginate.next.url }}">
+            <span class="u-sr-only">Next page</span>
+            <span aria-hidden="true">></span>
+          </a>
+        </li>
+      {%- else -%}
+        <li class="disabled default-pagination-arrow">
+          <span class="u-sr-only">Next page</span>
+          <span aria-hidden="true">></span>
+        </li>
+      {%- endif -%}
+    </ol>
+  </nav>
+{%- endif -%}
