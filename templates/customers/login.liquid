@@ -136,20 +136,17 @@
           </div>
         {%- endif -%}
 
-        {% if shop.checkout.guest_login %}
-          <div class='h1 px1'>
-            <hr class='cgm' />
-          </div>
+        {%- assign continue_cta = 'customer.login.guest_continue' | t -%}
 
+        {% if shop.checkout.guest_login %}
           {% form 'guest_login' %}
-            {%
-              include 'button' with
-              tag: 'button',
-              type: 'submit',
-              cta: 'Continue as a guest',
-              className: 'btn btn__blue',
-              outline: true
-            %}
+          {%
+            render 'component-button'
+            tag: 'button',
+            type: 'submit',
+            cta: continue_cta,
+            className: 'account-btn btn btn--lg btn--dark'
+          %}
           {% endform %}
         {% endif %}
       </div>

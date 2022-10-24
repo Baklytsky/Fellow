@@ -48,12 +48,13 @@
       {%- when 'Complete' -%}
         <span>Delivered</span>
       {%- when 'Fulfilled' -%}
-        <span>Delivered</span>
+        <span>Shipped</span>
+        <a href="{{ order.order_status_url }}">Track Order</a>
       {%- when 'Partial' -%}
         <span>Shipped</span>
         <a href="{{ order.order_status_url }}">Track Order</a>
       {%- when 'Restocked' -%}
-        <span>In Progress</span>
+        <span>Delivered</span>
       {%- when 'Unfulfilled' -%}
         <span>In Progress</span>
         {%- else -%}
