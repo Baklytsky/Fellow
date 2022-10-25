@@ -1,0 +1,71 @@
+@import '../helpers/_mixins.scss';
+
+.faq {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  text-align: center;
+}
+
+.faq__heading {
+  margin: 0 auto 3px;
+  max-width: 650px;
+  font-size: 38px;
+  line-height: 100%;
+
+  @media screen and (max-width: $tablet) {
+    margin: 0 auto 2px;
+    font-size: 26px;
+  }
+}
+
+.faq__description {
+  font-size: 18px;
+  margin: 0 auto;
+  max-width: 550px;
+}
+
+.faq__list {
+  margin: 40px 0 0;
+}
+
+.faq__list-item {
+  background-color: #F5F5F5;
+  margin-bottom: 16px;
+}
+
+.faq__list-header {
+  padding: 24px;
+  font-size: 18px;
+  font-weight: 600;
+
+  @media screen and (max-width: $tablet) {
+    font-size: 16px;
+  }
+}
+
+.faq__list-title {
+  text-align: left;
+}
+
+.faq__list-header.active {
+  .dropdownHeader-icon {
+    transform: rotate(180deg);
+  }
+}
+
+.faq__list-content {
+  padding: 0 24px 24px;
+  text-align: left;
+  font-size: 16px;
+  line-height: 130%;
+
+  p {
+    font-size: inherit;
+    margin: 8px 0;
+  }
+
+  a {
+    text-decoration: underline;
+    font-weight: 500;
+  }
+}

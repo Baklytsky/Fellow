@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="{{ 'section-featured-collections.min.css' | asset_url }}">
+<script src="{{ 'section-featured-collections.min.js' | asset_url }}" defer="defer"></script>
 {%- if section.settings.enable_section -%}
   {%- assign heading = section.settings.heading | default: false -%}
   {%- assign blocks = section.blocks -%}

@@ -1,0 +1,194 @@
+@import '../helpers/_mixins.scss';
+
+.ImageWithText {
+  margin: 0 auto;
+  padding: 32px 25px 32px;
+
+  @media screen and (max-width: $tablet) {
+    padding: 0 0 64px;
+    margin: 0 auto;
+  }
+}
+.ImageWithText__Wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  text-align: left;
+
+  .btn--dark {
+    &:hover {
+      color: $color-black;
+      background: transparent;
+      border: 2px solid $color-black;
+    }
+  }
+
+  .btn--light {
+    &:hover {
+      color: $color-white;
+      background: transparent;
+      border: 2px solid $color-white;
+    }
+  }
+}
+
+.ImageWithText__CopyWrapper {
+  width: 100%;
+  max-width: 450px;
+  padding-right: 25px;
+
+  @media screen and (max-width: $tablet) {
+    margin: 0 auto;
+    padding: 16px 16px 0;
+    max-width: unset;
+  }
+}
+.ImageWithText__Header {
+  margin-bottom: 25px;
+  font-family: $font-header;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 3.75rem;
+  line-height: 3.75rem;
+
+  @media screen and (max-width: $tablet) {
+    margin-bottom: 16px;
+    font-size: 42px;
+    line-height: 42px;
+  }
+}
+
+.ImageWithText__Description  p {
+  margin: 0 0 25px;
+  font-family: $font-base;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.25rem;
+  line-height: 140%;
+
+  @media screen and (max-width: $tablet) {
+    margin: 0 0 16px;
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
+
+.ImageWithText__ButtonWrapper {
+
+  .btn {
+    width: 100%;
+    min-width: 165px;
+    max-width: 320px;
+    padding: 16px;
+    margin: 0;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+    text-align: center;
+    text-transform: capitalize;
+
+
+    @media screen and (max-width: $tablet) {
+      padding: 16px 62px;
+      width: auto;
+      max-width: unset;
+      font-size: 16px;
+      line-height: 20px;
+    }
+  }
+}
+
+.ImageWithText__ImageWrapper {
+  width: 100%;
+  max-width: 670px;
+
+  @media screen and (max-width: $tablet) {
+    max-width: unset;
+  }
+}
+.ImageWithText__Image {
+  width: 100%;
+}
+
+.ImageWithText--center {
+  max-width: 1335px;
+  justify-content: flex-end;
+  align-items: stretch;
+
+  @media screen and (max-width: $tablet) {
+    flex-direction: column;
+    justify-content: unset;
+  }
+
+  .ImageWithText__Header {
+    font-size: 120px;
+    line-height: 100px;
+    max-width: 185px;
+    z-index: 1;
+    margin: 0;
+
+    @media screen and (max-width: $tablet) {
+      font-weight: 500;
+      font-size: 3.5rem;
+      line-height: 3.5rem;
+      padding: 0 16px;
+    }
+  }
+
+  .ImageWithText__ImageWrapper {
+    margin: 25px;
+    max-width: 570px;
+
+    @media screen and (max-width: $tablet){
+      margin: -35px 0 0 auto;
+      max-width: calc(100% - 75px);
+    }
+  }
+
+  .ImageWithText__CopyWrapper {
+    align-self: flex-end;
+    max-width: 425px;
+
+    @media screen and (max-width: $tablet){
+      margin: 0 auto;
+      max-width: unset;
+
+      .ImageWithText__Description p {
+        margin: 0;
+        font-size: 18px;
+        line-height: 22px;
+      }
+
+      .ImageWithText__ButtonWrapper {
+        margin-top: 16px;
+      }
+    }
+  }
+}
+
+.ImageWithText--right {
+  @media screen and (max-width: $tablet) {
+    flex-direction: column-reverse;
+  }
+}
+
+.ImageWithText--left {
+  .ImageWithText__CopyWrapper {
+    padding-left: 25px;
+    padding-right: 0;
+    text-align: left;
+
+    @media screen and (max-width: $tablet) {
+      margin: 0 auto;
+      padding: 16px 16px 0;
+      max-width: unset;
+    }
+  }
+
+  @media screen and (max-width: $tablet) {
+    flex-direction: column;
+  }
+}

@@ -2,6 +2,8 @@
 {%- assign description = section.settings.description -%}
 
 {%- if heading != blank or description != blank or section.blocks.size > 0 -%}
+  <link rel="stylesheet" href="{{ 'section-coffee-marketplace-cards.min.css' | asset_url }}">
+
   <section class="cmCards">
     {%- if heading != blank -%}
       <h2 class="cmCards__heading cmHeading">{{ heading }}</h2>

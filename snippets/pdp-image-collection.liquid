@@ -1,4 +1,6 @@
 {% if product.metafields.custom_fields["show_image_collection_new"] == 1 %}
+  <link rel="stylesheet" href="{{ 'section-pdp-image-collection.min.css' | asset_url }}">
+
   {% comment %}Assign Media Proof Flex Order{% endcomment %}
   {% assign flex_order = product.metafields.custom_fields["image_collection_order_new"] | downcase %}
   {% if flex_order %}

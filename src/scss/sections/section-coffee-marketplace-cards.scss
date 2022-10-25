@@ -1,0 +1,105 @@
+@import '../helpers/_mixins.scss';
+
+.cmCards {
+  margin: 0 auto;
+  max-width: 1440px;
+  padding: 40px 33px 14px;
+  color: #000;
+  text-align: center;
+
+  @media screen and (max-width: $tablet) {
+    text-align: left;
+    padding: 24px 0 24px;
+  }
+}
+
+.cmCards__description {
+  max-width: 910px;
+  margin: 24px auto 0;
+
+  @media screen and (max-width: $tablet) {
+    margin: 16px auto 0;
+  }
+}
+
+.cmCards__heading,
+.cmCards__description {
+  @media screen and (max-width: $tablet) {
+    padding: 0 16px;
+  }
+}
+
+.cmCards__listWrapper {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  @media screen and (max-width: $tablet) {
+    overflow-x: scroll;
+  }
+}
+
+.cmCards__list {
+  width: calc(100% + 26px);
+  margin: 40px -13px 0;
+  display: flex;
+  flex-wrap: wrap;
+
+  @media screen and (max-width: $tablet) {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    margin: 32px 8px 0;
+    flex-wrap: nowrap;
+  }
+}
+
+.cmCards__listItem {
+  width: 100%;
+  max-width: calc(100% / 3);
+  padding: 0 13px 26px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media screen and (max-width: $tablet) {
+    width: 79.5vw;
+    padding: 0 4px;
+    max-width: unset;
+    align-items: flex-start;
+  }
+}
+
+.cmCards__listItemImage {
+  width: 100%;
+  padding-top: 54.5%;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  display: block;
+  overflow: hidden;
+
+  @media screen and (max-width: $tablet) {
+    padding-top: 83%;
+  }
+}
+
+.cmCards__listItemHeading {
+  margin: 0 0 5px;
+  font-family: $font-base;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 120%;
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.cmCards__listItemDescription {
+  margin: 0;
+  font-size: 16px;
+  line-height: 21px;
+}

@@ -1,4 +1,7 @@
 {% if product.metafields.custom_fields["show_learn_more_section"] == 1 %}
+  <link rel="stylesheet" href="{{ 'section-pdp-learn-more.min.css' | asset_url }}">
+  <script src="{{ 'component-pdp-learn-more.min.js' | asset_url }}" defer="defer"></script>
+
   {% comment %}Assign Media Proof Flex Order{% endcomment %}
   {% assign flex_order = product.metafields.custom_fields["learn_more_order"] | downcase %}
   {% if flex_order %}

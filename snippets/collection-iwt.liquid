@@ -1,4 +1,6 @@
 {%- if collection.metafields.custom_fields["show_collection_iwt"] == 1 -%}
+  <link rel="stylesheet" href="{{ 'section-collection-iwt.min.css' | asset_url }}">
+
   {%- assign collection_iwt_bg = collection.metafields.custom_fields["collection_iwt_background"] | default: 'transparent' -%}
   {%- assign collection_iwt_image = collection.metafields.custom_fields["collection_iwt_image"] -%}
   {%- assign collection_iwt_image_mobile = collection.metafields.custom_fields["collection_iwt_image_mobile"] -%}

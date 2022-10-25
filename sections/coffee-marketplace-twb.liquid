@@ -8,6 +8,8 @@
 {%- assign text_color = section.settings.text_color -%}
 
 {%- if pre_heading != blank or heading != blank or description != blank or cta_text != blank -%}
+  <link rel="stylesheet" href="{{ 'section-coffee-marketplace-twb.min.css' | asset_url }}">
+
   <section class="cmTWB" style="color: {{ text_color }}; background-color: {{ bg_color }};">
     <div class="cmTWB__wrapper">
       {%- if pre_heading != blank -%}

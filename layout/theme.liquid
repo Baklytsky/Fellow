@@ -14,7 +14,13 @@
   <link rel="preload" href="{{ 'global.min.js' | asset_url }}" as="script">
   <link rel="preload" href="{{ 'cart.min.js' | asset_url }}" as="script">
 
+  {%- if template contains 'search' -%}
+    <link rel="preload" href="{{ 'search.min.css' | asset_url }}" as="style">
+    <link rel="preload" href="{{ 'search.min.js' | asset_url }}" as="script">
+  {%- endif -%}
+
   {%- if template contains 'collection' -%}
+    <link rel="preload" href="{{ 'collection.min.css' | asset_url }}" as="style">
     <link rel="preload" href="{{ 'collection.min.js' | asset_url }}" as="script">
   {%- endif -%}
 
@@ -60,6 +66,14 @@
 
     {{ 'theme.min.css' | asset_url | stylesheet_tag }}
 
+    {%- if template contains 'collection' -%}
+      {{ 'collection.min.css' | asset_url | stylesheet_tag }}
+    {%- endif -%}
+
+    {%- if template contains 'search' -%}
+      {{ 'search.min.css' | asset_url | stylesheet_tag }}
+    {%- endif -%}
+
     {% include 'swatchUpload' %}
 
     {%- if request.path contains 'carter-move-mug' or request.path contains 'carter-everywhere-mug' or product.handle contains 'carter-move-mug-with-360-sip-lid' -%}
@@ -92,20 +106,25 @@
     {% include 'cloak' %}
 
     {{ 'libs.min.js' | asset_url | script_tag }}
+    {{ 'global.min.js' | asset_url | script_tag }}
+
+    {% if template contains 'customers' %}
+      <script src="{{ 'account.min.js' | asset_url }}" defer='defer'></script>
+    {% endif %}
 
     {% if template contains 'customers/account' or template contains 'customers/register' or template == 'index' %}
       <script src="https://app.accentuate.io/dist/proxy.js" defer="defer"></script>
       {%- render 'accenture-set-phone' -%}
     {% endif %}
 
-    <script src="{{ 'global.min.js' | asset_url }}" defer='defer'></script>
-
     {%- if template contains 'collection' -%}
       <script src="{{ 'handlebars-v4.7.7.js' | asset_url }}" defer='defer'></script>
       <script src="{{ 'collection.min.js' | asset_url }}" defer='defer'></script>
     {%- endif -%}
 
-    <script src="{{ 'cart.min.js' | asset_url }}" defer="defer"></script>
+    {%- if template contains 'search' -%}
+      <script src="{{ 'search.min.js' | asset_url }}" defer='defer'></script>
+    {%- endif -%}
 
     {% include 'component-customize-js' %}
 

@@ -4,6 +4,8 @@
 {%- assign text_color = section.settings.text_color -%}
 
 {%- if heading != blank or text != blank -%}
+  <link rel="stylesheet" href="{{ 'section-seo.min.css' | asset_url }}">
+
   <div class="seo" style="background-color: {{ bg_color }}; color: {{ text_color }}">
     <div class="seo-wrapper page-wrapper">
       {%- if heading != blank -%}

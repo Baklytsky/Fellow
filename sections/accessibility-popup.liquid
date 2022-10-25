@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="{{ 'section-accessibility-popup.min.css' | asset_url }}">
+
 {%- if section.settings.btn_text != blank -%}
   <modal-opener class="accessibility__opener {% unless section.settings.test_mode %}visually-hidden{% endunless %}"
                 data-modal="#PopupModal--accessibility">

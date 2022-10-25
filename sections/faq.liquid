@@ -2,6 +2,7 @@
 {%- assign description = section.settings.description -%}
 
 {%- if heading != blank or description != blank or section.blocks.size > 0 -%}
+  <link rel="stylesheet" href="{{ 'section-faq.min.css' | asset_url }}">
 
   <div class="faq page-wrapper">
     {%- if heading != blank -%}

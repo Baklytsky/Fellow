@@ -1,4 +1,7 @@
 {% if product.metafields.custom_fields["video_url_new"] != blank %}
+  <link rel="stylesheet" href="{{ 'section-pdp-video.min.css' | asset_url }}">
+  <script src="{{ 'section-youtube-vimeo-video.min.js' | asset_url }}" defer="defer"></script>
+
   {% assign video_title_array = product.metafields.custom_fields["video_title"] %}
   {% assign video_url = product.metafields.custom_fields["video_url_new"] %}
   {% assign video_poster = product.metafields.custom_fields["video_poster_image_new"] %}

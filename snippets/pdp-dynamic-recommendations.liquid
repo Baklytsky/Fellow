@@ -1,3 +1,4 @@
+<script src="{{ 'section-pdp-dynamic-recommendations.min.js' | asset_url }}" defer="defer"></script>
 {%- if section.settings.show_product_recommendations -%}
   {% if product.metafields.custom_fields["hide_pdr_section"] != 1 %}
     {% assign product_limit = section.settings.product_limit %}
@@ -11,7 +12,7 @@
     {% endif %}
 
     <dynamic-recommendations
-            class="x relatedProducts pdpRelatedProducts {% if display_order %} o-{{ display_order }}{% endif %}"
+            class="block x relatedProducts pdpRelatedProducts {% if display_order %} o-{{ display_order }}{% endif %}"
             data-product-id="{{ product.id }}"
             data-product-limit="{{ product_limit }}"
             data-section-id="{{ section.id }}">

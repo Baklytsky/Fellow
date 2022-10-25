@@ -1,4 +1,5 @@
 {% if product.metafields.custom_fields["media_proof_items_new"] != blank %}
+  <link rel="stylesheet" href="{{ 'section-pdp-media-proof.min.css' | asset_url }}">
   {% comment %}Assign Media Proof Flex Order{% endcomment %}
   {% assign flex_order = product.metafields.custom_fields["media_proof_order_new"] | downcase %}
   {% if flex_order %}

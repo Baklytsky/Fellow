@@ -7,6 +7,8 @@
 {%- assign text_block_position = section.settings.text_block_position -%}
 
 {%- if desktop_image != blank or mobile_image != blank  or heading != blank  or description != blank -%}
+  <link rel="stylesheet" href="{{ 'section-coffee-marketplace-hero.min.css' | asset_url }}">
+
   <section class="cmHero">
     <div class="cmHero__wrapper rel cmHero__wrapper--{{ text_block_position }}">
       {%- if desktop_image != blank or mobile_image != blank -%}

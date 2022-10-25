@@ -1,4 +1,6 @@
 {% if product.metafields.custom_fields["show_features_redesign"] == 1 %}
+  <link rel="stylesheet" href="{{ 'section-pdp-features-redesign.min.css' | asset_url }}">
+
   {% comment %}Assign Media Proof Flex Order{% endcomment %}
   {% assign flex_order = product.metafields.custom_fields["features_redesign_order"] | downcase %}
   {% if flex_order %}

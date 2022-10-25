@@ -1,3 +1,4 @@
+<script src="{{ 'section-mp4-video.min.js' | asset_url }}" defer="defer"></script>
 {%- assign enable_section_padding = section.settings.enable_section_padding -%}
 {%- assign full_width_section = section.settings.full_width_section -%}
 {%- assign section_bg = section.settings.section_bg -%}
@@ -24,6 +25,7 @@
 {%- assign mobile_format_16_9 = section.settings.mobile_format_16_9 -%}
 
 {%- if image != blank or video_mp4 != blank -%}
+  <link rel="stylesheet" href="{{ 'section-mp4-video.min.css' | asset_url }}">
   {%- unless full_width_section -%}
     <div class="landing__hero--wrapper {% if enable_section_padding %}landing__hero-with-padding{% endif %}" style="background-color: {{ section_bg }}; color: {{ text_color }};">
   {%- endunless -%}

@@ -6,6 +6,8 @@
 {%- assign image_position = section.settings.image_position -%}
 
 {%- if heading != blank or description != blank or cta_text != blank or image != blank -%}
+  <link rel="stylesheet" href="{{ 'section-coffee-marketplace-iwt.min.css' | asset_url }}">
+
   <section class="cmIWT cmIWT__image--{{ image_position }}">
     {%- if image != blank -%}
       <div class="cmIWT__image rel">

@@ -1,4 +1,6 @@
 {% if product.metafields.custom_fields["show_bundle_include_section"] == 1 %}
+  <link rel="stylesheet" href="{{ 'section-pdp-bundle-include.min.css' | asset_url }}">
+
   {% comment %}Assign Media Proof Flex Order{% endcomment %}
   {% assign flex_order = product.metafields.custom_fields["bundle_include_section_order"] | downcase %}
   {% if flex_order %}

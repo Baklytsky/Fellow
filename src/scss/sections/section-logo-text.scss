@@ -1,0 +1,49 @@
+@import '../helpers/_mixins.scss';
+
+.LogoText {
+  padding: 16px;
+  text-align: center;
+  background-color: $color-sand;
+
+
+  @media screen and (max-width: $tablet){
+    padding: 16px;
+  }
+}
+.LogoText__Message {
+  margin: 0;
+  font-family: $font-header;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 1em;
+  text-decoration: none;
+  color: $color-black;
+
+  @media screen and (max-width: $tablet){
+    font-size: 20px;
+    line-height: 100%;
+  }
+
+  &:hover, &:active, &:visited {
+    text-decoration: none;
+    color: $color-black;
+
+    .LogoText__Icon {
+      transform: translateY(-10px);
+    }
+  }
+}
+
+.LogoText__Icon {
+  display: inline-block;
+  margin-left: 20px;
+  width: auto;
+  height: 35px;
+  vertical-align: middle;
+  transition: all 500ms;
+
+  @media screen and (max-width: $tablet) {
+    display:none;
+  }
+}

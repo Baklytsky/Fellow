@@ -6,6 +6,7 @@
 {%- assign show_dots = section.settings.show_dots -%}
 
 {%- if heading != blank or description != blank or section.blocks.size > 0 -%}
+  <link rel="stylesheet" href="{{ 'section-features.min.css' | asset_url }}">
 
   {%- if section.blocks.size > 0 -%}
     {%- capture 'slick-config' -%}

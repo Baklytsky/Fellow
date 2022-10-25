@@ -1,4 +1,6 @@
 {%- if section.settings.enable_section -%}
+  <link rel="stylesheet" href="{{ 'section-instagram.min.css' | asset_url }}">
+
   {%- assign heading = section.settings.heading | default: false -%}
   {%- assign feed_id = section.settings.feed_id | default: false -%}
   {%- assign instagram_name = section.settings.instagram_name | default: false-%}

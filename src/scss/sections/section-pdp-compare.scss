@@ -1,0 +1,263 @@
+@import '../helpers/_mixins.scss';
+
+.pdpCompare {
+  margin: 32px 0;
+}
+
+.pdpCompare__wrapper {
+  max-width: 1440px;
+  padding: 0 32px;
+  margin: 0 auto;
+
+  @media screen and (max-width: $tablet) {
+    padding: 0 16px;
+  }
+}
+
+.pdpCompare__heading {
+  margin: 0;
+  padding: 0 0 16px;
+  font-weight: 500;
+  font-size: 48px;
+  line-height: 100%;
+  border-bottom: 2px solid #D5D5D5;
+
+  @media screen and (max-width: $large_desk) {
+    padding: 0 0 24px;
+    font-size: 40px;
+    border: none;
+  }
+}
+
+.pdpCompare__table,
+.pdpCompare__table-mobile-title {
+  width: 100%;
+  margin-top: 24px;
+  border-collapse: collapse;
+
+  @media screen and (max-width: $large_desk) {
+    display: none;
+  }
+
+  th {
+    padding: 16px 24px 16px 0;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 100%;
+    text-align: left;
+    vertical-align: top;
+
+    @media screen and (max-width: $large_desk) {
+      font-size: 12px;
+    }
+  }
+
+  td {
+    padding: 16px 24px 0 0;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 130%;
+    vertical-align: top;
+
+    p {
+      font-size: inherit;
+      margin: 0 0 16px;
+    }
+
+    @media screen and (max-width: $large_desk) {
+      font-size: 12px;
+    }
+  }
+
+  tbody {
+    tr, td {
+      border-bottom: 1px solid #DFDFDF;
+    }
+  }
+
+  thead {
+    th {
+      padding: 16px 24px 8px 0;
+    }
+  }
+}
+
+.pdpCompare__table-th {
+  max-width: 326px;
+  height: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.pdpCompare__table-td {
+  max-width: 326px;
+}
+
+.pdpCompare__table-productTitle {
+  font-family: $font-header;
+  margin: 0 0 16px;
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 100%;
+  text-align: center;
+}
+
+.pdpCompare__table-productImage {
+  width: 100%;
+  max-width: 326px;
+  padding-top: 100%;
+  background-color: $color-dim-white;
+}
+
+.pdpCompare__table-half {
+  th, td {
+    width: 50%;
+  }
+}
+
+.pdpCompare__table-third {
+  th, td {
+    width: 36%;
+  }
+
+  thead tr th:first-child {
+    width: 29%;
+  }
+
+  tbody tr th {
+    width: 29%;
+  }
+}
+
+.pdpCompare__table-four {
+  th, td {
+    width: 25.5%;
+  }
+
+  thead tr th:first-child {
+    width: 17%;
+  }
+
+  thead tr th:last-child {
+    width: 31.5%;
+    padding-right: calc(6% + 24px);
+  }
+
+  tbody tr th {
+    width: 17%;
+  }
+
+  tbody tr td:last-child {
+    width: 31.5%;
+    padding-right: calc(6% + 24px);
+  }
+}
+
+.pdpCompare__table-five {
+  th, td {
+    width: 21%;
+    min-width: 230px;
+  }
+
+  thead tr th:first-child {
+    width: 16%;
+    min-width: 190px;
+  }
+
+  thead th, tbody tr td {
+    padding: 16px 0 8px 24px;
+  }
+
+  tbody tr th {
+    width: 16%;
+    min-width: 190px;
+    padding: 16px 0;
+  }
+}
+
+.pdpCompare__tabs,
+.pdpCompare__tabsProducts-wrapper {
+  display: none;
+  @media screen and (max-width: $large_desk) {
+    display: block;
+  }
+}
+
+.pdpCompare__tabsProducts-wrapper {
+  padding: 0 16px 16px;
+  background-color: $color-grey;
+  border-radius: 12px;
+
+  [data-tab] {
+    display: none;
+
+    &[data-selected='true'] {
+      display: block;
+    }
+  }
+}
+
+.pdpCompare__tabsProductsImage {
+  width: 100%;
+  padding-top: 100%;
+}
+
+.pdpCompare__tabsProductsTitle {
+  font-family: $font-header;
+  margin: 24px 0 16px;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 100%;
+}
+
+.pdpCompare__tabsProductsSettings {
+  margin: 8px 0;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 100%;
+}
+
+.pdpCompare__tabsProductsDescription {
+  p {
+    margin: 0 0 16px;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 130%;
+  }
+}
+
+.pdpCompare__tabsList {
+  overflow-x: scroll;
+  margin-bottom: 36px;
+  display: flex;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  li {
+    padding: 0 8px 0 0;
+  }
+}
+
+.pdpCompare__tabButton {
+  padding: 8px 16px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: inherit;
+  background-color: $color-dim-white;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+
+.pdpCompare__tabButton[data-selected='true'] {
+  background-color: $color-black;
+  color: $color-white;
+}

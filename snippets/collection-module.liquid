@@ -1,4 +1,6 @@
 {%- if collection.metafields.custom_fields["show_collection_module"] == 1 -%}
+  <link rel="stylesheet" href="{{ 'section-collection-module.min.css' | asset_url }}">
+
   {%- assign collection_module_bg = collection.metafields.custom_fields["collection_module_background"] | default:  '#FFF9E5' -%}
   {%- assign collection_module_image = collection.metafields.custom_fields["collection_module_image"] -%}
   {%- assign collection_module_image_mobile = collection.metafields.custom_fields["collection_module_mobile_image"] -%}

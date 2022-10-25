@@ -1,0 +1,229 @@
+@import '../helpers/_mixins.scss';
+
+.JoinFellow {
+  width: 100%;
+  display: flex;
+}
+
+.JoinFellow__Wrapper {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 33px;
+  display: flex;
+  z-index: 2;
+
+  @media screen and (max-width: $large_desk) {
+    flex-direction: column;
+    padding: 0;
+  }
+}
+
+.JoinFellow__TextBlock {
+  width: 33.5%;
+  padding: 67px 80px 67px 47px;
+  background-color: #000000;
+  color: #FFFFFF;
+
+  @media screen and (max-width: $large_desk) {
+    width: 100%;
+    padding: 40px 33px;
+    text-align: center;
+  }
+
+  @media screen and (max-width: $tablet) {
+    padding: 40px 16px;
+  }
+}
+
+.JoinFellow__TextBlock-Heading {
+  font-family: $font-header;
+  margin: 0 0 10px 0;
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 100%;
+
+  @media screen and (max-width: $tablet) {
+    font-size: 28px;
+  }
+}
+
+.JoinFellow__TextBlock-Description {
+  margin: 0;
+  font-family: $font-base;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 120%;
+
+  @media screen and (max-width: $tablet) {
+    font-size: 16px;
+  }
+}
+
+.JoinFellow__FormBlock {
+  width: 65%;
+  padding: 0 60px 0 15px;
+  display: flex;
+  align-items: center;
+
+  @media screen and (max-width: $large_desk) {
+    width: 100%;
+    padding: 40px 33px 30px;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  @media screen and (max-width: $tablet) {
+    padding: 40px 16px 30px;
+  }
+}
+
+.JoinFellow__FormBlock-Content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+  padding-left: 15px;
+
+  @media screen and (max-width: $large_desk) {
+    width: 100%;
+    max-width: 800px;
+    padding-left: 0;
+  }
+}
+
+.JoinFellow__FormBlock-LogoDesktop {
+  width: 225px;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+
+  @media screen and (max-width: $large_desk) {
+    display: none;
+  }
+}
+
+.JoinFellow__FormBlock-LogoMobile {
+  display: none;
+  width: 100%;
+  max-width: 475px;
+  margin: 15px auto 0;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+
+  @media screen and (max-width: $large_desk) {
+    display: block;
+  }
+}
+
+.JoinFellow__FormBlock-Heading {
+  margin: 0 0 30px;
+  font-family: $font-header;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: 2.5px;
+
+  @media screen and (max-width: $tablet) {
+    font-size: 16px;
+    margin: 0 0 20px;
+  }
+}
+
+.JoinFellow__FormBlock-Description {
+  max-width: 440px;
+  margin: 30px 0 0;
+  font-family: $font-base;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 20px;
+
+  @media screen and (max-width: $large_desk) {
+    margin: 30px auto 0;
+  }
+
+  @media screen and (max-width: $tablet) {
+    font-size: 12px;
+    margin: 20px auto 0;
+  }
+}
+
+.JoinFellow__FormBlock {
+  form {
+    max-width: 100% !important;
+    .go1443270314,
+    .go3377259632,
+    .go306639911 {
+      border: 1px solid #FFFFFF !important;
+      height: 60px !important;
+      @media screen and (max-width: $tablet) {
+        height: 50px !important;
+      }
+    }
+    button.go1412863392 {
+      padding: 18px 42px !important;
+      font-size: 20px !important;
+      height: unset !important;
+      background-color: transparent !important;
+      color: #FFFFFF !important;
+      border-color: #FFFFFF !important;
+      &:hover {
+        color: #FFFFFF !important;
+        border-color: #000000 !important;
+      }
+      @media screen and (max-width: $tablet) {
+        padding: 15px 20px !important;
+        font-size: 16px !important;
+      }
+    }
+    [data-testid="form-component"] {
+      padding: 0 !important;
+      p {
+        background-color: transparent !important;
+        color: #FFFFFF !important;
+        text-align: left !important;
+        @media screen and (max-width: $large_desk) {
+          text-align: center !important;
+        }
+        span {
+          font-size: 16px !important;
+          margin-bottom: 15px !important;
+          display: inline-block !important;
+        }
+        strong {
+          display: none !important;
+          visibility: hidden;
+        }
+      }
+    }
+    [data-testid="form-component"]:first-child {
+      padding: 0 14px 0 0 !important;
+      @media screen and (max-width: $tablet) {
+        padding: 0 10px 0 0 !important;
+      }
+    }
+    [role="option"] .kl-private-reset-css-Xuajs1 {
+      cursor: pointer !important;
+      text-align: left !important;
+      font-size: 14px !important;
+      overflow-x: hidden !important;
+
+      & > .kl-private-reset-css-Xuajs1 {
+        max-width: 80% !important;
+        & > span {
+          white-space: nowrap !important;
+          text-overflow: ellipsis !important;
+        }
+      }
+    }
+    [role="listbox"] {
+      border: none !important;
+    }
+  }
+}

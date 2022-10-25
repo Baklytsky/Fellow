@@ -8,6 +8,7 @@
   {%- assign cta_color = section.settings.cta_color -%}
 
   {%- if section.blocks.size > 0 or description or cta_title -%}
+    <link rel="stylesheet" href="{{ 'section-featured-blog.min.css' | asset_url }}">
 
     {%- capture 'slick-config' -%}
       {

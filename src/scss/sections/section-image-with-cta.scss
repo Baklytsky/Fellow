@@ -1,0 +1,40 @@
+@import '../helpers/_mixins.scss';
+
+.ImageWithCta__Image--right {
+  flex-direction: row-reverse;
+
+  @media screen and (max-width: $tablet) {
+    flex-direction: column;
+  }
+}
+
+.ImageWithCta .collectionHero {
+  margin-top: 0;
+}
+
+.ImageWithCta .btn {
+  @media screen and (max-width: $tablet) {
+    max-width: 350px;
+    margin-top: 9px;
+  }
+}
+
+.ImageWithCta .collectionHero__content {
+  @media screen and (max-width: $tablet) {
+    padding: 33px 16px;
+  }
+}
+
+.ImageWithCta__Heading {
+  margin: 0 0 8px;
+  font-weight: 500;
+  line-height: 100%;
+
+  @media screen and (max-width: $tablet) {
+    text-align: center;
+  }
+}
+
+.ImageWithCta__Text {
+  margin: 0 0 8px;
+}
