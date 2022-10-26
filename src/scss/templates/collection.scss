@@ -1,4 +1,4 @@
-@import 'helpers/mixins';
+@import '../helpers/_variables';
 
 .collection-wrapper {
   display: block;
@@ -423,6 +423,10 @@
 
     }
   }
+}
+
+.filter-group-input {
+  display: none;
 }
 
 .collection__product-title.skeleton {

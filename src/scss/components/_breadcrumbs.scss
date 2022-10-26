@@ -1,0 +1,22 @@
+@import '../helpers/_variables';
+
+.breadcrumbs {
+  margin: 0 auto;
+  padding: 24px 33px 0;
+  max-width: 1440px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+
+  @media screen and (max-width: $tablet) {
+    display: none;
+  }
+
+  li {
+    display: inline;
+  }
+
+  li:not(:last-child):after {
+    content: ' / ';
+  }
+}

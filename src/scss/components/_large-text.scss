@@ -1,0 +1,39 @@
+.large-text-with-cta__body {
+  line-height: 1.5;
+  margin: 1em 0
+}
+
+.large-text-with-cta__tagline {
+  font-style: normal;
+  font-weight: 600
+}
+
+.large-text-with-cta__header {
+  margin-top: 0
+}
+
+.large-text-with-cta .btn,
+.large-text-with-cta button,
+.large-text-with-cta .button {
+  margin-top: 1em;
+  min-width: 200px
+}
+
+@media screen and (min-width: 992px) {
+  .large-text-with-cta__tagline {
+    margin-bottom: 1em
+  }
+  .large-text-with-cta__header {
+    font-size: 2.5rem;
+    margin-bottom: .7em
+  }
+}
+
+@media screen and (max-width: 991.98px) {
+  .large-text-with-cta__tagline {
+    margin-bottom: .7em
+  }
+  .large-text-with-cta__header {
+    margin-bottom: .6em
+  }
+}

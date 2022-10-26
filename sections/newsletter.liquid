@@ -1,7 +1,9 @@
 {% comment %}
 Hi George, this is the newsletter.liquid section from the BHT theme - I'd also recommend looking at what files are in the Debut theme - the styling below seems to handle fade-in for form success/failure states. Also, as you can't nest sections, I think this section exists as a thing you can drop-in at any point on the homepage (or eventually other places that support sections).
 {% endcomment %}
-{% comment %} <style>
+<link rel="stylesheet" href="{{ 'section-newsletter.min.css' | asset_url }}">
+{% comment %}
+  <style>
   .newsletter-wrapper--{{ section.id }} input[type='email']::-webkit-input-placeholder {
     color: {{ section.settings.text_color }};
   }
@@ -33,7 +35,8 @@ Hi George, this is the newsletter.liquid section from the BHT theme - I'd also r
       background-color: {{ section.settings.background_color }};
     }
   {% endif %}
-</style> {% endcomment %}
+</style>
+{% endcomment %}
 
 <div class="newsletter-wrapper newsletter-wrapper--{{ section.id }} one-whole" data-section-id="{{ section.id }}" data-section-type="newsletter" data-component='newsletter'>
   <div class="page-width">

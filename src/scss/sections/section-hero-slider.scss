@@ -1,0 +1,341 @@
+@import '../helpers/_variables.scss';
+
+.hero__module {
+  background-size: cover;
+  background-position: center center;
+  overflow: hidden
+}
+
+.hero__slider {
+  overflow: hidden;
+  width: 100%;
+  color: #fff;
+  transition: all .2s linear;
+}
+
+.hero__slider:not(.slick-initialized) {
+  visibility: hidden;
+  opacity: 0
+}
+
+.hero__slider .slick-dots {
+  position: absolute;
+  z-index: 10;
+  width: 100%;
+  bottom: 24px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  text-align: center;
+  line-height: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.hero__slider .slick-dots li {
+  margin: 4px 10px;
+}
+
+.hero__slider .slick-dots button {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid;
+  opacity: 1
+}
+
+.hero__slider .slick-dots .slick-active button {
+  background-color: currentColor
+}
+
+.hero__slide {
+  background-size: cover;
+  background-position: 50%;
+  width: 100%
+}
+
+.hero__slideWrapper {
+  margin: 0 auto;
+  max-width: 1440px;
+}
+
+.hero__slide img {
+  opacity: 0;
+  width: 100%
+}
+
+@media screen and (max-width:991.98px) {
+  .hero__slide img {
+    height: 375px;
+    -o-object-fit: cover;
+    object-fit: cover
+  }
+}
+
+.hero__slide .h0,
+.hero__slide h1 {
+  font-family: Oswald, -apple-system, system-ui, BlinkMacSystemFont, Helvetica Neue, Arial, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  text-transform: uppercase;
+  overflow-wrap: normal;
+  word-wrap: normal
+}
+
+@media screen and (max-width:991.98px) {
+  .hero__slide .h0,
+  .hero__slide h1 {
+    font-size: 2.25rem;
+    margin-bottom: 0
+  }
+}
+
+.hero__slide h3 {
+  font-family: Oswald, -apple-system, system-ui, BlinkMacSystemFont, Helvetica Neue, Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400
+}
+
+
+.hero__slide--split {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  opacity: 1;
+}
+
+.hero__slide--img-wrapper {
+  width: 100%;
+}
+.hero__slide--split img {
+  opacity: 1;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+
+.splitSlide__textContainer {
+  position: relative;
+  display: flex;
+  width: 40%;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  letter-spacing: 0
+}
+
+.splitSlide__textContainer .textContainer__desktopPadding {
+  padding: 25px 25px 25px 55px;
+}
+
+@media screen and (min-width:992px) {
+  .hero__slide--split img {
+    padding: 55px 0 55px 30px;
+    flex: 1 1 0px;
+  }
+
+  .hero__slide--img-wrapper {
+    max-width: 62%;
+  }
+}
+
+@media screen and (max-width:991.98px) {
+  .hero__slide--split {
+    flex-direction: column-reverse;
+  }
+
+  .splitSlide__textContainer {
+    width: 100%;
+  }
+}
+
+.hero__text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  color: currentColor
+}
+
+@media screen and (max-width:991.98px) {
+  .hero__text {
+    top: 10%
+  }
+}
+
+.hero__textWrapper {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  text-align: center;
+  text-transform: uppercase;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, .5);
+  letter-spacing: 0
+}
+
+.hero__ctaSubtext {
+  text-transform: none;
+  font-size: .875rem
+}
+
+@media screen and (min-width:992px) {
+  .hero__ctaSubtext {
+    margin-top: 2rem
+  }
+}
+
+@media screen and (max-width:991.98px) {
+  .hero__ctaSubtext {
+    margin-top: 1rem;
+    margin-bottom: 0;
+    text-align: left;
+  }
+}
+
+.hero__mobile_subslide {
+  padding: 0 2rem 2rem;
+  border-top: 1px solid rgba(0, 0, 0, .125);
+  border-bottom: 1px solid rgba(0, 0, 0, .125);
+  transition: background-color var(--fast) var(--ease), color var(--fast) var(--ease)
+}
+
+.hero__mobile_subslide .btn--hero-slider,
+.hero__mobile_subslide .btn--lg {
+  margin-top: 0
+}
+
+@media screen and (min-width:992px) {
+  .hero__mobile_subslide {
+    visibility: hidden;
+    display: none
+  }
+}
+
+.hero__subheader--mobile {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  min-height: 160px
+}
+
+.hero__subheader--mobile.is-visible {
+  display: flex
+}
+
+.hero__subheader--mobile * {
+  opacity: 0;
+  transition: opacity var(--fast)
+}
+
+.hero__subheader--mobile.is-visible.active * {
+  opacity: 1
+}
+
+.hero__subheader--mobile h3 {
+  max-width: 90%;
+  min-height: 5rem;
+  margin: 1rem 0;
+  text-align: center;
+  font-weight: 600
+}
+
+.hero__subheader--mobile .btn--hero-slider,
+.hero__subheader--mobile .btn--lg {
+  width: 100%;
+  max-width: 450px
+}
+
+@media screen and (min-width: 992px) {
+  .hero__slide .btn--lg,
+  .hero__slide .btn--hero-slider {
+    margin: 2rem 0 0 ;
+    min-width: 200px
+  }
+}
+
+.hero__module.is-marginBottom {
+  margin-bottom: 5rem
+}
+
+.hero__slide--split {
+  .button {
+    padding: 16px 23px;
+    margin: 0;
+    width: 100%;
+    min-width: 165px;
+    max-width: 320px;
+    font-family: $font-base;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+    text-transform: none;
+
+    @media screen and (max-width: $tablet) {
+      padding: 16px 62px;
+      width: auto;
+      font-size: 16px;
+      line-height: 20px;
+      margin-top: 0;
+    }
+  }
+
+  .btn--light {
+    &:hover {
+      background: transparent;
+      border: 2px solid $color-white;
+      color: $color-white;
+    }
+  }
+
+  .splitSlide__textContainer {
+
+    @media screen and (max-width: $tablet) {
+      .textContainer__desktopPadding {
+        padding: 16px 16px 50px;
+      }
+    }
+  }
+
+  .splitSlide__Header {
+    font-family: $font-header;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 60px;
+    line-height: 60px;
+    text-align: left;
+    text-transform: none;
+    margin-bottom: 24px;
+
+    @media screen and (max-width: $desk) {
+      font-size: 60px;
+    }
+
+    @media screen and (max-width: $tablet) {
+      font-size: 42px;
+      line-height:100%;
+    }
+  }
+
+  .splitSlide__Description {
+    margin-bottom: 24px;
+    padding: 0 0;
+    font-family: $font-base;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: left;
+    text-transform: none;
+
+    @media screen and (max-width: $tablet) {
+      font-size: 18px;
+      padding: 0 0;
+      line-height: 22px;
+
+    }
+  }
+}

@@ -1,0 +1,107 @@
+@import '../helpers/_variables.scss';
+
+.newsletter {
+  font-size: 16px;
+  line-height: 1.3em;
+  color: #fff;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.newsletter__label h5,
+.newsletter__label .h5 {
+  padding: 0;
+  margin: 0 0 25px;
+  font-family: "Inter", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  text-transform: initial;
+}
+
+@media screen and (max-width: 992px) {
+  .newsletter__label .h5 {
+    margin-bottom: 16px;
+  }
+}
+.newsletter__input {
+  background: #ffffff;
+  border: 2px solid #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.newsletter .input-group__btn {
+  background: #000000;
+  font-size: 16px;
+  text-align: right;
+  opacity: 1
+}
+
+.newsletter input[type=email] {
+  margin: -1px;
+  padding: 15px 19px;
+  width: calc(100% + 2px);
+  color: #000;
+  outline: none;
+  background: #fff;
+  font-size: 16px;
+  border-radius: 0;
+}
+
+.newsletter input[type=email]:focus,
+.newsletter input[type=email]:hover {
+  color: #000;
+}
+
+.newsletter input[type=email]::-moz-placeholder,
+.newsletter input[type=email]:-ms-input-placeholder,
+.newsletter input[type=email]::-ms-input-placeholder,
+.newsletter input[type=email]::placeholder,
+.newsletter input[type=email]::-webkit-input-placeholder,
+.newsletter input[type=email]::-moz-placeholder,
+.newsletter input[type=email]:-ms-input-placeholder {
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  color: #C2C2C2;
+}
+
+.newsletter .btn--newsletter__submit {
+  padding: 11px 28px;
+  min-width: 115px;
+  font-family: "Inter", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  color: #ffffff;
+  background: transparent;
+}
+
+@media screen and (max-width: 992px) {
+  .newsletter input[type=email] {
+    padding: 10px 19px;
+  }
+
+  .newsletter .btn--newsletter__submit {
+    padding: 7px 28px;
+  }
+}
+
+.newsletter .btn--newsletter__submit:focus,
+.newsletter .btn--newsletter__submit:hover {
+  cursor: pointer;
+}
+
+.newsletter-message {
+  padding-top: 10px;
+  -webkit-animation-delay: 15s;
+  animation-delay: 15s;
+  -webkit-animation: fadeOut 15s var(--ease);
+  animation: fadeOut 15s var(--ease);
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  color: #ffffff;
+}

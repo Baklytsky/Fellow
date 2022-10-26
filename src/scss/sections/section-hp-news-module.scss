@@ -1,0 +1,52 @@
+@import '../helpers/_variables.scss';
+
+@media screen and (min-width: 992px) {
+  .news-module {
+    margin-bottom: 5rem;
+    min-height: calc(90vh - 80px);
+    display: flex;
+    margin-bottom: 5rem
+  }
+  .news-module-section:first-child .news-module {
+    min-height: calc(90vh)
+  }
+  .news-module-section:first-child .news-module__text {
+    padding-top: calc(80px + 7%)
+  }
+  .news-module__image {
+    width: 50%
+  }
+  .news-module__image.is-scaled img {
+    -o-object-fit: scale-down;
+    object-fit: scale-down
+  }
+  .news-module__text {
+    width: calc(720px + 2rem);
+    display: flex;
+    align-items: center;
+    padding: 0 2rem
+  }
+}
+
+@media screen and (max-width: 991.98px) {
+  .news-module {
+    margin-bottom: 2.5rem
+  }
+  .news-module__image {
+    position: static
+  }
+  .news-module__image .image img {
+    min-height: 75vw;
+    max-height: 125vw
+  }
+  .news-module__text {
+    padding: 2rem 2rem 3rem 2rem
+  }
+  .news-module .btn {
+    width: 100%
+  }
+}
+
+.news-module .large-text-with-cta__body {
+  font-size: 1.125rem
+}

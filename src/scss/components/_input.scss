@@ -1,0 +1,225 @@
+input,
+textarea,
+select {
+  display: block;
+  outline: none;
+  border-radius: 0;
+  border: 0;
+  position: relative;
+  font-size: inherit;
+  background-color: transparent;
+  padding: .75em 1em;
+  color: var(--black)
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--black)
+}
+
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder,
+select::-webkit-input-placeholder {
+  color: #C2C2C2;
+}
+
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 30px #fff inset
+}
+
+textarea {
+  max-width: 100%;
+  overflow: auto;
+  resize: vertical;
+  min-height: 55px;
+  padding-top: .5em
+}
+
+.select-wrapper {
+  display: block;
+  position: relative;
+  margin-bottom: 18px;
+  font-family: "Inter", sans-serif;
+}
+
+.select-wrapper select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding-right: 50px;
+  width: 100%;
+  border: 1px solid #B8B8B8;
+  border-radius: 5px;
+}
+
+.select-wrapper svg {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translate(0, -50%);
+  z-index: -1;
+}
+
+.input-wrapper {
+  margin-bottom: 18px;
+  font-family: "Inter", sans-serif;
+}
+
+.input-wrapper__error {
+  margin: 9px 0 5px;
+  display: none;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  text-transform: none;
+  color: #D0331F;
+}
+
+.input-wrapper.input-error .input-wrapper__error {
+  display: inline-block;
+}
+
+.input-wrapper__input {
+  border: 1px solid #B8B8B8;
+  border-radius: 5px;
+}
+
+.input-wrapper.input-error .input-wrapper__input {
+  border: 1px solid #C20000;
+}
+
+.input-wrapper__label {
+  display: block;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 120%;
+  margin: 0 0 7px;
+}
+
+.input-wrapper.input-error .input-wrapper__label {
+  color: #D0331F;
+}
+
+.js-recover-trigger,
+.input-wrapper__password-toggle,
+.button.account-cancel-btn,
+.account-cancel-btn {
+  display: block;
+  padding: 0;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  text-decoration-line: underline;
+  border: none;
+  background-color: transparent;
+  text-transform: none;
+  color: inherit;
+}
+
+.input-wrapper__password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 5px;
+  transform: translate(0, -50%);
+  font-size: 14px;
+  background-color: white;
+  padding: 0 5px;
+  line-height: 26px;
+  height: 26px;
+}
+
+.input-wrapper.checkbox .input-wrapper__label {
+  position: relative;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.input-wrapper.checkbox input {
+  display: none;
+}
+
+.input-wrapper.checkbox .input-wrapper__label:before {
+  content:'';
+  -webkit-appearance: none;
+  background-color: transparent;
+  border: 1px solid #B8B8B8;
+  border-radius: 5px;
+  padding: 10px;
+  display: block;
+  position: relative;
+  vertical-align: middle;
+  cursor: pointer;
+  margin-right: 14px;
+}
+
+.input-wrapper.checkbox input:checked + .input-wrapper__label:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 2px;
+  left: 9px;
+  width: 6px;
+  height: 14px;
+  border: solid #000;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.input-wrapper.checkbox {
+  margin: 0 0 30px 0;
+}
+
+@media screen and (max-width: 991.98px) {
+  .input-wrapper.checkbox {
+    margin: 0 0 25px 0;
+  }
+
+  .input-wrapper.checkbox .input-wrapper__label {
+    font-size: 12px;
+  }
+}
+
+.password input {
+  border: 1px solid currentColor;
+  font-family: inherit
+}
+
+.password a {
+  text-decoration: underline
+}
+
+.shopify-challenge__container {
+  padding-top: 200px;
+  min-height: calc(100vh - 600px);
+  background: #fff;
+  max-width: 100% !important
+}
+
+.shopify-challenge__container .shopify-challenge__button {
+  cursor: pointer;
+  outline: none;
+  border-radius: 12px;
+  background-color: #000000;
+  color: #ffffff;
+  padding: 18px 40px;
+  margin: 50px auto !important;
+  font-family: "Inter", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.shopify-challenge__container .shopify-challenge__button:hover {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+input[name=product_search_field] {
+  width: 100%
+}

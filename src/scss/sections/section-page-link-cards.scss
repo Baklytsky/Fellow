@@ -1,0 +1,59 @@
+@import '../helpers/_variables.scss';
+
+.card-links {
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem
+}
+
+.card-link__body {
+  padding: 0 36px;
+}
+
+@media screen and (min-width: 768px) {
+  .card-links {
+    margin-top: 6rem;
+    margin-bottom: 6rem
+  }
+}
+
+@media screen and (max-width: 767.98px) {
+  .card-links {
+    padding-right: 0;
+    padding-left: 0;
+    margin-right: 0;
+    margin-left: 0
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .card-links__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch
+  }
+}
+
+@media screen and (max-width: 767.98px) {
+  .card-links__inner {
+    padding-top: 1.5rem;
+    background: var(--xlightgrey)
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .card-link {
+    width: calc(50% - 1.5vw)
+  }
+  .card-link__inner {
+    border-radius: .5rem
+  }
+}
+
+.card-link__button {
+  margin-top: 1rem;
+  margin-bottom: 1rem
+}
+
+.card-link img {
+  width: 100%
+}

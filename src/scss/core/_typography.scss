@@ -1,35 +1,13 @@
-h1,
-.h1,
-h2,
-.h2,
-h3,
-.h3,
-h4,
-.h4,
-.drawerItem__title,
-h5,
-.h5,
-h6,
-.h6 {
+@import '../helpers/_variables.scss';
+
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, .drawerItem__title, h5, .h5, h6, .h6 {
   font-style: normal;
   font-weight: 500;
   letter-spacing: normal
 }
 
 @media screen and (max-width: 991.98px) {
-  h1,
-  .h1,
-  h2,
-  .h2,
-  h3,
-  .h3,
-  h4,
-  .h4,
-  .drawerItem__title,
-  h5,
-  .h5,
-  h6,
-  .h6 {
+  h1, .h1, h2, .h2, h3, .h3, h4, .h4, .drawerItem__title, h5, .h5, h6, .h6 {
     margin: 1em 0
   }
 }
@@ -45,9 +23,7 @@ h6,
   }
 }
 
-.s1,
-h1,
-.h1 {
+.s1, h1, .h1 {
   font-size: 3rem;
   line-height: 1;
   font-weight: 500;
@@ -55,76 +31,59 @@ h1,
 }
 
 @media screen and (max-width: 991.98px) {
-  .s1,
-  h1,
-  .h1 {
+  .s1, h1, .h1 {
     font-size: 2.36rem
   }
 }
 
-.s2,
-h2,
-.h2 {
+.s2, h2, .h2 {
   font-size: calc((40 / 16) * 1rem);
   line-height: 1.2
 }
 
 @media screen and (max-width: 991.98px) {
-  .s2,
-  h2,
-  .h2 {
+  .s2, h2, .h2 {
     font-size: 1.75rem
   }
 }
 
-.s3,
-h3,
-.h3 {
+.s3, h3, .h3 {
   font-size: 1.625rem;
   line-height: 1;
 }
 
 @media screen and (max-width: 991.98px) {
-  .s3,
-  h3,
-  .h3 {
+  .s3, h3, .h3 {
     font-size: 1.5rem
   }
 }
 
-.s4,
-h4,
-.h4,
-.drawerItem__title {
+.s4, h4, .h4, .drawerItem__title {
   font-size: calc((24 / 16) * 1rem);
   line-height: 1.4
 }
 
 @media screen and (max-width: 991.98px) {
-  .s4,
-  h4,
-  .h4,
-  .drawerItem__title {
+  .s4, h4, .h4, .drawerItem__title {
     font-size: 1.25rem
   }
 }
 
-.s5,
-h5,
-.h5 {
+.s5, h5, .h5 {
   font-size: calc((20 / 16) * 1rem);
   line-height: 1.5
 }
 
-.s6,
-h6,
-.h6 {
+.s6, h6, .h6 {
   font-size: calc((14 / 16) * 1rem)
 }
 
-h6,
-.h6 {
+h6, .h6 {
   line-height: 1.5
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-header;
 }
 
 p,
@@ -317,7 +276,6 @@ em,
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
-
 
 .articleCard__excerpt {
   overflow: hidden;

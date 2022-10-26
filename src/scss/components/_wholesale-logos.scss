@@ -1,0 +1,68 @@
+.wholesale-logos {
+  margin-top: 2.5rem;
+  margin-bottom: 3.125rem
+}
+
+@media screen and (min-width: 768px) {
+  .wholesale-logos {
+    margin-top: 6rem;
+    margin-bottom: 6rem
+  }
+}
+
+.wholesale-logos__carousel {
+  max-width: 1220px
+}
+
+.wholesale-logos__carousel::after {
+  content: "";
+  position: absolute !important;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip: rect(0 0 0 0)
+}
+
+@media screen and (max-width: 767.98px) {
+  .wholesale-logos__carousel::after {
+    content: "flickity"
+  }
+}
+
+@media screen and (max-width: 767.98px) {
+  .wholesale-logos__carousel {
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0
+  }
+}
+
+.wholesale-logos__carousel .flickity-page-dots {
+  bottom: -5px
+}
+
+@media screen and (max-width: 767.98px) {
+  .wholesale-logos__slide {
+    flex-direction: column;
+    min-height: 100%
+  }
+}
+
+@media screen and (max-width: 767.98px) {
+  .wholesale-logos__logo {
+    padding: .5rem 0;
+    max-width: 17.5rem;
+    margin-left: auto;
+    margin-right: auto
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .wholesale-logos__logo {
+    padding: 1rem 1.875rem
+  }
+}

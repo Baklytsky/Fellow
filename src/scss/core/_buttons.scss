@@ -302,3 +302,13 @@ button.button--ghost:focus {
   color: #fff;
   transition: all var(--medium) var(--ease)
 }
+
+@media screen and (max-width: 991.98px) {
+  button.klaviyo-bis-trigger {
+    padding: 1.25rem
+  }
+}
+
+button {
+  color: currentColor;
+}

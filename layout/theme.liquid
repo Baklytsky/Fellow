@@ -14,6 +14,10 @@
   <link rel="preload" href="{{ 'global.min.js' | asset_url }}" as="script">
   <link rel="preload" href="{{ 'cart.min.js' | asset_url }}" as="script">
 
+  {% if template contains 'customers' %}
+    <link rel="preload" href="{{ 'account.min.css' | asset_url }}" as="style">
+  {% endif %}
+
   {%- if template contains 'search' -%}
     <link rel="preload" href="{{ 'search.min.css' | asset_url }}" as="style">
     <link rel="preload" href="{{ 'search.min.js' | asset_url }}" as="script">
@@ -69,6 +73,10 @@
     {%- if template contains 'collection' -%}
       {{ 'collection.min.css' | asset_url | stylesheet_tag }}
     {%- endif -%}
+
+    {% if template contains 'customers' %}
+      {{ 'account.min.css' | asset_url | stylesheet_tag }}
+    {% endif %}
 
     {%- if template contains 'search' -%}
       {{ 'search.min.css' | asset_url | stylesheet_tag }}

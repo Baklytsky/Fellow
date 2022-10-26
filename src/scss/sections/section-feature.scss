@@ -1,0 +1,158 @@
+@import '../helpers/_variables.scss';
+
+.featuredSection {
+  padding-top: 3rem;
+  padding-bottom: 3rem
+}
+
+.featuredSection.is-overlap {
+  padding-top: 0;
+  padding-bottom: 7.5rem
+}
+
+@media screen and (max-width: 1199.98px) {
+  .featuredSection.is-overlap {
+    padding-bottom: 5rem
+  }
+}
+
+.featuredSection.no-padding {
+  padding-top: 0;
+  padding-bottom: 0
+}
+
+@media screen and (max-width: 991.98px) {
+  .featuredSection {
+    padding-top: 0;
+    padding-bottom: 0
+  }
+}
+
+.is-fullbleed .featuredSection__bg {
+  position: relative
+}
+
+@media screen and (min-width: 992px) {
+  .is-fullbleed .featuredSection__bg.is-small {
+    height: 70vh
+  }
+  .is-fullbleed .featuredSection__bg.is-medium {
+    height: 80vh
+  }
+  .is-fullbleed .featuredSection__bg.is-large {
+    height: 90vh
+  }
+}
+
+@media screen and (max-width: 991.98px) {
+  .featuredSection__bg {
+    padding: 2rem 0;
+    background-color: #f5f5f5
+  }
+}
+
+.featuredSection__image {
+  width: 100%
+}
+
+.featuredSection__image.is-fullbleed {
+  position: absolute;
+  top: 0;
+  padding: 0;
+  height: 100%
+}
+
+.featuredSection__image.is-fullbleed.is-right {
+  right: 0
+}
+
+.featuredSection__image.is-fullbleed.is-right img {
+  -o-object-position: right top;
+  object-position: right top
+}
+
+.featuredSection__image.is-fullbleed.is-left {
+  left: 0
+}
+
+.featuredSection__image.is-fullbleed.is-left img {
+  -o-object-position: left top;
+  object-position: left top
+}
+
+@media screen and (min-width: 992px) {
+  .featuredSection__image {
+    width: 50%
+  }
+  .featuredSection__image.is-overlap {
+    padding: 0 4rem;
+    min-height: 500px;
+    max-height: 66vh;
+    margin-top: -2.5rem;
+    margin-bottom: -2.5rem
+  }
+  .featuredSection__image.is-fullbleed {
+    min-height: auto;
+    max-height: initial
+  }
+}
+
+@media screen and (max-width: 991.98px) {
+  .featuredSection__image {
+    position: relative
+  }
+  .featuredSection__image .image {
+    position: relative;
+    height: 85vw;
+    width: 100%
+  }
+}
+
+.featuredSection__text {
+  width: 100%
+}
+
+@media screen and (min-width: 992px) {
+  .featuredSection__text {
+    width: 50%;
+    margin-right: 0;
+    margin-bottom: 0;
+    padding: 2rem 0 2rem 3rem
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .featuredSection__text.is-left {
+    margin-left: 0;
+    padding: 2rem 3rem 2rem 0;
+    order: -1
+  }
+}
+
+@media screen and (max-width: 991.98px) {
+  .featuredSection__text {
+    margin-top: 2rem
+  }
+  .is-fullbleed .featuredSection__text {
+    margin-top: 80vw
+  }
+}
+
+.featuredSection__text h1,
+.featuredSection__text h2,
+.featuredSection__text h3 {
+  margin-top: 0;
+  font-family: "Oswald", -apple-system, system-ui, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  font-style: normal;
+  font-weight: 700
+}
+
+.featuredSection__text .rte {
+  margin: 1rem 0
+}
+
+@media screen and (max-width: 991.98px) {
+  .featuredSection__text .btn {
+    width: 100%
+  }
+}

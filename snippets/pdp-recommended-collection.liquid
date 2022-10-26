@@ -1,4 +1,5 @@
 {% if product.metafields.custom_fields["pdp_rec_collection"] != blank %}
+	<link rel="stylesheet" href="{{ 'section-pdp-recommended-collection.min.css' | asset_url }}">
 
 	{%- assign rec_collection_heading = product.metafields.custom_fields["pdp_rec_collection_heading"] %}
 	{%- assign rec_collection = collections[product.metafields.custom_fields["pdp_rec_collection"]] -%}

@@ -13,7 +13,7 @@
     "gift_wrapping_message": "Is this a gift?",
     "gift_wrapping_result_message": "Your order will be sent in a gift box",
     "gift_wrapping_heading": "Gift Box + Gift Note",
-    "enable_gwp": true,
+    "enable_gwp": false,
     "gwp_threshold": 99,
     "gwp_product": "donotlook",
     "gwp_1_success_message": "We've added a free mystery coffee to your cart!",
@@ -52,7 +52,7 @@
     "social_youtube_link": "https:\/\/www.youtube.com\/channel\/UCrtS-B4xQtbNVnyqC4lSSHg",
     "social_pinterest_link": "",
     "contact_us_link": "https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/requests\/new",
-    "favicon": "shopify:\/\/shop_images\/favicon.png",
+    "favicon": "shopify:\/\/shop_images\/fellowfavicon.png",
     "email_klaviyo_list_id": "PjWd8d",
     "sms_klaviyo_list_id": "",
     "terms_of_service_link": "shopify:\/\/pages\/terms-and-conditions",
@@ -522,7 +522,7 @@
         "type": "logo-text",
         "settings": {
           "enable_section": true,
-          "text": "Get free shipping + a free bag of coffee from one of our favorite roasters on orders $99+",
+          "text": "Get free shipping on orders $99+",
           "url": "shopify:\/\/collections\/bestsellers",
           "icon": "shopify:\/\/shop_images\/FP-icon-Homepage-AltIcon-black_1.png"
         }
@@ -530,16 +530,6 @@
       "162997622949d3f8ee": {
         "type": "featured-collections",
         "blocks": {
-          "74896794-3a9a-4ead-a9f5-c8a78fc6788e": {
-            "type": "collection",
-            "disabled": true,
-            "settings": {
-              "tab_text": "Cyber Weekend Deals",
-              "collection": "black-friday",
-              "button_text": "Shop Cyber Deals",
-              "button_url": ""
-            }
-          },
           "1c8f9541-a475-428c-9638-4b46c17cf01e": {
             "type": "collection",
             "settings": {
@@ -554,16 +544,6 @@
             "settings": {
               "tab_text": "Grind + Brew",
               "collection": "grind-brew",
-              "button_text": "",
-              "button_url": ""
-            }
-          },
-          "7acc7b63-cc70-4ca0-83e1-ffa6c28c031a": {
-            "type": "collection",
-            "disabled": true,
-            "settings": {
-              "tab_text": "Matte White",
-              "collection": "matte-white",
               "button_text": "",
               "button_url": ""
             }
@@ -585,80 +565,13 @@
               "button_text": "",
               "button_url": ""
             }
-          },
-          "e562759f-87e2-472a-9bff-544a67dff43c": {
-            "type": "collection",
-            "settings": {
-              "tab_text": "Pride Mugs",
-              "collection": "pride-mugs-coffee-collection",
-              "button_text": "Shop The Pride Collection",
-              "button_url": ""
-            }
-          },
-          "a739270d-13fd-4aaf-9bd0-c54e753ab0a7": {
-            "type": "collection",
-            "disabled": true,
-            "settings": {
-              "tab_text": "",
-              "collection": "super-fancy-gifts",
-              "button_text": "",
-              "button_url": ""
-            }
-          },
-          "db2a2a28-0b9f-4295-9b8c-60c865322da2": {
-            "type": "collection",
-            "disabled": true,
-            "settings": {
-              "tab_text": "Personalize Me",
-              "collection": "personalization",
-              "button_text": "Shop All",
-              "button_url": "shopify:\/\/collections\/all-products"
-            }
-          },
-          "0bc35052-fa24-4ee9-8955-ae08bee2e924": {
-            "type": "collection",
-            "disabled": true,
-            "settings": {
-              "tab_text": "",
-              "collection": "coffee-products-kits-bundles",
-              "button_text": "",
-              "button_url": ""
-            }
-          },
-          "9c56b143-db73-45f6-a837-924726f66341": {
-            "type": "collection",
-            "disabled": true,
-            "settings": {
-              "tab_text": "Coffee",
-              "collection": "coffee",
-              "button_text": "Shop Our Coffee Collection",
-              "button_url": "shopify:\/\/pages\/curated-coffee-collection"
-            }
-          },
-          "a40458b2-1409-4f4a-94fe-4a7dbf54b847": {
-            "type": "collection",
-            "disabled": true,
-            "settings": {
-              "tab_text": "",
-              "collection": "test-collection",
-              "button_text": "",
-              "button_url": ""
-            }
           }
         },
         "block_order": [
-          "74896794-3a9a-4ead-a9f5-c8a78fc6788e",
           "1c8f9541-a475-428c-9638-4b46c17cf01e",
           "61c6e91f-6505-42c0-866f-25296dbe3d4e",
-          "7acc7b63-cc70-4ca0-83e1-ffa6c28c031a",
           "34a21fe6-0cfe-4b56-85f5-42725eb153e6",
-          "bfeb2272-7a44-421f-ac0c-ab8e740b0fe8",
-          "e562759f-87e2-472a-9bff-544a67dff43c",
-          "a739270d-13fd-4aaf-9bd0-c54e753ab0a7",
-          "db2a2a28-0b9f-4295-9b8c-60c865322da2",
-          "0bc35052-fa24-4ee9-8955-ae08bee2e924",
-          "9c56b143-db73-45f6-a837-924726f66341",
-          "a40458b2-1409-4f4a-94fe-4a7dbf54b847"
+          "bfeb2272-7a44-421f-ac0c-ab8e740b0fe8"
         ],
         "settings": {
           "enable_section": true,
@@ -672,30 +585,14 @@
         "disabled": true,
         "settings": {
           "enable_section": true,
-          "image": "shopify:\/\/shop_images\/HeroImage_WormyWeek_Desktop__2x_2de8ede4-faee-47a0-9507-23802205642a.jpg",
+          "image": "shopify:\/\/shop_images\/HP_Module_1__Early_Start_to_Gifting.png",
           "layout": "left",
-          "header": "The 2022 Wormy World Championships",
-          "description": "<p>Play the video game hidden in all out electric kettles for the chance at glory (and prizes).<\/p>",
+          "header": "No time like the present",
+          "description": "<p>Give them the brewing tools to transform their mornings forever.<\/p>",
           "bg_color": "",
           "text_color": "#000000",
-          "cta_url": "https:\/\/fellowproducts.com\/wormy",
-          "cta_copy": "Enter The Competition",
-          "cta_color": "btn--dark"
-        }
-      },
-      "163005286553dd2458": {
-        "type": "hp-iwt",
-        "disabled": true,
-        "settings": {
-          "enable_section": true,
-          "image": "shopify:\/\/shop_images\/Fellow-Highlight.jpg",
-          "layout": "center",
-          "header": "Hi. We're Fellow.",
-          "description": "<p>We’re on a mission to give you the gear and the guidance to make your brewing routine a moment of creativity. We believe in terribly good design that results in ridiculously good coffee. Welcome to a brighter, less boring morning!<\/p>",
-          "bg_color": "#fff9e5",
-          "text_color": "#000000",
-          "cta_url": "shopify:\/\/collections\/top-rated",
-          "cta_copy": "Get Started",
+          "cta_url": "shopify:\/\/collections\/gifts-for-coffee-nerds",
+          "cta_copy": "Shop Gifts",
           "cta_color": "btn--dark"
         }
       },
@@ -776,28 +673,12 @@
             "settings": {
               "article": "learn\/the-golden-ratio-for-brewing-coffee"
             }
-          },
-          "243f1fe7-12cb-4b51-b5ac-6897c8af25d9": {
-            "type": "article",
-            "disabled": true,
-            "settings": {
-              "article": "learn\/2022-wormy-world-championships"
-            }
-          },
-          "3b78c804-955a-454f-b8d7-af7b4271d9a4": {
-            "type": "article",
-            "disabled": true,
-            "settings": {
-              "article": "brew-guides\/back-to-brewing-school-pour-over-basics-101"
-            }
           }
         },
         "block_order": [
           "55c828e0-6568-40ab-8326-d86837340614",
           "8034bca3-6535-40a1-83ce-613a916266d4",
-          "b89badb0-2f13-4dfd-b834-29780dfc72cd",
-          "243f1fe7-12cb-4b51-b5ac-6897c8af25d9",
-          "3b78c804-955a-454f-b8d7-af7b4271d9a4"
+          "b89badb0-2f13-4dfd-b834-29780dfc72cd"
         ],
         "settings": {
           "heading": "Commence Your Coffee Quest Here",
@@ -880,27 +761,13 @@
       },
       "page-template": {
         "type": "page-template",
-        "settings": {}
-      },
-      "16391832269c232690": {
-        "type": "hp-iwt",
-        "disabled": true,
         "settings": {
-          "enable_section": true,
-          "image": "shopify:\/\/shop_images\/2021-11-2_fellow_drops12932-min.jpg",
-          "layout": "right",
-          "header": "Seasonal menu",
-          "description": "<p>Just launched: Fellow’s new Coffee Collection. A rotation of our latest coffee obsessions, updated seasonally. <\/p>",
-          "bg_color": "#ffffff",
-          "text_color": "",
-          "cta_url": "shopify:\/\/pages\/curated-coffee-collection",
-          "cta_copy": "Shop Coffee",
-          "cta_color": "btn--dark"
         }
       },
       "search-template": {
         "type": "search-template",
-        "settings": {}
+        "settings": {
+        }
       },
       "1648114115d10a8d6a": {
         "type": "hp-hero-video",
@@ -945,41 +812,10 @@
           "form_description": "*Free to join. Message and data rates may apply.  Reply STOP to opt-out anytime"
         }
       },
-      "164970109872b4e7fa": {
-        "type": "hp-iwt",
-        "disabled": true,
-        "settings": {
-          "enable_section": true,
-          "image": "shopify:\/\/shop_images\/Labor_Day_9.2-9.4_HP_Module_1__2x_98861b91-2186-4052-9a2e-c5819d0b3622.png",
-          "layout": "left",
-          "header": "Winner’s Circle",
-          "description": "<p>Discover precision brewing gear recognized as the best in the business.<\/p>",
-          "bg_color": "rgba(0,0,0,0)",
-          "text_color": "",
-          "cta_url": "shopify:\/\/collections\/award-winners",
-          "cta_copy": "Shop Award Winners",
-          "cta_color": "btn--dark"
-        }
-      },
-      "16497034024471c77e": {
-        "type": "hp-iwt",
-        "disabled": true,
-        "settings": {
-          "enable_section": true,
-          "image": "shopify:\/\/shop_images\/HP_Module_1_Award_Winning__2x_2ac07ba0-b88f-4868-a0f6-a55686423143.png",
-          "layout": "right",
-          "header": "Ethiopia Fresh Crop",
-          "description": "<p>Just in. Discover our new curated collection from the birthplace of coffee.<\/p>",
-          "bg_color": "",
-          "text_color": "",
-          "cta_url": "https:\/\/fellowproducts.com\/pages\/curated-coffee-collection",
-          "cta_copy": "Shop Coffee",
-          "cta_color": "btn--dark"
-        }
-      },
       "cart-drawer-content": {
         "type": "cart-drawer-content",
-        "settings": {}
+        "settings": {
+        }
       },
       "accessibility-popup": {
         "type": "accessibility-popup",
@@ -992,7 +828,8 @@
       },
       "page-template-raf": {
         "type": "page-template-raf",
-        "settings": {}
+        "settings": {
+        }
       },
       "collection-by-variant": {
         "type": "collection-by-variant",
@@ -1040,13 +877,9 @@
       "1629968785d9d2e1c7",
       "1648464189e55630c9",
       "162997622949d3f8ee",
-      "164970109872b4e7fa",
-      "16497034024471c77e",
-      "1630052841314f69dd",
       "1636101715cd2df3c8",
-      "16391832269c232690",
-      "163005286553dd2458",
       "16342252676e2388c3",
+      "1630052841314f69dd",
       "1630069783d5517455",
       "163041601834c99057",
       "163040772842cf0e69"
@@ -1057,7 +890,8 @@
       "sections": {
         "featured-product": {
           "type": "featured-product",
-          "settings": {}
+          "settings": {
+          }
         }
       },
       "content_for_index": [
