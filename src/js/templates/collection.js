@@ -164,6 +164,7 @@ class collectionFacets extends HTMLElement {
           template = Handlebars.compile(resultSource);
     this.resultWrapper.innerHTML = template({items: data})
     if (typeof window.yotpo !== "undefined") window.yotpo.initWidgets();
+    this.checkSlideArrows()
   }
 
   getSelectedFacets () {
@@ -297,6 +298,21 @@ class collectionFacets extends HTMLElement {
       facetToSelect.forEach(input => input.setAttribute('checked', 'checked'));
       this.facetsForm.dispatchEvent(new Event('change'))
     })
+  }
+
+  checkSlideArrows() {
+    this.slideArrows = this.querySelectorAll('[data-slide-action]')
+    if (!this.slideArrows.length) return
+    this.slideArrows.forEach(arrow => {
+      arrow.addEventListener('click', ()=> this.slideRow(arrow))
+    })
+  }
+
+  slideRow(arrow) {
+    const action = arrow.dataset.slideAction,
+        scrollWidth = arrow.closest('.collection__product-item').querySelector('.productCard').offsetWidth,
+        target = arrow.closest('.collection__product-item').querySelector('.collection__product-variants');
+    (action === 'right') ? target.scrollLeft += scrollWidth : target.scrollLeft += -scrollWidth;
   }
 
 }

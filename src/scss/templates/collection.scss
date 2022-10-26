@@ -526,6 +526,7 @@
   overflow-x: auto;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  scroll-behavior: smooth;
 
   @media screen and (max-width: $large_desk) {
     width: 100%;
@@ -562,4 +563,53 @@
 .subcollection__product-results {
   display: flex;
   flex-direction: column;
+}
+
+.collection__arrow-right,
+.collection__arrow-left {
+  position: absolute;
+  top: 40%;
+  width: 30px;
+  height: 30px;
+  z-index: 2;
+  cursor: pointer;
+
+  @media screen and (max-width: $mobile) {
+    top: unset;
+    bottom: 10px;
+  }
+}
+
+.collection__arrow-right {
+  right: 0;
+  transform: translate(100%, -50%);
+  background: $right-arrow no-repeat center/contain;
+
+  @media screen and (max-width: $mobile) {
+    transform: translate(0, 0);
+  }
+}
+
+.collection__arrow-left {
+  left: 21%;
+  transform: translate(-100%, -50%);
+  background: $left-arrow no-repeat center/contain;
+
+  @media screen and (max-width: $mobile) {
+    left: unset;
+    right: 50px;
+    transform: translate(0, 0);
+  }
+}
+
+.collection__arrow-desktop {
+  @media screen and (max-width: $mobile) {
+    display: none;
+  }
+}
+
+.collection__arrow-mobile {
+  @media screen and (min-width: $mobile-up) {
+    display: none;
+  }
 }

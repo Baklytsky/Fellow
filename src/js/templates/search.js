@@ -99,9 +99,6 @@ function filterResults() {
       if (typeof window.yotpo !== "undefined") {
         window.yotpo.initWidgets();
       }
-      $('.productCard').each(function () {
-        theme.updateSwatches($(this)[0])
-      })
     }
   });
 }

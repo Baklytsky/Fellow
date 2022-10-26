@@ -5,8 +5,16 @@
   {% raw %}
   {{#if items.length}}
     {{#each items}}
-      <div class="collection__product-item" style="order: {{#if order}}{{ order }}{{ else }}{{ @index }}{{/if}}">
-        <div class="collection__product-content">
+      <div class="collection__product-item rel" style="order: {{#if order}}{{ order }}{{ else }}{{ @index }}{{/if}}">
+         {{#if variants.[3]}}
+          <div class="collection__arrow-right collection__arrow-desktop" data-slide-action="right"></div>
+          <div class="collection__arrow-left collection__arrow-desktop" data-slide-action="left"></div>
+        {{/if}}
+        <div class="collection__product-content rel">
+          {{#if variants.[2]}}
+            <div class="collection__arrow-right collection__arrow-mobile" data-slide-action="right"></div>
+            <div class="collection__arrow-left collection__arrow-mobile" data-slide-action="left"></div>
+          {{/if}}
           <h3 class="collection__product-title">
             <a href="{{ url }}">{{ title }}</a>
           </h3>

@@ -1473,14 +1473,14 @@
 @media screen and (min-width: 992px) {
   .hidden-lg-up {
     display: none;
-    visibility: none
+    visibility: hidden;
   }
 }
 
 @media screen and (max-width: 991.98px) {
   .hidden-md-down {
     display: none;
-    visibility: none
+    visibility: hidden;
   }
 }
 
