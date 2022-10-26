@@ -17,8 +17,8 @@
     "16522312584b4699f1": {
       "type": "coffee-marketplace-hero",
       "settings": {
-        "desktop_image": "shopify:\/\/shop_images\/Collections_Banner_Coffee_Marketplace_Desktop__2x_f66d473f-4386-44bb-923f-8c4a08c7cbe2.png",
-        "mobile_image": "shopify:\/\/shop_images\/Collections_Banner_Coffee_Marketplace_Desktop__2x_f66d473f-4386-44bb-923f-8c4a08c7cbe2.png",
+        "desktop_image": "shopify:\/\/shop_images\/2021-11-2_fellow_drops13046-min_7cb25f01-70fe-4e5f-b34e-a8f1bc92216c.jpg",
+        "mobile_image": "shopify:\/\/shop_images\/2021-11-2_fellow_drops12791_copy-min_1.jpg",
         "heading": "Fellow's Coffee Collection",
         "description": "Introducing our new Coffee Collection: a rotation of our latest coffee obsessions, updated seasonally and whenever a new roast wows us.",
         "text_block_position": "center",
@@ -203,6 +203,118 @@
     "1650645747c17529af": {
       "type": "coffee-marketplace-products",
       "blocks": {
+        "69a557e7-af76-4302-9416-2eaf6eb349f5": {
+          "type": "product",
+          "settings": {
+            "product": "necessary-coffee-burundi",
+            "title_1": "Roasted In",
+            "description_1": "Lancaster, Pennsylvania",
+            "title_2": "Grown In",
+            "description_2": "Nkonge Hill, Burundi",
+            "title_3": "We Tasted",
+            "description_3": "Stone Fruit, Nectarine",
+            "title_4": "Why Try It?",
+            "description_4": "A nectarine-noted coffee, sustainably sourced from East Africa’s smallest nation."
+          }
+        },
+        "57ad29ed-9f56-4eb2-8861-b0bfeb97dcff": {
+          "type": "product",
+          "settings": {
+            "product": "necessary-coffee-ethiopia",
+            "title_1": "Roasted In",
+            "description_1": "Lancaster, Pennsylvania",
+            "title_2": "Grown In",
+            "description_2": "Jimma, Ethiopia",
+            "title_3": "We Tasted",
+            "description_3": "Peach, Baking Spices",
+            "title_4": "Why Try It?",
+            "description_4": "All the ingredients for a peach pie, in a coffee bag."
+          }
+        },
+        "059b199e-ecec-4443-a806-a667a37b1a46": {
+          "type": "product",
+          "settings": {
+            "product": "passenger-el-salvador-montecarlos",
+            "title_1": "Roasted In",
+            "description_1": "Lancaster, Pennsylvania",
+            "title_2": "Grown In",
+            "description_2": "Apaneca, El Salvador",
+            "title_3": "We Tasted",
+            "description_3": "Milk Chocolate, Dried Apricot, Pear",
+            "title_4": "Why Try It?",
+            "description_4": "A sweet comforting coffee, grown on the rim of a dormant volcano."
+          }
+        },
+        "b8acc3bf-f06a-4771-8416-2a3912773ee1": {
+          "type": "product",
+          "settings": {
+            "product": "passenger-peru-cusco",
+            "title_1": "Roasted In",
+            "description_1": "Lancaster, Pennsylvania",
+            "title_2": "Grown In",
+            "description_2": "Cusco, Peru",
+            "title_3": "We Tasted",
+            "description_3": "Apple, Toasted Oats, Sweet Butter",
+            "title_4": "Why Try It?",
+            "description_4": "A buttery sweet treat that exemplifies the Peruvian terroir."
+          }
+        },
+        "04ccb9d7-c9c8-413b-8fda-ef353d28b46e": {
+          "type": "product",
+          "settings": {
+            "product": "passenger-ethiopia-agaro",
+            "title_1": "Roasted In",
+            "description_1": "Lancaster, Pennsylvania",
+            "title_2": "Grown In",
+            "description_2": "Jimma, Ethiopia",
+            "title_3": "We Tasted",
+            "description_3": "Apple, Baking Spices, Meyer Lemon",
+            "title_4": "Why Try It?",
+            "description_4": "A juicy and sweet staple, previously featured on Fellow Drops!"
+          }
+        },
+        "8482f2d7-d0db-4cf4-acf7-05ea809172ed": {
+          "type": "product",
+          "settings": {
+            "product": "little-waves-ethiopia-yukro",
+            "title_1": "Roasted In",
+            "description_1": "Durham, North Carolina",
+            "title_2": "Grown In",
+            "description_2": "Agaro Gera Woreda, Jimma, Ethiopia",
+            "title_3": "We Tasted",
+            "description_3": "Peach, Black Cherry, Lemon",
+            "title_4": "Why Try It?",
+            "description_4": "A creamy and pleasantly tart cup by 2022’s Micro Roaster of the Year."
+          }
+        },
+        "a49b51ee-c3fd-4df1-8b85-401f088bca85": {
+          "type": "product",
+          "settings": {
+            "product": "little-waves-ethiopia-halo-hartume",
+            "title_1": "Roasted In",
+            "description_1": "Durham, North Carolina",
+            "title_2": "Grown In",
+            "description_2": "Gedeb, Gedeo, Ethiopia",
+            "title_3": "We Tasted",
+            "description_3": "Black Tea, Peach, Brown Sugar, Grapefruit",
+            "title_4": "Why Try It?",
+            "description_4": "A burst of summery flavors by 2022’s Micro Roaster of the Year."
+          }
+        },
+        "c8aa35cd-4e32-425b-844a-bea10186eeb9": {
+          "type": "product",
+          "settings": {
+            "product": "flower-child-layo-teraga",
+            "title_1": "Roasted In",
+            "description_1": "Oakland, California",
+            "title_2": "Grown In",
+            "description_2": "Uraga, Guji, Ethiopia",
+            "title_3": "We Tasted",
+            "description_3": "Peach, Cola, Sweet Pastry, Floral Tea",
+            "title_4": "Why Try It?",
+            "description_4": "A highly nuanced and well-developed coffee from an incredible new roaster."
+          }
+        },
         "2115e373-8bab-4923-a85d-ebece997e478": {
           "type": "product",
           "disabled": true,
@@ -542,14 +654,17 @@
             "title_4": "Why Try It?",
             "description_4": "{{ block.settings.product.metafields.coffee.attribute_4.value }}"
           }
-        },
-        "4a5670c4-a2b6-4cfb-97fe-9c6a3fbeb041": {
-          "type": "lifestyle-image",
-          "disabled": true,
-          "settings": {}
         }
       },
       "block_order": [
+        "69a557e7-af76-4302-9416-2eaf6eb349f5",
+        "57ad29ed-9f56-4eb2-8861-b0bfeb97dcff",
+        "059b199e-ecec-4443-a806-a667a37b1a46",
+        "b8acc3bf-f06a-4771-8416-2a3912773ee1",
+        "04ccb9d7-c9c8-413b-8fda-ef353d28b46e",
+        "8482f2d7-d0db-4cf4-acf7-05ea809172ed",
+        "a49b51ee-c3fd-4df1-8b85-401f088bca85",
+        "c8aa35cd-4e32-425b-844a-bea10186eeb9",
         "2115e373-8bab-4923-a85d-ebece997e478",
         "f9a1d380-a590-44c7-a55e-9b2a3a3f2d12",
         "8ea2cfd6-81dc-432a-93f9-9e46739cdbb5",
@@ -573,8 +688,7 @@
         "f1c6aca2-ca7d-49cb-9203-80994c022cb4",
         "c71c537e-331b-4b08-980b-9b905e236cf5",
         "6f701f26-c0b2-4587-b388-960d258ddea8",
-        "9bc02913-d646-4cde-b261-2b4ae4a24550",
-        "4a5670c4-a2b6-4cfb-97fe-9c6a3fbeb041"
+        "9bc02913-d646-4cde-b261-2b4ae4a24550"
       ],
       "settings": {
         "heading": "Your Dream Coffee Aisle",

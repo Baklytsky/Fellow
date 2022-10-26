@@ -1,0 +1,119 @@
+{
+  "sections": {
+    "521640e2-cfd1-4883-a6a5-dc74685c60a5": {
+      "type": "image-with-cta",
+      "settings": {
+        "top_bottom_margin": false,
+        "image": "shopify:\/\/shop_images\/EKG_Pro_Gear_Guide_Banner.png",
+        "layout": "left",
+        "bg_color": "#000000",
+        "text_color": "#ffffff",
+        "heading": "Fellow Los Angeles Store",
+        "heading_size": "h1",
+        "text": "",
+        "cta_url": "https:\/\/www.google.com\/maps\/place\/Allbirds\/@47.6626452,-122.2989625,17z\/data=!4m5!3m4!1s0x549015ff1e9134f7:0x5cc91ba713fc8f8a!8m2!3d47.6626452!4d-122.2989625",
+        "cta_copy": "Directions",
+        "cta_color": "btn--light"
+      }
+    },
+    "bc245a7b-8eeb-4cfb-a545-a9b7cf97ab08": {
+      "type": "coffee-marketplace-iwt",
+      "disabled": true,
+      "settings": {
+        "heading": "Address",
+        "description": "1342 1\/2 Abbot Kinney Blvd Venice, CA 90291",
+        "cta_text": "",
+        "cta_link": "",
+        "image_position": "left"
+      }
+    },
+    "84c65c64-f0c3-435c-9586-b4ab92c89aca": {
+      "type": "seo-block",
+      "settings": {
+        "bg_color": "#FFFFFF",
+        "text_color": "#000000",
+        "heading": "Address",
+        "text": "<p>1342 1\/2 Abbot Kinney Blvd Venice, CA 90291<\/p>"
+      }
+    },
+    "1664388097345cae2b": {
+      "type": "seo-block",
+      "settings": {
+        "bg_color": "#ffffff",
+        "text_color": "#000000",
+        "heading": "Contact",
+        "text": "<p>805-387-2482<\/p><p><a href=\"mailto:FellowLA@fellowproducts.com\"><span style=\"text-decoration:underline\">FellowLA@fellowproducts.com<\/span><\/a><\/p>"
+      }
+    },
+    "761095fa-ccd6-4d00-b145-c978e4cd3daa": {
+      "type": "seo-block",
+      "settings": {
+        "bg_color": "#FFFFFF",
+        "text_color": "#000000",
+        "heading": "Hours",
+        "text": "<p>Monday - Sunday: 11:00 am - 7:00 pm<\/p>"
+      }
+    },
+    "d370043b-3f83-45e6-bbfa-3087a494f7a7": {
+      "type": "seo-block",
+      "settings": {
+        "bg_color": "#FFFFFF",
+        "text_color": "#000000",
+        "heading": "Announcements",
+        "text": "<p>Fellow's LA Store opens on Monday, November 7th! <\/p>"
+      }
+    },
+    "69bcfb6f-2006-45c8-8da4-510353bf2a1a": {
+      "type": "features",
+      "blocks": {
+        "27c954f4-6fb0-4cf6-87cc-0033a12f2338": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/Group_1.png",
+            "title": "Brandywine Coffee Roasters",
+            "description": "Exclusive Felloween Edition: Ethiopia Shakiso Natural - Roasted in Wilmington, DE"
+          }
+        },
+        "ed3a375b-d58c-4379-8c1d-6f2a6154dd95": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/Group_1.png",
+            "title": "April Coffee Roasters",
+            "description": "Kenya Kainamui- Roasted in Copehnagen, Denmark"
+          }
+        }
+      },
+      "block_order": [
+        "27c954f4-6fb0-4cf6-87cc-0033a12f2338",
+        "ed3a375b-d58c-4379-8c1d-6f2a6154dd95"
+      ],
+      "settings": {
+        "bg_color": "#FFF9E5",
+        "text_color": "#000000",
+        "heading": "Featured Roasters",
+        "description": "What we're tasting in store",
+        "show_arrows": true,
+        "show_dots": true
+      }
+    },
+    "03b5cf1d-cdd0-4b93-819b-f635d2b874a4": {
+      "type": "instagram-feed-v2",
+      "settings": {
+        "enable_section": true,
+        "feed_id": "34414",
+        "heading": "Brew along with us",
+        "instagram_name": "@fellowproducts"
+      }
+    }
+  },
+  "order": [
+    "521640e2-cfd1-4883-a6a5-dc74685c60a5",
+    "bc245a7b-8eeb-4cfb-a545-a9b7cf97ab08",
+    "84c65c64-f0c3-435c-9586-b4ab92c89aca",
+    "1664388097345cae2b",
+    "761095fa-ccd6-4d00-b145-c978e4cd3daa",
+    "d370043b-3f83-45e6-bbfa-3087a494f7a7",
+    "69bcfb6f-2006-45c8-8da4-510353bf2a1a",
+    "03b5cf1d-cdd0-4b93-819b-f635d2b874a4"
+  ]
+}

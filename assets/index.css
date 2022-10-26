@@ -4488,6 +4488,21 @@ textarea {
   letter-spacing: normal;
 }
 
+.button.account-btn.btn--light {
+  border: 2px solid #000;
+  background: #fff;
+  color: #000;
+}
+
+.button.account-btn.btn--light:hover {
+  background: #000;
+  color: #FFF;
+}
+
+.button.account-btn.account-btn-guest {
+  text-transform: none;
+}
+
 .account-subtitle {
   font-weight: 400;
   font-size: 16px;
