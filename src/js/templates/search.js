@@ -1,3 +1,6 @@
+// Legacy search result page
+
+$( document ).ready(function() {
 if ($('[data-dropdown-filter]').length) {
   $(document).on('keypress.dropdownFilters click.dropdownFilters', '[data-dropdown-filter]', function () {
     if (window.innerWidth > 992) {
@@ -148,6 +151,7 @@ $(document).on('click.mobileClearAll', '[data-clear-filter]', function () {
     }
   });
 })
+});
 
 class SearchPageForm extends HTMLElement {
   constructor() {
