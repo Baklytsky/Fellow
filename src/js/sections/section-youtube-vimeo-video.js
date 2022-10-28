@@ -1,3 +1,4 @@
+if (!customElements.get('video-section')) {
 class YoutubeVimeoVideo extends HTMLElement {
   constructor() {
     super();
@@ -79,3 +80,4 @@ class YoutubeVimeoVideo extends HTMLElement {
 }
 
 customElements.define('video-section', YoutubeVimeoVideo);
+}

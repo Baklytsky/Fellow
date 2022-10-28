@@ -34,6 +34,11 @@
   {%- assign shown_shop_by_use_arr = collection.metafields["custom_fields"]["shown_shop_by_use_tags"] | split: ',' -%}
 {% endif %}
 
+{%- comment -%} /// Check custom "shop by use" title  /// {%- endcomment -%}
+{% if collection.metafields["custom_fields"]["custom_shop_by_use_title"] != blank %}
+  {%- assign custom_shop_by_use_title = collection.metafields["custom_fields"]["custom_shop_by_use_title"] -%}
+{% endif %}
+
 {% paginate collection.products by 1000 %}
 {%- assign product_counter = 0 -%}
   {
@@ -41,6 +46,8 @@
   {%- for product in collection.products -%}
 
     {%- assign best_selling_order = forloop.index -%}
+
+    {%- comment -%} /// Reset all variables /// {%- endcomment -%}
 
     {%- assign product_color_names = blank -%}
     {%- assign product_color_names_uniq = blank -%}
@@ -56,6 +63,15 @@
     {%- assign product_shop_by_use = blank -%}
     {%- assign product_shop_by_use_val = blank -%}
     {%- assign product_shop_by_use_val_uniq = blank -%}
+    {%- assign product_custom_filter_1 = blank -%}
+    {%- assign product_custom_filter_1_val = blank -%}
+    {%- assign product_custom_filter_1_uniq = blank -%}
+    {%- assign product_custom_filter_1_val_uniq = blank -%}
+    {%- assign product_custom_filter_2 = blank -%}
+    {%- assign product_custom_filter_2_val = blank -%}
+    {%- assign product_custom_filter_2_uniq = blank -%}
+    {%- assign product_custom_filter_2_val_uniq = blank -%}
+    {%- assign all_product_use_tags = blank -%}
 
     {%- assign option_color_index = blank -%}
     {%- assign option_size_index = blank -%}
@@ -204,6 +220,7 @@
         {%- assign skip_tag = true -%}
         {%- assign use_name = tag | split: 'Use:' | last | strip -%}
         {%- assign use_name_handle = use_name | handleize -%}
+        {%- assign all_product_use_tags = all_product_use_tags | append: use_name | append: '**' -%}
 
         {%- if shown_shop_by_use_arr.size > 0 -%}
           {%- for shown_shop_by_use in shown_shop_by_use_arr -%}
@@ -220,9 +237,94 @@
           {%- assign product_shop_by_use_val = product_shop_by_use_val | append: use_name_handle | append: '**' -%}
         {%- endunless -%}
 
-
       {%- endif -%}
     {%- endfor -%}
+
+    {%- comment -%} /// Check custom filter field #1 /// {%- endcomment -%}
+
+    {%- assign custom_filter_title_1 = blank -%}
+    {%- assign custom_filter_tag_1 = blank -%}
+    {%- assign shown_custom_filter_1_arr = blank -%}
+
+    {% if collection.metafields["custom_fields"]["custom_filter_field_1"] != blank %}
+      {% for item in collection.metafields["custom_fields"]["custom_filter_field_1"] %}
+        {%- assign custom_filter_title_1 = item["title_1"] -%}
+        {%- assign custom_filter_tag_1 = item["tag_to_search_1"] -%}
+        {%- assign shown_custom_filter_1_arr = item["shown_results_1"] | split: ',' -%}
+
+        {% if custom_filter_title_1 != blank and custom_filter_tag_1 != blank and item["shown_results_1"] != blank %}
+
+          {%- for tag in product.tags -%}
+            {%- if tag contains custom_filter_tag_1 -%}
+              {%- assign skip_tag = true -%}
+              {%- assign result_name = tag | split: custom_filter_tag_1 | last | strip -%}
+              {%- assign result_name_handle = result_name | handleize -%}
+
+              {%- if shown_custom_filter_1_arr.size > 0 -%}
+                {%- for shown_result in shown_custom_filter_1_arr -%}
+                  {%- assign shown_result_handle = shown_result | handleize -%}
+                  {%- if shown_result_handle == result_name_handle  -%}
+                    {%- assign skip_tag = false -%}
+                    {%- break -%}
+                  {%- endif -%}
+                {%- endfor -%}
+              {%- endif -%}
+
+              {%- unless skip_tag -%}
+              {%- assign product_custom_filter_1 = product_custom_filter_1 | append: result_name | append: '**' -%}
+              {%- assign product_custom_filter_1_val = product_custom_filter_1_val | append: result_name_handle | append: '**' -%}
+              {%- endunless -%}
+
+            {%- endif -%}
+
+          {%- endfor -%}
+
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+
+    {%- comment -%} /// Check custom filter field #2 /// {%- endcomment -%}
+
+    {%- assign custom_filter_title_2 = blank -%}
+    {%- assign custom_filter_tag_2 = blank -%}
+    {%- assign shown_custom_filter_2_arr = blank -%}
+
+    {% if collection.metafields["custom_fields"]["custom_filter_field_2"] != blank %}
+      {% for item in collection.metafields["custom_fields"]["custom_filter_field_2"] %}
+        {%- assign custom_filter_title_2 = item["title_2"] -%}
+        {%- assign custom_filter_tag_2 = item["tag_to_search_2"] -%}
+        {%- assign shown_custom_filter_2_arr = item["shown_results_2"] | split: ',' -%}
+
+        {% if custom_filter_title_2 != blank and custom_filter_tag_2 != blank and item["shown_results_2"] != blank %}
+
+          {%- for tag in product.tags -%}
+            {%- if tag contains custom_filter_tag_2 -%}
+              {%- assign skip_tag = true -%}
+              {%- assign result_name = tag | split: custom_filter_tag_2 | last | strip -%}
+              {%- assign result_name_handle = result_name | handleize -%}
+
+              {%- if shown_custom_filter_2_arr.size > 0 -%}
+                {%- for shown_result in shown_custom_filter_2_arr -%}
+                  {%- assign shown_result_handle = shown_result | handleize -%}
+                  {%- if shown_result_handle == result_name_handle  -%}
+                    {%- assign skip_tag = false -%}
+                    {%- break -%}
+                  {%- endif -%}
+                {%- endfor -%}
+              {%- endif -%}
+
+              {%- unless skip_tag -%}
+              {%- assign product_custom_filter_2 = product_custom_filter_2 | append: result_name | append: '**' -%}
+              {%- assign product_custom_filter_2_val = product_custom_filter_2_val | append: result_name_handle | append: '**' -%}
+              {%- endunless -%}
+
+            {%- endif -%}
+
+          {%- endfor -%}
+
+        {% endif %}
+      {% endfor %}
+    {% endif %}
 
     {%- assign product_color_names_uniq = product_color_names | split: '**' | uniq -%}
     {%- assign product_color_hex_uniq = product_color_hex | split: '**' | uniq -%}
@@ -233,12 +335,19 @@
 
     {%- assign product_shop_by_use_uniq = product_shop_by_use | split: '**' | uniq -%}
     {%- assign product_shop_by_use_val_uniq = product_shop_by_use_val | split: '**' | uniq -%}
+    {%- assign all_product_use_tags_arr = all_product_use_tags | split: '**' | uniq -%}
+
+    {%- assign product_custom_filter_1_uniq = product_custom_filter_1 | split: '**' | uniq -%}
+    {%- assign product_custom_filter_1_val_uniq = product_custom_filter_1_val | split: '**' | uniq -%}
+
+    {%- assign product_custom_filter_2_uniq = product_custom_filter_2 | split: '**' | uniq -%}
+    {%- assign product_custom_filter_2_val_uniq = product_custom_filter_2_val | split: '**' | uniq -%}
 
     {%- assign tag_info = blank -%}
     {%- assign tag_info_item = blank -%}
     {%- assign tag_info_arr = blank -%}
 
-    {%- for use_tag in product_shop_by_use_uniq -%}
+    {%- for use_tag in all_product_use_tags_arr -%}
       {%- assign use_tag_handle = use_tag | handleize -%}
 
       {%- case use_tag_handle -%}
@@ -473,7 +582,8 @@
       "date": "{{ product.published_at | date: "%Y/%m/%d %H:%M:%S" }}",
       "facets": {
         "shop_by_use": {
-          "names": {{ product_shop_by_use_uniq | json }}
+          "names": {{ product_shop_by_use_uniq | json }},
+          "title": {{ custom_shop_by_use_title | default: 'Shop By Use' | json }}
         },
         "color": {
           "names": {{ product_color_names_uniq | json }},
@@ -481,10 +591,24 @@
         },
         "size": {
           "names": {{ product_sizes_uniq | json}}
+        },
+        "custom_filter_1": {
+          "names": {{ product_custom_filter_1_uniq | json }},
+          "title": {{ custom_filter_title_1 | json }}
+        },
+        "custom_filter_2": {
+          "names": {{ product_custom_filter_2_uniq | json }},
+          "title": {{ custom_filter_title_2 | json }}
         }
       },
       "shop_by_use": {
         "value": {{ product_shop_by_use_val_uniq | json }}
+      },
+      "custom_filter_1": {
+        "value": {{ product_custom_filter_1_val_uniq | json }}
+      },
+      "custom_filter_2": {
+        "value": {{ product_custom_filter_2_val_uniq | json }}
       },
       "color": {
         "value": {{ product_color_val_uniq | json }}
@@ -604,6 +728,12 @@
         "compare_at_price_money": "{{ variant_compare_at_price | money_without_trailing_zeros }}",
         "shop_by_use": {
           "value": {{ product_shop_by_use_val_uniq | json }}
+          },
+        "custom_filter_1": {
+          "value": {{ product_custom_filter_1_val_uniq | json }}
+          },
+        "custom_filter_2": {
+          "value": {{ product_custom_filter_2_val_uniq | json }}
           },
         "color": {
           "value": {% if not_bundle %}"{{ variant_color_name | handleize }}"{% else %}{{ product_color_val_uniq | json }}{% endif %},

@@ -173,17 +173,3 @@
   height: auto;
   max-height: none;
 }
-
-.SectionPadding {
-  padding: 32px 0;
-
-  @media screen and (max-width: $tablet) {
-    padding: 16px 0;
-  }
-}
-
-.ImageWithCta.SectionPadding {
-  @media screen and (max-width: $tablet) {
-    padding: 0;
-  }
-}

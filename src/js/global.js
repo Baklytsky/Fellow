@@ -1,3 +1,5 @@
+// All methods in the theme object are helpers
+
 theme.changeBtnState = function (btn, state, btnInner) {
   if (!btn) return
     (state === 'active')

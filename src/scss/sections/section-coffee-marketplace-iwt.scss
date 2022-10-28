@@ -1,6 +1,6 @@
 @import '../helpers/_variables.scss';
 
-.cmIWT {
+.cmImageWithText {
   margin: 0 auto;
   max-width: 1440px;
   padding: 40px 33px 25px;
@@ -19,7 +19,7 @@
   }
 }
 
-.cmIWT__image {
+.cmImageWithText__image {
   width: 49%;
   padding-top: 38%;
 
@@ -29,7 +29,7 @@
   }
 }
 
-.cmIWT__content {
+.cmImageWithText__content {
   width: 51%;
   padding: 24px;
   display: flex;
@@ -44,7 +44,7 @@
   }
 }
 
-.cmIWT__contentDescription {
+.cmImageWithText__contentDescription {
   width: 100%;
   max-width: 560px;
   margin: 24px 0 0;
@@ -54,7 +54,7 @@
   }
 }
 
-.cmIWT__button {
+.cmImageWithText__button {
   margin-top: 24px;
   font-size: 18px;
   padding: 16px;
@@ -68,10 +68,10 @@
   }
 }
 
-.cmIWT__image--right {
+.cmImageWithText__image--right {
   flex-direction: row-reverse;
 
-  .cmIWT__content {
+  .cmImageWithText__content {
     align-items: flex-end;
     text-align: right;
 

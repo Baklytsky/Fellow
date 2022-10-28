@@ -1,3 +1,4 @@
+if (!customElements.get('mp4-video')) {
 class MP4Video extends HTMLElement {
   constructor() {
     super();
@@ -39,3 +40,4 @@ class MP4Video extends HTMLElement {
 }
 
 customElements.define('mp4-video', MP4Video);
+}

@@ -19,7 +19,7 @@
   {%- assign desktop_image_class = 'image-abs-cover hide-mobile' -%}
 {%- endif -%}
 
-<section class="ImageWithCta {% if top_bottom_margin %}SectionPadding{% endif %}">
+<section class="ImageWithCta {% if top_bottom_margin %}ImageWithCta--WithPadding{% endif %}">
   <div class="collectionHero ImageWithCta__Wrapper ImageWithCta__Image--{{ layout }}">
     {%- if image != blank -%}
       <div class="collectionHero__media ImageWithCta__Media rel">

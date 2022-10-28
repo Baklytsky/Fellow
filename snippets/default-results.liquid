@@ -5,7 +5,7 @@
   {% raw %}
   {{#if items.length}}
     {{#each items}}
-    <product-card class='productCard'>
+    <product-card class='productCard' id="productCard-{{ id }}">
       <div class='productCard__content y'>
         <div aria-label='Image of {{ title }}' class='productCard__img rel z0'>
         {{#if badge}}

@@ -129,7 +129,9 @@ class collectionFacets extends HTMLElement {
   renderFacets(facets) {
     const facetsToRender = {
           facetsArr: [
-            {title: 'Shop By Use', handle: 'shop_by_use', shop_by_use: true, facets: this.getFacetsArr(facets, 'shop_by_use')},
+            {title: facets[0].shop_by_use.title, handle: 'shop_by_use', shop_by_use: true, facets: this.getFacetsArr(facets, 'shop_by_use')},
+            {title: facets[0]['custom_filter_1'].title, handle: 'custom_filter_1', custom_filter_1: true, facets: this.getFacetsArr(facets, 'custom_filter_1')},
+            {title: facets[0]['custom_filter_2'].title, handle: 'custom_filter_2', custom_filter_1: true, facets: this.getFacetsArr(facets, 'custom_filter_2')},
             {title: 'Size', handle: 'size', size: true, facets: this.getFacetsArr(facets, 'size')},
             {title: 'Color', handle: 'color',  color: true, facets: this.getFacetsArr(facets, 'color')}
           ]
@@ -137,6 +139,7 @@ class collectionFacets extends HTMLElement {
         facetsSource = this.facetsSourse.innerHTML,
         template = Handlebars.compile(facetsSource);
         this.facetsWrapper.innerHTML = template(facetsToRender)
+    this.checkSelectedFacets()
   }
 
   getFacetsArr (facets, facetName) {
@@ -182,8 +185,8 @@ class collectionFacets extends HTMLElement {
       this.selectedFacetsCount.innerHTML = ''
     }
 
-    let allSelectedItems = this.data,
-        allSelectedVariants = this.variants;
+    let allSelectedVariants = this.variants,
+        allSelectedResults = checkedInputs.length ? [] : this.data;
 
     facetGroup.forEach(group => {
       const groupName = group.getAttribute('data-group-name'),
@@ -193,8 +196,10 @@ class collectionFacets extends HTMLElement {
 
      if (!groupValues.length) return
 
-      const selectedItems = this.filterResults(allSelectedItems, groupName, groupValues)
-      allSelectedItems = [...selectedItems]
+      const selectedItems = this.filterResults(this.data, groupName, groupValues)
+      if (!this.template.includes('by-product')) {
+        allSelectedResults = [...new Set(allSelectedResults.concat(selectedItems))]
+      }
 
       if (this.template.includes('by-product')) {
         const productSelectedVariants = selectedItems.map(product => {
@@ -204,8 +209,8 @@ class collectionFacets extends HTMLElement {
           }
           return productClone
         })
-        allSelectedItems = [...productSelectedVariants].filter(product => product.variants.length)
-        allSelectedVariants = allSelectedItems.reduce((arr, product) => arr.concat(product.variants), [])
+        allSelectedResults = [...new Set(allSelectedResults.concat([...productSelectedVariants].filter(product => product.variants.length)))]
+        allSelectedVariants = allSelectedResults.reduce((arr, product) => arr.concat(product.variants), [])
       }
 
      const groupValuesStr = groupValues.join('+');
@@ -214,11 +219,16 @@ class collectionFacets extends HTMLElement {
 
     if (this.externalUrlParams && this.externalUrlParams.length) this.urlParams+= '&' + this.externalUrlParams
 
-    this.sortBy(allSelectedItems, sortByAction)
-    this.renderResults(allSelectedItems)
+    this.sortBy(allSelectedResults, sortByAction)
+    this.renderResults(allSelectedResults)
     this.resultsCount.innerHTML = (this.template.includes('by-product'))
         ? `(${allSelectedVariants.length || 0})`
-        : `(${allSelectedItems.length})`
+        : `(${allSelectedResults.length})`
+
+    if (this.template.includes('default')) {
+      const selectedColor = this.facetsForm.querySelector('[data-group-name=color] input:checked')
+      if (selectedColor) this.switchColorSwatch(allSelectedResults, selectedColor.value)
+    }
     history.replaceState(null, null, this.urlParams)
   }
 
@@ -313,6 +323,39 @@ class collectionFacets extends HTMLElement {
         scrollWidth = arrow.closest('.collection__product-item').querySelector('.productCard').offsetWidth,
         target = arrow.closest('.collection__product-item').querySelector('.collection__product-variants');
     (action === 'right') ? target.scrollLeft += scrollWidth : target.scrollLeft += -scrollWidth;
+  }
+
+  checkSelectedFacets() {
+    this.facetsItem = this.facetsForm.querySelectorAll('.facet-group__list-item')
+
+    this.facetsItem.forEach(item => item.addEventListener('click', ()=> {
+      const selectedInput = item.querySelector('input'),
+          groupInputs = item.closest('.facet-group').querySelectorAll('input')
+
+      if (!selectedInput.checked) {
+        groupInputs.forEach(input => {
+          if (input !== selectedInput) input.checked = false
+        })
+      }
+    }))
+  }
+
+  switchColorSwatch(results, colorGroup) {
+    const productsWithSelectedColor = results.filter(product => product.color.value.includes(colorGroup)),
+        arrayOfObj = productsWithSelectedColor.map(product => {
+      const firstMatchingVariant = product.variants.find(variant => variant.color.value.includes(colorGroup))
+      return {
+        product_id: product.id,
+        variant_id: firstMatchingVariant.id
+      }
+    });
+
+    arrayOfObj.forEach(obj => {
+      const productCard = this.resultWrapper.querySelector('#productCard-'+ obj.product_id +''),
+            colorSwatch = productCard.querySelector('input[name="color"][data-variant-id="'+ obj.variant_id +'"]');
+
+      if (colorSwatch) colorSwatch.click()
+    })
   }
 
 }

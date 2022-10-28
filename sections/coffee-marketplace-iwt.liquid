@@ -8,26 +8,26 @@
 {%- if heading != blank or description != blank or cta_text != blank or image != blank -%}
   <link rel="stylesheet" href="{{ 'section-coffee-marketplace-iwt.min.css' | asset_url }}">
 
-  <section class="cmIWT cmIWT__image--{{ image_position }}">
+  <section class="cmImageWithText cmImageWithText__image--{{ image_position }}">
     {%- if image != blank -%}
-      <div class="cmIWT__image rel">
+      <div class="cmImageWithText__image rel">
         {% render 'image', image: image, class_name: 'image-abs-contain', alt: heading, %}
       </div>
     {%- endif -%}
     {%- if heading != blank or description != blank or cta_text != blank -%}
-      <div class="cmIWT__content">
+      <div class="cmImageWithText__content">
         {%- if heading != blank -%}
-          <h2 class="cmIWT__contentHeading m0 cmHeading">
+          <h2 class="cmImageWithText__contentHeading m0 cmHeading">
             {{ heading }}
           </h2>
         {%- endif -%}
         {%- if description != blank -%}
-          <p class="cmIWT__contentDescription cmDescription">
+          <p class="cmImageWithText__contentDescription cmDescription">
             {{ description }}
           </p>
         {%- endif -%}
         {%- if cta_text != blank and cta_link != blank -%}
-          <a href="{{ cta_link }}" class="btn btn--lg btn--dark cmIWT__button">
+          <a href="{{ cta_link }}" class="btn btn--lg btn--dark cmImageWithText__button">
             {{ cta_text | escape }}
           </a>
         {%- endif -%}

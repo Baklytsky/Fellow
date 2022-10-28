@@ -1,6 +1,3 @@
-{% comment %} Metafield represents index as 1, 2, 3, 4, etc. {% endcomment %}
-{% assign product_image_index = 0 %}
-
 {% paginate collection.products by 1000 %}
 
 {% if collection.metafields.custom_fields["desktop_masthead_image"] != blank %}
@@ -38,7 +35,7 @@
     %}
   {% endif %}
 
-  <collection-facets class='collection-wrapper' data-template="{{ template.suffix }}">
+  <collection-facets class='collection-wrapper' data-template="{{ template.suffix | default: 'default' }}">
     {%- if template.suffix == 'by-product-with-subcollection'
       and collection.metafields["custom_fields"]["subcollection_list"] != blank -%}
       {%- assign subcollection_counter = 0 -%}
