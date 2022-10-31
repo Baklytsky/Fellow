@@ -1401,8 +1401,6 @@ class bundle extends HTMLElement {
     this.bundleName = this.atcButton.getAttribute('data-bundle-name');
     this.selects = this.querySelectorAll('.js-bundle-variant .js-select');
     this.atcButton.addEventListener('click', this.addBundle.bind(this));
-    this.variantsId = [];
-    this.variantsData = [];
     if (this.gallery) this.bundleGallery()
   }
 
@@ -1413,6 +1411,8 @@ class bundle extends HTMLElement {
 
   addBundle(e) {
     e.preventDefault();
+    this.variantsId = [];
+    this.variantsData = [];
     this.selects.forEach((select) => {
       const variant_id = select.getAttribute('value');
       this.variantsId.push(variant_id);
