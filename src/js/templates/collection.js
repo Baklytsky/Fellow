@@ -185,7 +185,10 @@ class collectionFacets extends HTMLElement {
           template = Handlebars.compile(resultSource);
     this.resultWrapper.innerHTML = template({items: data})
     if (typeof window.yotpo !== "undefined") window.yotpo.initWidgets();
-    this.checkSlideArrows()
+    if (this.template.includes('by-product')) {
+      this.checkSlideArrows()
+      this.showHideScrollArrows()
+    }
   }
 
   getSelectedFacets () {
@@ -338,9 +341,29 @@ class collectionFacets extends HTMLElement {
 
   slideRow(arrow) {
     const action = arrow.dataset.slideAction,
-        scrollWidth = arrow.closest('.collection__product-item').querySelector('.productCard').offsetWidth,
-        target = arrow.closest('.collection__product-item').querySelector('.collection__product-variants');
+        wrapper = arrow.closest('.collection__product-item'),
+        scrollWidth = wrapper.querySelector('.productCard').offsetWidth,
+        target = wrapper.querySelector('.collection__product-variants');
     (action === 'right') ? target.scrollLeft += scrollWidth : target.scrollLeft += -scrollWidth;
+  }
+
+  showHideScrollArrows() {
+    const productWrappers = this.querySelectorAll('.collection__product-item');
+    productWrappers.forEach(wrapper => {
+      const leftArrow = wrapper.querySelectorAll('[data-slide-action=left]'),
+          rightArrow = wrapper.querySelectorAll('[data-slide-action=right]'),
+          variantWrapper = wrapper.querySelector('.collection__product-variants');
+      if (!leftArrow || !rightArrow) return
+      variantWrapper.addEventListener('scroll', () => {
+        (variantWrapper.scrollLeft === variantWrapper.scrollWidth - variantWrapper.clientWidth)
+            ? rightArrow.forEach(el => el.classList.add('is-hidden'))
+            : rightArrow.forEach(el => el.classList.remove('is-hidden'));
+
+        (variantWrapper.scrollLeft === 0)
+            ? leftArrow.forEach(el => el.classList.add('is-hidden'))
+            : leftArrow.forEach(el => el.classList.remove('is-hidden'));
+      })
+    })
   }
 
   checkSelectedFacets() {

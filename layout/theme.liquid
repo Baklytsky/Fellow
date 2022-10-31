@@ -94,10 +94,12 @@
     
     {{ content_for_header }}
     {% include 'friendbuy' %}
+    {% include 'bazaarvoice-header-script' %}
 
 </head>
 
   <body>
+    {% section 'google-structured-data' %}
     {% section 'accessibility-popup' %}
     {% include 'gtm-no-script' %}
     {% section 'header' %}
@@ -111,6 +113,7 @@
     </main>
 
     {% section 'footer' %}
+    {% include 'bazaarvoice-footer-script' %}
     {% include 'cloak' %}
 
     {{ 'libs.min.js' | asset_url | script_tag }}

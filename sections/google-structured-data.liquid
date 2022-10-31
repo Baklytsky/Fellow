@@ -1,0 +1,19 @@
+{%- if section.settings.structured_data != blank -%}
+  <div style="display: none; visibility: hidden">
+    {{ section.settings.structured_data }}
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Google Structured Data",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "html",
+      "id": "structured_data",
+      "label": "Structured Data Script"
+    }
+  ]
+}
+{% endschema %}

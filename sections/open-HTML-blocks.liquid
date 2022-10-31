@@ -1,0 +1,31 @@
+{%- if section.blocks.size > 0 -%}
+  {%- for block in section.blocks -%}
+    {{ block.settings.html }}
+  {%- endfor -%}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Open | HTML",
+  "tag": "section",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "open-html",
+      "name": "HTML",
+      "settings": [
+        {
+          "type": "html",
+          "id": "html",
+          "label": "HTML"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Open | HTML"
+    }
+  ]
+}
+{% endschema %}
