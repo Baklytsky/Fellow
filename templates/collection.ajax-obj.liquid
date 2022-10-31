@@ -177,15 +177,21 @@
           {%- assign color_for_search = color_name | handleize | append: '~' | prepend: '~' -%}
 
           {%- if colors_str contains color_for_search -%}
-            {%- assign first_split = colors_str | split: color_for_search | first -%}
-            {%- assign second_split = first_split | split: '||' | last -%}
-            {%- assign name = second_split | split: '&&' | first -%}
-            {%- assign hex = second_split | split: '&&' | last -%}
-            {%- assign val = name | handleize -%}
+            {%- assign split_arr = colors_str | split: color_for_search -%}
+            {%- for part in split_arr -%}
 
-            {%- assign product_color_names = product_color_names | append: name | append: '**' -%}
-            {%- assign product_color_hex = product_color_hex | append: hex | append: '**' -%}
-            {%- assign product_color_val = product_color_val | append: val | append: '**' -%}
+              {%- unless forloop.last -%}
+              {%- assign split_part = part | split: '||' | last -%}
+              {%- assign name = split_part | split: '&&' | first -%}
+              {%- assign hex = split_part | split: '&&' | last -%}
+              {%- assign val = name | handleize -%}
+
+              {%- assign product_color_names = product_color_names | append: name | append: '**' -%}
+              {%- assign product_color_hex = product_color_hex | append: hex | append: '**' -%}
+              {%- assign product_color_val = product_color_val | append: val | append: '**' -%}
+              {%- endunless -%}
+
+            {%- endfor -%}
           {%- endif -%}
         {%- endif -%}
 
@@ -440,15 +446,21 @@
                   {%- assign color_for_search = color_name | handleize | append: '~' | prepend: '~' -%}
 
                   {%- if colors_str contains color_for_search -%}
-                    {%- assign first_split = colors_str | split: color_for_search | first -%}
-                    {%- assign second_split = first_split | split: '||' | last -%}
-                    {%- assign name = second_split | split: '&&' | first -%}
-                    {%- assign hex = second_split | split: '&&' | last -%}
-                    {%- assign val = name | handleize -%}
+                    {%- assign split_arr = colors_str | split: color_for_search -%}
+                    {%- for part in split_arr -%}
 
-                    {%- assign product_color_names = product_color_names | append: name | append: '**' -%}
-                    {%- assign product_color_hex = product_color_hex | append: hex | append: '**' -%}
-                    {%- assign product_color_val = product_color_val | append: val | append: '**' -%}
+                      {%- unless forloop.last -%}
+                      {%- assign split_part = part | split: '||' | last -%}
+                      {%- assign name = split_part | split: '&&' | first -%}
+                      {%- assign hex = split_part | split: '&&' | last -%}
+                      {%- assign val = name | handleize -%}
+
+                      {%- assign product_color_names = product_color_names | append: name | append: '**' -%}
+                      {%- assign product_color_hex = product_color_hex | append: hex | append: '**' -%}
+                      {%- assign product_color_val = product_color_val | append: val | append: '**' -%}
+                      {%- endunless -%}
+
+                    {%- endfor -%}
                   {%- endif -%}
                 {%- endif -%}
 
@@ -625,6 +637,8 @@
       {% endif %}
       "variants": [
       {% for variant in product.variants %}
+        {%- assign variant_color_names = blank -%}
+        {%- assign variant_color_hexes = blank -%}
         {%- assign variant_color_name = blank -%}
         {%- assign variant_color_hex = blank -%}
         {%- assign color_name = blank -%}
@@ -640,10 +654,23 @@
           {%- assign color_for_search = color_name | handleize | append: '~' | prepend: '~' -%}
 
           {%- if colors_str contains color_for_search -%}
-            {%- assign first_split = colors_str | split: color_for_search | first -%}
-            {%- assign second_split = first_split | split: '||' | last -%}
-            {%- assign variant_color_name = second_split | split: '&&' | first -%}
-            {%- assign variant_color_hex = second_split | split: '&&' | last -%}
+            {%- assign split_arr = colors_str | split: color_for_search -%}
+            {%- for part in split_arr -%}
+
+              {%- unless forloop.last -%}
+              {%- assign split_part = part | split: '||' | last -%}
+              {%- assign name = split_part | split: '&&' | first -%}
+              {%- assign hex = split_part | split: '&&' | last -%}
+              {%- assign val = name | handleize -%}
+
+              {%- assign variant_color_names = variant_color_names | append: val | append: '**' -%}
+              {%- assign variant_color_hexes = variant_color_hexes | append: hex | append: '**' -%}
+              {%- endunless -%}
+
+            {%- endfor -%}
+
+            {%- assign variant_color_name = variant_color_names | split: '**' | uniq -%}
+            {%- assign variant_color_hex = variant_color_hexes | split: '**' | uniq  -%}
           {%- endif -%}
         {%- endif -%}
 
@@ -736,8 +763,8 @@
           "value": {{ product_custom_filter_2_val_uniq | json }}
           },
         "color": {
-          "value": {% if not_bundle %}"{{ variant_color_name | handleize }}"{% else %}{{ product_color_val_uniq | json }}{% endif %},
-          "hex": "{{ variant_color_hex }}"
+          "value": {% if not_bundle %}{{ variant_color_name | json }}{% else %}{{ product_color_val_uniq | json }}{% endif %},
+          "hex": {{ variant_color_hex | json }}
           },
         "size": {
           "value": {% if not_bundle %}"{{ variant_size | handleize }}"{% else %}{{ product_sizes_val_uniq | json}}{% endif %}

@@ -98,8 +98,6 @@ class bundle extends HTMLElement {
     this.bundleName = this.addToCartBtn.getAttribute('data-bundle-name');
     this.selects = this.querySelectorAll('.js-bundle-variant .js-select');
     this.addToCartBtn.addEventListener('click', this.addBundle.bind(this));
-    this.variantsId = [];
-    this.variantsData = [];
     if (this.gallery) this.bundleGallery()
   }
 
@@ -110,6 +108,8 @@ class bundle extends HTMLElement {
 
   addBundle(e) {
     e.preventDefault();
+    this.variantsData = [];
+    this.variantsId = [];
     this.selects.forEach((select) => {
       const variant_id = select.getAttribute('value');
       this.variantsId.push(variant_id);

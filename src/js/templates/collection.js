@@ -61,10 +61,23 @@ class collectionFacets extends HTMLElement {
                   hex: this.getSetOfValues(products, ['facets', 'color', 'hex']),
                   names: this.getSetOfValues(products, ['facets', 'color', 'names'])
                 },
-                shop_by_use: {names: shopByUseNames},
-                size: {names: sizesNames}
+                shop_by_use: {
+                  names: shopByUseNames,
+                  title: collection['shop_by_use_title']
+                },
+                size: {names: sizesNames},
+                custom_filter_1: {
+                  names: this.getSetOfValues(products, ['facets', 'custom_filter_1', 'names']),
+                  title: collection['custom_filter_1_title'],
+                },
+                custom_filter_2: {
+                  names: this.getSetOfValues(products, ['facets', 'custom_filter_2', 'names']),
+                  title: collection['custom_filter_2_title'],
+                }
               },
               shop_by_use: {value: this.getSetOfValues(products, ['shop_by_use', 'value'])},
+              custom_filter_1: {value: this.getSetOfValues(products, ['custom_filter_1', 'value'])},
+              custom_filter_2: {value: this.getSetOfValues(products, ['custom_filter_2', 'value'])},
               size: {value: this.getSetOfValues(products, ['size', 'value'])},
               color: {value: this.getSetOfValues(products, ['color', 'value'])},
               variants: data.products.reduce((arr, product) => arr.concat(product.variants), [])
@@ -106,6 +119,7 @@ class collectionFacets extends HTMLElement {
         this.sortBy(this.data, this.defaultSortByAction)
         this.renderResults(this.data)
       }
+      console.log(data)
     })
   }
 
@@ -130,13 +144,17 @@ class collectionFacets extends HTMLElement {
     const facetsToRender = {
           facetsArr: [
             {title: facets[0].shop_by_use.title, handle: 'shop_by_use', shop_by_use: true, facets: this.getFacetsArr(facets, 'shop_by_use')},
-            {title: facets[0]['custom_filter_1'].title, handle: 'custom_filter_1', custom_filter_1: true, facets: this.getFacetsArr(facets, 'custom_filter_1')},
-            {title: facets[0]['custom_filter_2'].title, handle: 'custom_filter_2', custom_filter_1: true, facets: this.getFacetsArr(facets, 'custom_filter_2')},
             {title: 'Size', handle: 'size', size: true, facets: this.getFacetsArr(facets, 'size')},
             {title: 'Color', handle: 'color',  color: true, facets: this.getFacetsArr(facets, 'color')}
           ]
         },
-        facetsSource = this.facetsSourse.innerHTML,
+        custom_filter_1 = {title: facets[0]['custom_filter_1'].title, handle: 'custom_filter_1', custom_filter_1: true, facets: this.getFacetsArr(facets, 'custom_filter_1')},
+        custom_filter_2 = {title: facets[0]['custom_filter_2'].title, handle: 'custom_filter_2', custom_filter_2: true, facets: this.getFacetsArr(facets, 'custom_filter_2')};
+
+    if (facets[0]['custom_filter_1'].title) facetsToRender.facetsArr.splice(1, 0, custom_filter_1)
+    if (facets[0]['custom_filter_2'].title) facetsToRender.facetsArr.splice(2, 0, custom_filter_2)
+
+    const facetsSource = this.facetsSourse.innerHTML,
         template = Handlebars.compile(facetsSource);
         this.facetsWrapper.innerHTML = template(facetsToRender)
     this.checkSelectedFacets()

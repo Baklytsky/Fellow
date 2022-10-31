@@ -41,7 +41,7 @@
       {% endfor %}
     </div>
     {% if paginate.pages > 1 %}
-      {% include 'pagination' %}
+      {%- render 'default-pagination', paginate: paginate -%}
     {% endif %}
   {% endpaginate %}
 </section>

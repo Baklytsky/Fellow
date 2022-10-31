@@ -125,6 +125,14 @@
   }
 }
 
+.facet-group:not([data-group-name=color]) {
+  padding-bottom: 11px;
+
+  @media screen and (max-width: $tablet) {
+    padding-bottom: 0;
+  }
+}
+
 .facet-group-wrapper {
   display: flex;
   flex: 1 1 0;
