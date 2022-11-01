@@ -119,7 +119,6 @@ class collectionFacets extends HTMLElement {
         this.sortBy(this.data, this.defaultSortByAction)
         this.renderResults(this.data)
       }
-      console.log(data)
     })
   }
 
@@ -206,8 +205,8 @@ class collectionFacets extends HTMLElement {
       this.selectedFacetsCount.innerHTML = ''
     }
 
-    let allSelectedVariants = this.variants,
-        allSelectedResults = checkedInputs.length ? [] : this.data;
+    let allSelectedItems = this.data,
+        allSelectedVariants = this.variants;
 
     facetGroup.forEach(group => {
       const groupName = group.getAttribute('data-group-name'),
@@ -217,10 +216,8 @@ class collectionFacets extends HTMLElement {
 
      if (!groupValues.length) return
 
-      const selectedItems = this.filterResults(this.data, groupName, groupValues)
-      if (!this.template.includes('by-product')) {
-        allSelectedResults = [...new Set(allSelectedResults.concat(selectedItems))]
-      }
+      const selectedItems = this.filterResults(allSelectedItems, groupName, groupValues)
+      allSelectedItems = [...selectedItems]
 
       if (this.template.includes('by-product')) {
         const productSelectedVariants = selectedItems.map(product => {
@@ -230,8 +227,8 @@ class collectionFacets extends HTMLElement {
           }
           return productClone
         })
-        allSelectedResults = [...new Set(allSelectedResults.concat([...productSelectedVariants].filter(product => product.variants.length)))]
-        allSelectedVariants = allSelectedResults.reduce((arr, product) => arr.concat(product.variants), [])
+        allSelectedItems = [...productSelectedVariants].filter(product => product.variants.length)
+        allSelectedVariants = allSelectedItems.reduce((arr, product) => arr.concat(product.variants), [])
       }
 
      const groupValuesStr = groupValues.join('+');
@@ -240,15 +237,15 @@ class collectionFacets extends HTMLElement {
 
     if (this.externalUrlParams && this.externalUrlParams.length) this.urlParams+= '&' + this.externalUrlParams
 
-    this.sortBy(allSelectedResults, sortByAction)
-    this.renderResults(allSelectedResults)
+    this.sortBy(allSelectedItems, sortByAction)
+    this.renderResults(allSelectedItems)
     this.resultsCount.innerHTML = (this.template.includes('by-product'))
         ? `(${allSelectedVariants.length || 0})`
-        : `(${allSelectedResults.length})`
+        : `(${allSelectedItems.length})`
 
     if (this.template.includes('default')) {
       const selectedColor = this.facetsForm.querySelector('[data-group-name=color] input:checked')
-      if (selectedColor) this.switchColorSwatch(allSelectedResults, selectedColor.value)
+      if (selectedColor) this.switchColorSwatch(allSelectedItems, selectedColor.value)
     }
     history.replaceState(null, null, this.urlParams)
   }
