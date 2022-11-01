@@ -338,8 +338,8 @@
           "menu_right": "new-right-menu",
           "mobile_menu": "mobile-navigation-q3-2022",
           "show_announcement": true,
-          "announcement_text": "New to Rebrew 🌎 Fully refurbished Ode Brew Grinders! <u class=\"ml05\" style=\"cursor:pointer;\"> Save 25% -&gt;<\/u>",
-          "announcement_link": "shopify:\/\/products\/rebrew-ode-brew-grinder",
+          "announcement_text": "The next generation of grinding is here! <u class=\"ml05\" style=\"cursor:pointer;\"> Meet Ode Gen 2 -&gt;<\/u>",
+          "announcement_link": "shopify:\/\/pages\/compare-ode-grinders",
           "enable_timer": false,
           "end_date": "Sep 05, 2022 23:59:00 GMT-08:00"
         }
@@ -361,6 +361,12 @@
           "show_newsletter": false,
           "newsletter_heading": "Sign up for updates + 10% off your first order",
           "newsletter_subheading": ""
+        }
+      },
+      "collection-template": {
+        "type": "collection-template",
+        "settings": {
+          "show_breadcrumbs": true
         }
       },
       "1565155576930": {
@@ -389,6 +395,7 @@
           },
           "1f457594-c59c-4edd-800a-a9f7662f319e": {
             "type": "splitSlide",
+            "disabled": true,
             "settings": {
               "splitSlide__layout": "right",
               "heroSlide": "shopify:\/\/shop_images\/EKG_Pro_Homepage_Hero.png",
@@ -449,29 +456,9 @@
               "heroSlide__ctaSubtext": ""
             }
           },
-          "c15c0d5c-f86c-436e-95b6-2f10cb6c8b20": {
-            "type": "splitSlide",
-            "disabled": true,
-            "settings": {
-              "splitSlide__layout": "right",
-              "heroSlide": "shopify:\/\/shop_images\/Collections_Banner_Coffee_Marketplace_Desktop__2x_f66d473f-4386-44bb-923f-8c4a08c7cbe2.png",
-              "desktopAlignment": "center",
-              "mobileAlignment": "center",
-              "heroSlide__header": "Just Cropped Up",
-              "heroSlide__subheader": "Discover our curated favorites from this year's Ethiopian coffee harvest.",
-              "subSlide__bgColor": "#8cbde0",
-              "subSlide__textColor": "#231f20",
-              "heroSlide__ctaURL": "https:\/\/fellowproducts.com\/pages\/curated-coffee-collection",
-              "heroSlide__ctaCopy": "Shop Fresh Crop",
-              "heroSlide__ctaColor": "black",
-              "heroSlide__ctaURL2": "",
-              "heroSlide__ctaCopy2": "",
-              "heroSlide__ctaColor2": "black",
-              "heroSlide__ctaSubtext": ""
-            }
-          },
           "27a91856-bf47-4ce6-97a1-31a3c2cedede": {
             "type": "splitSlide",
+            "disabled": true,
             "settings": {
               "splitSlide__layout": "right",
               "heroSlide": "shopify:\/\/shop_images\/HP_Hero_desktop_opt_2_63ab38e3-f0cb-4293-9d0d-d7bc28e31d1d.png",
@@ -489,6 +476,26 @@
               "heroSlide__ctaColor2": "black",
               "heroSlide__ctaSubtext": ""
             }
+          },
+          "20f7f57e-3fa5-4fd3-bc18-21a3bdc27f84": {
+            "type": "splitSlide",
+            "settings": {
+              "splitSlide__layout": "right",
+              "heroSlide": "shopify:\/\/shop_images\/Hero_Module_Image_OdeGen2_102522_LP1.png",
+              "desktopAlignment": "center",
+              "mobileAlignment": "center",
+              "heroSlide__header": "The next generation of grinding is here",
+              "heroSlide__subheader": "Introducing Ode Brew Grinder Gen 2. Welcome to a new state of grind.",
+              "subSlide__bgColor": "#000000",
+              "subSlide__textColor": "#FFFFFF",
+              "heroSlide__ctaURL": "shopify:\/\/products\/ode-brew-grinder-gen-2",
+              "heroSlide__ctaCopy": "Shop Now",
+              "heroSlide__ctaColor": "white",
+              "heroSlide__ctaURL2": "",
+              "heroSlide__ctaCopy2": "",
+              "heroSlide__ctaColor2": "black",
+              "heroSlide__ctaSubtext": ""
+            }
           }
         },
         "block_order": [
@@ -496,8 +503,8 @@
           "1f457594-c59c-4edd-800a-a9f7662f319e",
           "58ee7397-6079-412a-9acd-d453a0cf281c",
           "91049687-67b8-4bdc-8f37-c74f97e41d00",
-          "c15c0d5c-f86c-436e-95b6-2f10cb6c8b20",
-          "27a91856-bf47-4ce6-97a1-31a3c2cedede"
+          "27a91856-bf47-4ce6-97a1-31a3c2cedede",
+          "20f7f57e-3fa5-4fd3-bc18-21a3bdc27f84"
         ],
         "settings": {
           "addMargin": false
@@ -517,7 +524,7 @@
         "type": "logo-text",
         "settings": {
           "enable_section": true,
-          "text": "Get free shipping on orders $99+",
+          "text": "Get free shipping on orders <s>$99+<\/s> $50+",
           "url": "shopify:\/\/collections\/bestsellers",
           "icon": "shopify:\/\/shop_images\/FP-icon-Homepage-AltIcon-black_1.png"
         }
@@ -577,14 +584,13 @@
       },
       "1630052841314f69dd": {
         "type": "hp-iwt",
-        "disabled": true,
         "settings": {
           "enable_section": true,
           "image": "shopify:\/\/shop_images\/HP_Module_1__Early_Start_to_Gifting.png",
           "layout": "left",
           "header": "No time like the present",
           "description": "<p>Give them the brewing tools to transform their mornings forever.<\/p>",
-          "bg_color": "",
+          "bg_color": "#ffffff",
           "text_color": "#000000",
           "cta_url": "shopify:\/\/collections\/gifts-for-coffee-nerds",
           "cta_copy": "Shop Gifts",
@@ -593,9 +599,22 @@
       },
       "1630069783d5517455": {
         "type": "product-slider",
+        "disabled": true,
         "blocks": {
+          "eeca2485-9dfa-48e8-8a5b-75b7d2c6c3b3": {
+            "type": "image",
+            "settings": {
+              "product": "carter-everywhere-mug",
+              "image": "shopify:\/\/shop_images\/HP_Module_5__Personalization_Highlight.png",
+              "header": "Sincerely, Carter",
+              "description": "<p>To give or to keep, personalize any Carter travel mug with the message of your choosing.<\/p>",
+              "link_text": "Add Engraving",
+              "link_url": "shopify:\/\/collections\/personalization"
+            }
+          },
           "b245a563-02ab-401a-a377-d337fb806a10": {
             "type": "image",
+            "disabled": true,
             "settings": {
               "product": "ode-brew-grinder",
               "image": "shopify:\/\/shop_images\/ReviewsModule_Ode.jpg",
@@ -607,6 +626,7 @@
           },
           "b48ae659-2871-4d7f-ab74-08400e928bd1": {
             "type": "image",
+            "disabled": true,
             "settings": {
               "product": "clara-french-press",
               "image": "shopify:\/\/shop_images\/ReviewsModule_Clara.jpg",
@@ -618,6 +638,7 @@
           },
           "8a451129-a76d-4314-97a1-21d2187843a7": {
             "type": "image",
+            "disabled": true,
             "settings": {
               "product": "shimmy-coffee-sieve",
               "image": "shopify:\/\/shop_images\/ReviewsModule_Shimmy.jpg",
@@ -629,6 +650,7 @@
           }
         },
         "block_order": [
+          "eeca2485-9dfa-48e8-8a5b-75b7d2c6c3b3",
           "b245a563-02ab-401a-a377-d337fb806a10",
           "b48ae659-2871-4d7f-ab74-08400e928bd1",
           "8a451129-a76d-4314-97a1-21d2187843a7"
@@ -692,7 +714,7 @@
             "type": "block",
             "settings": {
               "svg_icon": "<svg xmlns=\"http:\/\/www.w3.org\/2000\/svg\" width=\"34\" height=\"34\" viewbox=\"0 0 34 24\" fill=\"none\">\n<path d=\"M28.25 6H24.5V3C24.5 1.35 23.15 0 21.5 0H3.5C1.85 0 0.5 1.35 0.5 3V16.5C0.5 18.15 1.85 19.5 3.5 19.5C3.5 21.99 5.51 24 8 24C10.49 24 12.5 21.99 12.5 19.5H21.5C21.5 21.99 23.51 24 26 24C28.49 24 30.5 21.99 30.5 19.5H32C32.825 19.5 33.5 18.825 33.5 18V13.005C33.5 12.36 33.29 11.73 32.9 11.205L29.45 6.6C29.165 6.225 28.715 6 28.25 6ZM8 21C7.175 21 6.5 20.325 6.5 19.5C6.5 18.675 7.175 18 8 18C8.825 18 9.5 18.675 9.5 19.5C9.5 20.325 8.825 21 8 21ZM28.25 8.25L31.19 12H24.5V8.25H28.25ZM26 21C25.175 21 24.5 20.325 24.5 19.5C24.5 18.675 25.175 18 26 18C26.825 18 27.5 18.675 27.5 19.5C27.5 20.325 26.825 21 26 21Z\" fill=\"black\"><\/path>\n<\/svg>",
-              "text": "Free shipping on orders over $99<u id=\"freeShipPopup\" class=\"ml05\" style=\"cursor:pointer;\">Learn more<\/u>",
+              "text": "Free shipping on orders <s>$99+<\/s> $50+<u id=\"freeShipPopup\" class=\"ml05\" style=\"cursor:pointer;\">Learn more<\/u>",
               "display_on_bundle": false
             }
           },
@@ -707,8 +729,8 @@
           "94f80824-48d0-4beb-987b-ba5b194f019b": {
             "type": "block",
             "settings": {
-              "svg_icon": "<svg xmlns=\"http:\/\/www.w3.org\/2000\/svg\" width=\"30\" height=\"30\" viewbox=\"0 0 30 30\" fill=\"none\">\n<path d=\"M28.75 15L25.7 11.5125L26.125 6.9L21.6125 5.875L19.25 1.875L15 3.7L10.75 1.875L8.3875 5.8625L3.875 6.875L4.3 11.5L1.25 15L4.3 18.4875L3.875 23.1125L8.3875 24.1375L10.75 28.125L15 26.2875L19.25 28.1125L21.6125 24.125L26.125 23.1L25.7 18.4875L28.75 15ZM11.725 20.0125L8.75 17.0125C8.2625 16.525 8.2625 15.7375 8.75 15.25L8.8375 15.1625C9.325 14.675 10.125 14.675 10.6125 15.1625L12.625 17.1875L19.0625 10.7375C19.55 10.25 20.35 10.25 20.8375 10.7375L20.925 10.825C21.4125 11.3125 21.4125 12.1 20.925 12.5875L13.525 20.0125C13.0125 20.5 12.225 20.5 11.725 20.0125Z\" fill=\"black\"><\/path>\n<\/svg>",
-              "text": "Can't decide?<a class=\"ml05\" href=\"https:\/\/fellowproducts.com\/collections\/bestsellers\" style=\"text-decoration:underline;\">Shop our Best Sellers<\/a>",
+              "svg_icon": "<svg xmlns=\"http:\/\/www.w3.org\/2000\/svg\" id=\"a\" width=\"34\" height=\"34\" viewbox=\"0 0 40 40\"><path d=\"M20.97,32.97h7.52c.83,0,1.5-.67,1.5-1.5v-11.13h-9.01v12.62Z\"><\/path><path d=\"M19.07,20.34H10.02v11.13c0,.83,.67,1.5,1.5,1.5h7.55v-12.62Z\"><\/path><path d=\"M30.84,12.55h-2.74s.03-.04,.04-.06c.65-1.19,.61-2.59-.12-3.73-.68-1.07-1.83-1.71-3.1-1.71-.03,0-.06,0-.09,0-1.3,.03-2.46,.72-3.1,1.85l-1.7,2.99-1.7-2.99c-.64-1.13-1.8-1.82-3.11-1.85-1.3,0-2.49,.61-3.19,1.71-.73,1.15-.77,2.54-.12,3.73,.01,.02,.03,.04,.04,.06h-2.67c-.55,0-.99,.44-.99,.99v3.49c0,.55,.44,.99,.99,.99h9.79v-5.51h1.9v5.51h9.87c.55,0,.99-.44,.99-.99v-3.49c0-.55-.44-.99-.99-.99Zm-15.71-.05c-.66,0-1.23-.34-1.55-.92-.32-.57-.29-1.25,.06-1.8,.33-.52,.88-.82,1.5-.82h.04c.63,.01,1.19,.35,1.5,.9l1.51,2.66h-3.06Zm11.35-.93c-.31,.58-.89,.92-1.55,.92h-3.06l1.51-2.65c.31-.55,.87-.88,1.5-.9h.04c.61,0,1.17,.31,1.5,.82,.35,.55,.37,1.23,.06,1.8Z\"><\/path><\/svg>",
+              "text": "Looking for the perfect gift?<a class=\"ml05\" href=\"https:\/\/fellowproducts.com\/collections\/gifts-for-coffee-nerds\" style=\"text-decoration:underline;\">Shop gifts<\/a>",
               "display_on_bundle": false
             }
           }
@@ -726,10 +748,11 @@
       },
       "16342252676e2388c3": {
         "type": "hp-iwt",
+        "disabled": true,
         "settings": {
           "enable_section": true,
           "image": "shopify:\/\/shop_images\/section_2_mobile_1.jpg",
-          "layout": "left",
+          "layout": "right",
           "header": "Take it one week at a time",
           "description": "<p>Join Fellow Drops: no-commitment coffee recommendations from people who drink way too much of it.<\/p>",
           "bg_color": "#ffffff",
@@ -744,9 +767,9 @@
         "settings": {
           "enable_section": true,
           "image": "shopify:\/\/shop_images\/Refer_A_Friend_Homepage_Module.png",
-          "layout": "right",
-          "header": "Coffee's Better Shared",
-          "description": "<p>Refer a friend to Fellow and you’ll both get a free Carter Move Mug.<\/p>",
+          "layout": "left",
+          "header": "Coffee's better shared",
+          "description": "<p>Refer a friend to Fellow and you'll both get a free Carter Move Mug.<\/p>",
           "bg_color": "",
           "text_color": "",
           "cta_url": "shopify:\/\/pages\/refer-a-friend",
@@ -860,6 +883,71 @@
           "description": "<p>Success! Your account has been created. <a href=\"\/collections\/bestsellers\" title=\"Best Sellers\">Continue shopping<\/a>.<\/p>"
         }
       },
+      "3c511033-0609-4c81-b3c8-9576217029c1": {
+        "type": "hp-iwt",
+        "settings": {
+          "enable_section": true,
+          "image": "shopify:\/\/shop_images\/HP_Module_2__Highlight_Coffee_Marketplace.png",
+          "layout": "left",
+          "header": "Your dream coffee aisle",
+          "description": "<p>Need a refill? We try hundreds of coffees so you don't have to. Only the best get a spot on our \"shelves.\"<\/p>",
+          "bg_color": "#ffffff",
+          "text_color": "",
+          "cta_url": "https:\/\/fellowproducts.com\/pages\/curated-coffee-collection",
+          "cta_copy": "Shop Our Coffee Collection",
+          "cta_color": "btn--dark"
+        }
+      },
+      "c6c4062f-144f-4853-92de-ce8e0da0c728": {
+        "type": "hp-iwt",
+        "settings": {
+          "enable_section": true,
+          "image": "shopify:\/\/shop_images\/HP_Module_3__EKG_Pro_Studio_Highlight.png",
+          "layout": "right",
+          "header": "Even icons evolve",
+          "description": "<p>Introducing Stagg EKG Pro and Pro Studio Edition. We set the undisputed standard for electric kettles again.<\/p>",
+          "bg_color": "#000000",
+          "text_color": "#ffffff",
+          "cta_url": "shopify:\/\/pages\/compare-stagg-ekg-kettles",
+          "cta_copy": "Shop now",
+          "cta_color": "btn--light"
+        }
+      },
+      "034dc6b4-4f53-4b7f-a62e-14b09725152d": {
+        "type": "hp-iwt",
+        "settings": {
+          "enable_section": true,
+          "image": "shopify:\/\/shop_images\/HP_Module_4__Kits_and_Bundles.png",
+          "layout": "right",
+          "header": "Build a brewing kit and save",
+          "description": "<p>Cover all your brewing bases (and your gift list) in one with our best-selling coffee kits.<\/p>",
+          "bg_color": "#ffffff",
+          "text_color": "",
+          "cta_url": "shopify:\/\/collections\/coffee-products-kits-bundles",
+          "cta_copy": "Shop Kits + Bundles",
+          "cta_color": "btn--dark"
+        }
+      },
+      "d7b0dc3f-18a6-437b-8f63-aa8706c9d69a": {
+        "type": "hp-iwt",
+        "settings": {
+          "enable_section": true,
+          "layout": "right",
+          "header": "",
+          "description": "",
+          "bg_color": "",
+          "text_color": "",
+          "cta_url": "",
+          "cta_copy": "",
+          "cta_color": "btn--dark"
+        }
+      },
+      "collection-by-default": {
+        "type": "collection-by-default",
+        "settings": {
+          "show_breadcrumbs": true
+        }
+      },
       "google-structured-data": {
         "type": "google-structured-data",
         "settings": {
@@ -871,12 +959,16 @@
       "1648114115d10a8d6a",
       "1664296876ed335022",
       "1565155576930",
-      "1629968785d9d2e1c7",
       "1648464189e55630c9",
+      "1629968785d9d2e1c7",
       "162997622949d3f8ee",
+      "1630052841314f69dd",
+      "034dc6b4-4f53-4b7f-a62e-14b09725152d",
+      "3c511033-0609-4c81-b3c8-9576217029c1",
+      "c6c4062f-144f-4853-92de-ce8e0da0c728",
+      "d7b0dc3f-18a6-437b-8f63-aa8706c9d69a",
       "1636101715cd2df3c8",
       "16342252676e2388c3",
-      "1630052841314f69dd",
       "1630069783d5517455",
       "163041601834c99057",
       "163040772842cf0e69"

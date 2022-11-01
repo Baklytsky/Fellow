@@ -1,0 +1,490 @@
+{
+  "sections": {
+    "main": {
+      "type": "toggle-hero-slider",
+      "blocks": {
+        "7ae1cacd-4567-4b52-8951-0a398e52c371": {
+          "type": "slide",
+          "settings": {
+            "bg_color": "#000000",
+            "text_color": "#ffffff",
+            "tab_btn_style": "light",
+            "tab_name": "Ode Gen 2",
+            "title": "Ode Brew Grinder Gen 2",
+            "description": "Broader grind range, less mess, and brand new burrs for an exceptional tasting cup.",
+            "btn_text": "Shop Now",
+            "btn_url": "shopify:\/\/products\/ode-brew-grinder-gen-2",
+            "image": "shopify:\/\/shop_images\/The_Next_generation_of_grinding_is_here.png",
+            "image_on_the_left": false
+          }
+        },
+        "e11cf429-b3b8-45d3-afee-2d19059179be": {
+          "type": "slide",
+          "settings": {
+            "bg_color": "#ffffff",
+            "text_color": "#000000",
+            "tab_btn_style": "dark",
+            "tab_name": "Ode",
+            "title": "Ode Brew Grinder",
+            "description": "The award-winning original: a powerfully precise home coffee grinder with cafe capabilities.",
+            "btn_text": "Shop Now",
+            "btn_url": "shopify:\/\/products\/ode-brew-grinder",
+            "image": "shopify:\/\/shop_images\/The_Award_winning_original.png",
+            "image_on_the_left": false
+          }
+        }
+      },
+      "block_order": [
+        "7ae1cacd-4567-4b52-8951-0a398e52c371",
+        "e11cf429-b3b8-45d3-afee-2d19059179be"
+      ],
+      "settings": {
+        "section_title": "The next generation of grinding is here",
+        "section_subtitle": "",
+        "section_description": "Our award-winning Ode changed grinder design forever. We committed to never stop improving it. Meet Gen 2."
+      }
+    },
+    "278b6e10-f3c8-4e99-b0ba-3d9934f317d7": {
+      "type": "features",
+      "disabled": true,
+      "settings": {
+        "bg_color": "#000000",
+        "text_color": "#ffffff",
+        "heading": "A new state of grind",
+        "description": "A great brew bar begins with a great burr grinder.",
+        "show_arrows": false,
+        "show_dots": false
+      }
+    },
+    "1664270553aee121f2": {
+      "type": "hp-hero-video",
+      "settings": {
+        "enable_section_padding": false,
+        "full_width_section": false,
+        "mobile_format_16_9": true,
+        "section_bg": "#000000",
+        "video_mp4": "https:\/\/cdn.shopify.com\/videos\/c\/o\/v\/aa1da175ee614cda8567ab52429d9e1d.mp4",
+        "video_poster": "shopify:\/\/shop_images\/Video_Preview_Image.png",
+        "video_autoplay": false,
+        "video_muted": false,
+        "show_mute_button": false,
+        "show_default_controls": true,
+        "show_hide_video": "show_on_all",
+        "overlay_opacity": 0,
+        "content_position": "topCenter",
+        "text_color": "#ffffff",
+        "heading": "",
+        "image_heading_width": 70,
+        "text": "",
+        "link": "",
+        "button_text": "",
+        "btn_type": "btn--light"
+      }
+    },
+    "9e6d1498-0268-4509-b8cf-de428d7964a2": {
+      "type": "features",
+      "blocks": {
+        "1d3801b3-34ee-47a6-bed9-33f0c03862ee": {
+          "type": "feature",
+          "disabled": true,
+          "settings": {
+            "title": "“Incredible burrs! An absolute must if you are doing pour-overs. My coffee truly tastes cafe quality.”",
+            "description": "- Joel P."
+          }
+        }
+      },
+      "block_order": [
+        "1d3801b3-34ee-47a6-bed9-33f0c03862ee"
+      ],
+      "settings": {
+        "bg_color": "#000000",
+        "text_color": "#ffffff",
+        "heading": "“Incredible burrs! An absolute must if you are doing pour-overs. My coffee truly tastes cafe quality.”",
+        "description": "-Joel P.",
+        "show_arrows": true,
+        "show_dots": true
+      }
+    },
+    "166427647891f49e65": {
+      "type": "features",
+      "blocks": {
+        "5d3695c6-1d88-47cd-9a82-7052f2f754c4": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/211012_Fellow_Icon-Library_OUTLINED_OdeBrewGrinder_PrecisionGrindQuality.png",
+            "title": "Precision Grind Quality",
+            "description": "31 precise grind settings for brewed coffee methods."
+          }
+        },
+        "24a69457-ad47-464d-bba3-f60d501f830e": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/211012_Fellow_Icon-Library_OUTLINED_OdeBrewGrinder_ReducedGrindNoise.png",
+            "title": "Quiet Grind Noise",
+            "description": "We kept it very hush, hush. No more waking up your roommates."
+          }
+        },
+        "3bca0e43-64c4-47b6-be69-da1fcec88a0f": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/211012_Fellow_Icon-Library_OUTLINED_OdeBrewGrinder_SingleDoseLoading.png",
+            "title": "Single Dose Loading",
+            "description": "Grind only what you need, now with a expanded 100 gram volume."
+          }
+        },
+        "d33150b7-5595-4d16-8868-763d2bcf7000": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/211012_Fellow_Icon-Library_OUTLINED_ShimmyCoffeeSieve_EasyClean.png",
+            "title": "Mess-Free Design",
+            "description": "New anti-static technology to keep your coffee bar clean."
+          }
+        },
+        "127fd793-65c9-4a33-b22e-2ba5962c43af": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/211012_Fellow_Icon-Library_OUTLINED_OdeBrewGrinder_AutoStop.png",
+            "title": "Auto Stop",
+            "description": "Automatically shuts itself off after the last bean has been ground."
+          }
+        }
+      },
+      "block_order": [
+        "5d3695c6-1d88-47cd-9a82-7052f2f754c4",
+        "24a69457-ad47-464d-bba3-f60d501f830e",
+        "3bca0e43-64c4-47b6-be69-da1fcec88a0f",
+        "d33150b7-5595-4d16-8868-763d2bcf7000",
+        "127fd793-65c9-4a33-b22e-2ba5962c43af"
+      ],
+      "settings": {
+        "bg_color": "#fff9e5",
+        "text_color": "#000000",
+        "heading": "Cafe performance for your countertop",
+        "description": "Ode does things differently.",
+        "show_arrows": true,
+        "show_dots": true
+      }
+    },
+    "1664355544406e6554": {
+      "type": "compare-products-characteristics",
+      "blocks": {
+        "2db5c370-dedf-490f-9b22-bb02e5898ff4": {
+          "type": "product",
+          "settings": {
+            "compare_product": "ode-brew-grinder",
+            "comparison_1": "<p>Ode Standard Brew Burrs, 64 mm stainless steel, flat, uncoated<\/p>",
+            "comparison_2": "<p>✔️<\/p>",
+            "comparison_3": "<p>550 microns and up<\/p>",
+            "comparison_4": "<p>General drip coffee isIage from pour-over to full immersion<\/p>",
+            "comparison_5": "<p>High clarity and high acidity<\/p>",
+            "comparison_6": "<p>X<\/p>",
+            "comparison_7": "<p><a href=\"https:\/\/fellowproducts.com\/pages\/warranty\" target=\"_blank\" title=\"https:\/\/fellowproducts.com\/pages\/warranty\"><span style=\"text-decoration:underline\">1-year standard<\/span><\/a>, 2-years with <a href=\"https:\/\/register.fellowproducts.com\/\" target=\"_blank\" title=\"https:\/\/register.fellowproducts.com\/\"><span style=\"text-decoration:underline\">product registration<\/span><\/a><\/p>",
+            "comparison_8": "<p>1,400 RPM<\/p>",
+            "comparison_9": "<p>31<\/p>",
+            "comparison_10": "<p>80 grams<\/p>",
+            "comparison_11": "<p>✔️<\/p>",
+            "comparison_12": "<p>✔️<\/p>",
+            "comparison_13": "<p>✔️<\/p>",
+            "comparison_14": "<p>Matte Black, Matte White<\/p>",
+            "comparison_15": "<p>Starting at $299<\/p>",
+            "comparison_16": "",
+            "comparison_17": "",
+            "comparison_18": "",
+            "comparison_19": "",
+            "comparison_20": ""
+          }
+        },
+        "4cf663b0-811b-4c56-9e8c-aa07ed325f3f": {
+          "type": "product",
+          "settings": {
+            "compare_product": "ode-brew-grinder-gen-2",
+            "comparison_1": "<p>Ode Gen 2 Brew Burrs, 64 mm stainless steel, flat, uncoated, two-stage grinding geometry, designed in-house<\/p>",
+            "comparison_2": "<p>✔️<\/p>",
+            "comparison_3": "<p>250-300 microns and up<\/p>",
+            "comparison_4": "<p>Increasing extraction from light roast pour-overs and general drip coffee usage<\/p>",
+            "comparison_5": "<p>Balanced flavor profile, ehances body and sweetness with medium clarity<\/p>",
+            "comparison_6": "<p>✔️<\/p>",
+            "comparison_7": "<p><a href=\"https:\/\/fellowproducts.com\/pages\/warranty\" target=\"_blank\" title=\"https:\/\/fellowproducts.com\/pages\/warranty\"><span style=\"text-decoration:underline\">2-year standard,<\/span><\/a> 3-years with <a href=\"https:\/\/register.fellowproducts.com\/\" target=\"_blank\" title=\"https:\/\/register.fellowproducts.com\/\"><span style=\"text-decoration:underline\">product registration<\/span><\/a><\/p>",
+            "comparison_8": "<p>1,400 RPM<\/p>",
+            "comparison_9": "<p>31<\/p>",
+            "comparison_10": "<p>100 grams<\/p>",
+            "comparison_11": "<p>✔️<\/p>",
+            "comparison_12": "<p>✔️<\/p>",
+            "comparison_13": "<p>✔️<\/p>",
+            "comparison_14": "<p>Matte Black, Matte White<\/p>",
+            "comparison_15": "<p>Starting at $345<\/p>",
+            "comparison_16": "",
+            "comparison_17": "",
+            "comparison_18": "",
+            "comparison_19": "",
+            "comparison_20": ""
+          }
+        },
+        "d509c253-5da9-4c69-baba-eeca202449c0": {
+          "type": "product",
+          "disabled": true,
+          "settings": {
+            "compare_product": "ssp-red-speed-coated-64mm-flat-brew-burrs",
+            "comparison_1": "<p>SSP MP Red Speed Brew Burrs, 64 mm stainless steel flat burrs, titanium aluminum carbon nitride coating<\/p>",
+            "comparison_2": "<p>300 microns and up<\/p>",
+            "comparison_3": "<p>High clarity pour-over with lightly roasted coffee<\/p>",
+            "comparison_4": "<p>Extreme clarity and flavor separation<\/p>",
+            "comparison_5": "<p>✔️<\/p>",
+            "comparison_6": "<p><a href=\"https:\/\/fellowproducts.com\/pages\/warranty\" target=\"_blank\" title=\"https:\/\/fellowproducts.com\/pages\/warranty\"><span style=\"text-decoration:underline\">2- year standard<\/span><\/a>, 3 years with <a href=\"https:\/\/register.fellowproducts.com\/\" target=\"_blank\" title=\"https:\/\/register.fellowproducts.com\/\"><span style=\"text-decoration:underline\">product registration<\/span><\/a><\/p>",
+            "comparison_7": "<p>1,400 RPM<\/p>",
+            "comparison_8": "<p>31<\/p>",
+            "comparison_9": "<p>100 grams<\/p>",
+            "comparison_10": "<p>✔️<\/p>",
+            "comparison_11": "<p>✔️<\/p>",
+            "comparison_12": "<p>✔️<\/p>",
+            "comparison_13": "<p>Matte Black, Matte White<\/p>",
+            "comparison_14": "<p>Starting at $495<\/p>",
+            "comparison_15": "",
+            "comparison_16": "",
+            "comparison_17": "",
+            "comparison_18": "",
+            "comparison_19": "",
+            "comparison_20": ""
+          }
+        },
+        "54f6dba7-1a80-48ce-b43b-75901f6af1b9": {
+          "type": "product",
+          "disabled": true,
+          "settings": {
+            "compare_product": "corvo-ekg",
+            "comparison_1": "<p>✔️<\/p>",
+            "comparison_2": "",
+            "comparison_3": "",
+            "comparison_4": "",
+            "comparison_5": "<p>60 minutes<\/p>",
+            "comparison_6": "<p>Black and white LCD screen<\/p>",
+            "comparison_7": "<p>Standard<\/p>",
+            "comparison_8": "<p>✔️<\/p>",
+            "comparison_9": "",
+            "comparison_10": "",
+            "comparison_11": "<p>✔️<\/p>",
+            "comparison_12": "<p>English<\/p>",
+            "comparison_13": "",
+            "comparison_14": "",
+            "comparison_15": "<p>Shop Now -&gt;<\/p>",
+            "comparison_16": "",
+            "comparison_17": "",
+            "comparison_18": "",
+            "comparison_19": "",
+            "comparison_20": ""
+          }
+        }
+      },
+      "block_order": [
+        "2db5c370-dedf-490f-9b22-bb02e5898ff4",
+        "4cf663b0-811b-4c56-9e8c-aa07ed325f3f",
+        "d509c253-5da9-4c69-baba-eeca202449c0",
+        "54f6dba7-1a80-48ce-b43b-75901f6af1b9"
+      ],
+      "settings": {
+        "heading": "Compare grinders",
+        "comparison_1": "Burrs",
+        "comparison_2": "Available with SSP burrs",
+        "comparison_3": "Grind Capabilities",
+        "comparison_4": "Great For",
+        "comparison_5": "Flavor Profile",
+        "comparison_6": "Anti-Static Technology",
+        "comparison_7": "Warranty",
+        "comparison_8": "Burr Speed",
+        "comparison_9": "Grind Settings",
+        "comparison_10": "Catch Capacity",
+        "comparison_11": "Magnetically Aligned Catch Cup",
+        "comparison_12": "Auto Stop",
+        "comparison_13": "Grinders Knocker",
+        "comparison_14": "Colors",
+        "comparison_15": "Price",
+        "comparison_16": "",
+        "comparison_17": "",
+        "comparison_18": "",
+        "comparison_19": "",
+        "comparison_20": ""
+      }
+    },
+    "16642717231d856327": {
+      "type": "featured-collections",
+      "blocks": {
+        "bf8b078a-5bce-4b74-9647-97d580285e1b": {
+          "type": "collection",
+          "settings": {
+            "tab_text": "Shop All Grinders + Burrs",
+            "collection": "grinder",
+            "button_text": "",
+            "button_url": "shopify:\/\/collections\/kettles"
+          }
+        }
+      },
+      "block_order": [
+        "bf8b078a-5bce-4b74-9647-97d580285e1b"
+      ],
+      "settings": {
+        "enable_section": true,
+        "heading": "Time to make up your grind",
+        "limit": 6,
+        "show_view_all": true
+      }
+    },
+    "f2a09cf9-eb92-49dd-aec1-a27d515043af": {
+      "type": "featured-blog-v2",
+      "blocks": {
+        "20465e76-c187-4a3c-9d60-c0c254b6d93c": {
+          "type": "article",
+          "settings": {
+            "article": "learn\/fellow-s-uncertain-path-to-our-new-gen-2-brew-burrs"
+          }
+        },
+        "41c05a6b-e6e3-477f-ac23-705eb56fb2a3": {
+          "type": "article",
+          "settings": {
+            "article": "learn\/which-electric-kettle-is-right-for-me"
+          }
+        },
+        "f4dac414-5c02-46fd-b23f-38321df29d18": {
+          "type": "article",
+          "settings": {
+            "article": "brew-guides\/back-to-brewing-school-pour-over-basics-101"
+          }
+        }
+      },
+      "block_order": [
+        "20465e76-c187-4a3c-9d60-c0c254b6d93c",
+        "41c05a6b-e6e3-477f-ac23-705eb56fb2a3",
+        "f4dac414-5c02-46fd-b23f-38321df29d18"
+      ],
+      "settings": {
+        "heading": "Brew like a pro",
+        "description": "<p>We want to share our insider knowledge to make \"specialty coffee\" a language you can speak.<\/p>",
+        "cta_title": "Fellow Blog",
+        "cta_url": "shopify:\/\/blogs\/learn",
+        "cta_color": "btn--light",
+        "bg_color": "#000000",
+        "text_color": "#ffffff"
+      }
+    },
+    "90a6d8bc-532a-4f19-83a5-528fc05fdab5": {
+      "type": "hp-iwt",
+      "settings": {
+        "enable_section": true,
+        "image": "shopify:\/\/shop_images\/Your_dream_coffee_aisle_-_Coffee_Marketplace.png",
+        "layout": "left",
+        "header": "Your dream coffee aisle",
+        "description": "<p>Need a refill? We try hundreds of coffees so you don't have to. Only the best get a spot on our \"shelves.\"<\/p>",
+        "bg_color": "",
+        "text_color": "",
+        "cta_url": "https:\/\/fellowproducts.com\/pages\/curated-coffee-collection",
+        "cta_copy": "Shop Coffee",
+        "cta_color": "btn--dark"
+      }
+    },
+    "1664286931317058a0": {
+      "type": "faq",
+      "blocks": {
+        "1a670074-334c-4963-8931-28ce7221fd8c": {
+          "type": "faq-block",
+          "settings": {
+            "title": "How do I use and care for my Ode Brew Grinder Gen 2?",
+            "description": "<p>Ready to start using your Ode Gen 2? Download the <a href=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0057\/6235\/1219\/files\/Ode_Gen2_GTKYG_V5.pdf?v=1666995794\" title=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0057\/6235\/1219\/files\/Ode_Gen2_GTKYG_V5.pdf?v=1666995794\"><span style=\"text-decoration:underline\">Get to Know You Guide<\/span><\/a> that will walk you through all of your grinder’s features.<\/p><p>We also have cleaning, maintenance, and calibration instructions in the <a href=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0057\/6235\/1219\/files\/Ode_Gen2_SafetyManual_V3.pdf?v=1666995795\" title=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0057\/6235\/1219\/files\/Ode_Gen2_SafetyManual_V3.pdf?v=1666995795\"><span style=\"text-decoration:underline\">Safety Manual<\/span><\/a>.<\/p>"
+          }
+        },
+        "eb66113a-5455-4ece-a487-fb3ca3caf9ae": {
+          "type": "faq-block",
+          "settings": {
+            "title": "How do I register my Ode Brew Grinder?",
+            "description": "<p>In order to register your Fellow electric product please submit <a href=\"https:\/\/register.fellowproducts.com\/\"><span style=\"text-decoration:underline\">this form<\/span><\/a>. Registering your Ode Brew Grinder will extend your warranty by one additional year. <\/p><p>After registering, you will receive an email from Fellow containing your registration perks like extended warranty and priority support! Please save this email for future reference.<\/p>"
+          }
+        },
+        "1940777b-e34c-4a03-af5e-80274e652c72": {
+          "type": "faq-block",
+          "settings": {
+            "title": "What are the differences between Ode Brew Grinder and Ode Brew Grinder Gen 2?",
+            "description": "<p>Ode Brew Grinder is our original award-winning grinder designed for brewed coffee. Ode Brew Grinder Gen 2 comes as an upgrade to the original, refreshed with some thoughtful new features to improve your daily coffee brewing experience.<\/p><p>Ode Brew Grinder Gen 2 comes with:<\/p><p>1. <strong>Updated brew burrs (<\/strong><a href=\"https:\/\/fellowproducts.com\/products\/ode-gen-2-brew-burrs?variant=40341272363108\"><strong>Gen 2 Brew Burrs<\/strong><\/a><strong>) <\/strong>that were designed specifically for Ode by VP of R&D and Certified Q Grader Nick Terzulli. The Gen 2 Brew Burrs are capable of grinding as fine as 250 microns, while the Standard Brew Burrs that come stock in the original Ode Brew Grinder can grind as fine as 500 microns. Learn more about the different burrs <a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/7786626239259-What-is-the-difference-between-Ode-Standard-Brew-Burrs-Ode-Gen-2-Brew-Burrs-and-SSP-Multi-Purpose-Red-Speed-Coated-Brew-Burrs-\">here<\/a>.<\/p><p>2. <strong>Anti-static technology<\/strong>, which helps to reduce the static from freshly ground coffee. This reduces the retention of coffee grounds in the grinder from ~1g to as low as 0.1g, so there is much less grind mess than the original Ode Brew Grinder.<\/p><p>3. <strong>A larger hopper<\/strong> that can hold 100g of beans, enough for 12 cups of brewed coffee at the golden ratio of 1:16.<\/p><p>4. <strong>A redesigned hopper <\/strong>that has steeper angles to help feed beans down the chute for speedier grinding.<\/p><p>5. <strong>A larger catch cup<\/strong> that can hold 100g of ground coffee, enough for 12 cups of brewed coffee at the <a href=\"https:\/\/fellowproducts.com\/blogs\/learn\/the-golden-ratio-for-brewing-coffee\" title=\"https:\/\/fellowproducts.com\/blogs\/learn\/the-golden-ratio-for-brewing-coffee\">golden ratio<\/a>.<\/p><p>6. <strong>A redesigned catch cup<\/strong> that makes it easier to pour coffee grounds into your brewing tool of choice. <\/p>"
+          }
+        },
+        "6cab98e1-ee91-4b19-988f-d076aa10f541": {
+          "type": "faq-block",
+          "settings": {
+            "title": "Is Ode Brew Grinder suitable for grinding espresso?",
+            "description": "<p>Ode is built to dominate brewed coffee. Unfortunately, that means that Ode is not suitable for espresso. The grind range on Ode will not be fine enough (&lt;200 microns for espresso). Ode’s 64mm flat burrs and motor are geared towards drip and immersion coffee brewing.<\/p>"
+          }
+        },
+        "8b7a18c8-b99e-4b1c-9d6e-4a5f666471fe": {
+          "type": "faq-block",
+          "settings": {
+            "title": "What is the difference between Ode Gen 2 and Ode Gen 2 with SSP Burrs?",
+            "description": "<p>Ode Brew Grinder Gen 2 comes preinstalled with <strong>Ode Gen 2 Brew Burrs<\/strong>.<\/p><p>Ode Brew Grinder Gen 2 with SSP Burrs comes preinstalled with <strong>SSP MP Red Speed Brew Burrs<\/strong>.<\/p><p>Learn more about the different burrs <a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/7786626239259-What-is-the-difference-between-Ode-Standard-Brew-Burrs-Ode-Gen-2-Brew-Burrs-and-SSP-Multi-Purpose-Red-Speed-Coated-Brew-Burrs-\"><span style=\"text-decoration:underline\">here<\/span><\/a>.<\/p>"
+          }
+        },
+        "8b886acd-2ef4-4436-a39a-f484875db0bb": {
+          "type": "faq-block",
+          "settings": {
+            "title": "How do I keep the Ode Brew Grinder Gen 2 clean?",
+            "description": "<p>Please see the General Cleaning instructions in the <a href=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0057\/6235\/1219\/files\/Ode_Gen2_SafetyManual_V3.pdf?v=1666995795\" title=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0057\/6235\/1219\/files\/Ode_Gen2_SafetyManual_V3.pdf?v=1666995795\"><span style=\"text-decoration:underline\">Safety Manual<\/span>.<\/a><\/p><p>If you start to notice that there is more grind retention (grinds stuck in the exit chute) than when you first used the unit, don’t worry! This is normal. We found during our testing that the grinder will run for about 60 cycles before it needs to be cleaned to operate at its best performance.<\/p><p>To clean it, remove the catch cup, and use the provided brush and “swipe” around the inside of the exit chute (where the coffee grounds come out). This will clean the chute and help the anti-static mechanisms working well. <\/p><p><strong>Remember<\/strong>: The cleaner you keep your grinder, the better the anti static mechanisms are going to work. This will help reduce the amount of coffee retained in the grinder.<\/p><p>Watch a demonstration from Nick Terzulli, VP of R&D and Certified Q Grader <a href=\"https:\/\/youtu.be\/u0ShJI6lYJI\">here<\/a>.<\/p>"
+          }
+        },
+        "15d491aa-7ba6-4cdd-9f50-ac0d95505169": {
+          "type": "faq-block",
+          "settings": {
+            "title": "My dial gets stuck when I try to adjust the grind setting finer (the burrs are binding)!",
+            "description": "<p>You may notice that your dial may get stuck if you try to adjust from a coarser grind setting (11) to a finer grind setting (1) while the machine is off.<\/p><p>This is because the dial is trying to push the burrs closer together, which may compact residual coffee in the burrs. <\/p><p><strong>We recommend adjusting the grind dial with the machine on.<\/strong> This is because the spinning burrs will help kick off any residual coffee as you adjust towards a finer grind setting.<\/p><p>Watch a demonstration from Nick Terzulli, VP of R&D and Certified Q Grader <a href=\"https:\/\/youtu.be\/SGwWbHyrewQ\">here<\/a>.<\/p>"
+          }
+        },
+        "3cfbddff-2a26-4456-a203-66792eec6bf5": {
+          "type": "faq-block",
+          "settings": {
+            "title": "Can I replace the Burrs in my Ode Gen 2?",
+            "description": "<p>Yes. If you’d like to replace the burrs in your Ode Brew Grinder Gen 2, which comes with Ode Gen 2 Brew Burrs, please follow the instructions on <a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/7767147426843-How-do-I-install-and-calibrate-my-Ode-Gen-2-Brew-Burrs-please-follow-for-SSP-burrs-as-well-\"><span style=\"text-decoration:underline\">this page.<\/span><\/a><\/p>"
+          }
+        },
+        "c22b1618-9edc-4c6f-af21-b9eb3afe8562": {
+          "type": "faq-block",
+          "settings": {
+            "title": "How do I calibrate my Ode Brew Grinder?",
+            "description": "<p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/360052069632-How-to-calibrate-your-Ode-Brew-Grinder\"><span style=\"text-decoration:underline\">Learn More<\/span><\/a><\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "1a670074-334c-4963-8931-28ce7221fd8c",
+        "eb66113a-5455-4ece-a487-fb3ca3caf9ae",
+        "1940777b-e34c-4a03-af5e-80274e652c72",
+        "6cab98e1-ee91-4b19-988f-d076aa10f541",
+        "8b7a18c8-b99e-4b1c-9d6e-4a5f666471fe",
+        "8b886acd-2ef4-4436-a39a-f484875db0bb",
+        "15d491aa-7ba6-4cdd-9f50-ac0d95505169",
+        "3cfbddff-2a26-4456-a203-66792eec6bf5",
+        "c22b1618-9edc-4c6f-af21-b9eb3afe8562"
+      ],
+      "settings": {
+        "heading": "Have questions?",
+        "description": "We’ve got answers."
+      }
+    },
+    "1664388097345cae2b": {
+      "type": "seo-block",
+      "disabled": true,
+      "settings": {
+        "bg_color": "#ffffff",
+        "text_color": "#000000",
+        "heading": "Travel Mugs",
+        "text": "<p>Take everything on the move always.Functional Elegance Meets Design, Fellow Coffee Products Elevate Your Coffee Experience. Fellow’s Award-Winning Coffee Products Turn Anyone Into A Coffee Connoisseur. <\/p>"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "278b6e10-f3c8-4e99-b0ba-3d9934f317d7",
+    "1664270553aee121f2",
+    "9e6d1498-0268-4509-b8cf-de428d7964a2",
+    "166427647891f49e65",
+    "1664355544406e6554",
+    "16642717231d856327",
+    "f2a09cf9-eb92-49dd-aec1-a27d515043af",
+    "90a6d8bc-532a-4f19-83a5-528fc05fdab5",
+    "1664286931317058a0",
+    "1664388097345cae2b"
+  ]
+}

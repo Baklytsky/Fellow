@@ -114,49 +114,6 @@
         "text_color": "#ffffff"
       }
     },
-    "1e3dd3cb-7c87-4123-bfa6-ef3b22e9af45": {
-      "type": "faq",
-      "blocks": {
-        "74b47985-b86c-44da-b11c-5cd39b9512f6": {
-          "type": "faq-block",
-          "settings": {
-            "title": "FAQs",
-            "description": "<p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313040430235-How-do-I-use-and-care-for-my-Stagg-EKG-Pro-or-Pro-Studio-Edition-\" target=\"_blank\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313040430235-How-do-I-use-and-care-for-my-Stagg-EKG-Pro-or-Pro-Studio-Edition-\">How do I use and care for my Stagg EKG Pro and Pro Studio Edition?<\/a><\/p><p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313036055707-What-are-the-differences-between-the-Stagg-EKG-Stagg-EKG-Pro-and-Stagg-EKG-Pro-Studio-Edition-\" target=\"_blank\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313036055707-What-are-the-differences-between-the-Stagg-EKG-Stagg-EKG-Pro-and-Stagg-EKG-Pro-Studio-Edition-\">What are the differences between Stagg EKG, Stagg EKG Pro, and Stagg EKG Pro Studio Edition?<\/a><\/p><p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313103050907-Is-my-current-Stagg-EKG-Corvo-EKG-kettle-compatible-with-the-Pro-and-Pro-Studio-Edition-base-and-vice-versa-\" target=\"_blank\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313103050907-Is-my-current-Stagg-EKG-Corvo-EKG-kettle-compatible-with-the-Pro-and-Pro-Studio-Edition-base-and-vice-versa-\">Is my current Stagg EKG\/Corvo EKG kettle compatible with the Pro and Pro Studio Edition base (and vice-versa)?<\/a><\/p><p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313141992347-Can-I-buy-a-replacement-kettle-or-base-for-my-Stagg-EKG-Pro-or-Pro-Studio-Edition-\" target=\"_blank\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313141992347-Can-I-buy-a-replacement-kettle-or-base-for-my-Stagg-EKG-Pro-or-Pro-Studio-Edition-\">Can I buy a replacement kettle or base for my Stagg EKG Pro or Pro Studio Edition?<\/a><\/p><p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/sections\/9342737097755-Stagg-EKG-Pro-and-Pro-Studio-Edition\" target=\"_blank\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/sections\/9342737097755-Stagg-EKG-Pro-and-Pro-Studio-Edition\">All Pro + Pro Studio Edition FAQs<\/a><\/p>"
-          }
-        },
-        "0c302609-36d9-4e92-8796-380d58d892e7": {
-          "type": "faq-block",
-          "settings": {
-            "title": "Care + Cleaning",
-            "description": "<p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/115001707851-Can-I-heat-milk-or-other-liquids-in-my-Fellow-electric-kettle-\" target=\"_blank\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/115001707851-Can-I-heat-milk-or-other-liquids-in-my-Fellow-electric-kettle-\">Can I heat milk or other liquids in my Fellow electric kettle?<\/a><\/p><p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/115001707911-How-do-I-clean-maintain-and-descale-my-Fellow-electric-kettle-\" target=\"_blank\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/115001707911-How-do-I-clean-maintain-and-descale-my-Fellow-electric-kettle-\">How do I clean, maintain, and descale my Fellow electric kettle?<\/a><\/p><p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/360040214291-How-do-I-best-care-for-the-wooden-accents-on-my-Fellow-products-\" target=\"_blank\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/360040214291-How-do-I-best-care-for-the-wooden-accents-on-my-Fellow-products-\">How do I best care for the wooden accents on my Fellow products?<\/a><\/p><p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/115001736851-Is-my-Fellow-electric-kettle-stovetop-safe-\" target=\"_blank\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/115001736851-Is-my-Fellow-electric-kettle-stovetop-safe-\">Is my Fellow electric kettle stovetop safe?<\/a><\/p>"
-          }
-        },
-        "07cde849-bba8-45de-9220-2d2e188d3e16": {
-          "type": "faq-block",
-          "settings": {
-            "title": "Product Registration",
-            "description": "<p><a href=\"https:\/\/Register.fellowproducts.com\" target=\"_blank\" title=\"https:\/\/Register.fellowproducts.com\">How do I register my Fellow electric products?<\/a><\/p>"
-          }
-        },
-        "1759bc70-f140-4686-ad63-2abc6194bb4c": {
-          "type": "faq-block",
-          "settings": {
-            "title": "Fellow Updater App",
-            "description": "<p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313502245403-What-does-the-Fellow-Updater-app-do-and-why-do-I-need-it-\" target=\"_blank\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313502245403-What-does-the-Fellow-Updater-app-do-and-why-do-I-need-it-\">What does the Fellow Updater App do and why do I need it?<\/a><\/p><p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313550533019-My-Fellow-Updater-app-says-that-there-is-an-Update-Available-but-has-yet-to-update-what-should-I-do-\" target=\"_blank\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313550533019-My-Fellow-Updater-app-says-that-there-is-an-Update-Available-but-has-yet-to-update-what-should-I-do-\">My Fellow Updater app says that there is an ‘Update Available’ but has yet to update - what should I do?<\/a><\/p><p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313615326363-Will-there-be-any-features-beyond-updates-on-the-Fellow-Updater-app-in-the-future-\" target=\"_blank\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313615326363-Will-there-be-any-features-beyond-updates-on-the-Fellow-Updater-app-in-the-future-\">Will there be any features beyond updates on the Fellow Updater app in the future?<\/a><\/p><p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9593179929115-What-is-the-current-firmware-version-and-what-did-it-update-\" target=\"_blank\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9593179929115-What-is-the-current-firmware-version-and-what-did-it-update-\">What is the current firmware version and what did it update?<\/a><\/p>"
-          }
-        }
-      },
-      "block_order": [
-        "74b47985-b86c-44da-b11c-5cd39b9512f6",
-        "0c302609-36d9-4e92-8796-380d58d892e7",
-        "07cde849-bba8-45de-9220-2d2e188d3e16",
-        "1759bc70-f140-4686-ad63-2abc6194bb4c"
-      ],
-      "settings": {
-        "heading": "Resources",
-        "description": "You’ve got questions. We’ve got answers."
-      }
-    },
     "c35b14fb-0e6e-43fa-944e-8c762c98b616": {
       "type": "featured-collections",
       "blocks": {
@@ -180,6 +137,190 @@
         "show_view_all": true
       }
     },
+    "1e3dd3cb-7c87-4123-bfa6-ef3b22e9af45": {
+      "type": "faq",
+      "blocks": {
+        "74b47985-b86c-44da-b11c-5cd39b9512f6": {
+          "type": "faq-block",
+          "disabled": true,
+          "settings": {
+            "title": "FAQs",
+            "description": "<p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313040430235-How-do-I-use-and-care-for-my-Stagg-EKG-Pro-or-Pro-Studio-Edition-\" target=\"_blank\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313040430235-How-do-I-use-and-care-for-my-Stagg-EKG-Pro-or-Pro-Studio-Edition-\">How do I use and care for my Stagg EKG Pro and Pro Studio Edition?<\/a><\/p><p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313036055707-What-are-the-differences-between-the-Stagg-EKG-Stagg-EKG-Pro-and-Stagg-EKG-Pro-Studio-Edition-\" target=\"_blank\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313036055707-What-are-the-differences-between-the-Stagg-EKG-Stagg-EKG-Pro-and-Stagg-EKG-Pro-Studio-Edition-\">What are the differences between Stagg EKG, Stagg EKG Pro, and Stagg EKG Pro Studio Edition?<\/a><\/p><p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313103050907-Is-my-current-Stagg-EKG-Corvo-EKG-kettle-compatible-with-the-Pro-and-Pro-Studio-Edition-base-and-vice-versa-\" target=\"_blank\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313103050907-Is-my-current-Stagg-EKG-Corvo-EKG-kettle-compatible-with-the-Pro-and-Pro-Studio-Edition-base-and-vice-versa-\">Is my current Stagg EKG\/Corvo EKG kettle compatible with the Pro and Pro Studio Edition base (and vice-versa)?<\/a><\/p><p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313141992347-Can-I-buy-a-replacement-kettle-or-base-for-my-Stagg-EKG-Pro-or-Pro-Studio-Edition-\" target=\"_blank\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313141992347-Can-I-buy-a-replacement-kettle-or-base-for-my-Stagg-EKG-Pro-or-Pro-Studio-Edition-\">Can I buy a replacement kettle or base for my Stagg EKG Pro or Pro Studio Edition?<\/a><\/p><p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/sections\/9342737097755-Stagg-EKG-Pro-and-Pro-Studio-Edition\" target=\"_blank\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/sections\/9342737097755-Stagg-EKG-Pro-and-Pro-Studio-Edition\">All Pro + Pro Studio Edition FAQs<\/a><\/p>"
+          }
+        },
+        "0c302609-36d9-4e92-8796-380d58d892e7": {
+          "type": "faq-block",
+          "disabled": true,
+          "settings": {
+            "title": "Care + Cleaning",
+            "description": "<p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/115001707851-Can-I-heat-milk-or-other-liquids-in-my-Fellow-electric-kettle-\" target=\"_blank\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/115001707851-Can-I-heat-milk-or-other-liquids-in-my-Fellow-electric-kettle-\">Can I heat milk or other liquids in my Fellow electric kettle?<\/a><\/p><p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/115001707911-How-do-I-clean-maintain-and-descale-my-Fellow-electric-kettle-\" target=\"_blank\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/115001707911-How-do-I-clean-maintain-and-descale-my-Fellow-electric-kettle-\">How do I clean, maintain, and descale my Fellow electric kettle?<\/a><\/p><p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/360040214291-How-do-I-best-care-for-the-wooden-accents-on-my-Fellow-products-\" target=\"_blank\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/360040214291-How-do-I-best-care-for-the-wooden-accents-on-my-Fellow-products-\">How do I best care for the wooden accents on my Fellow products?<\/a><\/p><p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/115001736851-Is-my-Fellow-electric-kettle-stovetop-safe-\" target=\"_blank\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/115001736851-Is-my-Fellow-electric-kettle-stovetop-safe-\">Is my Fellow electric kettle stovetop safe?<\/a><\/p>"
+          }
+        },
+        "07cde849-bba8-45de-9220-2d2e188d3e16": {
+          "type": "faq-block",
+          "disabled": true,
+          "settings": {
+            "title": "Product Registration",
+            "description": "<p><a href=\"https:\/\/Register.fellowproducts.com\" target=\"_blank\" title=\"https:\/\/Register.fellowproducts.com\">How do I register my Fellow electric products?<\/a><\/p>"
+          }
+        },
+        "1759bc70-f140-4686-ad63-2abc6194bb4c": {
+          "type": "faq-block",
+          "disabled": true,
+          "settings": {
+            "title": "Fellow Updater App",
+            "description": "<p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313502245403-What-does-the-Fellow-Updater-app-do-and-why-do-I-need-it-\" target=\"_blank\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313502245403-What-does-the-Fellow-Updater-app-do-and-why-do-I-need-it-\">What does the Fellow Updater App do and why do I need it?<\/a><\/p><p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313550533019-My-Fellow-Updater-app-says-that-there-is-an-Update-Available-but-has-yet-to-update-what-should-I-do-\" target=\"_blank\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313550533019-My-Fellow-Updater-app-says-that-there-is-an-Update-Available-but-has-yet-to-update-what-should-I-do-\">My Fellow Updater app says that there is an ‘Update Available’ but has yet to update - what should I do?<\/a><\/p><p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313615326363-Will-there-be-any-features-beyond-updates-on-the-Fellow-Updater-app-in-the-future-\" target=\"_blank\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313615326363-Will-there-be-any-features-beyond-updates-on-the-Fellow-Updater-app-in-the-future-\">Will there be any features beyond updates on the Fellow Updater app in the future?<\/a><\/p><p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9593179929115-What-is-the-current-firmware-version-and-what-did-it-update-\" target=\"_blank\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9593179929115-What-is-the-current-firmware-version-and-what-did-it-update-\">What is the current firmware version and what did it update?<\/a><\/p>"
+          }
+        },
+        "98b79ea0-c48c-4f40-95ba-f34070c9cd80": {
+          "type": "faq-block",
+          "settings": {
+            "title": "How do I use and care for my Stagg EKG Pro or Pro Studio Edition?",
+            "description": "<p>Ready to start using your Stagg EKG Pro or Pro Studio Edition? Download the <a href=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0057\/6235\/1219\/files\/StaggEKGPro_GTKYG_Mech_R5_072522ns_2.pdf?v=1666115788\">Get to Know You Guide<\/a> that will walk you through all of your kettles features, how to use the menu, as well as how to brew a pour-over.<\/p>"
+          }
+        },
+        "5eb9e4a5-a057-4c17-835e-b31b330c1575": {
+          "type": "faq-block",
+          "settings": {
+            "title": "What are the differences between the Stagg EKG Pro and Stagg EKG Pro Studio Edition?",
+            "description": "<p>Stagg EKG Pro and Pro Studio Edition both feature a full color LCD screen, powerful features like Scheduling in advance and Guide Mode, the option to customize elements like altitude, hold time, or units, and firmware updates available over WiFi to take your brewing to the next level.<\/p><p>In addition to Stagg EKG Pro’s features, Stagg EKG Pro Studio Edition has a stunning glass top and aluminum base, zinc frame, and a metal cap on the end of the handle.<\/p><p>To see a detailed comparison across all of our electric kettles please visit <a href=\"https:\/\/fellowproducts.com\/pages\/compare-stagg-ekg-kettles\" target=\"_blank\">this page<\/a>.<\/p>"
+          }
+        },
+        "c57c0b1c-7661-4d5a-a076-2a9b0a162ffc": {
+          "type": "faq-block",
+          "settings": {
+            "title": "Is my current Stagg EKG \/ Corvo EKG kettle compatible with the Pro and Pro Studio Edition base (and vice-versa)?",
+            "description": "<p>Although both the Pro and Pro Studio Edition versions of the kettle and base are inter-compatible, neither version of the base will work with Stagg EKG or Corvo EKG kettles.<\/p><p>However, the Corvo EKG and Stagg EKG kettles are compatible with each other’s bases. <\/p>"
+          }
+        },
+        "6a7021c5-6a97-4ecd-9ce2-1840bfb454a3": {
+          "type": "faq-block",
+          "settings": {
+            "title": "Can I buy a replacement kettle or base for my Stagg EKG Pro or Pro Studio Edition?",
+            "description": "<p>Replacement kettles or bases aren’t available for purchase for your Stagg EKG Pro or Pro Studio. If you are experiencing issues with your kettle or base please <a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/requests\/new\">contact us<\/a> so that we can assist you in troubleshooting.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "74b47985-b86c-44da-b11c-5cd39b9512f6",
+        "0c302609-36d9-4e92-8796-380d58d892e7",
+        "07cde849-bba8-45de-9220-2d2e188d3e16",
+        "1759bc70-f140-4686-ad63-2abc6194bb4c",
+        "98b79ea0-c48c-4f40-95ba-f34070c9cd80",
+        "5eb9e4a5-a057-4c17-835e-b31b330c1575",
+        "c57c0b1c-7661-4d5a-a076-2a9b0a162ffc",
+        "6a7021c5-6a97-4ecd-9ce2-1840bfb454a3"
+      ],
+      "settings": {
+        "heading": "FAQs",
+        "description": ""
+      }
+    },
+    "a1df82db-23e3-45c7-ad80-c4d8393e8732": {
+      "type": "faq",
+      "blocks": {
+        "f10027b8-96ab-4695-aad5-2cdce7ec2588": {
+          "type": "faq-block",
+          "settings": {
+            "title": "Can I heat milk or other liquids in my Fellow electric kettle?",
+            "description": "<p>The Fellow line of electric kettles was designed to be an incredibly efficient water heater\/boiler. The software and hardware are crafted to be sure you have the best experience possible with water only.<\/p><p>Even if it is set at a lower temperature, the heating cycle is so rapid it could scald milk and other liquids. Please don't use the EKG with milk or any liquid other than fresh, clean water. <strong>Doing so will void your warranty.<\/strong><\/p>"
+          }
+        },
+        "c5f30292-6846-4afb-8df7-00af6cd38fb6": {
+          "type": "faq-block",
+          "settings": {
+            "title": "How do I clean, maintain and descale my Fellow electric kettle?",
+            "description": "<p><strong>On a cleaning spree or is your kettle not heating up correctly?<\/strong><\/p><p>Here are some steps for cleaning your electric kettle:<\/p><p>Prior to cleaning, be sure the base is unplugged and the kettle has cooled completely. Empty any remaining water from the kettle. Wash the inside of the kettle with soapy water and rinse. <strong>NEVER SUBMERGE THE KETTLE IN WATER OR OTHER LIQUIDS.<\/strong> Do not place it in a dishwasher. Neither base nor kettle is dishwasher safe and both include electrical components that could become damaged. Wipe the exterior of the kettle and base with a damp cloth or sponge (damp with water or an all-purpose cleaner) and allow it to dry. Do not use abrasive soaps, cleansers, or scouring pads on any part of the kettle as it may damage the finish.<\/p><p> <\/p><p><strong>Cleaning mineral deposits<\/strong><\/p><p>If you notice a stain on the bottom of your kettle's interior that resembles rust, don't worry! It's likely a harmless and common buildup of minerals called limescale (comprised of mainly calcium carbonate). Limescale is a direct result of heating up water and thus inevitable in all kettles. Depending on the mineral concentration in your water source, it will show up sooner or later.<\/p><p>You can remove the mineral deposits through a process called descaling. A gentle acid is used to remove the deposits without damaging the metal.<\/p><p>You can use vinegar to descale, but citric acid is our preferred home chemical choice. Both are safe and effective cleaning solutions, but citric acid is a bit stronger and doesn't leave a lingering scent. If you prefer to buy a ready-made solution, we recommend descaling with Urnez Dezcal, which you can buy from Amazon and many other locations.<\/p><p>If you use vinegar, heat a solution of half vinegar and half water in your kettle. Bring the mixture to a boil and let it sit for at least a half-hour before dumping it out and rinsing the kettle.<\/p><p>If you use citric acid, heat a solution of 500mL of water and 2 spoonfuls of citric acid. Bring the mixture to a boil and let it sit for at least a half-hour before dumping it out and rinsing the kettle.<\/p><p>If you use Urnex Dezcal, please follow the instructions on the bottle!<\/p><p><strong>Caution: <\/strong>Scrubbing the bottom of your kettle with steel wool or an abrasive brush will ultimately make limescale worse and could also result in the development of rust. Please use a sponge or soft brush to clean the inside of your kettle.<\/p>"
+          }
+        },
+        "a147842c-9b45-4a99-9279-f04378903e13": {
+          "type": "faq-block",
+          "settings": {
+            "title": "How do I best care for the wooden accents on my Fellow products?",
+            "description": "<p><strong>For Stagg EKG Pro, Stagg EKG, Corvo EKG, and any other products having wood handles or lid pulls - both maple & walnut. <\/strong><\/p><p>Because wood is a natural product it is prone to drying and warping. Wood components that are exposed to high heat and moisture, such as the lid pull and handle, may eventually dry out and crack (like repeatedly putting a cutting board in a dishwasher). <\/p><p>To prevent this, we recommend periodically applying any food safe mineral oil to the lid pull & handle once per month - and buffing with a soft cloth. It’s also good practice to do this any time you notice the wood feeling especially dry.<\/p>"
+          }
+        },
+        "d850057e-630c-4c8e-afd3-7204046ed05e": {
+          "type": "faq-block",
+          "settings": {
+            "title": "Is my Fellow electric kettle stovetop safe?",
+            "description": "<p>No. Please do not use your electric kettle on your stovetop! The kettle is designed for use with its electric base ONLY. By putting the kettle on your stovetop or induction surface, you risk melting functional parts in the kettle and paint.  <\/p><p>If you're looking for a pour-over kettle that's stovetop safe, please check out our <a href=\"https:\/\/fellowproducts.com\/collections\/stovetop-kettles\">stovetop kettles<\/a>.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "f10027b8-96ab-4695-aad5-2cdce7ec2588",
+        "c5f30292-6846-4afb-8df7-00af6cd38fb6",
+        "a147842c-9b45-4a99-9279-f04378903e13",
+        "d850057e-630c-4c8e-afd3-7204046ed05e"
+      ],
+      "settings": {
+        "heading": "Care + Cleaning",
+        "description": ""
+      }
+    },
+    "68048714-a025-477d-b0af-4bc3d554f9d7": {
+      "type": "faq",
+      "blocks": {
+        "b247a5f1-6fa6-4504-91eb-8e585828001e": {
+          "type": "faq-block",
+          "settings": {
+            "title": "How do I register my Fellow electric products?",
+            "description": "<p><a href=\"https:\/\/register.fellowproducts.com\/\" title=\"https:\/\/register.fellowproducts.com\/\">Register Here<\/a><\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "b247a5f1-6fa6-4504-91eb-8e585828001e"
+      ],
+      "settings": {
+        "heading": "Product Registration",
+        "description": ""
+      }
+    },
+    "291eef17-15e4-41a1-bdf2-e2aee1131354": {
+      "type": "faq",
+      "blocks": {
+        "a52155a8-94ea-4284-920a-8f94f58ba351": {
+          "type": "faq-block",
+          "settings": {
+            "title": "What does the Fellow Updater app do and why do I need it?",
+            "description": "<p>Although it’s not needed to use the product, we will occasionally provide updates to the firmware in your Stagg EKG Pro or Pro Studio Edition to ensure everything is running optimally and that your kettle has the latest firmware. Choosing not to use the app will not diminish the usefulness of your kettle, as the updates are not needed for the Pro or Pro Studio Edition to work.<\/p><p><strong>Please note:<\/strong> you aren’t able to control your kettle or its settings via the Fellow Updater app at this time. The app is also not compatible with Stagg EKG+ kettles.<\/p>"
+          }
+        },
+        "d7c756d3-13c9-4fee-a95c-cc9bbf8d4621": {
+          "type": "faq-block",
+          "settings": {
+            "title": "My Fellow Updater app says that there is an ‘Update Available’ but has yet to update - what should I do?",
+            "description": "<p>If your app is in ‘Update Available’ status this means there’s an update available for your Stagg EKG Pro or Pro Studio Edition and that your kettle has not checked in within the last 24 hours. This could be due to 3 primary reasons:<\/p><p>Your kettle is unplugged<\/p><p>The WiFi on your kettle is off<\/p><p>Your WiFi network has changed<\/p><p>If one of these reasons applies, please follow these troubleshooting steps:<\/p><p>Your kettle is unplugged: leave your kettle plugged in for at least 24 hours<\/p><p>The WiFi on your kettle is off: confirm that WiFi is on on your kettle via your kettle’s menu<\/p><p>Your WiFi network has changed: ‘Reset Kettle Name & Wifi’ which will allow you to go through the full set-up process once more.<\/p><p>If you’re still experiencing issues, please delete and re-download the app. You will need to go back through the initial steps to pair your base to your device listed in our <a href=\"https:\/\/fellowproducts.com\/pages\/gear-guide\" target=\"_self\">Gear Guide<\/a>.<\/p>"
+          }
+        },
+        "9a25eaf3-b5e4-4c83-925f-0268b74c236e": {
+          "type": "faq-block",
+          "settings": {
+            "title": "Will there be any features beyond updates on the Fellow Updater app in the future?",
+            "description": "<p>We work hard to give our customers the best overall experience when using our products. While we can’t predict what we come up with next, you may want to follow our <a href=\"https:\/\/www.instagram.com\/fellowproducts\/\">social media channels<\/a> and\/or our <a href=\"https:\/\/fellowproducts.com\/pages\/email-subscribe\">email list<\/a> to make sure you are kept up to date on the latest news at Fellow! If you have any specific feature recommendations you would like to see <a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/requests\/new\">please let us know<\/a>!<\/p>"
+          }
+        },
+        "cb17ebfb-83cf-4fe0-be67-6ad660604d76": {
+          "type": "faq-block",
+          "settings": {
+            "title": "What is the current firmware version and what did it update?",
+            "description": "<p>The latest firmware version available is <strong>Firmware<br\/>Version 1.1.19SSP.<\/strong> This version contains minor tweaks with major<br\/>impact! <\/p><p>This update:<\/p><p>Adds brew stopwatch functionality in Hold Mode<\/p><p>Resolves clock resetting to midnight and continuing to run after<br\/>unplugging, power outage, or firmware update. Clock now stays on midnight until<br\/>you manually set the time so you can schedule your next boil<\/p><p>Makes button behavior more consistent. The kettle can now only<br\/>be turned on and off by pressing the main dial button<\/p><p>Implements minor bug fixes<\/p><p>The previous firmware version is <strong>Firmware Version<br\/>1.1.13SSP<\/strong>.  This version contains a number of small fixes and UI<br\/>improvements.<\/p><p>Minor bug fixes<\/p><p>Improvements to the clock setting experience<\/p><p>Bricky enhancements<\/p><p>To verify if your kettle is on the most up to date version of<br\/>the firmware, download the Fellow Updater App. <\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "a52155a8-94ea-4284-920a-8f94f58ba351",
+        "d7c756d3-13c9-4fee-a95c-cc9bbf8d4621",
+        "9a25eaf3-b5e4-4c83-925f-0268b74c236e",
+        "cb17ebfb-83cf-4fe0-be67-6ad660604d76"
+      ],
+      "settings": {
+        "heading": "Fellow Updater App",
+        "description": ""
+      }
+    },
     "3e986760-8f93-4f13-933f-3b04b97136d1": {
       "type": "coffee-marketplace-twb",
       "settings": {
@@ -199,8 +340,11 @@
     "6502bd48-7cbd-4af3-b885-299394e45348",
     "353104b1-9d2f-4355-b6cc-a4554a788789",
     "adc0d42e-3d69-4550-8d40-252d3b41254f",
-    "1e3dd3cb-7c87-4123-bfa6-ef3b22e9af45",
     "c35b14fb-0e6e-43fa-944e-8c762c98b616",
+    "1e3dd3cb-7c87-4123-bfa6-ef3b22e9af45",
+    "a1df82db-23e3-45c7-ad80-c4d8393e8732",
+    "68048714-a025-477d-b0af-4bc3d554f9d7",
+    "291eef17-15e4-41a1-bdf2-e2aee1131354",
     "3e986760-8f93-4f13-933f-3b04b97136d1"
   ]
 }

@@ -147,6 +147,17 @@
     "c744d7a7-0395-41cf-ad68-67d084f08ea0": {
       "type": "product-slider",
       "blocks": {
+        "34f7bede-2795-4374-ba99-0e5e8c7d6d40": {
+          "type": "image",
+          "settings": {
+            "product": "",
+            "image": "shopify:\/\/shop_images\/HP_Module_5__Personalization_Highlight.png",
+            "header": "INFO",
+            "description": "<p>Info<\/p>",
+            "link_text": "Shop Now",
+            "link_url": "shopify:\/\/pages\/catalog"
+          }
+        },
         "6ecd3b02-88bd-4000-86e6-2c8646ab2239": {
           "type": "image",
           "settings": {
@@ -169,6 +180,7 @@
         }
       },
       "block_order": [
+        "34f7bede-2795-4374-ba99-0e5e8c7d6d40",
         "6ecd3b02-88bd-4000-86e6-2c8646ab2239",
         "c914e4ec-8524-44e6-a8a2-539261123f8d"
       ],

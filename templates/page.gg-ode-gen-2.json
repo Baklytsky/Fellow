@@ -1,0 +1,283 @@
+{
+  "sections": {
+    "8a02d72a-7e29-4c25-8bc5-9e3a483f5ccf": {
+      "type": "image-with-cta",
+      "settings": {
+        "top_bottom_margin": true,
+        "image": "shopify:\/\/shop_images\/Hero_Module_Image_OdeGen2_102522_LP1_5c424f6c-1d05-49eb-b2c1-90dc5e6eb3b5.png",
+        "layout": "left",
+        "bg_color": "#000000",
+        "text_color": "#ffffff",
+        "heading": "Ode Brew Grinder Gen 2 Gear Guide",
+        "heading_size": "h1",
+        "text": "",
+        "cta_url": "",
+        "cta_copy": "",
+        "cta_color": "btn--dark"
+      }
+    },
+    "6502bd48-7cbd-4af3-b885-299394e45348": {
+      "type": "coffee-marketplace-cards",
+      "blocks": {
+        "55eb1590-d289-402d-b19b-e3ba6d789743": {
+          "type": "Card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/How_to_use_your_grinder.png",
+            "heading": "How to use your grinder",
+            "description": "The basics before your first brew.<br><a href=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0057\/6235\/1219\/files\/Ode_Gen2_GTKYG_V5.pdf?v=1666995794\" style=\"text-decoration:underline;cursor:pointer;\">Get Started -><\/a>",
+            "link": "https:\/\/cdn.shopify.com\/s\/files\/1\/0057\/6235\/1219\/files\/StaggEKG_Pro_GTKYG_Mech_R4_Use.pdf?v=1664570631"
+          }
+        },
+        "abf4213f-6cfc-47ee-b7c7-f8c54b924fcf": {
+          "type": "Card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/How_to_clean_your_grinder.png",
+            "heading": "How to clean your grinder",
+            "description": "The proper care to maintain your new favorite machine.<br><a href=\"https:\/\/www.youtube.com\/watch?v=AuhZbWquYJ8\" style=\"text-decoration:underline;cursor:pointer;\">Learn More -><\/a>",
+            "link": "https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/115001707911-How-do-I-clean-maintain-and-descale-my-Fellow-electric-kettle-"
+          }
+        },
+        "c8b12d5e-f654-4809-be5c-212a15fcbaac": {
+          "type": "Card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Register_your_grinder.png",
+            "heading": "Register your grinder",
+            "description": "You’ll receive extended warranty when you do!\n<a href=\"https:\/\/Register.fellowproducts.com\" style=\"text-decoration:underline;cursor:pointer;\">Register Now -><\/a>",
+            "link": "https:\/\/Register.fellowproducts.com"
+          }
+        }
+      },
+      "block_order": [
+        "55eb1590-d289-402d-b19b-e3ba6d789743",
+        "abf4213f-6cfc-47ee-b7c7-f8c54b924fcf",
+        "c8b12d5e-f654-4809-be5c-212a15fcbaac"
+      ],
+      "settings": {
+        "heading": "Your one-stop shop to hit the grind running",
+        "description": "Everything you need to get started with Ode Brew Grinder Gen 2"
+      }
+    },
+    "353104b1-9d2f-4355-b6cc-a4554a788789": {
+      "type": "image-with-app-links",
+      "disabled": true,
+      "settings": {
+        "top_bottom_margin": false,
+        "bg_color": "#fff9e5",
+        "text_color": "#000000",
+        "image": "shopify:\/\/shop_images\/EKG_Pro_Gear_Guide_Module_Desktop.png",
+        "image_mobile": "shopify:\/\/shop_images\/EKG_Pro_Gear_Guide_Module_Mobile.png",
+        "layout": "left",
+        "heading": "It keeps getting better...",
+        "text": "<style>\n.ImageWithAppLinks__DecImage img {\nmargin-top: -20px;\n}\n<\/style>\nGet the latest features for Stagg EKG Pro and Pro Studio Edition with the Fellow Updater App.",
+        "scan_instruction": "Scan the QR code or visit Fellowproducts.com\/app on your phone.",
+        "qr_code": "shopify:\/\/shop_images\/EKG_Pro___Pro_Studio_Gear_Guide_Code-removebg-preview.png",
+        "decorative_image": "shopify:\/\/shop_images\/Group_308_2_ff7f913b-117a-41e6-b39d-1acb54d77c76.png",
+        "app_store_image": "shopify:\/\/shop_images\/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917_1.png",
+        "app_store_url": "https:\/\/apps.apple.com\/app\/fellow-updater\/id1592355693",
+        "google_play_image": "shopify:\/\/shop_images\/Group_307_2.png",
+        "google_play_url": ""
+      }
+    },
+    "adc0d42e-3d69-4550-8d40-252d3b41254f": {
+      "type": "featured-blog-v2",
+      "blocks": {
+        "9dff12f8-ba1c-4b77-8a3d-28c6aca0844d": {
+          "type": "article",
+          "settings": {
+            "article": "brew-guides\/back-to-brewing-school-pour-over-basics-101"
+          }
+        },
+        "6ec64236-0920-4c6a-9cdb-32cef180d9ff": {
+          "type": "article",
+          "settings": {
+            "article": "learn\/fellow-s-uncertain-path-to-our-new-gen-2-brew-burrs"
+          }
+        },
+        "c24428f3-81e5-46b5-a2c3-994e77c40ea7": {
+          "type": "article",
+          "settings": {
+            "article": "learn\/how-to-decipher-a-bag-of-coffee"
+          }
+        }
+      },
+      "block_order": [
+        "9dff12f8-ba1c-4b77-8a3d-28c6aca0844d",
+        "6ec64236-0920-4c6a-9cdb-32cef180d9ff",
+        "c24428f3-81e5-46b5-a2c3-994e77c40ea7"
+      ],
+      "settings": {
+        "heading": "Brew like a pro",
+        "description": "<p>Sharing our insider knowledge to make “specialty coffee” a language you can speak.<\/p>",
+        "cta_title": "Fellow Blog",
+        "cta_url": "shopify:\/\/blogs\/learn",
+        "cta_color": "btn--light",
+        "bg_color": "#000000",
+        "text_color": "#ffffff"
+      }
+    },
+    "1e3dd3cb-7c87-4123-bfa6-ef3b22e9af45": {
+      "type": "faq",
+      "blocks": {
+        "74b47985-b86c-44da-b11c-5cd39b9512f6": {
+          "type": "faq-block",
+          "disabled": true,
+          "settings": {
+            "title": "FAQs",
+            "description": "<p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313040430235-How-do-I-use-and-care-for-my-Stagg-EKG-Pro-or-Pro-Studio-Edition-\" target=\"_blank\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313040430235-How-do-I-use-and-care-for-my-Stagg-EKG-Pro-or-Pro-Studio-Edition-\">How do I use and care for my Stagg EKG Pro and Pro Studio Edition?<\/a><\/p><p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313036055707-What-are-the-differences-between-the-Stagg-EKG-Stagg-EKG-Pro-and-Stagg-EKG-Pro-Studio-Edition-\" target=\"_blank\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313036055707-What-are-the-differences-between-the-Stagg-EKG-Stagg-EKG-Pro-and-Stagg-EKG-Pro-Studio-Edition-\">What are the differences between Stagg EKG, Stagg EKG Pro, and Stagg EKG Pro Studio Edition?<\/a><\/p><p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313103050907-Is-my-current-Stagg-EKG-Corvo-EKG-kettle-compatible-with-the-Pro-and-Pro-Studio-Edition-base-and-vice-versa-\" target=\"_blank\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313103050907-Is-my-current-Stagg-EKG-Corvo-EKG-kettle-compatible-with-the-Pro-and-Pro-Studio-Edition-base-and-vice-versa-\">Is my current Stagg EKG\/Corvo EKG kettle compatible with the Pro and Pro Studio Edition base (and vice-versa)?<\/a><\/p><p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313141992347-Can-I-buy-a-replacement-kettle-or-base-for-my-Stagg-EKG-Pro-or-Pro-Studio-Edition-\" target=\"_blank\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313141992347-Can-I-buy-a-replacement-kettle-or-base-for-my-Stagg-EKG-Pro-or-Pro-Studio-Edition-\">Can I buy a replacement kettle or base for my Stagg EKG Pro or Pro Studio Edition?<\/a><\/p><p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/sections\/9342737097755-Stagg-EKG-Pro-and-Pro-Studio-Edition\" target=\"_blank\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/sections\/9342737097755-Stagg-EKG-Pro-and-Pro-Studio-Edition\">All Pro + Pro Studio Edition FAQs<\/a><\/p>"
+          }
+        },
+        "0c302609-36d9-4e92-8796-380d58d892e7": {
+          "type": "faq-block",
+          "disabled": true,
+          "settings": {
+            "title": "Care + Cleaning",
+            "description": "<p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/115001707851-Can-I-heat-milk-or-other-liquids-in-my-Fellow-electric-kettle-\" target=\"_blank\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/115001707851-Can-I-heat-milk-or-other-liquids-in-my-Fellow-electric-kettle-\">Can I heat milk or other liquids in my Fellow electric kettle?<\/a><\/p><p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/115001707911-How-do-I-clean-maintain-and-descale-my-Fellow-electric-kettle-\" target=\"_blank\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/115001707911-How-do-I-clean-maintain-and-descale-my-Fellow-electric-kettle-\">How do I clean, maintain, and descale my Fellow electric kettle?<\/a><\/p><p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/360040214291-How-do-I-best-care-for-the-wooden-accents-on-my-Fellow-products-\" target=\"_blank\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/360040214291-How-do-I-best-care-for-the-wooden-accents-on-my-Fellow-products-\">How do I best care for the wooden accents on my Fellow products?<\/a><\/p><p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/115001736851-Is-my-Fellow-electric-kettle-stovetop-safe-\" target=\"_blank\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/115001736851-Is-my-Fellow-electric-kettle-stovetop-safe-\">Is my Fellow electric kettle stovetop safe?<\/a><\/p>"
+          }
+        },
+        "07cde849-bba8-45de-9220-2d2e188d3e16": {
+          "type": "faq-block",
+          "disabled": true,
+          "settings": {
+            "title": "Product Registration",
+            "description": "<p><a href=\"https:\/\/Register.fellowproducts.com\" target=\"_blank\" title=\"https:\/\/Register.fellowproducts.com\">How do I register my Fellow electric products?<\/a><\/p>"
+          }
+        },
+        "1759bc70-f140-4686-ad63-2abc6194bb4c": {
+          "type": "faq-block",
+          "disabled": true,
+          "settings": {
+            "title": "Fellow Updater App",
+            "description": "<p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313502245403-What-does-the-Fellow-Updater-app-do-and-why-do-I-need-it-\" target=\"_blank\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313502245403-What-does-the-Fellow-Updater-app-do-and-why-do-I-need-it-\">What does the Fellow Updater App do and why do I need it?<\/a><\/p><p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313550533019-My-Fellow-Updater-app-says-that-there-is-an-Update-Available-but-has-yet-to-update-what-should-I-do-\" target=\"_blank\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313550533019-My-Fellow-Updater-app-says-that-there-is-an-Update-Available-but-has-yet-to-update-what-should-I-do-\">My Fellow Updater app says that there is an ‘Update Available’ but has yet to update - what should I do?<\/a><\/p><p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313615326363-Will-there-be-any-features-beyond-updates-on-the-Fellow-Updater-app-in-the-future-\" target=\"_blank\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9313615326363-Will-there-be-any-features-beyond-updates-on-the-Fellow-Updater-app-in-the-future-\">Will there be any features beyond updates on the Fellow Updater app in the future?<\/a><\/p><p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9593179929115-What-is-the-current-firmware-version-and-what-did-it-update-\" target=\"_blank\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/9593179929115-What-is-the-current-firmware-version-and-what-did-it-update-\">What is the current firmware version and what did it update?<\/a><\/p>"
+          }
+        },
+        "98b79ea0-c48c-4f40-95ba-f34070c9cd80": {
+          "type": "faq-block",
+          "settings": {
+            "title": "How do I use and care for my Ode Brew Grinder Gen 2?",
+            "description": "<p>Ready to start using your Ode Gen 2? Download the <a href=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0057\/6235\/1219\/files\/Ode_Gen2_GTKYG_V5.pdf?v=1666995794\" title=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0057\/6235\/1219\/files\/Ode_Gen2_GTKYG_V5.pdf?v=1666995794\"><span style=\"text-decoration:underline\">Get to Know You Guide<\/span><\/a> that will walk you through all of your grinder’s features.<\/p><p>We also have cleaning, maintenance, and calibration instructions in the <a href=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0057\/6235\/1219\/files\/Ode_Gen2_SafetyManual_V3.pdf?v=1666995795\" title=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0057\/6235\/1219\/files\/Ode_Gen2_SafetyManual_V3.pdf?v=1666995795\"><span style=\"text-decoration:underline\">Safety Manual<\/span><\/a>.<\/p>"
+          }
+        },
+        "5eb9e4a5-a057-4c17-835e-b31b330c1575": {
+          "type": "faq-block",
+          "settings": {
+            "title": "How do I register my Ode Brew Grinder?",
+            "description": "<p>In order to register your Fellow electric product please submit <a href=\"https:\/\/register.fellowproducts.com\/\"><span style=\"text-decoration:underline\">this form<\/span><\/a>. Registering your Ode Brew Grinder will extend your warranty by one additional year. <\/p><p>After registering, you will receive an email from Fellow containing your registration perks like extended warranty and priority support! Please save this email for future reference. <\/p>"
+          }
+        },
+        "c57c0b1c-7661-4d5a-a076-2a9b0a162ffc": {
+          "type": "faq-block",
+          "settings": {
+            "title": "What are the differences between Ode Brew Grinder and Ode Brew Grinder Gen 2?",
+            "description": "<p>Ode Brew Grinder is our original award-winning grinder designed for brewed coffee. Ode Brew Grinder Gen 2 comes as an upgrade to the original, refreshed with some thoughtful new features to improve your daily coffee brewing experience.<\/p><p>Ode Brew Grinder Gen 2 comes with:<\/p><p>1. <strong>Updated brew burrs (<\/strong><a href=\"https:\/\/fellowproducts.com\/products\/ode-gen-2-brew-burrs?variant=40341272363108\"><strong>Gen 2 Brew Burrs<\/strong><\/a><strong>) <\/strong>that were designed specifically for Ode by VP of R&D and Certified Q Grader Nick<br\/>Terzulli. The Gen 2 Brew Burrs are capable of grinding as fine as 250 microns, while the Standard Brew Burrs that come stock in the original Ode Brew Grinder can grind as fine as 500 microns. Learn more about the different burrs <a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/7786626239259-What-is-the-difference-between-Ode-Standard-Brew-Burrs-Ode-Gen-2-Brew-Burrs-and-SSP-Multi-Purpose-Red-Speed-Coated-Brew-Burrs-\">here<\/a>.<\/p><p>2. <strong>Anti-static technology<\/strong>, which helps to reduce the static from freshly ground coffee. This reduces the retention of coffee grounds in the grinder from ~1g to as low as 0.1g, so there is much less grind mess than the original Ode Brew Grinder.<\/p><p>3. <strong>A larger hopper<\/strong> that can hold 100g of beans, enough for 12 cups of brewed coffee at the golden ratio of 1:16.<\/p><p>4. <strong>A redesigned hopper <\/strong>that has steeper angles to help feed beans down the chute for speedier grinding.<\/p><p>5. <strong>A larger catch cup<\/strong> that can hold 100g of ground coffee, enough for 12 cups of brewed coffee at the golden ratio.<\/p><p>6. <strong>A redesigned catch cup<\/strong> that makes it easier to pour coffee grounds into your brewing tool of choice. <\/p><p>To see a detailed comparison across our grinders please <a href=\"https:\/\/fellowproducts.com\/pages\/compare-ode-grinders\" title=\"https:\/\/fellowproducts.com\/pages\/compare-ode-grinders\"><span style=\"text-decoration:underline\">visit this page<\/span>.<\/a><\/p>"
+          }
+        },
+        "6a7021c5-6a97-4ecd-9ce2-1840bfb454a3": {
+          "type": "faq-block",
+          "settings": {
+            "title": "Is Ode Brew Grinder suitable for grinding espresso?",
+            "description": "<p>Ode is built to dominate brewed coffee. Unfortunately, that means that Ode is not suitable for espresso. The grind range on Ode will not be fine enough (&lt;200 microns for espresso). Ode’s 64mm flat burrs and motor are geared towards drip and immersion coffee brewing.<\/p>"
+          }
+        },
+        "866d6c17-19b3-4eb3-b6a2-ae73d54f7b04": {
+          "type": "faq-block",
+          "settings": {
+            "title": "What is the difference between Ode Gen 2 and Ode Gen 2 with SSP Burrs?",
+            "description": "<p>Ode Brew Grinder Gen 2 comes preinstalled with <strong>Ode Gen 2 Brew Burrs<\/strong>.<\/p><p>Ode Brew Grinder Gen 2 with SSP Burrs comes preinstalled with <strong>SSP MP Red Speed Brew Burrs<\/strong>.<\/p><p>Learn more about the different burrs <a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/7786626239259-What-is-the-difference-between-Ode-Standard-Brew-Burrs-Ode-Gen-2-Brew-Burrs-and-SSP-Multi-Purpose-Red-Speed-Coated-Brew-Burrs-\"><span style=\"text-decoration:underline\">here<\/span><\/a>.<\/p>"
+          }
+        },
+        "5d58dbf2-fa33-4f93-809a-6b28f4f26d84": {
+          "type": "faq-block",
+          "settings": {
+            "title": "How do I keep the Ode Brew Grinder Gen 2 clean?",
+            "description": "<p>Please see the General Cleaning instructions in the <a href=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0057\/6235\/1219\/files\/Ode_Gen2_SafetyManual_V3.pdf?v=1666995795\" title=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0057\/6235\/1219\/files\/Ode_Gen2_SafetyManual_V3.pdf?v=1666995795\"><span style=\"text-decoration:underline\">Safety Manual<\/span>.<\/a><\/p><p>If you start to notice that there is more grind retention (grinds stuck in the exit chute) than when you first used the unit, don’t worry! This is normal. We found during our testing that the grinder will run for about 60 cycles before it needs to be cleaned to operate at its best performance.<\/p><p>To clean it, remove the catch cup, and use the provided brush and “swipe” around the inside of the exit chute (where the coffee grounds come out). This will clean the chute and help the anti-static mechanisms working well. <\/p><p><strong>Remember<\/strong>: The cleaner you keep your grinder, the better the anti static mechanisms are going to work. This will help reduce the amount of coffee retained in the grinder.<\/p><p>Watch a demonstration from Nick Terzulli, VP of R&D and Certified Q Grader <a href=\"https:\/\/youtu.be\/u0ShJI6lYJI\"><span style=\"text-decoration:underline\">here<\/span><\/a>.<\/p>"
+          }
+        },
+        "377c9675-88c9-4b21-bb12-61e8d0e29d9e": {
+          "type": "faq-block",
+          "settings": {
+            "title": "My dial gets stuck when I try to adjust the grind setting finer (the burrs are binding)!",
+            "description": "<p>You may notice that your dial may get stuck if you try to adjust from a coarser grind setting (11) to a finer grind setting (1) while the machine is off.<\/p><p>This is because the dial is trying to push the burrs closer together, which may compact residual coffee in the burrs. <\/p><p><strong>We recommend adjusting the grind dial with the machine on.<\/strong> This is because the spinning burrs will help kick off any residual coffee as you adjust towards a finer grind setting.<\/p><p>Watch a demonstration from Nick Terzulli, VP of R&D and Certified Q Grader <a href=\"https:\/\/youtu.be\/SGwWbHyrewQ\"><span style=\"text-decoration:underline\">here<\/span><\/a>.<\/p>"
+          }
+        },
+        "ddfd4f5f-cdc4-44f1-af8f-e320a5dccd7a": {
+          "type": "faq-block",
+          "settings": {
+            "title": "Can I replace the Burrs in my Ode Gen 2?",
+            "description": "<p>Yes. If you’d like to replace the burrs in your Ode Brew Grinder Gen 2, which comes with Ode Gen 2 Brew Burrs, please follow the instructions on <a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/7767147426843-How-do-I-install-and-calibrate-my-Ode-Gen-2-Brew-Burrs-please-follow-for-SSP-burrs-as-well-\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/7767147426843-How-do-I-install-and-calibrate-my-Ode-Gen-2-Brew-Burrs-please-follow-for-SSP-burrs-as-well-\">this page.<\/a><\/p>"
+          }
+        },
+        "3843feae-1c43-4a6b-b871-802c5765be05": {
+          "type": "faq-block",
+          "settings": {
+            "title": "How do I calibrate my Ode Brew Grinder?",
+            "description": "<p><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/360052069632-How-to-calibrate-your-Ode-Brew-Grinder\" title=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/360052069632-How-to-calibrate-your-Ode-Brew-Grinder\">Learn More<\/a><\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "74b47985-b86c-44da-b11c-5cd39b9512f6",
+        "0c302609-36d9-4e92-8796-380d58d892e7",
+        "07cde849-bba8-45de-9220-2d2e188d3e16",
+        "1759bc70-f140-4686-ad63-2abc6194bb4c",
+        "98b79ea0-c48c-4f40-95ba-f34070c9cd80",
+        "5eb9e4a5-a057-4c17-835e-b31b330c1575",
+        "c57c0b1c-7661-4d5a-a076-2a9b0a162ffc",
+        "6a7021c5-6a97-4ecd-9ce2-1840bfb454a3",
+        "866d6c17-19b3-4eb3-b6a2-ae73d54f7b04",
+        "5d58dbf2-fa33-4f93-809a-6b28f4f26d84",
+        "377c9675-88c9-4b21-bb12-61e8d0e29d9e",
+        "ddfd4f5f-cdc4-44f1-af8f-e320a5dccd7a",
+        "3843feae-1c43-4a6b-b871-802c5765be05"
+      ],
+      "settings": {
+        "heading": "Resources",
+        "description": ""
+      }
+    },
+    "c35b14fb-0e6e-43fa-944e-8c762c98b616": {
+      "type": "featured-collections",
+      "blocks": {
+        "eaca97f3-1bdb-46d6-9d6e-7ef7371f809c": {
+          "type": "collection",
+          "settings": {
+            "tab_text": "",
+            "collection": "accessories",
+            "button_text": "",
+            "button_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "eaca97f3-1bdb-46d6-9d6e-7ef7371f809c"
+      ],
+      "settings": {
+        "enable_section": true,
+        "heading": "Spares + Accessories",
+        "limit": 6,
+        "show_view_all": true
+      }
+    },
+    "3e986760-8f93-4f13-933f-3b04b97136d1": {
+      "type": "coffee-marketplace-twb",
+      "settings": {
+        "bg_color": "#fff9e5",
+        "text_color": "#000000",
+        "pre_heading": "Ode Brew Grinder Gen 2",
+        "heading": "Safety Guides",
+        "description": "Just in case you lost the hard copy from the box.",
+        "cta_text": "View Safety Guides",
+        "cta_link": "https:\/\/cdn.shopify.com\/s\/files\/1\/0057\/6235\/1219\/files\/Ode_Gen2_SafetyManual_V3.pdf?v=1666995795",
+        "cta_style": "dark"
+      }
+    }
+  },
+  "order": [
+    "8a02d72a-7e29-4c25-8bc5-9e3a483f5ccf",
+    "6502bd48-7cbd-4af3-b885-299394e45348",
+    "353104b1-9d2f-4355-b6cc-a4554a788789",
+    "adc0d42e-3d69-4550-8d40-252d3b41254f",
+    "1e3dd3cb-7c87-4123-bfa6-ef3b22e9af45",
+    "c35b14fb-0e6e-43fa-944e-8c762c98b616",
+    "3e986760-8f93-4f13-933f-3b04b97136d1"
+  ]
+}
