@@ -1,5 +1,6 @@
 {
   "current": {
+    "free_shipping_threshold": 50,
     "cart_recommended_enable": true,
     "cart_recommended_heading": "Complete Your Coffee Corner",
     "cart_recommended_icon": "<svg width=\"50\" height=\"52\" viewbox=\"0 0 50 52\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M37.8418 40.702C41.4521 35.3625 42.5595 22.5001 31.0001 15.5C17.5 7.32466 4.5 19.4999 4.5 19.4999\" stroke=\"black\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><\/path>\n<path d=\"M43.8696 39.0845L37.3033 42.5193L33.8924 35.9229\" stroke=\"black\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><\/path>\n<\/svg>",
@@ -360,12 +361,6 @@
           "show_newsletter": false,
           "newsletter_heading": "Sign up for updates + 10% off your first order",
           "newsletter_subheading": ""
-        }
-      },
-      "collection-template": {
-        "type": "collection-template",
-        "settings": {
-          "show_breadcrumbs": true
         }
       },
       "1565155576930": {
@@ -761,13 +756,11 @@
       },
       "page-template": {
         "type": "page-template",
-        "settings": {
-        }
+        "settings": {}
       },
       "search-template": {
         "type": "search-template",
-        "settings": {
-        }
+        "settings": {}
       },
       "1648114115d10a8d6a": {
         "type": "hp-hero-video",
@@ -814,8 +807,7 @@
       },
       "cart-drawer-content": {
         "type": "cart-drawer-content",
-        "settings": {
-        }
+        "settings": {}
       },
       "accessibility-popup": {
         "type": "accessibility-popup",
@@ -828,8 +820,7 @@
       },
       "page-template-raf": {
         "type": "page-template-raf",
-        "settings": {
-        }
+        "settings": {}
       },
       "collection-by-variant": {
         "type": "collection-by-variant",
@@ -868,6 +859,12 @@
           "heading": "Welcome",
           "description": "<p>Success! Your account has been created. <a href=\"\/collections\/bestsellers\" title=\"Best Sellers\">Continue shopping<\/a>.<\/p>"
         }
+      },
+      "google-structured-data": {
+        "type": "google-structured-data",
+        "settings": {
+          "structured_data": ""
+        }
       }
     },
     "content_for_index": [
@@ -890,8 +887,7 @@
       "sections": {
         "featured-product": {
           "type": "featured-product",
-          "settings": {
-          }
+          "settings": {}
         }
       },
       "content_for_index": [
