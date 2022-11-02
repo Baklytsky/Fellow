@@ -219,7 +219,11 @@
       {%- endfor -%}
     {%- endif -%}
 
-    {%- comment -%} /// Get shop by use tag /// {%- endcomment -%}
+    {%- comment -%} /// Get shop by use and details tag /// {%- endcomment -%}
+
+    {%- assign tag_info = blank -%}
+    {%- assign tag_info_item = blank -%}
+    {%- assign tag_info_arr = blank -%}
 
     {%- for tag in product.tags -%}
       {%- if tag contains 'Use:' -%}
@@ -244,7 +248,14 @@
         {%- endunless -%}
 
       {%- endif -%}
+
+      {%- if tag contains 'Details:' -%}
+        {%- assign details_name = tag | split: 'Details:' | last | strip -%}
+        {%- assign tag_info = tag_info | append: details_name | append: '**' -%}
+      {%- endif -%}
     {%- endfor -%}
+
+    {%- assign tag_info_arr = tag_info | split: '**' -%}
 
     {%- comment -%} /// Check custom filter field #1 /// {%- endcomment -%}
 
@@ -348,26 +359,6 @@
 
     {%- assign product_custom_filter_2_uniq = product_custom_filter_2 | split: '**' | uniq -%}
     {%- assign product_custom_filter_2_val_uniq = product_custom_filter_2_val | split: '**' | uniq -%}
-
-    {%- assign tag_info = blank -%}
-    {%- assign tag_info_item = blank -%}
-    {%- assign tag_info_arr = blank -%}
-
-    {%- for use_tag in all_product_use_tags_arr -%}
-      {%- assign use_tag_handle = use_tag | handleize -%}
-
-      {%- case use_tag_handle -%}
-      {%- when 'car-compatible' -%}
-      {%- assign tag_info_item = 'Fits in Cup Holder' -%}
-      {%- when 'one-handed' -%}
-      {%- assign tag_info_item = 'Single Handed' -%}
-        {%- else -%}
-      {%- assign tag_info_item = use_tag -%}
-      {%- endcase -%}
-
-      {%- assign tag_info = tag_info | append: tag_info_item | append: '**' -%}
-    {%- endfor -%}
-    {%- assign tag_info_arr = tag_info | split: '**' -%}
 
     {%- assign reviews_count = product.metafields.yotpo.reviews_count | plus: 0 -%}
     {%- if reviews_count == 0 -%}

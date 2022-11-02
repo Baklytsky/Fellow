@@ -251,30 +251,6 @@ toggle-tabs {
 	object-fit: scale-down;
 }
 
-.hide-mobile {
-	@media screen and (max-width: 991.98px) {
-		display: none;
-	}
-}
-
-.hide-desktop {
-	@media screen and (min-width: 992px) {
-		display: none;
-	}
-}
-
-.hide-tablet {
-	@media screen and (max-width: 1199px) {
-		display: none;
-	}
-}
-
-.hide-tablet-desk {
-	@media screen and (min-width: 1200px) {
-		display: none;
-	}
-}
-
 #conjured_referral {
 	input,
 	select,
