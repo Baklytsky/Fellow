@@ -17,7 +17,7 @@
 
       {%- for item in color_group_arr -%}
         {%- assign item_handle = item | handleize -%}
-        {%- assign colors_str = colors_str | append: '||' | append: color_name | append: '&&' | append: color_hex | append: '~' | append: item_handle | append: '~' -%}
+        {%- assign colors_str = colors_str | append: '||' | append: color_name | append: '&&' | append: color_hex | append: '~' | append: item_handle | append: '~' | append: '/~Divider~/' -%}
       {%- endfor -%}
 
     {% endif %}

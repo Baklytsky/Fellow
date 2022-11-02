@@ -12,12 +12,12 @@
     "settings": [
       {
         "type": "header",
-        "content": "Free shipping"
+        "content": "Free Shipping"
       },
       {
         "type": "number",
         "id": "free_shipping_threshold",
-        "label": "Free shipping threshold"
+        "label": "Free Shipping Threshold"
       },
       {
         "type": "header",
@@ -72,28 +72,28 @@
       },
       {
         "type": "header",
-        "content": "Remove item popup"
+        "content": "Remove Item Popup"
       },
       {
         "type": "text",
         "id": "cart_remove_text",
-        "label": "Popup text",
+        "label": "Popup Text",
         "default": "Are you sure you want to remove this item?"
       },
       {
         "type": "header",
-        "content": "Gift wrapping"
+        "content": "Gift Wrapping"
       },
       {
         "type": "checkbox",
         "id": "enable_gift_wrapping",
-        "label": "Enable gift wrapping",
+        "label": "Enable Gift Wrapping",
         "default": true
       },
       {
         "type": "product",
         "id": "gift_box_product",
-        "label": "Gift box product"
+        "label": "Gift Box Product"
       },
       {
         "type": "textarea",
@@ -103,12 +103,12 @@
       {
         "type": "text",
         "id": "gift_wrapping_message",
-        "label": "Gift wrapping message"
+        "label": "Gift Wrapping Message"
       },
       {
         "type": "text",
         "id": "gift_wrapping_result_message",
-        "label": "Gift wrapping result message"
+        "label": "Gift Wrapping Result Message"
       },
       {
         "type": "text",
@@ -128,7 +128,7 @@
       {
         "type": "number",
         "id": "gwp_threshold",
-        "label": "GWP threshold"
+        "label": "GWP Threshold"
       },
       {
         "type": "product",
@@ -138,12 +138,12 @@
       {
         "type": "text",
         "id": "gwp_1_success_message",
-        "label": "First GWP success message"
+        "label": "First GWP Success Message"
       },
       {
         "type": "number",
         "id": "second_gwp_threshold",
-        "label": "Second GWP threshold"
+        "label": "Second GWP Threshold"
       },
       {
         "type": "product",
@@ -153,12 +153,12 @@
       {
         "type": "text",
         "id": "gwp_2_success_message",
-        "label": "Second GWP success message"
+        "label": "Second GWP Success Message"
       },
       {
         "type": "text",
         "id": "finally_gwp_success_message",
-        "label": "Finally GWP success message"
+        "label": "Finally GWP Success Message"
       }
     ]
   },
@@ -168,7 +168,7 @@
       {
         "type": "product",
         "id": "personalization_product",
-        "label": "Personalization product"
+        "label": "Personalization Product"
       }
     ]
   },
@@ -178,12 +178,12 @@
       {
         "type": "checkbox",
         "id": "enable_search",
-        "label": "Enable search"
+        "label": "Enable Search"
       },
       {
         "type": "text",
         "id": "search_no_result_text",
-        "label": "No results description"
+        "label": "No Results Description"
       },
       {
         "type": "header",
@@ -193,12 +193,12 @@
       {
         "type": "checkbox",
         "id": "popular_section_enable",
-        "label": "Show section"
+        "label": "Show Section"
       },
       {
         "type": "checkbox",
         "id": "popular_section_hide_desktop",
-        "label": "Hide from desktop"
+        "label": "Hide From Desktop"
       },
       {
         "type": "text",
@@ -289,7 +289,7 @@
       {
         "type": "checkbox",
         "id": "show_best_sellers",
-        "label": "Show section"
+        "label": "Show Section"
       },
       {
         "type": "text",
@@ -338,32 +338,32 @@
       {
         "type": "url",
         "id": "social_instagram_link",
-        "label": "Instagram link"
+        "label": "Instagram Link"
       },
       {
         "type": "url",
         "id": "social_facebook_link",
-        "label": "Facebook link"
+        "label": "Facebook Link"
       },
       {
         "type": "url",
         "id": "social_twitter_link",
-        "label": "Twitter link"
+        "label": "Twitter Link"
       },
       {
         "type": "url",
         "id": "social_youtube_link",
-        "label": "Youtube link"
+        "label": "Youtube Link"
       },
       {
         "type": "url",
         "id": "social_pinterest_link",
-        "label": "Pinterest link"
+        "label": "Pinterest Link"
       },
       {
         "type": "url",
         "id": "social_linkedin_link",
-        "label": "LinkedIn link"
+        "label": "LinkedIn Link"
       },
       {
         "type": "header",
@@ -372,7 +372,7 @@
       {
         "type": "url",
         "id": "contact_us_link",
-        "label": "Contact Us link"
+        "label": "Contact Us Link"
       }
     ]
   },
@@ -382,7 +382,7 @@
       {
         "type": "image_picker",
         "id": "favicon",
-        "label": "Favicon image",
+        "label": "Favicon Image",
         "info": "Will be scaled down to 32 x 32px"
       }
     ]
@@ -393,32 +393,32 @@
       {
         "type": "text",
         "id": "email_klaviyo_list_id",
-        "label": "Klaviyo email list ID"
+        "label": "Klaviyo Email List ID"
       },
       {
         "type": "text",
         "id": "sms_klaviyo_list_id",
-        "label": "Klaviyo SMS list ID"
+        "label": "Klaviyo SMS List ID"
       },
       {
         "type": "url",
         "id": "terms_of_service_link",
-        "label": "Terms of service link"
+        "label": "Terms Of Service Link"
       },
       {
         "type": "url",
         "id": "privacy_policy_link",
-        "label": "Privacy policy link"
+        "label": "Privacy Policy Link"
       },
       {
         "type": "url",
         "id": "return_policy_link",
-        "label": "Return policy link"
+        "label": "Return Policy Link"
       },
       {
         "type": "richtext",
         "id": "empty_orders_text",
-        "label": "Empty orders text"
+        "label": "Empty Orders Text"
       }
     ]
   }
