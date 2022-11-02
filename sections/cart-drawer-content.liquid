@@ -92,21 +92,21 @@
       {%- endif -%}
 
       {%- capture free_shipping -%}
-        <div class='free-shipping--unmet {% if cart.total_price >= 9900 %} is-hidden{% endif %}'>
-          {%- assign away_from_shipping = 9900 | minus: cart.total_price -%}
+        <div class='free-shipping--unmet {% if cart.total_price >= 5000 %} is-hidden{% endif %}'>
+          {%- assign away_from_shipping = 5000 | minus: cart.total_price -%}
           You're <strong>
             <span>{{ away_from_shipping | money_without_trailing_zeros }}</span>
           </strong> away from free US shipping
         </div>
-        <div class='free-shipping--met {% if cart.total_price < 9900 %} is-hidden{% endif %}'>
+        <div class='free-shipping--met {% if cart.total_price < 5000 %} is-hidden{% endif %}'>
           Congrats! You get free US Shipping!
         </div>
 
         <div class='free-shipping__meter f aic'>
-          {%- if cart.total_price > 9900 -%}
+          {%- if cart.total_price > 5000 -%}
             {%- assign progress_bar_width = 100 -%}
           {%- else -%}
-            {%- assign progress_bar_width = cart.total_price | times: 100 | divided_by: 9900 -%}
+            {%- assign progress_bar_width = cart.total_price | times: 100 | divided_by: 5000 -%}
           {%- endif -%}
 
           <div class='free-shipping__meter__progress js-progress-bar'
@@ -491,7 +491,7 @@
 
         <div class="cart-drawer__footer-action f aic jcb">
           <section class='cart-footer__total'>
-            <div class='cart-footer__total-item js-shipping-free-text {% if cart.total_price < 9900 %}is-hidden{% endif %}'>
+            <div class='cart-footer__total-item js-shipping-free-text {% if cart.total_price < 5000 %}is-hidden{% endif %}'>
               Shipping: <span style="font-weight: 600;">Free</span>
             </div>
             <div class='cart-footer__total-item f aic fw'>
