@@ -66,22 +66,17 @@ class bundleMixCard extends ProductHelper {
   }
 
   checkBundlePrice() {
-    let priceDiffSum = 0;
-    const selectedMixVariants = this.pdpContainer.querySelectorAll('.js-bundle-variant option[selected]'),
-        priceDiffArray = Array.from(selectedMixVariants).map((variant) => {
-          return Number(variant.dataset.bundlePriceDifference)
-        });
+    const bundleSale = window.theme.product['compare_at_price'] - window.theme.product.price,
+        selectedVariants = Array.from(this.pdpContainer.querySelectorAll('.js-bundle-variant option[selected]')),
+        bundleCompareAtPrice = selectedVariants.reduce((sum, selectedVariant) => sum + Number(selectedVariant.dataset.variantOriginPrice), 0),
+        bundlePrice = bundleCompareAtPrice - bundleSale;
 
-    priceDiffArray.forEach(priceDiff => priceDiffSum += priceDiff);
-
-    const newCompareAtPrice = (window.theme.product.compare_at_price * 0.01) + priceDiffSum,
-        newPrice = (window.theme.product.price * 0.01) + priceDiffSum,
-        priceInner = this.pdpContainer.querySelectorAll('[data-product-price]'),
+    const priceInner = this.pdpContainer.querySelectorAll('[data-product-price]'),
         compareAtPriceInner = this.pdpContainer.querySelectorAll('[data-compare-at-price] span');
 
-    priceInner.forEach(element => element.innerHTML = '$' + newPrice)
+    priceInner.forEach(element => element.innerHTML = '$' + (bundlePrice * 0.01))
     if (compareAtPriceInner.length) {
-      compareAtPriceInner.forEach(element => element.innerHTML = '$' + newCompareAtPrice)
+      compareAtPriceInner.forEach(element => element.innerHTML = '$' + (bundleCompareAtPrice * 0.01))
     }
   }
 

@@ -42,19 +42,21 @@
       </ul>
     {%- endif -%}
 
-    {%- if section.blocks.size > 0 -%}
+    {% assign structured_blocks = section.blocks | map: 'settings' | where: 'enable_structured_data' %}
+
+    {%- if structured_blocks.size > 0 -%}
       <script type="application/ld+json">
         {
           "@context": "https://schema.org",
           "@type": "FAQPage",
           "mainEntity": [
-            {%- for block in section.blocks -%}
+            {%- for block in structured_blocks -%}
             {
               "@type": "Question",
-              "name": "{{ block.settings.title }}",
+              "name": "{{ block.title }}",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "{{ description | escape }}"
+                "text": "{{ block.description | escape }}"
                 }
             }{% unless forloop.last %},{% endunless %}
           {%- endfor -%}
@@ -88,6 +90,11 @@
       "type": "faq-block",
       "name": "FAQ Block",
       "settings": [
+        {
+          "type": "checkbox",
+          "id": "enable_structured_data",
+          "label": "Generate FAQ Structured Data"
+        },
         {
           "type": "text",
           "id": "title",
