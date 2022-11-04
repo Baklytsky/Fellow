@@ -23,7 +23,7 @@ class collectionFacets extends HTMLElement {
 
   addPriorityParam(key, value) {
     const searchParams = new URLSearchParams(window.location.search);
-    if (searchParams.toString().includes(key)) return
+    if (searchParams.toString().includes(key)) searchParams.delete(key)
     searchParams.append(key, value)
     history.pushState(null, '', window.location.pathname + '?' + searchParams.toString());
   }
