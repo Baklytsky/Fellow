@@ -14,9 +14,18 @@ class collectionFacets extends HTMLElement {
     this.resultsCount = this.querySelector('.facet-header-results-count')
     this.defaultSortBy = this.querySelector('[data-default-sort-by]')
     this.defaultSortByAction = this.defaultSortBy.value
+    this.priority = this.dataset.priority
 
+    if (this.priority) this.addPriorityParam('variant_by', this.priority)
     this.facetsForm.addEventListener('change', () => this.getSelectedFacets())
     this.clearAll.addEventListener('click', () => this.clearFacets())
+  }
+
+  addPriorityParam(key, value) {
+    const searchParams = new URLSearchParams(window.location.search);
+    if (searchParams.toString().includes(key)) return
+    searchParams.append(key, value)
+    history.pushState(null, '', window.location.pathname + '?' + searchParams.toString());
   }
 
   mergeBestSellingAndManual(collectionUrl) {
@@ -238,6 +247,7 @@ class collectionFacets extends HTMLElement {
     if (this.externalUrlParams && this.externalUrlParams.length) this.urlParams+= '&' + this.externalUrlParams
 
     this.sortBy(allSelectedItems, sortByAction)
+    if (this.sortByVariantValue) this.sortResultsByVariant(allSelectedItems, this.sortByVariantValue)
     this.renderResults(allSelectedItems)
     this.resultsCount.innerHTML = (this.template.includes('by-product'))
         ? `(${allSelectedVariants.length || 0})`
@@ -288,12 +298,14 @@ class collectionFacets extends HTMLElement {
 
   parseUrlParams() {
     const facets = [],
-          searchParams = new URLSearchParams(window.location.search);
+        searchParams = new URLSearchParams(window.location.search);
     this.externalUrlParams = ''
 
     for (let param of searchParams) {
       const [key, value] = param
       const facetsList = [...new Set(this.facets.reduce((accum, item) => [...accum, ...Object.keys(item)], ['sort_by']))]
+
+      if (key === 'variant_by') this.sortByVariantValue = value
 
       if (facetsList.includes(key)) {
         facets.push({
@@ -301,16 +313,21 @@ class collectionFacets extends HTMLElement {
           options: value.split(' ')
         });
       } else {
-        this.externalUrlParams+= key + '=' + value.split(' ').join('+')
+        this.externalUrlParams += key + '=' + value.split(' ').join('+')
       }
     }
-    
+
     if (!facets.length) {
       this.sortBy(this.data, this.defaultSortByAction)
       this.renderResults(this.data)
     }
-    
+
     this.selectFacetByParams(facets)
+
+    if (this.sortByVariantValue && !facets.length) {
+      this.sortResultsByVariant(this.data, this.sortByVariantValue)
+      this.renderResults(this.data)
+    }
   }
 
   selectFacetByParams(facets) {
@@ -326,6 +343,14 @@ class collectionFacets extends HTMLElement {
       facetToSelect.forEach(input => input.setAttribute('checked', 'checked'));
       this.facetsForm.dispatchEvent(new Event('change'))
     })
+  }
+
+  sortResultsByVariant(data, sortValue) {
+    if (this.template.includes('by-product')) {
+      data.forEach(product => product.variants.sort((a, b) => (a[sortValue] === b[sortValue]) ? 0 : a[sortValue] ? -1 : 1))
+    } else {
+      data.sort((a, b) => (a[sortValue] === b[sortValue]) ? 0 : a[sortValue] ? -1 : 1)
+    }
   }
 
   checkSlideArrows() {

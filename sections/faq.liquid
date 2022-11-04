@@ -54,7 +54,7 @@
               "name": "{{ block.settings.title }}",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "{{ block.description | escape }}"
+                "text": "{{ block.settings.description | escape }}"
                 }
             }{% unless forloop.last %},{% endunless %}
           {%- endfor -%}

@@ -15,7 +15,7 @@
     "gift_wrapping_result_message": "Your order will be sent in a gift box",
     "gift_wrapping_heading": "Gift Box + Gift Note",
     "enable_gwp": false,
-    "gwp_threshold": 99,
+    "gwp_threshold": 50,
     "gwp_product": "donotlook",
     "gwp_1_success_message": "We've added a free mystery coffee to your cart!",
     "second_gwp_threshold": 0,
@@ -361,12 +361,6 @@
           "show_newsletter": false,
           "newsletter_heading": "Sign up for updates + 10% off your first order",
           "newsletter_subheading": ""
-        }
-      },
-      "collection-template": {
-        "type": "collection-template",
-        "settings": {
-          "show_breadcrumbs": true
         }
       },
       "1565155576930": {
