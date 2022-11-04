@@ -1,0 +1,228 @@
+{
+  "sections": {
+    "8a02d72a-7e29-4c25-8bc5-9e3a483f5ccf": {
+      "type": "image-with-cta",
+      "settings": {
+        "top_bottom_margin": true,
+        "image": "shopify:\/\/shop_images\/Gear_Guide_LP_Landscape.png",
+        "layout": "right",
+        "bg_color": "#000000",
+        "text_color": "#ffffff",
+        "heading": "Fellow Gear Guides",
+        "heading_size": "h1",
+        "text": "Everything you need to make the most of your Fellow gear",
+        "cta_url": "",
+        "cta_copy": "",
+        "cta_color": "btn--dark"
+      }
+    },
+    "20c26820-4ea0-4065-8683-d99bbdab5014": {
+      "type": "coffee-marketplace-hero",
+      "disabled": true,
+      "settings": {
+        "heading": "Fellow Gear Guides",
+        "description": "Everything you need to make the most of your gear",
+        "text_block_position": "center",
+        "text_color": "#000000",
+        "text_block_bg_color": "#ffffff"
+      }
+    },
+    "d2e2bc0d-4789-4ae8-b9f3-020f05322b63": {
+      "type": "banner-blocks",
+      "blocks": {
+        "a74fbdcb-45cd-40e2-83cd-d03eba600513": {
+          "type": "banner",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Gear_Guide_LP_Block_1_Desktop.png",
+            "image_mobile": "shopify:\/\/shop_images\/Gear_Guide_LP_Block_1_Mobile.png",
+            "content_position": "TopCenter",
+            "text_color": "#000000",
+            "heading": "Ode Brew Grinder Gen 2",
+            "heading_size": "h2",
+            "text": "Your one stop shop to hit the grind running",
+            "cta_copy": "Browse Gear Guide",
+            "cta_url": "shopify:\/\/pages\/gear-guide-ode",
+            "cta_color": "btn--dark"
+          }
+        },
+        "9fa1a902-c492-4d97-985d-a932f8e3cfea": {
+          "type": "banner",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Gear_Guide_LP_Block_2_Desktop.png",
+            "content_position": "TopCenter",
+            "text_color": "#000000",
+            "heading": "EKG Pro and Pro Studio",
+            "heading_size": "h2",
+            "text": "Everything you need to get started with Stagg EKG Pro",
+            "cta_copy": "Browse Gear Guide",
+            "cta_url": "shopify:\/\/pages\/gear-guide",
+            "cta_color": "btn--dark"
+          }
+        }
+      },
+      "block_order": [
+        "a74fbdcb-45cd-40e2-83cd-d03eba600513",
+        "9fa1a902-c492-4d97-985d-a932f8e3cfea"
+      ],
+      "settings": {
+        "full_width_container": false,
+        "top_bottom_margin": true
+      }
+    },
+    "3e986760-8f93-4f13-933f-3b04b97136d1": {
+      "type": "coffee-marketplace-twb",
+      "settings": {
+        "bg_color": "#fff9e5",
+        "text_color": "#000000",
+        "pre_heading": "",
+        "heading": "Register your gear",
+        "description": "Get the most out of your Fellow gear throughout its lifetime and enjoy special benefits.",
+        "cta_text": "Register My Product",
+        "cta_link": "https:\/\/register.fellowproducts.com\/",
+        "cta_style": "dark"
+      }
+    },
+    "6502bd48-7cbd-4af3-b885-299394e45348": {
+      "type": "coffee-marketplace-cards",
+      "disabled": true,
+      "blocks": {
+        "55eb1590-d289-402d-b19b-e3ba6d789743": {
+          "type": "Card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/EKG_Pro_Gear_Guide_Image_1.png",
+            "heading": "How to use your kettle",
+            "description": "The basics to get you brewing<br><a href=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0057\/6235\/1219\/files\/StaggEKG_Pro_GTKYG_Mech_R4_Use.pdf?v=1664570631\" style=\"text-decoration:underline;cursor:pointer;\">Get Started -><\/a>",
+            "link": "https:\/\/cdn.shopify.com\/s\/files\/1\/0057\/6235\/1219\/files\/StaggEKG_Pro_GTKYG_Mech_R4_Use.pdf?v=1664570631"
+          }
+        },
+        "abf4213f-6cfc-47ee-b7c7-f8c54b924fcf": {
+          "type": "Card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/EKG_Pro_Gear_Guide_Image_2.png",
+            "heading": "How to clean your kettle",
+            "description": "The proper care to maintain perfect pours<br><a href=\"https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/115001707911-How-do-I-clean-maintain-and-descale-my-Fellow-electric-kettle-\" style=\"text-decoration:underline;cursor:pointer;\">Learn More -><\/a>",
+            "link": "https:\/\/fellowproducts.zendesk.com\/hc\/en-us\/articles\/115001707911-How-do-I-clean-maintain-and-descale-my-Fellow-electric-kettle-"
+          }
+        },
+        "c8b12d5e-f654-4809-be5c-212a15fcbaac": {
+          "type": "Card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/EKG_Pro_Gear_Guide_Image_3.png",
+            "heading": "Register your kettle",
+            "description": "You’ll receive extended warranty when you do!\n<a href=\"https:\/\/Register.fellowproducts.com\" style=\"text-decoration:underline;cursor:pointer;\">Register Now -><\/a>",
+            "link": "https:\/\/Register.fellowproducts.com"
+          }
+        }
+      },
+      "block_order": [
+        "55eb1590-d289-402d-b19b-e3ba6d789743",
+        "abf4213f-6cfc-47ee-b7c7-f8c54b924fcf",
+        "c8b12d5e-f654-4809-be5c-212a15fcbaac"
+      ],
+      "settings": {
+        "heading": "Your one-stop shop to brew like a Pro",
+        "description": "Everything you need to get started with Stagg EKG Pro and Pro Studio Edition."
+      }
+    },
+    "adc0d42e-3d69-4550-8d40-252d3b41254f": {
+      "type": "featured-blog-v2",
+      "blocks": {
+        "9dff12f8-ba1c-4b77-8a3d-28c6aca0844d": {
+          "type": "article",
+          "settings": {
+            "article": "brew-guides\/back-to-brewing-school-pour-over-basics-101"
+          }
+        },
+        "6ec64236-0920-4c6a-9cdb-32cef180d9ff": {
+          "type": "article",
+          "settings": {
+            "article": "learn\/how-to-play-bricky-on-stagg-ekg-pro-and-pro-studio-edition"
+          }
+        },
+        "c24428f3-81e5-46b5-a2c3-994e77c40ea7": {
+          "type": "article",
+          "settings": {
+            "article": "learn\/how-to-decipher-a-bag-of-coffee"
+          }
+        }
+      },
+      "block_order": [
+        "9dff12f8-ba1c-4b77-8a3d-28c6aca0844d",
+        "6ec64236-0920-4c6a-9cdb-32cef180d9ff",
+        "c24428f3-81e5-46b5-a2c3-994e77c40ea7"
+      ],
+      "settings": {
+        "heading": "Brew like a Pro",
+        "description": "<p>Sharing our insider knowledge to make “specialty coffee” a language you can speak.<\/p>",
+        "cta_title": "Fellow Blog",
+        "cta_url": "shopify:\/\/blogs\/learn",
+        "cta_color": "btn--light",
+        "bg_color": "#000000",
+        "text_color": "#ffffff"
+      }
+    },
+    "c35b14fb-0e6e-43fa-944e-8c762c98b616": {
+      "type": "featured-collections",
+      "blocks": {
+        "eaca97f3-1bdb-46d6-9d6e-7ef7371f809c": {
+          "type": "collection",
+          "settings": {
+            "tab_text": "",
+            "collection": "replacement-parts",
+            "button_text": "",
+            "button_url": ""
+          }
+        },
+        "e10745df-3154-4b7a-89d9-b8b9548b626c": {
+          "type": "collection",
+          "settings": {
+            "tab_text": "",
+            "collection": "accessories",
+            "button_text": "",
+            "button_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "eaca97f3-1bdb-46d6-9d6e-7ef7371f809c",
+        "e10745df-3154-4b7a-89d9-b8b9548b626c"
+      ],
+      "settings": {
+        "enable_section": true,
+        "heading": "Spares + Accessories",
+        "limit": 6,
+        "show_view_all": true
+      }
+    },
+    "68048714-a025-477d-b0af-4bc3d554f9d7": {
+      "type": "faq",
+      "disabled": true,
+      "blocks": {
+        "b247a5f1-6fa6-4504-91eb-8e585828001e": {
+          "type": "faq-block",
+          "settings": {
+            "title": "How do I register my Fellow electric products?",
+            "description": "<p><a href=\"https:\/\/register.fellowproducts.com\/\" title=\"https:\/\/register.fellowproducts.com\/\">Register Here<\/a><\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "b247a5f1-6fa6-4504-91eb-8e585828001e"
+      ],
+      "settings": {
+        "heading": "Product Registration",
+        "description": ""
+      }
+    }
+  },
+  "order": [
+    "8a02d72a-7e29-4c25-8bc5-9e3a483f5ccf",
+    "20c26820-4ea0-4065-8683-d99bbdab5014",
+    "d2e2bc0d-4789-4ae8-b9f3-020f05322b63",
+    "3e986760-8f93-4f13-933f-3b04b97136d1",
+    "6502bd48-7cbd-4af3-b885-299394e45348",
+    "adc0d42e-3d69-4550-8d40-252d3b41254f",
+    "c35b14fb-0e6e-43fa-944e-8c762c98b616",
+    "68048714-a025-477d-b0af-4bc3d554f9d7"
+  ]
+}

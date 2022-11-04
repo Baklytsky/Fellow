@@ -6,12 +6,12 @@
         "91440d17-d6b6-424b-88f3-ff8450a9bf93": {
           "type": "slide",
           "settings": {
-            "bg_color": "#ffffff",
-            "text_color": "#000000",
-            "tab_btn_style": "dark",
-            "tab_name": "Gift",
-            "title": "Buy this for someone else as a gift",
-            "description": "Great gifting opportunity!",
+            "bg_color": "#000000",
+            "text_color": "#ffffff",
+            "tab_btn_style": "light",
+            "tab_name": "For you",
+            "title": "For you",
+            "description": "Stay stocked with seasonal selections tailored to your taste",
             "btn_text": "Shop now",
             "btn_url": "shopify:\/\/products\/360-sip-lid",
             "image": "shopify:\/\/shop_images\/Group_258_1.png",
@@ -24,9 +24,9 @@
             "bg_color": "#000000",
             "text_color": "#ffffff",
             "tab_btn_style": "light",
-            "tab_name": "For you",
-            "title": "Purchase a subscription for yourself",
-            "description": "COPY",
+            "tab_name": "Gift",
+            "title": "Gift Subscription",
+            "description": "Treat a loved one to the gift that keeps them sipping.",
             "btn_text": "Shop Now",
             "btn_url": "shopify:\/\/products\/stagg-ekg-pro-electric-kettle",
             "image": "shopify:\/\/shop_images\/section_2_mobile_1.jpg",
@@ -56,9 +56,9 @@
         "e11cf429-b3b8-45d3-afee-2d19059179be"
       ],
       "settings": {
-        "section_title": "Subscription Coffee",
+        "section_title": "The Subscription Coffee",
         "section_subtitle": "",
-        "section_description": "Copy about subscription!"
+        "section_description": "Enjoy effortless access to the best roasters in the world. Discover hard-to-find coffees, curated by three certified Q Graders, and delivered on your schedule."
       }
     },
     "77cbcfdb-78a4-41b6-af70-b8e7a1043ec5": {
@@ -67,25 +67,25 @@
         "fcb8420c-4424-42f2-88ec-8bedfb00bfb2": {
           "type": "feature",
           "settings": {
-            "icon": "shopify:\/\/shop_images\/fellowfavicon.png",
-            "title": "Access to exclusive coffees",
-            "description": "info info"
+            "icon": "shopify:\/\/shop_images\/211012_Fellow_Icon-Library_OUTLINED_AtmosVacuumCanister_GreenMeansGoodToGo.png",
+            "title": "Meticulous curation",
+            "description": "Our inI-house Q Graders sample hundreds of coffees from world-class roasters and select the best: small batch, ethically sourced, curated to suit your palate."
           }
         },
         "917d0ea1-001f-494a-8698-88d3ff5dd8de": {
           "type": "feature",
           "settings": {
-            "icon": "shopify:\/\/shop_images\/fellowfavicon.png",
-            "title": "Convenient Subscription",
-            "description": "info info"
+            "icon": "shopify:\/\/shop_images\/211012_Fellow_Icon-Library_OUTLINED_OdeBrewGrinder_PerfectForTheHome.png",
+            "title": "Convenient without compromise",
+            "description": "Never resort to a supermarket coffee fix. With exceptional fresh-roasted coffees delivered on your timeline, you can always stay stocked with the best."
           }
         },
         "d9d67551-97df-4995-b8fb-8543c00c98be": {
           "type": "feature",
           "settings": {
-            "icon": "shopify:\/\/shop_images\/fellowfavicon.png",
-            "title": "Guidance to brew",
-            "description": "info info"
+            "icon": "shopify:\/\/shop_images\/211012_Fellow_Icon-Library_OUTLINED_ShimmyCoffeeSieve_BetterTastingCoffee.png",
+            "title": "Brewing perfection",
+            "description": "We'll help you tease every delicious nuance out of your coffee. Gain expertise and confidence with brewing recipes and custom tips."
           }
         }
       },
@@ -97,8 +97,8 @@
       "settings": {
         "bg_color": "#fff9e5",
         "text_color": "#000000",
-        "heading": "What Makes Subscription Special",
-        "description": "Lorem ipsum dolor sit amet",
+        "heading": "Why get a Fellow coffee subscription?",
+        "description": "The same reason you ask your mechanic about what car to get: we've got the inside track.",
         "show_arrows": true,
         "show_dots": true
       }
@@ -110,8 +110,8 @@
           "type": "Card",
           "settings": {
             "image": "shopify:\/\/shop_images\/Rectangle_1650_2.png",
-            "heading": "You Personalize",
-            "description": "Copy copy copy",
+            "heading": "You personalize it",
+            "description": "Let us know the type of coffee you like, how much you want, and how often you want deliveries.",
             "link": ""
           }
         },
@@ -119,8 +119,8 @@
           "type": "Card",
           "settings": {
             "image": "shopify:\/\/shop_images\/Rectangle_1650.png",
-            "heading": "Our Experts Select",
-            "description": "copy copy",
+            "heading": "We pick it",
+            "description": "We find a coffee we think you'll and you decide whether to ship it or skip it- it's pay as you go.",
             "link": ""
           }
         },
@@ -128,8 +128,8 @@
           "type": "Card",
           "settings": {
             "image": "shopify:\/\/shop_images\/efbe078a53bd--HeroImage-EKG-Pro_1920x1080.progressive_22e43369-c040-47d6-9c9c-e6b13b879826.webp",
-            "heading": "You Enjoy",
-            "description": "copy copy",
+            "heading": "You perfect it",
+            "description": "Your coffee ships fresh from the roaster, with custom tips so you can brew it perfectly.",
             "link": ""
           }
         }
@@ -140,8 +140,8 @@
         "3c881079-7dc8-4de1-a84b-89cabf9d25f4"
       ],
       "settings": {
-        "heading": "How it Works",
-        "description": "more copy"
+        "heading": "How it works",
+        "description": "The basics before your first brew"
       }
     },
     "c744d7a7-0395-41cf-ad68-67d084f08ea0": {
@@ -152,8 +152,8 @@
           "settings": {
             "product": "",
             "image": "shopify:\/\/shop_images\/HP_Module_5__Personalization_Highlight.png",
-            "header": "INFO",
-            "description": "<p>Info<\/p>",
+            "header": "Expect coffees like these",
+            "description": "<p>PLACEHOLDER COFFEE<\/p>",
             "link_text": "Shop Now",
             "link_url": "shopify:\/\/pages\/catalog"
           }
@@ -197,21 +197,21 @@
     "fa47f458-1111-4f7c-821f-db6981ce0ffc": {
       "type": "coffee-marketplace-cards",
       "blocks": {
-        "ededcdcd-de5c-40da-b45e-49d60e971562": {
-          "type": "Card",
-          "settings": {
-            "image": "shopify:\/\/shop_images\/FamilyPage_EKGProStudiov2.png",
-            "heading": "Hailie",
-            "description": "Hailie is Store Lead at the Fellow Store + Playground in San Francisco. She loves coffee science, socially responsible production, and calling \"espresso\" 'spro.",
-            "link": ""
-          }
-        },
         "6a8e579e-0c52-471c-b018-a87839d9c934": {
           "type": "Card",
           "settings": {
             "image": "shopify:\/\/shop_images\/5_MB_Studio_PDP.png",
             "heading": "Eric",
-            "description": "Eric is the Customer Experience Supervisor at Fellow and has a boundless obsession with coffee. He once ran a heavy-metal themed pop-up coffee bar called Grindpour.",
+            "description": "Our Roaster Partnerships Manager and certified Q grader, Eric's obsession with finding new coffees takes him all over the world. He once ran a heavy metal coffee popup called Grindpour.",
+            "link": ""
+          }
+        },
+        "ededcdcd-de5c-40da-b45e-49d60e971562": {
+          "type": "Card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/FamilyPage_EKGProStudiov2.png",
+            "heading": "Hailie",
+            "description": "Hailie runs the show at the Fellow Store in San Francisco as Store Lead. A certified Q grader and veteran barista, she's an advocate for socially responsible coffee production.",
             "link": ""
           }
         },
@@ -220,19 +220,19 @@
           "settings": {
             "image": "shopify:\/\/shop_images\/ClaraFrenchPress_Aplus_StandardImage_01.jpg",
             "heading": "Nick",
-            "description": "Nick is Fellow's Director of Mechanical Engineering and Head of R&D. He's also been a professional barista, roaster, and espresso machine repair technician.",
+            "description": "Nick is Fellow's Director of Mechanical Engineering, VP of R&D, and a certified Q Grader. A former barista and roaster, he personally designed our incredible new Ode Gen 2 Brew Burrs.",
             "link": ""
           }
         }
       },
       "block_order": [
-        "ededcdcd-de5c-40da-b45e-49d60e971562",
         "6a8e579e-0c52-471c-b018-a87839d9c934",
+        "ededcdcd-de5c-40da-b45e-49d60e971562",
         "c17f33cd-cd29-40f8-8d09-dd2a3c6ba6a1"
       ],
       "settings": {
-        "heading": "Tasting Panel",
-        "description": "copy copy"
+        "heading": "Tasting panel",
+        "description": "There are only a few hundred certified Q graders in the country: the highest grade of sensory coffee assessment. Three of them choose the coffees here."
       }
     },
     "1664286931317058a0": {

@@ -6,12 +6,12 @@
         "91440d17-d6b6-424b-88f3-ff8450a9bf93": {
           "type": "slide",
           "settings": {
-            "bg_color": "#ffffff",
-            "text_color": "#000000",
-            "tab_btn_style": "dark",
+            "bg_color": "#000000",
+            "text_color": "#ffffff",
+            "tab_btn_style": "light",
             "tab_name": "Subscription",
-            "title": "Subscription",
-            "description": "Description",
+            "title": "Coffee Subscription",
+            "description": "Get the best, delivered on your schedule and tailored to your tastes.",
             "btn_text": "Subscribe",
             "btn_url": "shopify:\/\/products\/360-sip-lid",
             "image": "shopify:\/\/shop_images\/Group_258_1.png",
@@ -25,8 +25,8 @@
             "text_color": "#ffffff",
             "tab_btn_style": "light",
             "tab_name": "Marketplace",
-            "title": "Marketplace",
-            "description": "COPY",
+            "title": "Our Coffee Collection",
+            "description": "Choose from our curated rotation of new roasts.",
             "btn_text": "Shop Now",
             "btn_url": "shopify:\/\/products\/stagg-ekg-pro-electric-kettle",
             "image": "shopify:\/\/shop_images\/section_2_mobile_1.jpg",
@@ -41,9 +41,9 @@
             "tab_btn_style": "dark",
             "tab_name": "Drops",
             "title": "Fellow Drops",
-            "description": "Copy about Drops",
+            "description": "Make one incredible coffee discovery a week.",
             "btn_text": "Sign Up",
-            "btn_url": "shopify:\/\/products\/stagg-ekg-pro-electric-kettle-studio-edition",
+            "btn_url": "shopify:\/\/pages\/join-fellow-drops",
             "image": "shopify:\/\/shop_images\/2021-11-2_fellow_drops12791_copy-min_1.jpg",
             "image_on_the_left": false
           }
@@ -55,50 +55,84 @@
         "e11cf429-b3b8-45d3-afee-2d19059179be"
       ],
       "settings": {
-        "section_title": "Coffee At Fellow",
+        "section_title": "The Fellow guide to coffee",
         "section_subtitle": "",
-        "section_description": "Copy about coffee and how we pick great ones"
+        "section_description": "We're on a mission to help you discover the most delicious new roasts in the world, because great gear is only as good as the coffee you brew with it."
       }
     },
-    "fa47f458-1111-4f7c-821f-db6981ce0ffc": {
+    "9acbf251-f8e9-4722-b0ee-5d234d047bb8": {
       "type": "coffee-marketplace-cards",
       "blocks": {
-        "ededcdcd-de5c-40da-b45e-49d60e971562": {
+        "fc0a6e35-a0aa-4e5e-997c-26ec5158d2e2": {
           "type": "Card",
           "settings": {
-            "image": "shopify:\/\/shop_images\/FamilyPage_EKGProStudiov2.png",
-            "heading": "Hailie",
-            "description": "Hailie is Store Lead at the Fellow Store + Playground in San Francisco. She loves coffee science, socially responsible production, and calling \"espresso\" 'spro.",
+            "image": "shopify:\/\/shop_images\/Your_dream_coffee_aisle_-_Coffee_Marketplace.png",
+            "heading": "Acclaimed Producers",
+            "description": "From Cup of Excellence-winners to experimental and innovative new growers.",
             "link": ""
           }
         },
-        "6a8e579e-0c52-471c-b018-a87839d9c934": {
+        "d876ae45-497a-4783-874b-37d4e66ff114": {
           "type": "Card",
           "settings": {
-            "image": "shopify:\/\/shop_images\/5_MB_Studio_PDP.png",
-            "heading": "Eric",
-            "description": "Eric is the Customer Experience Supervisor at Fellow and has a boundless obsession with coffee. He once ran a heavy-metal themed pop-up coffee bar called Grindpour.",
+            "image": "shopify:\/\/shop_images\/2022-10-4_fellow_holiday_in_studio0959_RT2_OT.jpg",
+            "heading": "Superstar Roasters",
+            "description": "Enjoy rare access to roasters we love from all over the world.",
             "link": ""
           }
         },
-        "c17f33cd-cd29-40f8-8d09-dd2a3c6ba6a1": {
+        "b11f0df5-11f0-44f0-aca3-479e90df106c": {
           "type": "Card",
           "settings": {
-            "image": "shopify:\/\/shop_images\/ClaraFrenchPress_Aplus_StandardImage_01.jpg",
-            "heading": "Nick",
-            "description": "Nick is Fellow's Director of Mechanical Engineering and Head of R&D. He's also been a professional barista, roaster, and espresso machine repair technician.",
+            "image": "shopify:\/\/shop_images\/EKG_Pro_Gear_Guide_Image_1.png",
+            "heading": "Tasting Experts",
+            "description": "Our tasting panel curates our selection and builds custom recipes for every coffee.",
             "link": ""
           }
         }
       },
       "block_order": [
-        "ededcdcd-de5c-40da-b45e-49d60e971562",
-        "6a8e579e-0c52-471c-b018-a87839d9c934",
-        "c17f33cd-cd29-40f8-8d09-dd2a3c6ba6a1"
+        "fc0a6e35-a0aa-4e5e-997c-26ec5158d2e2",
+        "d876ae45-497a-4783-874b-37d4e66ff114",
+        "b11f0df5-11f0-44f0-aca3-479e90df106c"
       ],
       "settings": {
-        "heading": "Tasting Panel",
-        "description": "copy copy"
+        "heading": "Our unique selection process",
+        "description": "Hand-picked coffees from some of the best roasters in the world. Meticulously chosen, tasted, and road-tested with Fellow gear by our expert brewing team."
+      }
+    },
+    "16642717231d856327": {
+      "type": "featured-collections",
+      "blocks": {
+        "bf8b078a-5bce-4b74-9647-97d580285e1b": {
+          "type": "collection",
+          "settings": {
+            "tab_text": "",
+            "collection": "coffee-best-sellers",
+            "button_text": "",
+            "button_url": "shopify:\/\/collections\/kettles"
+          }
+        },
+        "2280d5e1-b120-4a46-8194-180b93b14306": {
+          "type": "collection",
+          "disabled": true,
+          "settings": {
+            "tab_text": "",
+            "collection": "bright-floral",
+            "button_text": "",
+            "button_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "bf8b078a-5bce-4b74-9647-97d580285e1b",
+        "2280d5e1-b120-4a46-8194-180b93b14306"
+      ],
+      "settings": {
+        "enable_section": true,
+        "heading": "The roasts with the most",
+        "limit": 6,
+        "show_view_all": true
       }
     },
     "1665104018064a51ce": {
@@ -116,37 +150,45 @@
       ],
       "settings": {}
     },
-    "16642717231d856327": {
-      "type": "featured-collections",
+    "fa47f458-1111-4f7c-821f-db6981ce0ffc": {
+      "type": "coffee-marketplace-cards",
       "blocks": {
-        "bf8b078a-5bce-4b74-9647-97d580285e1b": {
-          "type": "collection",
+        "6a8e579e-0c52-471c-b018-a87839d9c934": {
+          "type": "Card",
           "settings": {
-            "tab_text": "Best Selling Coffee Beans",
-            "collection": "coffee-best-sellers",
-            "button_text": "",
-            "button_url": "shopify:\/\/collections\/kettles"
+            "image": "shopify:\/\/shop_images\/5_MB_Studio_PDP.png",
+            "heading": "Eric",
+            "description": "Our Roaster Partnerships Manager and certified Q grader, Eric's obsession with finding new coffees takes him all over the world. He once ran a heavy metal coffee popup called Grindpour.",
+            "link": ""
           }
         },
-        "2280d5e1-b120-4a46-8194-180b93b14306": {
-          "type": "collection",
+        "ededcdcd-de5c-40da-b45e-49d60e971562": {
+          "type": "Card",
           "settings": {
-            "tab_text": "",
-            "collection": "bright-floral",
-            "button_text": "",
-            "button_url": ""
+            "image": "shopify:\/\/shop_images\/FamilyPage_EKGProStudiov2.png",
+            "heading": "Hailie",
+            "description": "Hailie runs the show at the Fellow store in San Francisco as Store Lead. A certified Q grader and veteran barista, she's an advocate for socially responsible coffee production.",
+            "link": ""
+          }
+        },
+        "c17f33cd-cd29-40f8-8d09-dd2a3c6ba6a1": {
+          "type": "Card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/ClaraFrenchPress_Aplus_StandardImage_01.jpg",
+            "heading": "Nick",
+            "description": "Nick is Fellow's Director of Mechanical Engineering, VP of R&D, and a certified Q Grader. A former barista and roaster, he personally designed our incredible new Ode Gen 2 Brew Burrs.",
+            "link": ""
           }
         }
       },
       "block_order": [
-        "bf8b078a-5bce-4b74-9647-97d580285e1b",
-        "2280d5e1-b120-4a46-8194-180b93b14306"
+        "6a8e579e-0c52-471c-b018-a87839d9c934",
+        "ededcdcd-de5c-40da-b45e-49d60e971562",
+        "c17f33cd-cd29-40f8-8d09-dd2a3c6ba6a1"
       ],
       "settings": {
-        "enable_section": true,
-        "heading": "All the beans! Copy Copy",
-        "limit": 6,
-        "show_view_all": true
+        "heading": "Tasting Panel",
+        "description": "There are only a few hundred certified Q graders in the country: the highest grade of sensory coffee assessment. Three of them choose the coffees here."
       }
     },
     "b1380a23-d39c-4a02-8657-51a920127c54": {
@@ -155,19 +197,19 @@
         "a85a98a9-b7a5-4398-b09d-928bded19704": {
           "type": "article",
           "settings": {
-            "article": "learn\/anaerobic-fermentation-distinguishing-the-difference-in-your-cup"
+            "article": "brew-guides\/vietnamese-inspired-flash-brewed-coffee-recipe"
           }
         },
         "e5ef00c8-ffb8-424d-a74d-1f33145462a0": {
           "type": "article",
           "settings": {
-            "article": "learn\/northern-lights-drop"
+            "article": "brew-guides\/vietnamese-inspired-flash-brewed-coffee-recipe"
           }
         },
         "0856c472-9f39-4e8d-a675-83a12b8f905c": {
           "type": "article",
           "settings": {
-            "article": "learn\/why-temperature-matters-for-your-french-press"
+            "article": "brew-guides\/vietnamese-inspired-flash-brewed-coffee-recipe"
           }
         }
       },
@@ -177,8 +219,8 @@
         "0856c472-9f39-4e8d-a675-83a12b8f905c"
       ],
       "settings": {
-        "heading": "Read about brewing coffee and stuff",
-        "description": "<p>copy copy<\/p>",
+        "heading": "Go deep on brewing",
+        "description": "<p>Discover unique recipes ad game-changing advice.<\/p>",
         "cta_title": "Brew Guides",
         "cta_url": "shopify:\/\/blogs\/brew-guides",
         "cta_color": "btn--light",
@@ -264,6 +306,7 @@
     },
     "f0d1bd49-b440-4899-a287-63f6c6ad214a": {
       "type": "product-slider",
+      "disabled": true,
       "blocks": {
         "d92b3b04-275a-40c1-90db-bfabebe1dbb9": {
           "type": "image",
@@ -299,9 +342,10 @@
   },
   "order": [
     "main",
-    "fa47f458-1111-4f7c-821f-db6981ce0ffc",
-    "1665104018064a51ce",
+    "9acbf251-f8e9-4722-b0ee-5d234d047bb8",
     "16642717231d856327",
+    "1665104018064a51ce",
+    "fa47f458-1111-4f7c-821f-db6981ce0ffc",
     "b1380a23-d39c-4a02-8657-51a920127c54",
     "1664286931317058a0",
     "1664388097345cae2b",
