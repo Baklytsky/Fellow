@@ -535,6 +535,24 @@
               "button_url": "shopify:\/\/collections\/bestsellers"
             }
           },
+          "bfeb2272-7a44-421f-ac0c-ab8e740b0fe8": {
+            "type": "collection",
+            "settings": {
+              "tab_text": "Kits + Bundles",
+              "collection": "coffee-products-kits-bundles",
+              "button_text": "",
+              "button_url": ""
+            }
+          },
+          "93eb52e0-a39b-49cb-b989-ff68a632e2dc": {
+            "type": "collection",
+            "settings": {
+              "tab_text": "Coffee Beans",
+              "collection": "coffee-best-sellers",
+              "button_text": "",
+              "button_url": ""
+            }
+          },
           "61c6e91f-6505-42c0-866f-25296dbe3d4e": {
             "type": "collection",
             "settings": {
@@ -552,22 +570,14 @@
               "button_text": "",
               "button_url": ""
             }
-          },
-          "bfeb2272-7a44-421f-ac0c-ab8e740b0fe8": {
-            "type": "collection",
-            "settings": {
-              "tab_text": "Kits + Bundles",
-              "collection": "coffee-products-kits-bundles",
-              "button_text": "",
-              "button_url": ""
-            }
           }
         },
         "block_order": [
           "1c8f9541-a475-428c-9638-4b46c17cf01e",
+          "bfeb2272-7a44-421f-ac0c-ab8e740b0fe8",
+          "93eb52e0-a39b-49cb-b989-ff68a632e2dc",
           "61c6e91f-6505-42c0-866f-25296dbe3d4e",
-          "34a21fe6-0cfe-4b56-85f5-42725eb153e6",
-          "bfeb2272-7a44-421f-ac0c-ab8e740b0fe8"
+          "34a21fe6-0cfe-4b56-85f5-42725eb153e6"
         ],
         "settings": {
           "enable_section": true,
@@ -763,7 +773,7 @@
           "image": "shopify:\/\/shop_images\/Refer_A_Friend_Homepage_Module.png",
           "layout": "left",
           "header": "Coffee's better shared",
-          "description": "<p>Refer a friend to Fellow and you'll both get a free Carter Move Mug.<\/p>",
+          "description": "<p>Refer a friend to Fellow and you'll both get 15% off!<\/p>",
           "bg_color": "",
           "text_color": "",
           "cta_url": "shopify:\/\/pages\/refer-a-friend",

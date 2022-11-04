@@ -268,29 +268,6 @@
         "comparison_20": ""
       }
     },
-    "16642717231d856327": {
-      "type": "featured-collections",
-      "blocks": {
-        "bf8b078a-5bce-4b74-9647-97d580285e1b": {
-          "type": "collection",
-          "settings": {
-            "tab_text": "Kettles",
-            "collection": "ekg-family-kettles",
-            "button_text": "",
-            "button_url": "shopify:\/\/collections\/kettles"
-          }
-        }
-      },
-      "block_order": [
-        "bf8b078a-5bce-4b74-9647-97d580285e1b"
-      ],
-      "settings": {
-        "enable_section": true,
-        "heading": "The full lineup, from stovetop to countertop",
-        "limit": 6,
-        "show_view_all": true
-      }
-    },
     "1664286931317058a0": {
       "type": "faq",
       "blocks": {
@@ -350,14 +327,36 @@
         "description": "We’ve got answers."
       }
     },
+    "16642717231d856327": {
+      "type": "featured-collections",
+      "blocks": {
+        "bf8b078a-5bce-4b74-9647-97d580285e1b": {
+          "type": "collection",
+          "settings": {
+            "tab_text": "Kettles",
+            "collection": "ekg-family-kettles",
+            "button_text": "",
+            "button_url": "shopify:\/\/collections\/kettles"
+          }
+        }
+      },
+      "block_order": [
+        "bf8b078a-5bce-4b74-9647-97d580285e1b"
+      ],
+      "settings": {
+        "enable_section": true,
+        "heading": "The full lineup, from stovetop to countertop",
+        "limit": 6,
+        "show_view_all": true
+      }
+    },
     "1664388097345cae2b": {
       "type": "seo-block",
-      "disabled": true,
       "settings": {
         "bg_color": "#ffffff",
         "text_color": "#000000",
-        "heading": "Travel Mugs",
-        "text": "<p>Take everything on the move always.Functional Elegance Meets Design, Fellow Coffee Products Elevate Your Coffee Experience. Fellow’s Award-Winning Coffee Products Turn Anyone Into A Coffee Connoisseur. <\/p>"
+        "heading": "Electric Kettles",
+        "text": "<p>Kettles have evolved over the years to become much more than simple heating devices. Today, many electric kettles, such as the Stagg EKG Pro, offer advanced features such as temperature control, scheduling capabilities, and built-in Wi-Fi connectivity. Smart features like these make the Stagg EKG Pro an ideal choice for anyone looking for a high-quality electric kettle that can help them brew better coffee or tea.<\/p><p><strong>What Should I Look for When Buying an Electric Kettle?<\/strong><\/p><p>When choosing an electric kettle, we suggest a few key features customers should consider. First, we invite customers to imagine what they'd want from their kettle:<\/p><p>Do they want consistent boiling temperature and precise temperature control?<\/p><p>Do they need a kettle that boils water automatically each morning so they can start their day with a perfect cup of coffee or tea?<\/p><p>Are they aesthetically minded and looking for a sleek, modern design?<\/p><p>Once you've answered these questions, you can start to narrow your search based on other factors such as the material of construction (stainless steel vs. plastic), heating method (stovetop vs. electric), special features such as programmable timers, and price point. Ultimately, the best electric kettle for you will depend on your individual preferences and needs, so we encourage you to explore the many options available and find the one that's right for you.<\/p><p><strong>What’s So Special About a Gooseneck Kettle?<\/strong><\/p><p>A gooseneck kettle, such as the Stagg EKG Studio Edition, is special because of its design features. Its long, thin spout makes it easy to control water flow, so you can pour your coffee or tea exactly how you want. Additionally, the gooseneck design also helps minimize spilling and splashing when pouring, so you can enjoy a clean, mess-free brewing experience.<\/p><p><strong>When Does It Make Sense to Upgrade My Stagg EKG Kettle to Pro or Studio Edition?<\/strong><\/p><p>If you love your Stagg EKG kettle and want to take your coffee or tea brewing experience to the next level, you may consider upgrading to either the Stagg EKG Pro or Stagg EKG Pro Studio Edition. These advanced models offer additional features, including firmware updates available over WiFi, scheduling, and Guide Mode, which makes it easy to select the perfect temperature and get precise pouring control. Finally, the Pro and Pro Studio Editions have adjustable hold temperatures, meaning you can easily keep your water at the ideal brewing temperature for as long as you need. What sets the Stagg EKG Pro Studio Edition apart is its stunning glass top and aluminum base, zinc frame, and a metal cap on the end of the handle, which adds an extra touch of sophistication to your coffee or tea bar.<\/p><p>So if you're looking for a premium kettle that can help you brew the perfect cup of coffee or tea every time, we highly recommend upgrading to the Stagg EKG Pro or Stagg EKG Pro Studio Edition.<\/p>"
       }
     }
   },
@@ -366,8 +365,8 @@
     "1664270553aee121f2",
     "166427647891f49e65",
     "1664355544406e6554",
-    "16642717231d856327",
     "1664286931317058a0",
+    "16642717231d856327",
     "1664388097345cae2b"
   ]
 }
