@@ -17,7 +17,7 @@
 
       {%- for item in color_group_arr -%}
         {%- assign item_handle = item | handleize -%}
-        {%- assign colors_str = colors_str | append: '||' | append: color_name | append: '&&' | append: color_hex | append: '~' | append: item_handle | append: '~' -%}
+        {%- assign colors_str = colors_str | append: '||' | append: color_name | append: '&&' | append: color_hex | append: '~' | append: item_handle | append: '~' | append: '/~Divider~/' -%}
       {%- endfor -%}
 
     {% endif %}
@@ -34,6 +34,11 @@
   {%- assign shown_shop_by_use_arr = collection.metafields["custom_fields"]["shown_shop_by_use_tags"] | split: ',' -%}
 {% endif %}
 
+{%- comment -%} /// Check custom "shop by use" title  /// {%- endcomment -%}
+{% if collection.metafields["custom_fields"]["custom_shop_by_use_title"] != blank %}
+  {%- assign custom_shop_by_use_title = collection.metafields["custom_fields"]["custom_shop_by_use_title"] -%}
+{% endif %}
+
 {% paginate collection.products by 1000 %}
 {%- assign product_counter = 0 -%}
   {
@@ -41,6 +46,8 @@
   {%- for product in collection.products -%}
 
     {%- assign best_selling_order = forloop.index -%}
+
+    {%- comment -%} /// Reset all variables /// {%- endcomment -%}
 
     {%- assign product_color_names = blank -%}
     {%- assign product_color_names_uniq = blank -%}
@@ -56,6 +63,15 @@
     {%- assign product_shop_by_use = blank -%}
     {%- assign product_shop_by_use_val = blank -%}
     {%- assign product_shop_by_use_val_uniq = blank -%}
+    {%- assign product_custom_filter_1 = blank -%}
+    {%- assign product_custom_filter_1_val = blank -%}
+    {%- assign product_custom_filter_1_uniq = blank -%}
+    {%- assign product_custom_filter_1_val_uniq = blank -%}
+    {%- assign product_custom_filter_2 = blank -%}
+    {%- assign product_custom_filter_2_val = blank -%}
+    {%- assign product_custom_filter_2_uniq = blank -%}
+    {%- assign product_custom_filter_2_val_uniq = blank -%}
+    {%- assign all_product_use_tags = blank -%}
 
     {%- assign option_color_index = blank -%}
     {%- assign option_size_index = blank -%}
@@ -161,15 +177,21 @@
           {%- assign color_for_search = color_name | handleize | append: '~' | prepend: '~' -%}
 
           {%- if colors_str contains color_for_search -%}
-            {%- assign first_split = colors_str | split: color_for_search | first -%}
-            {%- assign second_split = first_split | split: '||' | last -%}
-            {%- assign name = second_split | split: '&&' | first -%}
-            {%- assign hex = second_split | split: '&&' | last -%}
-            {%- assign val = name | handleize -%}
+            {%- assign split_arr = colors_str | split: color_for_search -%}
+            {%- for part in split_arr -%}
 
-            {%- assign product_color_names = product_color_names | append: name | append: '**' -%}
-            {%- assign product_color_hex = product_color_hex | append: hex | append: '**' -%}
-            {%- assign product_color_val = product_color_val | append: val | append: '**' -%}
+              {%- unless forloop.last -%}
+              {%- assign split_part = part | split: '||' | last -%}
+              {%- assign name = split_part | split: '&&' | first -%}
+              {%- assign hex = split_part | split: '&&' | last -%}
+              {%- assign val = name | handleize -%}
+
+              {%- assign product_color_names = product_color_names | append: name | append: '**' -%}
+              {%- assign product_color_hex = product_color_hex | append: hex | append: '**' -%}
+              {%- assign product_color_val = product_color_val | append: val | append: '**' -%}
+              {%- endunless -%}
+
+            {%- endfor -%}
           {%- endif -%}
         {%- endif -%}
 
@@ -197,13 +219,18 @@
       {%- endfor -%}
     {%- endif -%}
 
-    {%- comment -%} /// Get shop by use tag /// {%- endcomment -%}
+    {%- comment -%} /// Get shop by use and details tag /// {%- endcomment -%}
+
+    {%- assign tag_info = blank -%}
+    {%- assign tag_info_item = blank -%}
+    {%- assign tag_info_arr = blank -%}
 
     {%- for tag in product.tags -%}
       {%- if tag contains 'Use:' -%}
         {%- assign skip_tag = true -%}
         {%- assign use_name = tag | split: 'Use:' | last | strip -%}
         {%- assign use_name_handle = use_name | handleize -%}
+        {%- assign all_product_use_tags = all_product_use_tags | append: use_name | append: '**' -%}
 
         {%- if shown_shop_by_use_arr.size > 0 -%}
           {%- for shown_shop_by_use in shown_shop_by_use_arr -%}
@@ -220,9 +247,101 @@
           {%- assign product_shop_by_use_val = product_shop_by_use_val | append: use_name_handle | append: '**' -%}
         {%- endunless -%}
 
+      {%- endif -%}
 
+      {%- if tag contains 'Details:' -%}
+        {%- assign details_name = tag | split: 'Details:' | last | strip -%}
+        {%- assign tag_info = tag_info | append: details_name | append: '**' -%}
       {%- endif -%}
     {%- endfor -%}
+
+    {%- assign tag_info_arr = tag_info | split: '**' -%}
+
+    {%- comment -%} /// Check custom filter field #1 /// {%- endcomment -%}
+
+    {%- assign custom_filter_title_1 = blank -%}
+    {%- assign custom_filter_tag_1 = blank -%}
+    {%- assign shown_custom_filter_1_arr = blank -%}
+
+    {% if collection.metafields["custom_fields"]["custom_filter_field_1"] != blank %}
+      {% for item in collection.metafields["custom_fields"]["custom_filter_field_1"] %}
+        {%- assign custom_filter_title_1 = item["title_1"] -%}
+        {%- assign custom_filter_tag_1 = item["tag_to_search_1"] -%}
+        {%- assign shown_custom_filter_1_arr = item["shown_results_1"] | split: ',' -%}
+
+        {% if custom_filter_title_1 != blank and custom_filter_tag_1 != blank and item["shown_results_1"] != blank %}
+
+          {%- for tag in product.tags -%}
+            {%- if tag contains custom_filter_tag_1 -%}
+              {%- assign skip_tag = true -%}
+              {%- assign result_name = tag | split: custom_filter_tag_1 | last | strip -%}
+              {%- assign result_name_handle = result_name | handleize -%}
+
+              {%- if shown_custom_filter_1_arr.size > 0 -%}
+                {%- for shown_result in shown_custom_filter_1_arr -%}
+                  {%- assign shown_result_handle = shown_result | handleize -%}
+                  {%- if shown_result_handle == result_name_handle  -%}
+                    {%- assign skip_tag = false -%}
+                    {%- break -%}
+                  {%- endif -%}
+                {%- endfor -%}
+              {%- endif -%}
+
+              {%- unless skip_tag -%}
+              {%- assign product_custom_filter_1 = product_custom_filter_1 | append: result_name | append: '**' -%}
+              {%- assign product_custom_filter_1_val = product_custom_filter_1_val | append: result_name_handle | append: '**' -%}
+              {%- endunless -%}
+
+            {%- endif -%}
+
+          {%- endfor -%}
+
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+
+    {%- comment -%} /// Check custom filter field #2 /// {%- endcomment -%}
+
+    {%- assign custom_filter_title_2 = blank -%}
+    {%- assign custom_filter_tag_2 = blank -%}
+    {%- assign shown_custom_filter_2_arr = blank -%}
+
+    {% if collection.metafields["custom_fields"]["custom_filter_field_2"] != blank %}
+      {% for item in collection.metafields["custom_fields"]["custom_filter_field_2"] %}
+        {%- assign custom_filter_title_2 = item["title_2"] -%}
+        {%- assign custom_filter_tag_2 = item["tag_to_search_2"] -%}
+        {%- assign shown_custom_filter_2_arr = item["shown_results_2"] | split: ',' -%}
+
+        {% if custom_filter_title_2 != blank and custom_filter_tag_2 != blank and item["shown_results_2"] != blank %}
+
+          {%- for tag in product.tags -%}
+            {%- if tag contains custom_filter_tag_2 -%}
+              {%- assign skip_tag = true -%}
+              {%- assign result_name = tag | split: custom_filter_tag_2 | last | strip -%}
+              {%- assign result_name_handle = result_name | handleize -%}
+
+              {%- if shown_custom_filter_2_arr.size > 0 -%}
+                {%- for shown_result in shown_custom_filter_2_arr -%}
+                  {%- assign shown_result_handle = shown_result | handleize -%}
+                  {%- if shown_result_handle == result_name_handle  -%}
+                    {%- assign skip_tag = false -%}
+                    {%- break -%}
+                  {%- endif -%}
+                {%- endfor -%}
+              {%- endif -%}
+
+              {%- unless skip_tag -%}
+              {%- assign product_custom_filter_2 = product_custom_filter_2 | append: result_name | append: '**' -%}
+              {%- assign product_custom_filter_2_val = product_custom_filter_2_val | append: result_name_handle | append: '**' -%}
+              {%- endunless -%}
+
+            {%- endif -%}
+
+          {%- endfor -%}
+
+        {% endif %}
+      {% endfor %}
+    {% endif %}
 
     {%- assign product_color_names_uniq = product_color_names | split: '**' | uniq -%}
     {%- assign product_color_hex_uniq = product_color_hex | split: '**' | uniq -%}
@@ -233,26 +352,13 @@
 
     {%- assign product_shop_by_use_uniq = product_shop_by_use | split: '**' | uniq -%}
     {%- assign product_shop_by_use_val_uniq = product_shop_by_use_val | split: '**' | uniq -%}
+    {%- assign all_product_use_tags_arr = all_product_use_tags | split: '**' | uniq -%}
 
-    {%- assign tag_info = blank -%}
-    {%- assign tag_info_item = blank -%}
-    {%- assign tag_info_arr = blank -%}
+    {%- assign product_custom_filter_1_uniq = product_custom_filter_1 | split: '**' | uniq -%}
+    {%- assign product_custom_filter_1_val_uniq = product_custom_filter_1_val | split: '**' | uniq -%}
 
-    {%- for use_tag in product_shop_by_use_uniq -%}
-      {%- assign use_tag_handle = use_tag | handleize -%}
-
-      {%- case use_tag_handle -%}
-      {%- when 'car-compatible' -%}
-      {%- assign tag_info_item = 'Fits in Cup Holder' -%}
-      {%- when 'one-handed' -%}
-      {%- assign tag_info_item = 'Single Handed' -%}
-        {%- else -%}
-      {%- assign tag_info_item = use_tag -%}
-      {%- endcase -%}
-
-      {%- assign tag_info = tag_info | append: tag_info_item | append: '**' -%}
-    {%- endfor -%}
-    {%- assign tag_info_arr = tag_info | split: '**' -%}
+    {%- assign product_custom_filter_2_uniq = product_custom_filter_2 | split: '**' | uniq -%}
+    {%- assign product_custom_filter_2_val_uniq = product_custom_filter_2_val | split: '**' | uniq -%}
 
     {%- assign reviews_count = product.metafields.yotpo.reviews_count | plus: 0 -%}
     {%- if reviews_count == 0 -%}
@@ -331,15 +437,21 @@
                   {%- assign color_for_search = color_name | handleize | append: '~' | prepend: '~' -%}
 
                   {%- if colors_str contains color_for_search -%}
-                    {%- assign first_split = colors_str | split: color_for_search | first -%}
-                    {%- assign second_split = first_split | split: '||' | last -%}
-                    {%- assign name = second_split | split: '&&' | first -%}
-                    {%- assign hex = second_split | split: '&&' | last -%}
-                    {%- assign val = name | handleize -%}
+                    {%- assign split_arr = colors_str | split: color_for_search -%}
+                    {%- for part in split_arr -%}
 
-                    {%- assign product_color_names = product_color_names | append: name | append: '**' -%}
-                    {%- assign product_color_hex = product_color_hex | append: hex | append: '**' -%}
-                    {%- assign product_color_val = product_color_val | append: val | append: '**' -%}
+                      {%- unless forloop.last -%}
+                      {%- assign split_part = part | split: '||' | last -%}
+                      {%- assign name = split_part | split: '&&' | first -%}
+                      {%- assign hex = split_part | split: '&&' | last -%}
+                      {%- assign val = name | handleize -%}
+
+                      {%- assign product_color_names = product_color_names | append: name | append: '**' -%}
+                      {%- assign product_color_hex = product_color_hex | append: hex | append: '**' -%}
+                      {%- assign product_color_val = product_color_val | append: val | append: '**' -%}
+                      {%- endunless -%}
+
+                    {%- endfor -%}
                   {%- endif -%}
                 {%- endif -%}
 
@@ -462,7 +574,7 @@
       "price_money": "{{ product.selected_or_first_available_variant.price | money_without_trailing_zeros }}",
       "price" : {{ product.selected_or_first_available_variant.price }},
       "price_min": {{ product.price_min }},
-      "compare_at_price_is_more_than_price": {{ product_compare_at_price_is_more_than_price }},
+      "sale": {{ product_compare_at_price_is_more_than_price }},
       "compare_at_price": "{{ product_compare_at_price }}",
       "compare_at_price_money": "{{ product_compare_at_price | money_without_trailing_zeros }}",
       "vendor": "{{ product.vendor }}",
@@ -473,7 +585,8 @@
       "date": "{{ product.published_at | date: "%Y/%m/%d %H:%M:%S" }}",
       "facets": {
         "shop_by_use": {
-          "names": {{ product_shop_by_use_uniq | json }}
+          "names": {{ product_shop_by_use_uniq | json }},
+          "title": {{ custom_shop_by_use_title | default: 'Shop By Use' | json }}
         },
         "color": {
           "names": {{ product_color_names_uniq | json }},
@@ -481,10 +594,24 @@
         },
         "size": {
           "names": {{ product_sizes_uniq | json}}
+        },
+        "custom_filter_1": {
+          "names": {{ product_custom_filter_1_uniq | json }},
+          "title": {{ custom_filter_title_1 | json }}
+        },
+        "custom_filter_2": {
+          "names": {{ product_custom_filter_2_uniq | json }},
+          "title": {{ custom_filter_title_2 | json }}
         }
       },
       "shop_by_use": {
         "value": {{ product_shop_by_use_val_uniq | json }}
+      },
+      "custom_filter_1": {
+        "value": {{ product_custom_filter_1_val_uniq | json }}
+      },
+      "custom_filter_2": {
+        "value": {{ product_custom_filter_2_val_uniq | json }}
       },
       "color": {
         "value": {{ product_color_val_uniq | json }}
@@ -501,6 +628,8 @@
       {% endif %}
       "variants": [
       {% for variant in product.variants %}
+        {%- assign variant_color_names = blank -%}
+        {%- assign variant_color_hexes = blank -%}
         {%- assign variant_color_name = blank -%}
         {%- assign variant_color_hex = blank -%}
         {%- assign color_name = blank -%}
@@ -516,10 +645,23 @@
           {%- assign color_for_search = color_name | handleize | append: '~' | prepend: '~' -%}
 
           {%- if colors_str contains color_for_search -%}
-            {%- assign first_split = colors_str | split: color_for_search | first -%}
-            {%- assign second_split = first_split | split: '||' | last -%}
-            {%- assign variant_color_name = second_split | split: '&&' | first -%}
-            {%- assign variant_color_hex = second_split | split: '&&' | last -%}
+            {%- assign split_arr = colors_str | split: color_for_search -%}
+            {%- for part in split_arr -%}
+
+              {%- unless forloop.last -%}
+              {%- assign split_part = part | split: '||' | last -%}
+              {%- assign name = split_part | split: '&&' | first -%}
+              {%- assign hex = split_part | split: '&&' | last -%}
+              {%- assign val = name | handleize -%}
+
+              {%- assign variant_color_names = variant_color_names | append: val | append: '**' -%}
+              {%- assign variant_color_hexes = variant_color_hexes | append: hex | append: '**' -%}
+              {%- endunless -%}
+
+            {%- endfor -%}
+
+            {%- assign variant_color_name = variant_color_names | split: '**' | uniq -%}
+            {%- assign variant_color_hex = variant_color_hexes | split: '**' | uniq  -%}
           {%- endif -%}
         {%- endif -%}
 
@@ -595,19 +737,27 @@
         "price": "{{ variant_price }}",
         "price_money": "{{ variant_price | money_without_trailing_zeros }}",
         "best-selling": {{ best_selling_order }},
+        "best-selling-variant": {{ variant.metafields.custom.best_seller | json }},
         "inventory": {{ variant.inventory_quantity }},
         "date": "{{ product.published_at | date: "%Y/%m/%d %H:%M:%S" }}",
         "badge": {{ show_badge }},
         "badge_text": "{{ badge_text }}",
-        "compare_at_price_is_more_than_price": {{ compare_at_price_is_more_than_price }},
+        "sale": {{ compare_at_price_is_more_than_price }},
         "compare_at_price": "{{ variant_compare_at_price }}",
         "compare_at_price_money": "{{ variant_compare_at_price | money_without_trailing_zeros }}",
+        "new-color": {{ variant.metafields.custom.new_color.value | json }},
         "shop_by_use": {
           "value": {{ product_shop_by_use_val_uniq | json }}
           },
+        "custom_filter_1": {
+          "value": {{ product_custom_filter_1_val_uniq | json }}
+          },
+        "custom_filter_2": {
+          "value": {{ product_custom_filter_2_val_uniq | json }}
+          },
         "color": {
-          "value": {% if not_bundle %}"{{ variant_color_name | handleize }}"{% else %}{{ product_color_val_uniq | json }}{% endif %},
-          "hex": "{{ variant_color_hex }}"
+          "value": {% if not_bundle %}{{ variant_color_name | json }}{% else %}{{ product_color_val_uniq | json }}{% endif %},
+          "hex": {{ variant_color_hex | json }}
           },
         "size": {
           "value": {% if not_bundle %}"{{ variant_size | handleize }}"{% else %}{{ product_sizes_val_uniq | json}}{% endif %}

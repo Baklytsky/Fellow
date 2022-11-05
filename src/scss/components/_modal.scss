@@ -1,0 +1,359 @@
+@import '../helpers/_variables';
+
+@-webkit-keyframes tilt-in-top-1 {
+  0% {
+    -webkit-transform: rotateY(30deg) translateY(-300px) skewY(-30deg);
+    transform: rotateY(30deg) translateY(-300px) skewY(-30deg);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: rotateY(0deg) translateY(0) skewY(0deg);
+    transform: rotateY(0deg) translateY(0) skewY(0deg);
+    opacity: 1;
+  }
+}
+@keyframes tilt-in-top-1 {
+  0% {
+    -webkit-transform: rotateY(30deg) translateY(-300px) skewY(-30deg);
+    transform: rotateY(30deg) translateY(-300px) skewY(-30deg);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: rotateY(0deg) translateY(0) skewY(0deg);
+    transform: rotateY(0deg) translateY(0) skewY(0deg);
+    opacity: 1;
+  }
+}
+
+#modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 16px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba($color-dim-black, .8);
+}
+
+.modal-quick-add {
+  width: 100%;
+  max-width: 910px;
+  min-height: 410px;
+  max-height: 630px;
+  padding: 40px;
+  background: $color-white;
+  border-radius: 12px;
+  transition: all .2s linear;
+  overflow: hidden;
+}
+
+#emptyModal {
+  padding: 80px;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 50%;
+
+  -webkit-animation: tilt-in-top-1 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  animation: tilt-in-top-1 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+#emptyQvModal {
+  width: 100%;
+  height: 100%;
+  min-height: 450px;
+  display: flex;
+}
+
+.emptyQvModal__Content {
+  width: 39%;
+}
+
+/* sleleton elements */
+.skeleton {
+  background: linear-gradient(
+                  90deg,
+                  hsl(210, 15%, 88%),
+                  hsl(210, 15%, 95%),
+                  hsl(210, 15%, 88%)
+  );
+  background-size: 200%;
+  animation: loader 1s infinite reverse;
+}
+
+.emptyQvModal__GalleryThumbnailWrapper {
+  width: 43px;
+  display: flex;
+  flex-direction: column;
+
+}
+
+.emptyQvModal__GalleryThumbnail.skeleton {
+  width: 100%;
+  padding-top: 100%;
+  margin-bottom: 10px;
+}
+
+.emptyQvModal__GalleryImage.skeleton {
+  width: 412px;
+  height: 412px;
+  margin: 0 34px 0 13px;
+}
+
+.emptyQvModal__ContentTitle.skeleton {
+  width: 200px;
+  height: 26px;
+  margin-bottom: 16px;
+}
+
+.emptyQvModal__ContentPrice.skeleton {
+  width: 32px;
+  height: 16px;
+  margin-bottom: 25px;
+}
+
+.emptyQvModal__ContentDescription.skeleton {
+  height: 10px;
+  margin-bottom: 5px;
+}
+
+/* skeleton animation */
+@keyframes loader {
+  from {
+    background-position: -100% 0;
+  }
+  to {
+    background-position: 100% 0;
+  }
+}
+
+.closeModal {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  z-index: 10;
+  background: $color-white;
+  padding: 5px;
+  height: 25px;
+  width: 25px;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:hover {
+    opacity: .7;
+  }
+}
+
+
+#modalContent {
+  width: 100%;
+  height: inherit;
+
+  .pdpTemplate {
+    margin: 0;
+
+    .pdpBar,
+    .pdp__tagline,
+    .shop-pay,
+    .counter-wrapper,
+    .breadcrumbs {
+      display: none;
+    }
+
+    .pdpQuickView__gallery {
+      width: 61%;
+    }
+
+    .pdpQuickView__description {
+      width: 39%;
+      overflow-x: hidden;
+
+      [data-option-label=Color] {
+        display: none;
+      }
+    }
+
+    .pdpMain__container {
+      padding: 0;
+    }
+
+    #productQuantity {
+      pointer-events: none;
+    }
+
+    .pdpMain__gallery-thumbnails,
+    .pdpMain__details {
+      position: static;
+      top: unset;
+      height: 100%;
+      overflow: hidden;
+
+      .cart__button {
+        margin: 0;
+      }
+    }
+
+    .pdpMain__gallery-thumbnails {
+      .slick-current {
+        border: 2px solid #ABABAB;
+      }
+    }
+
+    .pdpMain__details {
+      padding-right: 2px;
+      height: 100%;
+
+      form {
+        display: flex;
+        flex-direction: column;
+        height: inherit;
+        max-height: 550px;
+        overflow-x: hidden;
+        overflow-y: auto;
+
+        &::-webkit-scrollbar-track {
+          border-radius: 10px;
+          background-color: #FFFFFF;
+        }
+
+        &::-webkit-scrollbar {
+          width: 6px;
+          background-color: #FFFFFF;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          border-radius: 10px;
+          -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+          background-color: #f5f5f5;
+        }
+      }
+
+      .pdp__options {
+        margin-top: auto;
+      }
+
+      .option-groups {
+        margin-top: 0;
+      }
+
+      .option-groups__group {
+        padding-top: 0;
+        padding-bottom: 16px;
+      }
+    }
+
+    .pdp__description p {
+      font-size: 14px;
+      line-height: 120%;
+    }
+
+    .pdpMain__gallery-thumbnails {
+      max-width: 47px;
+      height: auto;
+      margin-bottom: 6px;
+    }
+
+    .pdpMain__gallery-wrapper {
+      width: 100%;
+      height: inherit;
+      max-height: 412px;
+      margin: 0;
+      padding: 0 34px 0 13px;
+      overflow: hidden;
+
+      .slick-slide,
+      .slick-list {
+        width: 100%;
+      }
+    }
+
+    .pdpMain__variant-image {
+      padding-top: 100%;
+      margin: 0;
+    }
+
+    .pdpMain__gallery-thumbnails .pdpMain__gallery-thumbnails-item {
+      height: 47px;
+      min-width: 100%;
+    }
+
+    .pdpCopy__header {
+      width: 97%;
+    }
+
+    .pdpCopy__header-title {
+      margin: 0 0 16px;
+      font-family: $font-header;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 26px;
+      line-height: 1em;
+    }
+
+    .pdpCopy__header-price {
+      margin: 0 0 25px;
+      font-family: $font-base;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 1em;
+    }
+
+    #atc-wrapper {
+      margin-top: 8px;
+
+      #quickAdd[disabled] {
+        &:hover {
+          background-color: #000;
+          color: #fff;
+          border: 2px solid transparent;
+        }
+      }
+    }
+  }
+}
+
+modal-dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  transition: all .2s linear;
+  background: rgba(0,0,0,.5);
+  visibility: hidden;
+  opacity: 0;
+  z-index: 10;
+}
+
+modal-dialog[open] {
+  visibility: visible;
+  opacity: 1;
+}
+
+modal-dialog [aria-modal] {
+  position: relative;
+}
+
+modal-dialog .modal-close-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 35px;
+  height: 35px;
+  padding: 8px;
+  background-color: transparent;
+
+  @media screen and (max-width: $mobile) {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+modal-opener {
+  display: block;
+}

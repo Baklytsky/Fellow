@@ -3,6 +3,7 @@
   {%- assign description = collection.metafields.custom_fields["collection_text_module_desc"] -%}
 
   {% if title != blank or description != blank %}
+    <link rel="stylesheet" href="{{ 'section-collection-tm.min.css' | asset_url }}">
     <div class="collectionTM">
       {%- if title != blank -%}
         <h4 class="collectionTM__title">{{ title }}</h4>

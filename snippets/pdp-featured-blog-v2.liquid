@@ -1,4 +1,6 @@
 {%- if product.metafields.custom_fields["show_featured_blog_section"] == 1 -%}
+  <link rel="stylesheet" href="{{ 'section-featured-blog.min.css' | asset_url }}">
+
   {%- assign articles_array = product.metafields.custom_fields["featured_articles"] | default: false -%}
   {%- assign heading = product.metafields.custom_fields["featured_blog_heading"] | default: blog.title -%}
   {%- assign description = product.metafields.custom_fields["featured_blog_description"] | default: false -%}

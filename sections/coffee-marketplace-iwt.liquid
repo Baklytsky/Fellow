@@ -6,26 +6,28 @@
 {%- assign image_position = section.settings.image_position -%}
 
 {%- if heading != blank or description != blank or cta_text != blank or image != blank -%}
-  <section class="cmIWT cmIWT__image--{{ image_position }}">
+  <link rel="stylesheet" href="{{ 'section-coffee-marketplace-iwt.min.css' | asset_url }}">
+
+  <section class="cmImageWithText cmImageWithText__image--{{ image_position }}">
     {%- if image != blank -%}
-      <div class="cmIWT__image rel">
+      <div class="cmImageWithText__image rel">
         {% render 'image', image: image, class_name: 'image-abs-contain', alt: heading, %}
       </div>
     {%- endif -%}
     {%- if heading != blank or description != blank or cta_text != blank -%}
-      <div class="cmIWT__content">
+      <div class="cmImageWithText__content">
         {%- if heading != blank -%}
-          <h2 class="cmIWT__contentHeading m0 cmHeading">
+          <h2 class="cmImageWithText__contentHeading m0 cmHeading">
             {{ heading }}
           </h2>
         {%- endif -%}
         {%- if description != blank -%}
-          <p class="cmIWT__contentDescription cmDescription">
+          <p class="cmImageWithText__contentDescription cmDescription">
             {{ description }}
           </p>
         {%- endif -%}
         {%- if cta_text != blank and cta_link != blank -%}
-          <a href="{{ cta_link }}" class="btn btn--lg btn--dark cmIWT__button">
+          <a href="{{ cta_link }}" class="btn btn--lg btn--dark cmImageWithText__button">
             {{ cta_text | escape }}
           </a>
         {%- endif -%}
@@ -36,7 +38,7 @@
 
 {% schema %}
 {
-  "name": "Marketplace Image & Text",
+  "name": "Images | Split Side 2",
   "settings": [
     {
       "type": "header",
@@ -55,12 +57,12 @@
     {
       "type": "text",
       "id": "cta_text",
-      "label": "Button text"
+      "label": "Button Text"
     },
     {
       "type": "url",
       "id": "cta_link",
-      "label": "Button link"
+      "label": "Button Link"
     },
     {
       "type": "header",
@@ -74,7 +76,7 @@
     {
       "type": "select",
       "id": "image_position",
-      "label": "Image position",
+      "label": "Image Position",
       "options": [
         {
           "value": "left",
@@ -90,7 +92,7 @@
   ],
   "presets": [
     {
-      "name": "Marketplace Image & Text"
+      "name": "Images | Split Side 2"
     }
   ]
 }

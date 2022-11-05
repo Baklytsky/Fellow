@@ -366,21 +366,6 @@
         "text": "<p>Take everything on the move always.Functional Elegance Meets Design, Fellow Coffee Products Elevate Your Coffee Experience. Fellow’s Award-Winning Coffee Products Turn Anyone Into A Coffee Connoisseur. <\/p>"
       }
     },
-    "56d3321d-afc9-408f-ae0c-863d7d78dd69": {
-      "type": "featured-post-blog",
-      "disabled": true,
-      "settings": {
-        "title": "The Blog",
-        "eyebrow": "",
-        "title_location": "left_top",
-        "featuredPost": "",
-        "blog": "",
-        "post_limit": 3,
-        "show_author": false,
-        "show_date": true,
-        "show_view_all": false
-      }
-    },
     "f0d1bd49-b440-4899-a287-63f6c6ad214a": {
       "type": "product-slider",
       "disabled": true,
@@ -427,7 +412,6 @@
     "1664286931317058a0",
     "7b7cfb2c-e3ab-4bd5-bd49-671b9eea9675",
     "1664388097345cae2b",
-    "56d3321d-afc9-408f-ae0c-863d7d78dd69",
     "f0d1bd49-b440-4899-a287-63f6c6ad214a"
   ]
 }

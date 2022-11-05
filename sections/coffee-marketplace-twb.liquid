@@ -8,6 +8,8 @@
 {%- assign text_color = section.settings.text_color -%}
 
 {%- if pre_heading != blank or heading != blank or description != blank or cta_text != blank -%}
+  <link rel="stylesheet" href="{{ 'section-coffee-marketplace-twb.min.css' | asset_url }}">
+
   <section class="cmTWB" style="color: {{ text_color }}; background-color: {{ bg_color }};">
     <div class="cmTWB__wrapper">
       {%- if pre_heading != blank -%}
@@ -30,7 +32,7 @@
 
 {% schema %}
 {
-  "name": "Marketplace Text & Button",
+  "name": "Text | Call Out Banner",
   "settings": [
     {
       "type": "header",
@@ -74,17 +76,17 @@
     {
       "type": "text",
       "id": "cta_text",
-      "label": "Button text"
+      "label": "Button Text"
     },
     {
       "type": "url",
       "id": "cta_link",
-      "label": "Button link"
+      "label": "Button Link"
     },
     {
       "type": "select",
       "id": "cta_style",
-      "label": "Button style",
+      "label": "Button Style",
       "options": [
         {
           "value": "dark",
@@ -100,7 +102,7 @@
   ],
   "presets": [
     {
-      "name": "Marketplace Text & Button"
+      "name": "Text | Call Out Banner"
     }
   ]
 }

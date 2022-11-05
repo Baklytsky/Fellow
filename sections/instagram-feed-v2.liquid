@@ -1,4 +1,6 @@
 {%- if section.settings.enable_section -%}
+  <link rel="stylesheet" href="{{ 'section-instagram.min.css' | asset_url }}">
+
   {%- assign heading = section.settings.heading | default: false -%}
   {%- assign feed_id = section.settings.feed_id | default: false -%}
   {%- assign instagram_name = section.settings.instagram_name | default: false-%}
@@ -25,12 +27,12 @@
 
 {% schema %}
   {
-    "name": "Instagram Feed v2",
+    "name": "Social | Grid Feed",
     "settings": [
       {
         "type": "checkbox",
         "id": "enable_section",
-        "label": "Enable section"
+        "label": "Enable Section"
       },
       {
         "type": "text",
@@ -46,13 +48,13 @@
       {
         "type": "text",
         "id": "instagram_name",
-        "label": "Instagram name",
+        "label": "Instagram Name",
         "default": "@instagramname"
       }
     ],
     "presets": [
       {
-        "name": "Instagram Feed v2",
+        "name": "Social | Grid Feed",
         "category": "Social"
       }
     ]

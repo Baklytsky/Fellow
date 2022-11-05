@@ -1,0 +1,239 @@
+@import '../helpers/_variables.scss';
+
+.FeaturedCollections {
+  display: block;
+  margin: 64px auto 0;
+  width: 100%;
+  max-width: 1440px;
+
+
+  @media screen and (max-width: $tablet) {
+    margin-bottom: 32px;
+    margin-top: 40px;
+  }
+}
+
+.FeaturedCollections__Heading {
+  padding: 0 30px;
+  font-family: $font-header;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 48px;
+  line-height: 1em;
+  text-align: left;
+
+  @media screen and (max-width: $tablet) {
+    padding: 0 16px;
+    font-size: 33px;
+  }
+}
+.FeaturedCollections__TabsWrapper {
+  width: 100%;
+  overflow: hidden;
+}
+
+.FeaturedCollections__TabsHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 25px 40px;
+
+  @media screen and (max-width: $tablet) {
+    flex-direction: column;
+    padding: 25px 0 25px 15px;
+  }
+}
+
+.FeaturedCollections__TabsList {
+  list-style: none;
+  width: 70%;
+  max-width: 1200px;
+  overflow-x: auto;
+  white-space: nowrap;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+
+  @media screen and (max-width: $tablet) {
+    width: 100%;
+    margin-bottom: 25px;
+  }
+
+  li {
+    vertical-align: top;
+    display: inline-block;
+  }
+}
+
+.FeaturedCollections__TabButton {
+  position: relative;
+  padding: 0 1px 10px;
+  margin-right: 70px;
+  background: none;
+  font-family: $font-base;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.125rem;
+  line-height: 24px;
+  color: #585858;
+
+  @media screen and (max-width: $desk) {
+    margin-right: 15px;
+  }
+
+  @media screen and (max-width: $tablet) {
+    margin-right: 7px;
+    padding: 8px 16px;
+    color: $color-black;
+    background-color: $color-dim-white;
+    border-radius: 12px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  &:before {
+    @media screen and (min-width: $tablet) {
+      content: "";
+    }
+
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 5px;
+    background-color: $color-black;
+    transition: all 250ms;
+  }
+
+  &:hover,
+  &[data-selected="true"] {
+    color: $color-black;
+
+    &:before {
+      width: 100%;
+      transition: all 250ms;
+    }
+
+    @media screen and (max-width: $tablet) {
+      background-color: $color-black;
+      color: $color-white;
+    }
+  }
+}
+
+
+.FeaturedCollections__CollectionLink {
+  position: relative;
+  font-family: $font-base;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 26px;
+  text-decoration: none;
+  white-space: nowrap;
+
+  @media screen and (max-width: $tablet) {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: $color-black;
+  }
+}
+
+.FeaturedCollections__ProductsWrapper {
+  margin: 0 25px;
+  padding: 0 25px 0 5px;
+  height: 100%;
+  width: 100%;
+  max-width: calc(100% - 30px);
+
+  @media screen and (max-width: $tablet) {
+    margin: 0 8px;
+    padding: 0;
+    max-width: calc(100% - 16px);
+  }
+
+  .productCard__content {
+    padding: 0 8px 25px;
+  }
+}
+
+.FeaturedCollections__ScrollPrev,
+.FeaturedCollections__ScrollNext {
+  position: absolute;
+  top: 202px;
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+
+  @media screen and (max-width: $tablet) {
+    display: none;
+  }
+}
+
+.FeaturedCollections__ScrollPrev {
+  left: -45px;
+  transform: translate(50%, -50%);
+}
+
+.FeaturedCollections__ScrollNext {
+  right: -25px;
+  transform: translate(-50%, -50%);
+}
+
+.FeaturedCollections__ProductsTabs[data-selected="false"] {
+  .FeaturedCollections__ScrollPrev,
+  .FeaturedCollections__ScrollNext {
+    display: none;
+  }
+}
+
+.FeaturedCollections__ProductsTabs {
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  @media screen and (max-width: $tablet) {
+    flex-wrap: wrap;
+  }
+}
+.FeaturedCollections__Product {
+  width: 100%;
+  min-width: 436px;
+
+  @media screen and (max-width: $tablet) {
+    min-width: unset;
+    max-width: 50%;
+  }
+
+  .productCard {
+    max-width: 420px;
+  }
+}

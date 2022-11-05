@@ -1,0 +1,99 @@
+@import '../helpers/_variables.scss';
+
+.cmHero {
+  margin: calc(var(--header-height) + 45px) auto 0;
+  max-width: 1374px;
+
+  @media screen and (max-width: $tablet) {
+    margin: 0 auto;
+  }
+}
+
+.cmHero__wrapper {
+  min-height: 310px;
+  padding: 45px 33px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media screen and (max-width: $tablet) {
+    min-height: unset;
+    padding: 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.cmHero__wrapper--left {
+  justify-content: flex-start;
+
+  @media screen and (max-width: $tablet) {
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.cmHero__wrapper--right {
+  justify-content: flex-end;
+
+  @media screen and (max-width: $tablet) {
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.cmHero__imageWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  @media screen and (max-width: $tablet) {
+    position: relative;
+    top: unset;
+    left: unset;
+    height: 240px;
+  }
+}
+
+.cmHero__contentWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 680px;
+  padding: 40px;
+  text-align: center;
+  z-index: 1;
+
+  @media screen and (max-width: $tablet) {
+    max-width: 100%;
+    padding: 32px 16px;
+  }
+}
+
+.cmHero__contentHeading {
+  margin: 0;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 48px;
+  line-height: 100%;
+  color: inherit;
+
+  @media screen and (max-width: $tablet) {
+    font-size: 33px;
+  }
+}
+
+.cmHero__contentDescription {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 120%;
+  color: inherit;
+  margin: 8px 0 0;
+
+  @media screen and (max-width: $tablet) {
+    font-size: 16px;
+    line-height: 130%;
+  }
+}

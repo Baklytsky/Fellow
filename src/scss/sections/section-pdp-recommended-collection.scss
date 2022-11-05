@@ -1,0 +1,53 @@
+@import '../helpers/_variables.scss';
+
+.pdpRecCollection {
+  .col-lg-10 {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.pdpRecCollection__slideshow {
+  padding: 0 20px;
+
+  .slick-arrow {
+    background: 0 0;
+    color: #737373;
+    font-size: 1.5rem;
+    transition: all var(--fast) var(--ease);
+
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 40px;
+    z-index: 1;
+
+    &:hover {
+      color: #000000;
+    }
+  }
+
+  .slick-disabled {
+    opacity: 0;
+  }
+
+  .slick-prev {
+    left: -10px;
+  }
+
+  .slick-next {
+    right: -10px;
+  }
+}
+
+.pdpRecCollection__slide {
+  &.slick-slide {
+    display: flex;
+    height: auto;
+    padding: 0 1vw;
+  }
+
+  .productCard {
+    width: 100%;
+  }
+}

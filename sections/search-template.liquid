@@ -4,6 +4,7 @@
 
 
 <section class="searchMain">
+  <search-form>
   <form action="{{ routes.search_url }}" name="GET" role="search" class="searchForm searchFormMain">
     <label for='search-input'>
       <span class='visually-hidden'>Search</span>
@@ -24,6 +25,7 @@
     </button>
     <input type="hidden" name="type" value="product">
   </form>
+  </search-form>
   
   {%- capture popular_section -%}
     {%- if settings.popular_section_enable -%}
@@ -271,7 +273,6 @@
               <div class="searchMain__searchSize hidden-md-down">{{ 'general.search.count_results' | t: results_count: visible_results }}</div>
               
               <div class="collection__products-results">
-                <div data-terms="{{ search.terms }}" data-result-count="{{ visible_results }}" class="hide"></div>
                 <div class="subcollection__products one-third">
                   {{ search_content }}
                 </div>
@@ -311,7 +312,7 @@
 
 {% schema %}
 {
-  "name": "Search template",
+  "name": "Search Template",
   "settings": []
 }
 {% endschema %}

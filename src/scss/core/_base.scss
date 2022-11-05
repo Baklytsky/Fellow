@@ -1,0 +1,285 @@
+@import '../helpers/_variables';
+
+html,
+body {
+	margin: 0
+}
+
+html {
+	box-sizing: border-box;
+	-ms-overflow-style: scrollbar
+}
+
+html {
+	font-size: 16px
+}
+
+@media screen and (max-width: 991.98px) {
+	html {
+		font-size: 14px
+	}
+}
+
+body {
+	font-style: normal;
+	font-weight: 400;
+	color: #000;
+	font-family: $font-base;
+	font-size: 16px;
+	-webkit-tap-highlight-color: transparent;
+	-webkit-font-smoothing: antialiased;
+	overflow-x: hidden;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+a,
+button,
+[role="button"],
+input,
+label,
+select,
+textarea {
+	touch-action: manipulation;
+}
+
+form {
+	margin: 0;
+}
+
+input,
+textarea,
+select {
+	display: inline-block;
+	outline: none;
+	border-radius: 0;
+	border: 1px solid #000;
+	position: relative;
+	font-size: inherit;
+	font-family: inherit;
+	background-color: transparent;
+}
+
+textarea {
+	max-width: 100%;
+	overflow: auto;
+	resize: vertical;
+}
+
+:root {
+	--slow: .33s;
+	--medium: .25s;
+	--fast: .15s;
+	--ease: ease-in-out;
+	--cubic: cubic-bezier(.12, .67, .53, 1)
+}
+
+:root {
+	--white: white;
+	--xlightgrey: whitesmoke;
+	--lightgrey: #e7e8e6;
+	--grey: #969696;
+	--darkgrey: #444444;
+	--black: black;
+	--newblack: #0f0a0f;
+	--matteblack: #141414;
+	--polishedsteel: #dae0e4;
+	--orange: #c3672c;
+	--green: #6cc7b5;
+	--lightblue: #1290ce;
+	--blue: #344FDA;
+	--darkblue80: #495168;
+	--darkblue: #262c4d;
+	--navy: #202944;
+	--clydePurple: #d1b3d3
+}
+
+form {
+	margin: 0
+}
+
+ol,
+ul {
+	list-style: none;
+	padding: 0;
+	margin: 0
+}
+
+ul.list,
+ol.list {
+	padding-left: 2em
+}
+
+ol.list {
+	list-style: decimal
+}
+
+ul.list {
+	list-style: disc
+}
+
+.page-wrapper {
+	width: 100%;
+	max-width: 1440px;
+	margin: 0 auto;
+	padding-right: 33px;
+	padding-left: 33px;
+}
+
+@media screen and (max-width: $tablet) {
+	.page-wrapper {
+		padding-right: 16px;
+		padding-left: 16px;
+	}
+}
+
+.lazyload,
+.lazyloading {
+	opacity: 0;
+}
+
+.image-loader {
+	position: absolute;
+	display: flex;
+	height: 100%;
+	width: 100%;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	top: 0;
+	opacity: 0;
+	visibility: hidden;
+	margin: auto;
+	pointer-events: none;
+	z-index: -1;
+	overflow: hidden;
+	text-align: center;
+	font-size: 12px;
+	font-weight: 400;
+}
+
+.lazyload ~ .image-loader {
+	opacity: 1;
+	visibility: visible;
+	z-index: 2;
+}
+
+slide-toggle,
+toggle-tabs {
+	display: block;
+}
+
+.page.module {
+	padding-top: 80px;
+}
+
+@media screen and (max-width: 991.98px) {
+	.page.module {
+		margin-top: 45px;
+	}
+}
+
+.jsPrevSlide,
+.jsNextSlide {
+	position: absolute;
+	top: 50%;
+	width: 29px;
+	height: 29px;
+	transform: translateY(-50%);
+	color: inherit;
+	background-color: transparent;
+	z-index: 2;
+}
+
+.jsPrevSlide {
+	left: 0;
+
+	@media screen and (max-width: $large_desk) {
+		left: -50px;
+	}
+
+	@media screen and (max-width: $tablet) {
+		left: 25px;
+		color: #000000;
+	}
+}
+
+.jsNextSlide {
+	right: 0;
+
+	@media screen and (max-width: $large_desk) {
+		right: -50px;
+	}
+
+	@media screen and (max-width: $tablet) {
+		right: 25px;
+		color: #000000;
+	}
+}
+
+.image-abs-cover {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-position: center;
+	object-fit: cover;
+}
+
+.image-abs-contain {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-position: center;
+	object-fit: contain;
+}
+
+.image-abs-scale-down {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-position: center;
+	object-fit: scale-down;
+}
+
+#conjured_referral {
+	input,
+	select,
+	textarea {
+		border: 1px solid #000;
+	}
+}
+
+@keyframes pulse {
+	0% {opacity: 1;}
+	20% {opacity: .7;}
+	40% {opacity: .5;}
+	60% {opacity: .3;}
+	80% {opacity: .5;}
+	100% {opacity: 1;}
+}
+
+.kl-private-reset-css-Xuajs1 > input,
+.kl-private-reset-css-Xuajs1 > .go2323703347,
+.kl-private-reset-css-Xuajs1 > .go581579764,
+.kl-private-reset-css-Xuajs1 > .go1867856768,
+.kl-private-reset-css-Xuajs1 > .go1245633538 {
+	border-radius: 12px !important;
+}
+
+.SectionPadding {
+	padding: 32px 0;
+
+	@media screen and (max-width: $tablet) {
+		padding: 16px 0;
+	}
+}

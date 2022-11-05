@@ -7,6 +7,8 @@
 {%- assign text_block_position = section.settings.text_block_position -%}
 
 {%- if desktop_image != blank or mobile_image != blank  or heading != blank  or description != blank -%}
+  <link rel="stylesheet" href="{{ 'section-coffee-marketplace-hero.min.css' | asset_url }}">
+
   <section class="cmHero">
     <div class="cmHero__wrapper rel cmHero__wrapper--{{ text_block_position }}">
       {%- if desktop_image != blank or mobile_image != blank -%}
@@ -48,7 +50,7 @@
 
 {% schema %}
 {
-  "name": "Marketplace Hero",
+  "name": "Hero | Overlay",
   "settings": [
     {
       "type": "header",
@@ -57,12 +59,12 @@
     {
       "type": "image_picker",
       "id": "desktop_image",
-      "label": "Desktop image"
+      "label": "Desktop Image"
     },
     {
       "type": "image_picker",
       "id": "mobile_image",
-      "label": "Mobile image"
+      "label": "Mobile Image"
     },
     {
       "type": "header",
@@ -81,7 +83,7 @@
     {
       "type": "select",
       "id": "text_block_position",
-      "label": "Text position",
+      "label": "Text Position",
       "options": [
         {
           "value": "left",
@@ -105,19 +107,19 @@
     {
       "type": "color",
       "id": "text_color",
-      "label": "Text color",
+      "label": "Text Color",
       "default": "#000000"
     },
     {
       "type": "color",
       "id": "text_block_bg_color",
-      "label": "Text background",
+      "label": "Text Background",
       "default": "#FFFFFF"
     }
   ],
   "presets": [
     {
-      "name": "Marketplace Hero"
+      "name": "Hero | Overlay"
     }
   ]
 }

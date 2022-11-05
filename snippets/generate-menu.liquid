@@ -41,7 +41,7 @@
             <li class="megaMenu__item {% if mega_item.links != blank %} megaMenu__itemBold {% endif %}">
               <{% if mobile_menu == true and mega_item.links != blank %}slide-toggle{% else %}a href="{{ mega_item.url }}" {% endif %}
                  class="newHeader__link {% if mega_item.links == blank %}linkBlack{% else %}newHeader__button{% endif %}"
-                      {% if mega_item.links != blank %}data-slide-toggle="{{ item.title | append: mega_item.title | append: forloop.index | handleize }}"{% endif %}>
+                      {% if mega_item.links != blank %}data-slide-target="{{ item.title | append: mega_item.title | append: forloop.index | handleize }}"{% endif %}>
                 {{ mega_item.title }}
                 {%- if mobile_menu == true and mega_item.links != blank -%}
                   {%- render 'icon', icon: 'arrow' -%}
@@ -50,7 +50,7 @@
 
               {%- if mega_item.links != blank -%}
                 <ul class="megaMenu__subMenuList subMenuList"
-                    {% if mobile_menu == true and mega_item.links != blank %}data-slide-target="{{ item.title | append: mega_item.title | append: forloop.index | handleize }}"{% endif %}>
+                    {% if mobile_menu == true and mega_item.links != blank %}data-slide-content="{{ item.title | append: mega_item.title | append: forloop.index | handleize }}"{% endif %}>
                   {%- for sub_item in mega_item.links -%}
                     <li class="subMenuList__item">
                       <a data-selected="false" class="newHeader__link linkBlack"

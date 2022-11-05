@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="{{ 'section-pdp-compare.min.css' | asset_url }}">
+<script src="{{ 'component-pdp-compare.min.js' | asset_url }}" defer="defer"></script>
 {% if product.metafields.custom_fields["enable_compare_products"] == 1 %}
   {% assign compare_product_array = product.metafields.custom_fields["compare_products_list"] %}
   {%- assign compare_product_array_size = '' -%}

@@ -1,0 +1,15 @@
+class PdpLearnMore extends HTMLElement {
+  constructor() {
+    super();
+    this.items = this.querySelectorAll('.pdpLearnMore__dropdown-link-item')
+    this.learnMoreBtn = this.querySelector('.pdpLearnMore__dropdown-view-all')
+    if (this.learnMoreBtn) this.learnMoreBtn.addEventListener('click', () => this.showMore())
+  }
+
+  showMore() {
+    this.items.forEach((item => item.style.removeProperty('display')))
+    this.learnMoreBtn.classList.add('is-hidden')
+  }
+}
+
+customElements.define('pdp-learn-more', PdpLearnMore);

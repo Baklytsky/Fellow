@@ -1,6 +1,3 @@
-{% comment %} Metafield represents index as 1, 2, 3, 4, etc. {% endcomment %}
-{% assign product_image_index = 0 %}
-
 {% paginate collection.products by 1000 %}
 
 {% if collection.metafields.custom_fields["desktop_masthead_image"] != blank %}
@@ -11,6 +8,10 @@
 {% endif %}
 {%- assign collection_title = collection.title -%}
 
+{%- comment -%} /// Check custom "shop by use" title  /// {%- endcomment -%}
+{% if collection.metafields["custom_fields"]["custom_shop_by_use_title"] != blank %}
+  {%- assign custom_shop_by_use_title = collection.metafields["custom_fields"]["custom_shop_by_use_title"] -%}
+{% endif %}
 {%- comment -%} /// Hidden "sizes" in filters  /// {%- endcomment -%}
 {%- assign hidden_sizes_arr = false -%}
 {%- if collection.metafields["custom_fields"]["shown_sizes"] != blank -%}
@@ -38,7 +39,22 @@
     %}
   {% endif %}
 
-  <collection-facets class='collection-wrapper' data-template="{{ template.suffix }}">
+  {%- assign priority_variants = collection.metafields["custom_fields"]["priority_variants_with"] | default: false -%}
+
+  {%- if priority_variants -%}
+    {%- case priority_variants -%}
+    {%- when 'Sale' -%}
+    {%- assign priority_variants_value = 'sale' -%}
+    {%- when 'New colors' -%}
+    {%- assign priority_variants_value = 'new-color' -%}
+    {%- when 'Best selling' -%}
+    {%- assign priority_variants_value = 'best-selling-variant' -%}
+    {%- endcase -%}
+  {%- endif -%}
+
+  <collection-facets class='collection-wrapper'
+                     data-template="{{ template.suffix | default: 'default' }}"
+                    {% if priority_variants %} data-priority="{{ priority_variants_value }}"{% endif %}>
     {%- if template.suffix == 'by-product-with-subcollection'
       and collection.metafields["custom_fields"]["subcollection_list"] != blank -%}
       {%- assign subcollection_counter = 0 -%}
@@ -55,11 +71,20 @@
                 {%- if subcollection != blank -%}
                 {%- assign subcollection_counter = subcollection_counter | plus: 1 -%}
                 {%- if subcollection_counter != 1 -%},{%- endif -%}{
+                {%- for item in subcollection.metafields["custom_fields"]["custom_filter_field_1"] -%}
+                  {%- assign custom_filter_title_1 = item["title_1"] -%}
+                {%- endfor -%}
+                {%- for item in subcollection.metafields["custom_fields"]["custom_filter_field_2"] -%}
+                  {%- assign custom_filter_title_2 = item["title_2"] -%}
+                {%- endfor -%}
                   "title": "{{ title }}",
                   "description": {{ description | newline_to_br | json }},
                   "order": "{{ order | minus: 2 }}",
                   "url": "{{ subcollection.url }}",
                   "link_text": "{{'collections.general.link_text' | t }}",
+                  "shop_by_use_title": {{ subcollection.metafields["custom_fields"]["custom_shop_by_use_title"] | default: 'Shop By Use' | json }},
+                  "custom_filter_1_title": {{ custom_filter_title_1 | json }},
+                  "custom_filter_2_title": {{ custom_filter_title_2 | json }},
                   "shown_sizes_arr": {{ shown_sizes_arr | json }},
                   "shown_shop_by_use_arr": {{ shown_shop_by_use_tags_arr | json }}
                 }
@@ -128,7 +153,7 @@
       {
         "type": "checkbox",
         "id": "show_breadcrumbs",
-        "label": "Show breadcrumbs",
+        "label": "Show Breadcrumbs",
         "default": true
       }
     ]

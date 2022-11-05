@@ -1,0 +1,294 @@
+@import '../helpers/_variables.scss';
+
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, .drawerItem__title, h5, .h5, h6, .h6 {
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: normal
+}
+
+@media screen and (max-width: 991.98px) {
+  h1, .h1, h2, .h2, h3, .h3, h4, .h4, .drawerItem__title, h5, .h5, h6, .h6 {
+    margin: 1em 0
+  }
+}
+
+.h0 {
+  font-size: calc((70 / 16) * 1rem);
+  letter-spacing: 0
+}
+
+@media screen and (max-width: 991.98px) {
+  .h0 {
+    font-size: calc((54 / 16) * 1rem)
+  }
+}
+
+.s1, h1, .h1 {
+  font-size: 3rem;
+  line-height: 1;
+  font-weight: 500;
+
+}
+
+@media screen and (max-width: 991.98px) {
+  .s1, h1, .h1 {
+    font-size: 2.36rem
+  }
+}
+
+.s2, h2, .h2 {
+  font-size: calc((40 / 16) * 1rem);
+  line-height: 1.2
+}
+
+@media screen and (max-width: 991.98px) {
+  .s2, h2, .h2 {
+    font-size: 1.75rem
+  }
+}
+
+.s3, h3, .h3 {
+  font-size: 1.625rem;
+  line-height: 1;
+}
+
+@media screen and (max-width: 991.98px) {
+  .s3, h3, .h3 {
+    font-size: 1.5rem
+  }
+}
+
+.s4, h4, .h4, .drawerItem__title {
+  font-size: calc((24 / 16) * 1rem);
+  line-height: 1.4
+}
+
+@media screen and (max-width: 991.98px) {
+  .s4, h4, .h4, .drawerItem__title {
+    font-size: 1.25rem
+  }
+}
+
+.s5, h5, .h5 {
+  font-size: calc((20 / 16) * 1rem);
+  line-height: 1.5
+}
+
+.s6, h6, .h6 {
+  font-size: calc((14 / 16) * 1rem)
+}
+
+h6, .h6 {
+  line-height: 1.5
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-header;
+}
+
+p,
+.p {
+  font-size: 1rem
+}
+
+p,
+.p {
+  line-height: 1.6
+}
+
+a {
+  color: inherit;
+  text-decoration: none
+}
+
+a.underline {
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: .75rem;
+  font-weight: 700;
+  transition: all .25s;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 0px;
+  position: relative
+}
+
+a.underlineArrow {
+  padding-right: 10px
+}
+
+a.underlineArrow:after {
+  text-decoration: none;
+  transition: all .25s;
+  content: "";
+  position: absolute;
+  right: 0px;
+  top: 50%;
+  transform: translateY(-4px);
+  border-left: .25em solid currentColor;
+  border-top: .25em solid transparent;
+  border-bottom: .25em solid transparent
+}
+
+a.underlineArrow:hover {
+  opacity: 1
+}
+
+a.underlineArrow:hover:after {
+  right: -6px
+}
+
+a.underline:hover {
+  opacity: .75
+}
+
+hr {
+  display: block;
+  border: 0;
+  margin: 0;
+  height: 1px;
+  width: 100%;
+  background-color: currentColor;
+  color: inherit
+}
+
+small,
+.small {
+  font-size: calc((14 / 16) * 1rem)
+}
+
+.xxsmall {
+  font-size: calc((10 / 16) * 1rem)
+}
+
+.xsmall {
+  font-size: calc((12 / 16) * 1rem)
+}
+
+strong,
+.b {
+  font-weight: bold
+}
+
+em,
+.i {
+  font-style: italic
+}
+
+.caps {
+  text-transform: capitalize;
+}
+
+.no-under {
+  text-decoration: none
+}
+
+.strike {
+  text-decoration: line-through
+}
+
+.light {
+  font-weight: 300
+}
+
+.book,
+.regular,
+.medium {
+  font-weight: 400
+}
+
+.medium {
+  font-weight: 500
+}
+
+.semi {
+  font-weight: 700
+}
+
+.bold {
+  font-weight: 800
+}
+
+.track--xNarrow {
+  letter-spacing: .025em
+}
+
+.track--narrow {
+  letter-spacing: .05em
+}
+
+.track {
+  letter-spacing: .1em
+}
+
+.track--wide {
+  letter-spacing: .3em
+}
+
+.link-hover {
+  transition: all var(--fast) var(--ease)
+}
+
+.link-hover:hover {
+  color: var(--yellow)
+}
+
+.rte a {
+  text-decoration: underline;
+  font-weight: 500
+}
+
+@media screen and (min-width: 992px) {
+  .t-vertical {
+    margin: 0;
+    transform-origin: left top;
+    transform: rotate(-90deg) translateX(-100%);
+    text-align: right;
+    white-space: nowrap;
+    position: absolute
+  }
+}
+
+.eyebrow {
+  font-size: calc((12 / 16) * 1rem);
+  font-weight: 700;
+  line-height: 1.15;
+  text-transform: uppercase;
+  letter-spacing: normal;
+  margin-bottom: .5em
+}
+
+.articleCard__header > .eyebrow {
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 100%;
+  text-transform: capitalize;
+  letter-spacing: normal;
+  margin-bottom: 1rem
+}
+
+.articleCard__header > h2.h4 {
+  font-size: 1.625rem;
+  font-weight: 500;
+  line-height: 100%;
+  text-transform: capitalize;
+  letter-spacing: normal;
+  min-height: 3.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.articleCard__excerpt {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* number of lines to show */
+  -webkit-box-orient: vertical;
+  line-height: 1.25rem;
+}
+
+a.underline {
+  text-transform: capitalize;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+}

@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="{{ 'section-accessibility-popup.min.css' | asset_url }}">
+
 {%- if section.settings.btn_text != blank -%}
   <modal-opener class="accessibility__opener {% unless section.settings.test_mode %}visually-hidden{% endunless %}"
                 data-modal="#PopupModal--accessibility">
@@ -42,7 +44,7 @@
       {
         "type": "text",
         "id": "btn_text",
-        "label": "Button text",
+        "label": "Button Text",
         "info": "This button is invisible to the average user and only appears when the screen reader is activated"
       },
       {
@@ -57,12 +59,12 @@
       },
       {
         "type": "header",
-        "content": "Test mode"
+        "content": "Test Mode"
       },
       {
         "type": "checkbox",
         "id": "test_mode",
-        "label": "Enable test mode",
+        "label": "Enable Test Mode",
         "info": "In this mode, the button will be visible to all users."
       }
     ]

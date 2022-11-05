@@ -1,0 +1,40 @@
+@import '../helpers/_variables.scss';
+
+.quick-links {
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem
+}
+
+@media screen and (min-width: 768px) {
+  .quick-links {
+    text-align: left;
+    margin-top: 6rem;
+    margin-bottom: 6rem
+  }
+}
+
+@media screen and (max-width: 767.98px) {
+  .quick-links__heading {
+    padding-bottom: .5em
+  }
+}
+
+.quick-links__item {
+  display: block;
+  border-bottom: 1px solid var(--xlightgrey);
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.quick-links__item:first-child {
+  border-top: 1px solid var(--xlightgrey)
+}
+
+@media screen and (min-width: 768px) {
+  .quick-links__item {
+    width: calc(50% - 1.5vw)
+  }
+  .quick-links__item:nth-child(2) {
+    border-top: 1px solid var(--xlightgrey)
+  }
+}

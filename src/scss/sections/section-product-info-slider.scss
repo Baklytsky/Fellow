@@ -1,0 +1,162 @@
+@import '../helpers/_variables.scss';
+
+.ProductInfoSlider {
+  position: relative;
+  padding: 32px 16px;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+
+  .slick-dots {
+    padding: 35px 0 0;
+    justify-content: flex-start;
+    margin: 0;
+
+    li {
+      width: 14px;
+      height: 14px;
+      margin: 0 16px 0 0;
+
+      button {
+        width: 100%;
+        height: 100%;
+        border-radius: 100px;
+        background-color: #DBDBDB;
+      }
+    }
+    .slick-active button {
+      background-color: $color-dim-black;
+    }
+  }
+}
+.ProductInfoSlider__Wrapper {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 900px;
+
+}
+.ProductInfoSlider__Item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media screen and (max-width: $tablet) {
+    flex-direction: column;
+  }
+}
+.ProductInfoSlider__ImageWrapper {
+  width: 100%;
+  max-width: 440px;
+}
+.ProductInfoSlider__Image {
+  object-fit: cover;
+  -o-object-fit: cover;
+  object-position: center;
+  -o-object-position: center;
+}
+.ProductInfoSlider__Content {
+  width: 100%;
+  padding-left: 25px;
+
+  @media screen and (max-width: $tablet) {
+    padding: 25px 0 0;
+  }
+}
+.ProductInfoSlider__ProductInfo {
+  margin-bottom: 25px;
+
+  @media screen and (max-width: $tablet) {
+    margin-bottom: 8px;
+  }
+}
+.ProductInfoSlider__ProductTitle {
+  font-family: $font-base;
+  font-size: 24px;
+  line-height: 1.2em;
+
+  @media screen and (max-width: $tablet) {
+    font-size: 20px;
+  }
+}
+.ProductInfoSlider__Header {
+  margin: 0 0 25px;
+  font-family: $font-header;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 2.375rem;
+  line-height: 1em;
+
+  @media screen and (max-width: $tablet) {
+    font-size: 30px;
+  }
+}
+
+.ProductInfoSlider__Description {
+  margin-bottom: 25px;
+
+  @media screen and (max-width: $tablet) {
+    margin-bottom: 8px;
+  }
+
+  p {
+    margin: 0;
+    font-family: $font-base;
+    font-size: 20px;
+    line-height: 1.2em;
+    font-weight: 400;
+
+    @media screen and (max-width: $tablet) {
+      font-size: 16px;
+      line-height: 1.3em;
+    }
+  }
+}
+.ProductInfoSlider__Link {
+  display: inline-block;
+  font-family: $font-base;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  border-bottom: 1px solid $color-black;
+
+  @media screen and (max-width: $tablet) {
+    font-size: 16px;
+    line-height: 20px;
+  }
+}
+.ProductInfoSlider__Arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateX(-50%);
+  background: transparent;
+  border: transparent;
+  padding: 20px;
+  line-height: 0;
+
+
+  @media screen and (max-width: $tablet){
+    display: none;
+  }
+
+  i {
+    display: inline-block;
+    color: transparent;
+    width: 0;
+    height: 0;
+    font-size: 1px;
+  }
+
+  .icon {
+    width: 20px;
+    height: 20px;
+    display: block;
+  }
+}
+.ProductInfoSlider__ArrowPrev {
+  left: 0;
+  transform: translateY(-50%);
+}
+.ProductInfoSlider__ArrowNext {
+  right: 0;
+  transform: translateY(-50%);
+}

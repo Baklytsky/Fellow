@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="{{ 'section-logo-text.min.css' | asset_url }}">
+
 {%- if section.settings.enable_section -%}
   {%- assign text = section.settings.text -%}
   {%- assign url = section.settings.url -%}
@@ -19,13 +21,13 @@
 
 {% schema %}
   {
-    "name": "Logo text",
+    "name": "Text | Highlight",
     "class": "m0",
     "settings": [
       {
         "type": "checkbox",
         "id": "enable_section",
-        "label": "Enable section",
+        "label": "Enable Section",
         "default": true
       },
       {
@@ -41,12 +43,12 @@
       {
         "type": "image_picker",
         "id": "icon",
-        "label": "Logo icon"
+        "label": "Logo Icon"
       }
     ],
     "presets": [
       {
-        "name": "Logo text",
+        "name": "Text | Highlight",
         "category": "v1 | Homepage Modules"
       }
     ]

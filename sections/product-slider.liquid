@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="{{ 'section-product-info-slider.min.css' | asset_url }}">
+
 {%- if section.settings.enable_section -%}
   {%- assign blocks = section.blocks -%}
 
@@ -117,25 +119,25 @@
 
 {% schema %}
 {
-  "name": "Product Info Slider",
+  "name": "Images | Slider",
   "settings": [
     {
       "type": "checkbox",
       "id": "enable_section",
-      "label": "Enable section",
+      "label": "Enable Section",
       "default": true
     },
     {
       "type": "checkbox",
       "id": "show_dots",
-      "label": "Show dots",
+      "label": "Show Dots",
       "info": "Mobile only",
       "default": false
     },
     {
       "type": "checkbox",
       "id": "show_arrows",
-      "label": "Show arrows",
+      "label": "Show Arrows",
       "info": "Desktop only",
       "default": false
     }
@@ -163,18 +165,18 @@
         {
           "type": "richtext",
           "id": "description",
-          "label": "Description text"
+          "label": "Description Text"
         },
         {
           "type": "text",
           "id": "link_text",
-          "label": "Link text",
+          "label": "Link Text",
           "info": "By Default: 'See product'"
         },
         {
           "type": "url",
           "id": "link_url",
-          "label": "Link url",
+          "label": "Link URL",
           "info": "By Default: PRODUCT_URL"
         }
       ]
@@ -182,7 +184,7 @@
   ],
   "presets": [
     {
-      "name": "Product Info Slider",
+      "name": "Images | Slider",
       "category": "Homepage Sections"
     }
   ]

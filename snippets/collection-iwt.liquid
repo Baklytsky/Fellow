@@ -1,20 +1,24 @@
 {%- if collection.metafields.custom_fields["show_collection_iwt"] == 1 -%}
+  <link rel="stylesheet" href="{{ 'section-collection-iwt.min.css' | asset_url }}">
+
   {%- assign collection_iwt_bg = collection.metafields.custom_fields["collection_iwt_background"] | default: 'transparent' -%}
+  {%- assign collection_iwt_text_color = collection.metafields.custom_fields["collection_iwt_text_color"] | default: '#000000' -%}
   {%- assign collection_iwt_image = collection.metafields.custom_fields["collection_iwt_image"] -%}
   {%- assign collection_iwt_image_mobile = collection.metafields.custom_fields["collection_iwt_image_mobile"] -%}
   {%- assign collection_iwt_image_position = collection.metafields.custom_fields["collection_iwt_image_position"] -%}
   {%- assign collection_iwt_title = collection.metafields.custom_fields["collection_iwt_title"] -%}
   {%- assign collection_iwt_description = collection.metafields.custom_fields["collection_iwt_description"] -%}
-  {%- assign collection_iwt_btn_text = collection.metafields.custom_fields["collection_iwt_button_text"] | default:  'Shop Now' -%}
+  {%- assign collection_iwt_btn_text = collection.metafields.custom_fields["collection_iwt_button_text"] | default: 'Shop Now' -%}
   {%- assign collection_iwt_btn_url = collection.metafields.custom_fields["collection_iwt_button_url"] -%}
+  {%- assign collection_iwt_btn_type = collection.metafields.custom_fields["collection_iwt_button_type"] | default: 'black' -%}
 
-  <div class="collectionIWT" style="background-color: {{ collection_iwt_bg }}">
+  <div class="collectionIWT" style="background-color: {{ collection_iwt_bg }}; color: {{ collection_iwt_text_color }}">
     <div class="collectionIWT__wrapper {% if collection_iwt_image_position == 'Right' %}row-reverse{% endif %}">
       {%- if collection_iwt_image != blank -%}
-        {%- assign image_class = 'image image-abs-cover' -%}
+        {%- assign image_class = 'image image-abs-contain' -%}
 
         {%- if collection_iwt_image_mobile != blank -%}
-          {%- assign image_class = 'image image-abs-cover hide-tablet' -%}
+          {%- assign image_class = 'image image-abs-contain hide-tablet' -%}
         {%- endif -%}
         <div class="collectionIWT__media rel">
           {% render 'image-lazy-metafields',
@@ -25,7 +29,7 @@
           {%- if collection_iwt_image_mobile != blank -%}
             {% render 'image-lazy-metafields',
               image: collection_iwt_image_mobile,
-              class_name: 'image image-abs-cover hide-tablet-desk',
+              class_name: 'image hide-tablet-desk',
               alt: collection_iwt_title,
               size: 'medium' %}
           {%- endif -%}
@@ -45,7 +49,7 @@
           {%- endif -%}
           {%- if collection_iwt_btn_url != blank -%}
             <a href="{{ collection_iwt_btn_url }}"
-               class="collectionIWT__contentLink btn--dark">
+               class="collectionIWT__contentLink btn--{{ collection_iwt_btn_type }}">
               {{ collection_iwt_btn_text }}
             </a>
           {%- endif -%}

@@ -1,0 +1,24 @@
+@import '../helpers/_variables';
+
+.open-html {
+  display: flex;
+  flex-wrap: wrap;
+
+  .open-html-item {
+    width: 50%;
+  }
+
+  .open-html-item.open-html-item--single {
+    width: 100%;
+  }
+
+  @media screen and (max-width: $large_desk) {
+    flex-direction: column;
+    flex: unset;
+
+    .open-html-item,
+    .open-html-item.open-html-item--single {
+      width: 100%;
+    }
+  }
+}

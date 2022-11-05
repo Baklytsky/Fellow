@@ -8,6 +8,7 @@
   {%- assign cta_color = section.settings.cta_color -%}
 
   {%- if section.blocks.size > 0 or description or cta_title -%}
+    <link rel="stylesheet" href="{{ 'section-featured-blog.min.css' | asset_url }}">
 
     {%- capture 'slick-config' -%}
       {
@@ -105,11 +106,7 @@
 
 {% schema %}
   {
-    "name": {
-      "en": "Blog posts v2",
-      "de": "Blogposts v2",
-      "fr": "Articles de blog v2"
-    },
+    "name": "Blogs | Featured Articles",
     "settings": [
       {
         "type": "text",
@@ -136,12 +133,12 @@
       {
         "type": "url",
         "id": "cta_url",
-        "label": "CTA url"
+        "label": "CTA Url"
       },
       {
         "type": "radio",
         "id": "cta_color",
-        "label": "CTA color",
+        "label": "CTA Color",
         "options": [
           {
             "value": "btn--light",
@@ -157,20 +154,20 @@
       {
         "type": "color",
         "id": "bg_color",
-        "label": "Background color",
+        "label": "Background Color",
         "default": "#000000"
       },
       {
         "type": "color",
         "id": "text_color",
-        "label": "Text color",
+        "label": "Text Color",
         "default": "#ffffff"
       }
     ],
     "blocks": [
       {
         "type": "article",
-        "name": "article",
+        "name": "Article",
         "settings": [
           {
             "type": "article",
@@ -182,11 +179,7 @@
     ],
     "presets": [
       {
-        "name": {
-          "en": "Blog Posts | v2",
-          "de": "Blogposts | v2",
-          "fr": "Articles de blog | v2"
-        },
+        "name": "Blogs | Featured Articles",
         "category": "v1 | Homepage Modules"
       }
     ]

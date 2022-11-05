@@ -1,7 +1,7 @@
 <div class="pdpInfo">
   {%- if product.description != blank -%}
     <div class="pdpInfo-item dropdown">
-      <slide-toggle class="dropdownHeader active" data-slide-toggle="product-description">
+      <slide-toggle class="dropdownHeader active" data-slide-target="product-description">
         <h3 class="dropdownHeader-title">
           Overview
         </h3>
@@ -9,7 +9,7 @@
           {% render 'icon' with 'dropdown' %}
         </div>
       </slide-toggle>
-      <div class="dropdownContent active" data-slide-target="product-description">
+      <div class="dropdownContent active" data-slide-content="product-description">
         <div class="dropdownContent--animate-block dropdownContent--animate-block-visible">
           <p>{{ product.description }}</p>
         </div>
@@ -22,7 +22,7 @@
         {%- assign handle = item["product_info_heading_new"] | handleize -%}
         <div class="pdpInfo-item dropdown">
           <slide-toggle class="dropdownHeader {% if product.description == blank and forloop.first %}active{% endif %}"
-                        data-slide-toggle="{{ handle }}">
+                        data-slide-target="{{ handle }}">
             <h3 class="dropdownHeader-title">
               {{ item["product_info_heading_new"]}}
             </h3>
@@ -31,7 +31,7 @@
             </div>
           </slide-toggle>
           <div class="dropdownContent"
-               data-slide-target="{{ handle }}">
+               data-slide-content="{{ handle }}">
             <div class="dropdownContent--animate-block dropdownContent--animate-block-visible">
               <p>{{ item["product_info_content_new"] }}</p>
             </div>

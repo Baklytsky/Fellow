@@ -1,4 +1,5 @@
 {% if page.metafields.custom_fields["quick_links"] != blank %}
+  <link rel="stylesheet" href="{{ 'section-page-quick-links.min.css' | asset_url }}">
   <div class="quick-links container--l ac">
     {% if page.metafields.custom_fields["quicklinks_heading"] != blank %}
       <h3 class="quick-links__heading caps">{{ page.metafields.custom_fields["quicklinks_heading"] }}</h3>

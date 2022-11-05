@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="{{ 'section-featured-collections.min.css' | asset_url }}">
+<script src="{{ 'section-featured-collections.min.js' | asset_url }}" defer="defer"></script>
 {%- if section.settings.enable_section -%}
   {%- assign heading = section.settings.heading | default: false -%}
   {%- assign blocks = section.blocks -%}
@@ -97,28 +99,24 @@
 
 {% schema %}
 {
-  "name": {
-    "en": "Featured Collections",
-    "de": "Featured Kategories",
-    "fr": "Collections vedette"
-  },
+  "name": "Products | Collection",
   "settings": [
     {
       "type": "checkbox",
       "id": "enable_section",
-      "label": "Enable section",
+      "label": "Enable Section",
       "default": true
     },
     {
       "type": "text",
       "id": "heading",
-      "label": "Section heading"
+      "label": "Section Heading"
     },
     {
       "type": "range",
       "id": "limit",
       "label": {
-        "en": "Product limit"
+        "en": "Product Limit"
       },
       "info": "Select first products from collections",
       "min": 2,
@@ -141,7 +139,7 @@
         {
           "type": "text",
           "id": "tab_text",
-          "label": "Tab Button text",
+          "label": "Tab Button Text",
           "info": "By Default: 'COLLECTION_TITLE'"
         },
         {
@@ -170,16 +168,8 @@
   ],
   "presets": [
     {
-      "name": {
-        "en": "Featured Collections",
-        "de": "Featured Kategories",
-        "fr": "Collections vedette"
-      },
-      "category": {
-        "en": "Collection",
-        "de": "Kategorie",
-        "fr": "Collection"
-      }
+      "name": "Products | Collection",
+      "category": "Collection"
     }
   ]
 }

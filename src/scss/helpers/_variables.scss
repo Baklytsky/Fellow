@@ -1,0 +1,28 @@
+/* Colors */
+$color-white: #fff;
+$color-dim-white: #F5F5F5;
+$color-black: #000;
+$color-dim-dark: #ABABAB;
+$color-dim-black: #585858;
+$color-sand: #FFF9E5;
+$color-grey: #F2F2F2;
+
+/* Fonts */
+$font-header: var(--font-heading-family);
+$font-base: var(--font-body-family);
+
+/*Breakpoints*/
+$mobile: 768px;
+$mobile-up: 769px;
+$tablet: 992px;
+$tablet-up: 993px;
+$desk: 1140px;
+$large_desk: 1199px;
+$large_desk-up: 1200px;
+$larger_desk: 1300px;
+$widescreen: 1440px;
+
+/*Arrows*/
+
+$right-arrow: var(--right-arrow-url);
+$left-arrow: var(--left-arrow-url);

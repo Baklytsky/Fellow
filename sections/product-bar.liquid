@@ -17,7 +17,7 @@
   }
   {%- endcapture -%}
 
-  {%- capture 'slick-response' -%}
+  {%- capture 'slick_responsive' -%}
     {
     "response": 992,
     "maxMedia": true,
@@ -31,7 +31,7 @@
        data-slick-config='{{- slick-config -}}'>
     {%- if section.blocks.size > 0 -%}
     <div class="pdpBar__wrapper f {% if section.blocks < 3 %}jca{% else %}jcb{% endif %} aic"
-         data-check-slick-response='{{- slick-response -}}'>
+         data-slick-responsive='{{- slick_responsive -}}'>
       {%- for block in section.blocks -%}
         {%- assign svg_icon = block.settings.svg_icon -%}
         {%- assign title = block.settings.text -%}
@@ -75,33 +75,33 @@
         "type": "checkbox",
         "id": "show_product_bar",
         "label": {
-          "en": "Show product bar"
+          "en": "Show Product Bar"
         },
         "default": true
       },
       {
         "type": "color",
         "id": "product_bar_text_color",
-        "label": "Text color",
+        "label": "Text Color",
         "default": "#000000"
       },
       {
         "type": "color",
         "id": "product_bar_bg_color",
-        "label": "Background color",
+        "label": "Background Color",
         "default": "#FFF9E5"
       }
     ],
     "blocks": [
       {
         "type": "block",
-        "name": "block",
+        "name": "Block",
         "limit": 4,
         "settings": [
           {
             "type": "html",
             "id": "svg_icon",
-            "label": "Svg icon"
+            "label": "SVG Icon"
           },
           {
             "type": "html",
@@ -111,7 +111,7 @@
           {
             "type": "checkbox",
             "id": "display_on_bundle",
-            "label": "Display on bundle products",
+            "label": "Display On Bundle Products",
             "default": false
           }
         ]

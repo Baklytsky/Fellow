@@ -2,6 +2,8 @@
 {%- assign description = section.settings.description -%}
 
 {%- if heading != blank or description != blank or section.blocks.size > 0 -%}
+  <link rel="stylesheet" href="{{ 'section-coffee-marketplace-products.min.css' | asset_url }}">
+
   <section class="cmProducts">
     {%- if heading != blank -%}
       <h3 class="cmProducts__heading cmHeading">{{ heading | newline_to_br }}</h3>
@@ -41,7 +43,7 @@
 
 {% schema %}
 {
-  "name": "Marketplace Products",
+  "name": "Products | Detailed Cards",
   "settings": [
     {
       "type": "header",
@@ -70,7 +72,7 @@
         },
         {
           "type": "header",
-          "content": "Product note #1"
+          "content": "Product Note #1"
         },
         {
           "type": "text",
@@ -84,7 +86,7 @@
         },
         {
           "type": "header",
-          "content": "Product note #2"
+          "content": "Product Note #2"
         },
         {
           "type": "text",
@@ -98,7 +100,7 @@
         },
         {
           "type": "header",
-          "content": "Product note #3"
+          "content": "Product Note #3"
         },
         {
           "type": "text",
@@ -112,7 +114,7 @@
         },
         {
           "type": "header",
-          "content": "Product note #4"
+          "content": "Product Note #4"
         },
         {
           "type": "text",
@@ -140,7 +142,7 @@
   ],
   "presets": [
     {
-      "name": "Marketplace Products"
+      "name": "Products | Detailed Cards"
     }
   ]
 }

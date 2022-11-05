@@ -1,0 +1,134 @@
+.sellers-distributors {
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem
+}
+
+@media screen and (min-width: 768px) {
+  .sellers-distributors {
+    padding-left: 2rem;
+    padding-right: 2rem
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .sellers-distributors {
+    padding-left: 3.5rem;
+    padding-right: 3.5rem
+  }
+}
+
+.sellers-distributors h3 {
+  margin-top: 0;
+  margin-bottom: 0
+}
+
+.sellers-distributors h2 {
+  font-size: 2.5rem
+}
+
+.sellers-distributors h3 {
+  font-size: 1.625rem
+}
+
+.sellers-distributors p {
+  margin: 0
+}
+
+@media screen and (min-width: 768px) {
+  .sellers-distributors {
+    margin-bottom: 6rem
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .sellers-distributors .js-accordion-content {
+    max-height: unset
+  }
+}
+
+.sellers-distributors__region-name {
+  padding: .5rem 0;
+  margin: 1rem 0;
+  font-size: 2.625rem;
+  line-height:1;
+}
+
+.sellers-distributors__region-name:focus {
+  outline: auto
+}
+
+.sellers-distributors__country {
+  padding-bottom: 1.875rem
+}
+
+.sellers-distributors__country-name {
+  line-height: 1
+}
+
+.sellers-distributors__country-content a u {
+  font-weight:500;
+  font-size: 1rem;
+  line-height:1.25;
+}
+
+@media screen and (max-width: 991.98px) {
+  .sellers-distributors::after {
+    position: absolute !important;
+    overflow: hidden;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    clip: rect(0 0 0 0);
+    content: "accordion-active"
+  }
+  .sellers-distributors__region {
+    border-top: 1px solid var(--black)
+  }
+  .sellers-distributors__region:last-child {
+    border-bottom: 1px solid var(--black)
+  }
+  .sellers-distributors__region-name {
+    cursor: pointer;
+    position: relative
+  }
+  .sellers-distributors__region-name::before {
+    position: absolute;
+    font-family: Helvetica;
+    content: "＋";
+    font-size: .5em;
+    font-weight: bold;
+    margin-right: .5em;
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    top: 1.2em;
+    left: 0
+  }
+  .sellers-distributors__region-name.active:before {
+    content: "－"
+  }
+  .sellers-distributors__region-name,
+  .sellers-distributors__countries {
+    padding-left: 2rem
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .sellers-distributors__region-name {
+    border-bottom: 2px solid var(--black)
+  }
+  .sellers-distributors__region-name {
+    padding: 1.25rem 0;
+    margin: 1.25rem 0
+  }
+}
+
+.js-accordion-content {
+  transition: max-height .2s ease-out;
+  max-height: 0;
+  overflow: hidden
+}

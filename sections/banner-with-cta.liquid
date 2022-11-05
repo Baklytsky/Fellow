@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="{{ 'section-banner-with-cta.min.css' | asset_url }}">
+
 {%- assign full_width_container = section.settings.full_width_container -%}
 {%- assign top_bottom_margin = section.settings.top_bottom_margin -%}
 {%- assign image = section.settings.image -%}
@@ -81,12 +83,12 @@
     {
       "type": "checkbox",
       "id": "full_width_container",
-      "label": "Full width container"
+      "label": "Full Width Container"
     },
     {
       "type": "checkbox",
       "id": "top_bottom_margin",
-      "label": "Top and bottom padding"
+      "label": "Top and Bottom Padding"
     },
     {
       "type": "header",
@@ -100,7 +102,7 @@
     {
       "type": "image_picker",
       "id": "image_mobile",
-      "label": "Image mobile"
+      "label": "Image Mobile"
     },
     {
       "type": "header",
@@ -109,43 +111,43 @@
     {
       "type": "select",
       "id": "content_position",
-      "label": "Content position",
+      "label": "Content Position",
       "options": [
         {
           "value": "TopLeft",
-          "label": "Top left"
+          "label": "Top Left"
         },
         {
           "value": "TopRight",
-          "label": "Top right"
+          "label": "Top Right"
         },
         {
           "value": "TopCenter",
-          "label": "Top center"
+          "label": "Top Center"
         },
         {
           "value": "MiddleLeft",
-          "label": "Middle left"
+          "label": "Middle Left"
         },
         {
           "value": "MiddleCenter",
-          "label": "Middle center"
+          "label": "Middle Center"
         },
         {
           "value": "MiddleRight",
-          "label": "Middle right"
+          "label": "Middle Right"
         },
         {
           "value": "BottomLeft",
-          "label": "Bottom left"
+          "label": "Bottom Left"
         },
         {
           "value": "BottomCenter",
-          "label": "Bottom center"
+          "label": "Bottom Center"
         },
         {
           "value": "BottomRight",
-          "label": "Bottom right"
+          "label": "Bottom Right"
         }
       ],
       "default": "TopCenter"
@@ -153,19 +155,19 @@
     {
       "type": "select",
       "id": "content_position_mobile",
-      "label": "Content position mobile",
+      "label": "Content Position Mobile",
       "options": [
         {
           "value": "TopCenter",
-          "label": "Top center"
+          "label": "Top Center"
         },
         {
           "value": "MiddleCenter",
-          "label": "Middle center"
+          "label": "Middle Center"
         },
         {
           "value": "BottomCenter",
-          "label": "Bottom center"
+          "label": "Bottom Center"
         }
       ],
       "default": "TopCenter"
@@ -173,7 +175,7 @@
     {
       "type": "color",
       "id": "text_color",
-      "label": "Text color",
+      "label": "Text Color",
       "default": "#ffffff"
     },
     {
@@ -184,7 +186,7 @@
     {
       "type": "select",
       "id": "heading_size",
-      "label": "Heading size",
+      "label": "Heading Size",
       "default": "h1",
       "options": [
         {
@@ -223,7 +225,7 @@
     {
       "type": "radio",
       "id": "cta_color",
-      "label": "CTA color",
+      "label": "CTA Color",
       "options": [
         {
           "value": "btn--light",

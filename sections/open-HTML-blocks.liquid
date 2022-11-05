@@ -1,0 +1,37 @@
+{%- if section.blocks.size > 0 -%}
+  <link rel="stylesheet" href="{{ 'section-open-html-blocks.min.css' | asset_url }}">
+  <ul class="open-html">
+    {%- for block in section.blocks -%}
+      <li class="open-html-item {% if section.blocks.size == 1%}open-html-item--single{%- endif -%}">
+        {{ block.settings.html }}
+      </li>
+    {%- endfor -%}
+  </ul>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Open | HTML",
+  "tag": "section",
+  "class": "page-wrapper",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "open-html",
+      "name": "HTML",
+      "settings": [
+        {
+          "type": "html",
+          "id": "html",
+          "label": "HTML"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Open | HTML"
+    }
+  ]
+}
+{% endschema %}

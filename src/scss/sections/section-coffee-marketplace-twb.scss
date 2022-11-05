@@ -1,0 +1,71 @@
+@import '../helpers/_variables.scss';
+
+.cmTWB__wrapper {
+  margin: 0 auto;
+  max-width: 1440px;
+  padding: 65px 33px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  @media screen and (max-width: $tablet) {
+    padding: 32px 16px;
+  }
+}
+
+.cmTWB__preHeading,
+.cmTWB__heading,
+.cmTWB__description {
+  color: inherit;
+}
+
+.cmTWB__preHeading {
+  margin: 0 0 8px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 120%;
+}
+
+.cmTWB__heading {
+  margin: 0 0 24px;
+  font-weight: 500;
+  font-size: 48px;
+  line-height: 100%;
+
+  @media screen and (max-width: $tablet) {
+    font-size: 33px;
+  }
+}
+
+.cmTWB__description {
+  width: 100%;
+  max-width: 600px;
+  margin: 0;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 120%;
+}
+
+.cmTWB__button {
+  margin: 24px 0 0;
+  font-size: 18px;
+  padding: 16px;
+
+  @media screen and (max-width: $mobile) {
+    max-width: 100%;
+  }
+}
+
+.cmTWB__button.btn--white {
+  color: #000;
+  background-color: #fff;
+  border-color: #fff;
+
+  &:hover {
+    color: #fff;
+    background-color: transparent;
+    border-color: #fff;
+  }
+}

@@ -5,7 +5,7 @@
   {% raw %}
   {{#if items.length}}
     {{#each items}}
-    <product-card class='productCard'>
+    <product-card class='productCard' id="productCard-{{ id }}">
       <div class='productCard__content y'>
         <div aria-label='Image of {{ title }}' class='productCard__img rel z0'>
         {{#if badge}}
@@ -39,7 +39,7 @@
             {{/unless }}
             <div class="ar productCard__price-wrapper">
             {{#if available}}
-              {{#if compare_at_price_is_more_than_price}}
+              {{#if sale}}
               <div class="pdpCopy__price f aic">
                 <span class="inline-block strike card__price--regular ml1 pdpCopy__header-price pdpCopy__header-price-small rel">
                   {{ compare_at_price_money }}

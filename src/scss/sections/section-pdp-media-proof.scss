@@ -1,0 +1,64 @@
+@import '../helpers/_variables.scss';
+
+.pdpMediaProof {
+  background-color: $color-sand;
+  width: 100%;
+  margin-bottom: 32px;
+
+  .pdpMediaProof__wrapper {
+    max-width: calc(1440px - 164px);
+    padding: 64px;
+
+    @media screen and (max-width: $tablet) {
+      padding: 32px 0;
+    }
+  }
+
+  .mediaProof__items {
+    margin: 0;
+
+    @media screen and (min-width: 992px) {
+      margin: 0 -32px -40px;
+    }
+  }
+
+  .mediaProof__item {
+    margin: 0;
+    padding: 0 17px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    @media screen and (min-width: 992px) {
+      width: calc(100% / 3);
+      padding: 0 32px 40px;
+    }
+
+    p {
+      width: 100%;
+      max-width: 350px;
+      margin: 0 auto;
+      padding: 24px 0 12px 0;
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 130%;
+    }
+  }
+
+  .mediaProof__item .image {
+    max-width: 225px;
+    height: 70px;
+    min-height: unset;
+    max-height: unset;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  @media screen and (min-width: 992px) {
+    .mediaProof__item .image {
+      height: 88px;
+      min-height: unset;
+      max-height: unset;
+    }
+  }
+}

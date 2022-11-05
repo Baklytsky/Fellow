@@ -6,6 +6,7 @@
 {%- assign show_dots = section.settings.show_dots -%}
 
 {%- if heading != blank or description != blank or section.blocks.size > 0 -%}
+  <link rel="stylesheet" href="{{ 'section-features.min.css' | asset_url }}">
 
   {%- if section.blocks.size > 0 -%}
     {%- capture 'slick-config' -%}
@@ -17,7 +18,7 @@
       }
     {%- endcapture -%}
 
-    {%- capture 'slick-response' -%}
+    {%- capture 'slick_responsive' -%}
       {
         "response": 992,
         "maxMedia": true,
@@ -31,7 +32,7 @@
     <div class="features__wrapper page-wrapper rel">
 
       {%- if show_arrows -%}
-        <button type="button" class="jsPrevSlide is-hidden">{% render 'icon' with 'chevron-left' %}</button>
+        <button type="button" class="jsPrevSlide">{% render 'icon' with 'chevron-left' %}</button>
         <button type="button" class="jsNextSlide">{% render 'icon' with 'chevron-right' %}</button>
       {%- endif -%}
 
@@ -44,7 +45,7 @@
       {%- endif -%}
 
       {%- if section.blocks.size > 0 -%}
-        <ul class="features__list rel" data-check-slick-response='{{- slick-response -}}' data-toggle-arrows>
+        <ul class="features__list rel" data-slick-responsive='{{- slick_responsive -}}'>
           {%- for block in section.blocks -%}
             {%- assign title = block.settings.title -%}
             {%- assign description = block.settings.description -%}
@@ -75,20 +76,20 @@
 
 {% schema %}
 {
-  "name": "Features",
+  "name": "Images | Features",
   "tag": "section",
   "settings": [
     {
       "type": "color",
       "id": "bg_color",
       "default": "#FFF9E5",
-      "label": "Background color"
+      "label": "Background Color"
     },
     {
       "type": "color",
       "id": "text_color",
       "default": "#000000",
-      "label": "Text color"
+      "label": "Text Color"
     },
     {
       "type": "text",
@@ -106,24 +107,24 @@
       "type": "checkbox",
       "id": "show_arrows",
       "default": true,
-      "label": "Show arrows on mobile"
+      "label": "Show Arrows On Mobile"
     },
     {
       "type": "checkbox",
       "id": "show_dots",
       "default": true,
-      "label": "Show dots on mobile"
+      "label": "Show Dots On Mobile"
     }
   ],
   "blocks": [
     {
       "type": "feature",
-      "name": "feature",
+      "name": "Feature",
       "settings": [
         {
           "type": "image_picker",
           "id": "icon",
-          "label": "Logo icon"
+          "label": "Logo Icon"
         },
         {
           "type": "text",
@@ -140,7 +141,7 @@
   ],
   "presets": [
     {
-      "name": "Features"
+      "name": "Images | Features"
     }
   ]
 }

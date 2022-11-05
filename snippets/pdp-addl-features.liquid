@@ -1,4 +1,5 @@
 {% if product.metafields.custom_fields["additional_features_new"] != blank %}
+  <link rel="stylesheet" href="{{ 'section-pdp-addl-features.min.css' | asset_url }}">
   <section
           class='pdpAdditionalFeatures {% if product.metafields.custom_fields["additional_features_new"] == blank %} no-key{% endif %}'
           data-component='pdp-addlFeatures'>
@@ -28,7 +29,7 @@
                     </div>
                   {% endif %}
                   <slide-toggle class="pdpAdditionalFeatures__mobile-dropdown x"
-                       data-slide-toggle="{{ addl_feature_title | handleize }}-{{ forloop.index0 }}">
+                                data-slide-target="{{ addl_feature_title | handleize }}-{{ forloop.index0 }}">
                     {%- if iconSrc != blank or addl_feature_title != blank -%}
                       {% if iconSrc != blank %}
                         <div class="addlFeature__icon">
@@ -53,7 +54,7 @@
                     {%- endif -%}
                   </slide-toggle>
                   <div class="addlFeature__copy hide-mobile"
-                       data-slide-target="{{ addl_feature_title | handleize }}-{{ forloop.index0 }}">
+                       data-slide-content="{{ addl_feature_title | handleize }}-{{ forloop.index0 }}">
                       <h3 class="addlFeature__title hide-mobile">
                         {{ addl_feature_title }}
                       </h3>

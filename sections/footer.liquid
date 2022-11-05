@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="{{ 'section-footer.min.css' | asset_url }}">
 {%- assign show_icons = section.settings.show_icons -%}
 {% assign footer_menu = section.settings.footer_menu %}
 {%- assign footer_menu_bottom = section.settings.footer_menu_bottom -%}
@@ -115,9 +116,9 @@
         "type": "link_list",
         "id": "footer_menu",
         "label": {
-          "en": "Primary menu",
+          "en": "Primary Menu",
           "de": "Hauptmenü",
-          "fr": "Menu principal"
+          "fr": "Menu Principal"
         },
         "default": "footer",
         "info": {
@@ -129,26 +130,26 @@
       {
         "type": "link_list",
         "id": "footer_menu_bottom",
-        "label": "Bottom menu"
+        "label": "Bottom Menu"
       },
       {
         "type": "header",
-        "content": "Footer payments icons"
+        "content": "Footer Payments Icons"
       },
       {
         "type": "checkbox",
         "id": "show_footer_payment_icon",
-        "label": "Show payment icons",
+        "label": "Show Payment Icons",
         "default": false
       },
       {
         "type": "header",
-        "content": "Footer social icons"
+        "content": "Footer Social Icons"
       },
       {
         "type": "checkbox",
         "id": "show_icons",
-        "label": "Show social icons",
+        "label": "Show Social Icons",
         "default": true
       },
       {
@@ -218,7 +219,7 @@
       "id": "show_newsletter",
       "label": {
         "de": "Newsletter Signup anzeigen",
-        "en": "Show newsletter signup",
+        "en": "Show Newsletter Signup",
         "es": "Suscríbete al boletín",
         "fr": "Afficher l'inscription à la newsletter",
         "it": "Mostra iscrizione alla Newsletter",

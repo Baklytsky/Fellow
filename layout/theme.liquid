@@ -5,17 +5,27 @@
   <meta charset='utf-8'>
   <meta name='viewport' content='width=device-width,initial-scale=1,shrink-to-fit=no'>
   {% include 'no-index-pages' %}
+  {% render 'css-variables' %}
 
   <link rel='canonical' href='{{ canonical_url }}'>
   <link rel='shortcut icon' href='{{ settings.favicon | img_url: "32x32" }}' type='image/png'>
 
-  <link rel="preload" href="{{ 'index.css' | asset_url }}" as="style">
-  <link rel="preload" href="{{ 'custom.scss.css' | asset_url }}" as="style">
+  <link rel="preload" href="{{ 'theme.min.css' | asset_url }}" as="style">
+  <link rel="preload" href="{{ 'global.min.js' | asset_url }}" as="script">
+  <link rel="preload" href="{{ 'cart.min.js' | asset_url }}" as="script">
 
-  <link rel="preload" href="{{ 'custom.js' | asset_url }}" as="script">
+  {% if template contains 'customers' %}
+    <link rel="preload" href="{{ 'account.min.css' | asset_url }}" as="style">
+  {% endif %}
+
+  {%- if template contains 'search' -%}
+    <link rel="preload" href="{{ 'search.min.css' | asset_url }}" as="style">
+    <link rel="preload" href="{{ 'search.min.js' | asset_url }}" as="script">
+  {%- endif -%}
 
   {%- if template contains 'collection' -%}
-    <link rel="preload" href="{{ 'collection.js' | asset_url }}" as="script">
+    <link rel="preload" href="{{ 'collection.min.css' | asset_url }}" as="style">
+    <link rel="preload" href="{{ 'collection.min.js' | asset_url }}" as="script">
   {%- endif -%}
 
   {% include 'redirects' %}
@@ -58,8 +68,20 @@
     {% include 'google-tag-manager' %}
     {% include 'preconnect' %}
 
-    {{ 'index.css' | asset_url | stylesheet_tag }}
-    {{ 'custom.scss.css' | asset_url | stylesheet_tag }}
+    {{ 'theme.min.css' | asset_url | stylesheet_tag }}
+
+    {%- if template contains 'collection' -%}
+      {{ 'collection.min.css' | asset_url | stylesheet_tag }}
+    {%- endif -%}
+
+    {% if template contains 'customers' %}
+      {{ 'account.min.css' | asset_url | stylesheet_tag }}
+    {% endif %}
+
+    {%- if template contains 'search' -%}
+      {{ 'search.min.css' | asset_url | stylesheet_tag }}
+    {%- endif -%}
+
     {% include 'swatchUpload' %}
 
     {%- if request.path contains 'carter-move-mug' or request.path contains 'carter-everywhere-mug' or product.handle contains 'carter-move-mug-with-360-sip-lid' -%}
@@ -72,10 +94,12 @@
     
     {{ content_for_header }}
     {% include 'friendbuy' %}
+    {% include 'bazaarvoice-header-script' %}
 
 </head>
 
   <body>
+    {% section 'google-structured-data' %}
     {% section 'accessibility-popup' %}
     {% include 'gtm-no-script' %}
     {% section 'header' %}
@@ -89,23 +113,29 @@
     </main>
 
     {% section 'footer' %}
+    {% include 'bazaarvoice-footer-script' %}
     {% include 'cloak' %}
 
     {{ 'libs.min.js' | asset_url | script_tag }}
+    {{ 'global.min.js' | asset_url | script_tag }}
+
+    {% if template contains 'customers' %}
+      <script src="{{ 'account.min.js' | asset_url }}" defer='defer'></script>
+    {% endif %}
 
     {% if template contains 'customers/account' or template contains 'customers/register' or template == 'index' %}
       <script src="https://app.accentuate.io/dist/proxy.js" defer="defer"></script>
       {%- render 'accenture-set-phone' -%}
     {% endif %}
 
-    <script src="{{ 'custom.js' | asset_url }}" defer='defer'></script>
-
     {%- if template contains 'collection' -%}
       <script src="{{ 'handlebars-v4.7.7.js' | asset_url }}" defer='defer'></script>
-      <script src="{{ 'collection.js' | asset_url }}" defer='defer'></script>
+      <script src="{{ 'collection.min.js' | asset_url }}" defer='defer'></script>
     {%- endif -%}
 
-    <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
+    {%- if template contains 'search' -%}
+      <script src="{{ 'search.min.js' | asset_url }}" defer='defer'></script>
+    {%- endif -%}
 
     {% include 'component-customize-js' %}
 

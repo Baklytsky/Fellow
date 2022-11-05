@@ -1,0 +1,125 @@
+@import '../helpers/_variables.scss';
+
+.pdpAdditionalFeatures {
+  width: calc(100% - 68px);
+  margin: 34px auto;
+  background-color: $color-sand;
+
+  @media screen and (max-width: $tablet) {
+    width: calc(100% - 16px);
+    background-color: $color-white;
+  }
+}
+
+.pdpAdditionalFeatures__wrapper {
+  max-width: calc(1480px - 220px);
+  margin: 0 auto;
+  padding: 64px 20px;
+
+  @media screen and (max-width: $tablet) {
+    padding: 0 5px;
+  }
+}
+
+.pdpAdditionalFeatures__title {
+  margin: 0 0 40px 0;
+  font-size: 48px;
+  line-height: 100%;
+  text-align: center;
+}
+
+.pdpAdditionalFeatures__items {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -40px -40px;
+
+  @media screen and (max-width: $tablet) {
+    flex-direction: column;
+    margin: 0 0 -18px 0;
+  }
+}
+
+.pdpAdditionalFeatures__item {
+  width: calc(100% / 3);
+  padding: 0 40px 0;
+  margin-bottom: 40px;
+
+  @media screen and (max-width: $tablet) {
+    width: 100%;
+    padding: 16px;
+    margin-bottom: 18px;
+    background-color: $color-sand;
+    border-radius: 12px;
+  }
+}
+
+.addlFeature__title {
+  font-size: 26px;
+  line-height: 100%;
+  margin: 0 0 16px 0;
+
+  @media screen and (max-width: $tablet) {
+    flex-grow: 1;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 120%;
+    margin: 8px 0 8px 8px;
+  }
+}
+
+.addlFeature__copy {
+  display: block;
+  @media screen and (max-width: $tablet) {
+    padding-left: 64px;
+    display: none;
+  }
+
+  .dropdownContent--animate-block-visible p,
+  p {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 130%;
+  }
+
+  .dropdownContent--animate-block {
+    @media screen and (min-width: $tablet) {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}
+
+.addlFeature__copy.hide-mobile[data-slide-content] {
+  @media screen and (min-width: $tablet) {
+    display: block;
+  }
+}
+
+.addlFeature__copy.active {
+  display: block;
+}
+
+.addlFeature__icon-desktop {
+  margin-bottom: 16px;
+  @media screen and (max-width: $tablet) {
+    display: none;
+  }
+}
+
+.pdpAdditionalFeatures__mobile-dropdown {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  @media screen and (min-width: 993px) {
+    display: none;
+  }
+}
+
+.pdpAdditionalFeatures__mobile-dropdown.active {
+  .dropdownHeader-icon {
+    transform: rotate(180deg);
+  }
+}

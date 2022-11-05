@@ -1,0 +1,1 @@
+.open-html{display:flex;flex-wrap:wrap}.open-html .open-html-item{width:50%}.open-html .open-html-item.open-html-item--single{width:100%}@media screen and (max-width:1199px){.open-html{flex-direction:column;flex:unset}.open-html .open-html-item,.open-html .open-html-item.open-html-item--single{width:100%}}

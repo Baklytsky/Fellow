@@ -1,15 +1,19 @@
 {%- if collection.metafields.custom_fields["show_collection_module"] == 1 -%}
-  {%- assign collection_module_bg = collection.metafields.custom_fields["collection_module_background"] | default:  '#FFF9E5' -%}
+  <link rel="stylesheet" href="{{ 'section-collection-module.min.css' | asset_url }}">
+
+  {%- assign collection_module_bg = collection.metafields.custom_fields["collection_module_background"] | default: '#FFF9E5' -%}
+  {%- assign collection_module_text_color = collection.metafields.custom_fields["collection_module_text_color"] | default: '#000000' -%}
   {%- assign collection_module_image = collection.metafields.custom_fields["collection_module_image"] -%}
   {%- assign collection_module_image_mobile = collection.metafields.custom_fields["collection_module_mobile_image"] -%}
   {%- assign collection_module_title = collection.metafields.custom_fields["collection_module_title"] -%}
   {% if collection.metafields.custom_fields["collection_module_arrow"] == 1 %}
     {%- assign enable_arrow = true -%}
   {% endif %}
-  {%- assign collection_module_btn_text = collection.metafields.custom_fields["collection_module_button_text"] | default:  'Shop Now' -%}
+  {%- assign collection_module_btn_text = collection.metafields.custom_fields["collection_module_button_text"] | default: 'Shop Now' -%}
   {%- assign collection_module_btn_url = collection.metafields.custom_fields["collection_module_button_url"] -%}
+  {%- assign collection_module_btn_type = collection.metafields.custom_fields["collection_module_button_type"] | default: 'dark' -%}
 
-  <div class="collectionModule" style="background-color: {{ collection_module_bg }}">
+  <div class="collectionModule" style="background-color: {{ collection_module_bg }}; color: {{ collection_module_text_color }}">
     <div class="collectionModule__wrapper">
       {%- if collection_module_image != blank -%}
         {%- assign desktop_image_class = 'image image-abs-contain' -%}
@@ -27,10 +31,10 @@
               loader: true %}
           </div>
           {%- if collection_module_image_mobile != blank -%}
-            <div class="image image-abs-contain hide-tablet-desk">
+            <div class="image hide-tablet-desk">
               {% render 'image-lazy-metafields',
                 image: collection_module_image_mobile,
-                class_name: 'image image-abs-contain hide-tablet-desk',
+                class_name: 'image hide-tablet-desk',
                 alt: collection_module_title,
                 size: 'medium',
                 loader: true %}
@@ -55,7 +59,7 @@
           {%- endif -%}
           {%- if collection_module_btn_url != blank -%}
             <a href="{{ collection_module_btn_url }}"
-               class="collectionModule__contentLink btn--dark">
+               class="collectionModule__contentLink btn--{{ collection_module_btn_type }}">
               {{ collection_module_btn_text }}
             </a>
           {%- endif -%}

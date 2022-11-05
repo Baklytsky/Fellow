@@ -2,6 +2,7 @@
 {%- assign description = section.settings.description -%}
 
 {%- if heading != blank or description != blank or section.blocks.size > 0 -%}
+  <link rel="stylesheet" href="{{ 'section-faq.min.css' | asset_url }}">
 
   <div class="faq page-wrapper">
     {%- if heading != blank -%}
@@ -21,7 +22,7 @@
           {%- if title != blank -%}
             <li class="faq__list-item">
               <slide-toggle class="faq__list-header f jcb aic"
-                            data-slide-toggle="{{ block.id }}">
+                            data-slide-target="{{ block.id }}">
                 <div class="faq__list-title">
                   {{ title }}
                 </div>
@@ -30,7 +31,7 @@
                 </div>
               </slide-toggle>
               {%- if description != blank -%}
-                <div class="faq__list-content" data-slide-target="{{ block.id }}">
+                <div class="faq__list-content" data-slide-content="{{ block.id }}">
                   {{ description }}
                 </div>
               {%- endif -%}
@@ -41,7 +42,7 @@
       </ul>
     {%- endif -%}
 
-    {%- if section.blocks.size > 0 -%}
+    {%- if section.blocks.size > 0 and section.settings.enable_structured_data -%}
       <script type="application/ld+json">
         {
           "@context": "https://schema.org",
@@ -53,7 +54,7 @@
               "name": "{{ block.settings.title }}",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "{{ description | escape }}"
+                "text": "{{ block.settings.description | escape }}"
                 }
             }{% unless forloop.last %},{% endunless %}
           {%- endfor -%}
@@ -70,6 +71,11 @@
   "tag": "section",
   "settings": [
     {
+      "type": "checkbox",
+      "id": "enable_structured_data",
+      "label": "Generate FAQ Structured Data"
+    },
+    {
       "type": "text",
       "id": "heading",
       "default": "Have Questions?",
@@ -85,7 +91,7 @@
   "blocks": [
     {
       "type": "faq-block",
-      "name": "FAQ block",
+      "name": "FAQ Block",
       "settings": [
         {
           "type": "text",

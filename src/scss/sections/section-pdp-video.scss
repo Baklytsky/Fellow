@@ -1,0 +1,128 @@
+@import '../helpers/_variables.scss';
+
+.pdpVideo__Container {
+  background-color: #000;
+}
+
+.pdpVideo__Wrapper {
+  margin: 0 auto;
+  padding: 80px 33px;
+  max-width: 1440px;
+  flex-direction: column;
+  color: #ffffff;
+
+  @media screen and (max-width: $tablet) {
+    padding: 40px 15px;
+  }
+}
+
+.pdpVideo__Copy {
+  max-width: 850px;
+  margin: 0 auto 48px;
+  text-align: center;
+
+  @media screen and (max-width: $tablet) {
+    margin: 0 auto 24px;
+  }
+
+  h1, h2, h3 {
+    margin: 0 0 24px 0;
+    font-weight: 500;
+    font-size: 72px;
+    line-height: 100%;
+
+    @media screen and (max-width: $large_desk) {
+      font-size: 62px;
+      margin: 0 0 16px 0;
+    }
+
+    @media screen and (max-width: $tablet) {
+      font-size: 56px;
+    }
+  }
+
+
+  h4, h5, h6, p {
+    font-size: 20px;
+    line-height: 120%;
+    margin: 0 0 16px 0;
+    font-weight: 400;
+
+    @media screen and (max-width: $large_desk) {
+      font-size: 18px;
+    }
+
+    @media screen and (max-width: $tablet) {
+      font-size: 16px;
+      line-height: 130%;
+    }
+  }
+
+  h4, h5, h6 {
+    font-family: $font-base;
+    font-weight: 600;
+    margin: 0;
+
+    @media screen and (max-width: $tablet) {
+      margin: 0 0 16px 0;
+      line-height: 120%;
+    }
+  }
+
+  a {
+    text-decoration: underline;
+  }
+}
+
+.pdpVideo__Content {
+  z-index: 1;
+  .cw svg path {
+    fill: #FFFFFF;
+  }
+
+  .cb svg path {
+    fill: #000000;
+  }
+}
+
+.pdpVideo__Wrapper-row {
+  padding: 64px 72px;
+  flex-direction: row;
+  align-items: center;
+
+  @media screen and (max-width: $tablet) {
+    padding: 40px 15px;
+    flex-direction: column;
+  }
+
+  .pdpVideo__Copy {
+    padding-right: 40px;
+    margin: 0;
+    flex: 1;
+    text-align: left;
+
+    @media screen and (max-width: $tablet) {
+      flex: auto;
+      padding: 0;
+      margin: 0 auto 24px;
+      text-align: center;
+    }
+  }
+
+  .pdpVideo__Content {
+    width: 100%;
+    max-width: 58.7%;
+
+    @media screen and (max-width: $tablet) {
+      max-width: 100%;
+    }
+  }
+
+  .video-section__load-player-button {
+    width: 48px;
+
+    @media screen and (max-width: $tablet) {
+      width: 46px;
+    }
+  }
+}

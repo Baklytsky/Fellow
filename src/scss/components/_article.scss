@@ -1,0 +1,151 @@
+@import '../helpers/_variables';
+
+.article {
+  position: relative
+}
+
+@media screen and (min-width: 992px) {
+  .article {
+    padding: 2rem 0
+  }
+}
+
+.article__header {
+  margin-bottom: 1.5rem;
+  text-transform: Capitalize;
+}
+
+.article__body a {
+  font-weight: 500;
+}
+
+.article__header h1,
+.article__header h2,
+.article__header h3,
+.article__header h4,
+.article__header h5 {
+  margin-top: .75rem;
+  margin-bottom: 1rem
+}
+
+@media screen and (max-width: 991.98px) {
+  .article__header {
+    margin-top: 2rem;
+    margin-bottom: 2rem
+  }
+}
+
+@media screen and (max-width: 991.98px) {
+  .articleSidebar {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid #e7e8e6;
+    margin-bottom: 3rem
+  }
+}
+
+.articleSidebar__recentArticles {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  order: 1
+}
+
+.articleSidebar__recentArticles a {
+  position: relative
+}
+
+.articleSidebar__recentArticles a:not(:last-child) {
+  border-bottom: 1px solid #e7e8e6
+}
+
+@media screen and (max-width: 991.98px) {
+  .articleSidebar__recentArticles {
+    order: 2
+  }
+}
+
+.recentArticle__single {
+  margin: 1rem 0
+}
+
+.recentArticle__title {
+  color: #000;
+  font-size: 1.25rem;
+  font-weight: 600;
+  transition: opacity var(--fast) var(--ease);
+  opacity: .75
+}
+
+.recentArticle__title:hover {
+  opacity: 1
+}
+
+.divider:after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-right: 2px solid #e7e8e6;
+  height: 100%;
+  transform: translate(-50%, -50%)
+}
+
+.rte ol,
+.rte ul {
+  padding-left: 1.25em
+}
+
+.rte ol li,
+.rte ul li {
+  margin: .5em 0
+}
+
+.rte ol {
+  margin: 0 0 1.5em;
+  padding: 0;
+  counter-reset: item
+}
+
+.rte ol>li {
+  padding: 0 0 0 2em;
+  text-indent: -2em;
+  list-style-type: none;
+  counter-increment: item
+}
+
+.rte ol>li:before {
+  display: inline-block;
+  width: 1em;
+  padding-right: .5em;
+  font-weight: bold;
+  text-align: right;
+  content: counter(item) "."
+}
+
+.rte ul {
+  list-style-type: circle
+}
+
+.rte img {
+  display: block;
+  margin: 1rem auto;
+  max-width: 100% !important;
+  height: auto
+}
+
+@media screen and (max-width: 991.98px) {
+  .rte img {
+    max-width: 100%;
+    height: auto
+  }
+}
+
+.rte iframe {
+  max-width: 100%
+}
+
+.rte span {
+  font-size: 1rem;
+  line-height: 1.6
+}

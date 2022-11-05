@@ -1,0 +1,197 @@
+@import '../helpers/_variables.scss';
+
+.cmProducts {
+  margin: 0 auto;
+  max-width: 1440px;
+  padding: 40px 33px 16px;
+  color: #000;
+
+  @media screen and (max-width: $tablet) {
+    padding: 24px 16px;
+  }
+}
+
+.cmProducts__heading {
+  @media screen and (max-width: $tablet) {
+    font-size: 33px;
+  }
+}
+
+.cmProducts__description {
+  margin-top: 24px;
+  @media screen and (max-width: $tablet) {
+    margin-top: 16px;
+  }
+}
+
+.cmProducts__heading,
+.cmProducts__description {
+  max-width: 560px;
+}
+
+.cmProducts__wrapper {
+  width: calc(100% + 24px);
+  margin: 16px -12px 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+}
+
+.cmProducts__card {
+  width: 100%;
+  max-width: 25%;
+  padding: 24px 12px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  @media screen and (max-width: $large_desk) {
+    max-width: 50%;
+  }
+
+  @media screen and (max-width: $mobile) {
+    max-width: 100%;
+    padding: 16px 12px;
+  }
+}
+
+.cmProducts__cardImage {
+  width: 100%;
+  padding-top: 100%;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  overflow: hidden;
+  background-color: #F5F5F5;
+}
+
+.cmProducts__image {
+  width: 100%;
+  padding-top: 170%;
+  height: inherit;
+  flex-grow: 1;
+  border-radius: 12px;
+  overflow: hidden;
+
+  @media screen and (max-width: $mobile) {
+    padding-top: 128%;
+  }
+}
+
+.cmProducts__cardVendor {
+  margin: 0 0 12px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  .cmProducts__cardOptions {
+    font-family: $font-header;
+    font-size: 22px;
+    font-weight: 400;
+    white-space: nowrap;
+  }
+
+  @media screen and (max-width: $mobile) {
+    margin: 0 0 8px;
+    font-size: 18px;
+  }
+}
+
+.cmProducts__cardTitle {
+  margin: 0 0 12px;
+  height: 68px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* number of lines to show */
+  -webkit-box-orient: vertical;
+
+  a {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 100%;
+    text-decoration: none;
+
+    @media screen and (max-width: $mobile) {
+      font-size: 28px;
+    }
+  }
+
+  @media screen and (max-width: $mobile) {
+    height: auto;
+    -webkit-line-clamp: 4; /* number of lines to show */
+  }
+}
+
+.cmProducts__cardOptions.cmProducts__cardText {
+  @media screen and (max-width: $mobile) {
+    font-size: 18px;
+  }
+}
+
+.cmProducts__cardText,
+.cmProducts__cardHeading {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 120%;
+}
+
+.cmProducts__cardHeading {
+  font-weight: 600;
+}
+
+.cmProducts__cardNotes {
+  margin-top: 20px;
+
+  .cmProducts__cardNotesItem {
+    &:not(:first-child) {
+      @media screen and (max-width: $mobile) {
+        display: none;
+      }
+    }
+  }
+}
+
+.cmProducts__cardNotesItem {
+  border-top: 1px solid #ABABAB;
+  border-bottom: 1px solid #ABABAB;
+  margin-top: -1px;
+  padding: 12px 0;
+
+  @media screen and (max-width: $mobile) {
+    padding: 8px 0;
+  }
+}
+
+.cmProducts__cardNotesItemTitle {
+  font-family: $font-base;
+  margin: 0 0 4px;
+
+  @media screen and (max-width: $mobile) {
+    margin: 0 0 8px;
+  }
+}
+
+.cmProducts__cardNotesItemText {
+  margin: 0;
+}
+
+.cmProducts__cardBtn {
+  display: none;
+  .button {
+    max-width: 100%;
+    margin: 24px 0 0;
+    padding: 16px;
+    font-family: $font-base;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+    text-align: center;
+    text-transform: capitalize;
+  }
+
+  @media screen and (max-width: $mobile) {
+    display: block;
+  }
+}

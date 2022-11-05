@@ -1,0 +1,45 @@
+.jumboSlider__mobileWrap {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1440px;
+  overflow: hidden
+}
+
+.jumboSlider {
+  width: 100%;
+  overflow: hidden;
+}
+
+.jumboSlider__slide-item {
+  padding-top: 52%;
+}
+
+.jumboSlider .jsPrevSlide {
+  left: 50px;
+}
+
+.jumboSlider .jsNextSlide {
+  right: 50px;
+}
+
+.jumboSlider .jsPrevSlide,
+.jumboSlider .jsNextSlide {
+  opacity: 0;
+}
+
+.jumboSlider:hover .jsPrevSlide,
+.jumboSlider:hover .jsNextSlide {
+  opacity: 1;
+}
+
+@media screen and (max-width: 991.98px) {
+  .jumboSlider {
+    margin-left: -16px;
+    margin-right: -16px;
+  }
+
+  .jumboSlider .jsNextSlide,
+  .jumboSlider .jsPrevSlide {
+    display: none !important;
+  }
+}

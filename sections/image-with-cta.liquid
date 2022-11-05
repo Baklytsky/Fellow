@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="{{ 'section-image-with-cta.min.css' | asset_url }}">
+
 {%- assign top_bottom_margin = section.settings.top_bottom_margin -%}
 {%- assign image = section.settings.image -%}
 {%- assign image_mobile = section.settings.image_mobile -%}
@@ -17,7 +19,7 @@
   {%- assign desktop_image_class = 'image-abs-cover hide-mobile' -%}
 {%- endif -%}
 
-<section class="ImageWithCta {% if top_bottom_margin %}SectionPadding{% endif %}">
+<section class="ImageWithCta {% if top_bottom_margin %}ImageWithCta--WithPadding{% endif %}">
   <div class="collectionHero ImageWithCta__Wrapper ImageWithCta__Image--{{ layout }}">
     {%- if image != blank -%}
       <div class="collectionHero__media ImageWithCta__Media rel">
@@ -83,7 +85,7 @@
     {
       "type": "checkbox",
       "id": "top_bottom_margin",
-      "label": "Top and bottom padding"
+      "label": "Top And Bottom Padding"
     },
     {
       "type": "header",
@@ -97,12 +99,12 @@
     {
       "type": "image_picker",
       "id": "image_mobile",
-      "label": "Image mobile"
+      "label": "Image Mobile"
     },
     {
       "type": "radio",
       "id": "layout",
-      "label": "Image alignment",
+      "label": "Image Alignment",
       "default": "left",
       "options": [
         {
@@ -122,13 +124,13 @@
     {
       "type": "color",
       "id": "bg_color",
-      "label": "Background color",
+      "label": "Background Color",
       "default": "#000000"
     },
     {
       "type": "color",
       "id": "text_color",
-      "label": "Text color",
+      "label": "Text Color",
       "default": "#ffffff"
     },
     {
@@ -139,7 +141,7 @@
     {
       "type": "select",
       "id": "heading_size",
-      "label": "Heading size",
+      "label": "Heading Size",
       "default": "h1",
       "options": [
         {
@@ -178,7 +180,7 @@
     {
       "type": "radio",
       "id": "cta_color",
-      "label": "CTA color",
+      "label": "CTA Color",
       "options": [
         {
           "value": "btn--light",

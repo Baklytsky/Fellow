@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="{{ 'secton-join-fellow.min.css' | asset_url }}">
+
 {%- assign heading = section.settings.heading -%}
 {%- assign description = section.settings.description -%}
 {%- assign logo = section.settings.logo_image -%}
@@ -103,7 +105,7 @@
 
 {% schema %}
 {
-  "name": "Join Fellow",
+  "name": "Form | Split Side Banner",
   "settings": [
     {
       "type": "header",
@@ -126,13 +128,13 @@
     {
       "type": "color",
       "id": "bg_color",
-      "label": "Background color",
+      "label": "Background Color",
       "default": "#233539"
     },
     {
       "type": "color",
       "id": "text_color",
-      "label": "Text color",
+      "label": "Text Color",
       "default": "#FFFFFF"
     },
     {
@@ -143,7 +145,7 @@
     {
       "type": "image_picker",
       "id": "logo_image_mobile",
-      "label": "Logo mobile"
+      "label": "Logo Mobile"
     },
     {
       "type": "text",
@@ -158,7 +160,7 @@
   ],
   "presets": [
     {
-      "name": "Join Fellow",
+      "name": "Form | Split Side Banner",
       "category": "Homepage Sections"
     }
   ]

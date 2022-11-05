@@ -1,0 +1,171 @@
+@import '../helpers/_variables.scss';
+
+.comparison__wrapper {
+  padding-top: 52px;
+
+  .pdpCompare__table {
+    margin-top: 8px;
+  }
+
+  @media screen and (max-width: $tablet) {
+    padding-top: 32px;
+
+    .pdpCompare__heading {
+      font-size: 33px;
+      padding: 0;
+    }
+
+    .pdpCompare__table {
+      margin-top: 0;
+    }
+  }
+
+  .pdpCompare__wrapper {
+    padding: 0;
+    overflow: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .pdpCompare__mobile-characteristic,
+  .pdpCompare__table-mobile-title {
+    display: none;
+  }
+
+  .pdpCompare__table-mobile-title {
+    background-color: #FFF;
+    transition: all .03s linear;
+
+    &.pdpCompare__table-half {
+      display: none !important;
+    }
+
+    .pdpCompare__table-th {
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 120%;
+    }
+
+    @media screen and (max-width: $large_desk) {
+      display: table;
+      position: fixed;
+      top: var(--header-height);
+      z-index: 3;
+      margin: 0;
+
+      thead th {
+        border-bottom: 2px solid #DBDBDB;
+      }
+
+      thead th, tbody tr td {
+        padding: 16px 6px;
+      }
+    }
+  }
+
+  .pdpCompare__table {
+    display: table;
+  }
+
+  .pdpCompare__table,
+  .pdpCompare__table-mobile-title {
+
+    @media screen and (max-width: $large_desk) {
+      .pdpCompare__mobile-characteristic {
+        display: block;
+        visibility: hidden;
+      }
+
+      tbody th {
+        position: -webkit-sticky; /* for Safari */
+        position: sticky;
+        left: 0;
+        font-size: 12px;
+      }
+
+      thead, tbody {
+        display: block;
+        margin-left: calc(-43vw - 6px);
+        margin-right: -6px;
+      }
+
+      thead tr th:first-child,
+      tbody tr th {
+        width: 43vw;
+        min-width: 43vw;
+      }
+
+      th, td {
+        width: 43vw;
+        min-width: 43vw;
+      }
+
+      &.pdpCompare__table-four {
+        thead tr th:last-child,
+        tbody tr td:last-child {
+          width: 43vw;
+          padding-right: 0;
+        }
+      }
+
+      &.pdpCompare__table-third {
+        thead, tbody {
+          margin-left: calc(-60vw - 6px);
+          margin-right: -6px;
+        }
+
+        thead tr th:first-child,
+        tbody tr th {
+          width: 60vw;
+          min-width: 60vw;
+        }
+
+        th, td {
+          width: 60vw;
+          min-width: 60vw;
+        }
+      }
+
+      &.pdpCompare__table-half {
+        thead, tbody {
+          margin-left: calc(-90vw + 6px);
+          margin-right: -6px;
+        }
+
+        thead tr th:first-child,
+        tbody tr th {
+          width: 90vw;
+          min-width: 90vw;
+        }
+
+        th, td {
+          width: 90vw;
+          min-width: 90vw;
+        }
+      }
+
+      thead th, tbody tr td {
+        padding: 16px 6px 8px;
+      }
+
+      .pdpCompare__table-th {
+        max-width: unset;
+      }
+    }
+
+    @media screen and (max-width: 425px) {
+      .productCard .productCard__variants .productCard__options {
+        max-width: 125px;
+      }
+    }
+
+  }
+}
+

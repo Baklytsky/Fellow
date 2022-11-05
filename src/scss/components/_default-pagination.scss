@@ -1,0 +1,32 @@
+@import '../helpers/_variables';
+
+.default-pagination {
+  margin: 40px 0 0;
+}
+
+.default-pagination__list {
+  justify-content: flex-end;
+}
+
+.default-pagination__list li {
+  padding: 5px 15px 5px 0;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: #999999;
+}
+
+.default-pagination__list li:last-child {
+  padding: 5px 0;
+}
+
+.default-pagination__list li.disabled {
+  display: none;
+}
+
+.default-pagination__list li.active,
+.default-pagination__list li.default-pagination-arrow {
+  color: #000;
+}
